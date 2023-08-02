@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c673d76dbd72bb40a13964ed7165f1b, type: 3}
+  m_Name: SoundData
+  m_EditorClassIdentifier: 
+  backgroundMusic: {fileID: 8300000, guid: 242dbfcfa08a8af488778849ce52ef1a, type: 3}
+  changePhase: {fileID: 8300000, guid: af60f59b3a8ba6348a41fe518cb17c48, type: 3}
+  complete: {fileID: 8300000, guid: c5ea46e4a0075f248aa7b5a6442b8d88, type: 3}
+  match: {fileID: 8300000, guid: 6ab38dbebc067104e9b8c18845593562, type: 3}
+  pickup: {fileID: 8300000, guid: d487d65ce1dc09a49a2d5bc208d1a2eb, type: 3}
+  playButton: {fileID: 8300000, guid: 66d1c78ad63be324f865ccc19b419dd8, type: 3}
