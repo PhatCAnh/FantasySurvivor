@@ -10,17 +10,12 @@ public class ConfigManager : ConfigManagerBase
 {
     //Configs
     public ConstConfigTable constConfig;
-    public MapConfigTable mapConfigs;
-    public BlockConfigTable blockConfigs;
 
     //private bool _isCanLoadRemoteConfig = false;
     public void Init()
     {
         //Register
         Register(out constConfig);
-        Register(out mapConfigs);
-        Register(out blockConfigs);
-
         LoadConfigs();
   }
 

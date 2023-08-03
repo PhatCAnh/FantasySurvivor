@@ -13,12 +13,7 @@ using UnityEngine.UI;
 
 public class ResourceManager : UIManagerBase<PopupType>
 {
-    [SerializeField] Block _blockPrefab;
-    [SerializeField] Map _mapPrefab;
     [SerializeField] GameObject keyPrefab;
-
-    public Map mapPrefab => _mapPrefab;
-    public Block blockPrefab => _blockPrefab;
 
     [SerializeField] private GameObject mainUIPopupPrefab;
     [SerializeField] private GameObject notificationPopupPrefab;

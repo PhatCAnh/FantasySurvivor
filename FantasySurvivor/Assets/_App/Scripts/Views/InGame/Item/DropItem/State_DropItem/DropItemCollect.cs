@@ -14,7 +14,7 @@ namespace MR.State_DropItem {
             var distanceToTarget = Vector2.Distance(agent.transform.position, agent.character.transform.position);
             if (distanceToTarget < 0.15f)
             {
-                Singleton<GameController>.instance.CollectedItem(agent.type);
+                //Singleton<GameController>.instance.CollectedItem(agent.type);
                 agent.Complete();
                 return;
             }
