@@ -1,18 +1,7 @@
-using ArbanFramework.MVC;
-using MR;
-
-public class ModelManager : ModelManagerBase
+﻿namespace _App.Scripts.Managers
 {
-	public MapModel mapModel;
-	public CharacterModel characterModel;
-	//Models
-	public SettingModel settingModel;
-	public void Init()
+	public class ModelManager
 	{
-		//Register
-		RegisterModel( out mapModel );
-		RegisterModel( out settingModel );
-		RegisterModel( out characterModel );
-		LoadData();
+		
 	}
 }
