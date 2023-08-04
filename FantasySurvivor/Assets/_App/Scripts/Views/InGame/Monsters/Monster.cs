@@ -1,24 +1,23 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using ArbanFramework;
-using ArbanFramework.Config;
-using ArbanFramework.MVC;
+using ArbanFramework.StateMachine;
 using FantasySurvivor;
 using MR;
 using MR.CharacterState;
 using UnityEngine;
-using UnityEngine.Serialization;
-using StateMachine = ArbanFramework.StateMachine.StateMachine;
 
-public class Character : ObjectRPG
+public class Monster : ObjectRPG
 {
 	[HideInInspector]
 	public Rigidbody2D myRigid;
 
 	public Animator animator;
 
-	public CharacterModel model { get; private set; }
-
-	public CharacterStat stat { get; private set; }
+	public MonsterStat stat { get; private set; }
+	
+	public MonsterModel model { get; private set; }
+	
 	public bool isMove => _stateMachine.currentState == _moveSM;
 
 	public float speedMul { get; set; } = 1;
@@ -35,13 +34,13 @@ public class Character : ObjectRPG
 			_direction = value;
 		}
 	}
-
+	
 	private Vector2 _direction = Vector2.zero;
 
 	private StateMachine _stateMachine;
-	private CharacterIdle _idleSM;
-	private CharacterMove _moveSM;
-
+	private MonsterIdle _idleSM;
+	private MonsterMove _moveSM;
+	
 	private GameController _gameController => Singleton<GameController>.instance;
 
 	protected override void OnViewInit()
@@ -50,8 +49,8 @@ public class Character : ObjectRPG
 		if(_stateMachine == null)
 		{
 			_stateMachine = new StateMachine();
-			_idleSM = new CharacterIdle(this, _stateMachine);
-			_moveSM = new CharacterMove(this, _stateMachine);
+			_idleSM = new MonsterIdle(this, _stateMachine);
+			_moveSM = new MonsterMove(this, _stateMachine);
 			_stateMachine.Init(_idleSM);
 		}
 		else
@@ -60,21 +59,20 @@ public class Character : ObjectRPG
 		}
 
 		myRigid = GetComponent<Rigidbody2D>();
-		Init(new CharacterModel(1f, 120f));
+		Init(new MonsterModel(1f, 120f));
 	}
 
-	public void Init(CharacterModel model)
+	public void Init(MonsterModel model)
 	{
 		this.model = model;
 	}
 
 	private void Update()
 	{
-		// if(_gameController.isStop) return;
 		var time = Time.deltaTime;
+		Controlled(Vector2.right);
 		_stateMachine.currentState.LogicUpdate(time);
-		// if(isDoingSomething) return;
-
+		
 		HandlePhysicUpdate();
 	}
 
@@ -85,7 +83,7 @@ public class Character : ObjectRPG
 		_stateMachine.currentState.PhysicUpdate(Time.fixedTime);
 	}
 
-	public void Controlled(float deltaTime, Vector2 moveForce)
+	public void Controlled(Vector2 moveForce)
 	{
 		moveDirection = moveForce;
 	}
@@ -120,4 +118,5 @@ public class Character : ObjectRPG
 	}
 
 	#endregion
+	
 }

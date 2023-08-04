@@ -7,7 +7,7 @@ namespace MR
 {
     public class CharacterModel : Model<GameApp>
     {
-        public static EventTypeBase dataChangedEvent = new EventTypeBase(nameof(SettingModel) + ".dataChanged");
+        public static EventTypeBase dataChangedEvent = new EventTypeBase(nameof(CharacterModel) + ".dataChanged");
 
         public CharacterModel(EventTypeBase eventType) : base(dataChangedEvent)
         {

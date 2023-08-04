@@ -4,12 +4,14 @@ using MR;
 public class ModelManager : ModelManagerBase
 {
 	public CharacterModel characterModel;
+	public MonsterModel monsterModel;
 	//Models
 	public SettingModel settingModel;
 	public void Init()
 	{
 		//Register
 		RegisterModel(out settingModel);
+		RegisterModel(out monsterModel);
 		RegisterModel(out characterModel);
 		LoadData();
 	}

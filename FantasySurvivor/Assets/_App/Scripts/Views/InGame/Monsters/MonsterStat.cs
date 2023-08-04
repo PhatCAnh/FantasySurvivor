@@ -1,12 +1,12 @@
-﻿using ArbanFramework;
+using ArbanFramework;
 
 namespace FantasySurvivor
 {
-	public class CharacterStat
+	public class MonsterStat
 	{
 		public StatFloat moveSpeed = new();
 
-		public CharacterStat(float moveSpeed)
+		public MonsterStat(float moveSpeed)
 		{
 			this.moveSpeed.BaseValue = moveSpeed;
 		}
