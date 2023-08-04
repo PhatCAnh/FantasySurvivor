@@ -21,6 +21,7 @@ public class Monster : ObjectRPG
 	public Character target { get; private set; }
 	
 	public bool isMove => _stateMachine.currentState == _moveSM;
+	public bool isIdle => _stateMachine.currentState == _idleSM;
 
 	public float speedMul { get; set; } = 1;
 	public Vector2 idleDirection { get; private set; } = Vector2.down;
@@ -91,33 +92,37 @@ public class Monster : ObjectRPG
 
 	private void HandlePhysicUpdate()
 	{
-
-		if(moveDirection == Vector2.zero)
+		moveDirection = target.transform.position - transform.position;
+		if(moveDirection.magnitude < 0.1f)
 			IdleState();
 		else
 		{
-			moveDirection = target.transform.position - transform.position;
 			MoveState();
 		}
 
-		SetAnimation(moveDirection, idleDirection);
+		SetAnimation(idleDirection);
 	}
 
-	private void SetAnimation(Vector2 dir, Vector2 idleDirection)
+	private void SetAnimation(Vector2 idleDirection)
 	{
-		//animator.SetFloat("SpeedMul", speedMul);
-		animator.SetFloat("Speed", dir.normalized.magnitude);
+		animator.SetFloat("SpeedMul", speedMul);
 		animator.SetFloat("Horizontal", idleDirection.x);
 		animator.SetFloat("Vertical", idleDirection.y);
 	}
 
 	#region State Machine Method
 
-	public void IdleState() => _stateMachine.ChangeState(_idleSM);
+	public void IdleState()
+	{
+		if(isIdle) return;
+		animator.SetFloat("Speed", 0f);
+		_stateMachine.ChangeState(_idleSM);
+	}
 
 	public void MoveState()
 	{
 		if(isMove) return;
+		animator.SetFloat("Speed", 1f);
 		_stateMachine.ChangeState(_moveSM);
 	}
 

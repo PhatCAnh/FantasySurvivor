@@ -103,7 +103,7 @@ public class Character : ObjectRPG
 
 	private void SetAnimation(Vector2 dir, Vector2 idleDirection)
 	{
-		//animator.SetFloat("SpeedMul", speedMul);
+		animator.SetFloat("SpeedMul", speedMul);
 		animator.SetFloat("Speed", dir.normalized.magnitude);
 		animator.SetFloat("Horizontal", idleDirection.x);
 		animator.SetFloat("Vertical", idleDirection.y);
