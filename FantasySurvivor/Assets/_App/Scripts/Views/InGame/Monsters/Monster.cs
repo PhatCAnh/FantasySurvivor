@@ -17,6 +17,8 @@ public class Monster : ObjectRPG
 	public MonsterStat stat { get; private set; }
 	
 	public MonsterModel model { get; private set; }
+
+	public Character target { get; private set; }
 	
 	public bool isMove => _stateMachine.currentState == _moveSM;
 
@@ -59,12 +61,12 @@ public class Monster : ObjectRPG
 		}
 
 		myRigid = GetComponent<Rigidbody2D>();
-		Init(new MonsterModel(1f, 120f));
 	}
 
-	public void Init(MonsterModel model)
+	public void Init(MonsterModel modelInit, Character character)
 	{
-		this.model = model;
+		model = modelInit;
+		target = character;
 	}
 
 	private void Update()
@@ -79,7 +81,6 @@ public class Monster : ObjectRPG
 	private void FixedUpdate()
 	{
 		if(_gameController.isStop) return;
-
 		_stateMachine.currentState.PhysicUpdate(Time.fixedTime);
 	}
 
@@ -94,7 +95,10 @@ public class Monster : ObjectRPG
 		if(moveDirection == Vector2.zero)
 			IdleState();
 		else
+		{
+			moveDirection = target.transform.position - transform.position;
 			MoveState();
+		}
 
 		SetAnimation(moveDirection, idleDirection);
 	}

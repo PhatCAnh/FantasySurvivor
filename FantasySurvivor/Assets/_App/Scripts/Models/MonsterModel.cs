@@ -12,7 +12,7 @@ public class MonsterModel : Model<GameApp>
     {
     }
 
-    public MonsterModel(float moveSpeed, float amountOil) : base(dataChangedEvent)
+    public MonsterModel(float moveSpeed) : base(dataChangedEvent)
     {
         this.moveSpeed = moveSpeed;
     }

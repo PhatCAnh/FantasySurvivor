@@ -60,7 +60,7 @@ public class Character : ObjectRPG
 		}
 
 		myRigid = GetComponent<Rigidbody2D>();
-		Init(new CharacterModel(1f, 120f));
+		
 	}
 
 	public void Init(CharacterModel model)

@@ -13,9 +13,6 @@ namespace FantasySurvivor
 
 		public override void PhysicUpdate(float fixedDeltaTime)
 		{
-			base.PhysicUpdate(fixedDeltaTime);
-			
-
 			var directionUnit = agent.moveDirection.normalized;
 			Move(directionUnit, Time.fixedDeltaTime);
 		}
