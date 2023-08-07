@@ -36,6 +36,8 @@ public class Character : ObjectRPG
 		}
 	}
 
+	public bool isAlive => model.currentHealthPoint > 0;
+
 	private Vector2 _direction = Vector2.zero;
 
 	private StateMachine _stateMachine;
@@ -85,9 +87,20 @@ public class Character : ObjectRPG
 		_stateMachine.currentState.PhysicUpdate(Time.fixedTime);
 	}
 
-	public void Controlled(float deltaTime, Vector2 moveForce)
+	public void Controlled(Vector2 moveForce)
 	{
 		moveDirection = moveForce;
+	}
+	
+	public void TakeDamage(int damage)
+	{
+		model.currentHealthPoint -= damage;
+		if(isAlive) Die();
+	}
+
+	public void Die()
+	{
+		Destroy(gameObject);
 	}
 
 	private void HandlePhysicUpdate()
@@ -100,6 +113,9 @@ public class Character : ObjectRPG
 
 		SetAnimation(moveDirection, idleDirection);
 	}
+	
+	
+	
 
 	private void SetAnimation(Vector2 dir, Vector2 idleDirection)
 	{

@@ -19,13 +19,10 @@ public class CharacterController : Controller<GameApp>
 	{
 		if(_gameController.isStop) return;
 
-		ControlMove(Time.deltaTime);
+		ControlMove();
 	}
-	private void ControlMove(float deltaTime)
+	private void ControlMove()
 	{
-		var posX = Input.GetAxis("Horizontal");
-		var posY = Input.GetAxis("Vertical");
-		var position = new Vector2(posX, posY);
-		character.Controlled(deltaTime, position);
+		character.Controlled(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
 	}
 }

@@ -16,6 +16,9 @@ using UnityEngine.Serialization;
 public class GameController : Controller<GameApp>
 {
 	[SerializeField] private Character _characterPrefab;
+	[SerializeField] private Transform _test;
+	
+	
 	// [SerializeField] private DropItem _keyPrefab;
 	// [SerializeField] private DropItem _oilPrefab;
 	// [SerializeField] private Door _doorPrefab;
@@ -38,6 +41,22 @@ public class GameController : Controller<GameApp>
 	private void Start()
 	{
 		StartGame();
+	}
+
+	private void Update()
+	{
+		var test = Instantiate(_test);
+		Vector2 random = RandomPointOnCircleEdge(5);
+		Vector2 charPos = character.transform.position;
+		test.position = new Vector2(charPos.x, charPos.y) + random;
+	}
+	
+	Vector2 RandomPointOnCircleEdge(float radius)
+	{
+		float angle = Random.Range(0, 2 * Mathf.PI); // Random angle in radians
+		float x = radius * Mathf.Cos(angle);
+		float y = radius * Mathf.Sin(angle);
+		return new Vector2(x, y);
 	}
 
 	protected override void OnDestroy()
