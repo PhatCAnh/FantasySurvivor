@@ -1,9 +1,8 @@
 using ArbanFramework.MVC;
+using FantasySurvivor;
 
-public class MonsterModel : Model<GameApp>
+public class MonsterModel : UnitModel
 {
-    public static EventTypeBase dataChangedEvent = new EventTypeBase(nameof(MonsterModel) + ".dataChanged");
-
     public MonsterModel(EventTypeBase eventType) : base(dataChangedEvent)
     {
     }
@@ -17,18 +16,8 @@ public class MonsterModel : Model<GameApp>
         this.moveSpeed = moveSpeed;
     }
 
-    private float _moveSpeed;
-
-    public float moveSpeed
+    public MonsterModel(float movespeed, int maxHp) : base(movespeed, maxHp)
     {
-        get => _moveSpeed;
-        set
-        {
-            if (moveSpeed != value)
-            {
-                _moveSpeed = value;
-                RaiseDataChanged(nameof(moveSpeed));
-            }
-        }
+        
     }
 }

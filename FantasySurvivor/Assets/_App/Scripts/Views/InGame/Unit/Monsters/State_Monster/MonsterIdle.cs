@@ -1,6 +1,6 @@
 using ArbanFramework.StateMachine;
 
-public class MonsterIdle : State<Monster>
+public class MonsterIdle : UnitIdle
 {
 	public MonsterIdle(Monster agent, StateMachine stateMachine) : base(agent, stateMachine)
 	{

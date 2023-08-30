@@ -7,7 +7,7 @@ using Cooldown = ArbanFramework.Cooldown;
 
 public class CharacterController : Controller<GameApp>
 {
-	public Character character => _gameController.character;
+	public TowerView Tower => _gameController.tower;
 	private GameController _gameController => Singleton<GameController>.instance;
 
 	private void Awake()
@@ -23,6 +23,6 @@ public class CharacterController : Controller<GameApp>
 	}
 	private void ControlMove()
 	{
-		character.Controlled(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
+		//Tower.Controlled(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
 	}
 }

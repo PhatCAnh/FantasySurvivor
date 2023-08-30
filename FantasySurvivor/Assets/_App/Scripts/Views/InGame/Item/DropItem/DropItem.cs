@@ -30,14 +30,14 @@ namespace MR
         private DropItemCollect _collectSm;
         private DropItemComplete _completeSm;
         
-        public Character character { get; private set; }
+        public TowerView character { get; private set; }
 
         private GameController _gameController => Singleton<GameController>.instance;
 
         protected override void OnViewInit() {
             base.OnViewInit();
 
-            character = _gameController.character;
+            character = _gameController.tower;
 
             if( _stateMachine == null ) {
                 _stateMachine = new StateMachine();
