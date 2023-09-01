@@ -32,12 +32,12 @@ namespace MR
         
         public TowerView character { get; private set; }
 
-        private GameController _gameController => Singleton<GameController>.instance;
+        //private GameController _gameController => Singleton<GameController>.instance;
 
         protected override void OnViewInit() {
             base.OnViewInit();
 
-            character = _gameController.tower;
+            //character = _gameController.tower;
 
             if( _stateMachine == null ) {
                 _stateMachine = new StateMachine();
@@ -53,7 +53,7 @@ namespace MR
 
         public void Update()
         {
-            if(_gameController.isStop) return;
+            //if(_gameController.isStop) return;
             _stateMachine.currentState.LogicUpdate(Time.deltaTime);
         } 
 

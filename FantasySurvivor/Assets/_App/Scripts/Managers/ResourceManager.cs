@@ -13,13 +13,9 @@ using UnityEngine.UI;
 
 public class ResourceManager : UIManagerBase<PopupType>
 {
-    [SerializeField] GameObject keyPrefab;
+    //[SerializeField] GameObject keyPrefab;
 
-    [SerializeField] private GameObject mainUIPopupPrefab;
-    [SerializeField] private GameObject notificationPopupPrefab;
-    [SerializeField] private GameObject winGamePopupPrefab;
-    [SerializeField] private GameObject loseGamePopupPrefab; 
-    [SerializeField] private GameObject choiceMapPopupPrefab;
+    //[SerializeField] private GameObject mainUIPopupPrefab;
 
     private Dictionary<ItemType, GameObject> _itemDic;
 
@@ -38,18 +34,14 @@ public class ResourceManager : UIManagerBase<PopupType>
     {
         InitItemDic();
 
-        RegisterPopup(PopupType.Main, mainUIPopupPrefab);
-        RegisterPopup(PopupType.Notification, notificationPopupPrefab);
-        RegisterPopup(PopupType.WinGame, winGamePopupPrefab);
-        RegisterPopup(PopupType.LoseGame, loseGamePopupPrefab);
-        RegisterPopup(PopupType.ChoiceMap, choiceMapPopupPrefab);
+        //RegisterPopup(PopupType.Main, mainUIPopupPrefab);
     }
 
     private void InitItemDic()
     {
         _itemDic = new Dictionary<ItemType, GameObject>()
         {
-            {ItemType.Key, keyPrefab }
+            //{ItemType.Key, keyPrefab }
         };
     }    
 

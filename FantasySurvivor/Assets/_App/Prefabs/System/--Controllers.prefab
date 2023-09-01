@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6821980598547356828}
-  - component: {fileID: 3679997591628030443}
+  - component: {fileID: 3406260845707158370}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 4008007943000763285}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3679997591628030443
+--- !u!114 &3406260845707158370
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2857875863129843907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50514bdb78ef14146a0d94b6d5a2b852, type: 3}
+  m_Script: {fileID: 11500000, guid: d0d63d1c0a934a6f999408f0cee3bc60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterPrefab: {fileID: 5281739451839745425, guid: 169d4e58824d47647a166e95477b2cc8, type: 3}
+  isStopGame: 0
+  isEndGame: 0
+  tower: {fileID: 0}
+  monster: {fileID: 0}
+  listMonster: []
 --- !u!1 &4008007943000763282
 GameObject:
   m_ObjectHideFlags: 0

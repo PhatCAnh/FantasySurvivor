@@ -23,9 +23,9 @@ public class BulletView : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.TryGetComponent(out Unit unit))
+        if(other.TryGetComponent(out Monster monster))
         {
-            unit.TakeDamage(10);
+            monster.TakeDamage(10);
             TouchUnit();
         }
     }

@@ -9,22 +9,7 @@ using UnityEngine.Serialization;
 
 public class GameController : Controller<GameApp>
 {
-	[SerializeField] private Character _characterPrefab;
-
-	[SerializeField] private HealthBar _healthBarPrefab;
-
 	public Monster monsterPrefab;
-
-	[SerializeField] private Transform _test;
-
-
-	// [SerializeField] private DropItem _keyPrefab;
-	// [SerializeField] private DropItem _oilPrefab;
-	// [SerializeField] private Door _doorPrefab;
-	//
-	// [HideInInspector] public MapView map;
-
-
 	public bool isStop => isEndGame || isStopGame;
 
 	public bool isStopGame;
@@ -32,7 +17,6 @@ public class GameController : Controller<GameApp>
 	public bool isEndGame;
 
 	public TowerView tower;
-	public Monster monster;
 
 	public List<Monster> listMonster = new List<Monster>();
 
@@ -97,13 +81,13 @@ public class GameController : Controller<GameApp>
 	}
 
 
-	public Monster SpawnMonster(Vector2 spawnPos)
+	public Monster SpawnMonster()
 	{
 		Monster monsterIns = Instantiate(monsterPrefab);
 
-		monsterIns.transform.position = spawnPos;
+		monsterIns.transform.position = RandomPositionSpawnMonster();
 
-		monsterIns.Init(new MonsterModel(0.25f, 20));
+		monsterIns.Init(new MonsterModel(0.5f, 20));
 
 		listMonster.Add(monsterIns);
 
@@ -119,8 +103,8 @@ public class GameController : Controller<GameApp>
 	public Monster GetMonsterNearest()
 	{
 		var nearestMons = listMonster.FirstOrDefault();
-		var towerPos = tower.transform.position;
 		if(nearestMons == null) return nearestMons;
+		var towerPos = tower.transform.position;
 		var nearestDistance = Vector2.Distance(nearestMons.transform.position, towerPos);
 		for(int i = 1; i < listMonster.Count; i++)
 		{
@@ -134,48 +118,26 @@ public class GameController : Controller<GameApp>
 		return nearestMons;
 	}
 
-	private Character SpawnCharacter(Vector2 spawnPos)
+	public void TowerDie(TowerView towerView)
 	{
-		//create character
-		Character characterIns = Instantiate(_characterPrefab);
-		var hpIns = Instantiate(_healthBarPrefab, app.resourceManager.rootContainer);
+		Debug.Log($"Lose game");
+	}
 
-		characterIns.Init(new CharacterModel(1f, 10));
-		characterIns.transform.position = spawnPos;
-
-		hpIns.Init(characterIns);
-
-		return characterIns;
-
-
-		// public void LoadGame(int level)
-		// {
-		// 	SpawnMap(level);
-		// }
-		//
-		// private void SpawnMap(int level)
-		// {
-		// 	var cfg = app.configs.mapConfigs.GetConfig(level);
-		// 	var map = Instantiate(app.resourceManager.mapPrefab);
-		// 	map.SpawnMap(cfg.mapConfig);
-		// }
-
-		// private DropItem SpawnDropItem(ItemType type, Vector2 spawnPoint)
-		// {
-		// 	var item = type switch
-		// 	{
-		// 		ItemType.Key => _keyPrefab,
-		// 		ItemType.Oil => _oilPrefab,
-		// 		_ => null
-		// 	};
-		// 	Instantiate(item, spawnPoint, quaternion.identity);
-		// 	return item;
-		// }
-		//
-		// private Door SpawnDoor(Vector2 spawnPoint)
-		// {
-		// 	var door = Instantiate(_doorPrefab, spawnPoint, quaternion.identity);
-		// 	return door;
-		// }
+	private Vector2 RandomPositionSpawnMonster()
+	{
+		int posX = 20;
+		int posY = 20;
+		int randomTopDown = Random.Range(0, 2);
+		if(randomTopDown == 0)
+		{
+			posX = Random.Range(-21, 21);
+			posY = (Random.Range(0, 2) * 2 - 1) * 20;
+		}
+		else
+		{
+			posX = (Random.Range(0, 2) * 2 - 1) * 20;
+			posY = Random.Range(-21, 21);
+		}
+		return new Vector2(posX, posY);
 	}
 }

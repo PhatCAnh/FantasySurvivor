@@ -537,39 +537,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4008007943000763285, guid: d8bffafac3ebbbb4c982947129728679, type: 3}
   m_PrefabInstance: {fileID: 8341650858537570064}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6082755293646858195 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2857875863129843907, guid: d8bffafac3ebbbb4c982947129728679, type: 3}
-  m_PrefabInstance: {fileID: 8341650858537570064}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &988904743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6082755293646858195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50514bdb78ef14146a0d94b6d5a2b852, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterPF: {fileID: 6980818757309096130, guid: e679a345c1e93424f921109a1aaf81ba, type: 3}
-  keyPF: {fileID: 3221224761168961406, guid: 23681ccaa2934b546a93d86632b63c1a, type: 3}
-  doorPF: {fileID: 3954911737388255345, guid: 1108e70da73808e4f8a9ad730e94a5d4, type: 3}
-  map: {fileID: 0}
-  isEndGame: 0
-  character: {fileID: 0}
---- !u!114 &988904745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6082755293646858195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4902a9b23b2482eb2d43f0d1ec734a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  joystick: {fileID: 0}

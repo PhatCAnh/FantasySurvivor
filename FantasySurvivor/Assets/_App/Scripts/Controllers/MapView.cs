@@ -30,16 +30,9 @@ public class MapView : View<AppBase>
 		_cooldownTime.Update(Time.deltaTime);
 		if(_cooldownTime.isFinished)
 		{
-			gameController.SpawnMonster(GetRandomPositionSpawn());
+			gameController.SpawnMonster();
 			_cooldownTime.Restart(_cooldown);
 		}
-	}
-
-	private Vector2 GetRandomPositionSpawn()
-	{
-		var randomX = (Random.Range(0, 2) * 2 - 1) * Random.Range(0, _size.x / 2 + 1);
-		var randomY = (Random.Range(0, 2) * 2 - 1) * Random.Range(0, _size.y / 2 + 1);
-		return new Vector2(randomX, randomY);
 	}
 
 	private void OnDrawGizmosSelected()

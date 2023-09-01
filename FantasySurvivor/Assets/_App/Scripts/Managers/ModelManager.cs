@@ -4,8 +4,8 @@ using MR;
 
 public class ModelManager : ModelManagerBase
 {
-	public CharacterModel characterModel;
 	public MonsterModel monsterModel;
+	public TowerModel towerModel;
 	//Models
 	public SettingModel settingModel;
 	public void Init()
@@ -13,7 +13,7 @@ public class ModelManager : ModelManagerBase
 		//Register
 		RegisterModel(out settingModel);
 		RegisterModel(out monsterModel);
-		RegisterModel(out characterModel);
+		RegisterModel(out towerModel);
 		LoadData();
 	}
 }
