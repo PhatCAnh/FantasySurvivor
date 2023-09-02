@@ -114,8 +114,8 @@ public class GameController : Controller<GameApp>
 
 	private Vector2 RandomPositionSpawnMonster()
 	{
-		int posX = 20;
-		int posY = 20;
+		int posX;
+		int posY;
 		int randomTopDown = Random.Range(0, 2);
 		if(randomTopDown == 0)
 		{
