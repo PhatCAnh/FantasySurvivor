@@ -11,11 +11,13 @@ public class MonsterModel : Model<GameApp>
     public MonsterModel() : base(dataChangedEvent)
     {
     }
-    public MonsterModel(float moveSpeed, int healthPoint) : base(dataChangedEvent)
+    public MonsterModel(float moveSpeed, int healthPoint, int attackDamage, float attackSpeed) : base(dataChangedEvent)
     {
         this.moveSpeed = moveSpeed;
         this.currentHealthPoint = healthPoint;
         this.maxHealthPoint = healthPoint;
+        this.attackDamage = attackDamage;
+        this.attackSpeed = attackSpeed;
     }
 
     private int _attackDamage;

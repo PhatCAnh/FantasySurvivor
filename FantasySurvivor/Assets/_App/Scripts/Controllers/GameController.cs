@@ -87,7 +87,7 @@ public class GameController : Controller<GameApp>
 
 		monsterIns.transform.position = RandomPositionSpawnMonster();
 
-		monsterIns.Init(new MonsterModel(0.5f, 20));
+		monsterIns.Init(new MonsterModel(0.5f, 20, 10, 1f));
 
 		listMonster.Add(monsterIns);
 

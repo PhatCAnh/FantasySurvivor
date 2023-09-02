@@ -9,8 +9,14 @@ public class BulletView : MonoBehaviour
 
     public Rigidbody2D rigidbody2d;
 
-    public void Init(Transform spawnPos, float speed)
+    private TowerView _origin;
+    
+    
+
+    public void Init(TowerView origin, float speed)
     {
+        _origin = origin;
+        var spawnPos = _origin.firePoint;
         transform.SetPositionAndRotation(spawnPos.position, spawnPos.rotation);
         rigidbody2d.velocity = spawnPos.up * speed;
         Destroy(gameObject, 3f);
@@ -25,7 +31,7 @@ public class BulletView : MonoBehaviour
     {
         if(other.TryGetComponent(out Monster monster))
         {
-            monster.TakeDamage(10);
+            monster.TakeDamage(_origin.model.attackDamage);
             TouchUnit();
         }
     }

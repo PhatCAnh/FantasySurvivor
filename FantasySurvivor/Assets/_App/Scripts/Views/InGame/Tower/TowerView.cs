@@ -39,7 +39,7 @@ public class TowerView : View<GameApp>
 	protected override void OnViewInit()
 	{
 		base.OnViewInit();
-		model = new TowerModel(100, 1f);
+		model = new TowerModel(100, 1f, 10);
 		if(_stateMachine == null)
 		{
 			_stateMachine = new StateMachine();
@@ -85,7 +85,7 @@ public class TowerView : View<GameApp>
 	public void Attack()
 	{
 		var arrowIns = Instantiate(arrow);
-		arrowIns.Init(firePoint, 15f);
+		arrowIns.Init(this, 15f);
 	}
 
 	public void IdleState()

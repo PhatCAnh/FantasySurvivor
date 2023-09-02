@@ -7,21 +7,23 @@ using UnityEngine;
 public class Monster : View<GameApp>
 {
 	#region Fields
-	
+
 	public Rigidbody2D myRigid;
 
 	public Animator animator;
-	
+
+	#region Properties
+
 	private Vector2 _direction = Vector2.zero;
-	
+
 	public MonsterModel model { get; protected set; }
-	
+
 	public MonsterStat stat { get; protected set; }
-	
+
 	public Vector2 idleDirection { get; private set; } = Vector2.down;
 
 	public float speedMul { get; set; } = 1;
-	
+
 	public Vector2 moveDirection
 	{
 		get => _direction;
@@ -33,34 +35,46 @@ public class Monster : View<GameApp>
 			_direction = value;
 		}
 	}
+
+	#endregion
+
+	#region Fields State Machine
+
 	public bool isIdle => _stateMachine.currentState == _idleState;
 
 	public bool isMove => _stateMachine.currentState == _moveState;
-	
+
+	public bool isAttack => _stateMachine.currentState == _attackState;
+
 	public bool isAlive => model.currentHealthPoint > 0;
-	
+
 	private StateMachine _stateMachine;
 	private GameController gameController => Singleton<GameController>.instance;
-	
+
 	private MonsterIdle _idleState;
-	
-	private MonsterMove _moveState;	
-	
+
+	private MonsterMove _moveState;
+
+	private MonsterAttack _attackState;
+
+	#endregion
+
 	public float size;
-	
 	private TowerView target => gameController.tower;
 
 	private float _sizeDirection;
-	
+
+	private Cooldown _cdAttack = new Cooldown();
+
 	#endregion
 
 	#region Base Methods
-	
+
 	public virtual void Init(MonsterModel monsterModel)
 	{
 		this.model = monsterModel;
 	}
-	
+
 	protected override void OnViewInit()
 	{
 		base.OnViewInit();
@@ -68,7 +82,8 @@ public class Monster : View<GameApp>
 		{
 			_stateMachine = new StateMachine();
 			_idleState = new MonsterIdle(this, _stateMachine);
-			_moveState =  new MonsterMove(this, _stateMachine);
+			_moveState = new MonsterMove(this, _stateMachine);
+			_attackState = new MonsterAttack(this, _stateMachine);
 			_stateMachine.Init(_idleState);
 		}
 		else
@@ -80,11 +95,13 @@ public class Monster : View<GameApp>
 
 	private void Update()
 	{
+		if(gameController.isStop) return;
 		var time = Time.deltaTime;
+		_cdAttack.Update(time);
 		_stateMachine.currentState.LogicUpdate(time);
 		HandlePhysicUpdate();
 	}
-	
+
 	private void FixedUpdate()
 	{
 		if(gameController.isStop) return;
@@ -96,16 +113,23 @@ public class Monster : View<GameApp>
 	private void HandlePhysicUpdate()
 	{
 		moveDirection = target.transform.position - transform.position;
-		
+
 		if(moveDirection.magnitude < _sizeDirection)
-			IdleState();
+		{
+			if(_cdAttack.isFinished)
+			{
+				AttackState();
+				_cdAttack.Restart(model.attackSpeed);
+			}
+			//IdleState();
+		}
 		else
 		{
 			MoveState();
 		}
 		SetAnimation(idleDirection);
 	}
-	
+
 	protected virtual void SetAnimation(Vector2 directionMove)
 	{
 		animator.SetFloat("SpeedMul", speedMul);
@@ -117,7 +141,7 @@ public class Monster : View<GameApp>
 	{
 		target.TakeDamage(model.attackDamage);
 	}
-	
+
 	public void TakeDamage(int damage)
 	{
 		model.currentHealthPoint -= damage;
@@ -133,7 +157,7 @@ public class Monster : View<GameApp>
 	{
 		Gizmos.DrawWireSphere(transform.position, size);
 	}
-	
+
 	#region State Machine Method
 
 	public virtual void IdleState()
@@ -142,10 +166,16 @@ public class Monster : View<GameApp>
 		_stateMachine.ChangeState(_idleState);
 	}
 
-	public virtual void MoveState()
+	public void MoveState()
 	{
 		if(isMove) return;
 		_stateMachine.ChangeState(_moveState);
+	}
+
+	public void AttackState()
+	{
+		if(isAttack) return;
+		_stateMachine.ChangeState(_attackState);
 	}
 
 	#endregion

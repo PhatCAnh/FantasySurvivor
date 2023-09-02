@@ -14,16 +14,18 @@ namespace FantasySurvivor
 			
 		}
 
-		public TowerModel(int hp, float attackSpeed) : base(dataChangedEvent)
+		public TowerModel(int hp, float attackSpeed, int attackDamage) : base(dataChangedEvent)
 		{
 			currentHealthPoint = hp;
 			maxHealthPoint = hp;
 			this.attackSpeed = attackSpeed;
+			this.attackDamage = attackDamage;
 		}
 
 		private int _currentHealthPoint;
 		private int _maxHealthPoint;
 		private float _attackSpeed;
+		private int _attackDamage;
 		
 		public int currentHealthPoint
 		{
@@ -52,6 +54,16 @@ namespace FantasySurvivor
 				if(attackSpeed.Equals(value)) return;
 				_attackSpeed = value;
 				RaiseDataChanged(nameof(attackSpeed));
+			}
+		}
+		
+		public int attackDamage
+		{
+			get => _attackDamage;
+			set {
+				if(attackDamage == value) return;
+				_attackDamage = value;
+				RaiseDataChanged(nameof(attackDamage));
 			}
 		}
 	}
