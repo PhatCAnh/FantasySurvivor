@@ -340,6 +340,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4925867890978961579, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _healthBarPrefab
+      value: 
+      objectReference: {fileID: 5614261067818666273, guid: 35409695b36a9264d80899c5dd561465, type: 3}
     - target: {fileID: 6667024491820133490, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: tower
       value: 
@@ -620,7 +624,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1817254534
 MonoBehaviour:
   m_ObjectHideFlags: 0

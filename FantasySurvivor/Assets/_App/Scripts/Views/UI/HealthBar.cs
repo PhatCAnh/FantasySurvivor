@@ -1,4 +1,5 @@
 using System;
+using ArbanFramework;
 using ArbanFramework.MVC;
 using FantasySurvivor;
 using UnityEngine;
@@ -10,31 +11,32 @@ namespace FantasySurvivor
 	{
 		[SerializeField] private Slider _sldHealthPoint;
 
-		private void LateUpdate()
-		{
-			// if (_unit == null)
-			// 	return;
-			//
-			// transform.position = Camera.main.WorldToScreenPoint(_unit.trfUI.position);
-		}
+		private TowerView _towerView => Singleton<GameController>.instance.tower;
 
 		protected override void OnViewInit()
 		{
-			// AddDataBinding("sldOil-value", _sldHealthPoint, (control, e) =>
-			// 	{
-			// 		float value = _unit.model.currentHealthPoint / (float) _unit.model.maxHealthPoint;
-			// 		_sldHealthPoint.value = value;
-			// 	}, new DataChangedValue(
-			// 		CharacterModel.dataChangedEvent,
-			// 		nameof(CharacterModel.currentHealthPoint),
-			// 		_unit.model
-			// 	)
-			// );
+			var model = _towerView.model;
+			
+			transform.SetParent(app.resourceManager.rootContainer);
+			
+			AddDataBinding("sldHealthBar-maxValue", _sldHealthPoint, (control, e) =>
+				{
+					control.maxValue = model.maxHealthPoint;
+				},
+				new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.maxHealthPoint), model)
+			);
+			
+			AddDataBinding("sldHealthBar-value", _sldHealthPoint, (control, e) =>
+				{
+					control.value = model.currentHealthPoint;
+				},
+				new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.currentHealthPoint), model)
+			);
+			
+			var position = _towerView.transform.position;
+			var uiPos = new Vector2(position.x, position.y + 2);
+			
+			transform.position = Camera.main.WorldToScreenPoint(uiPos);
 		}
-
-		// public void Init(Character character)
-		// {
-		// 	_unit = character;
-		// }
 	}
 }

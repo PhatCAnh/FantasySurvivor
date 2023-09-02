@@ -15,7 +15,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 {
     //[SerializeField] GameObject keyPrefab;
 
-    //[SerializeField] private GameObject mainUIPopupPrefab;
+    [SerializeField] private GameObject _healthBarPrefab;
 
     private Dictionary<ItemType, GameObject> _itemDic;
 
@@ -34,14 +34,14 @@ public class ResourceManager : UIManagerBase<PopupType>
     {
         InitItemDic();
 
-        //RegisterPopup(PopupType.Main, mainUIPopupPrefab);
+        //RegisterPopup(PopupType.Main, _healthBarPrefab);
     }
 
     private void InitItemDic()
     {
         _itemDic = new Dictionary<ItemType, GameObject>()
         {
-            //{ItemType.Key, keyPrefab }
+            {ItemType.HealthBar, _healthBarPrefab }
         };
     }    
 

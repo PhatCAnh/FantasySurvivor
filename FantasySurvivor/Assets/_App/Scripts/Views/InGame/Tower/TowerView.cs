@@ -36,10 +36,17 @@ public class TowerView : View<GameApp>
 	private TowerIdle _idleState;
 	private TowerAttack _attackState;
 
+	public void Init()
+	{
+		model = new TowerModel(100, 1f, 5, 10f);
+		var healthBar = app.resourceManager.GetItem(ItemType.HealthBar);
+		Instantiate(healthBar);
+	}
+
 	protected override void OnViewInit()
 	{
 		base.OnViewInit();
-		model = new TowerModel(100, 1f, 10);
+		Init();
 		if(_stateMachine == null)
 		{
 			_stateMachine = new StateMachine();
@@ -51,7 +58,7 @@ public class TowerView : View<GameApp>
 		{
 			IdleState();
 		}
-		AddDataBinding("sldOil-value", this, (control, e) =>
+		AddDataBinding("fieldTower-attackSpeedValue", this, (control, e) =>
 			{
 				animator.SetFloat("AttackSpeed", model.attackSpeed);
 			}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.attackSpeed), model)

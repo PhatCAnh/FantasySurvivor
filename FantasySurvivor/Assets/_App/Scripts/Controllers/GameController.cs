@@ -10,6 +10,7 @@ using UnityEngine.Serialization;
 public class GameController : Controller<GameApp>
 {
 	public Monster monsterPrefab;
+	
 	public bool isStop => isEndGame || isStopGame;
 
 	public bool isStopGame;
@@ -53,7 +54,7 @@ public class GameController : Controller<GameApp>
 
 	public void ShowChoiceMap()
 	{
-		app.resourceManager.ShowPopup(PopupType.ChoiceMap);
+		//app.resourceManager.ShowPopup(PopupType.ChoiceMap);
 	}
 
 	public void StartGame()
@@ -100,22 +101,10 @@ public class GameController : Controller<GameApp>
 		if(canDestroy) Destroy(mons.gameObject);
 	}
 
-	public Monster GetMonsterNearest()
+	public Monster GetFirstMonster()
 	{
-		var nearestMons = listMonster.FirstOrDefault();
-		if(nearestMons == null) return nearestMons;
-		var towerPos = tower.transform.position;
-		var nearestDistance = Vector2.Distance(nearestMons.transform.position, towerPos);
-		for(int i = 1; i < listMonster.Count; i++)
-		{
-			var distance = Vector2.Distance(listMonster[i].transform.position, towerPos);
-			if(distance < nearestDistance)
-			{
-				nearestMons = listMonster[i];
-				nearestDistance = distance;
-			}
-		}
-		return nearestMons;
+		if(listMonster.Count == 0) return null;
+		return listMonster.FirstOrDefault(monster => Vector2.Distance(monster.transform.position, tower.transform.position) < tower.model.attackRange);
 	}
 
 	public void TowerDie(TowerView towerView)
