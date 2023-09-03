@@ -59,9 +59,7 @@ public class GameController : Controller<GameApp>
 
 	public void StartGame()
 	{
-		// character = SpawnCharacter(Vector2.zero);
-		//monster = SpawnMonster(new Vector2(10, 10));
-
+		tower = SpawnTower();
 	}
 
 	public void WinGame()
@@ -129,4 +127,18 @@ public class GameController : Controller<GameApp>
 		}
 		return new Vector2(posX, posY);
 	}
+
+	private TowerView SpawnTower()
+	{
+		var towerPrefab = Instantiate(app.resourceManager.GetItem(ItemType.Tower))
+			.GetComponent<TowerView>();
+		towerPrefab.transform.position = Vector2.zero;
+		towerPrefab.Init();
+		
+		Instantiate(app.resourceManager.GetItem(ItemType.HealthBar), app.resourceManager.rootContainer)
+			.GetComponent<HealthBar>().Init(towerPrefab);
+		
+		return towerPrefab;
+	}
+	
 }

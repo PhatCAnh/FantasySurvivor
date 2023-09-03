@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ArbanFramework;
 using UnityEngine;
 
 public class BulletView : MonoBehaviour
@@ -10,8 +11,6 @@ public class BulletView : MonoBehaviour
     public Rigidbody2D rigidbody2d;
 
     private TowerView _origin;
-    
-    
 
     public void Init(TowerView origin, float speed)
     {
@@ -31,7 +30,10 @@ public class BulletView : MonoBehaviour
     {
         if(other.TryGetComponent(out Monster monster))
         {
-            monster.TakeDamage(_origin.model.attackDamage);
+            var damage = _origin.model.attackDamage;
+            monster.TakeDamage(damage);
+            Singleton<PoolDamagePoint>.instance
+                .GetObjectFromPool(other.transform.position, damage, false);
             TouchUnit();
         }
     }

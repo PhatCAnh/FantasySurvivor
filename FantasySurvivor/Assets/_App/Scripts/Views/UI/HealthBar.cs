@@ -15,13 +15,11 @@ namespace FantasySurvivor
 
 		[Required, SerializeField] private TextMeshProUGUI _txtPoint;
 
-		private TowerView _towerView => Singleton<GameController>.instance.tower;
+		private TowerView _towerView;
 
 		protected override void OnViewInit()
 		{
 			var model = _towerView.model;
-			
-			transform.SetParent(app.resourceManager.rootContainer);
 			
 			AddDataBinding("sldHealthBar-maxValue", _sldHealthPoint, (control, e) =>
 				{
@@ -40,9 +38,14 @@ namespace FantasySurvivor
 			);
 			
 			var position = _towerView.transform.position;
-			var uiPos = new Vector2(position.x, position.y + 2);
+			var uiPos = new Vector2(position.x, position.y + 3);
 			
 			transform.position = Camera.main.WorldToScreenPoint(uiPos);
+		}
+
+		public void Init(TowerView towerView)
+		{
+			_towerView = towerView;
 		}
 	}
 }

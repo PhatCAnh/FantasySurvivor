@@ -10,7 +10,7 @@ using TMPro;
 
 using UnityEngine;
 using UnityEngine.UI;
-namespace MR
+namespace Popup
 {
     public class MainUI : View<GameApp>, IPopup
     {

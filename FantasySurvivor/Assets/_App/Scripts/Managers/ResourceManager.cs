@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -15,7 +16,11 @@ public class ResourceManager : UIManagerBase<PopupType>
 {
     //[SerializeField] GameObject keyPrefab;
 
-    [SerializeField] private GameObject _healthBarPrefab;
+    [Required, SerializeField] private GameObject _healthBarPrefab;
+    
+    [Required, SerializeField] private GameObject _towerPrefab;
+    
+    
 
     private Dictionary<ItemType, GameObject> _itemDic;
 
@@ -41,7 +46,8 @@ public class ResourceManager : UIManagerBase<PopupType>
     {
         _itemDic = new Dictionary<ItemType, GameObject>()
         {
-            {ItemType.HealthBar, _healthBarPrefab }
+            {ItemType.HealthBar, _healthBarPrefab },
+            {ItemType.Tower, _towerPrefab },
         };
     }    
 

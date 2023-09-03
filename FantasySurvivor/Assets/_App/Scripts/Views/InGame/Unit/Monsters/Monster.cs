@@ -2,9 +2,10 @@ using ArbanFramework;
 using ArbanFramework.MVC;
 using ArbanFramework.StateMachine;
 using FantasySurvivor;
+using MR.CharacterState;
 using UnityEngine;
 
-public class Monster : View<GameApp>
+public class Monster : ObjectRPG
 {
 	#region Fields
 

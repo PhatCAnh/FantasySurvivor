@@ -5,11 +5,12 @@ using ArbanFramework;
 using ArbanFramework.MVC;
 using ArbanFramework.StateMachine;
 using FantasySurvivor;
+using MR.CharacterState;
 using MR.CharacterState.Tower;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class TowerView : View<GameApp>
+public class TowerView : ObjectRPG
 {
 	public SpriteRenderer skinBase;
 
@@ -39,14 +40,11 @@ public class TowerView : View<GameApp>
 	public void Init()
 	{
 		model = new TowerModel(100, 1f, 5, 10f);
-		var healthBar = app.resourceManager.GetItem(ItemType.HealthBar);
-		Instantiate(healthBar);
 	}
 
 	protected override void OnViewInit()
 	{
 		base.OnViewInit();
-		Init();
 		if(_stateMachine == null)
 		{
 			_stateMachine = new StateMachine();
@@ -77,7 +75,6 @@ public class TowerView : View<GameApp>
 		_stateMachine.currentState.PhysicUpdate(Time.fixedTime);
 	}
 
-	[Button]
 	public void TakeDamage(int damage)
 	{
 		model.currentHealthPoint -= damage;
