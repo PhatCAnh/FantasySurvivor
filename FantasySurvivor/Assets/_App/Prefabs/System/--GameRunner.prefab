@@ -392,6 +392,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 4925867892422093208}
     m_Modifications:
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _towerPrefab
+      value: 
+      objectReference: {fileID: 4792938240872509890, guid: a9f6d6874cc145843990074321833cf4, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _healthBarPrefab
+      value: 
+      objectReference: {fileID: 5614261067818666273, guid: 35409695b36a9264d80899c5dd561465, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: mainUIPopupPrefab
       value: 
       objectReference: {fileID: 1056707390812190397, guid: 2b8c1bd94f7f13948980b02500595949, type: 3}
