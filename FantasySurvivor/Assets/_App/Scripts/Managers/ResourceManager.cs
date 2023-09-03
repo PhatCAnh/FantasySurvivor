@@ -15,14 +15,18 @@ using UnityEngine.UI;
 public class ResourceManager : UIManagerBase<PopupType>
 {
     //[SerializeField] GameObject keyPrefab;
+    
+    [Header("Object Prefabs")]
 
     [Required, SerializeField] private GameObject _healthBarPrefab;
     
     [Required, SerializeField] private GameObject _towerPrefab;
-    
-    
 
     private Dictionary<ItemType, GameObject> _itemDic;
+    
+    [Header("UI Prefabs")]
+    
+    [Required, SerializeField] private GameObject _pausePopup;
 
     private void Awake()
     {
@@ -39,7 +43,7 @@ public class ResourceManager : UIManagerBase<PopupType>
     {
         InitItemDic();
 
-        //RegisterPopup(PopupType.Main, _healthBarPrefab);
+        RegisterPopup(PopupType.Pause, _pausePopup);
     }
 
     private void InitItemDic()

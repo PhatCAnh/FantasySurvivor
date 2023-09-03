@@ -31,7 +31,7 @@ namespace Popup
 
 		private void OnClickBtnSetting()
 		{
-			gameController.isStopGame = true;
+			app.resourceManager.ShowPopup(PopupType.Pause);
 		}
 	}
 }
