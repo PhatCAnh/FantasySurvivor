@@ -26,6 +26,8 @@ public class ResourceManager : UIManagerBase<PopupType>
     
     [Header("UI Prefabs")]
     
+    [Required, SerializeField] private GameObject _mainUIInGame;
+    
     [Required, SerializeField] private GameObject _pausePopup;
 
     private void Awake()
@@ -44,6 +46,7 @@ public class ResourceManager : UIManagerBase<PopupType>
         InitItemDic();
 
         RegisterPopup(PopupType.Pause, _pausePopup);
+        RegisterPopup(PopupType.MainInGame, _mainUIInGame);
     }
 
     private void InitItemDic()

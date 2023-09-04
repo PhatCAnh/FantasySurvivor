@@ -59,6 +59,7 @@ public class GameController : Controller<GameApp>
 
 	public void StartGame()
 	{
+		app.resourceManager.ShowPopup(PopupType.MainInGame);
 		tower = SpawnTower();
 	}
 

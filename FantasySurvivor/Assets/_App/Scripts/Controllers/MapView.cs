@@ -27,6 +27,7 @@ public class MapView : View<AppBase>
 
 	private void Update()
 	{
+		if(gameController.isStop) return;
 		_cooldownTime.Update(Time.deltaTime);
 		if(_cooldownTime.isFinished)
 		{
