@@ -32,6 +32,8 @@ public class ResourceManager : UIManagerBase<PopupType>
     
     [Required, SerializeField] private GameObject _choiceMapPopup;
     
+    [Required, SerializeField] private GameObject _loseGamePopup;
+    
     
 
     private void Awake()
@@ -52,6 +54,7 @@ public class ResourceManager : UIManagerBase<PopupType>
         RegisterPopup(PopupType.Pause, _pausePopup);
         RegisterPopup(PopupType.MainInGame, _mainUIInGame);
         RegisterPopup(PopupType.ChoiceMap, _choiceMapPopup);
+        RegisterPopup(PopupType.LoseGame, _loseGamePopup);
     }
 
     private void InitItemDic()
