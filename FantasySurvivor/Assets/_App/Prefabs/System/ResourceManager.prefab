@@ -114,13 +114,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rootContainer: {fileID: 7740478561839289927}
-  _blockPrefab: {fileID: 7748279644106733095, guid: d3b6f6e397b59ce48bcd9f793c00acdc, type: 3}
-  _mapPrefab: {fileID: 1582861667139941812, guid: e7107c4973e58104f8bdccb02760091a, type: 3}
-  keyPrefab: {fileID: 3221224761168961405, guid: 23681ccaa2934b546a93d86632b63c1a, type: 3}
-  mainUIPopupPrefab: {fileID: 0}
-  notificationPopupPrefab: {fileID: 0}
-  endGamePopupPrefab: {fileID: 0}
-  choiceMapPopupPrefab: {fileID: 0}
+  _healthBarPrefab: {fileID: 5614261067818666273, guid: 35409695b36a9264d80899c5dd561465, type: 3}
+  _towerPrefab: {fileID: 4792938240872509890, guid: a9f6d6874cc145843990074321833cf4, type: 3}
+  _mainUIInGame: {fileID: 4517874775808894528, guid: 7d102716dff72d845bb7e2578b9f8f2a, type: 3}
+  _pausePopup: {fileID: 2920936543736872574, guid: 54c842cbdc5037e4e9d70f478b0694e4, type: 3}
+  _choiceMapPopup: {fileID: 596667037376128798, guid: 30f13f392a9b75b479117dbd33a1941e, type: 3}
 --- !u!1 &7740478561839289926
 GameObject:
   m_ObjectHideFlags: 0

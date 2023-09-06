@@ -5,7 +5,6 @@ using ArbanFramework.MVC;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using FantasySurvivor;
-using UnityEngine.Serialization;
 
 public class GameController : Controller<GameApp>
 {
@@ -25,11 +24,6 @@ public class GameController : Controller<GameApp>
 	{
 		Singleton<GameController>.Set(this);
 	}
-	private void Start()
-	{
-		StartGame();
-	}
-
 	private void Update()
 	{
 		// var test = Instantiate(_test);
@@ -54,11 +48,13 @@ public class GameController : Controller<GameApp>
 
 	public void ShowChoiceMap()
 	{
-		//app.resourceManager.ShowPopup(PopupType.ChoiceMap);
+		app.resourceManager.ShowPopup(PopupType.ChoiceMap);
 	}
 
 	public void StartGame()
 	{
+		
+		
 		app.resourceManager.ShowPopup(PopupType.MainInGame);
 		tower = SpawnTower();
 	}
@@ -69,6 +65,8 @@ public class GameController : Controller<GameApp>
 
 	public void LoseGame()
 	{
+		isEndGame = true;
+		app.resourceManager.ShowPopup(PopupType.LoseGame);
 	}
 
 	public void RestartGame()
@@ -108,7 +106,7 @@ public class GameController : Controller<GameApp>
 
 	public void TowerDie(TowerView towerView)
 	{
-		Debug.Log($"Lose game");
+		LoseGame();
 	}
 
 	private Vector2 RandomPositionSpawnMonster()

@@ -7,5 +7,6 @@ public enum PopupType
     LoseGame,
     Notification,
     HealthBar,
+    ChoiceMap,
 }
 
