@@ -5,6 +5,7 @@ using ArbanFramework.MVC;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using FantasySurvivor;
+using UnityEngine.SceneManagement;
 
 public class GameController : Controller<GameApp>
 {
@@ -53,8 +54,6 @@ public class GameController : Controller<GameApp>
 
 	public void StartGame()
 	{
-		
-		
 		app.resourceManager.ShowPopup(PopupType.MainInGame);
 		tower = SpawnTower();
 	}
@@ -67,6 +66,12 @@ public class GameController : Controller<GameApp>
 	{
 		isEndGame = true;
 		app.resourceManager.ShowPopup(PopupType.LoseGame);
+	}
+
+	public void ChangeSceneHome()
+	{
+		var load = SceneManager.LoadSceneAsync("scn_Main", LoadSceneMode.Single);
+		load.completed += o => ShowChoiceMap();
 	}
 
 	public void RestartGame()
