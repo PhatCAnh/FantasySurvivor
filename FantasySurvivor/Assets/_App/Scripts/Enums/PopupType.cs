@@ -1,12 +1,12 @@
 public enum PopupType
 {
     Main,
+    Notification,
     Pause,
-    MainInGame,
     WinGame,
     LoseGame,
-    Notification,
-    HealthBar,
     ChoiceMap,
+    MainInGame,
+    HealthBar,
 }
 

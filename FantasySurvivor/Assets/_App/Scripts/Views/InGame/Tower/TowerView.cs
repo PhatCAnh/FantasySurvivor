@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using ArbanFramework.StateMachine;
+using DG.Tweening;
 using FantasySurvivor;
 using MR.CharacterState;
 using MR.CharacterState.Tower;
@@ -12,6 +13,8 @@ using UnityEngine;
 
 public class TowerView : ObjectRPG
 {
+	public Transform skinAttackRange;
+	
 	public SpriteRenderer skinBase;
 
 	public Animator animator;
@@ -26,6 +29,8 @@ public class TowerView : ObjectRPG
 	
 	public Monster target { set; get; }
 	public TowerModel model { get; protected set; }
+	
+	public HealthBar healthBar { get; set; }
 
 	public bool isAlive => model.currentHealthPoint > 0;
 	public GameController gameController => Singleton<GameController>.instance;
@@ -37,9 +42,10 @@ public class TowerView : ObjectRPG
 	private TowerIdle _idleState;
 	private TowerAttack _attackState;
 
-	public void Init()
+	public void Init(HealthBar healthBar)
 	{
 		model = new TowerModel(100, 1f, 5, 10f);
+		this.healthBar = healthBar;
 	}
 
 	protected override void OnViewInit()
@@ -56,11 +62,21 @@ public class TowerView : ObjectRPG
 		{
 			IdleState();
 		}
-		AddDataBinding("fieldTower-attackSpeedValue", this, (control, e) =>
+		
+		AddDataBinding("fieldTower-attackSpeedValue", animator, (control, e) =>
 			{
-				animator.SetFloat("AttackSpeed", model.attackSpeed);
+				control.SetFloat("AttackSpeed", model.attackSpeed);
 			}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.attackSpeed), model)
 		);
+		AddDataBinding("fieldTower-attackRangeValue", skinAttackRange, (control, e) =>
+			{
+				control.localScale = model.attackRange / 10 * Vector3.one;
+			}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.attackRange), model)
+		);
+		
+		skinAttackRange.DORotate(new Vector3(0, 0, -360), 7.5f, RotateMode.FastBeyond360)
+			.SetLoops(-1, LoopType.Incremental)
+			.SetEase(Ease.Linear);
 	}
 
 	protected virtual void Update()
@@ -107,5 +123,12 @@ public class TowerView : ObjectRPG
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.DrawWireSphere(transform.position, sizeBase);
+	}
+
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+		Destroy(healthBar.gameObject);
+		skinAttackRange.DOKill();
 	}
 }

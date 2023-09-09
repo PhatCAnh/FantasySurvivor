@@ -5,3 +5,10 @@
     Tower,
 }
 
+public enum MapType
+{
+    Undefined = -1,
+    Forest,
+    Winter,
+}
+

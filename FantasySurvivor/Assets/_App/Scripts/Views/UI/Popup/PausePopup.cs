@@ -36,6 +36,7 @@ namespace Popup
 
 		private void OnClickExit()
 		{
+			gameController.ChangeSceneHome();
 			Close();
 		}
 

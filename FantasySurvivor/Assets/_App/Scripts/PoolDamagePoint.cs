@@ -12,6 +12,11 @@ public class PoolDamagePoint : Pooler
         Singleton<PoolDamagePoint>.Set(this);
     }
 
+    protected void OnDestroy()
+    {
+        Singleton<PoolDamagePoint>.Unset(this);
+    }
+
     private void Update()
     {
         if(Input.GetMouseButtonDown(0))

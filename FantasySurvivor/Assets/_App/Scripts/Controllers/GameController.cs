@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using FantasySurvivor;
+using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
 
 public class GameController : Controller<GameApp>
@@ -19,11 +21,16 @@ public class GameController : Controller<GameApp>
 
 	public TowerView tower;
 
-	public List<Monster> listMonster = new List<Monster>();
+	public List<Monster> listMonster;
 
 	private void Awake()
 	{
 		Singleton<GameController>.Set(this);
+	}
+
+	private void Start()
+	{
+		listMonster = new List<Monster>();
 	}
 	private void Update()
 	{
@@ -54,8 +61,11 @@ public class GameController : Controller<GameApp>
 
 	public void StartGame()
 	{
+		
 		app.resourceManager.ShowPopup(PopupType.MainInGame);
+		Instantiate(app.resourceManager.GetMap(MapType.Forest));
 		tower = SpawnTower();
+		listMonster.Clear();
 	}
 
 	public void WinGame()
@@ -71,7 +81,11 @@ public class GameController : Controller<GameApp>
 	public void ChangeSceneHome()
 	{
 		var load = SceneManager.LoadSceneAsync("scn_Main", LoadSceneMode.Single);
-		load.completed += o => ShowChoiceMap();
+		load.completed += o =>
+		{
+			app.resourceManager.CloseAllPopup();
+			ShowChoiceMap();
+		};
 	}
 
 	public void RestartGame()
@@ -81,6 +95,13 @@ public class GameController : Controller<GameApp>
 	public void CollectedItem(ItemType type)
 	{
 
+	}
+
+	[Button]
+	public void TestConfig(int level)
+	{
+		var prefab = app.configs.dataUpStatTowerInGameConfig.GetConfig(level);
+		Debug.Log($"{prefab.level}, {prefab.dataAttackSpeed.price}");
 	}
 
 
@@ -105,8 +126,20 @@ public class GameController : Controller<GameApp>
 
 	public Monster GetFirstMonster()
 	{
-		if(listMonster.Count == 0) return null;
-		return listMonster.FirstOrDefault(monster => Vector2.Distance(monster.transform.position, tower.transform.position) < tower.model.attackRange);
+		var nearestMons = listMonster.FirstOrDefault(monster => Vector2.Distance(monster.transform.position, tower.transform.position) < tower.model.attackRange + monster.size);
+		var towerPos = tower.transform.position;
+		if(nearestMons == null) return nearestMons;
+		var nearestDistance = Vector2.Distance(nearestMons.transform.position, towerPos);
+		for(int i = 1; i < listMonster.Count; i++)
+		{
+			var distance = Vector2.Distance(listMonster[i].transform.position, towerPos);
+			if(distance < nearestDistance)
+			{
+				nearestMons = listMonster[i];
+				nearestDistance = distance;
+			}
+		}
+		return nearestMons;
 	}
 
 	public void TowerDie(TowerView towerView)
@@ -137,10 +170,12 @@ public class GameController : Controller<GameApp>
 		var towerPrefab = Instantiate(app.resourceManager.GetItem(ItemType.Tower))
 			.GetComponent<TowerView>();
 		towerPrefab.transform.position = Vector2.zero;
-		towerPrefab.Init();
 		
-		Instantiate(app.resourceManager.GetItem(ItemType.HealthBar), app.resourceManager.rootContainer)
-			.GetComponent<HealthBar>().Init(towerPrefab);
+		var healthBar = Instantiate(app.resourceManager.GetItem(ItemType.HealthBar), app.resourceManager.rootContainer)
+			.GetComponent<HealthBar>();
+		healthBar.Init(towerPrefab);
+		
+		towerPrefab.Init(healthBar);
 		
 		return towerPrefab;
 	}

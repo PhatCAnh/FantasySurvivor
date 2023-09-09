@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Sequence = DG.Tweening.Sequence;
 namespace Popup
 {
 	public class ChoiceMapPopup : View<GameApp>, IPopup
@@ -31,7 +32,7 @@ namespace Popup
 
 		private Sequence _sequence;
 
-		private GameController gameController => Singleton<GameController>.instance;
+		private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
 		protected override void OnViewInit()
 		{
@@ -98,6 +99,12 @@ namespace Popup
 				.Append(_textContent.transform.DOScale(Vector3.one, duration))
 				.Append(_btnClaimGift.transform.DOScale(Vector3.one, duration))
 				.Join(_btnPlay.transform.DOScale(Vector3.one, duration));
+		}
+
+		protected override void OnDestroy()
+		{
+			base.OnDestroy();
+			_sequence.Kill();
 		}
 	}
 }

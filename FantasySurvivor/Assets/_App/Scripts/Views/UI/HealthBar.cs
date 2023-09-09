@@ -47,5 +47,7 @@ namespace FantasySurvivor
 		{
 			_towerView = towerView;
 		}
+		
+		
 	}
 }

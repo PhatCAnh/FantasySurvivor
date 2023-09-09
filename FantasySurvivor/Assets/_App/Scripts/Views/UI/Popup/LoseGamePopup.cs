@@ -47,6 +47,7 @@ public class LoseGamePopup : View<GameApp>, IPopup
     public void Close()
     {
         gameController.ChangeSceneHome();
+        gameController.isEndGame = false;
         Destroy(gameObject);
     }
 
@@ -95,5 +96,11 @@ public class LoseGamePopup : View<GameApp>, IPopup
         {
             _sequence.Append(_containerReward.GetChild(i).DOScale(Vector3.one, duration / 2));
         }
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        _sequence.Kill();
     }
 }

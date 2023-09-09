@@ -4,17 +4,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Config;
 using UnityEngine;
 
 public class ConfigManager : ConfigManagerBase
 {
     //Configs
     public ConstConfigTable constConfig;
+    public DataUpStatTowerInGameConfigTable dataUpStatTowerInGameConfig;
 
     //private bool _isCanLoadRemoteConfig = false;
     public void Init()
     {
         //Register
+        Register(out dataUpStatTowerInGameConfig);
         Register(out constConfig);
         LoadConfigs();
   }

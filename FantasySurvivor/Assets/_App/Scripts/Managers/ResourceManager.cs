@@ -24,6 +24,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     private Dictionary<ItemType, GameObject> _itemDic;
     
+    
     [Header("UI Prefabs")]
     
     [Required, SerializeField] private GameObject _mainUIInGame;
@@ -35,6 +36,11 @@ public class ResourceManager : UIManagerBase<PopupType>
     [Required, SerializeField] private GameObject _loseGamePopup;
     
     
+    [Header("Map Prefabs")]
+    
+    [Required, SerializeField] private GameObject _forestMap;
+
+    private Dictionary<MapType, GameObject> _mapDic;
 
     private void Awake()
     {
@@ -49,27 +55,37 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     public void Init()
     {
-        InitItemDic();
-
-        RegisterPopup(PopupType.Pause, _pausePopup);
+        InitDic();
         RegisterPopup(PopupType.MainInGame, _mainUIInGame);
         RegisterPopup(PopupType.ChoiceMap, _choiceMapPopup);
         RegisterPopup(PopupType.LoseGame, _loseGamePopup);
+        RegisterPopup(PopupType.Pause, _pausePopup);
     }
 
-    private void InitItemDic()
+    private void InitDic()
     {
         _itemDic = new Dictionary<ItemType, GameObject>()
         {
             {ItemType.HealthBar, _healthBarPrefab },
             {ItemType.Tower, _towerPrefab },
         };
+
+        _mapDic = new Dictionary<MapType, GameObject>
+        {
+            { MapType.Forest, _forestMap },
+        };
     }    
 
     public GameObject GetItem(ItemType itemType)
     {
         return _itemDic[itemType];
-    }    
+    }
+
+    public GameObject GetMap(MapType mapType)
+    {
+        return _mapDic[mapType];
+    }
+    
 
     public override GameObject ShowPopup(PopupType type, Action<GameObject> onInit = null)
     {
@@ -79,5 +95,7 @@ public class ResourceManager : UIManagerBase<PopupType>
         popupGo.GetOrAddComponent<GraphicRaycaster>();
         return popupGo;
     }
+    
+    
 }
 

@@ -24,6 +24,17 @@ namespace ArbanFramework.MVC
             _resourcePathDic.Add(type, prefab);
             return true;
         }
+        
+        public virtual void HidePopup(T type)
+        {
+            if(!_resourcePathDic.TryGetValue(type, out var prefab))
+            {
+                Debug.LogErrorFormat("Popup {0} is not found", type);
+                return;
+            }
+            
+            prefab.GetComponent<IPopup>().Close();
+        }
 
         public virtual GameObject ShowPopup(T type, Action<GameObject> onInit = null)
         {
@@ -41,9 +52,8 @@ namespace ArbanFramework.MVC
 
             var popupPrefab = prefab;
 
-            var popupGo = Instantiate(popupPrefab);
+            var popupGo = Instantiate(popupPrefab, rootContainer, false);
             onInit?.Invoke(popupGo);
-            popupGo.transform.SetParent(rootContainer, false);
 
             var popupComponent = popupGo.GetComponent<IPopup>();
             Debug.AssertFormat(popupComponent != null, "Prefabs {0} not have Popup Component", popupPrefab.name);

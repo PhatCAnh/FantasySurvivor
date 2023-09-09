@@ -78,5 +78,11 @@ namespace FantasySurvivor
 				RaiseDataChanged(nameof(attackRange));
 			}
 		}
+
+		public void AddMaxHealth(int value)
+		{
+			maxHealthPoint += value;
+			currentHealthPoint += value;
+		}
 	}
 }

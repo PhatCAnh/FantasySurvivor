@@ -1,5 +1,54 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1285100071921675574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9091336881132467036}
+  - component: {fileID: 7737549678799174928}
+  m_Layer: 0
+  m_Name: Pool Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9091336881132467036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285100071921675574}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4008007943000763285}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7737549678799174928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285100071921675574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b27c1bf037955c4aa834c73d933163f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 8019563876969885780, guid: e455c20de49a1234b8832933daa6dd58, type: 3}
+  _poolSize: 0
+  _expandable: 1
+  freeList: []
+  usedList: []
 --- !u!1 &2857875863129843907
 GameObject:
   m_ObjectHideFlags: 0
@@ -48,7 +97,6 @@ MonoBehaviour:
   isStopGame: 0
   isEndGame: 0
   tower: {fileID: 0}
-  monster: {fileID: 0}
   listMonster: []
 --- !u!1 &4008007943000763282
 GameObject:
@@ -80,6 +128,7 @@ Transform:
   m_Children:
   - {fileID: 6821980598547356828}
   - {fileID: 3338194416520147824}
+  - {fileID: 9091336881132467036}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
