@@ -11,8 +11,6 @@ using UnityEngine.SceneManagement;
 
 public class GameController : Controller<GameApp>
 {
-	public Monster monsterPrefab;
-	
 	public bool isStop => isEndGame || isStopGame;
 
 	public bool isStopGame;
@@ -108,9 +106,13 @@ public class GameController : Controller<GameApp>
 	}
 
 
-	public Monster SpawnMonster()
+	public Monster SpawnMonster(MonsterType monsterType)
 	{
-		Monster monsterIns = Instantiate(monsterPrefab);
+		var prefab = app.resourceManager.GetMonster(monsterType);
+		
+		var component = prefab.GetComponent<Monster>();
+		
+		var monsterIns = Instantiate(app.resourceManager.GetMonster(monsterType)).GetComponent<Monster>();
 
 		monsterIns.transform.position = RandomPositionSpawnMonster();
 

@@ -12,3 +12,8 @@ public enum MapType
     Winter,
 }
 
+public enum MonsterType
+{
+    BlueZombie,
+}
+

@@ -38,7 +38,7 @@ public class MapView : View<AppBase>
 		_cooldownTime.Update(Time.deltaTime);
 		if(_cooldownTime.isFinished)
 		{
-			gameController.SpawnMonster();
+			gameController.SpawnMonster(MonsterType.BlueZombie);
 			_cooldownTime.Restart(_cooldown);
 		}
 	}

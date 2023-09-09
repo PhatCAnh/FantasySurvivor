@@ -16,7 +16,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 {
     //[SerializeField] GameObject keyPrefab;
     
-    [Header("Object Prefabs")]
+    [Header("Object prefabs")]
 
     [Required, SerializeField] private GameObject _healthBarPrefab;
     
@@ -25,7 +25,7 @@ public class ResourceManager : UIManagerBase<PopupType>
     private Dictionary<ItemType, GameObject> _itemDic;
     
     
-    [Header("UI Prefabs")]
+    [Header("UI prefabs")]
     
     [Required, SerializeField] private GameObject _mainUIInGame;
     
@@ -36,11 +36,17 @@ public class ResourceManager : UIManagerBase<PopupType>
     [Required, SerializeField] private GameObject _loseGamePopup;
     
     
-    [Header("Map Prefabs")]
+    [Header("Map prefabs")]
     
     [Required, SerializeField] private GameObject _forestMap;
 
     private Dictionary<MapType, GameObject> _mapDic;
+    
+    [Header("Monster prefabs")]
+    
+    [Required, SerializeField] private GameObject _BlueZombie;
+    
+    private Dictionary<MonsterType, GameObject> _monsterDic;
 
     private void Awake()
     {
@@ -74,6 +80,11 @@ public class ResourceManager : UIManagerBase<PopupType>
         {
             { MapType.Forest, _forestMap },
         };
+        
+        _monsterDic = new Dictionary<MonsterType, GameObject>
+        {
+            { MonsterType.BlueZombie, _BlueZombie },
+        };
     }    
 
     public GameObject GetItem(ItemType itemType)
@@ -84,6 +95,11 @@ public class ResourceManager : UIManagerBase<PopupType>
     public GameObject GetMap(MapType mapType)
     {
         return _mapDic[mapType];
+    }
+
+    public GameObject GetMonster(MonsterType monsterType)
+    {
+        return _monsterDic[monsterType];
     }
     
 
