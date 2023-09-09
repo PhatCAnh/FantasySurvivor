@@ -22,6 +22,7 @@ namespace Popup
 
 		public int currentLevel = 0;
 		public int maxLevel = 10;
+		public int price = 0;
 	}
 	
 	public class MainUIInGame : View<GameApp>, IPopup
@@ -31,6 +32,8 @@ namespace Popup
 		[Required, SerializeField] private Sprite _spriteArrowDown;
 
 		[Required, SerializeField] private Button _btnSetting;
+
+		[Required, SerializeField] private TextMeshProUGUI _txtCoinInMap;
 
 		[Required, SerializeField] private Toggle _toggleChangeStateInteract;
 
@@ -56,7 +59,10 @@ namespace Popup
 		
 		[Required, SerializeField] private TextMeshProUGUI _txtHealth;
 
-		private TowerModel model => Singleton<GameController>.instance.tower.model;
+		private GameController gameController => Singleton<GameController>.instance;
+
+		private MapModel mapModel => gameController.map.model;
+		private TowerModel model => gameController.tower.model;
 
 		public void Open()
 		{
@@ -146,10 +152,17 @@ namespace Popup
 					control.text = String.Format($"<sprite index=5> {model.maxHealthPoint}");
 				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.maxHealthPoint), model)
 			);
+			
+			AddDataBinding("fieldMap-coinInMapValue", _txtCoinInMap, (control, e) =>
+				{
+					control.text = mapModel.coinInMap.ToString();
+				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.coinInMap), mapModel)
+			);
 		}
 
 		private void OnClickBtnUpAttackDamage()
 		{
+			mapModel.coinInMap -= _attackDamage.price;
 			LoadDataUpAttackDamage();
 		}
 
@@ -166,12 +179,14 @@ namespace Popup
 				button.coinToUpdate.text = "Max";
 				button.button.interactable = false;
 			}
+			button.price = data.price;
 			model.attackDamage += (int) data.value;
 			button.currentLevel++;
 		}
 		
 		private void OnClickBtnUpAttackRange()
 		{
+			mapModel.coinInMap -= _attackRange.price;
 			LoadDataUpAttackRange();
 		}
 		
@@ -188,12 +203,14 @@ namespace Popup
 				button.coinToUpdate.text = "Max";
 				button.button.interactable = false;
 			}
+			button.price = data.price;
 			model.attackRange += (int) data.value;
 			button.currentLevel++;
 		}
 		
 		private void OnClickBtnUpAttackSpeed()
 		{
+			mapModel.coinInMap -= _attackSpeed.price;
 			LoadDataUpAttackSpeed();
 		}
 		
@@ -210,12 +227,14 @@ namespace Popup
 				button.coinToUpdate.text = "Max";
 				button.button.interactable = false;
 			}
+			button.price = data.price;
 			model.attackSpeed += (int) data.value;
 			button.currentLevel++;
 		}
 		
 		private void OnClickBtnUpHealth()
 		{
+			mapModel.coinInMap -= _health.price;
 			LoadDataUpHealth();
 		}
 		
@@ -232,6 +251,7 @@ namespace Popup
 				button.coinToUpdate.text = "Max";
 				button.button.interactable = false;
 			}
+			button.price = data.price;
 			model.AddMaxHealth((int) data.value);
 			button.currentLevel++;
 		}

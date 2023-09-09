@@ -21,6 +21,8 @@ public class GameController : Controller<GameApp>
 
 	public TowerView tower;
 
+	public MapView map;
+
 	public List<Monster> listMonster;
 
 	private void Awake()
@@ -62,7 +64,8 @@ public class GameController : Controller<GameApp>
 	public void StartGame()
 	{
 		
-		app.resourceManager.ShowPopup(PopupType.MainInGame);
+		map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
+		map.Init();
 		Instantiate(app.resourceManager.GetMap(MapType.Forest));
 		tower = SpawnTower();
 		listMonster.Clear();
@@ -111,7 +114,7 @@ public class GameController : Controller<GameApp>
 
 		monsterIns.transform.position = RandomPositionSpawnMonster();
 
-		monsterIns.Init(new MonsterModel(0.5f, 20, 10, 1f));
+		monsterIns.Init(new MonsterModel(0.5f, 20, 10, 1f, 5));
 
 		listMonster.Add(monsterIns);
 
@@ -120,6 +123,7 @@ public class GameController : Controller<GameApp>
 
 	public void MonsterDie(Monster mons, bool canDestroy = true)
 	{
+		map.model.coinInMap += mons.model.coin;
 		listMonster.Remove(mons);
 		if(canDestroy) Destroy(mons.gameObject);
 	}

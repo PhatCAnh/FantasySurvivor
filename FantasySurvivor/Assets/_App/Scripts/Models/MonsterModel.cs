@@ -11,16 +11,18 @@ public class MonsterModel : Model<GameApp>
     public MonsterModel() : base(dataChangedEvent)
     {
     }
-    public MonsterModel(float moveSpeed, int healthPoint, int attackDamage, float attackSpeed) : base(dataChangedEvent)
+    public MonsterModel(float moveSpeed, int healthPoint, int attackDamage, float attackSpeed, int coin) : base(dataChangedEvent)
     {
         this.moveSpeed = moveSpeed;
         this.currentHealthPoint = healthPoint;
         this.maxHealthPoint = healthPoint;
         this.attackDamage = attackDamage;
         this.attackSpeed = attackSpeed;
+        this.coin = coin;
     }
 
     private int _attackDamage;
+    
     private float _attackSpeed;
         
     private float _moveSpeed;
@@ -28,6 +30,8 @@ public class MonsterModel : Model<GameApp>
     private int _currentHealthPoint;
 		
     private int _maxHealthPoint;
+
+    private int _coin;
 
     public int attackDamage
     {
@@ -85,6 +89,16 @@ public class MonsterModel : Model<GameApp>
             if(maxHealthPoint == value) return;
             _maxHealthPoint = value;
             RaiseDataChanged(nameof(maxHealthPoint));
+        }
+    }
+
+    public int coin
+    {
+        get => _coin;
+        set {
+            if(coin == value) return;
+            _coin = value;
+            RaiseDataChanged(nameof(coin));
         }
     }
 }
