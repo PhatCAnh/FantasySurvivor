@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework;
 using ArbanFramework.MVC;
-using Config;
 using DG.Tweening;
 using FantasySurvivor;
 using Sirenix.OdinInspector;

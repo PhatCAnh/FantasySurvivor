@@ -101,17 +101,12 @@ public class GameController : Controller<GameApp>
 	[Button]
 	public void TestConfig(int level)
 	{
-		var prefab = app.configs.dataUpStatTowerInGameConfig.GetConfig(level);
-		Debug.Log($"{prefab.level}, {prefab.dataAttackSpeed.price}");
+		var prefab = app.configs.dataChapterConfigTable.GetConfig(level);
 	}
 
 
 	public Monster SpawnMonster(MonsterType monsterType)
 	{
-		var prefab = app.resourceManager.GetMonster(monsterType);
-		
-		var component = prefab.GetComponent<Monster>();
-		
 		var monsterIns = Instantiate(app.resourceManager.GetMonster(monsterType)).GetComponent<Monster>();
 
 		monsterIns.transform.position = RandomPositionSpawnMonster();

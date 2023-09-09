@@ -1,5 +1,5 @@
 ﻿using ArbanFramework.Config;
-namespace Config
+namespace DataConfig
 {
 	public class DataUpStatTowerInGameConfig : IConfigItem
 	{

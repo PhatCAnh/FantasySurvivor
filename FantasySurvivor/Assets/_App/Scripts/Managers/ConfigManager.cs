@@ -1,16 +1,16 @@
 using ArbanFramework.Config;
-using MR;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Config;
+using DataConfig;
 using UnityEngine;
 
 public class ConfigManager : ConfigManagerBase
 {
     //Configs
     public ConstConfigTable constConfig;
+    public DataChapterConfigTable dataChapterConfigTable;
     public DataUpStatTowerInGameConfigTable dataUpStatTowerInGameConfig;
 
     //private bool _isCanLoadRemoteConfig = false;
@@ -18,6 +18,7 @@ public class ConfigManager : ConfigManagerBase
     {
         //Register
         Register(out dataUpStatTowerInGameConfig);
+        Register(out dataChapterConfigTable);
         Register(out constConfig);
         LoadConfigs();
   }
