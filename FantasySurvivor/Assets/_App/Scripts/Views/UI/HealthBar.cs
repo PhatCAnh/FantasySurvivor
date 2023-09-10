@@ -17,6 +17,8 @@ namespace FantasySurvivor
 
 		private TowerView _towerView;
 
+		private Vector2 _uiPos;
+
 		protected override void OnViewInit()
 		{
 			var model = _towerView.model;
@@ -38,9 +40,12 @@ namespace FantasySurvivor
 			);
 			
 			var position = _towerView.transform.position;
-			var uiPos = new Vector2(position.x, position.y + 3);
-			
-			transform.position = Camera.main.WorldToScreenPoint(uiPos);
+			_uiPos = new Vector2(position.x, position.y + 3);
+		}
+
+		private void LateUpdate()
+		{
+			transform.position = Camera.main.WorldToScreenPoint(_uiPos);
 		}
 
 		public void Init(TowerView towerView)

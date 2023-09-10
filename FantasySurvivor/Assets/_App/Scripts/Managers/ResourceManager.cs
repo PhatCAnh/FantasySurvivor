@@ -46,7 +46,7 @@ public class ResourceManager : UIManagerBase<PopupType>
     
     [Required, SerializeField] private GameObject _BlueZombie;
     
-    private Dictionary<MonsterType, GameObject> _monsterDic;
+    private Dictionary<SkinMonsterType, GameObject> _skinMonsterDic;
 
     private void Awake()
     {
@@ -81,9 +81,9 @@ public class ResourceManager : UIManagerBase<PopupType>
             { MapType.Forest, _forestMap },
         };
         
-        _monsterDic = new Dictionary<MonsterType, GameObject>
+        _skinMonsterDic = new Dictionary<SkinMonsterType, GameObject>
         {
-            { MonsterType.BlueZombie, _BlueZombie },
+            { SkinMonsterType.BlueZombie, _BlueZombie },
         };
     }    
 
@@ -97,9 +97,9 @@ public class ResourceManager : UIManagerBase<PopupType>
         return _mapDic[mapType];
     }
 
-    public GameObject GetMonster(MonsterType monsterType)
+    public GameObject GetMonster(SkinMonsterType skinMonsterType)
     {
-        return _monsterDic[monsterType];
+        return _skinMonsterDic[skinMonsterType];
     }
     
 

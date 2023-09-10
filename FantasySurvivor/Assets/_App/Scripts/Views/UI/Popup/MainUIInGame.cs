@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
 using FantasySurvivor;
 using Sirenix.OdinInspector;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -23,7 +23,7 @@ namespace Popup
 		public int maxLevel = 10;
 		public int price = 0;
 	}
-	
+
 	public class MainUIInGame : View<GameApp>, IPopup
 	{
 		[Required, SerializeField] private Sprite _spriteArrowUp;
@@ -49,16 +49,16 @@ namespace Popup
 		[Required, SerializeField] private ButtonUpdateStat _attackSpeed;
 
 		[Required, SerializeField] private ButtonUpdateStat _health;
-		
+
 		[Required, SerializeField] private TextMeshProUGUI _txtAttackDamage;
-		
+
 		[Required, SerializeField] private TextMeshProUGUI _txtAttackRange;
-		
+
 		[Required, SerializeField] private TextMeshProUGUI _txtAttackSpeed;
-		
+
 		[Required, SerializeField] private TextMeshProUGUI _txtHealth;
 
-		private GameController gameController => Singleton<GameController>.instance;
+		private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
 		private MapModel mapModel => gameController.map.model;
 		private TowerModel model => gameController.tower.model;
@@ -94,11 +94,15 @@ namespace Popup
 		{
 			if(value)
 			{
+				Camera.main.transform.DOLocalMove(Vector3.back, 1f);
+				DOTween.To(() => Camera.main.orthographicSize, value => Camera.main.orthographicSize = value, 25, 1f);
 				_interactContainer.DOLocalMove(new Vector3(0, -750), 1f);
 				_toggleChangeStateInteract.GetComponent<Image>().sprite = _spriteArrowUp;
 			}
 			else
 			{
+				Camera.main.transform.DOLocalMove(new Vector3(0, -10, -1), 1f);
+				DOTween.To(() => Camera.main.orthographicSize, value => Camera.main.orthographicSize = value, 30, 1f);
 				_interactContainer.DOLocalMove(new Vector3(0, -360), 1f);
 				_toggleChangeStateInteract.GetComponent<Image>().sprite = _spriteArrowDown;
 			}
@@ -125,7 +129,7 @@ namespace Popup
 		{
 			app.resourceManager.ShowPopup(PopupType.Pause);
 		}
-		
+
 		private void AddEventChangeStat()
 		{
 			AddDataBinding("fieldTower-attackDamageValue", _txtAttackDamage, (control, e) =>
@@ -133,30 +137,41 @@ namespace Popup
 					control.text = String.Format($"<sprite index=2> {model.attackDamage}");
 				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.attackDamage), model)
 			);
-			
+
 			AddDataBinding("fieldTower-attackRangeValue", _txtAttackRange, (control, e) =>
 				{
-					control.text = String.Format($"<sprite index=4> {(float)Math.Round(model.attackRange, 2)}");
+					control.text = String.Format($"<sprite index=4> {(float) Math.Round(model.attackRange, 2)}");
 				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.attackRange), model)
 			);
-			
+
 			AddDataBinding("fieldTower-attackSpeedValue", _txtAttackSpeed, (control, e) =>
 				{
-					control.text = String.Format($"<sprite index=3> {(float)Math.Round(model.attackSpeed, 1)}");
+					control.text = String.Format($"<sprite index=3> {(float) Math.Round(model.attackSpeed, 1)}");
 				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.attackSpeed), model)
 			);
-			
+
 			AddDataBinding("fieldTower-healthValue", _txtHealth, (control, e) =>
 				{
 					control.text = String.Format($"<sprite index=5> {model.maxHealthPoint}");
 				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.maxHealthPoint), model)
 			);
-			
+
 			AddDataBinding("fieldMap-coinInMapValue", _txtCoinInMap, (control, e) =>
 				{
-					control.text = mapModel.coinInMap.ToString();
+					var coin = mapModel.coinInMap;
+					control.text = coin.ToString();
+					CheckInteractableBtnStat(_attackDamage, coin);
+					CheckInteractableBtnStat(_attackSpeed, coin);
+					CheckInteractableBtnStat(_attackRange, coin);
+					CheckInteractableBtnStat(_health, coin);
+
 				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.coinInMap), mapModel)
 			);
+		}
+
+		private void CheckInteractableBtnStat(ButtonUpdateStat button, int coin)
+		{
+			button.button.interactable = coin >= button.price && (button.currentLevel <= button.maxLevel);
 		}
 
 		private void OnClickBtnUpAttackDamage()
@@ -182,13 +197,13 @@ namespace Popup
 			model.attackDamage += (int) data.value;
 			button.currentLevel++;
 		}
-		
+
 		private void OnClickBtnUpAttackRange()
 		{
 			mapModel.coinInMap -= _attackRange.price;
 			LoadDataUpAttackRange();
 		}
-		
+
 		private void LoadDataUpAttackRange()
 		{
 			var button = _attackRange;
@@ -206,13 +221,13 @@ namespace Popup
 			model.attackRange += (int) data.value;
 			button.currentLevel++;
 		}
-		
+
 		private void OnClickBtnUpAttackSpeed()
 		{
 			mapModel.coinInMap -= _attackSpeed.price;
 			LoadDataUpAttackSpeed();
 		}
-		
+
 		private void LoadDataUpAttackSpeed()
 		{
 			var button = _attackSpeed;
@@ -230,13 +245,13 @@ namespace Popup
 			model.attackSpeed += (int) data.value;
 			button.currentLevel++;
 		}
-		
+
 		private void OnClickBtnUpHealth()
 		{
 			mapModel.coinInMap -= _health.price;
 			LoadDataUpHealth();
 		}
-		
+
 		private void LoadDataUpHealth()
 		{
 			var button = _health;

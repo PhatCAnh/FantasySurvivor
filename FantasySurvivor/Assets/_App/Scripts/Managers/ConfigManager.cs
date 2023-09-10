@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using _App.Scripts.Configs;
 using DataConfig;
 using UnityEngine;
 
@@ -12,11 +13,13 @@ public class ConfigManager : ConfigManagerBase
     public ConstConfigTable constConfig;
     public DataChapterConfigTable dataChapterConfigTable;
     public DataUpStatTowerInGameConfigTable dataUpStatTowerInGameConfig;
+    public NormalMonsterStatConfigTable normalMonsterStatConfigTable;
 
     //private bool _isCanLoadRemoteConfig = false;
     public void Init()
     {
         //Register
+        Register(out normalMonsterStatConfigTable);
         Register(out dataUpStatTowerInGameConfig);
         Register(out dataChapterConfigTable);
         Register(out constConfig);

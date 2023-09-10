@@ -56,7 +56,7 @@ namespace Popup
 		private void OnClickBtnPlay()
 		{
 			var load = SceneManager.LoadSceneAsync("scn_Game", LoadSceneMode.Single);
-			load.completed += o => gameController.StartGame();
+			load.completed += o => gameController.StartGame(0);
 			Close();
 		}
 

@@ -14,6 +14,14 @@ public enum MapType
 
 public enum MonsterType
 {
-    BlueZombie,
+    Normal = 0,
+    Medium = 1,
+    Big = 2,
 }
+
+public enum SkinMonsterType
+{
+    BlueZombie = 0,
+}
+
 

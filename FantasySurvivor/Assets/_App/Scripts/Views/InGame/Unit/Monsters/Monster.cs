@@ -3,6 +3,7 @@ using ArbanFramework.MVC;
 using ArbanFramework.StateMachine;
 using FantasySurvivor;
 using MR.CharacterState;
+using Stat;
 using UnityEngine;
 
 public class Monster : ObjectRPG
@@ -71,9 +72,16 @@ public class Monster : ObjectRPG
 
 	#region Base Methods
 
-	public virtual void Init(MonsterModel monsterModel)
+	public virtual void Init(MonsterStat monsterStat, int coin)
 	{
-		this.model = monsterModel;
+		stat = monsterStat;
+		model = new MonsterModel(
+			stat.moveSpeed.BaseValue,
+			stat.health.BaseValue,
+			stat.attackDamage.BaseValue,
+			stat.attackSpeed.BaseValue,
+			coin);
+		//this.model = monsterModel;
 	}
 
 	protected override void OnViewInit()

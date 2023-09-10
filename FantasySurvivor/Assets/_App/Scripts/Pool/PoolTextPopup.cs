@@ -5,30 +5,23 @@ using ArbanFramework;
 using TMPro;
 using UnityEngine;
 
-public class PoolDamagePoint : Pooler
+public class PoolTextPopup : Pooler
 {
     protected override void Awake()
     {
-        Singleton<PoolDamagePoint>.Set(this);
+        base.Awake();
+        Singleton<PoolTextPopup>.Set(this);
     }
 
     protected void OnDestroy()
     {
-        Singleton<PoolDamagePoint>.Unset(this);
-    }
-
-    private void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            GetObjectFromPool(transform.position, 10, false);
-        }
+        Singleton<PoolTextPopup>.Unset(this);
     }
 
     public override void GetObjectFromPool(Vector3 position, params object[] arrObject)
     {
-        var a = GetObject(position);
-        a.GetComponent<DamagePopup>().Create(a.transform, (int)arrObject[0], (bool)arrObject[1]);
+        var gObject = GetObject(position);
+        gObject.GetComponent<TextPopup>().Create(gObject.transform, arrObject[0].ToString());
     }
 
     public override void RemoveObjectToPool(GameObject theGameObject, params object[] arrObject)
