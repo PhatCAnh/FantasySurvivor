@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class TextPopup : MonoBehaviour
 {
@@ -24,22 +26,31 @@ public class TextPopup : MonoBehaviour
 	public void Setup(string text)
 	{
 		_textMesh.SetText(text);
-
-		_textMesh.fontSize = _fontSize;
-		
-		//_textMesh.color = new Color(0.8207547f, 0, 0.007291546f);
 		_sortingOrder++;
 		_textMesh.sortingOrder = _sortingOrder;
-		_textColor = _textMesh.color;
 		_disappearTimer = DisappearTimeMax;
 		_moveVector = new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0f) * 10f;
 	}
 
-	public TextPopup Create(Transform dmgPopupTransform, string text)
+	public void Create(string value, TextPopupType type)
 	{
-		TextPopup dmgPopup = dmgPopupTransform.GetComponent<TextPopup>();
-		dmgPopup.Setup(text);
-		return dmgPopup;
+		string textValue = "";
+
+		switch (type)
+		{
+			case TextPopupType.GoldCoin:
+				textValue = String.Format($"+ {value} <sprite index=0>");
+				_textMesh.color = new Color(1, 0.8470589f, 0.08627451f);
+				_textMesh.fontSize = 5;
+				break;
+			case TextPopupType.Damage:
+				textValue = value;
+				_textMesh.color = new Color(0.8207547f, 0, 0.007291546f);
+				_textMesh.fontSize = 7.5f;
+				break;
+		}
+		
+		Setup(textValue);
 	}
 
 	private void Update()

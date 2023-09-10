@@ -24,4 +24,11 @@ public enum SkinMonsterType
     BlueZombie = 0,
 }
 
+public enum TextPopupType
+{
+    GoldCoin,
+    Damage,
+    DamageCritical,
+}
+
 

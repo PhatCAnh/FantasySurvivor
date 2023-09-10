@@ -60,10 +60,3 @@ public class ObjectPool : MonoBehaviour
         freeList.Add(game);
     }
 }
-
-public abstract class Pooler : ObjectPool
-{
-    public abstract void GetObjectFromPool(Vector3 position, params object[] arrObject);
-
-    public abstract void RemoveObjectToPool(GameObject theGameObject, params object[] arrObject);
-}

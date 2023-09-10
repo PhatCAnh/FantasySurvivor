@@ -5,7 +5,7 @@ using ArbanFramework;
 using TMPro;
 using UnityEngine;
 
-public class PoolTextPopup : Pooler
+public class PoolTextPopup : ObjectPool
 {
     protected override void Awake()
     {
@@ -18,13 +18,12 @@ public class PoolTextPopup : Pooler
         Singleton<PoolTextPopup>.Unset(this);
     }
 
-    public override void GetObjectFromPool(Vector3 position, params object[] arrObject)
+    public void GetObjectFromPool(Vector3 position, string value, TextPopupType type)
     {
-        var gObject = GetObject(position);
-        gObject.GetComponent<TextPopup>().Create(gObject.transform, arrObject[0].ToString());
+        GetObject(position).GetComponent<TextPopup>().Create(value, type);
     }
 
-    public override void RemoveObjectToPool(GameObject theGameObject, params object[] arrObject)
+    public void RemoveObjectToPool(GameObject theGameObject, params object[] arrObject)
     {
         TextMeshPro textMesh = (TextMeshPro) arrObject[0];
         textMesh.color = new Color(textMesh.color.r, textMesh.color.g, textMesh.color.b, 1f);
