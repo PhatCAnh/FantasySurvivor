@@ -26,6 +26,10 @@ namespace Popup
 
 	public class MainUIInGame : View<GameApp>, IPopup
 	{
+		[Required, SerializeField] private TextMeshProUGUI _txtTimeMinutes;
+		
+		[Required, SerializeField] private TextMeshProUGUI _txtTimeSeconds;
+		
 		[Required, SerializeField] private Sprite _spriteArrowUp;
 
 		[Required, SerializeField] private Sprite _spriteArrowDown;
@@ -158,14 +162,28 @@ namespace Popup
 
 			AddDataBinding("fieldMap-coinInMapValue", _txtCoinInMap, (control, e) =>
 				{
-					var coin = mapModel.coinInMap;
+					var coin = mapModel.coinInGame;
 					control.text = coin.ToString();
 					CheckInteractableBtnStat(_attackDamage, coin);
 					CheckInteractableBtnStat(_attackSpeed, coin);
 					CheckInteractableBtnStat(_attackRange, coin);
 					CheckInteractableBtnStat(_health, coin);
 
-				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.coinInMap), mapModel)
+				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.coinInGame), mapModel)
+			);
+			
+			AddDataBinding("fieldMap-timeInMapValue", _txtTimeMinutes, (control, e) =>
+				{
+					var value = mapModel.timeInGame;
+					var minutes = Mathf.FloorToInt(value / 60f);
+					var seconds = Mathf.FloorToInt(value - minutes * 60);
+					var timeStr = $"{minutes:00}:{seconds:00}";
+					control.text = timeStr;
+
+					_txtTimeMinutes.text = $"{minutes:00}";
+					_txtTimeSeconds.text = $"{seconds:00}";
+
+				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.timeInGame), mapModel)
 			);
 		}
 
@@ -176,7 +194,7 @@ namespace Popup
 
 		private void OnClickBtnUpAttackDamage()
 		{
-			mapModel.coinInMap -= _attackDamage.price;
+			mapModel.coinInGame -= _attackDamage.price;
 			LoadDataUpAttackDamage();
 		}
 
@@ -200,7 +218,7 @@ namespace Popup
 
 		private void OnClickBtnUpAttackRange()
 		{
-			mapModel.coinInMap -= _attackRange.price;
+			mapModel.coinInGame -= _attackRange.price;
 			LoadDataUpAttackRange();
 		}
 
@@ -224,7 +242,7 @@ namespace Popup
 
 		private void OnClickBtnUpAttackSpeed()
 		{
-			mapModel.coinInMap -= _attackSpeed.price;
+			mapModel.coinInGame -= _attackSpeed.price;
 			LoadDataUpAttackSpeed();
 		}
 
@@ -248,7 +266,7 @@ namespace Popup
 
 		private void OnClickBtnUpHealth()
 		{
-			mapModel.coinInMap -= _health.price;
+			mapModel.coinInGame -= _health.price;
 			LoadDataUpHealth();
 		}
 

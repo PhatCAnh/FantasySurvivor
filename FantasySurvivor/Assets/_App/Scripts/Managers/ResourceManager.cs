@@ -42,9 +42,11 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     private Dictionary<MapType, GameObject> _mapDic;
     
-    [Header("Monster prefabs")]
+    [Required, SerializeField] private GameObject _blueZombie;
     
-    [Required, SerializeField] private GameObject _BlueZombie;
+    [Required, SerializeField] private GameObject _purpleZombie;
+    
+    [Required, SerializeField] private GameObject _blueGhost;
     
     private Dictionary<SkinMonsterType, GameObject> _skinMonsterDic;
 
@@ -83,7 +85,9 @@ public class ResourceManager : UIManagerBase<PopupType>
         
         _skinMonsterDic = new Dictionary<SkinMonsterType, GameObject>
         {
-            { SkinMonsterType.BlueZombie, _BlueZombie },
+            { SkinMonsterType.BlueZombie, _blueZombie },
+            { SkinMonsterType.PurpleZombie, _purpleZombie },
+            { SkinMonsterType.BlueGhost, _blueGhost },
         };
     }    
 

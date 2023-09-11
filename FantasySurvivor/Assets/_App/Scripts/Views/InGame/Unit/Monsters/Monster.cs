@@ -81,7 +81,6 @@ public class Monster : ObjectRPG
 			stat.attackDamage.BaseValue,
 			stat.attackSpeed.BaseValue,
 			coin);
-		//this.model = monsterModel;
 	}
 
 	protected override void OnViewInit()

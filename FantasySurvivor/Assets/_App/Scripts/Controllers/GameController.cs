@@ -129,7 +129,7 @@ public class GameController : Controller<GameApp>
 
 	public void MonsterDie(Monster mons, bool canDestroy = true)
 	{
-		map.model.coinInMap += mons.model.coin;
+		map.model.coinInGame += mons.model.coin;
 		Singleton<PoolTextPopup>.instance.GetObjectFromPool(mons.transform.position, mons.model.coin.ToString(), TextPopupType.GoldCoin);
 		listMonster.Remove(mons);
 		

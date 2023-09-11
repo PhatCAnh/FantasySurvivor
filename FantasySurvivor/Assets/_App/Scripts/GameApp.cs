@@ -23,8 +23,8 @@ public class GameApp : AppBase
         models.Init();
         Application.targetFrameRate = 60;
         
-// #if UNITY_STANDALONE
-//         Screen.SetResolution(540, 960, false);
-// #endif
+#if UNITY_STANDALONE
+         Screen.SetResolution(720, 1600, false);
+#endif
     }
 }

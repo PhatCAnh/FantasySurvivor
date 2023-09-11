@@ -31,6 +31,7 @@ public class MapView : View<GameApp>
 	public void Init(int chapter)
 	{
 		model = new();
+		
 		var dataChapter = app.configs.dataChapterConfigTable.GetConfig(chapter);
 		for(int i = 0; i < dataChapter.waves.Length; i++)
 		{
@@ -58,6 +59,8 @@ public class MapView : View<GameApp>
 	{
 		if(gameController.isStop) return;
 
+		model.timeInGame += Time.deltaTime;
+		
 		foreach(var wave in _listWaveData.ToList())
 		{
 			if(wave.duration != -1)
