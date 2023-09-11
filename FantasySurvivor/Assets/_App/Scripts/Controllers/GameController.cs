@@ -101,29 +101,23 @@ public class GameController : Controller<GameApp>
 	[Button]
 	public void TestConfig(int level)
 	{
-		var prefab = app.configs.normalMonsterStatConfigTable.GetConfig(level);
+		var prefab = app.configs.dataStatMonsterConfigTable.GetConfig(MonsterType.BlueZombie);
 	}
 
 
-	public Monster SpawnMonster(SkinMonsterType skinMonsterType, MonsterType monsterType, int monsterLevel, int coin)
+	public Monster SpawnMonster(MonsterType monsterType,int health, int adMonster, int coin)
 	{
-		MonsterStat monsterStat = null;
-		switch (monsterType)
-		{
-			case MonsterType.Normal:
-				var statMonster = app.configs.normalMonsterStatConfigTable.GetConfig(monsterLevel);
-				monsterStat = new(statMonster.moveSpeed, statMonster.health, statMonster.attackDamage, statMonster.attackSpeed);
-				break;
-		}
+		var statMonster = app.configs.dataStatMonsterConfigTable.GetConfig(monsterType);
+		var monsterStat = new MonsterStat(statMonster.moveSpeed, health, adMonster, statMonster.attackSpeed, statMonster.attackRange);
+
+		var monsterIns = Instantiate(app.resourceManager.GetMonster(monsterType)).GetComponent<Monster>();
 		
-		var monsterIns = Instantiate(app.resourceManager.GetMonster(skinMonsterType)).GetComponent<Monster>();
-
 		monsterIns.transform.position = RandomPositionSpawnMonster();
-
+		
 		monsterIns.Init(monsterStat, coin);
-
+		
 		listMonster.Add(monsterIns);
-
+		
 		return monsterIns;
 	}
 
@@ -132,7 +126,7 @@ public class GameController : Controller<GameApp>
 		map.model.coinInGame += mons.model.coin;
 		Singleton<PoolTextPopup>.instance.GetObjectFromPool(mons.transform.position, mons.model.coin.ToString(), TextPopupType.GoldCoin);
 		listMonster.Remove(mons);
-		
+
 		if(canDestroy) Destroy(mons.gameObject);
 	}
 
@@ -182,14 +176,14 @@ public class GameController : Controller<GameApp>
 		var towerPrefab = Instantiate(app.resourceManager.GetItem(ItemType.Tower))
 			.GetComponent<TowerView>();
 		towerPrefab.transform.position = Vector2.zero;
-		
+
 		var healthBar = Instantiate(app.resourceManager.GetItem(ItemType.HealthBar), app.resourceManager.rootContainer)
 			.GetComponent<HealthBar>();
 		healthBar.Init(towerPrefab);
-		
+
 		towerPrefab.Init(healthBar);
-		
+
 		return towerPrefab;
 	}
-	
+
 }

@@ -64,7 +64,7 @@ public class Monster : ObjectRPG
 	public float size;
 	private TowerView target => gameController.tower;
 
-	private float _sizeDirection;
+	private float _sizeAttack;
 
 	private Cooldown _cdAttack = new Cooldown();
 
@@ -81,6 +81,7 @@ public class Monster : ObjectRPG
 			stat.attackDamage.BaseValue,
 			stat.attackSpeed.BaseValue,
 			coin);
+		_sizeAttack = stat.attackRange.BaseValue != 0? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
 	}
 
 	protected override void OnViewInit()
@@ -98,7 +99,6 @@ public class Monster : ObjectRPG
 		{
 			IdleState();
 		}
-		_sizeDirection = 0.1f + target.sizeBase + size;
 	}
 
 	private void Update()
@@ -122,7 +122,7 @@ public class Monster : ObjectRPG
 	{
 		moveDirection = target.transform.position - transform.position;
 
-		if(moveDirection.magnitude < _sizeDirection)
+		if(moveDirection.magnitude < _sizeAttack)
 		{
 			if(_cdAttack.isFinished)
 			{

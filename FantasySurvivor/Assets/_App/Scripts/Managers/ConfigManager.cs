@@ -13,13 +13,13 @@ public class ConfigManager : ConfigManagerBase
     public ConstConfigTable constConfig;
     public DataChapterConfigTable dataChapterConfigTable;
     public DataUpStatTowerInGameConfigTable dataUpStatTowerInGameConfig;
-    public NormalMonsterStatConfigTable normalMonsterStatConfigTable;
+    public DataStatMonsterConfigTable dataStatMonsterConfigTable;
 
     //private bool _isCanLoadRemoteConfig = false;
     public void Init()
     {
         //Register
-        Register(out normalMonsterStatConfigTable);
+        Register(out dataStatMonsterConfigTable);
         Register(out dataUpStatTowerInGameConfig);
         Register(out dataChapterConfigTable);
         Register(out constConfig);
