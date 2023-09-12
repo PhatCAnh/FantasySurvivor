@@ -71,8 +71,8 @@ namespace Popup
 			
 			_leftArrow.transform.localScale = Vector3.zero;
 			_rightArrow.transform.localScale = Vector3.zero;
-			_leftArrow.transform.localPosition = new Vector3(0, 200);
-			_rightArrow.transform.localPosition = new Vector3(0, 200);
+			_leftArrow.transform.localPosition = Vector3.zero;
+			_rightArrow.transform.localPosition = Vector3.zero;
 			_txtChapterName.transform.localScale = Vector3.zero;
 			_sldLevel.transform.localScale = Vector3.zero;
 			_sldLevel.value = 0;
@@ -87,8 +87,8 @@ namespace Popup
 				.Append(_title.transform.DOScale(Vector3.one, duration))
 				.Append(_btnClose.transform.DOScale(Vector3.one, duration))
 				.Append(_icon.transform.DOScale(Vector3.one, duration))
-				.Append(_leftArrow.transform.DOLocalMove(new Vector3(-300, 200), duration))
-				.Join(_rightArrow.transform.DOLocalMove(new Vector3(300, 200), duration))
+				.Append(_leftArrow.transform.DOLocalMove(new Vector3(-450, 0), duration))
+				.Join(_rightArrow.transform.DOLocalMove(new Vector3(450, 0), duration))
 				.Join(_leftArrow.transform.DOScale(Vector3.one, duration))
 				.Join(_rightArrow.transform.DOScale(Vector3.one, duration))
 				.Join(_txtChapterName.transform.DOScale(Vector3.one, duration))

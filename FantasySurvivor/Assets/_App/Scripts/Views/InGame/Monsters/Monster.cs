@@ -1,3 +1,4 @@
+using _App.Scripts.Interface;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using ArbanFramework.StateMachine;
@@ -145,7 +146,7 @@ public class Monster : ObjectRPG
 		animator.SetFloat("Vertical", directionMove.y);
 	}
 
-	public void AttackDamage()
+	public virtual void Attack()
 	{
 		target.TakeDamage(model.attackDamage);
 	}

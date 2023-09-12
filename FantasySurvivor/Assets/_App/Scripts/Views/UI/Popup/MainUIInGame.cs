@@ -100,14 +100,14 @@ namespace Popup
 			{
 				Camera.main.transform.DOLocalMove(Vector3.back, 1f);
 				DOTween.To(() => Camera.main.orthographicSize, value => Camera.main.orthographicSize = value, 25, 1f);
-				_interactContainer.DOLocalMove(new Vector3(0, -750), 1f);
+				_interactContainer.DOLocalMove(new Vector3(0, -770), 1f);
 				_toggleChangeStateInteract.GetComponent<Image>().sprite = _spriteArrowUp;
 			}
 			else
 			{
 				Camera.main.transform.DOLocalMove(new Vector3(0, -10, -1), 1f);
 				DOTween.To(() => Camera.main.orthographicSize, value => Camera.main.orthographicSize = value, 30, 1f);
-				_interactContainer.DOLocalMove(new Vector3(0, -360), 1f);
+				_interactContainer.DOLocalMove(new Vector3(0, -0), 1f);
 				_toggleChangeStateInteract.GetComponent<Image>().sprite = _spriteArrowDown;
 			}
 		}

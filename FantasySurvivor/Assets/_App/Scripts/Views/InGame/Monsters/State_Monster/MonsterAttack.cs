@@ -12,7 +12,7 @@ namespace FantasySurvivor
 		{
 			base.Enter();
 			agent.animator.SetFloat("Speed", 0f);
-			agent.AttackDamage();
+			agent.Attack();
 			agent.IdleState();
 		}
 	}
