@@ -81,6 +81,7 @@ public class TowerView : ObjectRPG
 
 	protected virtual void Update()
 	{
+		if(gameController.isStop) return;
 		var time = Time.deltaTime;
 		_stateMachine.currentState.LogicUpdate(time);
 	}
@@ -93,6 +94,7 @@ public class TowerView : ObjectRPG
 
 	public void TakeDamage(int damage)
 	{
+		if(!isAlive) return;
 		model.currentHealthPoint -= damage;
 		if(!isAlive) Die();
 	}

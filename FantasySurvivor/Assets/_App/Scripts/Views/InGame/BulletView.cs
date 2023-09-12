@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework;
+using ArbanFramework.MVC;
 using UnityEngine;
 
 public class BulletView : MonoBehaviour

@@ -70,8 +70,8 @@ public class LoseGamePopup : View<GameApp>, IPopup
         _txtEnemyKilled.transform.localScale = Vector3.zero;
         _txtWave.transform.localScale = Vector3.zero;
         _txtReward.transform.localScale = Vector3.zero;
-        _leftArrow.transform.localPosition = new Vector3(-1200, -50);
-        _rightArrow.transform.localPosition = new Vector3(1200, -50);
+        _leftArrow.transform.localPosition = new Vector3(-1000, 0);
+        _rightArrow.transform.localPosition = new Vector3(1000, 0);
 
         for(int i = 0; i < _containerReward.childCount; i++)
         {
@@ -87,8 +87,8 @@ public class LoseGamePopup : View<GameApp>, IPopup
             .Append(_txtEnemyKilled.transform.DOScale(Vector3.one, duration))
             .Append(_txtWave.transform.DOScale(Vector3.one, duration))
             .Append(_txtReward.transform.DOScale(Vector3.one, duration))
-            .Join(_leftArrow.transform.DOLocalMove(new Vector3(-600, 0), duration))
-            .Join(_rightArrow.transform.DOLocalMove(new Vector3(600, 0), duration))
+            .Join(_leftArrow.transform.DOLocalMove(new Vector3(-470, 0), duration))
+            .Join(_rightArrow.transform.DOLocalMove(new Vector3(470, 0), duration))
             .Join(_btnHome.transform.DOScale(Vector3.one, duration))
             .Join(_btnReward.transform.DOScale(Vector3.one, duration));
         

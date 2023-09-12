@@ -15,6 +15,8 @@ public class Monster : ObjectRPG
 
 	public Animator animator;
 
+	public Transform firePoint;
+
 	#region Properties
 
 	private Vector2 _direction = Vector2.zero;
@@ -63,7 +65,7 @@ public class Monster : ObjectRPG
 	#endregion
 
 	public float size;
-	private TowerView target => gameController.tower;
+	public TowerView target => gameController.tower;
 
 	private float _sizeAttack;
 
@@ -153,6 +155,7 @@ public class Monster : ObjectRPG
 
 	public void TakeDamage(int damage)
 	{
+		if(!isAlive) return;
 		model.currentHealthPoint -= damage;
 		if(!isAlive) Die();
 	}
