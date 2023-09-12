@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ArbanFramework.MVC;
+using DataConfig;
 using FantasySurvivor;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -33,9 +34,8 @@ public class MapView : View<GameApp>
 		model = new();
 		
 		var dataChapter = app.configs.dataChapterConfigTable.GetConfig(chapter);
-		for(int i = 0; i < dataChapter.waves.Length; i++)
+		foreach(var wave in dataChapter.waves)
 		{
-			var wave = dataChapter.waves[i];
 			var waveData = new WaveData
 			{
 				duration = wave.duration,
@@ -45,7 +45,7 @@ public class MapView : View<GameApp>
 				healthMonster = wave.healthMonster,
 				coinMonster = wave.coinMonster,
 			};
-
+		
 			waveData.coolDownTime.Restart(wave.timeStart);
 			if(waveData.duration != -1)
 			{

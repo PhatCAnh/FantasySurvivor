@@ -75,6 +75,11 @@ namespace ArbanFramework.Config
             return config;
         }
 
+        public bool CheckExistConfig(string configId)
+        {
+            return itemDic.ContainsKey(configId);
+        }
+
         public _ConfigItem GetConfigAt(int index)
         {
             Debug.AssertFormat(index >= 0 && index < itemList.Count, "{0} index outof range: \'{1}\'!", this.GetType().Name, index);
