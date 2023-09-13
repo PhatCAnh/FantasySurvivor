@@ -92,6 +92,11 @@ public class TowerView : ObjectRPG
 		_stateMachine.currentState.PhysicUpdate(Time.fixedTime);
 	}
 
+	public void AddExp(int value)
+	{
+		model.exp += value;
+	}
+
 	public void TakeDamage(int damage)
 	{
 		if(!isAlive) return;

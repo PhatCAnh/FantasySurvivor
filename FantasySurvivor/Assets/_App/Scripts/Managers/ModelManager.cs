@@ -4,7 +4,6 @@ using MR;
 
 public class ModelManager : ModelManagerBase
 {
-	
 	//Models
 	public SettingModel settingModel;
 	public MonsterModel monsterModel;

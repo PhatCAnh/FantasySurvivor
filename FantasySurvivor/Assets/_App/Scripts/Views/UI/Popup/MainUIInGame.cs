@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
 using FantasySurvivor;
 using Sirenix.OdinInspector;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -26,6 +24,8 @@ namespace Popup
 
 	public class MainUIInGame : View<GameApp>, IPopup
 	{
+		
+		
 		[Required, SerializeField] private TextMeshProUGUI _txtTimeMinutes;
 		
 		[Required, SerializeField] private TextMeshProUGUI _txtTimeSeconds;
@@ -61,11 +61,14 @@ namespace Popup
 		[Required, SerializeField] private TextMeshProUGUI _txtAttackSpeed;
 
 		[Required, SerializeField] private TextMeshProUGUI _txtHealth;
-
+		
+		[Required, SerializeField] private Slider _sldExp;
+		
+		public TextMeshProUGUI txtLevel;
 		private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
 		private MapModel mapModel => gameController.map.model;
-		private TowerModel model => gameController.tower.model;
+		private TowerModel towerModel => gameController.tower.model;
 
 		public void Open()
 		{
@@ -138,26 +141,26 @@ namespace Popup
 		{
 			AddDataBinding("fieldTower-attackDamageValue", _txtAttackDamage, (control, e) =>
 				{
-					control.text = String.Format($"<sprite index=2> {model.attackDamage}");
-				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.attackDamage), model)
+					control.text = String.Format($"<sprite index=2> {towerModel.attackDamage}");
+				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.attackDamage), towerModel)
 			);
 
 			AddDataBinding("fieldTower-attackRangeValue", _txtAttackRange, (control, e) =>
 				{
-					control.text = String.Format($"<sprite index=4> {(float) Math.Round(model.attackRange, 2)}");
-				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.attackRange), model)
+					control.text = String.Format($"<sprite index=4> {(float) Math.Round(towerModel.attackRange, 2)}");
+				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.attackRange), towerModel)
 			);
 
 			AddDataBinding("fieldTower-attackSpeedValue", _txtAttackSpeed, (control, e) =>
 				{
-					control.text = String.Format($"<sprite index=3> {(float) Math.Round(model.attackSpeed, 1)}");
-				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.attackSpeed), model)
+					control.text = String.Format($"<sprite index=3> {(float) Math.Round(towerModel.attackSpeed, 1)}");
+				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.attackSpeed), towerModel)
 			);
 
 			AddDataBinding("fieldTower-healthValue", _txtHealth, (control, e) =>
 				{
-					control.text = String.Format($"<sprite index=5> {model.maxHealthPoint}");
-				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.maxHealthPoint), model)
+					control.text = String.Format($"<sprite index=5> {towerModel.maxHealthPoint}");
+				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.maxHealthPoint), towerModel)
 			);
 
 			AddDataBinding("fieldMap-coinInMapValue", _txtCoinInMap, (control, e) =>
@@ -184,6 +187,28 @@ namespace Popup
 					_txtTimeSeconds.text = $"{seconds:00}";
 
 				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.timeInGame), mapModel)
+			);
+			
+			AddDataBinding("fieldTower-maxExpValue", _sldExp, (control, e) =>
+				{
+					control.maxValue = towerModel.maxExp;
+					Debug.Log("Đã nhảy vô max exp nè");
+				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.maxExp), towerModel)
+			);
+			
+			AddDataBinding("fieldTower-expValue", _sldExp, (control, e) =>
+				{
+					control.value = towerModel.exp;
+					Debug.Log("Đã nhảy vô exp nè");
+				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.exp), towerModel)
+			);
+			
+			
+			AddDataBinding("fieldTower-levelValue", txtLevel, (control, e) =>
+				{
+					control.text = towerModel.level.ToString();
+					Debug.Log("Đã nhảy vô level nè");
+				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.level), towerModel)
 			);
 		}
 
@@ -212,7 +237,7 @@ namespace Popup
 				button.button.interactable = false;
 			}
 			button.price = data.price;
-			model.attackDamage += (int) data.value;
+			towerModel.attackDamage += (int) data.value;
 			button.currentLevel++;
 		}
 
@@ -236,7 +261,7 @@ namespace Popup
 				button.button.interactable = false;
 			}
 			button.price = data.price;
-			model.attackRange += (int) data.value;
+			towerModel.attackRange += (int) data.value;
 			button.currentLevel++;
 		}
 
@@ -260,7 +285,7 @@ namespace Popup
 				button.button.interactable = false;
 			}
 			button.price = data.price;
-			model.attackSpeed += (int) data.value;
+			towerModel.attackSpeed += (int) data.value;
 			button.currentLevel++;
 		}
 
@@ -284,7 +309,7 @@ namespace Popup
 				button.button.interactable = false;
 			}
 			button.price = data.price;
-			model.AddMaxHealth((int) data.value);
+			towerModel.AddMaxHealth((int) data.value);
 			button.currentLevel++;
 		}
 	}

@@ -3,13 +3,14 @@
     Undefined = -1,
     HealthBar,
     Tower,
+    GemExp,
 }
 
 public enum MapType
 {
     Undefined = -1,
-    Forest,
-    Winter,
+    Forest = 1,
+    Ocean = 2,
 }
 
 public enum MonsterType

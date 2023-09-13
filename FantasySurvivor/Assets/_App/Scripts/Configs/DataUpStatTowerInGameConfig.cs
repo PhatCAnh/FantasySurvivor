@@ -18,6 +18,8 @@ namespace DataConfig
 		public int id { get; private set; }
 		
 		public int level { get; private set; }
+		
+		public int maxExp { get; private set; }
 
 		public DataLevelConfig dataAttackDamage;
 		public DataLevelConfig dataAttackRange;
@@ -38,6 +40,7 @@ namespace DataConfig
 			var dataAttackRangeStr = reader.ReadString().Split(lineDelimiter);
 			var dataAttackSpeedStr = reader.ReadString().Split(lineDelimiter);
 			var dataHealthStr = reader.ReadString().Split(lineDelimiter);
+			maxExp = reader.ReadInt();
 
 			dataAttackDamage = new DataLevelConfig(dataAttackDamageStr[0], dataAttackDamageStr[1]);
 			dataAttackRange = new DataLevelConfig(dataAttackRangeStr[0], dataAttackRangeStr[1]);

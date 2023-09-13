@@ -7,6 +7,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using FantasySurvivor;
 using Sirenix.OdinInspector;
+using Unity.Mathematics;
 using UnityEngine.SceneManagement;
 using MonsterStat = Stat.MonsterStat;
 
@@ -64,7 +65,7 @@ public class GameController : Controller<GameApp>
 	{
 		map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
 		map.Init(chapter);
-		Instantiate(app.resourceManager.GetMap(MapType.Forest));
+		Instantiate(app.resourceManager.GetMap((MapType) chapter));
 		tower = SpawnTower();
 		listMonster.Clear();
 	}
@@ -99,16 +100,16 @@ public class GameController : Controller<GameApp>
 	}
 
 	[Button]
-	public void TestConfig(int level)
+	public void TestConfig()
 	{
-		var prefab = app.configs.dataStatMonsterConfigTable.GetConfig(MonsterType.BlueZombie);
+		tower.AddExp(10);
 	}
 
 
-	public Monster SpawnMonster(MonsterType monsterType,int health, int adMonster, int coin)
+	public Monster SpawnMonster(MonsterType monsterType,int health, int adMonster, int coin, int exp)
 	{
 		var statMonster = app.configs.dataStatMonsterConfigTable.GetConfig(monsterType);
-		var monsterStat = new MonsterStat(statMonster.moveSpeed, health, adMonster, statMonster.attackSpeed, statMonster.attackRange);
+		var monsterStat = new MonsterStat(statMonster.moveSpeed, health, adMonster, statMonster.attackSpeed, statMonster.attackRange, exp);
 
 		var monsterIns = Instantiate(app.resourceManager.GetMonster(monsterType)).GetComponent<Monster>();
 		
@@ -123,8 +124,14 @@ public class GameController : Controller<GameApp>
 
 	public void MonsterDie(Monster mons, bool canDestroy = true)
 	{
+		var gemExp = app.resourceManager.GetItem(ItemType.GemExp).GetComponent<GemExp>();
+		gemExp.Init(mons.stat.exp.BaseValue);
+
+		var position = mons.transform.position;
+		Instantiate(gemExp, position, quaternion.identity);
+		
 		map.model.coinInGame += mons.model.coin;
-		Singleton<PoolTextPopup>.instance.GetObjectFromPool(mons.transform.position, mons.model.coin.ToString(), TextPopupType.GoldCoin);
+		Singleton<PoolTextPopup>.instance.GetObjectFromPool(position, mons.model.coin.ToString(), TextPopupType.GoldCoin);
 		listMonster.Remove(mons);
 
 		if(canDestroy) Destroy(mons.gameObject);

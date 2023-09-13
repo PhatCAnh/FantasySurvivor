@@ -17,8 +17,10 @@ namespace DataConfig
 			public int adMonster { get; private set; }
 			public int healthMonster { get; private set; }
 			public int coinMonster { get; private set; }
+			
+			public int expMonster { get; private set; }
 		
-			public WaveConfig(int timeStart, int duration, int coolDown, MonsterType monsterType, int adMonster, int healthMonster, int coinMonster)
+			public WaveConfig(int timeStart, int duration, int coolDown, MonsterType monsterType, int adMonster, int healthMonster, int coinMonster, int expMonster)
 			{
 				this.timeStart = timeStart;
 				this.duration = duration;
@@ -27,6 +29,7 @@ namespace DataConfig
 				this.adMonster = adMonster;
 				this.healthMonster = healthMonster;
 				this.coinMonster = coinMonster;
+				this.expMonster = expMonster;
 			}
 		}
 
@@ -47,6 +50,7 @@ namespace DataConfig
 			var arrAdMonster = reader.ReadIntArr();
 			var arrHealthMonster = reader.ReadIntArr();
 			var arrCoinMonster = reader.ReadIntArr();
+			var arrExpMonster = reader.ReadIntArr();
 
 			chapter = arrChapter[0];
 			waves = new List<WaveConfig>();
@@ -60,7 +64,8 @@ namespace DataConfig
 					(MonsterType) arrMonsterType[i],
 					arrAdMonster[i],
 					arrHealthMonster[i],
-					arrCoinMonster[i]
+					arrCoinMonster[i],
+					arrExpMonster[i]
 				);
 				
 				waves.Add(wave);

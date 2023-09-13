@@ -17,6 +17,7 @@ public class MapView : View<GameApp>
 		public int adMonster;
 		public int healthMonster;
 		public int coinMonster;
+		public int expMonster;
 
 		public readonly Cooldown coolDownTime = new Cooldown();
 		public readonly Cooldown cooldownEnd = new Cooldown();
@@ -44,6 +45,7 @@ public class MapView : View<GameApp>
 				adMonster = wave.adMonster,
 				healthMonster = wave.healthMonster,
 				coinMonster = wave.coinMonster,
+				expMonster = wave.expMonster,
 			};
 		
 			waveData.coolDownTime.Restart(wave.timeStart);
@@ -76,7 +78,7 @@ public class MapView : View<GameApp>
 			wave.coolDownTime.Update(Time.deltaTime);
 			if(wave.coolDownTime.isFinished)
 			{
-				gameController.SpawnMonster(wave.monsterType,  wave.healthMonster, wave.adMonster, wave.coinMonster);
+				gameController.SpawnMonster(wave.monsterType,  wave.healthMonster, wave.adMonster, wave.coinMonster, wave.expMonster);
 				wave.coolDownTime.Restart(wave.coolDown);
 			}
 		}

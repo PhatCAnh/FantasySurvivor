@@ -21,6 +21,10 @@ namespace FantasySurvivor
 			this.attackSpeed = attackSpeed;
 			this.attackDamage = attackDamage;
 			this.attackRange = attackRange;
+
+			level = 1;
+			exp = 0;
+			maxExp = app.configs.dataUpStatTowerInGameConfig.GetConfig(0).maxExp;
 		}
 
 		private int _currentHealthPoint;
@@ -28,6 +32,9 @@ namespace FantasySurvivor
 		private int _attackDamage;
 		private float _attackSpeed;
 		private float _attackRange;
+		private int _exp;
+		private int _maxExp;
+		private int _level;
 		
 		public int currentHealthPoint
 		{
@@ -76,6 +83,42 @@ namespace FantasySurvivor
 				if(attackRange.Equals(value)) return;
 				_attackRange = value;
 				RaiseDataChanged(nameof(attackRange));
+			}
+		}
+		
+		public int exp
+		{
+			get => _exp;
+			set {
+				if(exp.Equals(value)) return;
+				_exp = value;
+				if(_exp >= maxExp)
+				{
+					maxExp = app.configs.dataUpStatTowerInGameConfig.GetConfig(level).maxExp;
+					_exp = 0;
+					level++;
+				}
+				RaiseDataChanged(nameof(exp));
+			}
+		}
+		
+		public int maxExp
+		{
+			get => _maxExp;
+			set {
+				if(maxExp.Equals(value)) return;
+				_maxExp = value;
+				RaiseDataChanged(nameof(maxExp));
+			}
+		}
+		
+		public int level
+		{
+			get => _level;
+			set {
+				if(level.Equals(value)) return;
+				_level = value;
+				RaiseDataChanged(nameof(level));
 			}
 		}
 

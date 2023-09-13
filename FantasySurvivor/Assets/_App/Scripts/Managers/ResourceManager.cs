@@ -21,7 +21,9 @@ public class ResourceManager : UIManagerBase<PopupType>
     [Required, SerializeField] private GameObject _healthBarPrefab;
     
     [Required, SerializeField] private GameObject _towerPrefab;
-
+    
+    [Required, SerializeField] private GameObject _gemExpPrefab;
+    
     private Dictionary<ItemType, GameObject> _itemDic;
     
     
@@ -39,8 +41,12 @@ public class ResourceManager : UIManagerBase<PopupType>
     [Header("Map prefabs")]
     
     [Required, SerializeField] private GameObject _forestMap;
+    
+    [Required, SerializeField] private GameObject _oceanMap;
 
     private Dictionary<MapType, GameObject> _mapDic;
+    
+    [Header("Monster prefabs")]
     
     [Required, SerializeField] private GameObject _blueZombie;
     
@@ -76,11 +82,13 @@ public class ResourceManager : UIManagerBase<PopupType>
         {
             {ItemType.HealthBar, _healthBarPrefab },
             {ItemType.Tower, _towerPrefab },
+            {ItemType.GemExp, _gemExpPrefab },
         };
 
         _mapDic = new Dictionary<MapType, GameObject>
         {
             { MapType.Forest, _forestMap },
+            { MapType.Ocean , _oceanMap},
         };
         
         _typeMonsterDic = new Dictionary<MonsterType, GameObject>

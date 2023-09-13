@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework.MVC;
@@ -11,14 +12,21 @@ using UnityEngine.UI;
 using Sequence = DG.Tweening.Sequence;
 namespace Popup
 {
+	[Serializable]
+	public class DataUiChapter
+	{
+		public string name;
+		public Sprite image;
+	}
+	
 	public class ChoiceMapPopup : View<GameApp>, IPopup
 	{
 		[Required, SerializeField] private GameObject _title;
 		[Required, SerializeField] private TextMeshProUGUI _txtTitle;
 		[Required, SerializeField] private Button _btnClose;
 		[Required, SerializeField] private GameObject _icon;
-		[Required, SerializeField] private GameObject _leftArrow;
-		[Required, SerializeField] private GameObject _rightArrow;
+		[Required, SerializeField] private Button _leftArrow;
+		[Required, SerializeField] private Button _rightArrow;
 		[Required, SerializeField] private TextMeshProUGUI _txtChapterName;
 		[Required, SerializeField] private Slider _sldLevel;
 		
@@ -29,6 +37,10 @@ namespace Popup
 		[Required, SerializeField] private Button _btnClaimGift;
 		[Required, SerializeField] private Button _btnPlay;
 
+		[Required, SerializeField] private Image _imgChapter;
+		[Required, SerializeField] private DataUiChapter[] _uiChapter;
+
+		private int _currentChapter = 1;
 
 		private Sequence _sequence;
 
@@ -39,24 +51,49 @@ namespace Popup
 			base.OnViewInit();
 			
 			_btnPlay.onClick.AddListener(OnClickBtnPlay);
-			
+			_leftArrow.onClick.AddListener(OnClickLeftArrow);
+			_rightArrow.onClick.AddListener(OnClickRightArrow);
 			
 			Open();
 		}
 
 		public void Open()
 		{
-			SetAnimOpen();
+			OpenUI(_currentChapter);
 		}
 		public void Close()
 		{
 			Destroy(gameObject);
 		}
 
+		private void OnClickLeftArrow()
+		{
+			_currentChapter--;
+			OpenUI(_currentChapter);
+		}
+		
+		private void OnClickRightArrow()
+		{
+			_currentChapter++;
+			OpenUI(_currentChapter);
+		}
+
+		private void OpenUI(int chapter)
+		{
+			_leftArrow.gameObject.SetActive(_currentChapter > 1);
+			_rightArrow.gameObject.SetActive(_currentChapter < _uiChapter.Length);
+
+			var chapterIndex = _uiChapter[chapter - 1];
+			_txtTitle.text = $"CHAPTER {_currentChapter}";
+			_imgChapter.sprite = chapterIndex.image;
+			_txtChapterName.text = chapterIndex.name;
+			SetAnimOpen();
+		}
+
 		private void OnClickBtnPlay()
 		{
 			var load = SceneManager.LoadSceneAsync("scn_Game", LoadSceneMode.Single);
-			load.completed += o => gameController.StartGame(1);
+			load.completed += o => gameController.StartGame(_currentChapter);
 			Close();
 		}
 
@@ -87,8 +124,8 @@ namespace Popup
 				.Append(_title.transform.DOScale(Vector3.one, duration))
 				.Append(_btnClose.transform.DOScale(Vector3.one, duration))
 				.Append(_icon.transform.DOScale(Vector3.one, duration))
-				.Append(_leftArrow.transform.DOLocalMove(new Vector3(-450, 0), duration))
-				.Join(_rightArrow.transform.DOLocalMove(new Vector3(450, 0), duration))
+				.Append(_leftArrow.transform.DOLocalMove(new Vector3(-500, 0), duration))
+				.Join(_rightArrow.transform.DOLocalMove(new Vector3(500, 0), duration))
 				.Join(_leftArrow.transform.DOScale(Vector3.one, duration))
 				.Join(_rightArrow.transform.DOScale(Vector3.one, duration))
 				.Join(_txtChapterName.transform.DOScale(Vector3.one, duration))
