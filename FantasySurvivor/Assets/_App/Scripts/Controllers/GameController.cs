@@ -6,6 +6,7 @@ using ArbanFramework.MVC;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using FantasySurvivor;
+using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using UnityEngine.SceneManagement;
@@ -56,20 +57,16 @@ public class GameController : Controller<GameApp>
 		Singleton<GameController>.Unset(this);
 	}
 
-	public void ShowChoiceMap()
+	public void ShowMainHome()
 	{
-		app.resourceManager.ShowPopup(PopupType.ChoiceMap);
+		app.resourceManager.ShowPopup(PopupType.MainUI);
 	}
 
 	public void StartGame(int chapter)
 	{
-		map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
-		map.Init(chapter);
-		Instantiate(app.resourceManager.GetMap((MapType) chapter));
-		tower = SpawnTower();
-		listMonster.Clear();
+		ChangeScene("scn_Game",  () => LoadMap(chapter));
 	}
-
+	
 	public void WinGame()
 	{
 	}
@@ -80,13 +77,22 @@ public class GameController : Controller<GameApp>
 		app.resourceManager.ShowPopup(PopupType.LoseGame);
 	}
 
+	public void ChangeScene(string nameScene, [CanBeNull] Action callback)
+	{
+		var load = SceneManager.LoadSceneAsync(nameScene, LoadSceneMode.Single);
+		load.completed += o =>
+		{
+			callback?.Invoke();
+		};
+	}
+
 	public void ChangeSceneHome()
 	{
 		var load = SceneManager.LoadSceneAsync("scn_Main", LoadSceneMode.Single);
 		load.completed += o =>
 		{
 			app.resourceManager.CloseAllPopup();
-			ShowChoiceMap();
+			ShowMainHome();
 		};
 	}
 
@@ -193,4 +199,12 @@ public class GameController : Controller<GameApp>
 		return towerPrefab;
 	}
 
+	private void LoadMap(int chapter)
+	{
+		map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
+		map.Init(chapter);
+		Instantiate(app.resourceManager.GetMap((MapType) chapter));
+		tower = SpawnTower();
+		listMonster.Clear();
+	}
 }

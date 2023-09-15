@@ -1,6 +1,6 @@
 public enum PopupType
 {
-    Main,
+    MainUI,
     Notification,
     Pause,
     WinGame,

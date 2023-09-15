@@ -192,14 +192,12 @@ namespace Popup
 			AddDataBinding("fieldTower-maxExpValue", _sldExp, (control, e) =>
 				{
 					control.maxValue = towerModel.maxExp;
-					Debug.Log("Đã nhảy vô max exp nè");
 				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.maxExp), towerModel)
 			);
 			
 			AddDataBinding("fieldTower-expValue", _sldExp, (control, e) =>
 				{
 					control.value = towerModel.exp;
-					Debug.Log("Đã nhảy vô exp nè");
 				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.exp), towerModel)
 			);
 			
@@ -207,7 +205,6 @@ namespace Popup
 			AddDataBinding("fieldTower-levelValue", txtLevel, (control, e) =>
 				{
 					control.text = towerModel.level.ToString();
-					Debug.Log("Đã nhảy vô level nè");
 				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.level), towerModel)
 			);
 		}
