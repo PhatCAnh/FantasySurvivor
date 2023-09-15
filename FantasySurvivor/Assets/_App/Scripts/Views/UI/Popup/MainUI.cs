@@ -18,7 +18,7 @@ public class MainUI : View<GameApp>, IPopup
 	}
 
 	[SerializeField] private ItemToggle _itemHome, _itemElemental, _itemShop, _itemUpdate, _itemLock;
-	[SerializeField] private GameObject _goLock;
+	[SerializeField] private GameObject _goLock, _goUpdateStat;
 	[SerializeField] private Image _imgLineFocus;
 	[SerializeField] private Button _btnBattle;
 
@@ -87,7 +87,7 @@ public class MainUI : View<GameApp>, IPopup
 	private void OnClickTglUpdate(bool value)
 	{
 		ChangeAnimToggle(_itemUpdate);
-		_goLock.SetActive(_itemUpdate.isLock);
+		_goUpdateStat.SetActive(value);
 	}
 	
 	private void OnClickTglLock(bool value)
