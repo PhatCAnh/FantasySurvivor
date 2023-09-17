@@ -29,6 +29,7 @@ public class GameController : Controller<GameApp>
 	private void Awake()
 	{
 		Singleton<GameController>.Set(this);
+		
 	}
 
 	private void Start()
@@ -108,13 +109,13 @@ public class GameController : Controller<GameApp>
 	[Button]
 	public void TestConfig()
 	{
-		tower.AddExp(10);
+		app.configs.dataUpBaseStatTower.GetConfig(1);
 	}
 
 
 	public Monster SpawnMonster(MonsterType monsterType,int health, int adMonster, int coin, int exp)
 	{
-		var statMonster = app.configs.dataStatMonsterConfigTable.GetConfig(monsterType);
+		var statMonster = app.configs.dataStatMonster.GetConfig(monsterType);
 		var monsterStat = new MonsterStat(statMonster.moveSpeed, health, adMonster, statMonster.attackSpeed, statMonster.attackRange, exp);
 
 		var monsterIns = Instantiate(app.resourceManager.GetMonster(monsterType)).GetComponent<Monster>();
@@ -194,9 +195,43 @@ public class GameController : Controller<GameApp>
 			.GetComponent<HealthBar>();
 		healthBar.Init(towerPrefab);
 
-		towerPrefab.Init(healthBar);
+		var model = new TowerModel(
+			 (int)GetStatTower(app.models.dataPlayerModel.levelHealth, TypeStatTower.Health),
+			 GetStatTower(app.models.dataPlayerModel.levelAs, TypeStatTower.AttackSpeed),
+			(int) GetStatTower(app.models.dataPlayerModel.levelAd, TypeStatTower.AttackDamage),
+			 GetStatTower(app.models.dataPlayerModel.levelAr, TypeStatTower.AttackRange)
+			);
+		towerPrefab.Init(model ,healthBar);
 
 		return towerPrefab;
+	}
+
+	private float GetStatTower(int level, TypeStatTower type)
+	{
+		float value = 0;
+		float baseValue = 0;
+		var dataLevel = app.configs.dataUpBaseStatTower.GetConfig(level);
+		var dataStatBase = app.configs.dataStatTower.GetConfig(TowerType.Basic);
+		switch (type)
+		{
+			case TypeStatTower.AttackDamage:
+				value = dataLevel.dataAttackDamage.value;
+				baseValue = dataStatBase.attackDamage;
+				break;
+			case TypeStatTower.AttackRange:
+				value = dataLevel.dataAttackRange.value;
+				baseValue = dataStatBase.attackRange;
+				break;
+			case TypeStatTower.AttackSpeed:
+				value = dataLevel.dataAttackSpeed.value;
+				baseValue = dataStatBase.attackSpeed;
+				break;
+			case TypeStatTower.Health:
+				value = dataLevel.dataHealth.value;
+				baseValue = dataStatBase.health;
+				break;
+		}
+		return value + baseValue;
 	}
 
 	private void LoadMap(int chapter)

@@ -17,6 +17,13 @@ public static class GameConst
     public static float MOVE_SPEED_ANIMATION_RATIO = 2.5f;
     public static float SPEED_UP_VALUE = 2.25f;
     public static float DASH_DELAY = 1f;
+
+    public static string iconAd = "<sprite index=2>";
+    public static string iconCoin = "<sprite index=0>";
+    public static string iconAr = "<sprite index=4>";
+    public static string iconAs = "<sprite index=3>";
+    public static string iconHealth = "<sprite index=5>";
+    
     
 
     public static string GetNameWithVersion(string str)

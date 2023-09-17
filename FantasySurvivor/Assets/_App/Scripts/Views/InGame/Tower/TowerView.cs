@@ -42,9 +42,9 @@ public class TowerView : ObjectRPG
 	private TowerIdle _idleState;
 	private TowerAttack _attackState;
 
-	public void Init(HealthBar healthBar)
+	public void Init(TowerModel modelInit, HealthBar healthBar)
 	{
-		model = new TowerModel(100, 1f, 5, 10f);
+		this.model = modelInit;
 		this.healthBar = healthBar;
 	}
 

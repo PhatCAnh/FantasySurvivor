@@ -20,6 +20,11 @@ public enum MonsterType
     BlueGhost = 2,
 }
 
+public enum TowerType
+{
+    Basic = 0,
+}
+
 public enum TextPopupType
 {
     GoldCoin,
@@ -27,4 +32,10 @@ public enum TextPopupType
     DamageCritical,
 }
 
-
+public enum TypeStatTower
+{
+    AttackDamage,
+    AttackRange,
+    AttackSpeed,
+    Health,
+}

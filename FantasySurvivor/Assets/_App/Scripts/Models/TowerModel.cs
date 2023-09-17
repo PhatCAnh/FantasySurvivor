@@ -24,7 +24,7 @@ namespace FantasySurvivor
 
 			level = 1;
 			exp = 0;
-			maxExp = app.configs.dataUpStatTowerInGameConfig.GetConfig(0).maxExp;
+			maxExp = app.configs.dataUpStatTowerInGame.GetConfig(1).maxExp;
 		}
 
 		private int _currentHealthPoint;
@@ -94,7 +94,7 @@ namespace FantasySurvivor
 				_exp = value;
 				if(_exp >= maxExp)
 				{
-					maxExp = app.configs.dataUpStatTowerInGameConfig.GetConfig(level).maxExp;
+					maxExp = app.configs.dataUpStatTowerInGame.GetConfig(level).maxExp;
 					_exp = 0;
 					level++;
 				}

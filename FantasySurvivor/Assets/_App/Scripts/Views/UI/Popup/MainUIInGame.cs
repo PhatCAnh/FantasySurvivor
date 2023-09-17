@@ -17,9 +17,7 @@ namespace Popup
 		[Required] public Button button;
 		[Required] public TextMeshProUGUI coinToUpdate;
 
-		public int currentLevel = 0;
-		public int maxLevel = 10;
-		public int price = 0;
+		public int currentLevel = 1,maxLevel = 10, price = 0;
 	}
 
 	public class MainUIInGame : View<GameApp>, IPopup
@@ -141,25 +139,25 @@ namespace Popup
 		{
 			AddDataBinding("fieldTower-attackDamageValue", _txtAttackDamage, (control, e) =>
 				{
-					control.text = String.Format($"<sprite index=2> {towerModel.attackDamage}");
+					control.text = String.Format($"{GameConst.iconAd} {towerModel.attackDamage}");
 				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.attackDamage), towerModel)
 			);
 
 			AddDataBinding("fieldTower-attackRangeValue", _txtAttackRange, (control, e) =>
 				{
-					control.text = String.Format($"<sprite index=4> {(float) Math.Round(towerModel.attackRange, 2)}");
+					control.text = String.Format($"{GameConst.iconAr} {(float) Math.Round(towerModel.attackRange, 2)}");
 				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.attackRange), towerModel)
 			);
 
 			AddDataBinding("fieldTower-attackSpeedValue", _txtAttackSpeed, (control, e) =>
 				{
-					control.text = String.Format($"<sprite index=3> {(float) Math.Round(towerModel.attackSpeed, 1)}");
+					control.text = String.Format($"{GameConst.iconAs} {(float) Math.Round(towerModel.attackSpeed, 1)}");
 				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.attackSpeed), towerModel)
 			);
 
 			AddDataBinding("fieldTower-healthValue", _txtHealth, (control, e) =>
 				{
-					control.text = String.Format($"<sprite index=5> {towerModel.maxHealthPoint}");
+					control.text = String.Format($"{GameConst.iconHealth} {towerModel.maxHealthPoint}");
 				}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.maxHealthPoint), towerModel)
 			);
 
@@ -223,7 +221,7 @@ namespace Popup
 		private void LoadDataUpAttackDamage()
 		{
 			var button = _attackDamage;
-			var data = app.configs.dataUpStatTowerInGameConfig.GetConfig(button.currentLevel).dataAttackDamage;
+			var data = app.configs.dataUpStatTowerInGame.GetConfig(button.currentLevel).dataAttackDamage;
 			if(button.currentLevel < button.maxLevel)
 			{
 				button.coinToUpdate.text = String.Format($"{data.price} <sprite index=0>");
@@ -247,7 +245,7 @@ namespace Popup
 		private void LoadDataUpAttackRange()
 		{
 			var button = _attackRange;
-			var data = app.configs.dataUpStatTowerInGameConfig.GetConfig(button.currentLevel).dataAttackRange;
+			var data = app.configs.dataUpStatTowerInGame.GetConfig(button.currentLevel).dataAttackRange;
 			if(button.currentLevel < button.maxLevel)
 			{
 				button.coinToUpdate.text = String.Format($"{data.price} <sprite index=0>");
@@ -271,7 +269,7 @@ namespace Popup
 		private void LoadDataUpAttackSpeed()
 		{
 			var button = _attackSpeed;
-			var data = app.configs.dataUpStatTowerInGameConfig.GetConfig(button.currentLevel).dataAttackSpeed;
+			var data = app.configs.dataUpStatTowerInGame.GetConfig(button.currentLevel).dataAttackSpeed;
 			if(button.currentLevel < button.maxLevel)
 			{
 				button.coinToUpdate.text = String.Format($"{data.price} <sprite index=0>");
@@ -295,7 +293,7 @@ namespace Popup
 		private void LoadDataUpHealth()
 		{
 			var button = _health;
-			var data = app.configs.dataUpStatTowerInGameConfig.GetConfig(button.currentLevel).dataHealth;
+			var data = app.configs.dataUpStatTowerInGame.GetConfig(button.currentLevel).dataHealth;
 			if(button.currentLevel < button.maxLevel)
 			{
 				button.coinToUpdate.text = String.Format($"{data.price} <sprite index=0>");

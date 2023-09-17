@@ -34,7 +34,7 @@ public class MapView : View<GameApp>
 	{
 		model = new();
 		
-		var dataChapter = app.configs.dataChapterConfigTable.GetConfig(chapter);
+		var dataChapter = app.configs.dataChapter.GetConfig(chapter);
 		foreach(var wave in dataChapter.waves)
 		{
 			var waveData = new WaveData
