@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
+using FantasySurvivor;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +23,7 @@ public class MainUI : View<GameApp>, IPopup
 	[SerializeField] private GameObject _goLock, _goUpdateStat, _goHome;
 	[SerializeField] private Image _imgLineFocus;
 	[SerializeField] private Button _btnBattle;
-	
+	[SerializeField] private TextMeshProUGUI _txtGoldCoin;
 
 	private float _durationAnim = 0.3f;
 
@@ -36,6 +38,7 @@ public class MainUI : View<GameApp>, IPopup
 		_itemUpdate.toggle.onValueChanged.AddListener(OnClickTglUpdate);
 		_itemLock.toggle.onValueChanged.AddListener(OnClickTglLock);
 		_btnBattle.onClick.AddListener(OnClickBtnBattle);
+		AddEventChangeStat();
 	}
 
 	public void Open()
@@ -101,6 +104,15 @@ public class MainUI : View<GameApp>, IPopup
 	{
 		gameController.StartGame(1);
 		Close();
+	}
+	
+	private void AddEventChangeStat()
+	{
+		AddDataBinding("fieldPlayerTower-goldCoinValue", _txtGoldCoin, (control, e) =>
+			{
+				control.text = $"{app.models.dataPlayerModel.coin}";
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.coin), app.models.dataPlayerModel)
+		);
 	}
 
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8527315627761866934}
   - component: {fileID: 8527315627761866933}
   - component: {fileID: 8527315627761866932}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: GemExp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skin: {fileID: 8527315628092798274}
-  _valueExp: 0
+  _valueExp: 5
 --- !u!58 &8527315627761866932
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.65
+  m_Radius: 1
 --- !u!1 &8527315628092798273
 GameObject:
   m_ObjectHideFlags: 0

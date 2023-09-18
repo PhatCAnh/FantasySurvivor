@@ -22,13 +22,14 @@ namespace FantasySurvivor
 		public override void InitBaseData()
 		{
 			this.coin = 100;
-			levelAd = 1;
-			levelAr = 1;
-			levelAs = 1;
-			levelHealth = 1;
+			levelAd = 0;
+			levelAr = 0;
+			levelAs = 0;
+			levelHealth = 0;
+			app.models.WriteModel<DataPlayerModel>();
 		}
 
-		private int _coin;
+		[JsonProperty] private int _coin;
 		[JsonProperty] private int _levelAd;
 		[JsonProperty] private int _levelAr;
 		[JsonProperty] private int _levelAs;

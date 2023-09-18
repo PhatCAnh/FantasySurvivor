@@ -112,7 +112,7 @@ public class TowerView : ObjectRPG
 	public void Attack()
 	{
 		var arrowIns = Instantiate(arrow);
-		arrowIns.Init(this, 15f);
+		arrowIns.Init(this);
 	}
 
 	public void IdleState()
