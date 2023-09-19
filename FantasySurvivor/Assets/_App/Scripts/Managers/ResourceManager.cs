@@ -56,7 +56,7 @@ public class ResourceManager : UIManagerBase<PopupType>
     
     [Required, SerializeField] private GameObject _blueGhost;
     
-    private Dictionary<MonsterType, GameObject> _typeMonsterDic;
+    private Dictionary<string, GameObject> _typeMonsterDic;
 
     private void Awake()
     {
@@ -94,11 +94,11 @@ public class ResourceManager : UIManagerBase<PopupType>
             { MapType.Ocean , _oceanMap},
         };
         
-        _typeMonsterDic = new Dictionary<MonsterType, GameObject>
+        _typeMonsterDic = new Dictionary<string, GameObject>
         {
-            { MonsterType.BlueZombie, _blueZombie },
-            { MonsterType.PurpleZombie, _purpleZombie },
-            { MonsterType.BlueGhost, _blueGhost },
+            { "M1", _blueZombie },
+            { "M2", _purpleZombie },
+            { "M3", _blueGhost },
         };
     }    
 
@@ -112,9 +112,9 @@ public class ResourceManager : UIManagerBase<PopupType>
         return _mapDic[mapType];
     }
 
-    public GameObject GetMonster(MonsterType skinMonsterType)
+    public GameObject GetMonster(string monsterId)
     {
-        return _typeMonsterDic[skinMonsterType];
+        return _typeMonsterDic[monsterId];
     }
     
 

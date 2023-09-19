@@ -85,7 +85,7 @@ public class Monster : ObjectRPG
 			stat.health.BaseValue,
 			stat.attackDamage.BaseValue,
 			stat.attackSpeed.BaseValue,
-			wave.coinMonster);
+			wave.expMonster);
 		this.wave = wave;
 		_sizeAttack = stat.attackRange.BaseValue != 0? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
 	}

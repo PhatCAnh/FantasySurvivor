@@ -110,16 +110,16 @@ public class GameController : Controller<GameApp>
 	[Button]
 	public void TestConfig()
 	{
-		app.configs.dataUpBaseStatTower.GetConfig(1);
+		app.configs.dataChapter.GetConfig(1);
 	}
 
 
 	public Monster SpawnMonster(MapView.WaveData wave)
 	{
-		var statMonster = app.configs.dataStatMonster.GetConfig(wave.monsterType);
+		var statMonster = app.configs.dataStatMonster.GetConfig(wave.idMonster);
 		var monsterStat = new MonsterStat(statMonster.moveSpeed, wave.healthMonster, wave.adMonster, statMonster.attackSpeed, statMonster.attackRange, wave.expMonster);
 
-		var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.monsterType)).GetComponent<Monster>();
+		var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
 		
 		monsterIns.transform.position = RandomPositionSpawnMonster();
 		
@@ -239,7 +239,7 @@ public class GameController : Controller<GameApp>
 	private void LoadMap(int chapter)
 	{
 		map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
-		map.Init(chapter);
+		map.Init();
 		Instantiate(app.resourceManager.GetMap((MapType) chapter));
 		tower = SpawnTower();
 		listMonster.Clear();

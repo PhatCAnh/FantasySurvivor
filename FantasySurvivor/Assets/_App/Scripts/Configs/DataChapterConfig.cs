@@ -2,97 +2,74 @@
 using ArbanFramework.Config;
 namespace DataConfig
 {
+	public class WaveConfig
+	{
+		public string idMonster { get; private set; }
+		public int timeStart { get; private set; }
+		public int stepTime { get; private set; }
+		public int number { get; private set; }
+		public int adMonster { get; private set; }
+		public int healthMonster { get; private set; }
+		public int expMonster { get; private set; }
+		public int coinMonster { get; private set; }
+
+
+		public WaveConfig(string idMonster, int timeStart, int stepTime, int number, int adMonster, int healthMonster, int expMonster, int coinMonster)
+		{
+			this.idMonster = idMonster;
+			this.timeStart = timeStart;
+			this.stepTime = stepTime;
+			this.number = number;
+			this.adMonster = adMonster;
+			this.healthMonster = healthMonster;
+			this.expMonster = expMonster;
+			this.coinMonster = coinMonster;
+		}
+	}
+	
 	public class DataChapterConfig : IConfigItem
 	{
-		public int chapter { get; private set; }
-		public List<WaveConfig> waves { get; private set; }
-		public class WaveConfig
-		{
-			public int timeStart { get; private set; }
-			public int duration { get; private set; }
-			public int coolDown { get; private set; }
-		
-			public MonsterType monsterType { get; private set; }
-		
-			public int adMonster { get; private set; }
-			public int healthMonster { get; private set; }
-			public int coinMonster { get; private set; }
-			
-			public int expMonster { get; private set; }
-		
-			public WaveConfig(int timeStart, int duration, int coolDown, MonsterType monsterType, int adMonster, int healthMonster, int coinMonster, int expMonster)
-			{
-				this.timeStart = timeStart;
-				this.duration = duration;
-				this.coolDown = coolDown;
-				this.monsterType = monsterType;
-				this.adMonster = adMonster;
-				this.healthMonster = healthMonster;
-				this.coinMonster = coinMonster;
-				this.expMonster = expMonster;
-			}
-		}
+		public int level { get; private set; }
+		public WaveConfig[] waves { get; private set; }
 
 		public string GetId()
 		{
-			return chapter.ToString();
+			return level.ToString();
 		}
 
 		public void OnReadImpl(IConfigReader reader)
 		{
 			// var arrTimeStart = reader.ReadString().Split(lineDelimiter);
-			
-			var arrChapter = reader.ReadIntArr();
-			var arrTimeStart = reader.ReadIntArr();
-			var arrDuration = reader.ReadIntArr();
-			var arrCooldown = reader.ReadIntArr();
-			var arrMonsterType = reader.ReadIntArr();
-			var arrAdMonster = reader.ReadIntArr();
-			var arrHealthMonster = reader.ReadIntArr();
-			var arrCoinMonster = reader.ReadIntArr();
-			var arrExpMonster = reader.ReadIntArr();
+			var lineDelimiter = '_';
 
-			chapter = arrChapter[0];
-			waves = new List<WaveConfig>();
+			level = reader.ReadInt();
+			var idMonsterArr = reader.ReadString();
+			var idMonster = idMonsterArr.Split(lineDelimiter);
+			var startTime = reader.ReadString().Split(lineDelimiter);
+			var stepTime = reader.ReadString().Split(lineDelimiter);
+			var number = reader.ReadString().Split(lineDelimiter);
+			var atkDamage = reader.ReadString().Split(lineDelimiter);
+			var healthPoint = reader.ReadString().Split(lineDelimiter);
+			var exp = reader.ReadString().Split(lineDelimiter);
+			var gold = reader.ReadInt();
 
-			for(int i = 0; i < arrChapter.Length; i++)
+			waves = new WaveConfig[idMonster.Length];
+
+			for(int i = 0; i < waves.Length; i++)
 			{
 				WaveConfig wave = new WaveConfig(
-					arrTimeStart[i],
-					arrDuration[i],
-					arrCooldown[i],
-					(MonsterType) arrMonsterType[i],
-					arrAdMonster[i],
-					arrHealthMonster[i],
-					arrCoinMonster[i],
-					arrExpMonster[i]
+					idMonster[i],
+					int.Parse(startTime[i]),
+					int.Parse(stepTime[i]),
+					int.Parse(number[i]),
+					int.Parse(atkDamage[i]),
+					int.Parse(healthPoint[i]),
+					int.Parse(exp[i]),
+					gold
 				);
-				
-				waves.Add(wave);
-			}
-			
-			
-			
-			
-			
-			
-			
-			
 
-			// waves = new WaveConfig[arrTimeStart.Length];
-			//
-			// for(int i = 0; i < arrTimeStart.Length; i++)
-			// {
-			// 	var timeStart = int.Parse(arrTimeStart[i]);
-			// 	var duration = int.Parse(arrDuration[i]);
-			// 	var cooldown = int.Parse(arrCooldown[i]);
-			// 	var monsterType = int.Parse(arrMonsterType[i]);
-			// 	var adMonster = int.Parse(arrAdMonster[i]);
-			// 	var healthMonster = int.Parse(arrHealthMonster[i]);
-			// 	var coinMonster = int.Parse(arrCoinMonster[i]);
-			//
-			// 	waves[i] = new WaveConfig(timeStart, duration, cooldown, (MonsterType) monsterType, adMonster, healthMonster, coinMonster);
-			// }
+				waves[i] = wave;
+			}
 		}
 	}
 
@@ -100,9 +77,9 @@ namespace DataConfig
 	{
 		public override string FileName => nameof(DataChapterConfig);
 
-		public DataChapterConfig GetConfig(int id)
+		public DataChapterConfig GetConfig(int level)
 		{
-			return GetConfig(id.ToString());
+			return GetConfig(level.ToString());
 		}
 	}
 }
