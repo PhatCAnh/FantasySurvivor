@@ -70,6 +70,7 @@ public class GameController : Controller<GameApp>
 	
 	public void WinGame()
 	{
+		Debug.Log("Wingame r ne");
 	}
 
 	public void LoseGame()
@@ -113,16 +114,16 @@ public class GameController : Controller<GameApp>
 	}
 
 
-	public Monster SpawnMonster(MonsterType monsterType,int health, int adMonster, int coin, int exp)
+	public Monster SpawnMonster(MapView.WaveData wave)
 	{
-		var statMonster = app.configs.dataStatMonster.GetConfig(monsterType);
-		var monsterStat = new MonsterStat(statMonster.moveSpeed, health, adMonster, statMonster.attackSpeed, statMonster.attackRange, exp);
+		var statMonster = app.configs.dataStatMonster.GetConfig(wave.monsterType);
+		var monsterStat = new MonsterStat(statMonster.moveSpeed, wave.healthMonster, wave.adMonster, statMonster.attackSpeed, statMonster.attackRange, wave.expMonster);
 
-		var monsterIns = Instantiate(app.resourceManager.GetMonster(monsterType)).GetComponent<Monster>();
+		var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.monsterType)).GetComponent<Monster>();
 		
 		monsterIns.transform.position = RandomPositionSpawnMonster();
 		
-		monsterIns.Init(monsterStat, coin);
+		monsterIns.Init(monsterStat, wave);
 		
 		listMonster.Add(monsterIns);
 		
@@ -140,6 +141,7 @@ public class GameController : Controller<GameApp>
 		map.model.coinInGame += mons.model.coin;
 		Singleton<PoolTextPopup>.instance.GetObjectFromPool(position, mons.model.coin.ToString(), TextPopupType.GoldCoin);
 		listMonster.Remove(mons);
+		mons.wave.monsterInWave.Remove(mons);
 
 		if(canDestroy) Destroy(mons.gameObject);
 	}

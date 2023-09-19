@@ -66,6 +66,8 @@ public class Monster : ObjectRPG
 
 	public float size;
 	public TowerView target => gameController.tower;
+	
+	public MapView.WaveData wave { get; private set; }
 
 	private float _sizeAttack;
 
@@ -75,7 +77,7 @@ public class Monster : ObjectRPG
 
 	#region Base Methods
 
-	public virtual void Init(MonsterStat monsterStat, int coin)
+	public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave)
 	{
 		stat = monsterStat;
 		model = new MonsterModel(
@@ -83,7 +85,8 @@ public class Monster : ObjectRPG
 			stat.health.BaseValue,
 			stat.attackDamage.BaseValue,
 			stat.attackSpeed.BaseValue,
-			coin);
+			wave.coinMonster);
+		this.wave = wave;
 		_sizeAttack = stat.attackRange.BaseValue != 0? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
 	}
 
