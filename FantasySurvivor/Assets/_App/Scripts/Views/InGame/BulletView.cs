@@ -33,7 +33,6 @@ public class BulletView : MonoBehaviour
 		{
 			var damage = _origin.model.attackDamage;
 			monster.TakeDamage(damage);
-			Singleton<PoolTextPopup>.instance.GetObjectFromPool(other.transform.position, damage.ToString(), TextPopupType.Damage);
 			TouchUnit();
 		}
 	}

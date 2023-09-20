@@ -24,7 +24,7 @@ public class GameApp : AppBase
         Application.targetFrameRate = 60;
         
 #if UNITY_STANDALONE
-         Screen.SetResolution(720, 1600, false);
+         Screen.SetResolution(440, 960, false);
 #endif
     }
 }

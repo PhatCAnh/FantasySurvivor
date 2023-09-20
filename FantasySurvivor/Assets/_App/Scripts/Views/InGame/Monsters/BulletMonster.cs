@@ -34,7 +34,6 @@ namespace MR.CharacterState.Unit
 			if(Vector2.Distance(transform.position, _target.transform.position) < 0.25f)
 			{
 				_target.TakeDamage(_origin.model.attackDamage);
-				Singleton<PoolTextPopup>.instance.GetObjectFromPool(_target.transform.position, _origin.model.attackDamage.ToString(), TextPopupType.Damage);
 				TouchUnit();
 			}
 		}

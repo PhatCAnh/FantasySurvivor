@@ -85,5 +85,10 @@ namespace ArbanFramework.Config
             Debug.AssertFormat(index >= 0 && index < itemList.Count, "{0} index outof range: \'{1}\'!", this.GetType().Name, index);
             return itemList[index];
         }
+
+        public int GetLengthConfig()
+        {
+            return itemDic.Count;
+        }
     }
 }

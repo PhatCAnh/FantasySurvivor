@@ -10,16 +10,18 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
+[Serializable]
+public class StatUI
+{
+	public Button button;
+	public TextMeshProUGUI txtCurrent, txtNext, txtCoin;
+
+	[HideInInspector] public int currentLevel = 0, maxLevel = 10, price = 0;
+}
+
 public partial class UpdateBaseStatUI : View<GameApp>
 {
-	[Serializable]
-	public class StatUI
-	{
-		public Button button;
-		public TextMeshProUGUI txtCurrent, txtNext, txtCoin;
-
-		[HideInInspector] public int currentLevel = 0, maxLevel = 10, price = 0;
-	}
+	
 
 	public StatUI statAttackDamage, statAttackRange, statAttackSpeed, statHealth;
 
@@ -35,6 +37,13 @@ public partial class UpdateBaseStatUI : View<GameApp>
 		statAttackRange.button.onClick.AddListener(OnClickBtnAttackRange);
 		statAttackSpeed.button.onClick.AddListener(OnClickBtnAttackSpeed);
 		statHealth.button.onClick.AddListener(OnClickBtnHealth);
+		
+		var maxLevel = app.configs.dataLevelTowerOutGame.GetLengthConfig();
+		statAttackDamage.maxLevel = maxLevel;
+		statAttackRange.maxLevel = maxLevel;
+		statAttackSpeed.maxLevel = maxLevel;
+		statHealth.maxLevel = maxLevel;
+		
 		AddEventChangeStat();
 	}
 
@@ -70,16 +79,17 @@ public partial class UpdateBaseStatUI : View<GameApp>
 		app.models.WriteModel<DataPlayerModel>();
 	}
 
-	private void UpdateStatUI(StatUI statUI, DataLevelConfig dataCurrent,  int currentLevel)
+	private void UpdateStatUI(StatUI statUI, DataLevelTowerConfig dataCurrent,  int currentLevel, TypeStatTower type)
 	{
 		statUI.currentLevel = currentLevel;
 		if(statUI.currentLevel < statUI.maxLevel)
 		{
-			var dataNext = app.configs.dataUpBaseStatTower.GetConfig(currentLevel + 1);
+			var dataNext = app.configs.dataLevelTowerOutGame.GetConfigStat(currentLevel + 1, type);
 			statUI.txtCurrent.text = $"{dataCurrent.value}";
-			statUI.txtCoin.text = $"{GameConst.iconCoin} {dataCurrent.price}";
-			statUI.txtNext.text = $"{dataNext.dataAttackDamage.value}";
-			statUI.price = dataCurrent.price;
+			statUI.txtCoin.text = $"{GameConst.iconCoin} {dataNext.price}";
+			statUI.txtNext.text = $"{dataNext.value}";
+			statUI.price = dataNext.price;
+			CheckInteractableBtnStat(statUI);
 		}
 		else
 		{
@@ -94,36 +104,36 @@ public partial class UpdateBaseStatUI : View<GameApp>
 		AddDataBinding("fieldPlayerTower-levelAdValue", txtLabelAd, (control, e) =>
 			{
 				var levelStat = dataPlayer.levelAd;
-				var dataCurrent = app.configs.dataUpBaseStatTower.GetConfig(levelStat).dataAttackDamage;
+				var dataCurrent = app.configs.dataLevelTowerOutGame.GetConfigStat(levelStat, TypeStatTower.AttackDamage);
 				control.text = $"{GameConst.iconAd} {dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).attackDamage}";
-				UpdateStatUI(statAttackDamage, dataCurrent, levelStat);
+				UpdateStatUI(statAttackDamage, dataCurrent, levelStat, TypeStatTower.AttackDamage);
 			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.levelAd), dataPlayer)
 		);
 
 		AddDataBinding("fieldPlayerTower-levelArValue", txtLabelAr, (control, e) =>
 			{
 				var levelStat = dataPlayer.levelAr;
-				var dataCurrent = app.configs.dataUpBaseStatTower.GetConfig(levelStat).dataAttackRange;
+				var dataCurrent = app.configs.dataLevelTowerOutGame.GetConfigStat(levelStat, TypeStatTower.AttackRange);
 				control.text = $"{GameConst.iconAr} {dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).attackRange}";
-				UpdateStatUI(statAttackRange, dataCurrent, levelStat);
+				UpdateStatUI(statAttackRange, dataCurrent, levelStat, TypeStatTower.AttackRange);
 			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.levelAr), dataPlayer)
 		);
 		
 		AddDataBinding("fieldPlayerTower-LevelAsValue", txtLabelAs, (control, e) =>
 			{
 				var levelStat = dataPlayer.levelAs;
-				var dataCurrent = app.configs.dataUpBaseStatTower.GetConfig(levelStat).dataAttackSpeed;
+				var dataCurrent = app.configs.dataLevelTowerOutGame.GetConfigStat(levelStat, TypeStatTower.AttackSpeed);
 				control.text = $"{GameConst.iconAs} {dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).attackSpeed}";
-				UpdateStatUI(statAttackSpeed, dataCurrent, levelStat);
+				UpdateStatUI(statAttackSpeed, dataCurrent, levelStat, TypeStatTower.AttackSpeed);
 			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.levelAs), dataPlayer)
 		);
 		
 		AddDataBinding("fieldPlayerTower-levelHealthValue", txtLabelHealth, (control, e) =>
 			{
 				var levelStat = dataPlayer.levelHealth;
-				var dataCurrent = app.configs.dataUpBaseStatTower.GetConfig(levelStat).dataHealth;
+				var dataCurrent = app.configs.dataLevelTowerOutGame.GetConfigStat(levelStat, TypeStatTower.Health);
 				control.text = $"{GameConst.iconHealth} {dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).health}";
-				UpdateStatUI(statHealth, dataCurrent, levelStat);
+				UpdateStatUI(statHealth, dataCurrent, levelStat, TypeStatTower.Health);
 			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.levelHealth), dataPlayer)
 		);
 		

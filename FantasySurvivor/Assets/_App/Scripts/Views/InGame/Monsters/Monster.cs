@@ -160,6 +160,7 @@ public class Monster : ObjectRPG
 	{
 		if(!isAlive) return;
 		model.currentHealthPoint -= damage;
+		Singleton<PoolTextPopup>.instance.GetObjectFromPool(transform.position, damage.ToString(), TextPopupType.TowerDamage);
 		if(!isAlive) Die();
 	}
 

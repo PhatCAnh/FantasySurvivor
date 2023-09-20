@@ -16,15 +16,15 @@ namespace FantasySurvivor
 
 		public TowerModel(int hp, float attackSpeed, int attackDamage, float attackRange) : base(dataChangedEvent)
 		{
-			currentHealthPoint = hp;
 			maxHealthPoint = hp;
 			this.attackSpeed = attackSpeed;
 			this.attackDamage = attackDamage;
 			this.attackRange = attackRange;
-
-			level = 1;
-			exp = 0;
-			maxExp = app.configs.dataUpStatTowerInGame.GetConfig(1).maxExp;
+			
+			levelAd = 0;
+			levelAr = 0;
+			levelAs = 0;
+			levelHealth = 0;
 		}
 
 		private int _currentHealthPoint;
@@ -32,9 +32,6 @@ namespace FantasySurvivor
 		private int _attackDamage;
 		private float _attackSpeed;
 		private float _attackRange;
-		private int _exp;
-		private int _maxExp;
-		private int _level;
 		
 		public int currentHealthPoint
 		{
@@ -51,6 +48,7 @@ namespace FantasySurvivor
 			get => _maxHealthPoint;
 			set {
 				if(maxHealthPoint == value) return;
+				currentHealthPoint += (value - maxHealthPoint);
 				_maxHealthPoint = value;
 				RaiseDataChanged(nameof(maxHealthPoint));
 			}
@@ -62,7 +60,6 @@ namespace FantasySurvivor
 			set {
 				if(attackDamage == value) return;
 				_attackDamage = value;
-				RaiseDataChanged(nameof(attackDamage));
 			}
 		}
 		
@@ -86,46 +83,48 @@ namespace FantasySurvivor
 			}
 		}
 		
-		public int exp
+		private int _levelAd;
+		private int _levelAr;
+		private int _levelAs;
+		private int _levelHealth;
+
+		public int levelAd
 		{
-			get => _exp;
+			get => _levelAd;
 			set {
-				if(exp.Equals(value)) return;
-				_exp = value;
-				if(_exp >= maxExp)
-				{
-					maxExp = app.configs.dataUpStatTowerInGame.GetConfig(level).maxExp;
-					_exp = 0;
-					level++;
-				}
-				RaiseDataChanged(nameof(exp));
-			}
-		}
-		
-		public int maxExp
-		{
-			get => _maxExp;
-			set {
-				if(maxExp.Equals(value)) return;
-				_maxExp = value;
-				RaiseDataChanged(nameof(maxExp));
-			}
-		}
-		
-		public int level
-		{
-			get => _level;
-			set {
-				if(level.Equals(value)) return;
-				_level = value;
-				RaiseDataChanged(nameof(level));
+				if(levelAd == value) return;
+				_levelAd = value;
+				RaiseDataChanged(nameof(levelAd));
 			}
 		}
 
-		public void AddMaxHealth(int value)
+		public int levelAr
 		{
-			maxHealthPoint += value;
-			currentHealthPoint += value;
+			get => _levelAr;
+			set {
+				if(levelAr == value) return;
+				_levelAr = value;
+				RaiseDataChanged(nameof(levelAr));
+			}
+		}
+
+		public int levelAs
+		{
+			get => _levelAs;
+			set {
+				if(levelAs == value) return;
+				_levelAs = value;
+				RaiseDataChanged(nameof(levelAs));
+			}
+		}
+		public int levelHealth
+		{
+			get => _levelHealth;
+			set {
+				if(levelHealth == value) return;
+				_levelHealth = value;
+				RaiseDataChanged(nameof(levelHealth));
+			}
 		}
 	}
 }

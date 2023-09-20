@@ -27,9 +27,8 @@ public enum TowerType
 
 public enum TextPopupType
 {
-    GoldCoin,
-    Damage,
-    DamageCritical,
+    MonsterDamage,
+    TowerDamage,
 }
 
 public enum TypeStatTower

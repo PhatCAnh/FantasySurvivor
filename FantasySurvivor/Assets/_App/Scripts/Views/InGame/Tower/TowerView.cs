@@ -92,15 +92,11 @@ public class TowerView : ObjectRPG
 		_stateMachine.currentState.PhysicUpdate(Time.fixedTime);
 	}
 
-	public void AddExp(int value)
-	{
-		model.exp += value;
-	}
-
 	public void TakeDamage(int damage)
 	{
 		if(!isAlive) return;
 		model.currentHealthPoint -= damage;
+		Singleton<PoolTextPopup>.instance.GetObjectFromPool(transform.position, damage.ToString(), TextPopupType.MonsterDamage);
 		if(!isAlive) Die();
 	}
 	

@@ -38,12 +38,12 @@ public class TextPopup : MonoBehaviour
 
 		switch (type)
 		{
-			case TextPopupType.GoldCoin:
-				textValue = String.Format($"+ {value} <sprite index=0>");
-				_textMesh.color = new Color(1, 0.8470589f, 0.08627451f);
+			case TextPopupType.TowerDamage:
+				textValue = value;
+				_textMesh.color = Color.white;
 				_textMesh.fontSize = 5;
 				break;
-			case TextPopupType.Damage:
+			case TextPopupType.MonsterDamage:
 				textValue = value;
 				_textMesh.color = new Color(0.8207547f, 0, 0.007291546f);
 				_textMesh.fontSize = 7.5f;

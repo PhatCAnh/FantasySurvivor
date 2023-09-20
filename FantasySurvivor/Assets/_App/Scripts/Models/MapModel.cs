@@ -11,25 +11,16 @@ namespace FantasySurvivor
 		
 		public MapModel() : base(dataChangedEvent)
 		{
-			coinInGame = 100;
+			expInGame = 100;
 			timeInGame = 0;
+			levelInGame = 1;
 		}
-		
-		
-
-		private int _coinInGame;
 
 		private float _timeInGame;
 
-		public int coinInGame
-		{
-			get => _coinInGame;
-			set {
-				if(coinInGame == value) return;
-				_coinInGame = value;
-				RaiseDataChanged(nameof(coinInGame));
-			}
-		}
+		private int _expInGame;
+
+		private int _levelInGame;
 		
 		public float timeInGame
 		{
@@ -38,6 +29,26 @@ namespace FantasySurvivor
 				if(timeInGame.Equals(value)) return;
 				_timeInGame = value;
 				RaiseDataChanged(nameof(timeInGame));
+			}
+		}
+
+		public int expInGame
+		{
+			get => _expInGame;
+			set {
+				if(expInGame == value) return;
+				_expInGame = value;
+				RaiseDataChanged(nameof(expInGame));
+			}
+		}
+		
+		public int levelInGame
+		{
+			get => _levelInGame;
+			set {
+				if(levelInGame == value) return;
+				_levelInGame = value;
+				RaiseDataChanged(nameof(levelInGame));
 			}
 		}
 	}

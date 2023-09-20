@@ -28,7 +28,7 @@ public class MapView : View<GameApp>
 
 	[SerializeField] private Vector2 _size;
 
-	private int _currentLevel = 1;
+	private int _coinOfLevel = 0;
 
 	private readonly List<WaveData> _listWaveData = new List<WaveData>();
 	private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
@@ -36,7 +36,7 @@ public class MapView : View<GameApp>
 	public void Init()
 	{
 		model = new();
-		StartLevel(_currentLevel);
+		StartLevel(model.levelInGame);
 	}
 
 	private void StartLevel(int level)
@@ -57,6 +57,7 @@ public class MapView : View<GameApp>
 			waveData.coolDownTime.Restart(wave.timeStart);
 			_listWaveData.Add(waveData);
 		}
+		_coinOfLevel = dataChapter.coin;
 	}
 
 	private void Update()
@@ -74,8 +75,9 @@ public class MapView : View<GameApp>
 					_listWaveData.Remove(wave);
 					if(_listWaveData.Count == 0)
 					{
-						_currentLevel++;
-						StartLevel(_currentLevel);
+						app.models.dataPlayerModel.coin += _coinOfLevel;
+						model.levelInGame++;
+						StartLevel(model.levelInGame);
 					}
 				}
 				continue;

@@ -11,10 +11,8 @@ namespace DataConfig
 		public int adMonster { get; private set; }
 		public int healthMonster { get; private set; }
 		public int expMonster { get; private set; }
-		public int coinMonster { get; private set; }
 
-
-		public WaveConfig(string idMonster, int timeStart, int stepTime, int number, int adMonster, int healthMonster, int expMonster, int coinMonster)
+		public WaveConfig(string idMonster, int timeStart, int stepTime, int number, int adMonster, int healthMonster, int expMonster)
 		{
 			this.idMonster = idMonster;
 			this.timeStart = timeStart;
@@ -23,7 +21,6 @@ namespace DataConfig
 			this.adMonster = adMonster;
 			this.healthMonster = healthMonster;
 			this.expMonster = expMonster;
-			this.coinMonster = coinMonster;
 		}
 	}
 	
@@ -31,6 +28,8 @@ namespace DataConfig
 	{
 		public int level { get; private set; }
 		public WaveConfig[] waves { get; private set; }
+		
+		public int coin { get; private set; }
 
 		public string GetId()
 		{
@@ -51,7 +50,7 @@ namespace DataConfig
 			var atkDamage = reader.ReadString().Split(lineDelimiter);
 			var healthPoint = reader.ReadString().Split(lineDelimiter);
 			var exp = reader.ReadString().Split(lineDelimiter);
-			var gold = reader.ReadInt();
+			coin = reader.ReadInt();
 
 			waves = new WaveConfig[idMonster.Length];
 
@@ -64,8 +63,7 @@ namespace DataConfig
 					int.Parse(number[i]),
 					int.Parse(atkDamage[i]),
 					int.Parse(healthPoint[i]),
-					int.Parse(exp[i]),
-					gold
+					int.Parse(exp[i])
 				);
 
 				waves[i] = wave;

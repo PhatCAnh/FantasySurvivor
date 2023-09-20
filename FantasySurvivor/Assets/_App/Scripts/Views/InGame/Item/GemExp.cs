@@ -13,7 +13,7 @@ public class GemExp : View<GameApp>
 
     private bool _isTouched = false;
 
-    private TowerView towerView => Singleton<GameController>.instance.tower;
+    private GameController gameController => Singleton<GameController>.instance;
 
     public void Init(int valueExp)
     {
@@ -25,17 +25,17 @@ public class GemExp : View<GameApp>
         if(_isTouched) return;
         _isTouched = true;
         
-        var endPoint = 1.5f * transform.position + (transform.position - towerView.transform.position) .normalized;
+        var endPoint = 1.5f * transform.position + (transform.position - gameController.tower.transform.position) .normalized;
 
         _sequence = DOTween.Sequence();
 
         _sequence
             .Append(transform.DOLocalMove(endPoint, 0.5f))
-            .Append(DOTween.To(() => transform.position, x => transform.position = x, towerView.transform.position, 0.25f)
+            .Append(DOTween.To(() => transform.position, x => transform.position = x, gameController.tower.transform.position, 0.25f)
                 .SetEase(Ease.Linear)
                 .OnComplete(() =>
                 {
-                    towerView.model.exp += _valueExp;
+                    gameController.map.model.expInGame += _valueExp;
                     Destroy(gameObject);
                 }));
     }

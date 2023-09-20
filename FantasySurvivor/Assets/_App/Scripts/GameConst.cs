@@ -23,6 +23,7 @@ public static class GameConst
     public static string iconAr = "<sprite index=4>";
     public static string iconAs = "<sprite index=3>";
     public static string iconHealth = "<sprite index=5>";
+    public static string iconExp = "<sprite index=6>";
     
     
 

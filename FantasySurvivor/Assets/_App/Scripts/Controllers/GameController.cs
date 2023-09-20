@@ -138,8 +138,7 @@ public class GameController : Controller<GameApp>
 		var position = mons.transform.position;
 		Instantiate(gemExp, position, quaternion.identity);
 		
-		map.model.coinInGame += mons.model.coin;
-		Singleton<PoolTextPopup>.instance.GetObjectFromPool(position, mons.model.coin.ToString(), TextPopupType.GoldCoin);
+		//Singleton<PoolTextPopup>.instance.GetObjectFromPool(position, mons.model.coin.ToString(), TextPopupType.GoldCoin);
 		listMonster.Remove(mons);
 		mons.wave.monsterInWave.Remove(mons);
 
@@ -212,24 +211,24 @@ public class GameController : Controller<GameApp>
 	{
 		float value = 0;
 		float baseValue = 0;
-		var dataLevel = app.configs.dataUpBaseStatTower.GetConfig(level);
+		var dataLevel = app.configs.dataLevelTowerOutGame.GetConfig(level);
 		var dataStatBase = app.configs.dataStatTower.GetConfig(TowerType.Basic);
 		switch (type)
 		{
 			case TypeStatTower.AttackDamage:
-				value = dataLevel.dataAttackDamage.value;
+				value = dataLevel.attackDamage;
 				baseValue = dataStatBase.attackDamage;
 				break;
 			case TypeStatTower.AttackRange:
-				value = dataLevel.dataAttackRange.value;
+				value = dataLevel.attackRange;
 				baseValue = dataStatBase.attackRange;
 				break;
 			case TypeStatTower.AttackSpeed:
-				value = dataLevel.dataAttackSpeed.value;
+				value = dataLevel.attackSpeed;
 				baseValue = dataStatBase.attackSpeed;
 				break;
 			case TypeStatTower.Health:
-				value = dataLevel.dataHealth.value;
+				value = dataLevel.health;
 				baseValue = dataStatBase.health;
 				break;
 		}
