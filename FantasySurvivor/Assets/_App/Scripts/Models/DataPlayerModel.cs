@@ -26,6 +26,7 @@ namespace FantasySurvivor
 			levelAr = 0;
 			levelAs = 0;
 			levelHealth = 0;
+			_firstPlay = false;
 			app.models.WriteModel<DataPlayerModel>();
 		}
 
@@ -34,6 +35,7 @@ namespace FantasySurvivor
 		[JsonProperty] private int _levelAr;
 		[JsonProperty] private int _levelAs;
 		[JsonProperty] private int _levelHealth;
+		[JsonProperty] private bool _firstPlay;
 
 		public int coin
 		{
@@ -81,6 +83,15 @@ namespace FantasySurvivor
 				if(levelHealth == value) return;
 				_levelHealth = value;
 				RaiseDataChanged(nameof(levelHealth));
+			}
+		}
+		
+		public bool firstPlay
+		{
+			get => _firstPlay;
+			set {
+				if(firstPlay == value) return;
+				_firstPlay = value;
 			}
 		}
 	}

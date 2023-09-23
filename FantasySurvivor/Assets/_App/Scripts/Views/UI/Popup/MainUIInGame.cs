@@ -20,6 +20,8 @@ namespace Popup
 
 		[Required, SerializeField] private RectTransform _interactContainer;
 		
+		[Required, SerializeField] private Image _imgArrow, _imgStat, _imgElemental;
+		
 		[Required, SerializeField] private Toggle _toggleStat, _toggleElemental, _toggleChangeStateInteract;
 
 		[SerializeField] private TextMeshProUGUI _txtExpInMap, _txtLevel, _txtTimeMinutes, _txtTimeSeconds, _txtMonsterKilled;
@@ -87,14 +89,14 @@ namespace Popup
 				Camera.main.transform.DOLocalMove(Vector3.back, 1f);
 				DOTween.To(() => Camera.main.orthographicSize, value => Camera.main.orthographicSize = value, 25, 1f);
 				_interactContainer.DOLocalMove(new Vector3(0, -770), 1f);
-				_toggleChangeStateInteract.GetComponent<Image>().sprite = _spriteArrowUp;
+				_imgArrow.sprite = _spriteArrowUp;
 			}
 			else
 			{
 				Camera.main.transform.DOLocalMove(new Vector3(0, -10, -1), 1f);
 				DOTween.To(() => Camera.main.orthographicSize, value => Camera.main.orthographicSize = value, 30, 1f);
 				_interactContainer.DOLocalMove(new Vector3(0, -0), 1f);
-				_toggleChangeStateInteract.GetComponent<Image>().sprite = _spriteArrowDown;
+				_imgArrow.sprite = _spriteArrowDown;
 			}
 		}
 		
@@ -107,19 +109,13 @@ namespace Popup
 		private void OnClickToggleStat(bool value)
 		{
 			_toggleChangeStateInteract.isOn = false;
-			ChangeColorToggle(_toggleStat, value);
+			_imgStat.color = value ? new Color(1, 0.8313726f, 0.4196079f) : Color.white;
 		}
 
 		private void OnClickToggleElemental(bool value)
 		{
 			_toggleChangeStateInteract.isOn = false;
-			ChangeColorToggle(_toggleElemental, value);
+			_imgElemental.color = value ? new Color(1, 0.8313726f, 0.4196079f) : Color.white;
 		}
-		
-		private void ChangeColorToggle(Toggle toggle, bool value)
-		{
-			toggle.GetComponent<Image>().color = value ? new Color(1, 0.8313726f, 0.4196079f) : Color.white;
-		}
-		
 	}
 }

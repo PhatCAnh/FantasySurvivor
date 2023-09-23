@@ -262,7 +262,17 @@ public class GameController : Controller<GameApp>
 
 	private void LoadMap(int chapter)
 	{
-		map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
+		if(app.models.dataPlayerModel.firstPlay)
+		{
+			map = app.resourceManager.ShowPopup(PopupType.MainInTutorial).GetComponent<MapView>();
+		}
+		else
+		{
+			map = app.resourceManager.ShowPopup(PopupType.MainInTutorial).GetComponent<MapView>();
+			app.models.dataPlayerModel.firstPlay = true;
+			app.models.WriteModel<DataPlayerModel>();
+		}
+		
 		map.Init();
 		Instantiate(app.resourceManager.GetMap((MapType) chapter));
 		tower = SpawnTower();

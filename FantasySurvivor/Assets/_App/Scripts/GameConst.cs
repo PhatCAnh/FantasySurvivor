@@ -26,10 +26,6 @@ public static class GameConst
     public static string iconAs = "<sprite index=3>";
     public static string iconHealth = "<sprite index=5>";
     public static string iconExp = "<sprite index=6>";
-    
-    
-    
-    
 
     public static string GetNameWithVersion(string str)
     {

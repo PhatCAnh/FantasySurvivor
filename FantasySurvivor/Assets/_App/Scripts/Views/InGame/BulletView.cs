@@ -18,6 +18,9 @@ public class BulletView : MonoBehaviour
 		_origin = origin;
 		var spawnPos = _origin.firePoint;
 		transform.SetPositionAndRotation(spawnPos.position, spawnPos.rotation);
+
+		var moveSpeed = Mathf.Clamp(15 * origin.model.attackSpeed / 2, 15, 100);
+		
 		rigidbody2d.velocity = spawnPos.up * 15 * origin.model.attackSpeed / 2;
 		Destroy(gameObject, 3f);
 	}
