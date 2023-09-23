@@ -73,9 +73,11 @@ public class Monster : ObjectRPG
 
 	public Action<Monster> onMonsterDie;
 
-	private float _sizeAttack;
+	protected float sizeAttack;
 
-	private Cooldown _cdAttack = new Cooldown();
+	protected Cooldown cdAttack = new Cooldown();
+
+	protected Vector3 moveTarget;
 	
 	
 
@@ -93,7 +95,8 @@ public class Monster : ObjectRPG
 			stat.attackSpeed.BaseValue,
 			wave.expMonster);
 		this.wave = wave;
-		_sizeAttack = stat.attackRange.BaseValue != 0? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
+		sizeAttack = stat.attackRange.BaseValue != 0? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
+		moveTarget = target.transform.position;
 	}
 
 	protected override void OnViewInit()
@@ -117,7 +120,7 @@ public class Monster : ObjectRPG
 	{
 		if(gameController.isStop) return;
 		var time = Time.deltaTime;
-		_cdAttack.Update(time);
+		cdAttack.Update(time);
 		_stateMachine.currentState.LogicUpdate(time);
 		HandlePhysicUpdate();
 	}
@@ -130,16 +133,16 @@ public class Monster : ObjectRPG
 
 	#endregion
 
-	private void HandlePhysicUpdate()
+	protected virtual void HandlePhysicUpdate()
 	{
-		moveDirection = target.transform.position - transform.position;
+		moveDirection = moveTarget - transform.position;
 
-		if(moveDirection.magnitude < _sizeAttack)
+		if(moveDirection.magnitude < sizeAttack)
 		{
-			if(_cdAttack.isFinished)
+			if(cdAttack.isFinished)
 			{
 				AttackState();
-				_cdAttack.Restart(model.attackSpeed);
+				cdAttack.Restart(model.attackSpeed);
 			}
 			//IdleState();
 		}

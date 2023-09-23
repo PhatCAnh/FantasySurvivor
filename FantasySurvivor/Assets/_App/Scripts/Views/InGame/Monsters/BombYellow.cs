@@ -15,10 +15,9 @@ public class BombYellow : Monster
 		Die(true);
 	}
 
-	protected override void OnDestroy()
+	protected override void Die(bool selfDie = false)
 	{
+		base.Die(selfDie);
 		Instantiate(_deadEffect, transform.position, quaternion.identity);
-		
-		base.OnDestroy();
 	}
 }

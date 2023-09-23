@@ -25,6 +25,8 @@ public class GemExp : View<GameApp>
     
     private void OnMouseEnter()
     {
+        if(gameController.isStop) return;
+        
         if(isTouched) return;
         isTouched = true;
         

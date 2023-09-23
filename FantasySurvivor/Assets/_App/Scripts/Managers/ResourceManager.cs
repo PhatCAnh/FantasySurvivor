@@ -55,6 +55,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[Required, SerializeField] private GameObject _blueGhost;
 	
 	[Required, SerializeField] private GameObject _yellowBomb;
+	
+	[Required, SerializeField] private GameObject _purpleDevil;
 
 	private Dictionary<string, GameObject> _typeMonsterDic;
 
@@ -106,6 +108,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{"M2", _purpleZombie},
 			{"M3", _blueGhost},
 			{"M4", _yellowBomb},
+			{"M5", _purpleDevil},
 		};
 
 		_typeItemReward = new Dictionary<TypeItemReward, ItemReward>()
