@@ -149,7 +149,7 @@ public class GameController : Controller<GameApp>
 
 		var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
 		
-		monsterIns.transform.position = RandomPositionSpawnMonster();
+		monsterIns.transform.position = RandomPositionSpawnMonster(monsterIns.justSpawnVertical);
 		
 		monsterIns.Init(monsterStat, wave);
 		
@@ -193,12 +193,12 @@ public class GameController : Controller<GameApp>
 		LoseGame();
 	}
 
-	private Vector2 RandomPositionSpawnMonster()
+	private Vector2 RandomPositionSpawnMonster(bool justVertical = false)
 	{
 		int posX;
 		int posY;
 		int randomTopDown = Random.Range(0, 2);
-		if(randomTopDown == 0)
+		if(randomTopDown == 0 || justVertical)
 		{
 			posX = Random.Range(-21, 21);
 			posY = (Random.Range(0, 2) * 2 - 1) * 20;

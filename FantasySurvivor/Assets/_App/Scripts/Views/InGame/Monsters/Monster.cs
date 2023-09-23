@@ -19,6 +19,8 @@ public class Monster : ObjectRPG
 
 	public Transform firePoint;
 
+	public bool justSpawnVertical = false;
+
 	#region Properties
 
 	private Vector2 _direction = Vector2.zero;
