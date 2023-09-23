@@ -72,6 +72,11 @@ public class TowerView : ObjectRPG
 		AddDataBinding("fieldTower-attackRangeValue", skinAttackRange, (control, e) =>
 			{
 				control.localScale = model.attackRange / 10 * Vector3.one;
+				if(model.attackRange > 10)
+				{
+					var value = model.attackRange % 10;
+					Camera.main.orthographicSize += value * 0.2f;
+				}
 			}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.attackRange), model)
 		);
 		

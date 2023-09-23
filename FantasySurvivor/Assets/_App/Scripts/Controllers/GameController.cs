@@ -262,14 +262,14 @@ public class GameController : Controller<GameApp>
 
 	private void LoadMap(int chapter)
 	{
-		if(app.models.dataPlayerModel.firstPlay)
+		if(!app.models.dataPlayerModel.firstPlay)
 		{
-			map = app.resourceManager.ShowPopup(PopupType.MainInTutorial).GetComponent<MapView>();
+			map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
 		}
 		else
 		{
 			map = app.resourceManager.ShowPopup(PopupType.MainInTutorial).GetComponent<MapView>();
-			app.models.dataPlayerModel.firstPlay = true;
+			app.models.dataPlayerModel.firstPlay = false;
 			app.models.WriteModel<DataPlayerModel>();
 		}
 		

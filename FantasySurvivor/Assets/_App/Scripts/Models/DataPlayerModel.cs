@@ -26,7 +26,7 @@ namespace FantasySurvivor
 			levelAr = 0;
 			levelAs = 0;
 			levelHealth = 0;
-			_firstPlay = false;
+			_firstPlay = true;
 			app.models.WriteModel<DataPlayerModel>();
 		}
 
