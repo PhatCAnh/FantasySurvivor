@@ -1,4 +1,6 @@
+using System;
 using _App.Scripts.Interface;
+using _App.Scripts.Pool;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using ArbanFramework.StateMachine;
@@ -26,7 +28,7 @@ public class Monster : ObjectRPG
 	public MonsterStat stat { get; protected set; }
 
 	public Vector2 idleDirection { get; private set; } = Vector2.down;
-
+	
 	public float speedMul { get; set; } = 1;
 
 	public Vector2 moveDirection
@@ -69,9 +71,13 @@ public class Monster : ObjectRPG
 	
 	public MapView.WaveData wave { get; private set; }
 
+	public Action<Monster> onMonsterDie;
+
 	private float _sizeAttack;
 
 	private Cooldown _cdAttack = new Cooldown();
+	
+	
 
 	#endregion
 
@@ -164,9 +170,9 @@ public class Monster : ObjectRPG
 		if(!isAlive) Die();
 	}
 
-	private void Die()
+	protected virtual void Die(bool selfDie = false)
 	{
-		gameController.MonsterDie(this);
+		gameController.MonsterDie(this, selfDie);
 	}
 
 	private void OnDrawGizmosSelected()

@@ -24,6 +24,8 @@ public class MapView : View<GameApp>
 		public List<Monster> monsterInWave = new List<Monster>();
 	}
 
+	public Dictionary<TypeItemReward, int> dictionaryReward = new Dictionary<TypeItemReward, int>();
+
 	public MapModel model { get; private set; }
 
 	[SerializeField] private Vector2 _size;
@@ -75,7 +77,7 @@ public class MapView : View<GameApp>
 					_listWaveData.Remove(wave);
 					if(_listWaveData.Count == 0)
 					{
-						app.models.dataPlayerModel.coin += _coinOfLevel;
+						gameController.AddReward(dictionaryReward, TypeItemReward.Coin, _coinOfLevel);
 						model.levelInGame++;
 						StartLevel(model.levelInGame);
 					}

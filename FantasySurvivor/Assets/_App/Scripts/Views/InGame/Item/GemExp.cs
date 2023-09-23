@@ -1,8 +1,10 @@
+using _App.Scripts.Pool;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
 using Popup;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GemExp : View<GameApp>
 {
@@ -11,7 +13,8 @@ public class GemExp : View<GameApp>
 
     private Sequence _sequence;
 
-    private bool _isTouched = false;
+    [FormerlySerializedAs("_isTouched")]
+    public bool isTouched = false;
 
     private GameController gameController => Singleton<GameController>.instance;
 
@@ -22,8 +25,8 @@ public class GemExp : View<GameApp>
     
     private void OnMouseEnter()
     {
-        if(_isTouched) return;
-        _isTouched = true;
+        if(isTouched) return;
+        isTouched = true;
         
         var endPoint = 1.5f * transform.position + (transform.position - gameController.tower.transform.position) .normalized;
 
@@ -36,7 +39,7 @@ public class GemExp : View<GameApp>
                 .OnComplete(() =>
                 {
                     gameController.map.model.expInGame += _valueExp;
-                    Destroy(gameObject);
+                    Singleton<PoolGemExp>.instance.RemoveObjectToPool(this);
                 }));
     }
 

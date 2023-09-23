@@ -48,9 +48,11 @@ namespace FantasySurvivor
 			get => _maxHealthPoint;
 			set {
 				if(maxHealthPoint == value) return;
-				currentHealthPoint += (value - maxHealthPoint);
+				var currentMaxHp = _maxHealthPoint;
 				_maxHealthPoint = value;
 				RaiseDataChanged(nameof(maxHealthPoint));
+				
+				currentHealthPoint += (value - currentMaxHp);
 			}
 		}
 		

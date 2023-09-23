@@ -45,29 +45,29 @@ public class UpdateBaseStatUiInGame : View<GameApp>
 	{
 		AddDataBinding("fieldTower-levelAdValue", _txtAttackDamage, (control, e) =>
 			{
-				ChangeStatEvent(TypeStatTower.AttackDamage, towerModel.levelAd, towerModel.attackDamage, _attackDamage, GameConst.iconAd, control);
-
+				var value = ChangeStatEvent(TypeStatTower.AttackDamage, towerModel.levelAd, towerModel.attackDamage, _attackDamage, GameConst.iconAd, control);
+				towerModel.attackDamage += Mathf.RoundToInt(value);
 			}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.levelAd), towerModel)
 		);
 
 		AddDataBinding("fieldTower-levelArValue", _txtAttackRange, (control, e) =>
 			{
-				ChangeStatEvent(TypeStatTower.AttackRange, towerModel.levelAr, towerModel.attackRange, _attackRange, GameConst.iconAr, control);
+				towerModel.attackRange += ChangeStatEvent(TypeStatTower.AttackRange, towerModel.levelAr, towerModel.attackRange, _attackRange, GameConst.iconAr, control);
 				
 			}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.levelAr), towerModel)
 		);
 
 		AddDataBinding("fieldTower-levelAsValue", _txtAttackSpeed, (control, e) =>
 			{
-				ChangeStatEvent(TypeStatTower.AttackSpeed, towerModel.levelAs, towerModel.attackSpeed, _attackSpeed, GameConst.iconAs, control);
+				towerModel.attackSpeed += ChangeStatEvent(TypeStatTower.AttackSpeed, towerModel.levelAs, towerModel.attackSpeed, _attackSpeed, GameConst.iconAs, control);
 
 			}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.levelAs), towerModel)
 		);
 
 		AddDataBinding("fieldTower-levelHealthValue", _txtHealth, (control, e) =>
 			{
-				ChangeStatEvent(TypeStatTower.Health, towerModel.levelHealth, towerModel.maxHealthPoint, _health, GameConst.iconHealth, control);
-				
+				var value = ChangeStatEvent(TypeStatTower.Health, towerModel.levelHealth, towerModel.maxHealthPoint, _health, GameConst.iconHealth, control);
+				towerModel.maxHealthPoint += Mathf.RoundToInt(value);
 			}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.levelHealth), towerModel)
 		);
 
@@ -82,12 +82,12 @@ public class UpdateBaseStatUiInGame : View<GameApp>
 		);
 	}
 
-	private void ChangeStatEvent(TypeStatTower type, int level, float stat, StatUI statUI, string icon, TextMeshProUGUI label)
+	private float ChangeStatEvent(TypeStatTower type, int level, float stat, StatUI statUI, string icon, TextMeshProUGUI label)
 	{
 		var dataCurrent = app.configs.dataLevelTowerInGame.GetConfigStat(level, type);
 		var dataNext = app.configs.dataLevelTowerInGame.GetConfigStat(level + 1, type);
 
-		stat += Mathf.RoundToInt(dataCurrent.value);
+		stat += dataCurrent.value;
 
 		var value = stat;
 				
@@ -98,6 +98,7 @@ public class UpdateBaseStatUiInGame : View<GameApp>
 
 		statUI.price = dataNext.price;
 		CheckInteractableBtnStat(statUI, mapModel.expInGame);
+		return dataCurrent.value;
 	}
 
 	private void OnClickBtnUpAttackDamage()

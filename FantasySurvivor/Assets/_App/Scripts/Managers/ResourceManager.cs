@@ -14,119 +14,135 @@ using UnityEngine.UI;
 
 public class ResourceManager : UIManagerBase<PopupType>
 {
-    //[SerializeField] GameObject keyPrefab;
-    
-    [Header("Object prefabs")]
+	//[SerializeField] GameObject keyPrefab;
 
-    [Required, SerializeField] private GameObject _healthBarPrefab;
-    
-    [Required, SerializeField] private GameObject _towerPrefab;
-    
-    [Required, SerializeField] private GameObject _gemExpPrefab;
-    
-    private Dictionary<ItemType, GameObject> _itemDic;
-    
-    
-    [Header("UI prefabs")]
-    
-    [Required, SerializeField] private GameObject _mainUIInGame;
-    
-    [Required, SerializeField] private GameObject _mainUI;
-    
-    [Required, SerializeField] private GameObject _pausePopup;
-    
-    [Required, SerializeField] private GameObject _choiceMapPopup;
-    
-    [Required, SerializeField] private GameObject _loseGamePopup;
-    
-    
-    [Header("Map prefabs")]
-    
-    [Required, SerializeField] private GameObject _forestMap;
-    
-    [Required, SerializeField] private GameObject _oceanMap;
+	[Header("Object prefabs")]
+	[Required, SerializeField] private GameObject _healthBarPrefab;
 
-    private Dictionary<MapType, GameObject> _mapDic;
-    
-    [Header("Monster prefabs")]
-    
-    [Required, SerializeField] private GameObject _blueZombie;
-    
-    [Required, SerializeField] private GameObject _purpleZombie;
-    
-    [Required, SerializeField] private GameObject _blueGhost;
-    
-    private Dictionary<string, GameObject> _typeMonsterDic;
+	[Required, SerializeField] private GameObject _towerPrefab;
 
-    private void Awake()
-    {
-        Singleton<ResourceManager>.Set(this);
-        Init();
-    }
+	[Required, SerializeField] private GameObject _gemExpPrefab;
 
-    private void OnDestroy()
-    {
-        Singleton<ResourceManager>.Unset(this);
-    }
+	private Dictionary<ItemType, GameObject> _itemDic;
 
-    public void Init()
-    {
-        InitDic();
-        RegisterPopup(PopupType.MainUI, _mainUI);
-        RegisterPopup(PopupType.MainInGame, _mainUIInGame);
-        RegisterPopup(PopupType.ChoiceMap, _choiceMapPopup);
-        RegisterPopup(PopupType.LoseGame, _loseGamePopup);
-        RegisterPopup(PopupType.Pause, _pausePopup);
-    }
 
-    private void InitDic()
-    {
-        _itemDic = new Dictionary<ItemType, GameObject>()
-        {
-            {ItemType.HealthBar, _healthBarPrefab },
-            {ItemType.Tower, _towerPrefab },
-            {ItemType.GemExp, _gemExpPrefab },
-        };
+	[Header("UI prefabs")]
+	[Required, SerializeField] private GameObject _mainUIInGame;
 
-        _mapDic = new Dictionary<MapType, GameObject>
-        {
-            { MapType.Forest, _forestMap },
-            { MapType.Ocean , _oceanMap},
-        };
-        
-        _typeMonsterDic = new Dictionary<string, GameObject>
-        {
-            { "M1", _blueZombie },
-            { "M2", _purpleZombie },
-            { "M3", _blueGhost },
-        };
-    }    
+	[Required, SerializeField] private GameObject _mainUI;
 
-    public GameObject GetItem(ItemType itemType)
-    {
-        return _itemDic[itemType];
-    }
+	[Required, SerializeField] private GameObject _pausePopup;
 
-    public GameObject GetMap(MapType mapType)
-    {
-        return _mapDic[mapType];
-    }
+	[Required, SerializeField] private GameObject _cheatPopup;
 
-    public GameObject GetMonster(string monsterId)
-    {
-        return _typeMonsterDic[monsterId];
-    }
-    
+	[Required, SerializeField] private GameObject _choiceMapPopup;
 
-    public override GameObject ShowPopup(PopupType type, Action<GameObject> onInit = null)
-    {
-        var popupGo = base.ShowPopup(type, onInit);
-        if (!popupGo)
-            return null;
-        popupGo.GetOrAddComponent<GraphicRaycaster>();
-        return popupGo;
-    }
-    
-    
+	[Required, SerializeField] private GameObject _loseGamePopup;
+
+
+	[Header("Map prefabs")]
+	[Required, SerializeField] private GameObject _forestMap;
+
+	[Required, SerializeField] private GameObject _oceanMap;
+
+	private Dictionary<MapType, GameObject> _mapDic;
+
+	[Header("Monster prefabs")]
+	[Required, SerializeField] private GameObject _blueZombie;
+
+	[Required, SerializeField] private GameObject _purpleZombie;
+
+	[Required, SerializeField] private GameObject _blueGhost;
+	
+	[Required, SerializeField] private GameObject _yellowBomb;
+
+	private Dictionary<string, GameObject> _typeMonsterDic;
+
+	[Header("Item reward prefabs")]
+	[Required, SerializeField] private ItemReward _irCoin;
+
+	private Dictionary<TypeItemReward, ItemReward> _typeItemReward;
+
+	private void Awake()
+	{
+		Singleton<ResourceManager>.Set(this);
+		Init();
+	}
+
+	private void OnDestroy()
+	{
+		Singleton<ResourceManager>.Unset(this);
+	}
+
+	public void Init()
+	{
+		InitDic();
+		RegisterPopup(PopupType.MainUI, _mainUI);
+		RegisterPopup(PopupType.MainInGame, _mainUIInGame);
+		RegisterPopup(PopupType.ChoiceMap, _choiceMapPopup);
+		RegisterPopup(PopupType.LoseGame, _loseGamePopup);
+		RegisterPopup(PopupType.Pause, _pausePopup);
+		RegisterPopup(PopupType.Cheat, _cheatPopup);
+	}
+
+	private void InitDic()
+	{
+		_itemDic = new Dictionary<ItemType, GameObject>()
+		{
+			{ItemType.HealthBar, _healthBarPrefab},
+			{ItemType.Tower, _towerPrefab},
+			{ItemType.GemExp, _gemExpPrefab},
+		};
+
+		_mapDic = new Dictionary<MapType, GameObject>
+		{
+			{MapType.Forest, _forestMap},
+			{MapType.Ocean, _oceanMap},
+		};
+
+		_typeMonsterDic = new Dictionary<string, GameObject>
+		{
+			{"M1", _blueZombie},
+			{"M2", _purpleZombie},
+			{"M3", _blueGhost},
+			{"M4", _yellowBomb},
+		};
+
+		_typeItemReward = new Dictionary<TypeItemReward, ItemReward>()
+		{
+			{TypeItemReward.Coin, _irCoin}
+		};
+	}
+
+	public GameObject GetItem(ItemType itemType)
+	{
+		return _itemDic[itemType];
+	}
+
+	public GameObject GetMap(MapType mapType)
+	{
+		return _mapDic[mapType];
+	}
+
+	public GameObject GetMonster(string monsterId)
+	{
+		return _typeMonsterDic[monsterId];
+	}
+
+	public ItemReward GetItemReward(TypeItemReward type)
+	{
+		return _typeItemReward[type];
+	}
+
+
+	public override GameObject ShowPopup(PopupType type, Action<GameObject> onInit = null)
+	{
+		var popupGo = base.ShowPopup(type, onInit);
+		if(!popupGo)
+			return null;
+		popupGo.GetOrAddComponent<GraphicRaycaster>();
+		return popupGo;
+	}
+
+
 }
-

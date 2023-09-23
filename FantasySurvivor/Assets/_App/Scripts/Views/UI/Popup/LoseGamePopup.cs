@@ -14,8 +14,7 @@ public class LoseGamePopup : View<GameApp>, IPopup
     
     [Required, SerializeField] private GameObject _title;
     
-    [Required, SerializeField] private TextMeshProUGUI _txtEnemyKilled;
-    [Required, SerializeField] private TextMeshProUGUI _txtWave;
+    [Required, SerializeField] private TextMeshProUGUI _txtEnemyKilled, _txtWave;
     
     [Required, SerializeField] private GameObject _leftArrow;
     [Required, SerializeField] private GameObject _rightArrow;
@@ -32,10 +31,19 @@ public class LoseGamePopup : View<GameApp>, IPopup
     {
         base.OnViewInit();
 
+        foreach(var reward in gameController.map.dictionaryReward)
+        {
+            gameController.SpawnItemReward(reward.Key, reward.Value, _containerReward);
+        }
+
         _btnHome.onClick.AddListener(OnClickBtnHome);
         
         _btnReward.onClick.AddListener(OnClickBtnReward);
-        
+
+        _txtWave.text = $"Best wave: {gameController.map.model.levelInGame}";
+
+        _txtEnemyKilled.text = $"Monster killed: {gameController.map.model.monsterKilled}";
+
         Open();
     }
 
@@ -53,11 +61,21 @@ public class LoseGamePopup : View<GameApp>, IPopup
 
     private void OnClickBtnHome()
     {
+        foreach(var reward in gameController.map.dictionaryReward)
+        {
+            gameController.ClaimReward(reward.Key, reward.Value);
+        }
+        
         Close();
     }
 
     private void OnClickBtnReward()
-    {
+    {   
+        foreach(var reward in gameController.map.dictionaryReward)
+        {
+            gameController.ClaimReward(reward.Key, reward.Value * 2);
+        }
+        
         Close();
     }
 

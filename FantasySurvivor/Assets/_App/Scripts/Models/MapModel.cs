@@ -1,4 +1,5 @@
-﻿using ArbanFramework.MVC;
+﻿using System.Collections.Generic;
+using ArbanFramework.MVC;
 namespace FantasySurvivor
 {
 	public class MapModel : Model<GameApp>
@@ -11,8 +12,7 @@ namespace FantasySurvivor
 		
 		public MapModel() : base(dataChangedEvent)
 		{
-			expInGame = 100;
-			timeInGame = 0;
+			expInGame = GameConst.gemStartGame;
 			levelInGame = 1;
 		}
 
@@ -21,7 +21,13 @@ namespace FantasySurvivor
 		private int _expInGame;
 
 		private int _levelInGame;
-		
+
+		private int _monsterKilled;
+
+
+		private int _goldCoinCollected;
+
+
 		public float timeInGame
 		{
 			get => _timeInGame;
@@ -49,6 +55,25 @@ namespace FantasySurvivor
 				if(levelInGame == value) return;
 				_levelInGame = value;
 				RaiseDataChanged(nameof(levelInGame));
+			}
+		}
+		
+		public int monsterKilled
+		{
+			get => _monsterKilled;
+			set {
+				if(monsterKilled == value) return;
+				_monsterKilled = value;
+				RaiseDataChanged(nameof(monsterKilled));
+			}
+		}
+		
+		public int goldCoinCollected
+		{
+			get => _goldCoinCollected;
+			set {
+				if(goldCoinCollected == value) return;
+				_goldCoinCollected = value;
 			}
 		}
 	}

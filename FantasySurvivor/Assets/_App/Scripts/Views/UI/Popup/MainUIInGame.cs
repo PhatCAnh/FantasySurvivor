@@ -22,7 +22,7 @@ namespace Popup
 		
 		[Required, SerializeField] private Toggle _toggleStat, _toggleElemental, _toggleChangeStateInteract;
 
-		[SerializeField] private TextMeshProUGUI _txtCoin, _txtExpInMap, _txtLevel, _txtTimeMinutes, _txtTimeSeconds;
+		[SerializeField] private TextMeshProUGUI _txtExpInMap, _txtLevel, _txtTimeMinutes, _txtTimeSeconds, _txtMonsterKilled;
 		private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
 		private MapModel mapModel => gameController.map.model;
@@ -44,23 +44,25 @@ namespace Popup
 			_toggleStat.onValueChanged.AddListener(OnClickToggleStat);
 			_toggleElemental.onValueChanged.AddListener(OnClickToggleElemental);
 			
+			
+			
 			AddDataBinding("fieldMap-expInMapValue", _txtExpInMap, (control, e) =>
 				{
 					var coin = mapModel.expInGame;
 					control.text = coin.ToString();
 				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.expInGame), mapModel)
 			);
-
-			AddDataBinding("fieldPlayerTower-goldCoinValue", _txtCoin, (control, e) =>
-				{
-					control.text = $"{app.models.dataPlayerModel.coin}";
-				}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.coin), app.models.dataPlayerModel)
-			);
 			
 			AddDataBinding("fieldMap-levelInGameValue", _txtLevel, (control, e) =>
 				{
 					control.text = $"{mapModel.levelInGame}";
 				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.levelInGame), mapModel)
+			);
+			
+			AddDataBinding("fieldMap-monsterKilledValue", _txtMonsterKilled, (control, e) =>
+				{
+					control.text = $"{mapModel.monsterKilled}";
+				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.monsterKilled), mapModel)
 			);
 			
 			AddDataBinding("fieldMap-timeInMapValue", _txtTimeMinutes, (control, e) =>

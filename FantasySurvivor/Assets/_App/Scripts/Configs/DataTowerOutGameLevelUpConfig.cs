@@ -5,12 +5,11 @@ namespace DataConfig
 	public class DataTowerOutGameLevelUpConfig : IConfigItem
 	{
 		public int level { get; private set; }
-		public int attackDamage { get; private set; }
-		public float attackSpeed { get; private set; }
-		public float attackRange { get; private set; }
-		public int health { get; private set; }
-		public int price { get; private set; }
-
+		public DataLevelTowerConfig attackDamage { get; private set; }
+		public DataLevelTowerConfig attackSpeed { get; private set; }
+		public DataLevelTowerConfig attackRange { get; private set; }
+		public DataLevelTowerConfig health { get; private set; }
+		
 		public string GetId()
 		{
 			return level.ToString();
@@ -19,11 +18,22 @@ namespace DataConfig
 		public void OnReadImpl(IConfigReader reader)
 		{
 			level = reader.ReadInt();
-			attackDamage = reader.ReadInt();
-			attackSpeed = reader.ReadFloat();
-			attackRange = reader.ReadFloat();
-			health = reader.ReadInt();
-			price = reader.ReadInt();
+
+			var valueAtk = reader.ReadInt();
+			var priceAtk = reader.ReadInt();
+			attackDamage = new DataLevelTowerConfig(valueAtk, priceAtk);
+			
+			var valueAs = reader.ReadFloat();
+			var priceAs = reader.ReadInt();
+			attackSpeed = new DataLevelTowerConfig(valueAs, priceAs);
+
+			var valueAr = reader.ReadFloat();
+			var priceAr = reader.ReadInt();
+			attackRange = new DataLevelTowerConfig(valueAr, priceAr);
+			
+			var valueHealth = reader.ReadInt();
+			var priceHealth = reader.ReadInt();
+			health = new DataLevelTowerConfig(valueHealth, priceHealth);
 		}
 	}
 
@@ -40,23 +50,13 @@ namespace DataConfig
 		public DataLevelTowerConfig GetConfigStat(int level, TypeStatTower type)
 		{
 			var data = GetConfig(level.ToString());
-			float value = 0;
-			switch (type)
+			return type switch
 			{
-				case TypeStatTower.AttackDamage:
-					value = data.attackDamage;
-					break;
-				case TypeStatTower.AttackRange:
-					value = data.attackRange;
-					break;
-				case TypeStatTower.AttackSpeed:
-					value = data.attackSpeed;
-					break;
-				case TypeStatTower.Health:
-					value = data.health;
-					break;
-			}
-			return new DataLevelTowerConfig(value, data.price);
+				TypeStatTower.AttackDamage => data.attackDamage,
+				TypeStatTower.AttackRange => data.attackRange,
+				TypeStatTower.AttackSpeed => data.attackSpeed,
+				TypeStatTower.Health => data.health,
+			};
 		}
 	}
 }

@@ -28,7 +28,7 @@ namespace FantasySurvivor
 					_txtPoint.text = $"{model.currentHealthPoint} / {model.maxHealthPoint}";
 					control.maxValue = model.maxHealthPoint;
 				},
-				new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.maxHealthPoint), model)
+				new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.maxHealthPoint), _towerView.model)
 			);
 			
 			AddDataBinding("sldHealthBar-value", _sldHealthPoint, (control, e) =>
@@ -36,7 +36,7 @@ namespace FantasySurvivor
 					_txtPoint.text = $"{model.currentHealthPoint} / {model.maxHealthPoint}";
 					control.value = model.currentHealthPoint;
 				},
-				new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.currentHealthPoint), model)
+				new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.currentHealthPoint), _towerView.model)
 			);
 			
 			var position = _towerView.transform.position;

@@ -23,6 +23,8 @@ public enum MonsterType
 public enum TowerType
 {
     Basic = 0,
+    Speed = 1,
+    Tank = 2,
 }
 
 public enum TextPopupType
@@ -37,4 +39,9 @@ public enum TypeStatTower
     AttackRange,
     AttackSpeed,
     Health,
+}
+
+public enum TypeItemReward
+{
+    Coin,
 }

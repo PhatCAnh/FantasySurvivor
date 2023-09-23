@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using _App.Scripts.Pool;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using UnityEngine;
@@ -25,11 +26,12 @@ public class GameController : Controller<GameApp>
 	public MapView map;
 
 	public List<Monster> listMonster;
+	
+	public Action<Monster> onMonsterDie;
 
 	private void Awake()
 	{
 		Singleton<GameController>.Set(this);
-		
 	}
 
 	private void Start()
@@ -98,25 +100,51 @@ public class GameController : Controller<GameApp>
 		};
 	}
 
+	public void AddReward(Dictionary<TypeItemReward, int> listReward, TypeItemReward type, int value)
+	{
+		if(listReward.ContainsKey(type))
+		{
+			listReward[type] += value;
+		}
+		else
+		{
+			listReward.Add(type, value);
+		}
+	}
+
+	public ItemReward SpawnItemReward(TypeItemReward type, int value, Transform parent)
+	{
+		var rewardPrefab = app.resourceManager.GetItemReward(type);
+		var reward = Instantiate(rewardPrefab, parent);
+		reward.Init(value);
+		return reward;
+	}
+
 	public void RestartGame()
 	{
 	}
 
-	public void CollectedItem(ItemType type)
+	public void ClaimReward(TypeItemReward type, int value)
 	{
-
+		switch (type)
+		{
+			case TypeItemReward.Coin:
+				app.models.dataPlayerModel.coin += value;
+				break;
+		}
 	}
 
 	[Button]
 	public void TestConfig()
 	{
-		app.configs.dataChapter.GetConfig(1);
+		tower.TakeDamage(10);
 	}
 
 
 	public Monster SpawnMonster(MapView.WaveData wave)
 	{
 		var statMonster = app.configs.dataStatMonster.GetConfig(wave.idMonster);
+		
 		var monsterStat = new MonsterStat(statMonster.moveSpeed, wave.healthMonster, wave.adMonster, statMonster.attackSpeed, statMonster.attackRange, wave.expMonster);
 
 		var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
@@ -129,20 +157,17 @@ public class GameController : Controller<GameApp>
 		
 		return monsterIns;
 	}
-
-	public void MonsterDie(Monster mons, bool canDestroy = true)
+	public void MonsterDie(Monster mons, bool selfDie = false)
 	{
-		var gemExp = app.resourceManager.GetItem(ItemType.GemExp).GetComponent<GemExp>();
-		gemExp.Init(mons.stat.exp.BaseValue);
+		if(!selfDie)
+		{
+			map.model.monsterKilled++;
+			Singleton<PoolGemExp>.instance.GetObjectFromPool(mons.transform.position, mons.stat.exp.BaseValue);
+		}
 
-		var position = mons.transform.position;
-		Instantiate(gemExp, position, quaternion.identity);
-		
-		//Singleton<PoolTextPopup>.instance.GetObjectFromPool(position, mons.model.coin.ToString(), TextPopupType.GoldCoin);
 		listMonster.Remove(mons);
 		mons.wave.monsterInWave.Remove(mons);
-
-		if(canDestroy) Destroy(mons.gameObject);
+		Destroy(mons.gameObject);
 	}
 
 	public Monster GetFirstMonster()
@@ -216,19 +241,19 @@ public class GameController : Controller<GameApp>
 		switch (type)
 		{
 			case TypeStatTower.AttackDamage:
-				value = dataLevel.attackDamage;
+				value = dataLevel.attackDamage.value;
 				baseValue = dataStatBase.attackDamage;
 				break;
 			case TypeStatTower.AttackRange:
-				value = dataLevel.attackRange;
+				value = dataLevel.attackRange.value;
 				baseValue = dataStatBase.attackRange;
 				break;
 			case TypeStatTower.AttackSpeed:
-				value = dataLevel.attackSpeed;
+				value = dataLevel.attackSpeed.value;
 				baseValue = dataStatBase.attackSpeed;
 				break;
 			case TypeStatTower.Health:
-				value = dataLevel.health;
+				value = dataLevel.health.value;
 				baseValue = dataStatBase.health;
 				break;
 		}
