@@ -1,25 +1,16 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using ArbanFramework.MVC;
-using DG.Tweening;
 using FantasySurvivor;
-using Popup;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UpdateBaseStatUiInGame : View<GameApp>
 {
-
 	[Required, SerializeField] private StatUI _attackDamage, _attackRange, _attackSpeed, _health;
 
 	[Required, SerializeField] private TextMeshProUGUI _txtAttackDamage, _txtAttackRange, _txtAttackSpeed, _txtHealth;
-	
-
 	private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
-
 	private MapModel mapModel => gameController.map.model;
 	private TowerModel towerModel => gameController.tower.model;
 

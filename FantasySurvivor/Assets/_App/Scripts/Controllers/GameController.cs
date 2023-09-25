@@ -225,7 +225,9 @@ public class GameController : Controller<GameApp>
 			 (int)GetStatTower(app.models.dataPlayerModel.levelHealth, TypeStatTower.Health),
 			 GetStatTower(app.models.dataPlayerModel.levelAs, TypeStatTower.AttackSpeed),
 			(int) GetStatTower(app.models.dataPlayerModel.levelAd, TypeStatTower.AttackDamage),
-			 GetStatTower(app.models.dataPlayerModel.levelAr, TypeStatTower.AttackRange)
+			 GetStatTower(app.models.dataPlayerModel.levelAr, TypeStatTower.AttackRange),
+			 (int) GetStatTower(0, TypeStatTower.CriticalRate),
+			 (int) GetStatTower(0, TypeStatTower.CriticalDamage)
 			);
 		towerPrefab.Init(model ,healthBar);
 
@@ -251,6 +253,14 @@ public class GameController : Controller<GameApp>
 			case TypeStatTower.AttackSpeed:
 				value = dataLevel.attackSpeed.value;
 				baseValue = dataStatBase.attackSpeed;
+				break;
+			case TypeStatTower.CriticalRate:
+				value = 0;
+				baseValue = dataStatBase.criticalRate;
+				break;
+			case TypeStatTower.CriticalDamage:
+				value = 0;
+				baseValue = dataStatBase.criticalDamage;
 				break;
 			case TypeStatTower.Health:
 				value = dataLevel.health.value;

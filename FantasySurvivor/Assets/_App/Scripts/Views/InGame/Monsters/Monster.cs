@@ -146,7 +146,6 @@ public class Monster : ObjectRPG
 				AttackState();
 				cdAttack.Restart(1 / model.attackSpeed);
 			}
-			//IdleState();
 		}
 		else
 		{
@@ -167,7 +166,7 @@ public class Monster : ObjectRPG
 		target.TakeDamage(model.attackDamage);
 	}
 
-	public void TakeDamage(int damage)
+	public void TakeDamage(int damage, bool isCritical = false)
 	{
 		if(!isAlive) return;
 		model.currentHealthPoint -= damage;

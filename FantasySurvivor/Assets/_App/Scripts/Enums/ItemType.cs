@@ -38,6 +38,8 @@ public enum TypeStatTower
     AttackDamage,
     AttackRange,
     AttackSpeed,
+    CriticalRate,
+    CriticalDamage,
     Health,
 }
 
