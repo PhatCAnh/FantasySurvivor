@@ -8,6 +8,7 @@ public enum PopupType
     ChoiceMap,
     MainInGame,
     MainInTutorial,
+    ClickBulletTutorial,
     HealthBar,
     Cheat,
 }

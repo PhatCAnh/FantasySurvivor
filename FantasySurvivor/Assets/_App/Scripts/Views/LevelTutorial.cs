@@ -20,8 +20,6 @@ public class LevelTutorial : View<GameApp>
 
 	private int _numberHand = 0;
 
-	private int _numberHandTutorial = 0;
-
 	private int _numberClickUI = 0;
 
 	private GameController gameController => Singleton<GameController>.instance;

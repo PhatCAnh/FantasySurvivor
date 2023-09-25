@@ -144,7 +144,7 @@ public class Monster : ObjectRPG
 			if(cdAttack.isFinished)
 			{
 				AttackState();
-				cdAttack.Restart(model.attackSpeed);
+				cdAttack.Restart(1 / model.attackSpeed);
 			}
 			//IdleState();
 		}

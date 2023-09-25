@@ -12,7 +12,7 @@ namespace MR.CharacterState.Unit
 		
 		[SerializeField] protected GameObject deadEffect;
 
-		[SerializeField] private float _speedBullet = 15;
+		[SerializeField] private float _speedBullet = 15f;
 
 		private Monster _origin;
 
@@ -26,15 +26,20 @@ namespace MR.CharacterState.Unit
 			_target = origin.target;
 			var spawnPos = _origin.firePoint;
 			transform.SetPositionAndRotation(spawnPos.position, spawnPos.rotation);
-			rigidbody2d.velocity = spawnPos.up * _speedBullet;
-			Destroy(gameObject, 3f);
+			//rigidbody2d.velocity = spawnPos.up * _speedBullet;
+		}
+
+		protected void FixedUpdate()
+		{
+			if(gameController.isStop) return;
+			transform.position = Vector2.MoveTowards(transform.position, _target.transform.position, _speedBullet * Time.deltaTime);
 		}
 
 		protected void Touch()
 		{
 			if(deadEffect != null)
 			{
-				Instantiate(deadEffect, transform.position, Quaternion.identity);
+				Instantiate(deadEffect, transform.position, transform.rotation);
 			}
 			
 			Destroy(gameObject);

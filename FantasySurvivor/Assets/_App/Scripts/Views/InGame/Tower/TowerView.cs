@@ -9,6 +9,7 @@ using DG.Tweening;
 using FantasySurvivor;
 using MR.CharacterState;
 using MR.CharacterState.Tower;
+using Popup;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -109,6 +110,7 @@ public class TowerView : ObjectRPG
 	private void Die()
 	{
 		gameController.TowerDie(this);
+		Destroy(healthBar.gameObject);
 	}
 
 	public void Attack()
@@ -137,7 +139,6 @@ public class TowerView : ObjectRPG
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
-		Destroy(healthBar.gameObject);
 		skinAttackRange.DOKill();
 	}
 }

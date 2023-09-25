@@ -44,6 +44,17 @@ public class ObjectPool : MonoBehaviour
 
     }
 
+
+
+    public void ReturnAllObject()
+    {
+        foreach(var item in usedList)
+        {
+            item.SetActive(false);
+            freeList.Add(item);
+        }
+    }
+
     //Return an object to the pool
     protected void ReturnObject(GameObject obj)
     {

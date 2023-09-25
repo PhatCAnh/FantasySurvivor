@@ -1,4 +1,5 @@
-﻿using ArbanFramework.Config;
+﻿using System;
+using ArbanFramework.Config;
 namespace DataConfig
 {
 	public class DataLevelTowerConfig
@@ -71,6 +72,7 @@ namespace DataConfig
 				TypeStatTower.AttackRange => data.attackRange,
 				TypeStatTower.AttackSpeed => data.attackSpeed,
 				TypeStatTower.Health => data.health,
+				_ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
 			};
 		}
 	}

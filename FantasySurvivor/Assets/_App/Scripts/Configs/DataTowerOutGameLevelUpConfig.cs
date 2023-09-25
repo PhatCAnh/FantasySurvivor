@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ArbanFramework.Config;
 namespace DataConfig
 {
@@ -56,6 +57,7 @@ namespace DataConfig
 				TypeStatTower.AttackRange => data.attackRange,
 				TypeStatTower.AttackSpeed => data.attackSpeed,
 				TypeStatTower.Health => data.health,
+				_ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
 			};
 		}
 	}

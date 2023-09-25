@@ -9,7 +9,6 @@ using Random = UnityEngine.Random;
 using FantasySurvivor;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
-using Unity.Mathematics;
 using UnityEngine.SceneManagement;
 using MonsterStat = Stat.MonsterStat;
 
@@ -78,6 +77,7 @@ public class GameController : Controller<GameApp>
 	public void LoseGame()
 	{
 		isEndGame = true;
+		Singleton<PoolGemExp>.instance.ReturnAllObject();
 		app.resourceManager.ShowPopup(PopupType.LoseGame);
 	}
 
@@ -276,6 +276,7 @@ public class GameController : Controller<GameApp>
 		map.Init();
 		Instantiate(app.resourceManager.GetMap((MapType) chapter));
 		tower = SpawnTower();
+		app.resourceManager.ShowPopup(PopupType.ClickBulletTutorial);
 		listMonster.Clear();
 	}
 }
