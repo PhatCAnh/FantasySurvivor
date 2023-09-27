@@ -4,13 +4,8 @@ namespace DataConfig
 {
 	public class DataLevelTowerConfig
 	{
-		public float value;
-		public int price;
-
-		public DataLevelTowerConfig()
-		{
-			
-		}
+		public readonly float value;
+		public readonly int price;
 
 		public DataLevelTowerConfig(float value, int price)
 		{
@@ -21,46 +16,51 @@ namespace DataConfig
 
 	public class DataTowerInGameLevelUpConfig : IConfigItem
 	{
-		public int level { get; private set; }
-		public DataLevelTowerConfig attackDamage { get; private set; }
-		public DataLevelTowerConfig attackSpeed { get; private set; }
-		public DataLevelTowerConfig attackRange { get; private set; }
-		public DataLevelTowerConfig criticalRate { get; private set; }
-		public DataLevelTowerConfig criticalDamage { get; private set; }
-		public DataLevelTowerConfig health { get; private set; }
+		public int Level { get; private set; }
+		public DataLevelTowerConfig AttackDamage { get; private set; }
+		public DataLevelTowerConfig AttackSpeed { get; private set; }
+		public DataLevelTowerConfig AttackRange { get; private set; }
+		public DataLevelTowerConfig CriticalRate { get; private set; }
+		public DataLevelTowerConfig CriticalDamage { get; private set; }
+		public DataLevelTowerConfig Health { get; private set; }
+		public DataLevelTowerConfig RegenHp { get; private set; }
 
 		public string GetId()
 		{
-			return level.ToString();
+			return Level.ToString();
 		}
 
 		public void OnReadImpl(IConfigReader reader)
 		{
-			level = reader.ReadInt();
+			Level = reader.ReadInt();
 			
 			var valueAtk = reader.ReadInt();
 			var priceAtk = reader.ReadInt();
-			attackDamage = new DataLevelTowerConfig(valueAtk, priceAtk);
+			AttackDamage = new DataLevelTowerConfig(valueAtk, priceAtk);
 			
 			var valueAs = reader.ReadFloat();
 			var priceAs = reader.ReadInt();
-			attackSpeed = new DataLevelTowerConfig(valueAs, priceAs);
+			AttackSpeed = new DataLevelTowerConfig(valueAs, priceAs);
 
 			var valueAr = reader.ReadFloat();
 			var priceAr = reader.ReadInt();
-			attackRange = new DataLevelTowerConfig(valueAr, priceAr);
+			AttackRange = new DataLevelTowerConfig(valueAr, priceAr);
 			
 			var valueCd = reader.ReadInt();
 			var priceCd = reader.ReadInt();
-			criticalDamage = new DataLevelTowerConfig(valueCd, priceCd);
+			CriticalDamage = new DataLevelTowerConfig(valueCd, priceCd);
 			
 			var valueCr = reader.ReadFloat();
 			var priceCr = reader.ReadInt();
-			criticalRate = new DataLevelTowerConfig(valueCr, priceCr);
+			CriticalRate = new DataLevelTowerConfig(valueCr, priceCr);
 			
 			var valueHealth = reader.ReadFloat();
 			var priceHealth = reader.ReadInt();
-			health = new DataLevelTowerConfig(valueHealth, priceHealth);
+			Health = new DataLevelTowerConfig(valueHealth, priceHealth);
+			
+			var valueRegenHp = reader.ReadFloat();
+			var priceRegenHp = reader.ReadInt();
+			RegenHp = new DataLevelTowerConfig(valueRegenHp, priceRegenHp);
 		}
 	}
 
@@ -78,12 +78,13 @@ namespace DataConfig
 			var data = GetConfig(level.ToString());
 			return type switch
 			{
-				TypeStatTower.AttackDamage => data.attackDamage,
-				TypeStatTower.AttackRange => data.attackRange,
-				TypeStatTower.AttackSpeed => data.attackSpeed,
-				TypeStatTower.Health => data.health,
-				TypeStatTower.CriticalRate => data.criticalRate,
-				TypeStatTower.CriticalDamage => data.criticalDamage,
+				TypeStatTower.AttackDamage => data.AttackDamage,
+				TypeStatTower.AttackRange => data.AttackRange,
+				TypeStatTower.AttackSpeed => data.AttackSpeed,
+				TypeStatTower.Health => data.Health,
+				TypeStatTower.CriticalRate => data.CriticalRate,
+				TypeStatTower.CriticalDamage => data.CriticalDamage,
+				TypeStatTower.RegenHp => data.RegenHp,
 			};
 		}
 	}

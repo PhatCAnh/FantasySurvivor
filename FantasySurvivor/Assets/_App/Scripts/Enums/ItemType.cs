@@ -41,6 +41,7 @@ public enum TypeStatTower
     CriticalRate,
     CriticalDamage,
     Health,
+    RegenHp,
 }
 
 public enum TypeItemReward

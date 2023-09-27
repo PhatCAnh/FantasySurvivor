@@ -21,13 +21,7 @@ namespace FantasySurvivor
 
 		public override void InitBaseData()
 		{
-			this.coin = 100;
-			levelAd = 0;
-			levelAr = 0;
-			levelAs = 0;
-			levelHealth = 0;
-			levelCr = 0;
-			levelCd = 0;
+			this.Coin = 100;
 
 			firstTouchHand = true;
 			firstTutorialHandUi = true;
@@ -43,80 +37,97 @@ namespace FantasySurvivor
 		[JsonProperty] private int _levelCd;
 		
 		[JsonProperty] private int _levelHealth;
+		[JsonProperty] private int _levelRegenHp;
 		
 		[JsonProperty] public bool firstTouchHand;
 		[JsonProperty] public bool firstTutorialHandUi;
 		[JsonProperty] public bool firstSeeBulletInteract;
-		
-		
 
-		public int coin
+		public int Coin
 		{
 			get => _coin;
 			set {
-				if(coin == value) return;
+				if(Coin == value) return;
 				_coin = value;
-				RaiseDataChanged(nameof(coin));
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(Coin));
 			}
 		}
 
-		public int levelAd
+		public int LevelAd
 		{
 			get => _levelAd;
 			set {
-				if(levelAd == value) return;
+				if(LevelAd == value) return;
 				_levelAd = value;
-				RaiseDataChanged(nameof(levelAd));
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(LevelAd));
 			}
 		}
 
-		public int levelAr
+		public int LevelAr
 		{
 			get => _levelAr;
 			set {
-				if(levelAr == value) return;
+				if(LevelAr == value) return;
 				_levelAr = value;
-				RaiseDataChanged(nameof(levelAr));
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(LevelAr));
 			}
 		}
 
-		public int levelAs
+		public int LevelAs
 		{
 			get => _levelAs;
 			set {
-				if(levelAs == value) return;
+				if(LevelAs == value) return;
 				_levelAs = value;
-				RaiseDataChanged(nameof(levelAs));
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(LevelAs));
 			}
 		}
 		
-		public int levelCr
+		public int LevelCr
 		{
 			get => _levelCr;
 			set {
-				if(levelCr == value) return;
+				if(LevelCr == value) return;
 				_levelCr = value;
-				RaiseDataChanged(nameof(levelCr));
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(LevelCr));
 			}
 		}
 		
-		public int levelCd
+		public int LevelCd
 		{
 			get => _levelCd;
 			set {
-				if(levelCd == value) return;
+				if(LevelCd == value) return;
 				_levelCd = value;
-				RaiseDataChanged(nameof(levelCd));
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(LevelCd));
 			}
 		}
 		
-		public int levelHealth
+		public int LevelHealth
 		{
 			get => _levelHealth;
 			set {
-				if(levelHealth == value) return;
+				if(LevelHealth == value) return;
 				_levelHealth = value;
-				RaiseDataChanged(nameof(levelHealth));
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(LevelHealth));
+			}
+		}
+		
+		public int LevelRegenHp
+		{
+			get => _levelRegenHp;
+			set {
+				if(LevelRegenHp == value) return;
+				_levelRegenHp = value;
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(LevelRegenHp));
 			}
 		}
 	}

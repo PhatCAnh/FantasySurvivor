@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 using FantasySurvivor;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
+using Stat;
 using UnityEngine.SceneManagement;
 using MonsterStat = Stat.MonsterStat;
 
@@ -129,7 +130,7 @@ public class GameController : Controller<GameApp>
 		switch (type)
 		{
 			case TypeItemReward.Coin:
-				app.models.dataPlayerModel.coin += value;
+				app.models.dataPlayerModel.Coin += value;
 				break;
 		}
 	}
@@ -221,15 +222,16 @@ public class GameController : Controller<GameApp>
 			.GetComponent<HealthBar>();
 		healthBar.Init(towerPrefab);
 
-		var model = new TowerModel(
-			(int) GetStatTower(app.models.dataPlayerModel.levelHealth, TypeStatTower.Health),
-			GetStatTower(app.models.dataPlayerModel.levelAs, TypeStatTower.AttackSpeed),
-			(int) GetStatTower(app.models.dataPlayerModel.levelAd, TypeStatTower.AttackDamage),
-			GetStatTower(app.models.dataPlayerModel.levelAr, TypeStatTower.AttackRange),
-			(int) GetStatTower(0, TypeStatTower.CriticalRate),
-			(int) GetStatTower(0, TypeStatTower.CriticalDamage)
+		var stat = new TowerStat(
+			(int) GetStatTower(app.models.dataPlayerModel.LevelHealth, TypeStatTower.Health),
+			GetStatTower(app.models.dataPlayerModel.LevelAs, TypeStatTower.AttackSpeed),
+			(int) GetStatTower(app.models.dataPlayerModel.LevelAd, TypeStatTower.AttackDamage),
+			(int) GetStatTower(app.models.dataPlayerModel.LevelAr, TypeStatTower.AttackRange),
+			(int) GetStatTower(app.models.dataPlayerModel.LevelCr, TypeStatTower.CriticalRate),
+			(int) GetStatTower(app.models.dataPlayerModel.LevelCd, TypeStatTower.CriticalDamage),
+			GetStatTower(app.models.dataPlayerModel.LevelRegenHp, TypeStatTower.RegenHp)
 		);
-		towerPrefab.Init(model, healthBar);
+		towerPrefab.Init(stat, healthBar);
 
 		return towerPrefab;
 	}
@@ -243,28 +245,32 @@ public class GameController : Controller<GameApp>
 		switch (type)
 		{
 			case TypeStatTower.AttackDamage:
-				value = dataLevel.attackDamage.value;
-				baseValue = dataStatBase.attackDamage;
+				value = dataLevel.AttackDamage.value;
+				baseValue = dataStatBase.AttackDamage;
 				break;
 			case TypeStatTower.AttackRange:
-				value = dataLevel.attackRange.value;
-				baseValue = dataStatBase.attackRange;
+				value = dataLevel.AttackRange.value;
+				baseValue = dataStatBase.AttackRange;
 				break;
 			case TypeStatTower.AttackSpeed:
-				value = dataLevel.attackSpeed.value;
-				baseValue = dataStatBase.attackSpeed;
+				value = dataLevel.AttackSpeed.value;
+				baseValue = dataStatBase.AttackSpeed;
 				break;
 			case TypeStatTower.CriticalRate:
-				value = dataLevel.criticalRate.value;
-				baseValue = dataStatBase.criticalRate;
+				value = dataLevel.CriticalRate.value;
+				baseValue = dataStatBase.CriticalRate;
 				break;
 			case TypeStatTower.CriticalDamage:
-				value = dataLevel.criticalDamage.value;
-				baseValue = dataStatBase.criticalDamage;
+				value = dataLevel.CriticalDamage.value;
+				baseValue = dataStatBase.CriticalDamage;
 				break;
 			case TypeStatTower.Health:
-				value = dataLevel.health.value;
-				baseValue = dataStatBase.health;
+				value = dataLevel.Health.value;
+				baseValue = dataStatBase.Health;
+				break;
+			case TypeStatTower.RegenHp:
+				value = dataLevel.RegenHp.value;
+				baseValue = dataStatBase.RegenHp;
 				break;
 		}
 		return value + baseValue;

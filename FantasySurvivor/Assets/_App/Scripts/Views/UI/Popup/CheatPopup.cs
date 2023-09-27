@@ -32,8 +32,7 @@ public class CheatPopup : View<GameApp>, IPopup
 
     private void OnClickBtnCoin()
     {
-        app.models.dataPlayerModel.coin += 1000;
-        app.models.WriteModel<DataPlayerModel>();
+        app.models.dataPlayerModel.Coin += 1000;
     }
     
     private void OnClickBtnGem()

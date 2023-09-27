@@ -21,4 +21,34 @@ namespace Stat
 			this.exp.BaseValue = exp;
 		}
 	}
+	
+	public class TowerStat
+	{
+		public StatFloat atk = new();
+		public StatFloat ats = new();
+		public StatFloat atr = new();
+		public StatFloat critRate = new();
+		public StatFloat critDmg = new();
+		public StatFloat health = new();
+		public StatFloat regenHp = new();
+
+		public TowerStat(
+			int atk,
+			float ats,
+			float atr,
+			int critRate,
+			float critDmg,
+			float health,
+			float regenHp)
+		{
+			this.atk.BaseValue = atk;
+			this.ats.BaseValue = ats;
+			this.atr.BaseValue = atr;
+			this.critRate.BaseValue = critRate;
+			this.critDmg.BaseValue = critDmg;
+			this.health.BaseValue = health;
+			this.regenHp.BaseValue = regenHp;
+			
+		}
+	}
 }

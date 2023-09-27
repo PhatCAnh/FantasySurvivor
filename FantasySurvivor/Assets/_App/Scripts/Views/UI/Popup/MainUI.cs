@@ -117,8 +117,8 @@ public class MainUI : View<GameApp>, IPopup
 	{
 		AddDataBinding("fieldPlayerTower-goldCoinValue", _txtGoldCoin, (control, e) =>
 			{
-				control.text = $"{app.models.dataPlayerModel.coin}";
-			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.coin), app.models.dataPlayerModel)
+				control.text = $"{app.models.dataPlayerModel.Coin}";
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.Coin), app.models.dataPlayerModel)
 		);
 	}
 

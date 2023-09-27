@@ -26,15 +26,23 @@ public class StatUI
 
 public class UpdateBaseStatUI : View<GameApp>
 {
-	[Required, SerializeField] private StatUI _statAttackDamage, _statAttackRange, _statAttackSpeed, _statHealth, _statCriticalRate, _statCriticalDamage;
+	[Required, SerializeField] private StatUI
+		_statAttackDamage,
+		_statAttackRange,
+		_statAttackSpeed,
+		_statHealth,
+		_statCriticalRate,
+		_statCriticalDamage,
+		_statRegenHp;
 
-	[Required, SerializeField] private TextMeshProUGUI _txtLabelAd, _txtLabelAr, _txtLabelAs, _txtLabelHealth, _txtCriticalRate, _txtCriticalDamage;
+	[Required, SerializeField] private TextMeshProUGUI _txtLabelAd, _txtLabelAr, _txtLabelAs, _txtLabelHealth, _txtCriticalRate, _txtCriticalDamage, _txtRegenHp;
 
 	[Required, SerializeField] private Toggle _toggleAtk, _toggleDef, _toggleElemental;
 
 	[Required, SerializeField] private Image _imgAtk, _imgDef, _imgElemental;
 
-	[Required, SerializeField] private GameObject _imgFocus, _containerStatATK, containerStatDef;
+	[Required, SerializeField] private GameObject _imgFocus;
+	[Required, SerializeField] private GameObject _containerStatAtk, _containerStatDef;
 	private GameController gameController => Singleton<GameController>.instance;
 	private DataPlayerModel dataPlayer => app.models.dataPlayerModel;
 	private TowerModel towerModel => gameController.tower.model;
@@ -52,7 +60,9 @@ public class UpdateBaseStatUI : View<GameApp>
 		_statAttackSpeed.button.onClick.AddListener(OnClickBtnAttackSpeed);
 		_statCriticalRate.button.onClick.AddListener(OnClickBtnCriticalRate);
 		_statCriticalDamage.button.onClick.AddListener(OnClickBtnCriticalDamage);
+		
 		_statHealth.button.onClick.AddListener(OnClickBtnHealth);
+		_statRegenHp.button.onClick.AddListener(OnClickBtnRegenHp);
 
 		var maxLevel = app.configs.dataLevelTowerOutGame.GetLengthConfig();
 		_statAttackDamage.maxLevel = maxLevel;
@@ -67,49 +77,57 @@ public class UpdateBaseStatUI : View<GameApp>
 
 	private void OnClickBtnAttackDamage()
 	{
-		dataPlayer.coin -= _statAttackDamage.price;
-		dataPlayer.levelAd++;
+		dataPlayer.Coin -= _statAttackDamage.price;
+		dataPlayer.LevelAd++;
 		_statAttackDamage.currentLevel++;
 		app.models.WriteModel<DataPlayerModel>();
 	}
 
 	private void OnClickBtnAttackRange()
 	{
-		dataPlayer.coin -= _statAttackRange.price;
-		dataPlayer.levelAr++;
+		dataPlayer.Coin -= _statAttackRange.price;
+		dataPlayer.LevelAr++;
 		_statAttackRange.currentLevel++;
 		app.models.WriteModel<DataPlayerModel>();
 	}
 
 	private void OnClickBtnAttackSpeed()
 	{
-		dataPlayer.coin -= _statAttackSpeed.price;
-		dataPlayer.levelAs++;
+		dataPlayer.Coin -= _statAttackSpeed.price;
+		dataPlayer.LevelAs++;
 		_statAttackSpeed.currentLevel++;
 		app.models.WriteModel<DataPlayerModel>();
 	}
 
 	private void OnClickBtnHealth()
 	{
-		dataPlayer.coin -= _statHealth.price;
-		dataPlayer.levelHealth++;
+		dataPlayer.Coin -= _statHealth.price;
+		dataPlayer.LevelHealth++;
 		_statHealth.currentLevel++;
 		app.models.WriteModel<DataPlayerModel>();
 	}
 	
 	private void OnClickBtnCriticalRate()
 	{
-		dataPlayer.coin -= _statCriticalRate.price;
-		dataPlayer.levelCr++;
+		dataPlayer.Coin -= _statCriticalRate.price;
+		dataPlayer.LevelCr++;
 		_statCriticalRate.currentLevel++;
 		app.models.WriteModel<DataPlayerModel>();
 	}
 	
 	private void OnClickBtnCriticalDamage()
 	{
-		dataPlayer.coin -= _statCriticalDamage.price;
-		dataPlayer.levelCd++;
+		dataPlayer.Coin -= _statCriticalDamage.price;
+		dataPlayer.LevelCd++;
 		_statCriticalDamage.currentLevel++;
+		app.models.WriteModel<DataPlayerModel>();
+	}
+	
+	private void OnClickBtnRegenHp()
+	{
+		dataPlayer.Coin -= _statRegenHp.price;
+		dataPlayer.LevelRegenHp++;
+		_statRegenHp.currentLevel++;
 		app.models.WriteModel<DataPlayerModel>();
 	}
 
@@ -137,83 +155,96 @@ public class UpdateBaseStatUI : View<GameApp>
 	{
 		AddDataBinding("fieldPlayerTower-levelAdValue", _txtLabelAd, (control, e) =>
 			{
-				var levelStat = dataPlayer.levelAd;
+				var levelStat = dataPlayer.LevelAd;
 				var dataCurrent = app.configs.dataLevelTowerOutGame.GetConfigStat(levelStat, TypeStatTower.AttackDamage);
-				control.text = $"{dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).attackDamage}";
+				control.text = $"{dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).AttackDamage}";
 				UpdateStatUI(_statAttackDamage, dataCurrent, levelStat, TypeStatTower.AttackDamage);
-			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.levelAd), dataPlayer)
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.LevelAd), dataPlayer)
 		);
 
 		AddDataBinding("fieldPlayerTower-levelArValue", _txtLabelAr, (control, e) =>
 			{
-				var levelStat = dataPlayer.levelAr;
+				var levelStat = dataPlayer.LevelAr;
 				var dataCurrent = app.configs.dataLevelTowerOutGame.GetConfigStat(levelStat, TypeStatTower.AttackRange);
-				control.text = $"{dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).attackRange}";
+				control.text = $"{dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).AttackRange}";
 				UpdateStatUI(_statAttackRange, dataCurrent, levelStat, TypeStatTower.AttackRange);
-			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.levelAr), dataPlayer)
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.LevelAr), dataPlayer)
 		);
 
 		AddDataBinding("fieldPlayerTower-LevelAsValue", _txtLabelAs, (control, e) =>
 			{
-				var levelStat = dataPlayer.levelAs;
+				var levelStat = dataPlayer.LevelAs;
 				var dataCurrent = app.configs.dataLevelTowerOutGame.GetConfigStat(levelStat, TypeStatTower.AttackSpeed);
-				control.text = $"{dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).attackSpeed}";
+				control.text = $"{dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).AttackSpeed}";
 				UpdateStatUI(_statAttackSpeed, dataCurrent, levelStat, TypeStatTower.AttackSpeed);
-			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.levelAs), dataPlayer)
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.LevelAs), dataPlayer)
 		);
 
 		AddDataBinding("fieldPlayerTower-levelHealthValue", _txtLabelHealth, (control, e) =>
 			{
-				var levelStat = dataPlayer.levelHealth;
+				var levelStat = dataPlayer.LevelHealth;
 				var dataCurrent = app.configs.dataLevelTowerOutGame.GetConfigStat(levelStat, TypeStatTower.Health);
-				control.text = $"{dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).health}";
+				control.text = $"{dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).Health}";
 				UpdateStatUI(_statHealth, dataCurrent, levelStat, TypeStatTower.Health);
-			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.levelHealth), dataPlayer)
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.LevelHealth), dataPlayer)
 		);
 
 		AddDataBinding("fieldPlayerTower-levelCriticalRateValue", _txtCriticalRate, (control, e) =>
 			{
-				var levelStat = dataPlayer.levelCr;
+				var levelStat = dataPlayer.LevelCr;
 				var dataCurrent = app.configs.dataLevelTowerOutGame.GetConfigStat(levelStat, TypeStatTower.CriticalRate);
-				control.text = $"{dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).criticalRate}";
+				control.text = $"{dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).CriticalRate}";
 				UpdateStatUI(_statCriticalRate, dataCurrent, levelStat, TypeStatTower.CriticalRate);
-			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.levelCr), dataPlayer)
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.LevelCr), dataPlayer)
 		);
 
 		AddDataBinding("fieldPlayerTower-levelCriticalDamageValue", _txtCriticalDamage, (control, e) =>
 			{
-				var levelStat = dataPlayer.levelCd;
+				var levelStat = dataPlayer.LevelCd;
 				var dataCurrent = app.configs.dataLevelTowerOutGame.GetConfigStat(levelStat, TypeStatTower.CriticalDamage);
-				control.text = $"{dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).criticalDamage}";
+				control.text = $"{dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).CriticalDamage}";
 				UpdateStatUI(_statCriticalDamage, dataCurrent, levelStat, TypeStatTower.CriticalDamage);
-			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.levelCd), dataPlayer)
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.LevelCd), dataPlayer)
+		);
+		
+		AddDataBinding("fieldPlayerTower-levelRegenHpValue", _txtRegenHp, (control, e) =>
+			{
+				var levelStat = dataPlayer.LevelRegenHp;
+				var dataCurrent = app.configs.dataLevelTowerOutGame.GetConfigStat(levelStat, TypeStatTower.RegenHp);
+				control.text = $"{dataCurrent.value + app.configs.dataStatTower.GetConfig(TowerType.Basic).RegenHp}";
+				UpdateStatUI(_statRegenHp, dataCurrent, levelStat, TypeStatTower.RegenHp);
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.LevelRegenHp), dataPlayer)
 		);
 
 		AddDataBinding("fieldPlayerTower-goldCoinValue", this, (control, e) =>
 			{
-				CheckInteractableBtnStat(_statHealth);
 				CheckInteractableBtnStat(_statAttackDamage);
 				CheckInteractableBtnStat(_statAttackSpeed);
 				CheckInteractableBtnStat(_statAttackRange);
-			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.coin), app.models.dataPlayerModel)
+				CheckInteractableBtnStat(_statCriticalRate);
+				CheckInteractableBtnStat(_statCriticalDamage);
+				
+				CheckInteractableBtnStat(_statHealth);
+				CheckInteractableBtnStat(_statRegenHp);
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.Coin), app.models.dataPlayerModel)
 		);
 	}
 
 	private void CheckInteractableBtnStat(StatUI button)
 	{
-		button.button.interactable = app.models.dataPlayerModel.coin >= button.price && (button.currentLevel < button.maxLevel);
+		button.button.interactable = app.models.dataPlayerModel.Coin >= button.price && (button.currentLevel < button.maxLevel);
 	}
 
 	private void OnClickToggleAtk(bool result)
 	{
 		ClickedToggle(_imgAtk, result);
-		_containerStatATK.SetActive(result);
+		_containerStatAtk.SetActive(result);
 	}
 
 	private void OnClickToggleDef(bool result)
 	{
 		ClickedToggle(_imgDef, result);
-		containerStatDef.SetActive(result);
+		_containerStatDef.SetActive(result);
 	}
 
 	private void OnClickToggleElemental(bool result)

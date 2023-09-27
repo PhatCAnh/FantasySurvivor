@@ -14,8 +14,14 @@ namespace FantasySurvivor
 			
 		}
 
-		public TowerModel(int hp, float attackSpeed, int attackDamage, float attackRange,
-				int criticalRate, int criticalDamage)
+		public TowerModel(
+			int hp,
+			float attackSpeed,
+			int attackDamage,
+			float attackRange,
+			int criticalRate,
+			int criticalDamage,
+			float regenHp)
 			: base(dataChangedEvent)
 		{
 			maxHealthPoint = hp;
@@ -24,13 +30,7 @@ namespace FantasySurvivor
 			this.attackRange = attackRange;
 			this.criticalRate = criticalRate;
 			this.criticalDamage = criticalDamage;
-			
-			levelAd = 0;
-			levelAr = 0;
-			levelAs = 0;
-			levelCr = 0;
-			levelCd = 0;
-			levelHealth = 0;
+			this.regenHp = regenHp;
 		}
 
 		private float _currentHealthPoint;
@@ -41,6 +41,7 @@ namespace FantasySurvivor
 		private float _attackRange;
 		private int _criticalRate;
 		private int _criticalDamage;
+		private float _regenHp;
 		
 		private int _levelAd;
 		private int _levelAr;
@@ -48,6 +49,7 @@ namespace FantasySurvivor
 		private int _levelCr;
 		private int _levelCd;
 		private int _levelHealth;
+		private int _levelRegenHp;
 		
 		public float currentHealthPoint
 		{
@@ -118,6 +120,15 @@ namespace FantasySurvivor
 				_criticalDamage = value;
 			}
 		}
+		
+		public float regenHp
+		{
+			get => _regenHp;
+			set {
+				if(regenHp.Equals(value)) return;
+				_regenHp = value;
+			}
+		}
 
 		public int levelAd
 		{
@@ -174,6 +185,16 @@ namespace FantasySurvivor
 				if(levelCd == value) return;
 				_levelCd = value;
 				RaiseDataChanged(nameof(levelCd));
+			}
+		}
+		
+		public int levelRegenHp
+		{
+			get => _levelRegenHp;
+			set {
+				if(levelRegenHp == value) return;
+				_levelRegenHp = value;
+				RaiseDataChanged(nameof(levelRegenHp));
 			}
 		}
 	}

@@ -21,11 +21,13 @@ namespace Popup
 		[Required, SerializeField] private RectTransform _interactContainer;
 		
 		[Required, SerializeField] private Image _imgArrow, _imgStat, _imgElemental;
-		
-		[Required, SerializeField] private Toggle _toggleStat, _toggleElemental, _toggleChangeStateInteract;
+
+		[Required, SerializeField] private Toggle _toggleStat, _toggleDef, _toggleChangeStateInteract;
+
+		[Required, SerializeField] private GameObject _containerStatAtk, _containerStatDef;
 
 		[SerializeField] private TextMeshProUGUI _txtExpInMap, _txtLevel, _txtTimeMinutes, _txtTimeSeconds, _txtMonsterKilled;
-		private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
+		private GameController gameController => Singleton<GameController>.instance;
 
 		private MapModel mapModel => gameController.map.model;
 		private TowerModel towerModel => gameController.tower.model;
@@ -44,9 +46,7 @@ namespace Popup
 			_btnSetting.onClick.AddListener(OnClickBtnSetting);
 			_toggleChangeStateInteract.onValueChanged.AddListener(OnClickToggleChangeStateInteract);
 			_toggleStat.onValueChanged.AddListener(OnClickToggleStat);
-			_toggleElemental.onValueChanged.AddListener(OnClickToggleElemental);
-			
-			
+			_toggleDef.onValueChanged.AddListener(OnClickToggleDEF);
 			
 			AddDataBinding("fieldMap-expInMapValue", _txtExpInMap, (control, e) =>
 				{
@@ -111,12 +111,14 @@ namespace Popup
 		{
 			_toggleChangeStateInteract.isOn = false;
 			_imgStat.color = value ? new Color(1, 0.8313726f, 0.4196079f) : Color.white;
+			_containerStatAtk.SetActive(value);
 		}
 
-		private void OnClickToggleElemental(bool value)
+		private void OnClickToggleDEF(bool value)
 		{
 			_toggleChangeStateInteract.isOn = false;
 			_imgElemental.color = value ? new Color(1, 0.8313726f, 0.4196079f) : Color.white;
+			_containerStatDef.SetActive(value);
 		}
 	}
 }
