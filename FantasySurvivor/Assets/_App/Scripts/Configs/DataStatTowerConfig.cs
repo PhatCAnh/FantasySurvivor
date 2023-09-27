@@ -10,7 +10,6 @@ namespace _App.Scripts.Configs
 		public float attackRange { get; private set; }
 		public int criticalRate { get; private set; }
 		public int criticalDamage { get; private set; }
-		
 		public int health { get; private set; }
 
 

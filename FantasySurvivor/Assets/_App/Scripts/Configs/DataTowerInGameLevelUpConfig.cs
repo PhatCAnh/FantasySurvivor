@@ -25,6 +25,8 @@ namespace DataConfig
 		public DataLevelTowerConfig attackDamage { get; private set; }
 		public DataLevelTowerConfig attackSpeed { get; private set; }
 		public DataLevelTowerConfig attackRange { get; private set; }
+		public DataLevelTowerConfig criticalRate { get; private set; }
+		public DataLevelTowerConfig criticalDamage { get; private set; }
 		public DataLevelTowerConfig health { get; private set; }
 
 		public string GetId()
@@ -35,7 +37,7 @@ namespace DataConfig
 		public void OnReadImpl(IConfigReader reader)
 		{
 			level = reader.ReadInt();
-
+			
 			var valueAtk = reader.ReadInt();
 			var priceAtk = reader.ReadInt();
 			attackDamage = new DataLevelTowerConfig(valueAtk, priceAtk);
@@ -47,6 +49,14 @@ namespace DataConfig
 			var valueAr = reader.ReadFloat();
 			var priceAr = reader.ReadInt();
 			attackRange = new DataLevelTowerConfig(valueAr, priceAr);
+			
+			var valueCd = reader.ReadInt();
+			var priceCd = reader.ReadInt();
+			criticalDamage = new DataLevelTowerConfig(valueCd, priceCd);
+			
+			var valueCr = reader.ReadFloat();
+			var priceCr = reader.ReadInt();
+			criticalRate = new DataLevelTowerConfig(valueCr, priceCr);
 			
 			var valueHealth = reader.ReadInt();
 			var priceHealth = reader.ReadInt();
@@ -72,7 +82,8 @@ namespace DataConfig
 				TypeStatTower.AttackRange => data.attackRange,
 				TypeStatTower.AttackSpeed => data.attackSpeed,
 				TypeStatTower.Health => data.health,
-				_ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+				TypeStatTower.CriticalRate => data.criticalRate,
+				TypeStatTower.CriticalDamage => data.criticalDamage,
 			};
 		}
 	}

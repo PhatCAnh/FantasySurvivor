@@ -25,7 +25,7 @@ public class GameController : Controller<GameApp>
 	public MapView map;
 
 	public List<Monster> listMonster;
-	
+
 	public Action<Monster> onMonsterDie;
 
 	private void Awake()
@@ -66,9 +66,9 @@ public class GameController : Controller<GameApp>
 
 	public void StartGame(int chapter)
 	{
-		ChangeScene("scn_Game",  () => LoadMap(chapter));
+		ChangeScene("scn_Game", () => LoadMap(chapter));
 	}
-	
+
 	public void WinGame()
 	{
 		Debug.Log("Wingame r ne");
@@ -144,17 +144,17 @@ public class GameController : Controller<GameApp>
 	public Monster SpawnMonster(MapView.WaveData wave)
 	{
 		var statMonster = app.configs.dataStatMonster.GetConfig(wave.idMonster);
-		
+
 		var monsterStat = new MonsterStat(statMonster.moveSpeed, wave.healthMonster, wave.adMonster, statMonster.attackSpeed, statMonster.attackRange, wave.expMonster);
 
 		var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
-		
+
 		monsterIns.transform.position = RandomPositionSpawnMonster(monsterIns.justSpawnVertical);
-		
+
 		monsterIns.Init(monsterStat, wave);
-		
+
 		listMonster.Add(monsterIns);
-		
+
 		return monsterIns;
 	}
 	public void MonsterDie(Monster mons, bool selfDie = false)
@@ -222,14 +222,14 @@ public class GameController : Controller<GameApp>
 		healthBar.Init(towerPrefab);
 
 		var model = new TowerModel(
-			 (int)GetStatTower(app.models.dataPlayerModel.levelHealth, TypeStatTower.Health),
-			 GetStatTower(app.models.dataPlayerModel.levelAs, TypeStatTower.AttackSpeed),
+			(int) GetStatTower(app.models.dataPlayerModel.levelHealth, TypeStatTower.Health),
+			GetStatTower(app.models.dataPlayerModel.levelAs, TypeStatTower.AttackSpeed),
 			(int) GetStatTower(app.models.dataPlayerModel.levelAd, TypeStatTower.AttackDamage),
-			 GetStatTower(app.models.dataPlayerModel.levelAr, TypeStatTower.AttackRange),
-			 (int) GetStatTower(0, TypeStatTower.CriticalRate),
-			 (int) GetStatTower(0, TypeStatTower.CriticalDamage)
-			);
-		towerPrefab.Init(model ,healthBar);
+			GetStatTower(app.models.dataPlayerModel.levelAr, TypeStatTower.AttackRange),
+			(int) GetStatTower(0, TypeStatTower.CriticalRate),
+			(int) GetStatTower(0, TypeStatTower.CriticalDamage)
+		);
+		towerPrefab.Init(model, healthBar);
 
 		return towerPrefab;
 	}
@@ -255,11 +255,11 @@ public class GameController : Controller<GameApp>
 				baseValue = dataStatBase.attackSpeed;
 				break;
 			case TypeStatTower.CriticalRate:
-				value = 0;
+				value = dataLevel.criticalRate.value;
 				baseValue = dataStatBase.criticalRate;
 				break;
 			case TypeStatTower.CriticalDamage:
-				value = 0;
+				value = dataLevel.criticalDamage.value;
 				baseValue = dataStatBase.criticalDamage;
 				break;
 			case TypeStatTower.Health:
@@ -272,21 +272,11 @@ public class GameController : Controller<GameApp>
 
 	private void LoadMap(int chapter)
 	{
-		if(!app.models.dataPlayerModel.firstPlay)
-		{
-			map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
-		}
-		else
-		{
-			map = app.resourceManager.ShowPopup(PopupType.MainInTutorial).GetComponent<MapView>();
-			app.models.dataPlayerModel.firstPlay = false;
-			app.models.WriteModel<DataPlayerModel>();
-		}
-		
+		map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
+
 		map.Init();
 		Instantiate(app.resourceManager.GetMap((MapType) chapter));
 		tower = SpawnTower();
-		app.resourceManager.ShowPopup(PopupType.ClickBulletTutorial);
 		listMonster.Clear();
 	}
 }

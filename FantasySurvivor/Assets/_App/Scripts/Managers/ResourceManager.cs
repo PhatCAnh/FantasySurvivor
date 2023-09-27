@@ -42,8 +42,6 @@ public class ResourceManager : UIManagerBase<PopupType>
 	
 	[Header("UI Tutorial prefabs")]
 	
-	[Required, SerializeField] private GameObject _mainUiTutorial;
-
 	[Required, SerializeField] private GameObject _clickBulletTutorial;
 
 	[Header("Map prefabs")]
@@ -87,7 +85,6 @@ public class ResourceManager : UIManagerBase<PopupType>
 		InitDic();
 		RegisterPopup(PopupType.MainUI, _mainUI);
 		RegisterPopup(PopupType.MainInGame, _mainUIInGame);
-		RegisterPopup(PopupType.MainInTutorial, _mainUiTutorial);
 		RegisterPopup(PopupType.ClickBulletTutorial, _clickBulletTutorial);
 		RegisterPopup(PopupType.ChoiceMap, _choiceMapPopup);
 		RegisterPopup(PopupType.LoseGame, _loseGamePopup);

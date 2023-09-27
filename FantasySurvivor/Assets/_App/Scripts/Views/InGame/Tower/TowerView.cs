@@ -115,6 +115,7 @@ public class TowerView : ObjectRPG
 
 	public void Attack()
 	{
+		if(target == null) return;
 		var arrowIns = Instantiate(arrow);
 		arrowIns.Init(this);
 	}

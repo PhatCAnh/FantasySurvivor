@@ -26,7 +26,11 @@ namespace FantasySurvivor
 			levelAr = 0;
 			levelAs = 0;
 			levelHealth = 0;
-			firstPlay = true;
+			levelCr = 0;
+			levelCd = 0;
+
+			firstTouchHand = true;
+			firstTutorialHandUi = true;
 			firstSeeBulletInteract = true;
 			app.models.WriteModel<DataPlayerModel>();
 		}
@@ -35,9 +39,13 @@ namespace FantasySurvivor
 		[JsonProperty] private int _levelAd;
 		[JsonProperty] private int _levelAr;
 		[JsonProperty] private int _levelAs;
+		[JsonProperty] private int _levelCr;
+		[JsonProperty] private int _levelCd;
+		
 		[JsonProperty] private int _levelHealth;
 		
-		[JsonProperty] public bool firstPlay;
+		[JsonProperty] public bool firstTouchHand;
+		[JsonProperty] public bool firstTutorialHandUi;
 		[JsonProperty] public bool firstSeeBulletInteract;
 		
 		
@@ -81,6 +89,27 @@ namespace FantasySurvivor
 				RaiseDataChanged(nameof(levelAs));
 			}
 		}
+		
+		public int levelCr
+		{
+			get => _levelCr;
+			set {
+				if(levelCr == value) return;
+				_levelCr = value;
+				RaiseDataChanged(nameof(levelCr));
+			}
+		}
+		
+		public int levelCd
+		{
+			get => _levelCd;
+			set {
+				if(levelCd == value) return;
+				_levelCd = value;
+				RaiseDataChanged(nameof(levelCd));
+			}
+		}
+		
 		public int levelHealth
 		{
 			get => _levelHealth;

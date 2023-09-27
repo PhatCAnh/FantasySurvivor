@@ -28,6 +28,8 @@ namespace FantasySurvivor
 			levelAd = 0;
 			levelAr = 0;
 			levelAs = 0;
+			levelCr = 0;
+			levelCd = 0;
 			levelHealth = 0;
 		}
 
@@ -43,6 +45,8 @@ namespace FantasySurvivor
 		private int _levelAd;
 		private int _levelAr;
 		private int _levelAs;
+		private int _levelCr;
+		private int _levelCd;
 		private int _levelHealth;
 		
 		public int currentHealthPoint
@@ -151,6 +155,25 @@ namespace FantasySurvivor
 				if(levelHealth == value) return;
 				_levelHealth = value;
 				RaiseDataChanged(nameof(levelHealth));
+			}
+		}
+		public int levelCr
+		{
+			get => _levelCr;
+			set {
+				if(levelCr == value) return;
+				_levelCr = value;
+				RaiseDataChanged(nameof(levelCr));
+			}
+		}
+		
+		public int levelCd
+		{
+			get => _levelCd;
+			set {
+				if(levelCd == value) return;
+				_levelCd = value;
+				RaiseDataChanged(nameof(levelCd));
 			}
 		}
 	}

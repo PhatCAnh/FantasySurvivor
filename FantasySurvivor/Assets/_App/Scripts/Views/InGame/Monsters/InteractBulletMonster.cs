@@ -9,9 +9,10 @@ namespace _App.Scripts.Views.InGame.Monsters
 		protected override void OnViewInit()
 		{
 			base.OnViewInit();
-			if(app.models.dataPlayerModel.firstSeeBulletInteract)
+			if(!app.models.dataPlayerModel.firstSeeBulletInteract)
 			{
 				app.resourceManager.ShowPopup(PopupType.ClickBulletTutorial);
+				app.models.dataPlayerModel.firstSeeBulletInteract = true;
 			}
 		}
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using _App.Scripts.Pool;
 using ArbanFramework;
 using ArbanFramework.MVC;
+using FantasySurvivor;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -22,13 +23,23 @@ public class LevelTutorial : View<GameApp>
 
 	private int _numberClickUI = 0;
 
+	private DataPlayerModel _dataPlayer => app.models.dataPlayerModel;
+
 	private GameController gameController => Singleton<GameController>.instance;
 
 	protected override void OnViewInit()
 	{
 		base.OnViewInit();
-		Singleton<PoolGemExp>.instance.onSpawnGemExp += OnMonsterDie;
-		ClickFollowTutorial();
+
+		if(_dataPlayer.firstTouchHand)
+		{
+			Singleton<PoolGemExp>.instance.onSpawnGemExp += OnMonsterDie;
+		}
+		if(_dataPlayer.firstTutorialHandUi)
+		{
+			ClickFollowTutorial();
+			_handUi[0].SetActive(true);
+		}
 	}
 
 	private void OnMonsterDie(GemExp gemExp)
@@ -38,6 +49,8 @@ public class LevelTutorial : View<GameApp>
 		if(_numberHand >= 4)
 		{
 			Singleton<PoolGemExp>.instance.onSpawnGemExp -= OnMonsterDie;
+			_dataPlayer.firstTouchHand = false;
+			app.models.WriteModel<DataPlayerModel>();
 		}
 	}
 
@@ -47,6 +60,8 @@ public class LevelTutorial : View<GameApp>
 		if(_numberClickUI >= _handUi.Length)
 		{
 			_tglChangeState.onValueChanged.RemoveListener(OnClickToggle);
+			_dataPlayer.firstTutorialHandUi = false;
+			app.models.WriteModel<DataPlayerModel>();
 			return;
 		}
 		_handUi[_numberClickUI].SetActive(true);

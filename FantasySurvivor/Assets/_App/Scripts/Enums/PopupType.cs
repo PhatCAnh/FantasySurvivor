@@ -7,7 +7,6 @@ public enum PopupType
     LoseGame,
     ChoiceMap,
     MainInGame,
-    MainInTutorial,
     ClickBulletTutorial,
     HealthBar,
     Cheat,
