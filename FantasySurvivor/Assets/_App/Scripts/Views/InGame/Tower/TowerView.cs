@@ -131,6 +131,7 @@ public class TowerView : ObjectRPG
 			TypeStatTower.CriticalRate => stat.critRate.BaseValue,
 			TypeStatTower.CriticalDamage => stat.critDmg.BaseValue,
 			TypeStatTower.RegenHp => stat.regenHp.BaseValue,
+			_ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
 		};
 	}
 
@@ -140,7 +141,6 @@ public class TowerView : ObjectRPG
 		if(_cooldownRegen.isFinished)
 		{
 			model.currentHealthPoint += model.regenHp;
-			Debug.Log($"CurrentHP: {model.currentHealthPoint}");
 			_cooldownRegen.Restart(1);
 		}
 	}

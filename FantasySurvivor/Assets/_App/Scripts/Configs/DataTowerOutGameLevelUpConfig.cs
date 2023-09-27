@@ -75,6 +75,7 @@ namespace DataConfig
 				TypeStatTower.CriticalRate => data.CriticalRate,
 				TypeStatTower.CriticalDamage => data.CriticalDamage,
 				TypeStatTower.RegenHp => data.RegenHp,
+				_ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
 			};
 		}
 	}

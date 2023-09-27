@@ -239,41 +239,41 @@ public class GameController : Controller<GameApp>
 	private float GetStatTower(int level, TypeStatTower type)
 	{
 		float value = 0;
-		float baseValue = 0;
+		float valueOutGame = 0;
 		var dataLevel = app.configs.dataLevelTowerOutGame.GetConfig(level);
 		var dataStatBase = app.configs.dataStatTower.GetConfig(TowerType.Basic);
 		switch (type)
 		{
 			case TypeStatTower.AttackDamage:
 				value = dataLevel.AttackDamage.value;
-				baseValue = dataStatBase.AttackDamage;
+				valueOutGame = dataStatBase.AttackDamage;
 				break;
 			case TypeStatTower.AttackRange:
 				value = dataLevel.AttackRange.value;
-				baseValue = dataStatBase.AttackRange;
+				valueOutGame = dataStatBase.AttackRange;
 				break;
 			case TypeStatTower.AttackSpeed:
 				value = dataLevel.AttackSpeed.value;
-				baseValue = dataStatBase.AttackSpeed;
+				valueOutGame = dataStatBase.AttackSpeed;
 				break;
 			case TypeStatTower.CriticalRate:
 				value = dataLevel.CriticalRate.value;
-				baseValue = dataStatBase.CriticalRate;
+				valueOutGame = dataStatBase.CriticalRate;
 				break;
 			case TypeStatTower.CriticalDamage:
 				value = dataLevel.CriticalDamage.value;
-				baseValue = dataStatBase.CriticalDamage;
+				valueOutGame = dataStatBase.CriticalDamage;
 				break;
 			case TypeStatTower.Health:
 				value = dataLevel.Health.value;
-				baseValue = dataStatBase.Health;
+				valueOutGame = dataStatBase.Health;
 				break;
 			case TypeStatTower.RegenHp:
 				value = dataLevel.RegenHp.value;
-				baseValue = dataStatBase.RegenHp;
+				valueOutGame = dataStatBase.RegenHp;
 				break;
 		}
-		return value + baseValue;
+		return value + valueOutGame;
 	}
 
 	private void LoadMap(int chapter)

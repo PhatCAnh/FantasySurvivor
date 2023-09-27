@@ -1,4 +1,5 @@
 using ArbanFramework.MVC;
+using UnityEngine;
 namespace FantasySurvivor
 {
 	public class TowerModel : Model<GameApp>
@@ -56,7 +57,7 @@ namespace FantasySurvivor
 			get => _currentHealthPoint;
 			set {
 				if(currentHealthPoint.Equals(value)) return;
-				_currentHealthPoint = value;
+				_currentHealthPoint = Mathf.Clamp(value, 0, maxHealthPoint);
 				RaiseDataChanged(nameof(currentHealthPoint));
 			}
 		}

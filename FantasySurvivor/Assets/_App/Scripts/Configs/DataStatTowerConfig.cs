@@ -1,4 +1,5 @@
-﻿using ArbanFramework.Config;
+﻿using System;
+using ArbanFramework.Config;
 using DataConfig;
 namespace _App.Scripts.Configs
 {
@@ -53,6 +54,7 @@ namespace _App.Scripts.Configs
 				TypeStatTower.CriticalRate => data.CriticalRate,
 				TypeStatTower.CriticalDamage => data.CriticalDamage,
 				TypeStatTower.RegenHp => data.RegenHp,
+				_ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
 			};
 		}
 	}
