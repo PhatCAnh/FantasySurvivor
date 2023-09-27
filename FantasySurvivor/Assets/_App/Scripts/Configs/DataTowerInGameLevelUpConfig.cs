@@ -58,7 +58,7 @@ namespace DataConfig
 			var priceCr = reader.ReadInt();
 			criticalRate = new DataLevelTowerConfig(valueCr, priceCr);
 			
-			var valueHealth = reader.ReadInt();
+			var valueHealth = reader.ReadFloat();
 			var priceHealth = reader.ReadInt();
 			health = new DataLevelTowerConfig(valueHealth, priceHealth);
 		}

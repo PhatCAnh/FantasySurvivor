@@ -10,7 +10,7 @@ namespace _App.Scripts.Configs
 		public float attackRange { get; private set; }
 		public int criticalRate { get; private set; }
 		public int criticalDamage { get; private set; }
-		public int health { get; private set; }
+		public float health { get; private set; }
 
 
 		public string GetId()
@@ -26,7 +26,7 @@ namespace _App.Scripts.Configs
 			attackRange = reader.ReadFloat();
 			criticalRate = reader.ReadInt();
 			criticalDamage = reader.ReadInt();
-			health = reader.ReadInt();
+			health = reader.ReadFloat();
 		}
 	}
 

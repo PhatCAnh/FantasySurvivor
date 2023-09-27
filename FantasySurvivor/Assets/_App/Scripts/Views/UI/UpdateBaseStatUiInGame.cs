@@ -60,8 +60,7 @@ public class UpdateBaseStatUiInGame : View<GameApp>
 
 		AddDataBinding("fieldTower-levelHealthValue", _txtHealth, (control, e) =>
 			{
-				var value = ChangeStatEvent(TypeStatTower.Health, towerModel.levelHealth, towerModel.maxHealthPoint, _health);
-				towerModel.maxHealthPoint += Mathf.RoundToInt(value);
+				towerModel.maxHealthPoint += ChangeStatEvent(TypeStatTower.Health, towerModel.levelHealth, towerModel.maxHealthPoint, _health);
 			}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.levelHealth), towerModel)
 		);
 		

@@ -33,8 +33,8 @@ namespace FantasySurvivor
 			levelHealth = 0;
 		}
 
-		private int _currentHealthPoint;
-		private int _maxHealthPoint;
+		private float _currentHealthPoint;
+		private float _maxHealthPoint;
 		
 		private int _attackDamage;
 		private float _attackSpeed;
@@ -49,21 +49,21 @@ namespace FantasySurvivor
 		private int _levelCd;
 		private int _levelHealth;
 		
-		public int currentHealthPoint
+		public float currentHealthPoint
 		{
 			get => _currentHealthPoint;
 			set {
-				if(currentHealthPoint == value) return;
+				if(currentHealthPoint.Equals(value)) return;
 				_currentHealthPoint = value;
 				RaiseDataChanged(nameof(currentHealthPoint));
 			}
 		}
         
-		public int maxHealthPoint
+		public float maxHealthPoint
 		{
 			get => _maxHealthPoint;
 			set {
-				if(maxHealthPoint == value) return;
+				if(maxHealthPoint.Equals(value)) return;
 				var currentMaxHp = _maxHealthPoint;
 				_maxHealthPoint = value;
 				RaiseDataChanged(nameof(maxHealthPoint));
