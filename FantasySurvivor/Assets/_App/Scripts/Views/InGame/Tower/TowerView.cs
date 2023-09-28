@@ -29,13 +29,9 @@ public class TowerView : ObjectRPG
 	public BulletView arrow;
 
 	public float sizeBase;
-
 	public Monster target { set; get; }
 	public TowerModel model { get; protected set; }
-
 	public TowerStat stat { get; protected set; }
-
-	public HealthBar healthBar { get; set; }
 	public bool isAlive => model.currentHealthPoint > 0;
 	public GameController gameController => Singleton<GameController>.instance;
 	public bool isIdle => _stateMachine.currentState == _idleState;
@@ -47,10 +43,9 @@ public class TowerView : ObjectRPG
 
 	private readonly Cooldown _cooldownRegen = new Cooldown();
 
-	public void Init(TowerStat towerStat, HealthBar healthBar)
+	public void Init(TowerStat towerStat)
 	{
 		this.stat = towerStat;
-		this.healthBar = healthBar;
 		this.model = new TowerModel(
 			Mathf.RoundToInt(stat.health.BaseValue),
 			stat.ats.BaseValue,
@@ -147,7 +142,6 @@ public class TowerView : ObjectRPG
 
 	private void Die()
 	{
-		Destroy(healthBar.gameObject);
 		gameController.TowerDie(this);
 	}
 

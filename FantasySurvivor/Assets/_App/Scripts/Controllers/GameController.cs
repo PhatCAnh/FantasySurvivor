@@ -29,6 +29,8 @@ public class GameController : Controller<GameApp>
 
 	public Action<Monster> onMonsterDie;
 
+	private HealthBar _healthBar;
+
 	private void Awake()
 	{
 		Singleton<GameController>.Set(this);
@@ -97,6 +99,7 @@ public class GameController : Controller<GameApp>
 		load.completed += o =>
 		{
 			app.resourceManager.CloseAllPopup();
+			if(_healthBar != null) Destroy(_healthBar.gameObject);
 			ShowMainHome();
 		};
 	}
@@ -211,27 +214,27 @@ public class GameController : Controller<GameApp>
 		}
 		return new Vector2(posX, posY);
 	}
-
+	
 	private TowerView SpawnTower()
 	{
 		var towerPrefab = Instantiate(app.resourceManager.GetItem(ItemType.Tower))
 			.GetComponent<TowerView>();
 		towerPrefab.transform.position = Vector2.zero;
 
-		var healthBar = Instantiate(app.resourceManager.GetItem(ItemType.HealthBar), app.resourceManager.rootContainer)
+		_healthBar = Instantiate(app.resourceManager.GetItem(ItemType.HealthBar), app.resourceManager.rootContainer)
 			.GetComponent<HealthBar>();
-		healthBar.Init(towerPrefab);
+		_healthBar.Init(towerPrefab);
 
 		var stat = new TowerStat(
-			(int) GetStatTower(app.models.dataPlayerModel.LevelHealth, TypeStatTower.Health),
-			GetStatTower(app.models.dataPlayerModel.LevelAs, TypeStatTower.AttackSpeed),
 			(int) GetStatTower(app.models.dataPlayerModel.LevelAd, TypeStatTower.AttackDamage),
+			GetStatTower(app.models.dataPlayerModel.LevelAs, TypeStatTower.AttackSpeed),
 			(int) GetStatTower(app.models.dataPlayerModel.LevelAr, TypeStatTower.AttackRange),
 			(int) GetStatTower(app.models.dataPlayerModel.LevelCr, TypeStatTower.CriticalRate),
 			(int) GetStatTower(app.models.dataPlayerModel.LevelCd, TypeStatTower.CriticalDamage),
+			(int) GetStatTower(app.models.dataPlayerModel.LevelHealth, TypeStatTower.Health),
 			GetStatTower(app.models.dataPlayerModel.LevelRegenHp, TypeStatTower.RegenHp)
 		);
-		towerPrefab.Init(stat, healthBar);
+		towerPrefab.Init(stat);
 
 		return towerPrefab;
 	}

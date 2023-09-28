@@ -42,41 +42,41 @@ public class UpdateBaseStatUiInGame : View<GameApp>
 		AddDataBinding("fieldTower-levelAdValue", this, (control, e) =>
 			{
 				var value = ChangeStatEvent(TypeStatTower.AttackDamage, towerModel.levelAd, _attackDamage);
-				towerModel.attackDamage += Mathf.RoundToInt(value);
+				towerModel.attackDamage = Mathf.RoundToInt(value);
 			}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.levelAd), towerModel)
 		);
 
 		AddDataBinding("fieldTower-levelArValue", this, (control, e) =>
 			{
-				towerModel.attackRange += ChangeStatEvent(TypeStatTower.AttackRange, towerModel.levelAr, _attackRange);
+				towerModel.attackRange = ChangeStatEvent(TypeStatTower.AttackRange, towerModel.levelAr, _attackRange);
 				
 			}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.levelAr), towerModel)
 		);
 
 		AddDataBinding("fieldTower-levelAsValue", this, (control, e) =>
 			{
-				towerModel.attackSpeed += ChangeStatEvent(TypeStatTower.AttackSpeed, towerModel.levelAs, _attackSpeed);
+				towerModel.attackSpeed = ChangeStatEvent(TypeStatTower.AttackSpeed, towerModel.levelAs, _attackSpeed);
 
 			}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.levelAs), towerModel)
 		);
 
 		AddDataBinding("fieldTower-levelHealthValue", this, (control, e) =>
 			{
-				towerModel.maxHealthPoint += ChangeStatEvent(TypeStatTower.Health, towerModel.levelHealth, _health);
+				towerModel.maxHealthPoint = ChangeStatEvent(TypeStatTower.Health, towerModel.levelHealth, _health);
 			}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.levelHealth), towerModel)
 		);
 		
 		AddDataBinding("fieldTower-levelCriticalRateValue", this, (control, e) =>
 			{
 				var value = ChangeStatEvent(TypeStatTower.CriticalRate, towerModel.levelCr, _criticalRate);
-				towerModel.criticalRate += Mathf.RoundToInt(value);
+				towerModel.criticalRate+= Mathf.RoundToInt(value);
 			}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.levelCr), towerModel)
 		);
 		
 		AddDataBinding("fieldTower-levelCriticalDamageValue", this, (control, e) =>
 			{
 				var value = ChangeStatEvent(TypeStatTower.CriticalDamage, towerModel.levelCd, _criticalDamage);
-				towerModel.criticalDamage += Mathf.RoundToInt(value);
+				towerModel.criticalDamage = Mathf.RoundToInt(value);
 			}, new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.levelCd), towerModel)
 		);
 

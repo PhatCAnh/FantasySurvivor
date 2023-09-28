@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -48,10 +49,11 @@ public class ObjectPool : MonoBehaviour
 
     public void ReturnAllObject()
     {
-        foreach(var item in usedList)
+        foreach(var item in usedList.ToList())
         {
             item.SetActive(false);
             freeList.Add(item);
+            usedList.Remove(item);
         }
     }
 
