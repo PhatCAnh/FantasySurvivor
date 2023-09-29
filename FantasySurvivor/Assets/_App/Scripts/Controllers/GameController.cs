@@ -82,6 +82,7 @@ public class GameController : Controller<GameApp>
 		isEndGame = true;
 		Singleton<PoolGemExp>.instance.ReturnAllObject();
 		app.resourceManager.ShowPopup(PopupType.LoseGame);
+		app.analytics.TrackPlay(LevelResult.Failure, map.model.levelInGame);
 	}
 
 	public void ChangeScene(string nameScene, [CanBeNull] Action callback)
@@ -282,10 +283,10 @@ public class GameController : Controller<GameApp>
 	private void LoadMap(int chapter)
 	{
 		map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
-
 		map.Init();
 		Instantiate(app.resourceManager.GetMap((MapType) chapter));
 		tower = SpawnTower();
 		listMonster.Clear();
+		app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
 	}
 }

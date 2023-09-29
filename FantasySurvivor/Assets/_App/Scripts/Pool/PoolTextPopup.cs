@@ -16,9 +16,9 @@ namespace _App.Scripts.Pool
             Singleton<PoolTextPopup>.Unset(this);
         }
 
-        public void GetObjectFromPool(Vector3 position, string value, TextPopupType type)
+        public void GetObjectFromPool(Vector3 position, string value, TextPopupType type, bool isCritical = false)
         {
-            GetObject(position).GetComponent<TextPopup>().Create(value, type);
+            GetObject(position).GetComponent<TextPopup>().Create(value, type, isCritical);
         }
 
         public void RemoveObjectToPool(GameObject theGameObject, params object[] arrObject)

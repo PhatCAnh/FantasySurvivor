@@ -71,8 +71,6 @@ public class UpdateBaseStatUI : View<GameApp>
 		_statHealth.maxLevel = maxLevel;
 
 		AddEventChangeStat();
-
-
 	}
 
 	private void OnClickBtnAttackDamage()
@@ -81,6 +79,7 @@ public class UpdateBaseStatUI : View<GameApp>
 		dataPlayer.LevelAd++;
 		_statAttackDamage.currentLevel++;
 		app.models.WriteModel<DataPlayerModel>();
+		app.analytics.TrackUpStat(false, TypeStatTower.AttackDamage, dataPlayer.LevelAd);
 	}
 
 	private void OnClickBtnAttackRange()
@@ -89,6 +88,7 @@ public class UpdateBaseStatUI : View<GameApp>
 		dataPlayer.LevelAr++;
 		_statAttackRange.currentLevel++;
 		app.models.WriteModel<DataPlayerModel>();
+		app.analytics.TrackUpStat(false, TypeStatTower.AttackRange, dataPlayer.LevelAr);
 	}
 
 	private void OnClickBtnAttackSpeed()
@@ -97,6 +97,7 @@ public class UpdateBaseStatUI : View<GameApp>
 		dataPlayer.LevelAs++;
 		_statAttackSpeed.currentLevel++;
 		app.models.WriteModel<DataPlayerModel>();
+		app.analytics.TrackUpStat(false, TypeStatTower.AttackSpeed, dataPlayer.LevelAs);
 	}
 
 	private void OnClickBtnHealth()
@@ -105,6 +106,7 @@ public class UpdateBaseStatUI : View<GameApp>
 		dataPlayer.LevelHealth++;
 		_statHealth.currentLevel++;
 		app.models.WriteModel<DataPlayerModel>();
+		app.analytics.TrackUpStat(false, TypeStatTower.Health, dataPlayer.LevelHealth);
 	}
 	
 	private void OnClickBtnCriticalRate()
@@ -113,6 +115,7 @@ public class UpdateBaseStatUI : View<GameApp>
 		dataPlayer.LevelCr++;
 		_statCriticalRate.currentLevel++;
 		app.models.WriteModel<DataPlayerModel>();
+		app.analytics.TrackUpStat(false, TypeStatTower.CriticalRate, dataPlayer.LevelCr);
 	}
 	
 	private void OnClickBtnCriticalDamage()
@@ -121,6 +124,7 @@ public class UpdateBaseStatUI : View<GameApp>
 		dataPlayer.LevelCd++;
 		_statCriticalDamage.currentLevel++;
 		app.models.WriteModel<DataPlayerModel>();
+		app.analytics.TrackUpStat(false, TypeStatTower.CriticalDamage, dataPlayer.LevelCd);
 	}
 	
 	private void OnClickBtnRegenHp()
@@ -129,6 +133,7 @@ public class UpdateBaseStatUI : View<GameApp>
 		dataPlayer.LevelRegenHp++;
 		_statRegenHp.currentLevel++;
 		app.models.WriteModel<DataPlayerModel>();
+		app.analytics.TrackUpStat(false, TypeStatTower.RegenHp, dataPlayer.LevelRegenHp);
 	}
 
 	private void UpdateStatUI(StatUI statUI, DataLevelTowerConfig dataCurrent, int currentLevel, TypeStatTower type)

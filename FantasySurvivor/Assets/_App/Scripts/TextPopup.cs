@@ -30,10 +30,10 @@ public class TextPopup : MonoBehaviour
 		_sortingOrder++;
 		_textMesh.sortingOrder = _sortingOrder;
 		_disappearTimer = DisappearTimeMax;
-		_moveVector = new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0f) * 10f;
+		_moveVector = new Vector3(0, Random.Range(0, 3f), 0f) * 10f;
 	}
 
-	public void Create(string value, TextPopupType type)
+	public void Create(string value, TextPopupType type, bool isCritical = false)
 	{
 		string textValue = "";
 
@@ -43,6 +43,14 @@ public class TextPopup : MonoBehaviour
 				textValue = value;
 				_textMesh.color = Color.white;
 				_textMesh.fontSize = 5;
+
+
+				if(isCritical)
+				{
+					textValue = $"{value} <sprite=6>";
+					_textMesh.color = new Color(1, 0.8f, 0);
+					_textMesh.fontSize *= 1.5f;
+				}
 				break;
 			case TextPopupType.MonsterDamage:
 				textValue = value;

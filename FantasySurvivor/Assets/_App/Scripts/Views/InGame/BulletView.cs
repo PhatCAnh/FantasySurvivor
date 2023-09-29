@@ -52,7 +52,7 @@ public class BulletView : MonoBehaviour
 		if(other.TryGetComponent(out Monster monster))
 		{
 			var damage = _damage;
-			monster.TakeDamage(damage);
+			monster.TakeDamage(damage, _isCritical);
 			TouchUnit();
 		}
 	}

@@ -42,7 +42,7 @@ namespace FantasySurvivor
 		[JsonProperty] public bool firstTouchHand;
 		[JsonProperty] public bool firstTutorialHandUi;
 		[JsonProperty] public bool firstSeeBulletInteract;
-
+		
 		public int Coin
 		{
 			get => _coin;

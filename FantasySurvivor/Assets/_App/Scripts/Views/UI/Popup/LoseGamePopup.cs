@@ -71,12 +71,15 @@ public class LoseGamePopup : View<GameApp>, IPopup
 
     private void OnClickBtnReward()
     {   
-        foreach(var reward in gameController.map.dictionaryReward)
+        app.adsController.ShowReward(() =>
         {
-            gameController.ClaimReward(reward.Key, reward.Value * 2);
-        }
+            foreach(var reward in gameController.map.dictionaryReward)
+            {
+                gameController.ClaimReward(reward.Key, reward.Value * 2);
+            }
         
-        Close();
+            Close();
+        });
     }
 
     private void SetAnimOpen()

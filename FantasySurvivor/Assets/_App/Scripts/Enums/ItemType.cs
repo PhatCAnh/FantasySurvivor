@@ -48,3 +48,18 @@ public enum TypeItemReward
 {
     Coin,
 }
+
+public enum LevelResult
+{
+    Start,
+    Failure,
+    Completed,
+    Exit,
+}
+
+public enum TypeAds
+{
+    Interstitial,
+    Reward,
+    Banner,
+}

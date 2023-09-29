@@ -1,28 +1,36 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Advertisements;
 namespace _App.Scripts.Controllers.Ads
 {
-	public class LoadInterstitial : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
+	public class LoadInterstitial : IUnityAdsLoadListener, IUnityAdsShowListener
 	{
 		public string androidGameId;
 		public string iosGameId;
 
 		private string _gameId;
 
-		private void Awake()
+		private Action _callBack;
+		
+		public LoadInterstitial(string androidId, string iosId)
 		{
+			this.androidGameId = androidId;
+			this.iosGameId = iosId;
+			
 #if UNITY_ANDROID
-			_gameId = androidGameId;
+			_gameId = this.androidGameId;
 #elif UNITY_IOS
 			_gameId = iosGameId;
 #elif UNITY_Editor
 			_gameId = androidGameId;
 #endif
 		}
-		public void LoadAd()
+		
+		public void LoadAd(Action callback)
 		{
 			Debug.Log("Loading interstitial!!");
 			Advertisement.Load(_gameId, this);
+			_callBack = callback;
 		}
 		
 		public void ShowAd()
@@ -57,6 +65,7 @@ namespace _App.Scripts.Controllers.Ads
 		public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
 		{
 			Debug.Log("interstitial show complete!!");
+			_callBack?.Invoke();
 		}
 	}
 }

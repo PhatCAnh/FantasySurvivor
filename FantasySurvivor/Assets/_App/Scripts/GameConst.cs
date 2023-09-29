@@ -20,12 +20,13 @@ public static class GameConst
 
     public static int gemStartGame = 100;
 
-    public static string iconAd = "<sprite index=2>";
     public static string iconCoin = "<sprite index=0>";
-    public static string iconAr = "<sprite index=4>";
+    public static string iconAd = "<sprite index=1>";
+    public static string iconAr = "<sprite index=2>";
     public static string iconAs = "<sprite index=3>";
-    public static string iconHealth = "<sprite index=5>";
-    public static string iconExp = "<sprite index=6>";
+    public static string iconHealth = "<sprite index=4>";
+    public static string iconExp = "<sprite index=5>";
+    public static string iconCritical = "<sprite index=6>";
 
     public static string GetNameWithVersion(string str)
     {

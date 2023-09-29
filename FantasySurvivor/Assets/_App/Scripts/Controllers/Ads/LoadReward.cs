@@ -1,24 +1,30 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Advertisements;
 namespace _App.Scripts.Controllers.Ads
 {
-	public class LoadReward : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
+	public class LoadReward : IUnityAdsLoadListener, IUnityAdsShowListener
 	{
-
-		public string androidGameId;
-		public string iosGameId;
+		private string _androidGameId;
+		private string _iosGameId;
 
 		private string _gameId;
 
-		private void Awake()
+		private Action _callBack;
+
+		public LoadReward(string androidGameId, string iosGameId)
 		{
-#if UNITY_ANDROID
-			_gameId = androidGameId;
+			this._androidGameId = androidGameId;
+			this._iosGameId = iosGameId;
+			
+			#if UNITY_ANDROID
+			_gameId = _androidGameId;
 #elif UNITY_IOS
 			_gameId = iosGameId;
 #elif UNITY_Editor
 			_gameId = androidGameId;
 #endif
+			LoadAd();
 		}
 		public void LoadAd()
 		{
@@ -26,10 +32,11 @@ namespace _App.Scripts.Controllers.Ads
 			Advertisement.Load(_gameId, this);
 		}
 
-		public void ShowAd()
+		public void ShowAd(Action callback)
 		{
 			Debug.Log("Showing ad!");
 			Advertisement.Show(_gameId, this);
+			_callBack = callback;
 		}
 
 
@@ -38,7 +45,6 @@ namespace _App.Scripts.Controllers.Ads
 			if(placementId.Equals(_gameId))
 			{
 				Debug.Log("Reward loaded!!");
-				ShowAd();
 			}
 		}
 		public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
@@ -60,9 +66,10 @@ namespace _App.Scripts.Controllers.Ads
 
 		public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
 		{
-			if(placementId.Equals(_gameId) && showCompletionState.Equals(UnityAdsCompletionState.COMPLETED))
+			if(placementId.Equals(_gameId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
 			{
 				Debug.Log("Reward show complete!!");
+				_callBack?.Invoke();
 			}
 		}
 	}

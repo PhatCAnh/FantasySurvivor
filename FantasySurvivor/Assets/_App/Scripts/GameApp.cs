@@ -11,6 +11,7 @@ public class GameApp : AppBase
     public ResourceManager resourceManager => Singleton<ResourceManager>.instance;
     public AudioManager audioManager => Singleton<AudioManager>.instance;
     public AdsController adsController => Singleton<AdsController>.instance;
+    public AnalyticsController analytics => Singleton<AnalyticsController>.instance;
 
     public override void OnInit()
     {
@@ -18,9 +19,12 @@ public class GameApp : AppBase
         Singleton<ModelManager>.Set(new ModelManager());
         Singleton<ConfigManager>.Set(new ConfigManager());
         Singleton<AdsController>.Set(new AdsController());
+        Singleton<AnalyticsController>.Set(new AnalyticsController());
 
         configs.Init();
         models.Init();
+        analytics.Init();
+        adsController.Init(analytics);
         Application.targetFrameRate = 60;
         
 #if UNITY_STANDALONE
