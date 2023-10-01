@@ -24,6 +24,7 @@ namespace _App.Scripts.Controllers.Ads
 #elif UNITY_Editor
 			_gameId = androidGameId;
 #endif
+			
 			LoadAd();
 		}
 		public void LoadAd()

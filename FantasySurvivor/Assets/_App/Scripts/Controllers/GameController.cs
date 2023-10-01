@@ -61,7 +61,7 @@ public class GameController : Controller<GameApp>
 		base.OnDestroy();
 		Singleton<GameController>.Unset(this);
 	}
-
+	
 	public void ShowMainHome()
 	{
 		app.resourceManager.ShowPopup(PopupType.MainUI);
@@ -82,7 +82,7 @@ public class GameController : Controller<GameApp>
 		isEndGame = true;
 		Singleton<PoolGemExp>.instance.ReturnAllObject();
 		app.resourceManager.ShowPopup(PopupType.LoseGame);
-		app.analytics.TrackPlay(LevelResult.Failure, map.model.levelInGame);
+		//app.analytics.TrackPlay(LevelResult.Failure, map.model.levelInGame);
 	}
 
 	public void ChangeScene(string nameScene, [CanBeNull] Action callback)
@@ -142,7 +142,7 @@ public class GameController : Controller<GameApp>
 	[Button]
 	public void TestConfig()
 	{
-		tower.TakeDamage(10);
+		app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
 	}
 
 
@@ -175,9 +175,9 @@ public class GameController : Controller<GameApp>
 		Destroy(mons.gameObject);
 	}
 
-	public Monster GetFirstMonster()
+	public Monster GetFirstMonster(float attackRange)
 	{
-		var nearestMons = listMonster.FirstOrDefault(monster => Vector2.Distance(monster.transform.position, tower.transform.position) < tower.model.attackRange + monster.size);
+		var nearestMons = listMonster.FirstOrDefault(monster => Vector2.Distance(monster.transform.position, tower.transform.position) < attackRange + monster.size);
 		var towerPos = tower.transform.position;
 		if(nearestMons == null) return nearestMons;
 		var nearestDistance = Vector2.Distance(nearestMons.transform.position, towerPos);
@@ -191,6 +191,21 @@ public class GameController : Controller<GameApp>
 			}
 		}
 		return nearestMons;
+	}
+	
+	public Monster GetStrongMonster(float attackRange)
+	{
+		var monsInRange = listMonster.Where(monster => Vector2.Distance(monster.transform.position, tower.transform.position) < attackRange + monster.size).ToList();
+		if(monsInRange.Count == 0) return null;
+		var strongestMons = monsInRange.First();
+		foreach(var mons in monsInRange)
+		{
+			if(mons.model.currentHealthPoint > strongestMons.model.currentHealthPoint)
+			{
+				strongestMons = mons;
+			}
+		}
+		return strongestMons;
 	}
 
 	public void TowerDie(TowerView towerView)
@@ -287,6 +302,7 @@ public class GameController : Controller<GameApp>
 		Instantiate(app.resourceManager.GetMap((MapType) chapter));
 		tower = SpawnTower();
 		listMonster.Clear();
-		app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
+		app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
+		//app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
 	}
 }

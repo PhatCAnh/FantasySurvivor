@@ -11,7 +11,7 @@ namespace MR.CharacterState.Tower
 		public override void LogicUpdate(float deltaTime)
 		{
 			base.LogicUpdate(deltaTime);
-			agent.target = agent.gameController.GetFirstMonster();
+			agent.target = agent.gameController.GetFirstMonster(agent.model.attackRange);
 			if(agent.target != null)
 				agent.AttackState();
 		}

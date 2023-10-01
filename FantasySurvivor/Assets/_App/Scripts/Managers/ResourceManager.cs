@@ -14,8 +14,6 @@ using UnityEngine.UI;
 
 public class ResourceManager : UIManagerBase<PopupType>
 {
-	//[SerializeField] GameObject keyPrefab;
-
 	[Header("Object prefabs")]
 	[Required, SerializeField] private GameObject _healthBarPrefab;
 
@@ -28,7 +26,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	[Header("UI prefabs")]
 	[Required, SerializeField] private GameObject _mainUIInGame;
-	
+
 
 	[Required, SerializeField] private GameObject _mainUI;
 
@@ -40,8 +38,10 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	[Required, SerializeField] private GameObject _loseGamePopup;
 	
-	[Header("UI Tutorial prefabs")]
+	[Required, SerializeField] private GameObject _choiceSkill;
 	
+
+	[Header("UI Tutorial prefabs")]
 	[Required, SerializeField] private GameObject _clickBulletTutorial;
 
 	[Header("Map prefabs")]
@@ -57,9 +57,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[Required, SerializeField] private GameObject _purpleZombie;
 
 	[Required, SerializeField] private GameObject _blueGhost;
-	
+
 	[Required, SerializeField] private GameObject _yellowBomb;
-	
+
 	[Required, SerializeField] private GameObject _purpleDevil;
 
 	private Dictionary<string, GameObject> _typeMonsterDic;
@@ -69,6 +69,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	private Dictionary<TypeItemReward, ItemReward> _typeItemReward;
 
+	[SerializeField] private List<SkillData>  _poolSkill;
 	private void Awake()
 	{
 		Singleton<ResourceManager>.Set(this);
@@ -90,6 +91,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 		RegisterPopup(PopupType.LoseGame, _loseGamePopup);
 		RegisterPopup(PopupType.Pause, _pausePopup);
 		RegisterPopup(PopupType.Cheat, _cheatPopup);
+		RegisterPopup(PopupType.ChoiceSkill, _choiceSkill);
 	}
 
 	private void InitDic()
@@ -118,7 +120,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 		_typeItemReward = new Dictionary<TypeItemReward, ItemReward>()
 		{
-			{TypeItemReward.Coin, _irCoin}
+			{TypeItemReward.Coin, _irCoin},
 		};
 	}
 
@@ -140,6 +142,11 @@ public class ResourceManager : UIManagerBase<PopupType>
 	public ItemReward GetItemReward(TypeItemReward type)
 	{
 		return _typeItemReward[type];
+	}
+
+	public SkillData GetSkill(SkillType type)
+	{
+		return _poolSkill.FirstOrDefault(skill => skill.type == type);
 	}
 
 

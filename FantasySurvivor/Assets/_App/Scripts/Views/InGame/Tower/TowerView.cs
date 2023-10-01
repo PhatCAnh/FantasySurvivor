@@ -91,6 +91,7 @@ public class TowerView : ObjectRPG
 		skinAttackRange.DORotate(new Vector3(0, 0, -360), 7.5f, RotateMode.FastBeyond360)
 			.SetLoops(-1, LoopType.Incremental)
 			.SetEase(Ease.Linear);
+		//gameObject.AddComponent<SharkSkill>();
 	}
 
 	protected virtual void Update()

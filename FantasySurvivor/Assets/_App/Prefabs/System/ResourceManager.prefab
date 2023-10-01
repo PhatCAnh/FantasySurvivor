@@ -123,6 +123,7 @@ MonoBehaviour:
   _cheatPopup: {fileID: 4812586798846200643, guid: 3a1b66a258473134d9a4ea08e3587a55, type: 3}
   _choiceMapPopup: {fileID: 596667037376128798, guid: 30f13f392a9b75b479117dbd33a1941e, type: 3}
   _loseGamePopup: {fileID: 1395811789396144461, guid: 08abf63e269daae449e5d2dea7cc9230, type: 3}
+  _choiceSkill: {fileID: 8671060162732829558, guid: e18158855844cf846930ec9f3275f7a2, type: 3}
   _clickBulletTutorial: {fileID: 4578341570658841133, guid: 482474f6201afa444b6d80d03d536966, type: 3}
   _forestMap: {fileID: 7891410580401367348, guid: 4a657833fb5ae654e86158b4274f4159, type: 3}
   _oceanMap: {fileID: 7891410580401367348, guid: 4212d186c589b684a903282a5c57bea5, type: 3}
@@ -132,6 +133,12 @@ MonoBehaviour:
   _yellowBomb: {fileID: 8916838031505534731, guid: 77edd8347697b5842a205261c02618a9, type: 3}
   _purpleDevil: {fileID: 2251807672777610876, guid: cfec675ec25a68346897caaffd1f72f1, type: 3}
   _irCoin: {fileID: 4763499435868738885, guid: 4accdbbbca1969d46992dd9b3e66be7a, type: 3}
+  _poolSkill:
+  - type: 0
+    skillName: Shark
+    imgUI: {fileID: 21300000, guid: 65d81833a9705374299a503a6186aa2f, type: 3}
+    description: ABCXYZ
+    skillPrefab: {fileID: 8206914173546746077, guid: 24f582cf70ec6c444bd720fa6d3c911a, type: 3}
 --- !u!1 &7740478561839289926
 GameObject:
   m_ObjectHideFlags: 0

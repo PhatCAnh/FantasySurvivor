@@ -42,6 +42,12 @@ MonoBehaviour:
   m_SpriteCharacterTable:
   - m_ElementType: 2
     m_Unicode: 65534
+    m_GlyphIndex: 4
+    m_Scale: 1
+    m_Name: IconSprite_0
+    m_HashCode: 697003949
+  - m_ElementType: 2
+    m_Unicode: 65534
     m_GlyphIndex: 0
     m_Scale: 1
     m_Name: IconSprite_4
@@ -54,28 +60,22 @@ MonoBehaviour:
     m_HashCode: 697003950
   - m_ElementType: 2
     m_Unicode: 65534
-    m_GlyphIndex: 2
-    m_Scale: 1
-    m_Name: IconSprite_5
-    m_HashCode: 697003944
-  - m_ElementType: 2
-    m_Unicode: 65534
     m_GlyphIndex: 3
     m_Scale: 1
     m_Name: IconSprite_1
     m_HashCode: 697003948
   - m_ElementType: 2
     m_Unicode: 65534
-    m_GlyphIndex: 4
+    m_GlyphIndex: 2
     m_Scale: 1
-    m_Name: IconSprite_0
-    m_HashCode: 697003949
+    m_Name: IconSprite_5
+    m_HashCode: 697003944
   - m_ElementType: 2
     m_Unicode: 65534
-    m_GlyphIndex: 5
+    m_GlyphIndex: 7
     m_Scale: 1
-    m_Name: IconSprite_9
-    m_HashCode: 697003940
+    m_Name: IconSprite_11
+    m_HashCode: 1526293789
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 6
@@ -84,10 +84,10 @@ MonoBehaviour:
     m_HashCode: 1526293791
   - m_ElementType: 2
     m_Unicode: 65534
-    m_GlyphIndex: 7
+    m_GlyphIndex: 5
     m_Scale: 1
-    m_Name: IconSprite_11
-    m_HashCode: 1526293789
+    m_Name: IconSprite_9
+    m_HashCode: 697003940
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -157,8 +157,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 114
       m_Height: 121
-      m_HorizontalBearingX: -57
-      m_HorizontalBearingY: 60.5
+      m_HorizontalBearingX: -10
+      m_HorizontalBearingY: 100
       m_HorizontalAdvance: 114
     m_GlyphRect:
       m_X: 9
@@ -205,8 +205,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 112
       m_Height: 128
-      m_HorizontalBearingX: -56
-      m_HorizontalBearingY: 64
+      m_HorizontalBearingX: -10
+      m_HorizontalBearingY: 100
       m_HorizontalAdvance: 112
     m_GlyphRect:
       m_X: 9

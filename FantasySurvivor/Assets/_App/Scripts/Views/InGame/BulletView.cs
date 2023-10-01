@@ -38,6 +38,7 @@ public class BulletView : MonoBehaviour
 	
 	protected void FixedUpdate()
 	{
+		//sua lai
 		if(gameController.isStop) return;
 		transform.position = Vector2.MoveTowards(transform.position, _targetPos, _moveSpeed * Time.deltaTime);
 	}

@@ -1,4 +1,6 @@
-﻿public enum ItemType
+﻿using System;
+using UnityEngine;
+public enum ItemType
 {
     Undefined = -1,
     HealthBar,
@@ -62,4 +64,34 @@ public enum TypeAds
     Interstitial,
     Reward,
     Banner,
+}
+
+public enum SkillType
+{
+    SharkSkill,
+}
+
+public enum PopupType
+{
+    MainUI,
+    Notification,
+    Pause,
+    WinGame,
+    LoseGame,
+    ChoiceMap,
+    MainInGame,
+    ClickBulletTutorial,
+    HealthBar,
+    Cheat,
+    ChoiceSkill,
+}
+
+[Serializable]
+public class SkillData
+{
+    public SkillType type;
+    public string skillName;
+    public Sprite imgUI;
+    public string description;
+    public GameObject skillPrefab;
 }

@@ -121,49 +121,49 @@ public class UpdateBaseStatUiInGame : View<GameApp>
 	{
 		mapModel.expInGame -= _attackDamage.price;
 		towerModel.levelAd++;
-		app.analytics.TrackUpStat(true, TypeStatTower.AttackDamage, towerModel.levelAd);
+		//app.analytics.TrackUpStat(true, TypeStatTower.AttackDamage, towerModel.levelAd);
 	}
 
 	private void OnClickBtnUpAttackRange()
 	{
 		mapModel.expInGame -= _attackRange.price;
 		towerModel.levelAr++;
-		app.analytics.TrackUpStat(true, TypeStatTower.AttackRange, towerModel.levelAr);
+		//app.analytics.TrackUpStat(true, TypeStatTower.AttackRange, towerModel.levelAr);
 	}
 
 	private void OnClickBtnUpAttackSpeed()
 	{
 		mapModel.expInGame -= _attackSpeed.price;
 		towerModel.levelAs++;
-		app.analytics.TrackUpStat(true, TypeStatTower.AttackSpeed, towerModel.levelAs);
+		//app.analytics.TrackUpStat(true, TypeStatTower.AttackSpeed, towerModel.levelAs);
 	}
 
 	private void OnClickBtnUpHealth()
 	{
 		mapModel.expInGame -= _health.price;
 		towerModel.levelHealth++;
-		app.analytics.TrackUpStat(true, TypeStatTower.Health, towerModel.levelHealth);
+		//app.analytics.TrackUpStat(true, TypeStatTower.Health, towerModel.levelHealth);
 	}
 	
 	private void OnClickBtnUpCriticalRate()
 	{
 		mapModel.expInGame -= _criticalRate.price;
 		towerModel.levelCr++;
-		app.analytics.TrackUpStat(true, TypeStatTower.CriticalRate, towerModel.levelCr);
+		//app.analytics.TrackUpStat(true, TypeStatTower.CriticalRate, towerModel.levelCr);
 	}
 	
 	private void OnClickBtnUpCriticalDamage()
 	{
 		mapModel.expInGame -= _criticalDamage.price;
 		towerModel.levelCd++;
-		app.analytics.TrackUpStat(true, TypeStatTower.CriticalDamage, towerModel.levelCd);
+		//app.analytics.TrackUpStat(true, TypeStatTower.CriticalDamage, towerModel.levelCd);
 	}
 	
 	private void OnClickBtnUpRegenHp()
 	{
 		mapModel.expInGame -= _regenHp.price;
 		towerModel.levelRegenHp++;
-		app.analytics.TrackUpStat(true, TypeStatTower.RegenHp, towerModel.levelRegenHp);
+		//app.analytics.TrackUpStat(true, TypeStatTower.RegenHp, towerModel.levelRegenHp);
 	}
 
 	private void CheckInteractableBtnStat(StatUI button, int coin)
