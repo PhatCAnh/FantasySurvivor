@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _App.Scripts.Views.InGame.Skills;
@@ -10,24 +11,21 @@ using Cooldown = ArbanFramework.Cooldown;
 public class ProactiveSkill : View<GameApp>
 {
 	protected int timeSKill = 2;
-	protected Cooldown cooldownSkill = new Cooldown();
+	public Cooldown cooldownSkill = new Cooldown();
 
 	protected GameObject skillPrefab;
 
-	protected TowerView towerView;
+	protected Character origin;
 	protected GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
-	protected override void OnViewInit()
+	private void Awake()
 	{
-		base.OnViewInit();
-		towerView = GetComponent<TowerView>();
+		origin = GetComponent<Character>();
 	}
 
-	// Update is called once per frame
-	void Update()
+	public void CoolDownSkill(float deltaTime)
 	{
-		if(gameController.isStop) return;
-		cooldownSkill.Update(Time.deltaTime);
+		cooldownSkill.Update(deltaTime);
 		if(cooldownSkill.isFinished)
 		{
 			Active();
@@ -46,7 +44,7 @@ public class SharkSkill : ProactiveSkill
 {
 	public override void Active()
 	{
-		var mons = gameController.GetStrongMonster(towerView.model.attackRange);
+		var mons = gameController.GetStrongMonster(origin.model.attackRange);
 		if(mons != null)
 		{
 			var shark = Instantiate(
@@ -54,7 +52,41 @@ public class SharkSkill : ProactiveSkill
 				new Vector3(mons.transform.position.x, mons.transform.position.y),
 				quaternion.identity
 			);
-			shark.GetComponent<SkillAttack>().Init(towerView.model.attackDamage, mons);
+			shark.GetComponent<SkillAttack>().Init(origin.model.attackDamage, mons);
 		}
 	}
 }
+
+public class FireBallSkill : ProactiveSkill
+{
+	public override void Active()
+	{
+		var mons = gameController.GetFirstMonster(origin.model.attackRange);
+		if(mons != null)
+		{
+			var shark = Instantiate(
+				app.resourceManager.GetSkill(SkillType.FireBallSkill).skillPrefab,
+				origin.transform.position,
+				quaternion.identity
+			);
+			shark.GetComponent<BulletView>().Init(origin, mons);
+		}
+	}
+}
+
+public class TwinSkill : ProactiveSkill
+{
+	public override void Active()
+	{
+		var mons = gameController.GetFirstMonster(origin.model.attackRange);
+		if(mons != null)
+		{
+			var skill = Instantiate(
+				app.resourceManager.GetSkill(SkillType.TwinSkill).skillPrefab,
+				origin.transform.position,
+				quaternion.identity
+			);
+			skill.GetComponent<Crossed>().Init(origin, mons);
+		}
+	}
+}	

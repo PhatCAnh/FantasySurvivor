@@ -21,7 +21,7 @@ public class GameController : Controller<GameApp>
 
 	public bool isEndGame;
 
-	public TowerView tower;
+	public Character character;
 
 	public MapView map;
 
@@ -39,6 +39,7 @@ public class GameController : Controller<GameApp>
 	private void Start()
 	{
 		listMonster = new List<Monster>();
+		//character = SpawnChacter();
 	}
 	private void Update()
 	{
@@ -177,8 +178,8 @@ public class GameController : Controller<GameApp>
 
 	public Monster GetFirstMonster(float attackRange)
 	{
-		var nearestMons = listMonster.FirstOrDefault(monster => Vector2.Distance(monster.transform.position, tower.transform.position) < attackRange + monster.size);
-		var towerPos = tower.transform.position;
+		var nearestMons = listMonster.FirstOrDefault(monster => Vector2.Distance(monster.transform.position, character.transform.position) < attackRange + monster.size);
+		var towerPos = character.transform.position;
 		if(nearestMons == null) return nearestMons;
 		var nearestDistance = Vector2.Distance(nearestMons.transform.position, towerPos);
 		for(int i = 1; i < listMonster.Count; i++)
@@ -195,7 +196,7 @@ public class GameController : Controller<GameApp>
 	
 	public Monster GetStrongMonster(float attackRange)
 	{
-		var monsInRange = listMonster.Where(monster => Vector2.Distance(monster.transform.position, tower.transform.position) < attackRange + monster.size).ToList();
+		var monsInRange = listMonster.Where(monster => Vector2.Distance(monster.transform.position, character.transform.position) < attackRange + monster.size).ToList();
 		if(monsInRange.Count == 0) return null;
 		var strongestMons = monsInRange.First();
 		foreach(var mons in monsInRange)
@@ -208,7 +209,7 @@ public class GameController : Controller<GameApp>
 		return strongestMons;
 	}
 
-	public void TowerDie(TowerView towerView)
+	public void CharacterDie(Character characterView)
 	{
 		LoseGame();
 	}
@@ -231,68 +232,20 @@ public class GameController : Controller<GameApp>
 		return new Vector2(posX, posY);
 	}
 	
-	private TowerView SpawnTower()
+	private Character SpawnChacter()
 	{
-		var towerPrefab = Instantiate(app.resourceManager.GetItem(ItemType.Tower))
-			.GetComponent<TowerView>();
-		towerPrefab.transform.position = Vector2.zero;
+		var characterPrefab = Instantiate(app.resourceManager.GetItem(ItemType.Character))
+			.GetComponent<Character>();
+		characterPrefab.transform.position = Vector2.zero;
 
 		_healthBar = Instantiate(app.resourceManager.GetItem(ItemType.HealthBar), app.resourceManager.rootContainer)
 			.GetComponent<HealthBar>();
-		_healthBar.Init(towerPrefab);
+		_healthBar.Init(characterPrefab);
 
-		var stat = new TowerStat(
-			(int) GetStatTower(app.models.dataPlayerModel.LevelAd, TypeStatTower.AttackDamage),
-			GetStatTower(app.models.dataPlayerModel.LevelAs, TypeStatTower.AttackSpeed),
-			(int) GetStatTower(app.models.dataPlayerModel.LevelAr, TypeStatTower.AttackRange),
-			(int) GetStatTower(app.models.dataPlayerModel.LevelCr, TypeStatTower.CriticalRate),
-			(int) GetStatTower(app.models.dataPlayerModel.LevelCd, TypeStatTower.CriticalDamage),
-			(int) GetStatTower(app.models.dataPlayerModel.LevelHealth, TypeStatTower.Health),
-			GetStatTower(app.models.dataPlayerModel.LevelRegenHp, TypeStatTower.RegenHp)
-		);
-		towerPrefab.Init(stat);
+		var stat = new CharacterStat(2.5f, 100, 5, 20);
+		characterPrefab.Init(stat);
 
-		return towerPrefab;
-	}
-
-	private float GetStatTower(int level, TypeStatTower type)
-	{
-		float value = 0;
-		float valueOutGame = 0;
-		var dataLevel = app.configs.dataLevelTowerOutGame.GetConfig(level);
-		var dataStatBase = app.configs.dataStatTower.GetConfig(TowerType.Basic);
-		switch (type)
-		{
-			case TypeStatTower.AttackDamage:
-				value = dataLevel.AttackDamage.value;
-				valueOutGame = dataStatBase.AttackDamage;
-				break;
-			case TypeStatTower.AttackRange:
-				value = dataLevel.AttackRange.value;
-				valueOutGame = dataStatBase.AttackRange;
-				break;
-			case TypeStatTower.AttackSpeed:
-				value = dataLevel.AttackSpeed.value;
-				valueOutGame = dataStatBase.AttackSpeed;
-				break;
-			case TypeStatTower.CriticalRate:
-				value = dataLevel.CriticalRate.value;
-				valueOutGame = dataStatBase.CriticalRate;
-				break;
-			case TypeStatTower.CriticalDamage:
-				value = dataLevel.CriticalDamage.value;
-				valueOutGame = dataStatBase.CriticalDamage;
-				break;
-			case TypeStatTower.Health:
-				value = dataLevel.Health.value;
-				valueOutGame = dataStatBase.Health;
-				break;
-			case TypeStatTower.RegenHp:
-				value = dataLevel.RegenHp.value;
-				valueOutGame = dataStatBase.RegenHp;
-				break;
-		}
-		return value + valueOutGame;
+		return characterPrefab;
 	}
 
 	private void LoadMap(int chapter)
@@ -300,7 +253,7 @@ public class GameController : Controller<GameApp>
 		map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
 		map.Init();
 		Instantiate(app.resourceManager.GetMap((MapType) chapter));
-		tower = SpawnTower();
+		character = SpawnChacter();
 		listMonster.Clear();
 		app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
 		//app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);

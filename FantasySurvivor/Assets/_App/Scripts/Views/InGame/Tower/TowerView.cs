@@ -143,14 +143,14 @@ public class TowerView : ObjectRPG
 
 	private void Die()
 	{
-		gameController.TowerDie(this);
+		//gameController.CharacterDie(this);
 	}
 
 	public void Attack()
 	{
 		if(target == null) return;
 		var arrowIns = Instantiate(arrow);
-		arrowIns.Init(this);
+		//arrowIns.Init(this);
 	}
 
 	public void IdleState()

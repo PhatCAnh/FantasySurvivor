@@ -4,7 +4,7 @@ public enum ItemType
 {
     Undefined = -1,
     HealthBar,
-    Tower,
+    Character,
     GemExp,
 }
 
@@ -69,6 +69,8 @@ public enum TypeAds
 public enum SkillType
 {
     SharkSkill,
+    FireBallSkill,
+    TwinSkill,
 }
 
 public enum PopupType

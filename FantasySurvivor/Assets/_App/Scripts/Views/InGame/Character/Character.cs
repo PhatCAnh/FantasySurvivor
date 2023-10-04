@@ -1,7 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using _App.Scripts.Pool;
 using ArbanFramework;
 using ArbanFramework.Config;
 using ArbanFramework.MVC;
+using DG.Tweening;
 using FantasySurvivor;
 using MR;
 using MR.CharacterState;
@@ -11,15 +15,20 @@ using StateMachine = ArbanFramework.StateMachine.StateMachine;
 
 public class Character : ObjectRPG
 {
+	public Transform skinAttackRange;
+	
+	public SpriteRenderer skinBase;
+	
+	public float sizeBase;
+	
 	[HideInInspector]
 	public Rigidbody2D myRigid;
 
 	public Animator animator;
-
-	public CharacterModel model { get; private set; }
+	public Monster target { set; get; }
+	public CharacterModel model => app.models.characterModel;
 
 	public CharacterStat stat { get; private set; }
-	public bool isMove => _stateMachine.currentState == _moveSM;
 
 	public float speedMul { get; set; } = 1;
 	public Vector2 idleDirection { get; private set; } = Vector2.down;
@@ -36,15 +45,18 @@ public class Character : ObjectRPG
 		}
 	}
 
-	public bool isAlive => model.currentHealthPoint > 0;
+	private ProactiveSkill[] _proactiveSkills;
 
+	public bool IsAlive => model.currentHealthPoint > 0;
+	public bool IsMove => _stateMachine.currentState == _moveSm;
+	
 	private Vector2 _direction = Vector2.zero;
 
 	private StateMachine _stateMachine;
-	private CharacterIdle _idleSM;
-	private CharacterMove _moveSM;
+	private CharacterIdle _idleSm;
+	private CharacterMove _moveSm;
 
-	//private GameController _gameController => Singleton<GameController>.instance;
+	private GameController gameController => Singleton<GameController>.instance;
 
 	protected override void OnViewInit()
 	{
@@ -52,42 +64,74 @@ public class Character : ObjectRPG
 		if(_stateMachine == null)
 		{
 			_stateMachine = new StateMachine();
-			_idleSM = new CharacterIdle(this, _stateMachine);
-			_moveSM = new CharacterMove(this, _stateMachine);
-			_stateMachine.Init(_idleSM);
+			_idleSm = new CharacterIdle(this, _stateMachine);
+			_moveSm = new CharacterMove(this, _stateMachine);
+			_stateMachine.Init(_idleSm);
 		}
 		else
 		{
 			IdleState();
 		}
 
-		model = new CharacterModel(5, 10);
-
+		AddProactiveSkill();
 		myRigid = GetComponent<Rigidbody2D>();
+		
+		AddDataBinding("fieldCharacter-moveSpeedValue", animator, (control, e) =>
+			{
+				control.SetFloat("SpeedMul", model.moveSpeed / 2.5f);
+			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackSpeed), model)
+		);
+		
+		AddDataBinding("fieldCharacter-attackRangeValue", skinAttackRange, (control, e) =>
+			{
+				control.localScale = model.attackRange / 10 * Vector3.one;
+				if(model.attackRange > 10)
+				{
+					var value = model.attackRange % 10;
+					Camera.main.orthographicSize += value * 0.2f;
+				}
+			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackRange), model)
+		);
+
+		skinAttackRange.DORotate(new Vector3(0, 0, -360), 7.5f, RotateMode.FastBeyond360)
+			.SetLoops(-1, LoopType.Incremental)
+			.SetEase(Ease.Linear);
+		
 		
 	}
 
-	public void Init(CharacterModel model)
+	public void Init(CharacterStat statInit)
 	{
-		this.model = model;
+		app.models.characterModel = new CharacterModel(
+			statInit.moveSpeed.BaseValue,
+			statInit.health.BaseValue,
+			statInit.attackRange.BaseValue,
+			statInit.attackDamage.BaseValue
+			);
 	}
 
 	private void Update()
 	{
-		// if(_gameController.isStop) return;
-		Controlled(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
+		if(gameController.isStop) return;
+		Controlled(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
 		var time = Time.deltaTime;
 		_stateMachine.currentState.LogicUpdate(time);
-		// if(isDoingSomething) return;
 
 		HandlePhysicUpdate();
+		HandleProactiveSkill(Time.deltaTime);
 	}
 
 	private void FixedUpdate()
 	{
-		//if(_gameController.isStop) return;
+		if(gameController.isStop) return;
 
 		_stateMachine.currentState.PhysicUpdate(Time.fixedTime);
+	}
+
+	private void LateUpdate()
+	{
+		var position = transform.position;
+		Camera.main.transform.position = new Vector3(position.x, position.y, -1);
 	}
 
 	public void Controlled(Vector2 moveForce)
@@ -97,13 +141,21 @@ public class Character : ObjectRPG
 	
 	public void TakeDamage(int damage)
 	{
+		if(!IsAlive) return;
 		model.currentHealthPoint -= damage;
-		if(isAlive) Die();
+		Singleton<PoolTextPopup>.instance.GetObjectFromPool(transform.position, damage.ToString(), TextPopupType.MonsterDamage);
+		if(!IsAlive) Die();
 	}
 
-	public void Die()
+	public void AddProactiveSkill(Type type = null)
 	{
-		Destroy(gameObject);
+		gameObject.AddComponent(type);
+		_proactiveSkills = GetComponents<ProactiveSkill>();
+	}
+
+	private void Die()
+	{
+		gameController.CharacterDie(this);
 	}
 
 	private void HandlePhysicUpdate()
@@ -117,9 +169,17 @@ public class Character : ObjectRPG
 		SetAnimation(moveDirection, idleDirection);
 	}
 
+	// ReSharper disable Unity.PerformanceAnalysis
+	private void HandleProactiveSkill(float deltaTime)
+	{
+		foreach(var skill in _proactiveSkills)
+		{
+			skill.CoolDownSkill(deltaTime);
+		}
+	}
+
 	private void SetAnimation(Vector2 dir, Vector2 idleDirection)
 	{
-		animator.SetFloat("SpeedMul", speedMul);
 		animator.SetFloat("Speed", dir.normalized.magnitude);
 		animator.SetFloat("Horizontal", idleDirection.x);
 		animator.SetFloat("Vertical", idleDirection.y);
@@ -127,13 +187,19 @@ public class Character : ObjectRPG
 
 	#region State Machine Method
 
-	public void IdleState() => _stateMachine.ChangeState(_idleSM);
+	public void IdleState() => _stateMachine.ChangeState(_idleSm);
 
 	public void MoveState()
 	{
-		if(isMove) return;
-		_stateMachine.ChangeState(_moveSM);
+		if(IsMove) return;
+		_stateMachine.ChangeState(_moveSm);
 	}
 
 	#endregion
+
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+		skinAttackRange.DOKill();
+	}
 }

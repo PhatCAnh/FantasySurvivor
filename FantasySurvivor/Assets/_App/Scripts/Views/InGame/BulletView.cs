@@ -4,46 +4,45 @@ using System.Collections.Generic;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class BulletView : MonoBehaviour
+public class BulletView : View<GameApp>
 {
-	public SpriteRenderer skin;
+	[SerializeField] protected float moveSpeed;
+	
+	private Character _origin;
 
-	public Rigidbody2D rigidbody2d;
+	protected Monster target;
 
-	private TowerView _origin;
+	protected bool isCritical;
 
-	private Vector3 _targetPos;
-
-	private float _moveSpeed;
-
-	private bool _isCritical;
-
-	private int _damage;
+	protected float damage;
 	
 	protected GameController gameController => Singleton<GameController>.instance;
 
-	public void Init(TowerView origin)
+	public void Init(Character origin, Monster target)
 	{
 		_origin = origin;
-		var spawnPos = _origin.firePoint;
-		transform.SetPositionAndRotation(spawnPos.position, spawnPos.rotation);
-		_targetPos = origin.target.transform.position;
-		_moveSpeed = Mathf.Clamp(15 * origin.model.attackSpeed / 2, 10, 100);
-		_damage = _origin.model.attackDamage;
-		IsCritical(origin.model.criticalRate);
-		Destroy(gameObject, 3f);
+		this.target = target;
+		transform.up = target.transform.position - transform.position;
+		damage = _origin.model.attackDamage;
+		//IsCritical(origin.model.criticalRate);
 	}
 	
 	protected void FixedUpdate()
 	{
 		//sua lai
 		if(gameController.isStop) return;
-		transform.position = Vector2.MoveTowards(transform.position, _targetPos, _moveSpeed * Time.deltaTime);
+		transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+		if(Vector2.Distance(transform.position, target.transform.position) < 0.1f)
+		{
+			target.TakeDamage(damage, isCritical);
+			TouchUnit();
+		}
 	}
 
-	private void TouchUnit()
+	protected virtual void TouchUnit()
 	{
 		Destroy(gameObject);
 	}
@@ -52,24 +51,23 @@ public class BulletView : MonoBehaviour
 	{
 		if(other.TryGetComponent(out Monster monster))
 		{
-			var damage = _damage;
-			monster.TakeDamage(damage, _isCritical);
+			monster.TakeDamage(damage, isCritical);
 			TouchUnit();
 		}
 	}
 
 	private void IsCritical(int percent)
 	{
-		_isCritical = Random.Range(0, 100) < percent;
-		if(_isCritical)
-		{
-			skin.color = new Color(1, 0.75f, 0);
-			_moveSpeed *= 1.25f;
-			_damage = _damage * _origin.model.criticalDamage / 100;
-		}
-		else
-		{
-			skin.color = Color.white;
-		}
+		// _isCritical = Random.Range(0, 100) < percent;
+		// if(_isCritical)
+		// {
+		// 	skin.color = new Color(1, 0.75f, 0);
+		// 	_moveSpeed *= 1.25f;
+		// 	_damage = _damage * _origin.model.criticalDamage / 100;
+		// }
+		// else
+		// {
+		// 	skin.color = Color.white;
+		// }
 	}
 }

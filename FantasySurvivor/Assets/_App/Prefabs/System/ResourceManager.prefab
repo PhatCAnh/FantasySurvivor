@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootContainer: {fileID: 7740478561839289927}
   _healthBarPrefab: {fileID: 5614261067818666273, guid: 35409695b36a9264d80899c5dd561465, type: 3}
-  _towerPrefab: {fileID: 4792938240872509890, guid: a9f6d6874cc145843990074321833cf4, type: 3}
+  _characterPrefab: {fileID: 6980818757309096134, guid: e679a345c1e93424f921109a1aaf81ba, type: 3}
   _gemExpPrefab: {fileID: 8527315627761866939, guid: 8abfee58130042548a87a2d4844c6437, type: 3}
   _mainUIInGame: {fileID: 5689714708223612571, guid: 965e9b98cbf91be42860273d75b9e9b0, type: 3}
   _mainUI: {fileID: 4517874775808894528, guid: 05c26368afa94b545a807df678ec685d, type: 3}
@@ -139,6 +139,16 @@ MonoBehaviour:
     imgUI: {fileID: 21300000, guid: 65d81833a9705374299a503a6186aa2f, type: 3}
     description: ABCXYZ
     skillPrefab: {fileID: 8206914173546746077, guid: 24f582cf70ec6c444bd720fa6d3c911a, type: 3}
+  - type: 1
+    skillName: FireBall
+    imgUI: {fileID: 317864984, guid: e4ffbed7851f5774ca9f8acb8fce1d5e, type: 3}
+    description: XYZABC
+    skillPrefab: {fileID: 9075703475211245482, guid: 7c860169edcee5747bf90d4ebca6da2e, type: 3}
+  - type: 2
+    skillName: TwinSkill
+    imgUI: {fileID: 21300000, guid: cb07234778fa6514490cde4b81ddd137, type: 3}
+    description: Twin
+    skillPrefab: {fileID: 5969974768321339375, guid: bccfbe3ac4d1a834387290001c1a7597, type: 3}
 --- !u!1 &7740478561839289926
 GameObject:
   m_ObjectHideFlags: 0

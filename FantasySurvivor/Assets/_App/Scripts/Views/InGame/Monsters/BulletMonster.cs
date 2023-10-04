@@ -16,7 +16,7 @@ namespace MR.CharacterState.Unit
 
 		private Monster _origin;
 
-		private TowerView _target;
+		private Character _target;
 		
 		protected GameController gameController => Singleton<GameController>.instance;
 

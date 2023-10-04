@@ -45,7 +45,7 @@ public class UpdateBaseStatUI : View<GameApp>
 	[Required, SerializeField] private GameObject _containerStatAtk, _containerStatDef;
 	private GameController gameController => Singleton<GameController>.instance;
 	private DataPlayerModel dataPlayer => app.models.dataPlayerModel;
-	private TowerModel towerModel => gameController.tower.model;
+	private CharacterModel towerModel => gameController.character.model;
 
 	protected override void OnViewInit()
 	{

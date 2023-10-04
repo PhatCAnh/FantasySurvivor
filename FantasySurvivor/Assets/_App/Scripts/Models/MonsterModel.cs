@@ -27,9 +27,9 @@ public class MonsterModel : Model<GameApp>
         
     private float _moveSpeed;
 		
-    private int _currentHealthPoint;
+    private float _currentHealthPoint;
 		
-    private int _maxHealthPoint;
+    private float _maxHealthPoint;
 
     private int _exp;
 
@@ -72,21 +72,21 @@ public class MonsterModel : Model<GameApp>
         }
     }
 		
-    public int currentHealthPoint
+    public float currentHealthPoint
     {
         get => _currentHealthPoint;
         set {
-            if(currentHealthPoint == value) return;
+            if(moveSpeed.Equals(value)) return;
             _currentHealthPoint = value;
             RaiseDataChanged(nameof(currentHealthPoint));
         }
     }
         
-    public int maxHealthPoint
+    public float maxHealthPoint
     {
         get => _maxHealthPoint;
         set {
-            if(maxHealthPoint == value) return;
+            if(moveSpeed.Equals(value)) return;
             _maxHealthPoint = value;
             RaiseDataChanged(nameof(maxHealthPoint));
         }

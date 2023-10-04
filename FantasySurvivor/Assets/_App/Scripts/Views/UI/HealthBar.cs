@@ -15,20 +15,19 @@ namespace FantasySurvivor
 
 		[Required, SerializeField] private TextMeshProUGUI _txtPoint;
 
-		private TowerView _towerView;
-
-		private Vector2 _uiPos;
+		private Character _character;
+		public GameController gameController => Singleton<GameController>.instance;
 
 		protected override void OnViewInit()
 		{
-			var model = _towerView.model;
+			var model = _character.model;
 			
 			AddDataBinding("sldHealthBar-maxValue", _sldHealthPoint, (control, e) =>
 				{
 					_txtPoint.text = $"{model.currentHealthPoint} / {model.maxHealthPoint}";
 					control.maxValue = model.maxHealthPoint;
 				},
-				new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.maxHealthPoint), _towerView.model)
+				new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.maxHealthPoint), _character.model)
 			);
 			
 			AddDataBinding("sldHealthBar-value", _sldHealthPoint, (control, e) =>
@@ -36,21 +35,19 @@ namespace FantasySurvivor
 					_txtPoint.text = $"{model.currentHealthPoint} / {model.maxHealthPoint}";
 					control.value = model.currentHealthPoint;
 				},
-				new DataChangedValue(TowerModel.dataChangedEvent, nameof(TowerModel.currentHealthPoint), _towerView.model)
+				new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.currentHealthPoint), _character.model)
 			);
-			
-			var position = _towerView.transform.position;
-			_uiPos = new Vector2(position.x, position.y + 3);
 		}
 
 		private void LateUpdate()
 		{
-			transform.position = Camera.main.WorldToScreenPoint(_uiPos);
+			if(gameController.isStop) return;
+			transform.position = Camera.main.WorldToScreenPoint(Vector3.up * 1.5f + _character.transform.position);
 		}
 
-		public void Init(TowerView towerView)
+		public void Init(Character character)
 		{
-			_towerView = towerView;
+			_character = character;
 		}
 		
 		

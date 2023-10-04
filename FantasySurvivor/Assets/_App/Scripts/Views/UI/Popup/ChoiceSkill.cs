@@ -21,12 +21,20 @@ public class ChoiceSkill : View<GameApp>, IPopup
 	{
 		base.OnViewInit();
 		_listSkillUI = new SkillUI[skillNumber];
-		for(int i = 0; i < skillNumber; i++)
-		{
+		// for(int i = 0; i < skillNumber; i++)
+		// {
 			var slot = Instantiate(_slotSKill, _slotSkillContainer.transform);
 			slot.Init(app.resourceManager.GetSkill(SkillType.SharkSkill), this);
-			_listSkillUI[i] = slot;
-		}
+			_listSkillUI[0] = slot;
+			
+			var slot2 = Instantiate(_slotSKill, _slotSkillContainer.transform);
+			slot2.Init(app.resourceManager.GetSkill(SkillType.FireBallSkill), this);
+			_listSkillUI[1] = slot2;
+			
+			var slot3 = Instantiate(_slotSKill, _slotSkillContainer.transform);
+			slot3.Init(app.resourceManager.GetSkill(SkillType.TwinSkill), this);
+			_listSkillUI[2] = slot3;
+		//}
 		Open();
 	}
 

@@ -69,7 +69,7 @@ public class Monster : ObjectRPG
 	#endregion
 
 	public float size;
-	public TowerView target => gameController.tower;
+	public Character target => gameController.character;
 	
 	public MapView.WaveData wave { get; private set; }
 
@@ -98,7 +98,6 @@ public class Monster : ObjectRPG
 			wave.expMonster);
 		this.wave = wave;
 		sizeAttack = stat.attackRange.BaseValue != 0? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
-		moveTarget = target.transform.position;
 	}
 
 	protected override void OnViewInit()
@@ -137,6 +136,7 @@ public class Monster : ObjectRPG
 
 	protected virtual void HandlePhysicUpdate()
 	{
+		moveTarget = gameController.character.transform.position;
 		moveDirection = moveTarget - transform.position;
 
 		if(moveDirection.magnitude < sizeAttack)
@@ -166,7 +166,7 @@ public class Monster : ObjectRPG
 		target.TakeDamage(model.attackDamage);
 	}
 
-	public void TakeDamage(int damage, bool isCritical = false)
+	public void TakeDamage(float damage, bool isCritical = false)
 	{
 		if(!isAlive) return;
 		model.currentHealthPoint -= damage;

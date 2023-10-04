@@ -43,7 +43,7 @@ public class SkillUI : View<GameApp>
 	private void SelectedSkill()
 	{
 		System.Type componentType = System.Type.GetType(skillData.type.ToString());
-		gameController.tower.gameObject.AddComponent(componentType);
+		gameController.character.AddProactiveSkill(componentType);
 		_parent.Selected(this);
 	}
 }

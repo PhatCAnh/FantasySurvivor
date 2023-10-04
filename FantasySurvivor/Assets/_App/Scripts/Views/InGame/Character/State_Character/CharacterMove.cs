@@ -18,7 +18,7 @@ namespace MR.CharacterState
 
 		private void Move(Vector2 dir, float deltaTime)
 		{
-			var movement = agent.model.moveSpeed * dir * GameConst.MOVE_SPEED_ANIMATION_RATIO * deltaTime * agent.speedMul;
+			var movement = agent.model.moveSpeed * GameConst.MOVE_SPEED_ANIMATION_RATIO * deltaTime * dir;
 			var newPosition = agent.myRigid.position + movement;
 			agent.myRigid.MovePosition(newPosition);
 		}

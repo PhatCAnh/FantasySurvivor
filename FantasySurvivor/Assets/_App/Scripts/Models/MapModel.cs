@@ -24,10 +24,7 @@ namespace FantasySurvivor
 
 		private int _monsterKilled;
 
-
 		private int _goldCoinCollected;
-
-
 		public float timeInGame
 		{
 			get => _timeInGame;

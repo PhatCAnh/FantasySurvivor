@@ -17,7 +17,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[Header("Object prefabs")]
 	[Required, SerializeField] private GameObject _healthBarPrefab;
 
-	[Required, SerializeField] private GameObject _towerPrefab;
+	[Required, SerializeField] private GameObject _characterPrefab;
 
 	[Required, SerializeField] private GameObject _gemExpPrefab;
 
@@ -99,7 +99,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 		_itemDic = new Dictionary<ItemType, GameObject>()
 		{
 			{ItemType.HealthBar, _healthBarPrefab},
-			{ItemType.Tower, _towerPrefab},
+			{ItemType.Character, _characterPrefab},
 			{ItemType.GemExp, _gemExpPrefab},
 		};
 

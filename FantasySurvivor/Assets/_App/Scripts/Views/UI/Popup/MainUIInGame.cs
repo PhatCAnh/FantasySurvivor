@@ -30,7 +30,7 @@ namespace Popup
 		private GameController gameController => Singleton<GameController>.instance;
 
 		private MapModel mapModel => gameController.map.model;
-		private TowerModel towerModel => gameController.tower.model;
+		private CharacterModel towerModel => gameController.character.model;
 
 		public void Open()
 		{
@@ -57,7 +57,7 @@ namespace Popup
 			
 			AddDataBinding("fieldMap-levelInGameValue", _txtLevel, (control, e) =>
 				{
-					control.text = $"{mapModel.levelInGame}";
+					control.text = $"WAVE: {mapModel.levelInGame}";
 				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.levelInGame), mapModel)
 			);
 			

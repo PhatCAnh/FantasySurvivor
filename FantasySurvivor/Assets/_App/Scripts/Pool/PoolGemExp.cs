@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ArbanFramework;
 using UnityEngine;
 namespace _App.Scripts.Pool
@@ -6,6 +7,8 @@ namespace _App.Scripts.Pool
 	public class PoolGemExp : ObjectPool
 	{
 		public Action<GemExp> onSpawnGemExp;
+		
+		private Character character => Singleton<GameController>.instance.character;
 		
 		protected override void Awake()
 		{
@@ -27,7 +30,6 @@ namespace _App.Scripts.Pool
 
 		public void RemoveObjectToPool(GemExp theGameObject)
 		{
-			theGameObject.isTouched = false;
 			ReturnObject(theGameObject.gameObject);
 		}
 	}

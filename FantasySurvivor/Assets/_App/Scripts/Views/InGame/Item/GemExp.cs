@@ -1,53 +1,55 @@
+using System;
 using _App.Scripts.Pool;
-using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
 using Popup;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Sequence = DG.Tweening.Sequence;
 
 public class GemExp : View<GameApp>
 {
     [SerializeField] private SpriteRenderer _skin;
     [SerializeField] private int _valueExp;
+    private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
-    private Sequence _sequence;
-
-    [FormerlySerializedAs("_isTouched")]
-    public bool isTouched = false;
-
-    private GameController gameController => Singleton<GameController>.instance;
+    private State state = State.Waiting;
+    
+    private enum State
+    {
+        Waiting,
+        Follow,
+    }
 
     public void Init(int valueExp)
     {
         _valueExp = valueExp;
     }
-    
-    private void OnMouseEnter()
+
+    private void Update()
     {
+        //chuyen cai nay state machine
         if(gameController.isStop) return;
-        
-        if(isTouched) return;
-        isTouched = true;
-        
-        var endPoint = 1.5f * transform.position + (transform.position - gameController.tower.transform.position) .normalized;
-
-        _sequence = DOTween.Sequence();
-
-        _sequence
-            .Append(transform.DOLocalMove(endPoint, 0.5f))
-            .Append(DOTween.To(() => transform.position, x => transform.position = x, gameController.tower.transform.position, 0.25f)
-                .SetEase(Ease.Linear)
-                .OnComplete(() =>
-                {
-                    gameController.map.model.expInGame += _valueExp;
-                    Singleton<PoolGemExp>.instance.RemoveObjectToPool(this);
-                }));
+        if(state == State.Waiting && Vector2.Distance(transform.position, gameController.character.transform.position) < 3f)
+        {
+            state = State.Follow;
+        }
+        else if(state == State.Follow)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, gameController.character.transform.position, 10f * Time.deltaTime);
+            if(Vector2.Distance(transform.position, gameController.character.transform.position) < 0.1f)
+            {
+                gameController.map.model.expInGame += _valueExp;
+                ArbanFramework.Singleton<PoolGemExp>.instance.RemoveObjectToPool(this);
+                state = State.Waiting;
+            }
+        }
     }
 
     protected override void OnDestroy()
     {
         base.OnDestroy();
-        _sequence.Kill();
+        transform.DOKill();
     }
 }
