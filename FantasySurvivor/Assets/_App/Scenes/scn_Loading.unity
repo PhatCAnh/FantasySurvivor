@@ -418,6 +418,58 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4925867890978961579, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: poolSkill.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4925867890978961579, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: poolSkill.Array.data[1].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4925867890978961579, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: poolSkill.Array.data[2].type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4925867890978961579, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[3].type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4925867890978961579, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[3].imgUI
+      value: 
+      objectReference: {fileID: 21300000, guid: 98663b0033e5347c1a470a40f89f1f10, type: 3}
+    - target: {fileID: 4925867890978961579, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: poolSkill.Array.data[0].skillName
+      value: Shark
+      objectReference: {fileID: 0}
+    - target: {fileID: 4925867890978961579, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: poolSkill.Array.data[1].skillName
+      value: Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 4925867890978961579, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: poolSkill.Array.data[2].skillName
+      value: Twin
+      objectReference: {fileID: 0}
+    - target: {fileID: 4925867890978961579, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[3].skillName
+      value: Food
+      objectReference: {fileID: 0}
+    - target: {fileID: 4925867890978961579, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: poolSkill.Array.data[0].description
+      value: Baby Shark du du du du
+      objectReference: {fileID: 0}
+    - target: {fileID: 4925867890978961579, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: poolSkill.Array.data[1].description
+      value: Fireee
+      objectReference: {fileID: 0}
+    - target: {fileID: 4925867890978961579, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: poolSkill.Array.data[2].description
+      value: Twinnnn
+      objectReference: {fileID: 0}
+    - target: {fileID: 4925867890978961579, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[3].description
+      value: Food
+      objectReference: {fileID: 0}
     - target: {fileID: 6890373579386255262, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

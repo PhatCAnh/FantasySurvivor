@@ -17,31 +17,29 @@ public class ChoiceSkill : View<GameApp>, IPopup
 
 	private SkillUI[] _listSkillUI;
 
+	public GameController gameController => Singleton<GameController>.instance;
+
 	protected override void OnViewInit()
 	{
 		base.OnViewInit();
-		_listSkillUI = new SkillUI[skillNumber];
-		// for(int i = 0; i < skillNumber; i++)
-		// {
+		var skillData = gameController.map.GetRandomSkill();
+		_listSkillUI = new SkillUI[skillData.Count];
+		for(int i = 0; i < skillData.Count; i++)
+		{
 			var slot = Instantiate(_slotSKill, _slotSkillContainer.transform);
-			slot.Init(app.resourceManager.GetSkill(SkillType.SharkSkill), this);
-			_listSkillUI[0] = slot;
-			
-			var slot2 = Instantiate(_slotSKill, _slotSkillContainer.transform);
-			slot2.Init(app.resourceManager.GetSkill(SkillType.FireBallSkill), this);
-			_listSkillUI[1] = slot2;
-			
-			var slot3 = Instantiate(_slotSKill, _slotSkillContainer.transform);
-			slot3.Init(app.resourceManager.GetSkill(SkillType.TwinSkill), this);
-			_listSkillUI[2] = slot3;
-		//}
+			slot.Init(skillData[i], this);
+			_listSkillUI[i] = slot;
+		}
 		Open();
 	}
 
 	public void Open()
 	{
+		gameController.isStopGame = true;
+
 		foreach(var slot in _listSkillUI)
 		{
+			if(slot == null) return;
 			slot.objectParent.position = new Vector3(0, 3000);
 		}
 
@@ -50,6 +48,7 @@ public class ChoiceSkill : View<GameApp>, IPopup
 
 		for(int i = 1; i < _listSkillUI.Length; i++)
 		{
+			if(_listSkillUI[i] == null) return;
 			sequence.Join(_listSkillUI[i].objectParent
 				.DOLocalMove(Vector3.zero, 0.75f)
 				.SetEase(Ease.OutBack)
@@ -60,7 +59,7 @@ public class ChoiceSkill : View<GameApp>, IPopup
 	public void Selected(SkillUI skillUI)
 	{
 		Sequence sequence = DOTween.Sequence();
-		
+
 		sequence
 			.Join(
 				skillUI.objectChain
@@ -70,9 +69,10 @@ public class ChoiceSkill : View<GameApp>, IPopup
 				skillUI.objectContent
 					.DOLocalMove(new Vector3(0, -3000), 1.25f)
 					.SetEase(Ease.Linear));
-		
+
 		foreach(var skill in _listSkillUI)
 		{
+			if(skill == null) return;
 			if(!skill.Equals(skillUI))
 			{
 				sequence.Join(
@@ -87,6 +87,7 @@ public class ChoiceSkill : View<GameApp>, IPopup
 
 	public void Close()
 	{
+		gameController.isStopGame = false;
 		Destroy(gameObject);
 	}
 }

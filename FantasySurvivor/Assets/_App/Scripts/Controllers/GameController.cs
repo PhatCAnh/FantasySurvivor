@@ -10,6 +10,7 @@ using FantasySurvivor;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Stat;
+using Unity.Mathematics;
 using UnityEngine.SceneManagement;
 using MonsterStat = Stat.MonsterStat;
 
@@ -155,7 +156,7 @@ public class GameController : Controller<GameApp>
 
 		var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
 
-		monsterIns.transform.position = RandomPositionSpawnMonster(monsterIns.justSpawnVertical);
+		monsterIns.transform.position = RandomPositionSpawnMonster(20, monsterIns.justSpawnVertical);
 
 		monsterIns.Init(monsterStat, wave);
 
@@ -214,22 +215,41 @@ public class GameController : Controller<GameApp>
 		LoseGame();
 	}
 
-	private Vector2 RandomPositionSpawnMonster(bool justVertical = false)
+	public void Collected(GemExp exp)
 	{
-		int posX;
-		int posY;
-		int randomTopDown = Random.Range(0, 2);
-		if(randomTopDown == 0 || justVertical)
+		map.model.ExpCurrent += exp.valueExp;
+		if(map.model.ExpCurrent > map.model.ExpMax)
 		{
-			posX = Random.Range(-21, 21);
-			posY = (Random.Range(0, 2) * 2 - 1) * 20;
+			map.model.ExpCurrent -= map.model.ExpMax;
+			map.model.LevelCharacter++;
+			map.model.ExpMax += 50;
+			app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
 		}
-		else
-		{
-			posX = (Random.Range(0, 2) * 2 - 1) * 20;
-			posY = Random.Range(-21, 21);
-		}
-		return new Vector2(posX, posY);
+	}
+	
+
+	public Vector2 RandomPositionSpawnMonster(float radius, bool justVertical = false)
+	{
+		float angle = Random.Range(0, 2 * Mathf.PI);
+		float x = radius * Mathf.Cos(angle);
+		float y = radius * Mathf.Sin(angle);
+		return new Vector2(x + character.transform.position.x, y + character.transform.position.y);
+
+
+		// int posX;
+		// int posY;
+		// int randomTopDown = Random.Range(0, 2);
+		// if(randomTopDown == 0 || justVertical)
+		// {
+		// 	posX = Random.Range(-21, 21);
+		// 	posY = (Random.Range(0, 2) * 2 - 1) * 20;
+		// }
+		// else
+		// {
+		// 	posX = (Random.Range(0, 2) * 2 - 1) * 20;
+		// 	posY = Random.Range(-21, 21);
+		// }
+		// return new Vector2(posX, posY);
 	}
 	
 	private Character SpawnChacter()

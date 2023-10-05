@@ -3,6 +3,7 @@ using System.Linq;
 using ArbanFramework.MVC;
 using DataConfig;
 using FantasySurvivor;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 using Cooldown = ArbanFramework.Cooldown;
@@ -26,6 +27,8 @@ public class MapView : View<GameApp>
 
 	public Dictionary<TypeItemReward, int> dictionaryReward = new Dictionary<TypeItemReward, int>();
 
+	public List<SkillData> _listSkill;
+
 	public MapModel model { get; private set; }
 
 	[SerializeField] private Vector2 _size;
@@ -38,7 +41,29 @@ public class MapView : View<GameApp>
 	public void Init()
 	{
 		model = new();
+		_listSkill = app.resourceManager.GetListSkill().ToList();
 		StartLevel(model.levelInGame);
+	}
+
+	public List<SkillData> GetRandomSkill()
+	{
+		int count = 3;
+		List<SkillData> newList = new List<SkillData>();
+		if(_listSkill.Count < 3)
+		{
+			count = _listSkill.Count;
+		}
+		for(int i = 0; i < count; i++)
+		{
+			SkillData skill = null;
+			do
+			{
+				skill = _listSkill[Random.Range(0, _listSkill.Count)];
+			} while(newList.Contains(skill));
+			newList.Add(skill);
+		}
+		
+		return newList;
 	}
 
 	private void StartLevel(int level)

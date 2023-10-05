@@ -44,6 +44,7 @@ public class SkillUI : View<GameApp>
 	{
 		System.Type componentType = System.Type.GetType(skillData.type.ToString());
 		gameController.character.AddProactiveSkill(componentType);
+		gameController.map._listSkill.Remove(skillData);
 		_parent.Selected(this);
 	}
 }

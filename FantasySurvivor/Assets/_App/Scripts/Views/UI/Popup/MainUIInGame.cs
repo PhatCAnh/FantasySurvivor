@@ -15,20 +15,21 @@ namespace Popup
 	public class MainUIInGame : View<GameApp>, IPopup
 	{
 		[Required, SerializeField] private Sprite _spriteArrowUp, _spriteArrowDown;
-		
+
 		[Required, SerializeField] private Button _btnSetting;
 
+		[Required, SerializeField] private Slider _sldExpCharacter;
+
 		[Required, SerializeField] private RectTransform _interactContainer;
-		
+
 		[Required, SerializeField] private Image _imgArrow, _imgStat, _imgElemental;
 
 		[Required, SerializeField] private Toggle _toggleStat, _toggleDef, _toggleChangeStateInteract;
 
 		[Required, SerializeField] private GameObject _containerStatAtk, _containerStatDef;
 
-		[SerializeField] private TextMeshProUGUI _txtExpInMap, _txtLevel, _txtTimeMinutes, _txtTimeSeconds, _txtMonsterKilled;
-		private GameController gameController => Singleton<GameController>.instance;
-
+		[SerializeField] private TextMeshProUGUI _txtLevelCharacter, _txtLevel, _txtTimeMinutes, _txtTimeSeconds, _txtMonsterKilled;
+		public GameController gameController => Singleton<GameController>.instance;
 		private MapModel mapModel => gameController.map.model;
 		private CharacterModel towerModel => gameController.character.model;
 
@@ -47,26 +48,32 @@ namespace Popup
 			_toggleChangeStateInteract.onValueChanged.AddListener(OnClickToggleChangeStateInteract);
 			_toggleStat.onValueChanged.AddListener(OnClickToggleStat);
 			_toggleDef.onValueChanged.AddListener(OnClickToggleDEF);
-			
-			AddDataBinding("fieldMap-expInMapValue", _txtExpInMap, (control, e) =>
+
+			AddDataBinding("fieldMap-expCurrentValue", _sldExpCharacter, (control, e) =>
 				{
-					var coin = mapModel.expInGame;
-					control.text = coin.ToString();
-				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.expInGame), mapModel)
+					
+					control.value = (float) mapModel.ExpCurrent / mapModel.ExpMax;
+				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.ExpCurrent), mapModel)
 			);
 			
+			AddDataBinding("fieldMap-levelCharacterValue", _txtLevelCharacter, (control, e) =>
+				{
+					control.text = $"{mapModel.LevelCharacter}";
+				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.LevelCharacter), mapModel)
+			);
+
 			AddDataBinding("fieldMap-levelInGameValue", _txtLevel, (control, e) =>
 				{
 					control.text = $"WAVE: {mapModel.levelInGame}";
 				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.levelInGame), mapModel)
 			);
-			
+
 			AddDataBinding("fieldMap-monsterKilledValue", _txtMonsterKilled, (control, e) =>
 				{
 					control.text = $"{mapModel.monsterKilled}";
 				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.monsterKilled), mapModel)
 			);
-			
+
 			AddDataBinding("fieldMap-timeInMapValue", _txtTimeMinutes, (control, e) =>
 				{
 					var value = mapModel.timeInGame;
@@ -81,7 +88,7 @@ namespace Popup
 				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.timeInGame), mapModel)
 			);
 		}
-		
+
 		private void OnClickToggleChangeStateInteract(bool value)
 		{
 			var endValue = Camera.main.orthographicSize;
@@ -100,7 +107,7 @@ namespace Popup
 				_imgArrow.sprite = _spriteArrowDown;
 			}
 		}
-		
+
 
 		private void OnClickBtnSetting()
 		{

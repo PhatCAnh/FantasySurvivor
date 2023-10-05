@@ -12,13 +12,18 @@ namespace FantasySurvivor
 		
 		public MapModel() : base(dataChangedEvent)
 		{
-			expInGame = GameConst.gemStartGame;
+			_levelCharacter = 1;
+			_expMax = 10;
 			levelInGame = 1;
 		}
 
 		private float _timeInGame;
+		
+		private int _levelCharacter;
+		
+		private int _expCurrent;
 
-		private int _expInGame;
+		private int _expMax;
 
 		private int _levelInGame;
 
@@ -35,13 +40,33 @@ namespace FantasySurvivor
 			}
 		}
 
-		public int expInGame
+		public int ExpMax
 		{
-			get => _expInGame;
+			get => _expMax;
 			set {
-				if(expInGame == value) return;
-				_expInGame = value;
-				RaiseDataChanged(nameof(expInGame));
+				if(ExpMax == value) return;
+				_expMax = value;
+				RaiseDataChanged(nameof(ExpMax));
+			}
+		}
+		
+		public int ExpCurrent
+		{
+			get => _expCurrent;
+			set {
+				if(ExpCurrent == value) return;
+				_expCurrent = value;
+				RaiseDataChanged(nameof(ExpCurrent));
+			}
+		}
+		
+		public int LevelCharacter
+		{
+			get => _levelCharacter;
+			set {
+				if(LevelCharacter == value) return;
+				_levelCharacter = value;
+				RaiseDataChanged(nameof(LevelCharacter));
 			}
 		}
 		

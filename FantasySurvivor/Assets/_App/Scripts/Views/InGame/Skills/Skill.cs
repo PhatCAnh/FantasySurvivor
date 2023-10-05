@@ -18,7 +18,7 @@ namespace _App.Scripts.Views.InGame.Skills
 
 		private void DoneAnim()
 		{
-			Destroy(gameObject);
+			Destroy(_skill.gameObject);
 		}
 	}
 }

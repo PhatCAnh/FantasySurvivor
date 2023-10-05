@@ -11,7 +11,7 @@ using Sequence = DG.Tweening.Sequence;
 public class GemExp : View<GameApp>
 {
     [SerializeField] private SpriteRenderer _skin;
-    [SerializeField] private int _valueExp;
+    public int valueExp;
     private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
     private State state = State.Waiting;
@@ -24,7 +24,7 @@ public class GemExp : View<GameApp>
 
     public void Init(int valueExp)
     {
-        _valueExp = valueExp;
+        this.valueExp = valueExp;
     }
 
     private void Update()
@@ -40,7 +40,7 @@ public class GemExp : View<GameApp>
             transform.position = Vector2.MoveTowards(transform.position, gameController.character.transform.position, 10f * Time.deltaTime);
             if(Vector2.Distance(transform.position, gameController.character.transform.position) < 0.1f)
             {
-                gameController.map.model.expInGame += _valueExp;
+                gameController.Collected(this);
                 ArbanFramework.Singleton<PoolGemExp>.instance.RemoveObjectToPool(this);
                 state = State.Waiting;
             }

@@ -128,7 +128,11 @@ public class Monster : ObjectRPG
 
 	private void FixedUpdate()
 	{
-		if(gameController.isStop) return;
+		if(gameController.isStop)
+		{
+			Stop();
+			return;
+		}
 		_stateMachine.currentState.PhysicUpdate(Time.fixedTime);
 	}
 
@@ -138,6 +142,7 @@ public class Monster : ObjectRPG
 	{
 		moveTarget = gameController.character.transform.position;
 		moveDirection = moveTarget - transform.position;
+		
 
 		if(moveDirection.magnitude < sizeAttack)
 		{
@@ -146,6 +151,10 @@ public class Monster : ObjectRPG
 				AttackState();
 				cdAttack.Restart(1 / model.attackSpeed);
 			}
+		}
+		else if(moveDirection.magnitude > 25)
+		{
+			transform.position = gameController.RandomPositionSpawnMonster(20);
 		}
 		else
 		{
@@ -177,6 +186,11 @@ public class Monster : ObjectRPG
 	protected virtual void Die(bool selfDie = false)
 	{
 		gameController.MonsterDie(this, selfDie);
+	}
+
+	protected virtual void Stop()
+	{
+		myRigid.velocity = Vector2.zero;
 	}
 
 	private void OnDrawGizmosSelected()

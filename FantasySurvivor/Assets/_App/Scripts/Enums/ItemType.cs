@@ -71,6 +71,7 @@ public enum SkillType
     SharkSkill,
     FireBallSkill,
     TwinSkill,
+    Food,
 }
 
 public enum PopupType

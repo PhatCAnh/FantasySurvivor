@@ -15,6 +15,8 @@ public class BulletView : View<GameApp>
 
 	protected Monster target;
 
+	protected Vector3 targetPos;
+
 	protected bool isCritical;
 
 	protected float damage;
@@ -34,8 +36,14 @@ public class BulletView : View<GameApp>
 	{
 		//sua lai
 		if(gameController.isStop) return;
-		transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
-		if(Vector2.Distance(transform.position, target.transform.position) < 0.1f)
+
+		if(target != null)
+		{
+			targetPos = target.transform.position;
+		}
+		
+		transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+		if(Vector2.Distance(transform.position, targetPos) < 0.1f)
 		{
 			target.TakeDamage(damage, isCritical);
 			TouchUnit();

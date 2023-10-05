@@ -144,6 +144,11 @@ public class ResourceManager : UIManagerBase<PopupType>
 		return _typeItemReward[type];
 	}
 
+	public List<SkillData> GetListSkill()
+	{
+		return _poolSkill;
+	}
+	
 	public SkillData GetSkill(SkillType type)
 	{
 		return _poolSkill.FirstOrDefault(skill => skill.type == type);
