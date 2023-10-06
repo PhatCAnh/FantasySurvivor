@@ -1,7 +1,7 @@
 ﻿using System;
 using ArbanFramework.MVC;
 using UnityEngine;
-namespace _App.Scripts.Views.InGame.Skills
+namespace FantasySurvivor
 {
 	public class TwinInstantiate : View<GameApp>
 	{
@@ -15,7 +15,7 @@ namespace _App.Scripts.Views.InGame.Skills
 		private float _damage;
 		private bool _isCritical;
 
-		private bool _isDamage;
+		private bool _isDamaged = false;
 		
 
 		public void Init(Vector2 direction, float moveSpeed, float damage, Monster oldTarget)
@@ -39,9 +39,9 @@ namespace _App.Scripts.Views.InGame.Skills
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
-			if(other.TryGetComponent(out Monster monster) && !monster.Equals(_oldTarget) && !_isDamage)
+			if(other.TryGetComponent(out Monster monster) && !monster.Equals(_oldTarget) && !_isDamaged)
 			{
-				_isDamage = true;
+				_isDamaged = true;
 				monster.TakeDamage(_damage, _isCritical);
 				TouchUnit();
 			}
