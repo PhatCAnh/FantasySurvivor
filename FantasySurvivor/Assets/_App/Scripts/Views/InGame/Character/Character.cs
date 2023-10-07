@@ -243,4 +243,9 @@ public class Character : ObjectRPG
 		base.OnDestroy();
 		skinAttackRange.DOKill();
 	}
+
+	private void OnDrawGizmosSelected()
+	{
+		Gizmos.DrawWireSphere(transform.position, sizeBase);
+	}
 }

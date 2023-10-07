@@ -73,7 +73,7 @@ public class GameController : Controller<GameApp>
 	public void LoseGame()
 	{
 		isEndGame = true;
-		Singleton<PoolGemExp>.instance.ReturnAllObject();
+		Singleton<PoolDropItem>.instance.ReturnAllObject();
 		app.resourceManager.ShowPopup(PopupType.LoseGame);
 		//app.analytics.TrackPlay(LevelResult.Failure, map.model.levelInGame);
 	}
@@ -160,7 +160,7 @@ public class GameController : Controller<GameApp>
 		if(!selfDie)
 		{
 			map.model.monsterKilled++;
-			Singleton<PoolGemExp>.instance.GetObjectFromPool(mons.transform.position, mons.stat.exp.BaseValue);
+			Singleton<PoolDropItem>.instance.GetObjectFromPool(mons.transform.position, mons.stat.exp.BaseValue);
 		}
 
 		listMonster.Remove(mons);
@@ -223,16 +223,29 @@ public class GameController : Controller<GameApp>
 	// 	}
 	// }
 
-	public void Collected(GemExp exp)
+	public void Collected(DropItem dropItem)
 	{
-		map.model.ExpCurrent += exp.valueExp;
-		if(map.model.ExpCurrent > map.model.ExpMax)
+		switch (dropItem.type)
 		{
-			map.model.ExpCurrent -= map.model.ExpMax;
-			map.model.LevelCharacter++;
-			map.model.ExpMax += 50;
-			app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
+			case DropItemType.Exp:
+				map.model.ExpCurrent += dropItem.value;
+				if(map.model.ExpCurrent > map.model.ExpMax)
+				{
+					map.model.ExpCurrent -= map.model.ExpMax;
+					map.model.LevelCharacter++;
+					map.model.ExpMax += 50;
+					app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
+				}
+				break;
+			case DropItemType.Magnet:
+				foreach(var item in Singleton<PoolDropItem>.instance.usedList)
+				{
+					item.GetComponent<DropItem>().Collect();
+				}
+				
+				break;
 		}
+		
 	}
 
 

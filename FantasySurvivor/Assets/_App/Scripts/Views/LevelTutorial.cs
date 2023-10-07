@@ -32,7 +32,7 @@ public class LevelTutorial : View<GameApp>
 
 		if(_dataPlayer.firstTouchHand)
 		{
-			Singleton<PoolGemExp>.instance.onSpawnGemExp += OnMonsterDie;
+			//Singleton<PoolGemExp>.instance.onSpawnGemExp += OnMonsterDie;
 		}
 		if(_dataPlayer.firstTutorialHandUi)
 		{
@@ -41,17 +41,17 @@ public class LevelTutorial : View<GameApp>
 		}
 	}
 
-	private void OnMonsterDie(GemExp gemExp)
-	{
-		Instantiate(_hand, gemExp.transform.position, Quaternion.identity);
-		_numberHand++;
-		if(_numberHand >= 4)
-		{
-			Singleton<PoolGemExp>.instance.onSpawnGemExp -= OnMonsterDie;
-			_dataPlayer.firstTouchHand = false;
-			app.models.WriteModel<DataPlayerModel>();
-		}
-	}
+	// private void OnMonsterDie(GemExp gemExp)
+	// {
+	// 	Instantiate(_hand, gemExp.transform.position, Quaternion.identity);
+	// 	_numberHand++;
+	// 	if(_numberHand >= 4)
+	// 	{
+	// 		Singleton<PoolGemExp>.instance.onSpawnGemExp -= OnMonsterDie;
+	// 		_dataPlayer.firstTouchHand = false;
+	// 		app.models.WriteModel<DataPlayerModel>();
+	// 	}
+	// }
 
 	private void ClickFollowTutorial()
 	{

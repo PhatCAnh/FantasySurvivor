@@ -6,7 +6,6 @@ public enum Type
     Undefined = -1,
     HealthBar,
     Character,
-    GemExp,
 }
 
 public enum MapType
@@ -111,6 +110,12 @@ public enum SkillDamagedType
 {
     Single,
     AreaOfEffect,
+}
+
+public enum DropItemType
+{
+    Exp,
+    Magnet,    
 }
 
 

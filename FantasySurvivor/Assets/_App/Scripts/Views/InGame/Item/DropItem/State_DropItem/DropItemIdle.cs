@@ -14,7 +14,7 @@ namespace FantasySurvivor {
                 return;
 
             var distanceToTarget = Vector2.Distance(agent.transform.position, agent.character.transform.position);
-            if (distanceToTarget > 1f)
+            if (distanceToTarget > 3f)
                 return;
 
             agent.Collect();

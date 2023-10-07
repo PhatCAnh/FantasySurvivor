@@ -37,9 +37,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[Required, SerializeField] private GameObject _choiceMapPopup;
 
 	[Required, SerializeField] private GameObject _loseGamePopup;
-	
+
 	[Required, SerializeField] private GameObject _choiceSkill;
-	
+
 
 	[Header("UI Tutorial prefabs")]
 	[Required, SerializeField] private GameObject _clickBulletTutorial;
@@ -69,7 +69,13 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	private Dictionary<TypeItemReward, ItemReward> _typeItemReward;
 
-	[SerializeField] private List<SkillData>  _poolSkill;
+	[Header("Drop Item prefabs")]
+	[Required, SerializeField] private GameObject _exp;
+	[Required, SerializeField] private GameObject _magnet;
+
+	private Dictionary<DropItemType, GameObject> _dropItemDic;
+
+	[SerializeField] private List<SkillData> _poolSkill;
 	private void Awake()
 	{
 		Singleton<ResourceManager>.Set(this);
@@ -100,7 +106,6 @@ public class ResourceManager : UIManagerBase<PopupType>
 		{
 			{Type.HealthBar, _healthBarPrefab},
 			{Type.Character, _characterPrefab},
-			{Type.GemExp, _gemExpPrefab},
 		};
 
 		_mapDic = new Dictionary<MapType, GameObject>
@@ -121,6 +126,12 @@ public class ResourceManager : UIManagerBase<PopupType>
 		_typeItemReward = new Dictionary<TypeItemReward, ItemReward>()
 		{
 			{TypeItemReward.Coin, _irCoin},
+		};
+
+		_dropItemDic = new Dictionary<DropItemType, GameObject>()
+		{
+			{DropItemType.Exp, _exp},
+			{DropItemType.Magnet, _magnet},
 		};
 	}
 
@@ -148,10 +159,15 @@ public class ResourceManager : UIManagerBase<PopupType>
 	{
 		return _poolSkill.Where(skill => skill.name != SkillName.Food).ToList();
 	}
-	
+
 	public SkillData GetSkill(SkillName name)
 	{
 		return _poolSkill.FirstOrDefault(skill => skill.name == name);
+	}
+	
+	public GameObject GetDropItem(DropItemType type)
+	{
+		return _dropItemDic[type];
 	}
 
 	public override GameObject ShowPopup(PopupType type, Action<GameObject> onInit = null)

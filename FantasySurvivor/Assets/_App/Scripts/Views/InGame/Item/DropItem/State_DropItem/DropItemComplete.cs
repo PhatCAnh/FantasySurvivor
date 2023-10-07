@@ -1,6 +1,6 @@
-﻿using ArbanFramework.StateMachine;
-
-using UnityEngine;
+﻿using ArbanFramework;
+using ArbanFramework.StateMachine;
+using StateMachine = ArbanFramework.StateMachine.StateMachine;
 namespace FantasySurvivor {
     public class DropItemComplete : State<DropItem> {
         public DropItemComplete(DropItem agent, StateMachine stateMachine) : base( agent, stateMachine )
@@ -10,7 +10,7 @@ namespace FantasySurvivor {
         public override void Enter() {
             base.Enter();
             
-            GameObject.Destroy(agent.gameObject);
+            Singleton<PoolDropItem>.instance.RemoveObjectToPool(agent);
         }
     }
 }

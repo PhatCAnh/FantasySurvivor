@@ -12,9 +12,9 @@ namespace FantasySurvivor {
             base.LogicUpdate(deltaTime);
             
             var distanceToTarget = Vector2.Distance(agent.transform.position, agent.character.transform.position);
-            if (distanceToTarget < 0.15f)
+            if (distanceToTarget < agent.character.sizeBase)
             {
-                //Singleton<GameController>.instance.CollectedItem(agent.type);
+                Singleton<GameController>.instance.Collected(agent);
                 agent.Complete();
                 return;
             }

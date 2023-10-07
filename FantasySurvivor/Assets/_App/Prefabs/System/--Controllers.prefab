@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9091336881132467036}
   - component: {fileID: 7737549678799174928}
+  - component: {fileID: 7630291997617660540}
   m_Layer: 0
   m_Name: Pool Object
   m_TagString: Untagged
@@ -45,6 +46,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 8019563876969885780, guid: e455c20de49a1234b8832933daa6dd58, type: 3}
+  _poolSize: 0
+  _expandable: 1
+  freeList: []
+  usedList: []
+--- !u!114 &7630291997617660540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285100071921675574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0e4026f285349769e71bc3111636bf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 8527315627761866939, guid: 8abfee58130042548a87a2d4844c6437, type: 3}
   _poolSize: 0
   _expandable: 1
   freeList: []
@@ -95,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStopGame: 0
   isEndGame: 0
-  tower: {fileID: 0}
+  character: {fileID: 0}
   map: {fileID: 0}
   listMonster: []
 --- !u!1 &4008007943000763282
