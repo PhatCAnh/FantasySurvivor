@@ -30,7 +30,7 @@ public class GameApp : AppBase
         analytics.Init();
         adsController.Init(analytics);
 #endif
-		Application.targetFrameRate = 60;
+		Application.targetFrameRate = 120;
 
 #if UNITY_STANDALONE
 		Screen.SetResolution(440, 960, false);

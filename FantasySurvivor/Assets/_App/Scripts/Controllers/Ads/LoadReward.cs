@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Advertisements;
-namespace _App.Scripts.Controllers.Ads
+namespace FantasySurvivor
 {
 	public class LoadReward : IUnityAdsLoadListener, IUnityAdsShowListener
 	{

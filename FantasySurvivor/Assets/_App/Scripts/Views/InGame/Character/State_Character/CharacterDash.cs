@@ -2,7 +2,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace MR.CharacterState
+namespace FantasySurvivor
 {
     public class CharacterDash : State<Character>
     {

@@ -1,7 +1,7 @@
 ﻿using System;
-using MR.CharacterState.Unit;
+using FantasySurvivor;
 using UnityEngine;
-namespace _App.Scripts.Views.InGame.Monsters
+namespace FantasySurvivor
 {
 	
 	public class InteractBulletMonster : BulletMonster

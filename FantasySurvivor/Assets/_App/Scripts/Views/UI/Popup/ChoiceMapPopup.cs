@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Sequence = DG.Tweening.Sequence;
-namespace Popup
+namespace FantasySurvivor
 {
 	[Serializable]
 	public class DataUiChapter

@@ -1,17 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using _App.Scripts.Pool;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using ArbanFramework.StateMachine;
 using DG.Tweening;
 using FantasySurvivor;
-using MR.CharacterState;
-using MR.CharacterState.Tower;
-using Popup;
 using Sirenix.OdinInspector;
-using Stat;
 using UnityEngine;
 
 public class TowerView : ObjectRPG

@@ -1,4 +1,4 @@
-﻿namespace _App.Scripts.Interface
+﻿namespace FantasySurvivor
 {
 	public class IUnit
 	{

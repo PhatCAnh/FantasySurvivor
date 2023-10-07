@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MR
+namespace FantasySurvivor
 {
     public class MapConfig : IConfigItem
     {

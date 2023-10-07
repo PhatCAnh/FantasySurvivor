@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
-namespace MR.CharacterState.Unit.Monsters
+namespace FantasySurvivor
 {
 	public class RangedMonster : Monster
 	{

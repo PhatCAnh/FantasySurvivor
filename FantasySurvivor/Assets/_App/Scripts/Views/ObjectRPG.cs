@@ -1,6 +1,6 @@
 ﻿using ArbanFramework.MVC;
 
-namespace MR.CharacterState {
+namespace FantasySurvivor {
     public class ObjectRPG : View<GameApp>
     {
         

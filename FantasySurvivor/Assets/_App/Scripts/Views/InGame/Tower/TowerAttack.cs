@@ -1,5 +1,5 @@
 ﻿using ArbanFramework.StateMachine;
-namespace MR.CharacterState.Tower
+namespace FantasySurvivor
 {
 	public class TowerAttack : State<TowerView>
 	{

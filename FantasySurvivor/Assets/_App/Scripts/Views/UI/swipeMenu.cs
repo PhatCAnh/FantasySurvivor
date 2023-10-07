@@ -1,4 +1,4 @@
-﻿namespace _App.Scripts.Views.UI
+﻿namespace FantasySurvivor
 {
 	public class swipeMenu
 	{

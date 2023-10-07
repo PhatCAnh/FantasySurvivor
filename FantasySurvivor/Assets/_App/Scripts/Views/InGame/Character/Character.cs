@@ -1,14 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using _App.Scripts.Pool;
 using ArbanFramework;
 using ArbanFramework.Config;
 using ArbanFramework.MVC;
 using DG.Tweening;
 using FantasySurvivor;
-using MR;
-using MR.CharacterState;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
 using StateMachine = ArbanFramework.StateMachine.StateMachine;
@@ -16,11 +14,11 @@ using StateMachine = ArbanFramework.StateMachine.StateMachine;
 public class Character : ObjectRPG
 {
 	public Transform skinAttackRange;
-	
+
 	public SpriteRenderer skinBase;
-	
+
 	public float sizeBase;
-	
+
 	[HideInInspector]
 	public Rigidbody2D myRigid;
 
@@ -45,11 +43,11 @@ public class Character : ObjectRPG
 		}
 	}
 
-	private ProactiveSkill[] _proactiveSkills;
+	public List<Skill> proactiveSkills = new List<Skill>();
 
 	public bool IsAlive => model.currentHealthPoint > 0;
 	public bool IsMove => _stateMachine.currentState == _moveSm;
-	
+
 	private Vector2 _direction = Vector2.zero;
 
 	private StateMachine _stateMachine;
@@ -73,15 +71,14 @@ public class Character : ObjectRPG
 			IdleState();
 		}
 
-		AddProactiveSkill();
 		myRigid = GetComponent<Rigidbody2D>();
-		
+
 		AddDataBinding("fieldCharacter-moveSpeedValue", animator, (control, e) =>
 			{
 				control.SetFloat("SpeedMul", model.moveSpeed / 2.5f);
 			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackSpeed), model)
 		);
-		
+
 		AddDataBinding("fieldCharacter-attackRangeValue", skinAttackRange, (control, e) =>
 			{
 				control.localScale = model.attackRange / 10 * Vector3.one;
@@ -96,8 +93,8 @@ public class Character : ObjectRPG
 		skinAttackRange.DORotate(new Vector3(0, 0, -360), 7.5f, RotateMode.FastBeyond360)
 			.SetLoops(-1, LoopType.Incremental)
 			.SetEase(Ease.Linear);
-		
-		
+
+
 	}
 
 	public void Init(CharacterStat statInit)
@@ -107,7 +104,7 @@ public class Character : ObjectRPG
 			statInit.health.BaseValue,
 			statInit.attackRange.BaseValue,
 			statInit.attackDamage.BaseValue
-			);
+		);
 	}
 
 	private void Update()
@@ -138,7 +135,7 @@ public class Character : ObjectRPG
 	{
 		moveDirection = moveForce;
 	}
-	
+
 	public void TakeDamage(int damage)
 	{
 		if(!IsAlive) return;
@@ -147,10 +144,54 @@ public class Character : ObjectRPG
 		if(!IsAlive) Die();
 	}
 
-	public void AddProactiveSkill(Type type = null)
+	public void AddHealth(float value)
 	{
-		gameObject.AddComponent(type);
-		_proactiveSkills = GetComponents<ProactiveSkill>();
+		model.currentHealthPoint += value; 
+	}
+
+	public void AddProactiveSkill(SkillData skillData)
+	{
+		switch (skillData.type)
+		{
+			case SkillType.Proactive:
+				var skill = GetSkill(skillData.name);
+				if(skill != null)
+				{
+					skill.UpLevel();
+					if(skill.level >= 6)
+					{
+						gameController.map.RemoveSkill(skill.skillName);
+					}
+				}
+				else
+				{
+					var proactiveSkill = new ProactiveSkill();
+					proactiveSkill.Init(skillData);
+					proactiveSkills.Add(proactiveSkill);
+				}
+				break;
+			case SkillType.Passive:
+				break;
+			case SkillType.Buff:
+				if(skillData.name == SkillName.Food)
+				{
+					model.currentHealthPoint += model.currentHealthPoint * 20 / 100;
+				}
+				break;
+
+		}
+	}
+
+	public Skill GetSkill(SkillName skillName)
+	{
+		foreach(var skill in proactiveSkills)
+		{
+			if(skill.skillName.Equals(skillName))
+			{
+				return skill;
+			}
+		}
+		return null;
 	}
 
 	private void Die()
@@ -172,7 +213,7 @@ public class Character : ObjectRPG
 	// ReSharper disable Unity.PerformanceAnalysis
 	private void HandleProactiveSkill(float deltaTime)
 	{
-		foreach(var skill in _proactiveSkills)
+		foreach(var skill in proactiveSkills)
 		{
 			skill.CoolDownSkill(deltaTime);
 		}

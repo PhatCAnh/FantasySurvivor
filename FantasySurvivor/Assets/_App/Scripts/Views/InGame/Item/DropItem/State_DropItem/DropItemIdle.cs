@@ -1,7 +1,7 @@
 ﻿using ArbanFramework.StateMachine;
 
 using UnityEngine;
-namespace MR.State_DropItem {
+namespace FantasySurvivor {
     public class DropItemIdle : State<DropItem> {
         public DropItemIdle(DropItem agent, StateMachine stateMachine) : base( agent, stateMachine )
         {

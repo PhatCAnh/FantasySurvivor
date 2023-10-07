@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace Popup
+namespace FantasySurvivor
 {
 
 	public class MainUIInGame : View<GameApp>, IPopup

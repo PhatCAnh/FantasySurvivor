@@ -1,5 +1,5 @@
 ﻿using ArbanFramework;
-namespace Stat
+namespace FantasySurvivor
 {
 	public class MonsterStat
 	{

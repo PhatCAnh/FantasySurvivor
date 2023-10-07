@@ -134,21 +134,34 @@ MonoBehaviour:
   _purpleDevil: {fileID: 2251807672777610876, guid: cfec675ec25a68346897caaffd1f72f1, type: 3}
   _irCoin: {fileID: 4763499435868738885, guid: 4accdbbbca1969d46992dd9b3e66be7a, type: 3}
   _poolSkill:
-  - type: 0
-    skillName: Shark
+  - name: 0
+    type: 0
+    typeElemental: 0
     imgUI: {fileID: 21300000, guid: 65d81833a9705374299a503a6186aa2f, type: 3}
-    description: ABCXYZ
+    description: Baby Shark
     skillPrefab: {fileID: 8206914173546746077, guid: 24f582cf70ec6c444bd720fa6d3c911a, type: 3}
-  - type: 1
-    skillName: FireBall
-    imgUI: {fileID: 317864984, guid: e4ffbed7851f5774ca9f8acb8fce1d5e, type: 3}
-    description: XYZABC
+    effectPrefab: {fileID: 0}
+  - name: 1
+    type: 0
+    typeElemental: 0
+    imgUI: {fileID: 704797902, guid: e4ffbed7851f5774ca9f8acb8fce1d5e, type: 3}
+    description: Fire Ball
     skillPrefab: {fileID: 9075703475211245482, guid: 7c860169edcee5747bf90d4ebca6da2e, type: 3}
-  - type: 2
-    skillName: TwinSkill
-    imgUI: {fileID: 21300000, guid: cb07234778fa6514490cde4b81ddd137, type: 3}
+    effectPrefab: {fileID: 5960483955136575123, guid: 816f66b4279b5fd46b0bd8d9cad6eeee, type: 3}
+  - name: 2
+    type: 0
+    typeElemental: 0
+    imgUI: {fileID: 21300000, guid: 7d9f2344361daf645b44645c6bbcec2c, type: 3}
     description: Twin
     skillPrefab: {fileID: 5969974768321339375, guid: bccfbe3ac4d1a834387290001c1a7597, type: 3}
+    effectPrefab: {fileID: 0}
+  - name: 3
+    type: 2
+    typeElemental: 0
+    imgUI: {fileID: 0}
+    description: Food
+    skillPrefab: {fileID: 0}
+    effectPrefab: {fileID: 0}
 --- !u!1 &7740478561839289926
 GameObject:
   m_ObjectHideFlags: 0

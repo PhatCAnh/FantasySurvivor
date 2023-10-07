@@ -2,7 +2,7 @@
 using ArbanFramework;
 using ArbanFramework.MVC;
 using UnityEngine;
-namespace MR.CharacterState.Unit
+namespace FantasySurvivor
 {
 	public class BulletMonster : View<GameApp>
 	{

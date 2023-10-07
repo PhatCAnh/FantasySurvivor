@@ -1,4 +1,4 @@
-﻿namespace MR.CharacterState.Tower
+﻿namespace FantasySurvivor
 {
 	public class BulletTower
 	{

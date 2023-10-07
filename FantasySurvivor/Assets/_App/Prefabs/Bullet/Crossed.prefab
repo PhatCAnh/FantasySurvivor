@@ -146,7 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5969974768321339372}
-  - component: {fileID: 5969974768321339363}
+  - component: {fileID: 1126279905985960467}
   m_Layer: 0
   m_Name: Crossed
   m_TagString: Untagged
@@ -170,7 +170,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5969974768321339363
+--- !u!114 &1126279905985960467
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,5 +182,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e680591469d4754ea3e0c51411927f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  _twinInstantiate: {fileID: -1911901126836862808, guid: ea91f5ad36cfb4948b38949dbec985e3, type: 3}
+  canBlock: 1
+  spawnPos: 0
+  skillType: 1
+  moveSpeed: 15
+  skin: {fileID: 8655729004864248730}
+  size: 1
+  _twinInstantiate: {fileID: 8676909640431515508, guid: ea91f5ad36cfb4948b38949dbec985e3, type: 3}

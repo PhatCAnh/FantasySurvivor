@@ -5,7 +5,7 @@ using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.Analytics;
 using Random = UnityEngine.Random;
-namespace _App.Scripts.Controllers.Ads
+namespace FantasySurvivor
 {
 	public class Tracking : MonoBehaviour
 	{

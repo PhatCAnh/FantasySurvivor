@@ -1,6 +1,6 @@
 ﻿using ArbanFramework.StateMachine;
 
-namespace MR.CharacterState
+namespace FantasySurvivor
 {
     public class CharacterIdle : State<Character>
     {

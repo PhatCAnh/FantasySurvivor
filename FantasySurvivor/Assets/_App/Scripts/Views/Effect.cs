@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using ArbanFramework.MVC;
 using UnityEngine;
 
-public class Effect : MonoBehaviour
+public class Effect : View<GameApp>
 {
-    private void DoneEffect()
+    protected virtual void DoneEffect()
     {
         Destroy(gameObject);
     }

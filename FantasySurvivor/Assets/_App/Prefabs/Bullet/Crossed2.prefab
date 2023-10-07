@@ -146,8 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5969974768321339372}
-  - component: {fileID: 5969974768321339362}
-  - component: {fileID: -1911901126836862808}
+  - component: {fileID: 8676909640431515508}
   m_Layer: 0
   m_Name: Crossed2
   m_TagString: Untagged
@@ -171,23 +170,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &5969974768321339362
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5969974768321339375}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1
---- !u!114 &-1911901126836862808
+--- !u!114 &8676909640431515508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,4 +182,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07bc2c052079472e883bba6224c13205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skin: {fileID: 8655729004864248730}
+  target: {fileID: 0}
+  size: 1
+  skillDamagedType: 0
+  skin: {fileID: 8655729004864248730}
+  spawnPos: 2
+  targetType: 1
+  canBlock: 1
+  moveSpeed: 0

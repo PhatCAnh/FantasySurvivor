@@ -10,7 +10,7 @@ using TMPro;
 
 using UnityEngine;
 using UnityEngine.UI;
-namespace Popup
+namespace FantasySurvivor
 {
     public class MainUI : View<GameApp>, IPopup
     {

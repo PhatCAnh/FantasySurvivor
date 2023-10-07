@@ -1,5 +1,5 @@
 ﻿using ArbanFramework.Config;
-namespace _App.Scripts.Configs
+namespace FantasySurvivor
 {
 	public class DataStatMonsterConfig : IConfigItem
 	{

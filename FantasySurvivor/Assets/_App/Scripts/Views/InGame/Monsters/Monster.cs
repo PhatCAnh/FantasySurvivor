@@ -1,12 +1,7 @@
 using System;
-using _App.Scripts.Interface;
-using _App.Scripts.Pool;
 using ArbanFramework;
-using ArbanFramework.MVC;
 using ArbanFramework.StateMachine;
 using FantasySurvivor;
-using MR.CharacterState;
-using Stat;
 using UnityEngine;
 
 public class Monster : ObjectRPG
@@ -73,15 +68,11 @@ public class Monster : ObjectRPG
 	
 	public MapView.WaveData wave { get; private set; }
 
-	public Action<Monster> onMonsterDie;
-
 	protected float sizeAttack;
 
 	protected Cooldown cdAttack = new Cooldown();
 
 	protected Vector3 moveTarget;
-	
-	
 
 	#endregion
 

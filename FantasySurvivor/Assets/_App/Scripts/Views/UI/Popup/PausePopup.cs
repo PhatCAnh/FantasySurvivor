@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Popup
+namespace FantasySurvivor
 {
 	public class PausePopup : View<GameApp>, IPopup
 	{

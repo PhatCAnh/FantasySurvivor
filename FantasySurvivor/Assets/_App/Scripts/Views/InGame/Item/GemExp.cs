@@ -1,8 +1,7 @@
 using System;
-using _App.Scripts.Pool;
+using FantasySurvivor;
 using ArbanFramework.MVC;
 using DG.Tweening;
-using Popup;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;

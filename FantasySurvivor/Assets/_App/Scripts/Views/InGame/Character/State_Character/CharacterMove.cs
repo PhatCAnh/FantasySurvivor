@@ -1,7 +1,7 @@
 ﻿using ArbanFramework.StateMachine;
 using UnityEngine;
 
-namespace MR.CharacterState
+namespace FantasySurvivor
 {
 	public class CharacterMove : State<Character>
 	{

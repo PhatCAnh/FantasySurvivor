@@ -2,7 +2,7 @@
 using System.Linq;
 using ArbanFramework;
 using UnityEngine;
-namespace _App.Scripts.Pool
+namespace FantasySurvivor
 {
 	public class PoolGemExp : ObjectPool
 	{

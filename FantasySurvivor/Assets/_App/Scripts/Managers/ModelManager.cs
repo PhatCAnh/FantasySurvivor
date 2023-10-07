@@ -1,6 +1,5 @@
 ﻿using ArbanFramework.MVC;
 using FantasySurvivor;
-using MR;
 
 public class ModelManager : ModelManagerBase
 {

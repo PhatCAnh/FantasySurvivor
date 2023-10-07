@@ -1,12 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ArbanFramework.MVC;
-using DataConfig;
 using FantasySurvivor;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Cooldown = ArbanFramework.Cooldown;
+using Random = UnityEngine.Random;
 
 public class MapView : View<GameApp>
 {
@@ -27,7 +29,7 @@ public class MapView : View<GameApp>
 
 	public Dictionary<TypeItemReward, int> dictionaryReward = new Dictionary<TypeItemReward, int>();
 
-	public List<SkillData> _listSkill;
+	public List<SkillData> listSkill;
 
 	public MapModel model { get; private set; }
 
@@ -41,7 +43,7 @@ public class MapView : View<GameApp>
 	public void Init()
 	{
 		model = new();
-		_listSkill = app.resourceManager.GetListSkill().ToList();
+		listSkill = app.resourceManager.GetListSkill().ToList();
 		StartLevel(model.levelInGame);
 	}
 
@@ -49,21 +51,37 @@ public class MapView : View<GameApp>
 	{
 		int count = 3;
 		List<SkillData> newList = new List<SkillData>();
-		if(_listSkill.Count < 3)
+		if(listSkill.Count < 3)
 		{
-			count = _listSkill.Count;
+			count = listSkill.Count;
 		}
 		for(int i = 0; i < count; i++)
 		{
 			SkillData skill = null;
 			do
 			{
-				skill = _listSkill[Random.Range(0, _listSkill.Count)];
+				skill = listSkill[Random.Range(0, listSkill.Count)];
 			} while(newList.Contains(skill));
 			newList.Add(skill);
 		}
-		
+
+		if(listSkill.Count == 0)
+		{
+			newList.Add(app.resourceManager.GetSkill(SkillName.Food));
+		}
+
 		return newList;
+	}
+
+	public void RemoveSkill(SkillName skillName)
+	{
+		foreach(var skill in listSkill.ToList())
+		{
+			if(skill.name.Equals(skillName))
+			{
+				listSkill.Remove(skill);
+			}
+		}
 	}
 
 	private void StartLevel(int level)

@@ -1,5 +1,5 @@
 ﻿using ArbanFramework.StateMachine;
-namespace MR.State_DropItem {
+namespace FantasySurvivor {
     public class DropItemSpawn : State<DropItem> {
         public DropItemSpawn(DropItem agent, StateMachine stateMachine) : base( agent, stateMachine )
         {

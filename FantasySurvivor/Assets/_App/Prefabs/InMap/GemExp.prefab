@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8527315627761866934}
   - component: {fileID: 8527315627761866933}
-  - component: {fileID: 8527315627761866932}
-  m_Layer: 31
+  m_Layer: 0
   m_Name: GemExp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,23 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skin: {fileID: 8527315628092798274}
-  _valueExp: 5
---- !u!58 &8527315627761866932
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8527315627761866939}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1
+  valueExp: 0
 --- !u!1 &8527315628092798273
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8527315628092798275}
   - component: {fileID: 8527315628092798274}
-  m_Layer: 31
+  m_Layer: 0
   m_Name: Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,8 +73,8 @@ Transform:
   m_GameObject: {fileID: 8527315628092798273}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8527315627761866934}
   m_RootOrder: 0
@@ -136,7 +119,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 8b06dbfc926e74780a39e8a7d3b1edc0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -1,5 +1,5 @@
 ﻿using ArbanFramework.StateMachine;
-namespace MR.CharacterState.Tower
+namespace FantasySurvivor
 {
 	public class TowerIdle : State<TowerView>
 	{
@@ -11,7 +11,7 @@ namespace MR.CharacterState.Tower
 		public override void LogicUpdate(float deltaTime)
 		{
 			base.LogicUpdate(deltaTime);
-			agent.target = agent.gameController.GetFirstMonster(agent.model.attackRange);
+			agent.target = agent.gameController.GetRandomMonster();
 			if(agent.target != null)
 				agent.AttackState();
 		}

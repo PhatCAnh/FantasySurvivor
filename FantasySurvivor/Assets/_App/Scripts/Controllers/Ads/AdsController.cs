@@ -3,7 +3,7 @@ using ArbanFramework.MVC;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using _App.Scripts.Controllers.Ads;
+using FantasySurvivor;
 using UnityEngine;
 using UnityEngine.Advertisements;
 

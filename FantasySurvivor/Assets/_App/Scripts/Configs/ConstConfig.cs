@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace DataConfig
+namespace FantasySurvivor
 {
     public class ConstConfig : IConfigItem
     {

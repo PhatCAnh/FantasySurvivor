@@ -1,92 +1,85 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using _App.Scripts.Views.InGame.Skills;
-using ArbanFramework.MVC;
-using Unity.Mathematics;
-using Unity.VisualScripting;
+using FantasySurvivor;
 using UnityEngine;
 using Cooldown = ArbanFramework.Cooldown;
 
-public class ProactiveSkill : View<GameApp>
+public class Skill
 {
-	protected int timeSKill = 2;
-	public Cooldown cooldownSkill = new Cooldown();
-
-	protected GameObject skillPrefab;
-
+	public SkillName skillName;
+	
+	public int level;
+	
 	protected Character origin;
 	protected GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
-	private void Awake()
+	protected GameObject skillPrefab;
+	
+	protected GameObject effectPrefab;
+
+
+	protected Dictionary<int, LevelSkillData> levelData;
+
+	protected readonly Cooldown cooldownSkill = new Cooldown();
+	
+	public virtual void Active()
 	{
-		origin = GetComponent<Character>();
+
 	}
 
+	public virtual void Init(SkillData data)
+	{
+		this.skillName = data.name;
+		
+		this.origin = gameController.character;
+
+		level = 1;
+		
+		skillPrefab = data.skillPrefab;
+		effectPrefab = data.effectPrefab;
+
+		levelData = data.levelSkillData;
+	}
+
+	public virtual void UpLevel()
+	{
+		level++;
+	}
+	
 	public void CoolDownSkill(float deltaTime)
 	{
 		cooldownSkill.Update(deltaTime);
 		if(cooldownSkill.isFinished)
 		{
 			Active();
-			cooldownSkill.Restart(timeSKill);
-		}
-	}
-
-	public virtual void Active()
-	{
-
-	}
-}
-
-
-public class SharkSkill : ProactiveSkill
-{
-	public override void Active()
-	{
-		var mons = gameController.GetStrongMonster(origin.model.attackRange);
-		if(mons != null)
-		{
-			var shark = Instantiate(
-				app.resourceManager.GetSkill(SkillType.SharkSkill).skillPrefab,
-				new Vector3(mons.transform.position.x, mons.transform.position.y),
-				quaternion.identity
-			);
-			shark.GetComponent<SkillAttack>().Init(origin.model.attackDamage, mons);
+			cooldownSkill.Restart(levelData[level].cooldown);
 		}
 	}
 }
 
-public class FireBallSkill : ProactiveSkill
+public class ProactiveSkill : Skill
 {
 	public override void Active()
 	{
-		var mons = gameController.GetFirstMonster(origin.model.attackRange);
+		base.Active();
+		var mons = gameController.GetRandomMonster();
 		if(mons != null)
 		{
-			var shark = Instantiate(
-				app.resourceManager.GetSkill(SkillType.FireBallSkill).skillPrefab,
-				origin.transform.position,
-				quaternion.identity
-			);
-			shark.GetComponent<BulletView>().Init(origin, mons);
+			var skill = gameController.SpawnBullet(skillPrefab);
+			skill.GetComponent<SkillActive>().Init(origin.model.attackDamage * levelData[level].value / 100, mons, effectPrefab);
 		}
 	}
 }
 
-public class TwinSkill : ProactiveSkill
+public class BuffSkill : Skill
+{
+	
+}
+
+public class FoodSkill : BuffSkill
 {
 	public override void Active()
 	{
-		var mons = gameController.GetFirstMonster(origin.model.attackRange);
-		if(mons != null)
-		{
-			var skill = Instantiate(
-				app.resourceManager.GetSkill(SkillType.TwinSkill).skillPrefab,
-				origin.transform.position,
-				quaternion.identity
-			);
-			skill.GetComponent<Crossed>().Init(origin, mons);
-		}
+		base.Active();
+		origin.AddHealth(origin.model.currentHealthPoint * 20 / 100);
 	}
-}	
+}

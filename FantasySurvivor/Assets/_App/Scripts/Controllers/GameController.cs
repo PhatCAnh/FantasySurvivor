@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using _App.Scripts.Pool;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using UnityEngine;
@@ -9,10 +8,9 @@ using Random = UnityEngine.Random;
 using FantasySurvivor;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
-using Stat;
 using Unity.Mathematics;
 using UnityEngine.SceneManagement;
-using MonsterStat = Stat.MonsterStat;
+using MonsterStat = FantasySurvivor.MonsterStat;
 
 public class GameController : Controller<GameApp>
 {
@@ -32,6 +30,10 @@ public class GameController : Controller<GameApp>
 
 	private HealthBar _healthBar;
 
+	private Vector3 _camSize;
+	private float _width;
+	private float _height;
+
 	private void Awake()
 	{
 		Singleton<GameController>.Set(this);
@@ -40,22 +42,11 @@ public class GameController : Controller<GameApp>
 	private void Start()
 	{
 		listMonster = new List<Monster>();
-		//character = SpawnChacter();
-	}
-	private void Update()
-	{
-		// var test = Instantiate(_test);
-		// Vector2 random = RandomPointOnCircleEdge(5);
-		// Vector2 charPos = character.transform.position;
-		// test.position = new Vector2(charPos.x, charPos.y) + random;
-	}
-
-	Vector2 RandomPointOnCircleEdge(float radius)
-	{
-		float angle = Random.Range(0, 2 * Mathf.PI); // Random angle in radians
-		float x = radius * Mathf.Cos(angle);
-		float y = radius * Mathf.Sin(angle);
-		return new Vector2(x, y);
+		
+		foreach(var skill in app.resourceManager.GetListSkill())
+		{
+			skill.Init(app.configs.dataLevelSkill.GetConfig(skill.name).data);
+		}
 	}
 
 	protected override void OnDestroy()
@@ -63,7 +54,7 @@ public class GameController : Controller<GameApp>
 		base.OnDestroy();
 		Singleton<GameController>.Unset(this);
 	}
-	
+
 	public void ShowMainHome()
 	{
 		app.resourceManager.ShowPopup(PopupType.MainUI);
@@ -142,9 +133,9 @@ public class GameController : Controller<GameApp>
 	}
 
 	[Button]
-	public void TestConfig()
+	public void TestMethod()
 	{
-		app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
+		character.AddHealth(0);
 	}
 
 
@@ -177,43 +168,60 @@ public class GameController : Controller<GameApp>
 		Destroy(mons.gameObject);
 	}
 
-	public Monster GetFirstMonster(float attackRange)
+	public Monster GetRandomMonster()
 	{
-		var nearestMons = listMonster.FirstOrDefault(monster => Vector2.Distance(monster.transform.position, character.transform.position) < attackRange + monster.size);
-		var towerPos = character.transform.position;
-		if(nearestMons == null) return nearestMons;
-		var nearestDistance = Vector2.Distance(nearestMons.transform.position, towerPos);
-		for(int i = 1; i < listMonster.Count; i++)
+		var characterPos = character.transform.position;
+		Rect myRect = new Rect(characterPos.x - _width / 2, characterPos.y - _height / 2, _width, _height);
+		var listMonsterInRect = new List<Monster>();
+		foreach(var mons in listMonster)
 		{
-			var distance = Vector2.Distance(listMonster[i].transform.position, towerPos);
-			if(distance < nearestDistance)
+			if(myRect.Contains(mons.transform.position))
 			{
-				nearestMons = listMonster[i];
-				nearestDistance = distance;
+				listMonsterInRect.Add(mons);
 			}
 		}
-		return nearestMons;
-	}
-	
-	public Monster GetStrongMonster(float attackRange)
-	{
-		var monsInRange = listMonster.Where(monster => Vector2.Distance(monster.transform.position, character.transform.position) < attackRange + monster.size).ToList();
-		if(monsInRange.Count == 0) return null;
-		var strongestMons = monsInRange.First();
-		foreach(var mons in monsInRange)
-		{
-			if(mons.model.currentHealthPoint > strongestMons.model.currentHealthPoint)
-			{
-				strongestMons = mons;
-			}
-		}
-		return strongestMons;
+		return listMonsterInRect.Count != 0 ? listMonsterInRect[Random.Range(0, listMonsterInRect.Count)] : null;
 	}
 
 	public void CharacterDie(Character characterView)
 	{
 		LoseGame();
 	}
+
+	public GameObject SpawnBullet(GameObject prefab)
+	{
+		var bullet = Instantiate(prefab);
+		return bullet;
+	}
+
+	// public (GameObject, Monster) UseSkill(SkillName name)
+	// {
+	// 	var mons = GetRandomMonster();
+	// 	if(mons != null)
+	// 	{
+	// 		var skill = Instantiate(
+	// 			app.resourceManager.GetSkill(name).skillPrefab,
+	// 			new Vector3(mons.transform.position.x, mons.transform.position.y),
+	// 			quaternion.identity
+	// 		);
+	// 		return (skill, mons);
+	// 	}
+	// 	return (null, null);
+	// }
+
+	// public void UseSkillHaveFlightRoute(SkillName name)
+	// {
+	// 	var mons = GetRandomMonster();
+	// 	if(mons != null)
+	// 	{
+	// 		var skill = Instantiate(
+	// 			app.resourceManager.GetSkill(name).skillPrefab,
+	// 			character.transform.position,
+	// 			quaternion.identity
+	// 		);
+	// 		skill.GetComponent<BulletView>().Init(mons, name);
+	// 	}
+	// }
 
 	public void Collected(GemExp exp)
 	{
@@ -226,7 +234,7 @@ public class GameController : Controller<GameApp>
 			app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
 		}
 	}
-	
+
 
 	public Vector2 RandomPositionSpawnMonster(float radius, bool justVertical = false)
 	{
@@ -251,14 +259,14 @@ public class GameController : Controller<GameApp>
 		// }
 		// return new Vector2(posX, posY);
 	}
-	
+
 	private Character SpawnChacter()
 	{
-		var characterPrefab = Instantiate(app.resourceManager.GetItem(ItemType.Character))
+		var characterPrefab = Instantiate(app.resourceManager.GetItem(Type.Character))
 			.GetComponent<Character>();
 		characterPrefab.transform.position = Vector2.zero;
 
-		_healthBar = Instantiate(app.resourceManager.GetItem(ItemType.HealthBar), app.resourceManager.rootContainer)
+		_healthBar = Instantiate(app.resourceManager.GetItem(Type.HealthBar), app.resourceManager.rootContainer)
 			.GetComponent<HealthBar>();
 		_healthBar.Init(characterPrefab);
 
@@ -270,6 +278,10 @@ public class GameController : Controller<GameApp>
 
 	private void LoadMap(int chapter)
 	{
+		_camSize = Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0));
+		_width = 1 / (_camSize.x - 0.5f);
+		_height = 1 / (_camSize.y - 0.5f);
+
 		map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
 		map.Init();
 		Instantiate(app.resourceManager.GetMap((MapType) chapter));

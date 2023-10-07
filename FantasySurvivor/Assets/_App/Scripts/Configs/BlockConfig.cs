@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MR
+namespace FantasySurvivor
 {
     public class BlockConfig : IConfigItem
     {
@@ -12,10 +12,10 @@ namespace MR
         public ItemConfig[] items { get; private set; }
         public class ItemConfig
         {
-            public ItemType type { get; private set; }
+            public Type type { get; private set; }
             public Vector2 position { get; private set; }
 
-            public ItemConfig(ItemType type, Vector2 position)
+            public ItemConfig(Type type, Vector2 position)
             {
                 this.type = type;
                 this.position = position;
@@ -43,7 +43,7 @@ namespace MR
                 var strs = lines[i].Split(charDelimiter);
                 var itemId = int.Parse(strs[0]);
                 var position = new Vector2(int.Parse(strs[1]), int.Parse(strs[2]));
-                items[i] = new ItemConfig((ItemType)itemId, position);
+                items[i] = new ItemConfig((Type)itemId, position);
             }
         }
     }

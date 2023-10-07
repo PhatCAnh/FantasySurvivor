@@ -334,7 +334,7 @@ Transform:
   - {fileID: 4925867890600014227}
   - {fileID: 4925867891092163753}
   m_Father: {fileID: 4925867892422093208}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4925867891668576829
 MonoBehaviour:
@@ -379,25 +379,53 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4925867890978961576}
   - {fileID: 4925867891668576826}
+  - {fileID: 6828028213394730168}
   m_Father: {fileID: 4925867890613326579}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &3402335937378657251
+--- !u!1001 &3866818870080796659
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 4925867892422093208}
     m_Modifications:
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[3].name
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[3].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[3].imgUI
+      value: 
+      objectReference: {fileID: 21300000, guid: 98663b0033e5347c1a470a40f89f1f10, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[3].description
+      value: food
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[1].typeElemental
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[2].typeElemental
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7740478561442437962, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: m_Name
       value: ResourceManager
       objectReference: {fileID: 0}
     - target: {fileID: 7740478561442437963, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7740478561442437963, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -439,24 +467,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8661934258445367594, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
-      propertyPath: m_Spacing.x
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 8661934258445367594, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
-      propertyPath: m_Spacing.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8661934258835683737, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
---- !u!4 &4925867890978961576 stripped
+--- !u!4 &6828028213394730168 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7740478561442437963, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
-  m_PrefabInstance: {fileID: 3402335937378657251}
+  m_PrefabInstance: {fileID: 3866818870080796659}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8341650858537570064
 PrefabInstance:

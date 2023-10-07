@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework;
 using ArbanFramework.MVC;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -12,6 +13,8 @@ public class BulletView : View<GameApp>
 	[SerializeField] protected float moveSpeed;
 	
 	private Character _origin;
+
+	protected GameObject callBackEffect;
 
 	protected Monster target;
 
@@ -23,13 +26,15 @@ public class BulletView : View<GameApp>
 	
 	protected GameController gameController => Singleton<GameController>.instance;
 
-	public void Init(Character origin, Monster target)
+	public void Init(Character character, Monster target, GameObject effect)
 	{
-		_origin = origin;
+		_origin = character;
+		
 		this.target = target;
-		transform.up = target.transform.position - transform.position;
+
+		callBackEffect = effect;
+		
 		damage = _origin.model.attackDamage;
-		//IsCritical(origin.model.criticalRate);
 	}
 	
 	protected void FixedUpdate()
@@ -40,18 +45,24 @@ public class BulletView : View<GameApp>
 		if(target != null)
 		{
 			targetPos = target.transform.position;
+			transform.up = targetPos - transform.position;
 		}
 		
 		transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
 		if(Vector2.Distance(transform.position, targetPos) < 0.1f)
 		{
 			target.TakeDamage(damage, isCritical);
-			TouchUnit();
+			TouchUnit(target);
 		}
 	}
 
-	protected virtual void TouchUnit()
+	protected virtual void TouchUnit(Monster unit)
 	{
+		if(callBackEffect != null)
+		{
+			Instantiate(callBackEffect, unit.transform.position, quaternion.identity);
+		}
+		
 		Destroy(gameObject);
 	}
 
@@ -60,7 +71,7 @@ public class BulletView : View<GameApp>
 		if(other.TryGetComponent(out Monster monster))
 		{
 			monster.TakeDamage(damage, isCritical);
-			TouchUnit();
+			TouchUnit(monster);
 		}
 	}
 

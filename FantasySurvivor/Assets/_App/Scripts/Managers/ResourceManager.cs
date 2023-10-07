@@ -1,6 +1,6 @@
 using ArbanFramework;
 using ArbanFramework.MVC;
-using MR;
+using FantasySurvivor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	[Required, SerializeField] private GameObject _gemExpPrefab;
 
-	private Dictionary<ItemType, GameObject> _itemDic;
+	private Dictionary<Type, GameObject> _itemDic;
 
 
 	[Header("UI prefabs")]
@@ -96,11 +96,11 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	private void InitDic()
 	{
-		_itemDic = new Dictionary<ItemType, GameObject>()
+		_itemDic = new Dictionary<Type, GameObject>()
 		{
-			{ItemType.HealthBar, _healthBarPrefab},
-			{ItemType.Character, _characterPrefab},
-			{ItemType.GemExp, _gemExpPrefab},
+			{Type.HealthBar, _healthBarPrefab},
+			{Type.Character, _characterPrefab},
+			{Type.GemExp, _gemExpPrefab},
 		};
 
 		_mapDic = new Dictionary<MapType, GameObject>
@@ -124,9 +124,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 		};
 	}
 
-	public GameObject GetItem(ItemType itemType)
+	public GameObject GetItem(Type type)
 	{
-		return _itemDic[itemType];
+		return _itemDic[type];
 	}
 
 	public GameObject GetMap(MapType mapType)
@@ -146,14 +146,13 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	public List<SkillData> GetListSkill()
 	{
-		return _poolSkill;
+		return _poolSkill.Where(skill => skill.name != SkillName.Food).ToList();
 	}
 	
-	public SkillData GetSkill(SkillType type)
+	public SkillData GetSkill(SkillName name)
 	{
-		return _poolSkill.FirstOrDefault(skill => skill.type == type);
+		return _poolSkill.FirstOrDefault(skill => skill.name == name);
 	}
-
 
 	public override GameObject ShowPopup(PopupType type, Action<GameObject> onInit = null)
 	{
@@ -163,6 +162,4 @@ public class ResourceManager : UIManagerBase<PopupType>
 		popupGo.GetOrAddComponent<GraphicRaycaster>();
 		return popupGo;
 	}
-
-
 }

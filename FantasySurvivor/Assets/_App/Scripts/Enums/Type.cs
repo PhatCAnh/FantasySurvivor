@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
-public enum ItemType
+using UnityEngine.Serialization;
+public enum Type
 {
     Undefined = -1,
     HealthBar,
@@ -66,12 +67,29 @@ public enum TypeAds
     Banner,
 }
 
+public enum SkillName
+{
+    Shark,
+    Fireball,
+    Twin,
+    Food,
+}
+
 public enum SkillType
 {
-    SharkSkill,
-    FireBallSkill,
-    TwinSkill,
-    Food,
+    Proactive,
+    Passive,
+    Buff,
+}
+
+public enum SkillElementalType
+{
+    Water,
+    Fire,
+    Wind,
+    Ground,
+    Electric,
+    Light,
 }
 
 public enum PopupType
@@ -89,12 +107,12 @@ public enum PopupType
     ChoiceSkill,
 }
 
-[Serializable]
-public class SkillData
+public enum SkillDamagedType
 {
-    public SkillType type;
-    public string skillName;
-    public Sprite imgUI;
-    public string description;
-    public GameObject skillPrefab;
+    Single,
+    AreaOfEffect,
 }
+
+
+
+

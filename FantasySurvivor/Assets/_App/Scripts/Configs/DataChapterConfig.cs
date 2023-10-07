@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using ArbanFramework.Config;
-namespace DataConfig
+namespace FantasySurvivor
 {
 	public class WaveConfig
 	{

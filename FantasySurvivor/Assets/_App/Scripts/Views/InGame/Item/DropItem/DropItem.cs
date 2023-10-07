@@ -4,20 +4,17 @@ using System.Collections.Generic;
 
 using ArbanFramework;
 using ArbanFramework.StateMachine;
-
-using MR.CharacterState;
-using MR.State_DropItem;
-
+using FantasySurvivor;
 using UnityEngine;
 
 
-namespace MR
+namespace FantasySurvivor
 {
     public class DropItem : ObjectRPG
     {
         public SpriteRenderer skin;
 
-        public ItemType type;
+        public Type type;
         //item type
         public bool isSpawn => _stateMachine.currentState == _spawnSm;
         public bool isIdle => _stateMachine.currentState == _idleSm;

@@ -1,6 +1,6 @@
 ﻿using System;
 using ArbanFramework.Config;
-namespace DataConfig
+namespace FantasySurvivor
 {
 	public class DataLevelTowerConfig
 	{

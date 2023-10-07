@@ -1,7 +1,7 @@
 using ArbanFramework;
 using TMPro;
 using UnityEngine;
-namespace _App.Scripts.Pool
+namespace FantasySurvivor
 {
     public class PoolTextPopup : ObjectPool
     {

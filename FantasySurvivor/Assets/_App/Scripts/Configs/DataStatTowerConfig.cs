@@ -1,7 +1,7 @@
 ﻿using System;
 using ArbanFramework.Config;
-using DataConfig;
-namespace _App.Scripts.Configs
+using FantasySurvivor;
+namespace FantasySurvivor
 {
 	public class DataStatTowerConfig : IConfigItem
 	{
