@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using _App.Scripts.Views.InGame.Skills;
 using ArbanFramework;
 using ArbanFramework.Config;
 using ArbanFramework.MVC;
@@ -165,7 +166,16 @@ public class Character : ObjectRPG
 				}
 				else
 				{
-					var proactiveSkill = new ProactiveSkill();
+					ProactiveSkill proactiveSkill;
+					switch (skillData.name)
+					{
+						case SkillName.Fireball:
+							proactiveSkill = new FireBallSkill();
+							break;
+						default:
+							proactiveSkill = new ProactiveSkill();
+							break;
+					}
 					proactiveSkill.Init(skillData);
 					proactiveSkills.Add(proactiveSkill);
 				}

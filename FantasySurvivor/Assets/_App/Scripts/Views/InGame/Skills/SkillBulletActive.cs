@@ -16,36 +16,39 @@ namespace FantasySurvivor
 			Target,
 			Shot,
 		}
-		
+
 		[SerializeField] protected Transform skin;
-		
+
 		public SpawnPos spawnPos;
 
 		public TargetType targetType;
-		
+
 		public bool canBlock;
-		
+
 		public float moveSpeed;
-		
+
 		protected Monster oldTarget;
 
 		protected Vector3 targetPos;
 
 		protected Vector3 direction;
-		public override void Init(float damage, Monster target, GameObject effect)
+		public override void Init(float damage, Monster target, GameObject effect, int level)
 		{
-			base.Init(damage, target, effect);
+			base.Init(damage, target, effect, level);
+
+			if(target == null) return;
+			
 			transform.position = spawnPos == SpawnPos.Character ? origin.transform.position : target.transform.position;
-			
+
 			this.direction = target.transform.position - transform.position;
-			
+
 			skin.up = direction;
 		}
 
 		private void FixedUpdate()
 		{
 			if(gameController.isStop) return;
-			
+
 			if(target != null && skillDamagedType == SkillDamagedType.Single)
 			{
 				targetPos = target.transform.position;
@@ -68,32 +71,41 @@ namespace FantasySurvivor
 			}
 			HandleTouch();
 		}
-		
+
 		protected virtual void HandleTouch()
 		{
 			if(!canBlock)
 			{
-				if(Vector2.Distance(targetPos, transform.position) < sizeTouch)
+				switch (skillDamagedType)
 				{
-					TakeDamage();
-					TouchUnit(targetPos);
-					Destroy(gameObject);
+					case SkillDamagedType.Single:
+						if(Vector2.Distance(targetPos, transform.position) < sizeTouch)
+						{
+							TakeDamage();
+							TouchUnit(targetPos);
+							Destroy(gameObject);
+						}
+						break;
+					case SkillDamagedType.AreaOfEffect:
+						foreach(var mons in gameController.listMonster.ToList())
+						{
+							CheckTouchMonsters(mons);
+						}
+						break;
 				}
+
 			}
 			else
 			{
-				foreach(var mons in gameController.listMonster.ToList())
+				if(gameController.listMonster.ToList().Any(CheckTouchMonsters))
 				{
-					if(CheckTouchMonsters(mons) && skillDamagedType == SkillDamagedType.Single)
-					{
-						Destroy(gameObject);
-						return;
-					}
+					Destroy(gameObject);
+					return;
 				}
 			}
 			if(Vector2.Distance(origin.transform.position, transform.position) > 30)
 			{
-				TouchUnit(transform.position);
+				TouchUnit(targetPos);
 				Destroy(gameObject);
 			}
 		}

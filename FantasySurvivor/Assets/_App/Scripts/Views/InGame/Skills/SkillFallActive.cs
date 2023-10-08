@@ -7,21 +7,13 @@ namespace FantasySurvivor
 {
 	public class SkillFallActive : SkillActive
 	{
-		public override void Init(float damage, Monster target, GameObject effect)
+		public override void Init(float damage, Monster target, GameObject effect, int level)
 		{
-			base.Init(damage, target, effect);
-			
-			this.origin = gameController.character;
-			
-			this.target = target;
+			base.Init(damage, target, effect, level);
+
+			if(target == null) return;
 
 			transform.position = target.transform.position;
-
-			callBackEffect = effect;
-
-			this.damage = damage;
-
-			sizeTouch = size + target.size;
 		}
 	}
 }

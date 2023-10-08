@@ -166,12 +166,17 @@ public class Monster : ObjectRPG
 		target.TakeDamage(model.attackDamage);
 	}
 
-	public void TakeDamage(float damage, bool isCritical = false)
+	public void TakeDamage(float damage, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
 	{
 		if(!isAlive) return;
 		model.currentHealthPoint -= damage;
+		callBackDamaged?.Invoke();
 		Singleton<PoolTextPopup>.instance.GetObjectFromPool(transform.position, damage.ToString(), TextPopupType.TowerDamage, isCritical);
-		if(!isAlive) Die();
+		if(!isAlive)
+		{
+			Die();
+			callBackKilled?.Invoke();
+		}
 	}
 
 	protected virtual void Die(bool selfDie = false)

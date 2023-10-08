@@ -17,10 +17,10 @@ namespace FantasySurvivor
 			Singleton<PoolDropItem>.Unset(this);
 		}
 
-		public void GetObjectFromPool(Vector3 position, int value)
+		public void GetObjectFromPool(Vector3 position, int value, DropItemType type)
 		{
 			var gemExp = GetObject(position).GetComponent<DropItem>();
-			gemExp.Init(value);
+			gemExp.Init(value, type);
 		}
 
 		public void RemoveObjectToPool(DropItem theGameObject)

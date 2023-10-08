@@ -306,5 +306,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6828028213394730171, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[0].description
+      value: Summons a shark to attack enemies within its range
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828028213394730171, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[1].description
+      value: Launch 1 fire ball to enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828028213394730171, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[2].description
+      value: Fires a Twin bullet\nOnce Twin bullet hits, the bullet splits at a 90
+        degree angle. The split bullets deal the same damage
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828028213394730171, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[3].description
+      value: Regen 20% of the character's maximum health
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a58398efbbc97cc4eb189419670638b1, type: 3}

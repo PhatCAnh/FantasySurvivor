@@ -33,6 +33,8 @@ public class GameController : Controller<GameApp>
 	private Vector3 _camSize;
 	private float _width;
 	private float _height;
+	
+	private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
 
 	private void Awake()
 	{
@@ -46,6 +48,14 @@ public class GameController : Controller<GameApp>
 		foreach(var skill in app.resourceManager.GetListSkill())
 		{
 			skill.Init(app.configs.dataLevelSkill.GetConfig(skill.name).data);
+		}
+		
+		var data = app.resourceManager.GetDicDropItem();
+		float value = 0;
+		foreach(var item in data)
+		{
+			value += item.Value;
+			_percentDropItem.Add(item.Key, value);
 		}
 	}
 
@@ -160,7 +170,7 @@ public class GameController : Controller<GameApp>
 		if(!selfDie)
 		{
 			map.model.monsterKilled++;
-			Singleton<PoolDropItem>.instance.GetObjectFromPool(mons.transform.position, mons.stat.exp.BaseValue);
+			Singleton<PoolDropItem>.instance.GetObjectFromPool(mons.transform.position, mons.stat.exp.BaseValue, RandomDropItem());
 		}
 
 		listMonster.Remove(mons);
@@ -240,12 +250,40 @@ public class GameController : Controller<GameApp>
 			case DropItemType.Magnet:
 				foreach(var item in Singleton<PoolDropItem>.instance.usedList)
 				{
-					item.GetComponent<DropItem>().Collect();
+					if(item.TryGetComponent(out DropItem dropItemType) && dropItemType.type == DropItemType.Exp)
+					{
+						dropItemType.Collect();
+					}
 				}
-				
+				break;
+			case DropItemType.Food:
+				character.AddHealth(character.model.maxHealthPoint * 20 / 100);
+				break;
+			case DropItemType.Bomb:
+				var characterPos = character.transform.position;
+				Rect myRect = new Rect(characterPos.x - _width / 2, characterPos.y - _height / 2, _width, _height);
+				foreach(var mons in listMonster.ToList())
+				{
+					if(myRect.Contains(mons.transform.position))
+					{
+						MonsterDie(mons);
+					}
+				}
 				break;
 		}
-		
+	}
+
+	public DropItemType RandomDropItem()
+	{
+		var randomNumber = Random.Range(0f, 100f);
+		foreach(var item in _percentDropItem)
+		{
+			if(randomNumber < item.Value)
+			{
+				return item.Key;
+			}
+		}
+		return DropItemType.Exp;
 	}
 
 
@@ -273,7 +311,7 @@ public class GameController : Controller<GameApp>
 		// return new Vector2(posX, posY);
 	}
 
-	private Character SpawnChacter()
+	private Character SpawnCharacter()
 	{
 		var characterPrefab = Instantiate(app.resourceManager.GetItem(Type.Character))
 			.GetComponent<Character>();
@@ -298,7 +336,7 @@ public class GameController : Controller<GameApp>
 		map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
 		map.Init();
 		Instantiate(app.resourceManager.GetMap((MapType) chapter));
-		character = SpawnChacter();
+		character = SpawnCharacter();
 		listMonster.Clear();
 		app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
 		//app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);

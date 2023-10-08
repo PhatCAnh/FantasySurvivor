@@ -24,15 +24,26 @@ namespace FantasySurvivor
 		protected float sizeTouch;
 
 		protected Character origin;
+
+		protected int level;
+		protected Action callBackDamaged, callBackKilled;
 		protected GameController gameController => Singleton<GameController>.instance;
 		protected override void OnViewInit()
 		{
 			base.OnViewInit();
 		}
 
-		public virtual void Init(float damage, Monster target, GameObject effect)
+		public virtual void Init(float damage, Monster target, GameObject effect, int level)
 		{
 			this.origin = gameController.character;
+			
+			if(target == null)
+			{
+				Destroy(gameObject);
+				return;
+			}
+
+			this.level = level;
 			
 			this.target = target;
 
@@ -51,8 +62,9 @@ namespace FantasySurvivor
 				Instantiate(callBackEffect, pos, quaternion.identity);
 			}
 		}
+		
 
-		public void TakeDamage(Monster monster = null)
+		public virtual void TakeDamage(Monster monster = null)
 		{
 			switch (skillDamagedType)
 			{
@@ -61,7 +73,7 @@ namespace FantasySurvivor
 					{
 						monster = target;
 					}
-					monster.TakeDamage(damage, isCritical);
+					monster.TakeDamage(damage, isCritical, callBackDamaged, callBackKilled);
 					break;
 				case SkillDamagedType.AreaOfEffect:
 						CheckAoeMons();

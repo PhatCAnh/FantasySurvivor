@@ -115,7 +115,9 @@ public enum SkillDamagedType
 public enum DropItemType
 {
     Exp,
-    Magnet,    
+    Magnet,
+    Bomb,
+    Food,
 }
 
 

@@ -12,6 +12,11 @@ namespace FantasySurvivor
 {
     public class DropItem : ObjectRPG
     {
+        [SerializeField] private Sprite _spriteExp;
+        [SerializeField] private Sprite _spriteMagnet;
+        [SerializeField] private Sprite _spriteBomb;
+        [SerializeField] private Sprite _spriteFood;
+        
         public SpriteRenderer skin;
 
         public DropItemType type;
@@ -35,13 +40,12 @@ namespace FantasySurvivor
 
         protected override void OnViewInit() {
             base.OnViewInit();
-
-            character = gameController.character;
         }
 
         protected override void OnEnable()
         {
             base.OnEnable();
+            character = gameController.character;
             if( _stateMachine == null ) {
                 _stateMachine = new StateMachine();
                 _spawnSm = new DropItemSpawn(this, _stateMachine);
@@ -53,10 +57,27 @@ namespace FantasySurvivor
                 Spawn();
             }
         }
-
-        public void Init(int valueInit)
+        public void Init(int valueInit, DropItemType itemType)
         {
-            value = valueInit;
+            type = itemType;
+            switch (itemType)
+            {
+                case DropItemType.Exp:
+                    value = valueInit;
+                    skin.sprite = _spriteExp;
+                    break;
+                case DropItemType.Food:
+                    value = valueInit;
+                    skin.sprite = _spriteFood;
+                    break;
+                case DropItemType.Magnet:
+                    skin.sprite = _spriteMagnet;
+                    break;
+                case DropItemType.Bomb:
+                    value = valueInit;
+                    skin.sprite = _spriteBomb;
+                    break;
+            }
         }
 
         public void Update()

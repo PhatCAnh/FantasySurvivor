@@ -41,12 +41,13 @@ public class SkillUI : View<GameApp>
 		buttonInteract.onClick.AddListener(SelectedSkill);
 		_imgSkill.sprite = skillData.imgUI;
 		_txtNameSkill.text = skillData.name.ToString();
-		_txtDescription.text = skillData.description;
-
 		var skill = gameController.character.GetSkill(skillData.name);
-		if(skill != null) _level = skill.level;
-
+		if(skill != null)
+		{
+			_level = skill.level;
+		}
 		
+		_txtDescription.text = skillData.levelSkillData[_level + 1].description;
 
 		switch (skillData.typeElemental)
 		{

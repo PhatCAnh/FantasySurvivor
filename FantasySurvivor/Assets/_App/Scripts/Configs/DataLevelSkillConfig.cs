@@ -21,10 +21,11 @@ namespace FantasySurvivor
 			var levelArr = reader.ReadIntArr();
 			var valueArr = reader.ReadIntArr();
 			var cooldownArr = reader.ReadFloatArr();
+			var descriptionArr = reader.ReadStringArr();
 
 			for(int i = 0; i < levelArr.Length; i++)
 			{
-				data.Add(levelArr[i], new LevelSkillData(valueArr[i], cooldownArr[i]));
+				data.Add(levelArr[i], new LevelSkillData(valueArr[i], cooldownArr[i], descriptionArr[i]));
 			}
 		}
 	}
