@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class MapInfinityController : Controller<GameApp>
 {
-	private Vector3 _size;
+	private float _size;
 	private Character _character => gameController.character;
 	private Map[] arrMap;
 	private Map mapCenter;
@@ -19,7 +19,7 @@ public class MapInfinityController : Controller<GameApp>
 	public void Init(int chapter)
 	{
 		var mapPrefab = app.resourceManager.GetMap((MapType) chapter);
-		_size = mapPrefab.tilemap.size;
+		_size = 33;
 		arrMap = new Map[9];
 		for(int i = 0; i < 3; i++)
 		{
@@ -43,7 +43,7 @@ public class MapInfinityController : Controller<GameApp>
 
 	private void LateUpdate()
 	{
-		//CheckCharacterPos();
+		CheckCharacterPos();
 	}
 
 	private void CheckCharacterPos()
@@ -53,7 +53,7 @@ public class MapInfinityController : Controller<GameApp>
 		foreach(var map in arrMap)
 		{
 			var mapPosition = map.transform.position;
-			var rect = new Rect(mapPosition.x - _size.x / 2, mapPosition.y - _size.x / 2, _size.x, _size.y);
+			var rect = new Rect(mapPosition.x - _size / 2, mapPosition.y - _size / 2, _size, _size);
 			if(rect.Contains(_character.transform.position))
 			{
 				mapCenter = map;
@@ -61,7 +61,7 @@ public class MapInfinityController : Controller<GameApp>
 				break;
 			}
 		}
-		UpdatePosMap();
+		//UpdatePosMap();
 	}
 
 	private void UpdateMap(Map map)
@@ -77,6 +77,7 @@ public class MapInfinityController : Controller<GameApp>
 						item.horizontalPos = 0;
 					}
 				}
+				UpdatePosMap(arrMap.Where(map => map.horizontalPos == MapHorizontalType.Top).ToArray());
 				break;
 			case MapHorizontalType.Mid:
 				break;
@@ -89,6 +90,7 @@ public class MapInfinityController : Controller<GameApp>
 						item.horizontalPos = (MapHorizontalType) 2;
 					}
 				}
+				UpdatePosMap(arrMap.Where(map => map.horizontalPos == MapHorizontalType.Bot).ToArray());
 				break;
 		}
 		
@@ -103,6 +105,7 @@ public class MapInfinityController : Controller<GameApp>
 						item.verticalPos = 0;
 					}
 				}
+				UpdatePosMap(arrMap.Where(map => map.verticalPos == MapVerticalType.Left).ToArray());
 				break;
 			case MapVerticalType.Mid:
 				break;
@@ -115,31 +118,32 @@ public class MapInfinityController : Controller<GameApp>
 						item.verticalPos = (MapVerticalType) 2;
 					}
 				}
+				UpdatePosMap(arrMap.Where(map => map.verticalPos == MapVerticalType.Right).ToArray());
 				break;
 		}
 	}
-	
-	
-
-
-	private void UpdatePosMap()
+	private void UpdatePosMap(Map[] arrayMap = null)
 	{
-		myRect = new Rect(mapCenter.transform.position.x - _size.x / 2, mapCenter.transform.position.y - _size.x / 2, _size.x, _size.y);
-		foreach(var map in arrMap)
+		if(arrayMap == null)
+		{
+			arrayMap = arrMap;
+		}
+		myRect = new Rect(mapCenter.transform.position.x - _size / 2, mapCenter.transform.position.y - _size / 2, _size, _size);
+		foreach(var map in arrayMap)
 		{
 			var position = map.transform.position;
 			position.x = map.verticalPos switch
 			{
-				MapVerticalType.Right => _size.x,
+				MapVerticalType.Right => _size,
 				MapVerticalType.Mid => 0,
-				MapVerticalType.Left => -_size.x,
+				MapVerticalType.Left => -_size,
 			};
 
 			position.y = map.horizontalPos switch
 			{
-				MapHorizontalType.Top => _size.y,
+				MapHorizontalType.Top => _size,
 				MapHorizontalType.Mid => 0,
-				MapHorizontalType.Bot => -_size.y,
+				MapHorizontalType.Bot => -_size,
 			};
 			map.transform.position = position + mapCenter.transform.position;
 		}

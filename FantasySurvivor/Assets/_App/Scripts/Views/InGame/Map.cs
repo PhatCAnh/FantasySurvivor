@@ -4,7 +4,6 @@ namespace FantasySurvivor
 {
 	public class Map : View<GameApp>
 	{
-		public Tilemap tilemap;
 		public MapHorizontalType horizontalPos; //chieu ngang
 		public MapVerticalType verticalPos; //chieu doc
 
