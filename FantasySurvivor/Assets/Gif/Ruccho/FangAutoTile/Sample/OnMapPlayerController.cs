@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using FantasySurvivor;
 using UnityEngine;
 namespace Ruccho
 {
@@ -26,9 +27,8 @@ namespace Ruccho
 
         private void Update()
         {
-            if (Vector2.Distance(targetPos, transform.position) < speedPerFrame * Time.deltaTime)
+            if (GameLogic.CheckDistance(targetPos, transform.position,speedPerFrame * Time.deltaTime))
             {
-
                 transform.position = targetPos;
                 UpdateTarget();
             }

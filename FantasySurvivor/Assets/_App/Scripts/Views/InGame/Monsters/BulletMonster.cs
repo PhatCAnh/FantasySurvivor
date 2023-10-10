@@ -47,7 +47,7 @@ namespace FantasySurvivor
 		
 		private void Update()
 		{
-			if(Vector2.Distance(transform.position, _target.transform.position) < 0.25f)
+			if(GameLogic.CheckDistance(transform.position, _target.transform.position, 0.25f))
 			{
 				_target.TakeDamage(_origin.model.attackDamage);
 				Touch();

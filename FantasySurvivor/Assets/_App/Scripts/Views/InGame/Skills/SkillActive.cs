@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using FantasySurvivor;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using Unity.Mathematics;
@@ -84,7 +85,7 @@ namespace FantasySurvivor
 		protected virtual bool CheckTouchMonsters(Monster monster)
 		{
 			sizeTouch = size + monster.size;
-			if(Vector2.Distance(monster.transform.position, transform.position) < sizeTouch)
+			if(GameLogic.CheckDistance(monster.transform.position, transform.position, sizeTouch))
 			{
 				TakeDamage(monster);
 				TouchUnit(monster.transform.position);
@@ -103,7 +104,7 @@ namespace FantasySurvivor
 			foreach(var mons in gameController.listMonster.ToList())
 			{
 				sizeTouch = size + mons.size;
-				if(Vector2.Distance(mons.transform.position, transform.position) < sizeTouch)
+				if(GameLogic.CheckDistance(mons.transform.position, transform.position, sizeTouch))
 				{
 					mons.TakeDamage(damage, isCritical);
 					TouchUnit(mons.transform.position);

@@ -1,4 +1,5 @@
-﻿using ArbanFramework.StateMachine;
+﻿using FantasySurvivor;
+using ArbanFramework.StateMachine;
 
 using UnityEngine;
 namespace FantasySurvivor {
@@ -13,8 +14,7 @@ namespace FantasySurvivor {
             if (agent.character == null)
                 return;
 
-            var distanceToTarget = Vector2.Distance(agent.transform.position, agent.character.transform.position);
-            if (distanceToTarget > 3f)
+            if (GameLogic.CheckDistance(agent.transform.position, agent.character.transform.position, 0.1f))
                 return;
 
             agent.Collect();
