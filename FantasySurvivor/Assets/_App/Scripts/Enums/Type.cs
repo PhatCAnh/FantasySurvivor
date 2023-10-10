@@ -120,6 +120,20 @@ public enum DropItemType
     Food,
 }
 
+public enum MapHorizontalType
+ {
+     Top = 0,
+     Mid = 1,
+     Bot = 2,
+ }
+
+public enum MapVerticalType
+{
+    Left = 0,
+    Mid = 1,
+    Right = 2,
+}
+
 
 
 

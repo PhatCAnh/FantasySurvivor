@@ -332,13 +332,14 @@ public class GameController : Controller<GameApp>
 		_camSize = Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0));
 		_width = 1 / (_camSize.x - 0.5f);
 		_height = 1 / (_camSize.y - 0.5f);
+		Instantiate(app.resourceManager.mapInfinity, Vector3.zero, quaternion.identity).Init(chapter);
 
 		map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
 		map.Init();
-		Instantiate(app.resourceManager.GetMap((MapType) chapter));
 		character = SpawnCharacter();
 		listMonster.Clear();
 		app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
 		//app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
 	}
+	
 }

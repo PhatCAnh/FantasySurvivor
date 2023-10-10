@@ -125,8 +125,8 @@ MonoBehaviour:
   _loseGamePopup: {fileID: 1395811789396144461, guid: 08abf63e269daae449e5d2dea7cc9230, type: 3}
   _choiceSkill: {fileID: 8671060162732829558, guid: e18158855844cf846930ec9f3275f7a2, type: 3}
   _clickBulletTutorial: {fileID: 4578341570658841133, guid: 482474f6201afa444b6d80d03d536966, type: 3}
-  _forestMap: {fileID: 7891410580401367348, guid: 4a657833fb5ae654e86158b4274f4159, type: 3}
-  _oceanMap: {fileID: 7891410580401367348, guid: 4212d186c589b684a903282a5c57bea5, type: 3}
+  _forestMap: {fileID: 6643880886731442903, guid: 4a657833fb5ae654e86158b4274f4159, type: 3}
+  mapInfinity: {fileID: 1576476033222042154, guid: 5163479d93b45d24aadfde983865c1bb, type: 3}
   _blueZombie: {fileID: 5281739451839745389, guid: 169d4e58824d47647a166e95477b2cc8, type: 3}
   _purpleZombie: {fileID: 5281739451839745389, guid: fb3091dddb5f1e34a8f2642e9729034e, type: 3}
   _blueGhost: {fileID: 5281739451839745389, guid: e0101715c270b80498ca0800fc4eda60, type: 3}
@@ -142,28 +142,24 @@ MonoBehaviour:
     type: 0
     typeElemental: 0
     imgUI: {fileID: 21300000, guid: 65d81833a9705374299a503a6186aa2f, type: 3}
-    description: Baby Shark
     skillPrefab: {fileID: 8206914173546746077, guid: 24f582cf70ec6c444bd720fa6d3c911a, type: 3}
     effectPrefab: {fileID: 4718941582418019916, guid: 0b78a3d0e34680e4fad34abb3419e418, type: 3}
   - name: 1
     type: 0
     typeElemental: 0
     imgUI: {fileID: 704797902, guid: e4ffbed7851f5774ca9f8acb8fce1d5e, type: 3}
-    description: Fire Ball
     skillPrefab: {fileID: 9075703475211245482, guid: 7c860169edcee5747bf90d4ebca6da2e, type: 3}
     effectPrefab: {fileID: 5960483955136575123, guid: 816f66b4279b5fd46b0bd8d9cad6eeee, type: 3}
   - name: 2
     type: 0
     typeElemental: 0
     imgUI: {fileID: 21300000, guid: 7d9f2344361daf645b44645c6bbcec2c, type: 3}
-    description: Twin
     skillPrefab: {fileID: 5969974768321339375, guid: bccfbe3ac4d1a834387290001c1a7597, type: 3}
     effectPrefab: {fileID: 5775481878134524772, guid: f35354206d95ac8498ae4a8d4a138c0c, type: 3}
   - name: 3
     type: 2
     typeElemental: 0
     imgUI: {fileID: 0}
-    description: Food
     skillPrefab: {fileID: 0}
     effectPrefab: {fileID: 0}
 --- !u!1 &7740478561839289926

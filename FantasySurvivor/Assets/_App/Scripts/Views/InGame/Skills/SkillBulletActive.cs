@@ -97,10 +97,13 @@ namespace FantasySurvivor
 			}
 			else
 			{
-				if(gameController.listMonster.ToList().Any(CheckTouchMonsters))
+				foreach(var monster in gameController.listMonster.ToList())
 				{
-					Destroy(gameObject);
-					return;
+					if(CheckTouchMonsters(monster))
+					{
+						Destroy(gameObject);
+						return;
+					}
 				}
 			}
 			if(Vector2.Distance(origin.transform.position, transform.position) > 30)

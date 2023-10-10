@@ -166,11 +166,17 @@ public class Character : ObjectRPG
 				}
 				else
 				{
-					ProactiveSkill proactiveSkill;
+					Skill proactiveSkill;
 					switch (skillData.name)
 					{
 						case SkillName.Fireball:
-							proactiveSkill = new FireBallSkill();
+							proactiveSkill = new FireBall();
+							break;
+						case SkillName.Twin:
+							proactiveSkill = new Twin();
+							break;
+						case SkillName.Shark:
+							proactiveSkill = new Shark();
 							break;
 						default:
 							proactiveSkill = new ProactiveSkill();

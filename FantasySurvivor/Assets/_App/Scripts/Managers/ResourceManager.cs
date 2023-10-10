@@ -45,11 +45,11 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[Required, SerializeField] private GameObject _clickBulletTutorial;
 
 	[Header("Map prefabs")]
-	[Required, SerializeField] private GameObject _forestMap;
+	[Required, SerializeField] private Map _forestMap;
+	
+	public MapInfinityController mapInfinity;
 
-	[Required, SerializeField] private GameObject _oceanMap;
-
-	private Dictionary<MapType, GameObject> _mapDic;
+	private Dictionary<MapType, Map> _mapDic;
 
 	[Header("Monster prefabs")]
 	[Required, SerializeField] private GameObject _blueZombie;
@@ -70,7 +70,6 @@ public class ResourceManager : UIManagerBase<PopupType>
 	private Dictionary<TypeItemReward, ItemReward> _typeItemReward;
 
 	[Header("Drop Item prefabs")]
-
 	[Required, SerializeField] private float _exp;
 	[Required, SerializeField] private float _magnet;
 	[Required, SerializeField] private float _food;
@@ -79,6 +78,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 	private Dictionary<DropItemType, float> _dropItemDic;
 
 	[SerializeField] private List<SkillData> _poolSkill;
+
+	public Dictionary<SkillName, Skill> dictionarySkill = new Dictionary<SkillName, Skill>();
 	private void Awake()
 	{
 		Singleton<ResourceManager>.Set(this);
@@ -111,10 +112,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{Type.Character, _characterPrefab},
 		};
 
-		_mapDic = new Dictionary<MapType, GameObject>
+		_mapDic = new Dictionary<MapType, Map>
 		{
 			{MapType.Forest, _forestMap},
-			{MapType.Ocean, _oceanMap},
 		};
 
 		_typeMonsterDic = new Dictionary<string, GameObject>
@@ -145,7 +145,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 		return _itemDic[type];
 	}
 
-	public GameObject GetMap(MapType mapType)
+	public Map GetMap(MapType mapType)
 	{
 		return _mapDic[mapType];
 	}
@@ -169,7 +169,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 	{
 		return _poolSkill.FirstOrDefault(skill => skill.name == name);
 	}
-	
+
 	public Dictionary<DropItemType, float> GetDicDropItem()
 	{
 		return _dropItemDic;

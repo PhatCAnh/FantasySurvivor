@@ -8,7 +8,6 @@ public class SkillData
 	public SkillType type;
 	public SkillElementalType typeElemental;
 	public Sprite imgUI;
-	public string description;
 	public GameObject skillPrefab;
 	public GameObject effectPrefab;
 	public Dictionary<int, LevelSkillData> levelSkillData;
@@ -34,6 +33,6 @@ public class LevelSkillData
 	{
 		this.value = value;
 		this.cooldown = cooldown;
-		this.description = description;
+		this.description = $"{description}";
 	}
 }

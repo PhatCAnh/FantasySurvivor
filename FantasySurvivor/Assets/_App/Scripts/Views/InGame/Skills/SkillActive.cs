@@ -11,7 +11,7 @@ namespace FantasySurvivor
 	{
 		public Monster target;
 
-		[SerializeField] protected float size;
+		public float size;
 		
 		[SerializeField] protected SkillDamagedType skillDamagedType;
 
