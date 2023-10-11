@@ -17,7 +17,6 @@ public class Skill
 	
 	protected GameObject effectPrefab;
 
-
 	protected Dictionary<int, LevelSkillData> levelData;
 
 	protected readonly Cooldown cooldownSkill = new Cooldown();
@@ -51,7 +50,7 @@ public class Skill
 		level++;
 	}
 	
-	public void CoolDownSkill(float deltaTime)
+	public virtual void CoolDownSkill(float deltaTime)
 	{
 		cooldownSkill.Update(deltaTime);
 		if(cooldownSkill.isFinished)
@@ -75,7 +74,7 @@ public class ProactiveSkill : Skill
 		{
 			for(int i = 0; i < numberProjectile; i++)
 			{
-				var skill = gameController.SpawnBullet(skillPrefab).GetComponent<SkillActive>();
+				var skill = GameObject.Instantiate(skillPrefab).GetComponent<SkillActive>();
 				skill.Init(origin.model.attackDamage * levelData[level].value / 100, mons, effectPrefab, level);
 				UpdatePrefab(skill);
 				await Task.Delay(timeDelaySkill);

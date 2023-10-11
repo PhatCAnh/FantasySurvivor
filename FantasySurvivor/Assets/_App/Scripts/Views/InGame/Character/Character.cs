@@ -14,9 +14,7 @@ using StateMachine = ArbanFramework.StateMachine.StateMachine;
 
 public class Character : ObjectRPG
 {
-	public Transform skinAttackRange;
-
-	public SpriteRenderer skinBase;
+	public float abc = 2.5f;
 
 	public float sizeBase;
 
@@ -79,23 +77,6 @@ public class Character : ObjectRPG
 				control.SetFloat("SpeedMul", model.moveSpeed / 2.5f);
 			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackSpeed), model)
 		);
-
-		AddDataBinding("fieldCharacter-attackRangeValue", skinAttackRange, (control, e) =>
-			{
-				control.localScale = model.attackRange / 10 * Vector3.one;
-				if(model.attackRange > 10)
-				{
-					var value = model.attackRange % 10;
-					Camera.main.orthographicSize += value * 0.2f;
-				}
-			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackRange), model)
-		);
-
-		skinAttackRange.DORotate(new Vector3(0, 0, -360), 7.5f, RotateMode.FastBeyond360)
-			.SetLoops(-1, LoopType.Incremental)
-			.SetEase(Ease.Linear);
-
-
 	}
 
 	public void Init(CharacterStat statInit)
@@ -178,6 +159,12 @@ public class Character : ObjectRPG
 						case SkillName.Shark:
 							proactiveSkill = new Shark();
 							break;
+						case SkillName.ZoneOfJudgment:
+							proactiveSkill = new ZoneOfJudgment();
+							break;
+						case SkillName.ThunderStrike:
+							proactiveSkill = new ThunderStrike();
+							break;
 						default:
 							proactiveSkill = new ProactiveSkill();
 							break;
@@ -257,11 +244,11 @@ public class Character : ObjectRPG
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
-		skinAttackRange.DOKill();
 	}
 
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.DrawWireSphere(transform.position, sizeBase);
+		Gizmos.DrawWireSphere(transform.position, abc);
 	}
 }

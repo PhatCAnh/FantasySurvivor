@@ -12,7 +12,6 @@ public class CharacterModel : Model<GameApp>
 		this.currentHealthPoint = maxHp;
 		this.maxHealthPoint = maxHp;
 		this.moveSpeed = moveSpeed;
-		this.attackRange = attackRange;
 		this._attackDamage = attackDamage;
 	}
 
@@ -29,7 +28,6 @@ public class CharacterModel : Model<GameApp>
 	
 	private float _attackDamage;
 	private float _attackSpeed;
-	private float _attackRange;
 
 	public float moveSpeed
 	{
@@ -80,16 +78,6 @@ public class CharacterModel : Model<GameApp>
 			if(attackSpeed.Equals(value)) return;
 			_attackSpeed = value;
 			RaiseDataChanged(nameof(attackSpeed));
-		}
-	}
-
-	public float attackRange
-	{
-		get => _attackRange;
-		set {
-			if(attackRange.Equals(value)) return;
-			_attackRange = value;
-			RaiseDataChanged(nameof(attackRange));
 		}
 	}
 }

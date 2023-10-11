@@ -71,6 +71,8 @@ public enum SkillName
     Shark,
     Fireball,
     Twin,
+    ZoneOfJudgment,
+    ThunderStrike,
     Food,
 }
 
