@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using FantasySurvivor;
 using UnityEngine;
 namespace FantasySurvivor
 {
@@ -63,7 +62,7 @@ namespace FantasySurvivor
 				case TargetType.Target:
 					transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.fixedDeltaTime);
 					skin.up = direction;
-					if(GameLogic.CheckDistance(targetPos, transform.position, 0.1f))
+					if(Vector2.Distance(targetPos, transform.position) < 0.1f)
 					{
 						TouchUnit(targetPos);
 						Destroy(gameObject);
@@ -80,7 +79,7 @@ namespace FantasySurvivor
 				switch (skillDamagedType)
 				{
 					case SkillDamagedType.Single:
-						if(GameLogic.CheckDistance(targetPos, transform.position, sizeTouch))
+						if(Vector2.Distance(targetPos, transform.position) < sizeTouch)
 						{
 							TakeDamage();
 							TouchUnit(targetPos);
@@ -107,7 +106,7 @@ namespace FantasySurvivor
 					}
 				}
 			}
-			if(GameLogic.CheckDistance(origin.transform.position, transform.position, 30))
+			if(Vector2.Distance(origin.transform.position, transform.position) > 30)
 			{
 				TouchUnit(targetPos);
 				Destroy(gameObject);

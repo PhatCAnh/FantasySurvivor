@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ArbanFramework;
 using ArbanFramework.MVC;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,7 +9,6 @@ using FantasySurvivor;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using MonsterStat = FantasySurvivor.MonsterStat;
 
@@ -38,7 +38,7 @@ public class GameController : Controller<GameApp>
 
 	private void Awake()
 	{
-		ArbanFramework.Singleton<GameController>.Set(this);
+		Singleton<GameController>.Set(this);
 	}
 
 	private void Start()
@@ -62,7 +62,7 @@ public class GameController : Controller<GameApp>
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
-		ArbanFramework.Singleton<GameController>.Unset(this);
+		Singleton<GameController>.Unset(this);
 	}
 
 	public void ShowMainHome()
@@ -83,7 +83,7 @@ public class GameController : Controller<GameApp>
 	public void LoseGame()
 	{
 		isEndGame = true;
-		ArbanFramework.Singleton<PoolDropItem>.instance.ReturnAllObject();
+		Singleton<PoolDropItem>.instance.ReturnAllObject();
 		app.resourceManager.ShowPopup(PopupType.LoseGame);
 		//app.analytics.TrackPlay(LevelResult.Failure, map.model.levelInGame);
 	}
@@ -157,7 +157,7 @@ public class GameController : Controller<GameApp>
 
 		var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
 
-		monsterIns.transform.position = GameLogic.RandomPositionSpawnMonster(20, character.transform.position);
+		monsterIns.transform.position = RandomPositionSpawnMonster(20, monsterIns.justSpawnVertical);
 
 		monsterIns.Init(monsterStat, wave);
 
@@ -170,7 +170,7 @@ public class GameController : Controller<GameApp>
 		if(!selfDie)
 		{
 			map.model.monsterKilled++;
-			ArbanFramework.Singleton<PoolDropItem>.instance.GetObjectFromPool(mons.transform.position, mons.stat.exp.BaseValue, RandomDropItem());
+			Singleton<PoolDropItem>.instance.GetObjectFromPool(mons.transform.position, mons.stat.exp.BaseValue, RandomDropItem());
 		}
 
 		listMonster.Remove(mons);
@@ -248,7 +248,7 @@ public class GameController : Controller<GameApp>
 				}
 				break;
 			case DropItemType.Magnet:
-				foreach(var item in ArbanFramework.Singleton<PoolDropItem>.instance.usedList)
+				foreach(var item in Singleton<PoolDropItem>.instance.usedList)
 				{
 					if(item.TryGetComponent(out DropItem dropItemType) && dropItemType.type == DropItemType.Exp)
 					{
@@ -287,7 +287,29 @@ public class GameController : Controller<GameApp>
 	}
 
 
-	
+	public Vector2 RandomPositionSpawnMonster(float radius, bool justVertical = false)
+	{
+		float angle = Random.Range(0, 2 * Mathf.PI);
+		float x = radius * Mathf.Cos(angle);
+		float y = radius * Mathf.Sin(angle);
+		return new Vector2(x + character.transform.position.x, y + character.transform.position.y);
+
+
+		// int posX;
+		// int posY;
+		// int randomTopDown = Random.Range(0, 2);
+		// if(randomTopDown == 0 || justVertical)
+		// {
+		// 	posX = Random.Range(-21, 21);
+		// 	posY = (Random.Range(0, 2) * 2 - 1) * 20;
+		// }
+		// else
+		// {
+		// 	posX = (Random.Range(0, 2) * 2 - 1) * 20;
+		// 	posY = Random.Range(-21, 21);
+		// }
+		// return new Vector2(posX, posY);
+	}
 
 	private Character SpawnCharacter()
 	{
@@ -319,6 +341,5 @@ public class GameController : Controller<GameApp>
 		app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
 		//app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
 	}
-	
 	
 }

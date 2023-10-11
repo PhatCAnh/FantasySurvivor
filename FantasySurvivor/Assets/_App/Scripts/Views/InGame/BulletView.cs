@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework;
 using ArbanFramework.MVC;
-using FantasySurvivor;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -50,7 +49,7 @@ public class BulletView : View<GameApp>
 		}
 		
 		transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-		if(GameLogic.CheckDistance(transform.position, targetPos, 0.1f))
+		if(Vector2.Distance(transform.position, targetPos) < 0.1f)
 		{
 			target.TakeDamage(damage, isCritical);
 			TouchUnit(target);

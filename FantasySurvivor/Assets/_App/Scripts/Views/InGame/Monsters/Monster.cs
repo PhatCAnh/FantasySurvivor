@@ -145,7 +145,7 @@ public class Monster : ObjectRPG
 		}
 		else if(moveDirection.magnitude > 25)
 		{
-			transform.position = GameLogic.RandomPositionSpawnMonster(20, target.transform.position);
+			transform.position = gameController.RandomPositionSpawnMonster(20);
 		}
 		else
 		{
