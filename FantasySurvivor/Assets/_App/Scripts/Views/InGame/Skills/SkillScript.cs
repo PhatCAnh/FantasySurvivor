@@ -106,5 +106,35 @@ namespace FantasySurvivor
 	
 	public class ThunderStrike : ProactiveSkill
 	{
+		public override void Init(SkillData data)
+		{
+			base.Init(data);
+			origin.isCharacterMoving += RunToCooldown;
+		}
+
+		protected override void UpdatePrefab(SkillActive prefab)
+		{
+			base.UpdatePrefab(prefab);
+			if(level >= 2)
+			{
+				prefab.skillDamagedType = SkillDamagedType.AreaOfEffect;
+			}
+		}
+
+		public override void CoolDownSkill(float deltaTime)
+		{
+			return;
+			base.CoolDownSkill(deltaTime);
+		}
+
+		private void RunToCooldown(float moveDistance)
+		{
+			cooldownSkill.Update(moveDistance);
+			if(cooldownSkill.isFinished)
+			{
+				Active();
+				cooldownSkill.Restart(levelData[level].cooldown);
+			}
+		}
 	}
 }

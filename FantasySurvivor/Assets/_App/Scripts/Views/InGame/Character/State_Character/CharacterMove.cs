@@ -12,15 +12,16 @@ namespace FantasySurvivor
 		public override void PhysicUpdate(float fixedDeltaTime)
 		{
 			base.PhysicUpdate(fixedDeltaTime);
-			var directionUnit = agent.moveDirection.normalized;
-			Move(directionUnit, Time.fixedDeltaTime);
+			Move(agent.moveDirection.normalized, Time.fixedDeltaTime);
 		}
 
 		private void Move(Vector2 dir, float deltaTime)
 		{
 			var movement = agent.model.moveSpeed * GameConst.MOVE_SPEED_ANIMATION_RATIO * deltaTime * dir;
+			agent.isCharacterMoving?.Invoke(movement.magnitude);
 			var newPosition = agent.myRigid.position + movement;
 			agent.myRigid.MovePosition(newPosition);
+			
 		}
 	}
 }

@@ -13,7 +13,7 @@ namespace FantasySurvivor
 
 		public float size;
 		
-		[SerializeField] protected SkillDamagedType skillDamagedType;
+		public SkillDamagedType skillDamagedType;
 
 		protected GameObject callBackEffect;
 

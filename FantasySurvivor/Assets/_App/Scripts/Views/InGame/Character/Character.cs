@@ -47,12 +47,14 @@ public class Character : ObjectRPG
 	public bool IsAlive => model.currentHealthPoint > 0;
 	public bool IsMove => _stateMachine.currentState == _moveSm;
 
+	public Action<float> isCharacterMoving;
+
 	private Vector2 _direction = Vector2.zero;
 
 	private StateMachine _stateMachine;
 	private CharacterIdle _idleSm;
 	private CharacterMove _moveSm;
-
+	
 	private GameController gameController => Singleton<GameController>.instance;
 
 	protected override void OnViewInit()
