@@ -143,31 +143,31 @@ MonoBehaviour:
     typeElemental: 0
     imgUI: {fileID: 21300000, guid: 65d81833a9705374299a503a6186aa2f, type: 3}
     skillPrefab: {fileID: 8206914173546746077, guid: 24f582cf70ec6c444bd720fa6d3c911a, type: 3}
-    effectPrefab: {fileID: 4718941582418019916, guid: 0b78a3d0e34680e4fad34abb3419e418, type: 3}
+    skillEvolvePrefab: {fileID: 0}
   - name: 1
     type: 0
     typeElemental: 1
     imgUI: {fileID: 704797902, guid: e4ffbed7851f5774ca9f8acb8fce1d5e, type: 3}
     skillPrefab: {fileID: 9075703475211245482, guid: 7c860169edcee5747bf90d4ebca6da2e, type: 3}
-    effectPrefab: {fileID: 5960483955136575123, guid: 816f66b4279b5fd46b0bd8d9cad6eeee, type: 3}
+    skillEvolvePrefab: {fileID: 0}
   - name: 2
     type: 0
     typeElemental: 2
     imgUI: {fileID: 21300000, guid: 7d9f2344361daf645b44645c6bbcec2c, type: 3}
     skillPrefab: {fileID: 5969974768321339375, guid: bccfbe3ac4d1a834387290001c1a7597, type: 3}
-    effectPrefab: {fileID: 5775481878134524772, guid: f35354206d95ac8498ae4a8d4a138c0c, type: 3}
+    skillEvolvePrefab: {fileID: 0}
   - name: 3
     type: 0
     typeElemental: 5
     imgUI: {fileID: 21300000, guid: c2631b5db58c62e4193d892172de7ad7, type: 3}
     skillPrefab: {fileID: 5246971698916849523, guid: 9248e3ef35126f346affde9b9d9fde8b, type: 3}
-    effectPrefab: {fileID: 0}
+    skillEvolvePrefab: {fileID: 0}
   - name: 4
     type: 0
     typeElemental: 4
     imgUI: {fileID: -1216228538, guid: 8712650e07ff46049a576ee656f0e945, type: 3}
     skillPrefab: {fileID: 873336829918094235, guid: a6a831d5a3c80f44d8a599b2b220c529, type: 3}
-    effectPrefab: {fileID: 0}
+    skillEvolvePrefab: {fileID: 6105532977934052371, guid: 7755505eb2bb0b9448c97bde25b3c4cd, type: 3}
 --- !u!1 &7740478561839289926
 GameObject:
   m_ObjectHideFlags: 0

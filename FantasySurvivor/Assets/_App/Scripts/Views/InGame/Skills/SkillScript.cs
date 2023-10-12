@@ -109,7 +109,8 @@ namespace FantasySurvivor
 		public override void Init(SkillData data)
 		{
 			base.Init(data);
-			origin.isCharacterMoving += RunToCooldown;
+			isCooldownByTime = false;
+			origin.isCharacterMoving += RunCoolDown;
 		}
 
 		protected override void UpdatePrefab(SkillActive prefab)
@@ -121,15 +122,9 @@ namespace FantasySurvivor
 			}
 		}
 
-		public override void CoolDownSkill(float deltaTime)
+		protected override void RunCoolDown(float deltaTime)
 		{
-			return;
-			base.CoolDownSkill(deltaTime);
-		}
-
-		private void RunToCooldown(float moveDistance)
-		{
-			cooldownSkill.Update(moveDistance);
+			cooldownSkill.Update(deltaTime);
 			if(cooldownSkill.isFinished)
 			{
 				Active();

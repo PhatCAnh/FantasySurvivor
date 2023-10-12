@@ -8,10 +8,9 @@ namespace FantasySurvivor
 	{
 		[SerializeField] private SkillActive _twinInstantiate;
 
-		public void InitTwin(Vector2 direction, float moveSpeed, float damage, GameObject effect, Monster oldTarget, int level)
+		public void InitTwin(Vector2 direction, float moveSpeed, float damage, Monster oldTarget, int level)
 		{
 			this.level = level;
-			this.callBackEffect = effect;
 			this.origin = gameController.character;
 			this.direction = direction;
 			this.moveSpeed = moveSpeed;
@@ -34,9 +33,9 @@ namespace FantasySurvivor
 		private void SpawnTwinBorn()
 		{
 			var bullet = Instantiate(_twinInstantiate, transform.position, new Quaternion(0, 0, 90, 0));
-			bullet.GetComponent<TwinBorn>().InitTwin(new Vector2(-direction.y, direction.x), moveSpeed, damage/2, callBackEffect, target, level);
+			bullet.GetComponent<TwinBorn>().InitTwin(new Vector2(-direction.y, direction.x), moveSpeed, damage/2, target, level);
 			var bullet2 = Instantiate(_twinInstantiate, transform.position, new Quaternion(0, 0, -90, 0));
-			bullet2.GetComponent<TwinBorn>().InitTwin(new Vector2(direction.y, -direction.x), moveSpeed, damage/2, callBackEffect, target, level);
+			bullet2.GetComponent<TwinBorn>().InitTwin(new Vector2(direction.y, -direction.x), moveSpeed, damage/2, target, level);
 			Destroy(gameObject);
 		}
 	}

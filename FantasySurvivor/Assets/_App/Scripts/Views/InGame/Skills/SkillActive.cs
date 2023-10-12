@@ -15,8 +15,6 @@ namespace FantasySurvivor
 		
 		public SkillDamagedType skillDamagedType;
 
-		protected GameObject callBackEffect;
-
 		protected float damage;
 
 		protected bool isCritical;
@@ -33,7 +31,7 @@ namespace FantasySurvivor
 			base.OnViewInit();
 		}
 
-		public virtual void Init(float damage, Monster target, GameObject effect, int level)
+		public virtual void Init(float damage, Monster target, int level)
 		{
 			this.origin = gameController.character;
 			
@@ -47,8 +45,6 @@ namespace FantasySurvivor
 			
 			this.target = target;
 
-			callBackEffect = effect;
-
 			this.damage = damage;
 
 			sizeTouch = size + target.size;
@@ -57,10 +53,7 @@ namespace FantasySurvivor
 
 		public virtual void TouchUnit(Vector3 pos)
 		{
-			if(callBackEffect != null)
-			{
-				Instantiate(callBackEffect, pos, quaternion.identity);
-			}
+			
 		}
 		
 

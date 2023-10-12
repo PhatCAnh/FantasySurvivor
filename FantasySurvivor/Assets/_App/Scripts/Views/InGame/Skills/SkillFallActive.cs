@@ -7,9 +7,9 @@ namespace FantasySurvivor
 {
 	public class SkillFallActive : SkillActive
 	{
-		public override void Init(float damage, Monster target, GameObject effect, int level)
+		public override void Init(float damage, Monster target, int level)
 		{
-			base.Init(damage, target, effect, level);
+			base.Init(damage, target, level);
 
 			if(target == null) return;
 

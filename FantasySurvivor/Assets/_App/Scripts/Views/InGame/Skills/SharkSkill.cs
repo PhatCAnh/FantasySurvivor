@@ -14,17 +14,16 @@ public class Skill
 	protected GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
 	protected GameObject skillPrefab;
-	
-	protected GameObject effectPrefab;
 
+	protected GameObject skillEvolvePrefab;
+
+	protected GameObject skillIns;
+	
 	protected Dictionary<int, LevelSkillData> levelData;
 
-	protected readonly Cooldown cooldownSkill = new Cooldown();
+	protected bool isCooldownByTime;
 
-	public Skill()
-	{
-		
-	}
+	protected readonly Cooldown cooldownSkill = new Cooldown();
 	
 	public virtual void Active()
 	{
@@ -40,7 +39,10 @@ public class Skill
 		level = 1;
 		
 		skillPrefab = data.skillPrefab;
-		effectPrefab = data.effectPrefab;
+
+		skillEvolvePrefab = data.skillEvolvePrefab;
+
+		skillIns = skillPrefab;
 
 		levelData = data.levelSkillData;
 	}
@@ -48,9 +50,19 @@ public class Skill
 	public virtual void UpLevel()
 	{
 		level++;
+		if(level == 6 && skillEvolvePrefab != null)
+		{
+			skillIns = skillEvolvePrefab;
+		}
 	}
 	
 	public virtual void CoolDownSkill(float deltaTime)
+	{
+		if(!isCooldownByTime) return;
+		RunCoolDown(deltaTime);
+	}
+
+	protected virtual void RunCoolDown(float deltaTime)
 	{
 		cooldownSkill.Update(deltaTime);
 		if(cooldownSkill.isFinished)
@@ -74,8 +86,8 @@ public class ProactiveSkill : Skill
 		{
 			for(int i = 0; i < numberProjectile; i++)
 			{
-				var skill = GameObject.Instantiate(skillPrefab).GetComponent<SkillActive>();
-				skill.Init(origin.model.attackDamage * levelData[level].value / 100, mons, effectPrefab, level);
+				var skill = GameObject.Instantiate(skillIns).GetComponent<SkillActive>();
+				skill.Init(origin.model.attackDamage * levelData[level].value / 100, mons, level);
 				UpdatePrefab(skill);
 				await Task.Delay(timeDelaySkill);
 			}

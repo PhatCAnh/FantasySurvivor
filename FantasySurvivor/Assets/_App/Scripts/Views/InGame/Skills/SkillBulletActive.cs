@@ -32,9 +32,9 @@ namespace FantasySurvivor
 		protected Vector3 targetPos;
 
 		protected Vector3 direction;
-		public override void Init(float damage, Monster target, GameObject effect, int level)
+		public override void Init(float damage, Monster target, int level)
 		{
-			base.Init(damage, target, effect, level);
+			base.Init(damage, target, level);
 
 			if(target == null) return;
 			

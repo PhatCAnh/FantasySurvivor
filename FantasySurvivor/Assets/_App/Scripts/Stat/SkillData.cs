@@ -9,7 +9,8 @@ public class SkillData
 	public SkillElementalType typeElemental;
 	public Sprite imgUI;
 	public GameObject skillPrefab;
-	public GameObject effectPrefab;
+	public GameObject skillEvolvePrefab;
+	
 	public Dictionary<int, LevelSkillData> levelSkillData;
 
 	public void Init(Dictionary<int, LevelSkillData> data)
