@@ -88,7 +88,7 @@ public enum SkillElementalType
     Water,
     Fire,
     Wind,
-    Ground,
+    Dark,
     Electric,
     Light,
 }

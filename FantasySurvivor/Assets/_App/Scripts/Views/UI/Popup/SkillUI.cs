@@ -25,7 +25,8 @@ public class SkillUI : View<GameApp>
 	
 	[SerializeField] private Toggle[] _arrStarUI;
 
-	[SerializeField] private GameObject _fxBlue, _fxRed, _fxGreen;
+	[SerializeField] private GameObject _fxBlue, _fxRed, _fxGreen, _fxPurple, _fxYellow, _fxWhite;
+	[SerializeField] private Color _colorBlue, _colorRed, _colorGreen, _colorPurple, _colorYellow, _colorWhite;
 	
 	[SerializeField] private GameObject _normalStar, _bigStar;
 
@@ -52,52 +53,55 @@ public class SkillUI : View<GameApp>
 		switch (skillData.typeElemental)
 		{
 			case SkillElementalType.Water:
-				_txtNameSkill.color = new Color(0.2f, 0.3f, 0.7f);
-				_imgBackgroundIcon.color = new Color(0.2f, 0.3f, 0.7f);
+				UpdateColor(_colorBlue);
 
-				if(_level > 5)
+				if(_level >= 5)
 				{
 					_fxBlue.SetActive(true);
 				}
 				
 				break;
 			case SkillElementalType.Fire:
-				_txtNameSkill.color = new Color(0.7f, 0f, 0.1f);
-				_imgBackgroundIcon.color = new Color(0.7f, 0f, 0.1f);
+				UpdateColor(_colorRed);
 				
-				if(_level > 5)
+				if(_level >= 5)
 				{
 					_fxRed.SetActive(true);
 				}
 				break;
 			case SkillElementalType.Wind:
-				_txtNameSkill.color = new Color(0, 0.55f, 0.15f);
-				_imgBackgroundIcon.color = new Color(0, 0.55f, 0.15f);
+				UpdateColor(_colorGreen);
 				
-				if(_level > 5)
-				{
-					_fxBlue.SetActive(true);
-				}
-				break;
-			case SkillElementalType.Ground:
-				
-				if(_level > 5)
+				if(_level >= 5)
 				{
 					_fxGreen.SetActive(true);
 				}
 				break;
+			case SkillElementalType.Dark:
+				
+				UpdateColor(_colorPurple);
+				
+				if(_level >= 5)
+				{
+					_fxPurple.SetActive(true);
+				}
+				break;
 			case SkillElementalType.Electric:
 				
-				if(_level > 5)
+				UpdateColor(_colorYellow);
+				
+				if(_level >= 5)
 				{
-					_fxBlue.SetActive(true);
+					_fxYellow.SetActive(true);
 				}
 				break;
 			case SkillElementalType.Light:
 				
-				if(_level > 5)
+				UpdateColor(_colorWhite);
+				
+				if(_level >= 5)
 				{
-					_fxBlue.SetActive(true);
+					_fxWhite.SetActive(true);
 				}
 				break;
 		}
@@ -122,7 +126,7 @@ public class SkillUI : View<GameApp>
 				.SetLoops(-1, LoopType.Yoyo);
 		}
 	}
-
+	
 	public void Init(SkillData data, ChoiceSkill parent)
 	{
 		skillData = data;
@@ -133,5 +137,11 @@ public class SkillUI : View<GameApp>
 	{
 		gameController.character.AddProactiveSkill(skillData);
 		_parent.Selected(this);
+	}
+
+	private void UpdateColor(Color color)
+	{
+		_txtNameSkill.color = color;
+		_imgBackgroundIcon.color = color;
 	}
 }

@@ -21,7 +21,7 @@ public class Skill
 	
 	protected Dictionary<int, LevelSkillData> levelData;
 
-	protected bool isCooldownByTime;
+	protected bool isCooldownByTime = true;
 
 	protected readonly Cooldown cooldownSkill = new Cooldown();
 	
