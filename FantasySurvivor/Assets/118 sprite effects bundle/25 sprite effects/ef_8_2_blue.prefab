@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 688293241877877508}
   - component: {fileID: 688293241877877507}
   - component: {fileID: 688293241877877506}
-  - component: {fileID: 1539910430442493346}
   m_Layer: 0
   m_Name: ef_8_2_blue
   m_TagString: Untagged
@@ -4883,17 +4882,3 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &1539910430442493346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 688293241877877505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d5215bd18141404aba521faea8f18ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _listSkill: []
-  _size: {x: 0, y: 0}

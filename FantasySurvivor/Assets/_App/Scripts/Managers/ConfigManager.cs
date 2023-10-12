@@ -13,19 +13,13 @@ public class ConfigManager : ConfigManagerBase
 	public DataChapterConfigTable dataChapter;
 	public DataLevelSkillConfigTable dataLevelSkill;
 	public DataStatMonsterConfigTable dataStatMonster;
-	public DataTowerInGameLevelUpConfigTable dataLevelTowerInGame;
-	public DataTowerOutGameLevelUpConfigTable dataLevelTowerOutGame;
-	public DataStatTowerConfigTable dataStatTower;
 
 	//private bool _isCanLoadRemoteConfig = false;
 	public void Init()
 	{
 		//Register
-		Register(out dataStatTower);
 		Register(out dataLevelSkill);
 		Register(out dataStatMonster);
-		Register(out dataLevelTowerOutGame);
-		Register(out dataLevelTowerInGame);
 		Register(out dataChapter);
 		Register(out constConfig);
 		LoadConfigs();

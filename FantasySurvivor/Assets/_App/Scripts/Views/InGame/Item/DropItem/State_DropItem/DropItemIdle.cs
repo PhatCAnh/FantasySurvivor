@@ -1,5 +1,5 @@
 ﻿using ArbanFramework.StateMachine;
-
+using DG.Tweening;
 using UnityEngine;
 namespace FantasySurvivor {
     public class DropItemIdle : State<DropItem> {
@@ -16,7 +16,6 @@ namespace FantasySurvivor {
             var distanceToTarget = Vector2.Distance(agent.transform.position, agent.character.transform.position);
             if (distanceToTarget > 3f)
                 return;
-
             agent.Collect();
         }
     }

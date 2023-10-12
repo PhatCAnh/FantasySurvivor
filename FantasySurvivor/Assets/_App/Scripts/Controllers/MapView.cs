@@ -57,7 +57,7 @@ public class MapView : View<GameApp>
 		}
 		for(int i = 0; i < count; i++)
 		{
-			SkillData skill = null;
+			SkillData skill;
 			do
 			{
 				skill = listSkill[Random.Range(0, listSkill.Count)];

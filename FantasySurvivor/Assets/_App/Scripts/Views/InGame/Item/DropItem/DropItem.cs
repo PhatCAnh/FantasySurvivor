@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using ArbanFramework;
 using ArbanFramework.StateMachine;
+using DG.Tweening;
 using FantasySurvivor;
 using UnityEngine;
 
@@ -116,7 +117,11 @@ namespace FantasySurvivor
             if (isCollect)
                 return;
 
-            _stateMachine.ChangeState(_collectSm);
+            var agentPos = transform.position;
+            var endPoint = agentPos + (agentPos - gameController.character.transform.position).normalized;
+            transform
+                .DOLocalMove(endPoint * 1.1f, 0.5f)
+                .OnComplete(() => _stateMachine.ChangeState(_collectSm));
         }
 
         public void Complete()

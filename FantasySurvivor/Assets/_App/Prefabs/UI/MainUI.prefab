@@ -28439,7 +28439,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 260440455212963375}
-  - component: {fileID: 6001489856325139567}
   m_Layer: 0
   m_Name: UpdateStat
   m_TagString: Untagged
@@ -28468,90 +28467,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 175}
   m_SizeDelta: {x: 0, y: -350}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6001489856325139567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3880204356202477357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 331a886f6f5b3be49b8a513602dde165, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _statAttackDamage:
-    button: {fileID: 6444135387352808389}
-    txtCurrent: {fileID: 8035713666303979727}
-    txtNext: {fileID: 4505352100676667208}
-    txtCoin: {fileID: 1005716413230524589}
-    currentLevel: 0
-    maxLevel: 10
-    price: 0
-  _statAttackRange:
-    button: {fileID: 4233157067421215243}
-    txtCurrent: {fileID: 2003493730039365453}
-    txtNext: {fileID: 2371830749401031942}
-    txtCoin: {fileID: 5764124818198443028}
-    currentLevel: 0
-    maxLevel: 10
-    price: 0
-  _statAttackSpeed:
-    button: {fileID: 7486243097330733024}
-    txtCurrent: {fileID: 7312102386493545643}
-    txtNext: {fileID: 2740869155842494860}
-    txtCoin: {fileID: 481364493589179172}
-    currentLevel: 0
-    maxLevel: 10
-    price: 0
-  _statHealth:
-    button: {fileID: 6847403251133585176}
-    txtCurrent: {fileID: 4849954715201288131}
-    txtNext: {fileID: 7240953947335409176}
-    txtCoin: {fileID: 1529544959009559665}
-    currentLevel: 0
-    maxLevel: 10
-    price: 0
-  _statCriticalRate:
-    button: {fileID: 4760014425739547735}
-    txtCurrent: {fileID: 2416810986252967927}
-    txtNext: {fileID: 9127618073890812663}
-    txtCoin: {fileID: 2113081544110682901}
-    currentLevel: 0
-    maxLevel: 10
-    price: 0
-  _statCriticalDamage:
-    button: {fileID: 7504986488592600621}
-    txtCurrent: {fileID: 8759330907161011380}
-    txtNext: {fileID: 923438906419426025}
-    txtCoin: {fileID: 1774895996874230010}
-    currentLevel: 0
-    maxLevel: 10
-    price: 0
-  _statRegenHp:
-    button: {fileID: 462316205470218087}
-    txtCurrent: {fileID: 2998078882128525409}
-    txtNext: {fileID: 2782439272106040691}
-    txtCoin: {fileID: 7803992751034320762}
-    currentLevel: 0
-    maxLevel: 10
-    price: 0
-  _txtLabelAd: {fileID: 5328738637656384291}
-  _txtLabelAr: {fileID: 5305556464366043575}
-  _txtLabelAs: {fileID: 1203621097107945253}
-  _txtLabelHealth: {fileID: 8294034059420700345}
-  _txtCriticalRate: {fileID: 6632871502792383027}
-  _txtCriticalDamage: {fileID: 6240626864760433218}
-  _txtRegenHp: {fileID: 7026844385004786769}
-  _toggleAtk: {fileID: 3282082602455716824}
-  _toggleDef: {fileID: 5616084794960285782}
-  _toggleElemental: {fileID: 798704775124848822}
-  _imgAtk: {fileID: 1240025903476355943}
-  _imgDef: {fileID: 5854138435394422255}
-  _imgElemental: {fileID: 8266147795976281273}
-  _imgFocus: {fileID: 3091676101591015187}
-  _containerStatAtk: {fileID: 633286588381156}
-  _containerStatDef: {fileID: 1263184285530645060}
 --- !u!1 &3919515811181389725
 GameObject:
   m_ObjectHideFlags: 0
