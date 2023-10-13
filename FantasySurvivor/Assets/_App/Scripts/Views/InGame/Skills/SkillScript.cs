@@ -22,7 +22,7 @@ namespace FantasySurvivor
 			}
 		}
 	}
-	
+
 	public class Twin : ProactiveSkill
 	{
 		public override void Init(SkillData data)
@@ -40,7 +40,7 @@ namespace FantasySurvivor
 			}
 		}
 	}
-	
+
 	public class Shark : ProactiveSkill
 	{
 		protected override void UpdatePrefab(SkillActive prefab)
@@ -53,7 +53,7 @@ namespace FantasySurvivor
 			}
 		}
 	}
-	
+
 	public class ZoneOfJudgment : ProactiveSkill
 	{
 		private float _sizeTouch = 2.5f;
@@ -74,7 +74,7 @@ namespace FantasySurvivor
 				.SetEase(Ease.Linear);
 			_circle = prefab;
 		}
-		
+
 
 		public override void Active()
 		{
@@ -87,7 +87,7 @@ namespace FantasySurvivor
 			foreach(var monster in gameController.listMonster.ToList())
 			{
 				if(_monstersTouched.Contains(monster)) continue;
-				
+
 				if(Vector2.Distance(monster.transform.position, origin.transform.position) < _sizeTouch)
 				{
 					monster.TakeDamage(origin.model.attackDamage * levelData[level].value / 100);
@@ -103,7 +103,7 @@ namespace FantasySurvivor
 			_circle.transform.localScale = Vector2.one * _sizeTouch;
 		}
 	}
-	
+
 	public class ThunderStrike : ProactiveSkill
 	{
 		public override void Init(SkillData data)
@@ -130,6 +130,15 @@ namespace FantasySurvivor
 				Active();
 				cooldownSkill.Restart(levelData[level].cooldown);
 			}
+		}
+	}
+
+	public class BlackDrum : ProactiveSkill
+	{
+		protected override void UpdatePrefab(SkillActive prefab)
+		{
+			base.UpdatePrefab(prefab);
+			prefab.GetComponent<SkillBombActive>().sizeExplosion += 0.5f * level;
 		}
 	}
 }

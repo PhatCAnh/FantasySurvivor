@@ -12,7 +12,7 @@ namespace FantasySurvivor
 		public Monster target;
 
 		public float size;
-		
+
 		public SkillDamagedType skillDamagedType;
 
 		protected float damage;
@@ -23,18 +23,16 @@ namespace FantasySurvivor
 
 		protected Character origin;
 
+		protected GameObject hitEffect;
+
 		protected int level;
 		protected Action callBackDamaged, callBackKilled;
 		protected GameController gameController => Singleton<GameController>.instance;
-		protected override void OnViewInit()
-		{
-			base.OnViewInit();
-		}
 
 		public virtual void Init(float damage, Monster target, int level)
 		{
 			this.origin = gameController.character;
-			
+
 			if(target == null)
 			{
 				Destroy(gameObject);
@@ -42,20 +40,13 @@ namespace FantasySurvivor
 			}
 
 			this.level = level;
-			
+
 			this.target = target;
 
 			this.damage = damage;
 
 			sizeTouch = size + target.size;
 		}
-		
-
-		public virtual void TouchUnit(Vector3 pos)
-		{
-			
-		}
-		
 
 		public virtual void TakeDamage(Monster monster = null)
 		{
@@ -69,7 +60,7 @@ namespace FantasySurvivor
 					monster.TakeDamage(damage, isCritical, callBackDamaged, callBackKilled);
 					break;
 				case SkillDamagedType.AreaOfEffect:
-						CheckAoeMons();
+					CheckAoeMons();
 					break;
 			}
 		}
@@ -80,26 +71,28 @@ namespace FantasySurvivor
 			if(Vector2.Distance(monster.transform.position, transform.position) < sizeTouch)
 			{
 				TakeDamage(monster);
-				TouchUnit(monster.transform.position);
 				return true;
 			}
 			return false;
 		}
 
-		protected void OnDrawGizmosSelected()
+		protected virtual void OnDrawGizmosSelected()
 		{
 			Gizmos.DrawWireSphere(transform.position, size);
 		}
-		
-		protected void CheckAoeMons()
+
+		protected virtual void TouchUnit(Monster mons)
+		{
+			mons.TakeDamage(damage, isCritical);
+		}
+
+		protected virtual void CheckAoeMons()
 		{
 			foreach(var mons in gameController.listMonster.ToList())
 			{
-				sizeTouch = size + mons.size;
 				if(Vector2.Distance(mons.transform.position, transform.position) < sizeTouch)
 				{
-					mons.TakeDamage(damage, isCritical);
-					TouchUnit(mons.transform.position);
+					TouchUnit(mons);
 				}
 			}
 		}

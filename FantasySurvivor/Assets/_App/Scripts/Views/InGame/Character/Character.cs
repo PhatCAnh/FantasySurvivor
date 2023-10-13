@@ -167,6 +167,9 @@ public class Character : ObjectRPG
 						case SkillName.ThunderStrike:
 							proactiveSkill = new ThunderStrike();
 							break;
+						case SkillName.BlackDrum:
+							proactiveSkill = new BlackDrum();
+							break;
 						default:
 							proactiveSkill = new ProactiveSkill();
 							break;

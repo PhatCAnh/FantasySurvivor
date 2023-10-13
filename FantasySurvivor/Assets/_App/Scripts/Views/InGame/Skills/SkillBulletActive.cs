@@ -4,19 +4,6 @@ namespace FantasySurvivor
 {
 	public class SkillBulletActive : SkillActive
 	{
-		public enum SpawnPos
-		{
-			Character,
-			Monster,
-			OldBullet,
-		}
-
-		public enum TargetType
-		{
-			Target,
-			Shot,
-		}
-
 		[SerializeField] protected Transform skin;
 
 		public SpawnPos spawnPos;
@@ -64,7 +51,6 @@ namespace FantasySurvivor
 					skin.up = direction;
 					if(Vector2.Distance(targetPos, transform.position) < 0.1f)
 					{
-						TouchUnit(targetPos);
 						Destroy(gameObject);
 					}
 					break;
@@ -82,7 +68,6 @@ namespace FantasySurvivor
 						if(Vector2.Distance(targetPos, transform.position) < sizeTouch)
 						{
 							TakeDamage();
-							TouchUnit(targetPos);
 							Destroy(gameObject);
 						}
 						break;
@@ -97,18 +82,14 @@ namespace FantasySurvivor
 			}
 			else
 			{
-				foreach(var monster in gameController.listMonster.ToList())
+				if(gameController.listMonster.ToList().Any(CheckTouchMonsters))
 				{
-					if(CheckTouchMonsters(monster))
-					{
-						Destroy(gameObject);
-						return;
-					}
+					Destroy(gameObject);
+					return;
 				}
 			}
 			if(Vector2.Distance(origin.transform.position, transform.position) > 30)
 			{
-				TouchUnit(targetPos);
 				Destroy(gameObject);
 			}
 		}

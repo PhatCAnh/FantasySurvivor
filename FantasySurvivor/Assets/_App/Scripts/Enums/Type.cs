@@ -73,6 +73,7 @@ public enum SkillName
     Twin,
     ZoneOfJudgment,
     ThunderStrike,
+    BlackDrum,
     Food,
 }
 
@@ -134,6 +135,19 @@ public enum MapVerticalType
     Left = 0,
     Mid = 1,
     Right = 2,
+}
+
+public enum SpawnPos
+{
+    Character,
+    Monster,
+    OldBullet,
+}
+
+public enum TargetType
+{
+    Target,
+    Shot,
 }
 
 

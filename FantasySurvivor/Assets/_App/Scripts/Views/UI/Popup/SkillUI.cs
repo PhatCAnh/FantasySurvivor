@@ -22,18 +22,18 @@ public class SkillUI : View<GameApp>
 	[SerializeField] private TextMeshProUGUI _txtNameSkill;
 
 	[SerializeField] private TextMeshProUGUI _txtDescription;
-	
+
 	[SerializeField] private Toggle[] _arrStarUI;
 
 	[SerializeField] private GameObject _fxBlue, _fxRed, _fxGreen, _fxPurple, _fxYellow, _fxWhite;
 	[SerializeField] private Color _colorBlue, _colorRed, _colorGreen, _colorPurple, _colorYellow, _colorWhite;
-	
-	[SerializeField] private GameObject _normalStar, _bigStar;
+
+	[SerializeField] private GameObject _normalStar, _bigStar, _starDot;
 
 	private ChoiceSkill _parent;
 	private int _level;
 
-	
+
 	private GameController gameController => Singleton<GameController>.instance;
 
 	protected override void OnViewInit()
@@ -47,86 +47,53 @@ public class SkillUI : View<GameApp>
 		{
 			_level = skill.level;
 		}
-		
+
 		_txtDescription.text = skillData.levelSkillData[_level + 1].description;
 
 		switch (skillData.typeElemental)
 		{
 			case SkillElementalType.Water:
 				UpdateColor(_colorBlue);
-
-				if(_level >= 5)
-				{
-					_fxBlue.SetActive(true);
-				}
-				
+				_fxBlue.SetActive(_level >= 5);
 				break;
 			case SkillElementalType.Fire:
 				UpdateColor(_colorRed);
-				
-				if(_level >= 5)
-				{
-					_fxRed.SetActive(true);
-				}
+				_fxRed.SetActive(_level >= 5);
 				break;
 			case SkillElementalType.Wind:
 				UpdateColor(_colorGreen);
-				
-				if(_level >= 5)
-				{
-					_fxGreen.SetActive(true);
-				}
+				_fxGreen.SetActive(_level >= 5);
 				break;
 			case SkillElementalType.Dark:
-				
 				UpdateColor(_colorPurple);
-				
-				if(_level >= 5)
-				{
-					_fxPurple.SetActive(true);
-				}
+				_fxPurple.SetActive(_level >= 5);
 				break;
 			case SkillElementalType.Electric:
-				
 				UpdateColor(_colorYellow);
-				
-				if(_level >= 5)
-				{
-					_fxYellow.SetActive(true);
-				}
+				_fxYellow.SetActive(_level >= 5);
 				break;
 			case SkillElementalType.Light:
-				
 				UpdateColor(_colorWhite);
-				
-				if(_level >= 5)
-				{
-					_fxWhite.SetActive(true);
-				}
+				_fxWhite.SetActive(_level >= 5);
 				break;
 		}
-		
+
 		if(_level <= 4)
 		{
 			for(int i = 0; i < _level + 1; i++)
 			{
 				_arrStarUI[i].isOn = false;
 			}
-					
-			_arrStarUI[_level].transform
-				.DOScale(Vector3.one * 1.25f, 0.5f)
-				.SetLoops(-1, LoopType.Yoyo);
+			AnimStar(_arrStarUI[_level].gameObject);
 		}
 		else
 		{
 			_normalStar.SetActive(false);
 			_bigStar.SetActive(true);
-			_bigStar.transform
-				.DOScale(Vector3.one * 1.25f, 0.5f)
-				.SetLoops(-1, LoopType.Yoyo);
+			AnimStar(_bigStar);
 		}
 	}
-	
+
 	public void Init(SkillData data, ChoiceSkill parent)
 	{
 		skillData = data;
@@ -143,5 +110,19 @@ public class SkillUI : View<GameApp>
 	{
 		_txtNameSkill.color = color;
 		_imgBackgroundIcon.color = color;
+	}
+
+	private void AnimStar(GameObject star)
+	{
+		_starDot = star;
+		_starDot.transform
+			.DOScale(Vector3.one * 1.25f, 0.5f)
+			.SetLoops(-1, LoopType.Yoyo);
+	}
+
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+		_starDot.transform.DOKill();
 	}
 }

@@ -13,11 +13,7 @@ public class Skill
 	protected Character origin;
 	protected GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
-	protected GameObject skillPrefab;
-
-	protected GameObject skillEvolvePrefab;
-
-	protected GameObject skillIns;
+	protected GameObject skillPrefab, skillEvolvePrefab, skillIns;
 	
 	protected Dictionary<int, LevelSkillData> levelData;
 
