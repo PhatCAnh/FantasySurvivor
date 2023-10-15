@@ -74,6 +74,7 @@ public enum SkillName
     ZoneOfJudgment,
     ThunderStrike,
     BlackDrum,
+    Passive1,
     Food,
 }
 

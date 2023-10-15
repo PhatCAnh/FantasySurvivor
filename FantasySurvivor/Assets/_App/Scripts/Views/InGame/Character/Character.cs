@@ -22,11 +22,9 @@ public class Character : ObjectRPG
 	public Rigidbody2D myRigid;
 
 	public Animator animator;
-	public Monster target { set; get; }
 	public CharacterModel model => app.models.characterModel;
 
 	public CharacterStat stat { get; private set; }
-
 	public float speedMul { get; set; } = 1;
 	public Vector2 idleDirection { get; private set; } = Vector2.down;
 
@@ -42,7 +40,8 @@ public class Character : ObjectRPG
 		}
 	}
 
-	public List<Skill> proactiveSkills = new List<Skill>();
+	public List<Skill> listSkills = new List<Skill>();
+	public List<Skill> listSkillCooldown = new List<Skill>();
 
 	public bool IsAlive => model.currentHealthPoint > 0;
 	public bool IsMove => _stateMachine.currentState == _moveSm;
@@ -135,50 +134,51 @@ public class Character : ObjectRPG
 
 	public void AddProactiveSkill(SkillData skillData)
 	{
+		var skill = GetSkill(skillData.name);
+		if(skill != null)
+		{
+			skill.UpLevel();
+			if(skill.level >= 6)
+			{
+				gameController.map.RemoveSkill(skill.skillName);
+			}
+			return;
+		}
 		switch (skillData.type)
 		{
 			case SkillType.Proactive:
-				var skill = GetSkill(skillData.name);
-				if(skill != null)
 				{
-					skill.UpLevel();
-					if(skill.level >= 6)
-					{
-						gameController.map.RemoveSkill(skill.skillName);
-					}
-				}
-				else
-				{
-					Skill proactiveSkill;
+					Skill skillIns;
 					switch (skillData.name)
 					{
 						case SkillName.Fireball:
-							proactiveSkill = new FireBall();
+							skillIns = new FireBall();
 							break;
 						case SkillName.Twin:
-							proactiveSkill = new Twin();
+							skillIns = new Twin();
 							break;
 						case SkillName.Shark:
-							proactiveSkill = new Shark();
+							skillIns = new Shark();
 							break;
 						case SkillName.ZoneOfJudgment:
-							proactiveSkill = new ZoneOfJudgment();
+							skillIns = new ZoneOfJudgment();
 							break;
 						case SkillName.ThunderStrike:
-							proactiveSkill = new ThunderStrike();
+							skillIns = new ThunderStrike();
 							break;
 						case SkillName.BlackDrum:
-							proactiveSkill = new BlackDrum();
+							skillIns = new BlackDrum();
+							break;
+						case SkillName.Passive1:
+							skillIns = new Passive1();
 							break;
 						default:
-							proactiveSkill = new ProactiveSkill();
+							skillIns = new ProactiveSkill();
 							break;
 					}
-					proactiveSkill.Init(skillData);
-					proactiveSkills.Add(proactiveSkill);
+					skillIns.Init(skillData);
+					listSkills.Add(skillIns);
 				}
-				break;
-			case SkillType.Passive:
 				break;
 			case SkillType.Buff:
 				if(skillData.name == SkillName.Food)
@@ -186,13 +186,12 @@ public class Character : ObjectRPG
 					model.currentHealthPoint += model.currentHealthPoint * 20 / 100;
 				}
 				break;
-
 		}
 	}
 
 	public Skill GetSkill(SkillName skillName)
 	{
-		foreach(var skill in proactiveSkills)
+		foreach(var skill in listSkills)
 		{
 			if(skill.skillName.Equals(skillName))
 			{
@@ -221,7 +220,7 @@ public class Character : ObjectRPG
 	// ReSharper disable Unity.PerformanceAnalysis
 	private void HandleProactiveSkill(float deltaTime)
 	{
-		foreach(var skill in proactiveSkills)
+		foreach(var skill in listSkillCooldown)
 		{
 			skill.CoolDownSkill(deltaTime);
 		}

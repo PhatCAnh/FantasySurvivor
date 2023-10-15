@@ -19,7 +19,7 @@ namespace FantasySurvivor
 			skillName = reader.ReadString();
 
 			var levelArr = reader.ReadIntArr();
-			var valueArr = reader.ReadIntArr();
+			var valueArr = reader.ReadFloatArr();
 			var cooldownArr = reader.ReadFloatArr();
 			var descriptionArr = reader.ReadStringArr();
 

@@ -17,9 +17,7 @@ public class Skill
 	
 	protected Dictionary<int, LevelSkillData> levelData;
 
-	protected bool isCooldownByTime = true;
-
-	protected readonly Cooldown cooldownSkill = new Cooldown();
+	public readonly Cooldown cooldownSkill = new Cooldown();
 	
 	public virtual void Active()
 	{
@@ -54,12 +52,6 @@ public class Skill
 	
 	public virtual void CoolDownSkill(float deltaTime)
 	{
-		if(!isCooldownByTime) return;
-		RunCoolDown(deltaTime);
-	}
-
-	protected virtual void RunCoolDown(float deltaTime)
-	{
 		cooldownSkill.Update(deltaTime);
 		if(cooldownSkill.isFinished)
 		{
@@ -73,6 +65,12 @@ public class ProactiveSkill : Skill
 {
 	protected int numberProjectile = 1;
 	protected int timeDelaySkill = 1;
+
+	public override void Init(SkillData data)
+	{
+		base.Init(data);
+		AddCooldown();
+	}
 	
 	public override async void Active()
 	{
@@ -90,15 +88,14 @@ public class ProactiveSkill : Skill
 		}
 	}
 
+	protected virtual void AddCooldown()
+	{
+		origin.listSkillCooldown.Add(this);
+	}
+
 	protected virtual void UpdatePrefab(SkillActive prefab)
 	{
 		
 	}
 }
 
-
-
-public class BuffSkill : Skill
-{
-	
-}

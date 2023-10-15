@@ -26,11 +26,11 @@ public class SkillData
 
 public class LevelSkillData
 {
-	public int value;
+	public float value;
 	public float cooldown;
 	public string description;
 
-	public LevelSkillData(int value, float cooldown, string description)
+	public LevelSkillData(float value, float cooldown, string description)
 	{
 		this.value = value;
 		this.cooldown = cooldown;
