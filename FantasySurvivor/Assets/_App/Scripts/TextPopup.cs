@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _App.Scripts.Controllers;
 using FantasySurvivor;
 using ArbanFramework;
 using TMPro;
@@ -86,8 +87,14 @@ public class TextPopup : MonoBehaviour
 
 			if(_textColor.a < 0)
 			{
-				Singleton<PoolTextPopup>.instance.RemoveObjectToPool(gameObject, _textMesh);
+				Singleton<PoolController>.instance.ReturnObject(ItemPrefab.TextPopup, gameObject);
 			}
 		}
+	}
+
+	private void OnDisable()
+	{
+		_textMesh.color = new Color(_textMesh.color.r, _textMesh.color.g, _textMesh.color.b, 1f);
+		_textMesh.transform.localScale = Vector3.one;
 	}
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using _App.Scripts.Controllers;
 using _App.Scripts.Views.InGame.Skills;
 using ArbanFramework;
 using ArbanFramework.Config;
@@ -14,6 +15,10 @@ using StateMachine = ArbanFramework.StateMachine.StateMachine;
 
 public class Character : ObjectRPG
 {
+	[FormerlySerializedAs("a"),SerializeField] private int asd= 5;
+	public int b;
+	
+	
 	public float abc = 2.5f;
 
 	public float sizeBase;
@@ -123,7 +128,8 @@ public class Character : ObjectRPG
 	{
 		if(!IsAlive) return;
 		model.currentHealthPoint -= damage;
-		Singleton<PoolTextPopup>.instance.GetObjectFromPool(transform.position, damage.ToString(), TextPopupType.MonsterDamage);
+		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
+		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.MonsterDamage);
 		if(!IsAlive) Die();
 	}
 

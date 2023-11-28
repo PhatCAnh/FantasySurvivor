@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using UnityEngine;
@@ -35,6 +36,8 @@ public class GameController : Controller<GameApp>
 	private float _height;
 	
 	private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
+
+	private PoolController poolController => Singleton<PoolController>.instance;
 
 	private void Awake()
 	{
@@ -83,7 +86,7 @@ public class GameController : Controller<GameApp>
 	public void LoseGame()
 	{
 		isEndGame = true;
-		Singleton<PoolDropItem>.instance.ReturnAllObject();
+		Singleton<PoolController>.instance.RemoveAllObject(ItemPrefab.GemExp);
 		app.resourceManager.ShowPopup(PopupType.LoseGame);
 		//app.analytics.TrackPlay(LevelResult.Failure, map.model.levelInGame);
 	}
@@ -170,7 +173,8 @@ public class GameController : Controller<GameApp>
 		if(!selfDie)
 		{
 			map.model.monsterKilled++;
-			Singleton<PoolDropItem>.instance.GetObjectFromPool(mons.transform.position, mons.stat.exp.BaseValue, RandomDropItem());
+			var gem = poolController.GetObject(ItemPrefab.GemExp, mons.transform.position);
+			gem.GetComponent<DropItem>().Init(mons.stat.exp.BaseValue, RandomDropItem());
 		}
 
 		listMonster.Remove(mons);
@@ -248,7 +252,7 @@ public class GameController : Controller<GameApp>
 				}
 				break;
 			case DropItemType.Magnet:
-				foreach(var item in Singleton<PoolDropItem>.instance.usedList)
+				foreach(var item in poolController.GetPool(ItemPrefab.GemExp).usedList)
 				{
 					if(item.TryGetComponent(out DropItem dropItemType) && dropItemType.type == DropItemType.Exp)
 					{
@@ -313,11 +317,11 @@ public class GameController : Controller<GameApp>
 
 	private Character SpawnCharacter()
 	{
-		var characterPrefab = Instantiate(app.resourceManager.GetItem(Type.Character))
+		var characterPrefab = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.Character))
 			.GetComponent<Character>();
 		characterPrefab.transform.position = Vector2.zero;
 
-		_healthBar = Instantiate(app.resourceManager.GetItem(Type.HealthBar), app.resourceManager.rootContainer)
+		_healthBar = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.HealthBar), app.resourceManager.rootContainer)
 			.GetComponent<HealthBar>();
 		_healthBar.Init(characterPrefab);
 

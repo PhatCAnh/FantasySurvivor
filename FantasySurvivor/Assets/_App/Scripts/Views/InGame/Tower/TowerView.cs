@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using ArbanFramework.StateMachine;
@@ -107,7 +108,8 @@ public class TowerView : ObjectRPG
 	{
 		if(!isAlive) return;
 		model.currentHealthPoint -= damage;
-		Singleton<PoolTextPopup>.instance.GetObjectFromPool(transform.position, damage.ToString(), TextPopupType.MonsterDamage);
+		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
+		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.MonsterDamage);
 		if(!isAlive) Die();
 	}
 

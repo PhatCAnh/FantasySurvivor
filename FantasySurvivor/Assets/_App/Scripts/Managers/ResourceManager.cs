@@ -20,8 +20,10 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[Required, SerializeField] private GameObject _characterPrefab;
 
 	[Required, SerializeField] private GameObject _gemExpPrefab;
+	
+	[Required, SerializeField] private GameObject _textPopup;
 
-	private Dictionary<Type, GameObject> _itemDic;
+	private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
 
 	[Header("UI prefabs")]
@@ -106,10 +108,12 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	private void InitDic()
 	{
-		_itemDic = new Dictionary<Type, GameObject>()
+		_itemPrefabDic = new Dictionary<ItemPrefab, GameObject>()
 		{
-			{Type.HealthBar, _healthBarPrefab},
-			{Type.Character, _characterPrefab},
+			{ItemPrefab.HealthBar, _healthBarPrefab},
+			{ItemPrefab.Character, _characterPrefab},
+			{ItemPrefab.TextPopup, _textPopup},
+			{ItemPrefab.GemExp, _gemExpPrefab},
 		};
 
 		_mapDic = new Dictionary<MapType, Map>
@@ -140,9 +144,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 		};
 	}
 
-	public GameObject GetItem(Type type)
+	public GameObject GetItemPrefab(ItemPrefab itemPrefab)
 	{
-		return _itemDic[type];
+		return _itemPrefabDic[itemPrefab];
 	}
 
 	public Map GetMap(MapType mapType)

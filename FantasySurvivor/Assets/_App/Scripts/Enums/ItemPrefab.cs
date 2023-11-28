@@ -1,11 +1,13 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Serialization;
-public enum Type
+public enum ItemPrefab
 {
     Undefined = -1,
     HealthBar,
     Character,
+    TextPopup,
+    GemExp,
 }
 
 public enum MapType

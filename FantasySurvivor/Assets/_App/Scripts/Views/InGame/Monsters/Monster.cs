@@ -1,4 +1,5 @@
 using System;
+using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.StateMachine;
 using FantasySurvivor;
@@ -25,7 +26,7 @@ public class Monster : ObjectRPG
 	public MonsterStat stat { get; protected set; }
 
 	public Vector2 idleDirection { get; private set; } = Vector2.down;
-	
+
 	public float speedMul { get; set; } = 1;
 
 	public Vector2 moveDirection
@@ -65,7 +66,7 @@ public class Monster : ObjectRPG
 
 	public float size;
 	public Character target => gameController.character;
-	
+
 	public MapView.WaveData wave { get; private set; }
 
 	protected float sizeAttack;
@@ -88,7 +89,7 @@ public class Monster : ObjectRPG
 			stat.attackSpeed.BaseValue,
 			wave.expMonster);
 		this.wave = wave;
-		sizeAttack = stat.attackRange.BaseValue != 0? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
+		sizeAttack = stat.attackRange.BaseValue != 0 ? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
 	}
 
 	protected override void OnViewInit()
@@ -133,7 +134,7 @@ public class Monster : ObjectRPG
 	{
 		moveTarget = gameController.character.transform.position;
 		moveDirection = moveTarget - transform.position;
-		
+
 
 		if(moveDirection.magnitude < sizeAttack)
 		{
@@ -171,12 +172,12 @@ public class Monster : ObjectRPG
 		if(!isAlive) return;
 		model.currentHealthPoint -= damage;
 		callBackDamaged?.Invoke();
-		Singleton<PoolTextPopup>.instance.GetObjectFromPool(transform.position, damage.ToString(), TextPopupType.TowerDamage, isCritical);
-		if(!isAlive)
-		{
-			Die();
-			callBackKilled?.Invoke();
-		}
+		var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
+		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.TowerDamage, isCritical);
+		if(isAlive)
+			return;
+		Die();
+		callBackKilled?.Invoke();
 	}
 
 	protected virtual void Die(bool selfDie = false)
