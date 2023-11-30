@@ -28,14 +28,13 @@ public static class GameConst
     public static string iconExp = "<sprite index=5>";
     public static string iconCritical = "<sprite index=6>";
 
+    public static string nameScene_Loading = "scn_Loading";
+    public static string nameScene_Main = "scn_Main";
+    public static string nameScene_Game = "scn_Game";
+
     public static string GetNameWithVersion(string str)
     {
         return $"{str}_{VERSION_ID}";
     }
-}
-
-public static class GameUtil
-{
-
 }
 

@@ -75,7 +75,7 @@ public class GameController : Controller<GameApp>
 
 	public void StartGame(int chapter)
 	{
-		ChangeScene("scn_Game", () => LoadMap(chapter));
+		ChangeScene(GameConst.nameScene_Game, () => LoadMap(chapter));
 	}
 
 	public void WinGame()
@@ -102,7 +102,7 @@ public class GameController : Controller<GameApp>
 
 	public void ChangeSceneHome()
 	{
-		var load = SceneManager.LoadSceneAsync("scn_Main", LoadSceneMode.Single);
+		var load = SceneManager.LoadSceneAsync(GameConst.nameScene_Main, LoadSceneMode.Single);
 		load.completed += o =>
 		{
 			app.resourceManager.CloseAllPopup();

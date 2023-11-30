@@ -111,7 +111,7 @@ namespace FantasySurvivor
 
 		private void OnClickBtnSetting()
 		{
-			gameController.ChangeScene("scn_Game", null);
+			gameController.ChangeScene(GameConst.nameScene_Game, null);
 			//app.resourceManager.ShowPopup(PopupType.Pause);
 		}
 

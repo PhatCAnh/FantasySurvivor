@@ -92,7 +92,7 @@ namespace FantasySurvivor
 
 		private void OnClickBtnPlay()
 		{
-			var load = SceneManager.LoadSceneAsync("scn_Game", LoadSceneMode.Single);
+			var load = SceneManager.LoadSceneAsync(GameConst.nameScene_Game, LoadSceneMode.Single);
 			load.completed += o => gameController.StartGame(_currentChapter);
 			Close();
 		}
