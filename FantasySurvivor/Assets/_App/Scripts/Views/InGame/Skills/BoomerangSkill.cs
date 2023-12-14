@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArbanFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,8 @@ namespace FantasySurvivor
         protected Vector3 targetPos;
 
         protected Vector3 direction;
+
+        protected Vector3 playerPos;
         public override void Init(float damage, Monster target, int level)
         {
             base.Init(damage, target, level);
@@ -74,8 +77,6 @@ namespace FantasySurvivor
                         if (Vector2.Distance(targetPos, transform.position) < sizeTouch)
                         {
                             TakeDamage();
-                            transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.fixedDeltaTime);
-                            boomerang.up = direction;
                             Destroy(gameObject);
                         }
                         break;
