@@ -115,6 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4214289129664241309}
+  - component: {fileID: -106552811965389669}
   m_Layer: 0
   m_Name: Boomerang
   m_TagString: Untagged
@@ -138,3 +139,23 @@ Transform:
   - {fileID: 2658069732209475623}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-106552811965389669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7183301255097406363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9bcefe84f3978946a4d36c872c9958b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  size: 1
+  skillDamagedType: 0
+  boomerang: {fileID: 4214289129664241309}
+  spawnPos: 0
+  targetType: 0
+  canBlock: 0
+  moveSpeed: 15

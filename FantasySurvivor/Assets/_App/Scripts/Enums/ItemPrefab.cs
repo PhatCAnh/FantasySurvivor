@@ -78,6 +78,7 @@ public enum SkillName
     BlackDrum,
     Passive1,
     Food,
+    Boomerang,
 }
 
 public enum SkillType
