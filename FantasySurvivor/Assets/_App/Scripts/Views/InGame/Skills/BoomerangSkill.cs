@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace FantasySurvivor
 {
-    public class Boomerang  : SkillActive
+    public class BoomerangSkill  : SkillActive
     {
 
         [SerializeField] protected Transform boomerang;
@@ -74,6 +74,8 @@ namespace FantasySurvivor
                         if (Vector2.Distance(targetPos, transform.position) < sizeTouch)
                         {
                             TakeDamage();
+                            transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.fixedDeltaTime);
+                            boomerang.up = direction;
                             Destroy(gameObject);
                         }
                         break;

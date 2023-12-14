@@ -54,6 +54,15 @@ namespace FantasySurvivor
 		}
 	}
 
+	public class Boomerang : ProactiveSkill
+	{
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+            timeDelaySkill = Mathf.RoundToInt(1000);
+        }
+    }
+
 	public class ZoneOfJudgment : ProactiveSkill
 	{
 		private float _sizeTouch = 2.5f;
