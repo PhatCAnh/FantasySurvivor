@@ -134,4 +134,21 @@ namespace FantasySurvivor
 			prefab.GetComponent<SkillBombActive>().sizeExplosion += 0.5f * level;
 		}
 	}
+    public class Rocket : ProactiveSkill
+    {
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+            timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
+        }
+
+        public override void UpLevel()
+        {
+            base.UpLevel();
+            if (level == 3)
+            {
+                numberProjectile++;
+            }
+        }
+    }
 }

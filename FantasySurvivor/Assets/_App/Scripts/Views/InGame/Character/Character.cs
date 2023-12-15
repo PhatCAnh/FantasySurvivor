@@ -178,6 +178,9 @@ public class Character : ObjectRPG
 						case SkillName.Passive1:
 							skillIns = new Passive1();
 							break;
+						case SkillName.Rocket:
+							skillIns = new Rocket();
+							break;
 						default:
 							skillIns = new ProactiveSkill();
 							break;
