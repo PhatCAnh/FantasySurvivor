@@ -28,6 +28,13 @@ namespace FantasySurvivor
         protected Vector3 direction;
 
         protected Vector3 playerPos;
+
+        protected Vector3 endPos;
+
+        protected Character character;
+
+        protected Vector3 characterPos;
+
         public override void Init(float damage, Monster target, int level)
         {
             base.Init(damage, target, level);
@@ -39,6 +46,9 @@ namespace FantasySurvivor
             this.direction = target.transform.position - transform.position;
 
             boomerang.up = direction;
+
+            character = gameController.character;
+
         }
 
         private void FixedUpdate()
@@ -50,21 +60,52 @@ namespace FantasySurvivor
                 targetPos = target.transform.position;
             }
 
-            switch (targetType)
+            characterPos = character.transform.position;
+
+            if ((Vector2.Distance(characterPos, transform.position) < 4f))
             {
-                case TargetType.Shot:
-                    transform.Translate(moveSpeed * Time.fixedDeltaTime * direction.normalized);
-                    break;
-                case TargetType.Target:
-                    transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.fixedDeltaTime);
-                    boomerang.up = direction;
-                    if (Vector2.Distance(targetPos, transform.position) < 0.1f)
-                    {
-                        Destroy(gameObject);
-                    }
-                    break;
+                switch (targetType)
+                {
+                    case TargetType.Shot:
+                        transform.Translate(moveSpeed * Time.fixedDeltaTime * direction.normalized);
+                        break;
+                        //case TargetType.Target:
+                        //    transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.fixedDeltaTime);
+                        //    boomerang.up = direction;
+                        //    if (Vector2.Distance(targetPos, transform.position) < 0.1f)
+                        //    {
+                        //        Destroy(gameObject);
+                        //    }
+                        //    break;
+                }
+            } else
+            {
+                switch (targetType)
+                {
+                    case TargetType.Shot:
+                        boomerang.up = - direction.normalized;
+                        transform.Translate(moveSpeed * Time.fixedDeltaTime * direction.normalized);
+
+                        if (Vector2.Distance(characterPos, transform.position) > 7f)
+                        {
+                            Destroy(gameObject);
+                        }
+                        break;
+                        //case TargetType.Target:
+                        //    transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.fixedDeltaTime);
+                        //    boomerang.up = direction;
+                        //    if (Vector2.Distance(targetPos, transform.position) < 0.1f)
+                        //    {
+                        //        Destroy(gameObject);
+                        //    }
+                        //    break;
+                }
             }
             HandleTouch();
+            if (Vector2.Distance(targetPos, transform.position) < 0.1f)
+            {
+                Destroy(gameObject);
+            }
         }
 
         protected virtual void HandleTouch()
@@ -83,11 +124,11 @@ namespace FantasySurvivor
                     case SkillDamagedType.AreaOfEffect:
                         foreach (var mons in gameController.listMonster.ToList())
                         {
-                            CheckTouchMonsters(mons);
+                            if (CheckTouchMonsters(mons)) {
+                            }
                         }
                         break;
                 }
-
             }
             else
             {
@@ -102,5 +143,6 @@ namespace FantasySurvivor
                 Destroy(gameObject);
             }
         }
+
     }
 }
