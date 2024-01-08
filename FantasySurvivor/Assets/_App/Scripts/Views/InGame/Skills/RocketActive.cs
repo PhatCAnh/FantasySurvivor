@@ -32,52 +32,56 @@ namespace FantasySurvivor
 
          private float _cdTime ;
 
+        protected Vector3 explosionTarget;
+
         public override void Init(float damage, Monster target, int level)
         {
             base.Init(damage, target, level);
 
             if (target == null) return;
-
-            transform.position = spawnPos == SpawnPos.Character ? origin.transform.position : target.transform.position;
-
-            this.direction = target.transform.position - transform.position;
-
-            skin.up = direction;
+            if (origin != null)
+            {
+                transform.position = spawnPos == SpawnPos.Character ? origin.transform.position : target.transform.position;
+                this.direction = target.transform.position - transform.position;
+                explosionTarget = target.transform.position;
+                skin.up = direction;
+            }
         }
 
         private void FixedUpdate()
         {
             if (gameController.isStop) return;
 
-            if (target != null && skillDamagedType == SkillDamagedType.Single)
+            if (gameController != null)
             {
-                targetPos = target.transform.position;
+                if (target != null && skillDamagedType == SkillDamagedType.Single)
+                {
+                    targetPos = target.transform.position;
+                }
+                transform.Translate(moveSpeed * Time.fixedDeltaTime * direction.normalized);
+
+                HandleTouch();  
+
+                _cdTime += Time.deltaTime;
             }
-            transform.Translate(moveSpeed * Time.fixedDeltaTime * direction.normalized);
-
-            HandleTouch();
-
-            _cdTime += Time.deltaTime;
-
-            Debug.Log(_cdTime);
-            Debug.Log(_time);
-
         }
         protected virtual void HandleTouch()
         {
-
-            if (Vector2.Distance(origin.transform.position, transform.position) > 30 || _cdTime >= _time)
+            if (origin != null)
             {
-                CheckAoeMons();
-                var explosion = Instantiate(_explosionEffect, transform.position, quaternion.identity);
-                explosion.transform.localScale = sizeExplosion * Vector3.one;
-                foreach (var mons in gameController.listMonster.ToList())
+                if (Vector2.Distance(origin.transform.position, transform.position) > 30 || _cdTime >= _time || Vector2.Distance(explosionTarget, origin.transform.position) < 5 )
                 {
-                    CheckTouchMonsters(mons);
-                }
-                Destroy(gameObject);
+                    CheckAoeMons();
+                    var explosion = Instantiate(_explosionEffect, transform.position, quaternion.identity);
+                    explosion.transform.localScale = sizeExplosion * Vector3.one;
+                    foreach (var mons in gameController.listMonster.ToList())
+                    {
+                        CheckTouchMonsters(mons);
+                    }
+                    Destroy(gameObject);
 
-                _cdTime = 0;
+                    _cdTime = 0;
+                }
             }
         }
         protected override void OnDrawGizmosSelected()
