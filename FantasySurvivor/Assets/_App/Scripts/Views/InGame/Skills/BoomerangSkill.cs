@@ -35,6 +35,18 @@ namespace FantasySurvivor
 
         protected Vector3 characterPos;
 
+        private List<Monster> _listMonsterTouched;
+        private List<Monster> _listMonsterTouchedReturn;
+
+        enum FlyState
+        {
+            bumShot,
+            bumReturn
+        }
+
+        private FlyState flyState;
+
+
         public override void Init(float damage, Monster target, int level)
         {
             base.Init(damage, target, level);
@@ -49,6 +61,11 @@ namespace FantasySurvivor
 
             character = gameController.character;
 
+            _listMonsterTouched = new List<Monster>();
+
+            _listMonsterTouchedReturn = new List<Monster>();
+
+            flyState = FlyState.bumShot;
         }
 
         private void FixedUpdate()
@@ -62,7 +79,7 @@ namespace FantasySurvivor
 
             characterPos = character.transform.position;
 
-            if ((Vector2.Distance(characterPos, transform.position) < 4f))
+            if ((Vector2.Distance(characterPos, transform.position) < 8f))
             {
                 switch (targetType)
                 {
@@ -84,9 +101,9 @@ namespace FantasySurvivor
                 {
                     case TargetType.Shot:
                         boomerang.up = - direction.normalized;
+                        flyState = FlyState.bumReturn;
                         transform.Translate(moveSpeed * Time.fixedDeltaTime * direction.normalized);
-
-                        if (Vector2.Distance(characterPos, transform.position) > 7f)
+                        if (Vector2.Distance(characterPos, transform.position) > 9f)
                         {
                             Destroy(gameObject);
                         }
@@ -124,10 +141,22 @@ namespace FantasySurvivor
                     case SkillDamagedType.AreaOfEffect:
                         foreach (var mons in gameController.listMonster.ToList())
                         {
-                            if (CheckTouchMonsters(mons)) {
+                            if (flyState == FlyState.bumReturn)
+                            {
+                                if (!_listMonsterTouchedReturn.FirstOrDefault(mon => mon == mons) && CheckTouchMonsters(mons))
+                                {
+                                    _listMonsterTouchedReturn.Add(mons);
+                                }
+                            } else
+                            {
+                                if (!_listMonsterTouched.FirstOrDefault(mon => mon == mons) && CheckTouchMonsters(mons))
+                                {
+                                    _listMonsterTouched.Add(mons);
+                                }
                             }
                         }
                         break;
+
                 }
             }
             else
@@ -143,6 +172,5 @@ namespace FantasySurvivor
                 Destroy(gameObject);
             }
         }
-
     }
 }
