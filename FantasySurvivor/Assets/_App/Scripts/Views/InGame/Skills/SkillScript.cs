@@ -76,6 +76,8 @@ namespace FantasySurvivor
 		}
 
 
+
+
 		public override void Active()
 		{
 			_monstersTouched.Clear();
@@ -103,6 +105,8 @@ namespace FantasySurvivor
 			_circle.transform.localScale = Vector2.one * _sizeTouch;
 		}
 	}
+
+
 
 	public class ThunderStrike : ProactiveSkill
 	{

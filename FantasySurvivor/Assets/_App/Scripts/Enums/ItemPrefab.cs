@@ -77,7 +77,7 @@ public enum SkillName
     ThunderStrike,
     BlackDrum,
     Passive1,
-    Food,
+    Food, VongQuayMayMan,
 }
 
 public enum SkillType

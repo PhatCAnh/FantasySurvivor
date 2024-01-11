@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FantasySurvivor;
@@ -59,6 +60,11 @@ public class Skill
 			cooldownSkill.Restart(levelData[level].cooldown);
 		}
 	}
+
+    public static implicit operator Skill(VongQuayMayMan v)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 public class ProactiveSkill : Skill

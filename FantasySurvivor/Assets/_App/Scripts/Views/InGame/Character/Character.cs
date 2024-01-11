@@ -11,6 +11,7 @@ using FantasySurvivor;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
+using static FantasySurvivor.VongQuayMayMan;
 using StateMachine = ArbanFramework.StateMachine.StateMachine;
 
 public class Character : ObjectRPG
@@ -178,6 +179,9 @@ public class Character : ObjectRPG
 						case SkillName.Passive1:
 							skillIns = new Passive1();
 							break;
+						//case SkillName.VongQuayMayMan:
+						//  skillIns = new VongQuayMayMan();
+						//break;
 						default:
 							skillIns = new ProactiveSkill();
 							break;
