@@ -37,6 +37,8 @@ public class MapView : View<GameApp>
 
 	private int _coinOfLevel = 0;
 
+	private Cooldown _cdEndLevel = new Cooldown();
+
 	private readonly List<WaveData> _listWaveData = new List<WaveData>();
 	private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
@@ -99,17 +101,31 @@ public class MapView : View<GameApp>
 				expMonster = wave.expMonster,
 			};
 
-			waveData.coolDownTime.Restart(wave.timeStart);
+			waveData.coolDownTime.Restart(0);
 			_listWaveData.Add(waveData);
 		}
 		_coinOfLevel = dataChapter.coin;
+		_cdEndLevel.Restart(dataChapter.timeEnd);
 	}
 
 	private void Update()
 	{
 		if(gameController.isStop) return;
 
-		model.timeInGame += Time.deltaTime;
+		var deltaTime = Time.deltaTime;
+		
+		model.timeInGame += deltaTime;
+		
+		_cdEndLevel.Update(deltaTime);
+
+		if(_cdEndLevel.isFinished)
+		{
+			_listWaveData.Clear();
+			gameController.AddReward(dictionaryReward, TypeItemReward.Coin, _coinOfLevel);
+			model.levelInGame++;
+			StartLevel(model.levelInGame);
+			return;
+		}
 
 		foreach(var wave in _listWaveData.ToList())
 		{
@@ -127,7 +143,7 @@ public class MapView : View<GameApp>
 				}
 				continue;
 			}
-			wave.coolDownTime.Update(Time.deltaTime);
+			wave.coolDownTime.Update(deltaTime);
 			if(wave.coolDownTime.isFinished)
 			{
 				wave.monsterInWave.Add(gameController.SpawnMonster(wave));
