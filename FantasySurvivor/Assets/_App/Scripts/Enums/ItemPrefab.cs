@@ -4,6 +4,7 @@ using UnityEngine.Serialization;
 public enum ItemPrefab
 {
     Undefined = -1,
+    BlueZombie = 0,
     HealthBar,
     Character,
     TextPopup,

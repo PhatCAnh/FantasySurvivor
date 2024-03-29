@@ -114,6 +114,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.Character, _characterPrefab},
 			{ItemPrefab.TextPopup, _textPopup},
 			{ItemPrefab.GemExp, _gemExpPrefab},
+			{ItemPrefab.BlueZombie, _blueZombie},
 		};
 
 		_mapDic = new Dictionary<MapType, Map>

@@ -158,11 +158,15 @@ public class GameController : Controller<GameApp>
 
 		var monsterStat = new MonsterStat(statMonster.moveSpeed, wave.healthMonster, wave.adMonster, statMonster.attackSpeed, statMonster.attackRange, wave.expMonster);
 
-		var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
+		var type = (ItemPrefab) Enum.Parse(typeof(ItemPrefab), statMonster.monsterType);
+		
+		var monsterIns = Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).GetComponent<Monster>();
+		
+		//var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
 
 		monsterIns.transform.position = RandomPositionSpawnMonster(20, monsterIns.justSpawnVertical);
 
-		monsterIns.Init(monsterStat, wave);
+		monsterIns.Init(monsterStat, wave, type);
 
 		listMonster.Add(monsterIns);
 
@@ -179,7 +183,8 @@ public class GameController : Controller<GameApp>
 
 		listMonster.Remove(mons);
 		mons.wave.monsterInWave.Remove(mons);
-		Destroy(mons.gameObject);
+		Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
+		//Destroy(mons.gameObject);
 	}
 
 	public Monster GetRandomMonster()

@@ -79,7 +79,7 @@ public class Monster : ObjectRPG
 
 	#region Base Methods
 
-	public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave)
+	public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave, ItemPrefab monsType)
 	{
 		stat = monsterStat;
 		model = new MonsterModel(
@@ -89,24 +89,10 @@ public class Monster : ObjectRPG
 			stat.attackSpeed.BaseValue,
 			wave.expMonster);
 		this.wave = wave;
+		type = monsType;
 		sizeAttack = stat.attackRange.BaseValue != 0 ? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
-	}
 
-	protected override void OnViewInit()
-	{
-		base.OnViewInit();
-		if(_stateMachine == null)
-		{
-			_stateMachine = new StateMachine();
-			_idleState = new MonsterIdle(this, _stateMachine);
-			_moveState = new MonsterMove(this, _stateMachine);
-			_attackState = new MonsterAttack(this, _stateMachine);
-			_stateMachine.Init(_idleState);
-		}
-		else
-		{
-			IdleState();
-		}
+		InitializationStateMachine();
 	}
 
 	private void Update()
@@ -155,6 +141,8 @@ public class Monster : ObjectRPG
 		SetAnimation(idleDirection);
 	}
 
+	
+
 	protected virtual void SetAnimation(Vector2 directionMove)
 	{
 		animator.SetFloat("SpeedMul", speedMul);
@@ -190,12 +178,33 @@ public class Monster : ObjectRPG
 		myRigid.velocity = Vector2.zero;
 	}
 
+	public void ResetWhenDie()
+	{
+		
+	}
+
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.DrawWireSphere(transform.position, size);
 	}
 
 	#region State Machine Method
+	
+	protected virtual void InitializationStateMachine()
+	{
+		if(_stateMachine != null)
+		{
+			IdleState();
+		}
+		else
+		{
+			_stateMachine = new StateMachine();
+			_idleState = new MonsterIdle(this, _stateMachine);
+			_moveState = new MonsterMove(this, _stateMachine);
+			_attackState = new MonsterAttack(this, _stateMachine);
+			_stateMachine.Init(_idleState);
+		}
+	}
 
 	public virtual void IdleState()
 	{
