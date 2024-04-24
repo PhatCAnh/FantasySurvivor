@@ -322,16 +322,16 @@ public class GameController : Controller<GameApp>
 
 	private Character SpawnCharacter()
 	{
-		var characterPrefab = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.Character))
-			.GetComponent<Character>();
+		Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.Character))
+			.TryGetComponent(out Character characterPrefab);
+		
 		characterPrefab.transform.position = Vector2.zero;
 
 		_healthBar = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.HealthBar), app.resourceManager.rootContainer)
 			.GetComponent<HealthBar>();
 		_healthBar.Init(characterPrefab);
-
-		var stat = new CharacterStat(2.5f, 100, 5, 20);
-		characterPrefab.Init(stat);
+		
+		characterPrefab.Init(new CharacterStat(2.5f, 100, 5, 20));
 
 		return characterPrefab;
 	}
