@@ -34,6 +34,8 @@ public class GameController : Controller<GameApp>
 	private Vector3 _camSize;
 	private float _width;
 	private float _height;
+
+	private Vector3 _charPos => character.transform.position;
 	
 	private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
 
@@ -189,7 +191,7 @@ public class GameController : Controller<GameApp>
 
 	public Monster GetRandomMonster()
 	{
-		var characterPos = character.transform.position;
+		var characterPos = _charPos;
 		Rect myRect = new Rect(characterPos.x - _width / 2, characterPos.y - _height / 2, _width, _height);
 		var listMonsterInRect = new List<Monster>();
 		foreach(var mons in listMonster)
@@ -235,7 +237,7 @@ public class GameController : Controller<GameApp>
 	// 	{
 	// 		var skill = Instantiate(
 	// 			app.resourceManager.GetSkill(name).skillPrefab,
-	// 			character.transform.position,
+	// 			_charPos,
 	// 			quaternion.identity
 	// 		);
 	// 		skill.GetComponent<BulletView>().Init(mons, name);
@@ -269,7 +271,7 @@ public class GameController : Controller<GameApp>
 				character.AddHealth(character.model.maxHealthPoint * 20 / 100);
 				break;
 			case DropItemType.Bomb:
-				var characterPos = character.transform.position;
+				var characterPos = _charPos;
 				Rect myRect = new Rect(characterPos.x - _width / 2, characterPos.y - _height / 2, _width, _height);
 				foreach(var mons in listMonster.ToList())
 				{
@@ -299,9 +301,7 @@ public class GameController : Controller<GameApp>
 	public Vector2 RandomPositionSpawnMonster(float radius, bool justVertical = false)
 	{
 		float angle = Random.Range(0, 2 * Mathf.PI);
-		float x = radius * Mathf.Cos(angle);
-		float y = radius * Mathf.Sin(angle);
-		return new Vector2(x + character.transform.position.x, y + character.transform.position.y);
+		return new Vector2(radius * Mathf.Cos(angle) + _charPos.x , radius * Mathf.Sin(angle) + _charPos.y);
 
 
 		// int posX;
