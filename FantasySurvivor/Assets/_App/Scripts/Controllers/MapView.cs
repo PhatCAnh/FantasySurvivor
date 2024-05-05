@@ -45,7 +45,7 @@ public class MapView : View<GameApp>
 	public void Init()
 	{
 		model = new();
-		listSkill = app.resourceManager.GetListSkill().ToList();
+		listSkill = app.resourceManager.GetListSkill().Where(p => p.canAppear).ToList();
 		StartLevel(model.levelInGame);
 	}
 
