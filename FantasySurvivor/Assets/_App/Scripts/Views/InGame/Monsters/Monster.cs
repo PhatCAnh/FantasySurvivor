@@ -101,7 +101,6 @@ public class Monster : ObjectRPG
 		var time = Time.deltaTime;
 		cdAttack.Update(time);
 		_stateMachine.currentState.LogicUpdate(time);
-		HandlePhysicUpdate();
 	}
 
 	private void FixedUpdate()
@@ -111,6 +110,7 @@ public class Monster : ObjectRPG
 			Stop();
 			return;
 		}
+		HandlePhysicUpdate();
 		_stateMachine.currentState.PhysicUpdate(Time.fixedTime);
 	}
 
@@ -120,7 +120,6 @@ public class Monster : ObjectRPG
 	{
 		moveTarget = gameController.character.transform.position;
 		moveDirection = moveTarget - transform.position;
-
 
 		if(moveDirection.magnitude < sizeAttack)
 		{
@@ -168,7 +167,7 @@ public class Monster : ObjectRPG
 		callBackKilled?.Invoke();
 	}
 
-	protected virtual void Die(bool selfDie = false)
+	public virtual void Die(bool selfDie = false)
 	{
 		gameController.MonsterDie(this, selfDie);
 	}

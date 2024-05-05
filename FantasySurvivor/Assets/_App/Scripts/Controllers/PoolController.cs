@@ -52,7 +52,10 @@ namespace _App.Scripts.Controllers
 
 		public void RemoveAllObject(ItemPrefab key)
 		{
-			_dictionaryPool[key].ReturnAllObject();
+			if(_dictionaryPool.TryGetValue(key, out var value))
+			{
+				value.ReturnAllObject();
+			}
 		}
 	}
 }

@@ -137,6 +137,14 @@ public class GameController : Controller<GameApp>
 	{
 	}
 
+	public void SkillAllMob()
+	{
+		foreach(var mons in listMonster.ToList())
+		{
+			MonsterDie(mons, true);
+		}
+	}
+
 	public void ClaimReward(TypeItemReward type, int value)
 	{
 		switch (type)
