@@ -9,6 +9,7 @@ public class AnalyticsController
 {
 	public async void Init()
 	{
+		return;
 		try
 		{
 			await UnityServices.InitializeAsync();
@@ -22,12 +23,14 @@ public class AnalyticsController
 
 	private void LogEvent(string key, Dictionary<string, object> value)
 	{
+		return;
 		AnalyticsService.Instance.CustomData(key, value);
 		AnalyticsService.Instance.Flush();
 	}
 
 	public void TrackPlay(LevelResult result, int level)
 	{
+		return;
 		Dictionary<string, object> parameters = new Dictionary<string, object>()
 		{
 			{TrackParamsKey.LevelResult, result.ToString()},
@@ -38,6 +41,7 @@ public class AnalyticsController
 	
 	public void TrackAds(TypeAds type)
 	{
+		return;
 		Dictionary<string, object> parameters = new Dictionary<string, object>()
 		{
 			{TrackParamsKey.Category, type.ToString()},
@@ -47,6 +51,7 @@ public class AnalyticsController
 
 	public void TrackUpStat(bool isInGame, TypeStatTower type, int level)
 	{
+		return;
 		Dictionary<string, object> parameters = new Dictionary<string, object>()
 		{
 			{TrackParamsKey.Category, isInGame ? "inGame" : "outGame"},

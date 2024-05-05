@@ -32,12 +32,14 @@ public class AdsController : IUnityAdsInitializationListener
 	private LoadInterstitial _interstitial;
 	public void Init(AnalyticsController analyticsController)
 	{
+		return;
 		InitializeInterstitialAds();
 		_analyticsController = analyticsController;
 	}
 
 	private void InitializeInterstitialAds()
 	{
+		return;
 
 #if UNITY_ANDROID
 		_gameId = androidGameId;
@@ -56,21 +58,25 @@ public class AdsController : IUnityAdsInitializationListener
 	}
 	public void OnInitializationComplete()
 	{
+		return;
 		Debug.Log("Ads initialized");
 	}
 	public void OnInitializationFailed(UnityAdsInitializationError error, string message)
 	{
+		return;
 		Debug.Log("Failed to init");
 	}
 
 	public void ShowReward(Action callBack = null)
 	{
+		return;
 		_reward.ShowAd(callBack);
 		_analyticsController.TrackAds(TypeAds.Reward);
 	}
 
 	public void ShowInterstitial(Action callBack = null)
 	{
+		return;
 		_interstitial.LoadAd(callBack);
 		_analyticsController.TrackAds(TypeAds.Interstitial);
 	}
