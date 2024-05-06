@@ -5,6 +5,7 @@ public enum ItemPrefab
 {
     Undefined = -1,
     BlueZombie = 0,
+    PurpleZombie,
     HealthBar,
     Character,
     TextPopup,
