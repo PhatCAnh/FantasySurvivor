@@ -2,50 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework;
 using ArbanFramework.MVC;
+using DG.Tweening;
 using FantasySurvivor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CheatPopup : View<GameApp>, IPopup
 {
-    [SerializeField] private Button _btnCoin, _btnGem, _btnDeleteData, _btnClose;
+	[SerializeField] private Transform container;
+	[SerializeField] private GameObject iconSkillPrefab;
+	[SerializeField] private Button closeBtn;
 
-    protected override void OnViewInit()
-    {
-        base.OnViewInit();
-        
-        _btnCoin.onClick.AddListener(OnClickBtnCoin);
-        _btnGem.onClick.AddListener(OnClickBtnGem);
-        _btnDeleteData.onClick.AddListener(OnClickBtnDeleteData);
-        _btnClose.onClick.AddListener(Close);
-        
-        Open();
-    }
+	private List<SkillData> _listSkill = new List<SkillData>();
 
-    public void Open()
-    {
-    }
-    public void Close()
-    {
-        Destroy(gameObject);
-    }
+	protected override void OnViewInit()
+	{
+		base.OnViewInit();
+		_listSkill = app.resourceManager.GetListSkill();
 
-    private void OnClickBtnCoin()
-    {
-        app.models.dataPlayerModel.Coin += 1000;
-    }
-    
-    private void OnClickBtnGem()
-    {
-        GameConst.gemStartGame += 1000;
-    }
-    
-    private void OnClickBtnDeleteData()
-    {
-        GameConst.gemStartGame = 100;
-        PlayerPrefs.DeleteAll();
-        app.models.dataPlayerModel.InitBaseData();
-        app.resourceManager.CloseAllPopup();
-        Singleton<GameController>.instance.ChangeSceneHome();
-    }
+		foreach(var skill in _listSkill)
+		{
+			Instantiate(iconSkillPrefab, container).TryGetComponent(out IconSkill icon);
+			icon.skillData = skill;
+		}
+
+		closeBtn.onClick.AddListener(Close);
+
+		Open();
+	}
+
+	public void Open()
+	{
+		transform.localScale = Vector3.zero;
+		transform.DOScale(Vector3.one, 0.35f);
+	}
+	public void Close()
+	{
+		transform.DOScale(Vector3.zero, 0.35f).OnComplete(() => { Destroy(gameObject); });
+	}
+
+	// private void OnClickBtnCoin()
+	// {
+	//     app.models.dataPlayerModel.Coin += 1000;
+	// }
+	//
+	// private void OnClickBtnGem()
+	// {
+	//     GameConst.gemStartGame += 1000;
+	// }
+	//
+	// private void OnClickBtnDeleteData()
+	// {
+	//     GameConst.gemStartGame = 100;
+	//     PlayerPrefs.DeleteAll();
+	//     app.models.dataPlayerModel.InitBaseData();
+	//     app.resourceManager.CloseAllPopup();
+	//     Singleton<GameController>.instance.ChangeSceneHome();
+	// }
 }
