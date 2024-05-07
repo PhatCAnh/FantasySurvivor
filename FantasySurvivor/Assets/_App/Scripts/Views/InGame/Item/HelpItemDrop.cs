@@ -7,6 +7,7 @@ using ArbanFramework.MVC;
 using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class HelpItemDrop : View<GameApp>
 {
@@ -14,21 +15,41 @@ public class HelpItemDrop : View<GameApp>
 	[SerializeField] private Transform outCircle;
 	[SerializeField] private Transform questionMark;
 	[SerializeField] private GameObject rewardEffectPrefab;
+	[SerializeField] private SpriteRenderer originSprite;
+	[SerializeField] private Sprite bombSprite;
+	[SerializeField] private Sprite magnetSprite;
+	[SerializeField] private Sprite foodSprite;
+	
 	
 	private GameController gameController => Singleton<GameController>.instance;
 
-	private float _duration = 10;
+	private float _duration;
 	private float _speed;
-	private float _size = 5;
+	private int _size;
+	private DropItemType _type;
 
 	protected override void OnViewInit()
 	{
 		base.OnViewInit();
 
 		// ReSharper disable once PossibleLossOfFraction
-		
+		_size = Random.Range(5, 11);
+		_duration = Random.Range(2, 5) * 5;
 		outCircle.localScale = Vector3.one * _size;
 		_speed = _size / _duration;
+		_type = (DropItemType) Random.Range(0, 3);
+		switch (_type)
+		{
+			case DropItemType.Bomb:
+				originSprite.sprite = bombSprite;
+			break;
+			case DropItemType.Food:
+				originSprite.sprite = foodSprite;
+				break;
+			case DropItemType.Magnet:
+				originSprite.sprite = magnetSprite;
+				break;
+		}
 		
 		SetRotate(inCircle);
 		SetRotate(outCircle);
@@ -61,13 +82,7 @@ public class HelpItemDrop : View<GameApp>
 
 	private void Collected()
 	{
-		foreach(var mob in gameController.listMonster.ToList())
-		{
-			if(Vector2.Distance(transform.position, mob.transform.position) < _size + mob.size)
-			{
-				gameController.MonsterDie(mob);
-			}
-		}
+		gameController.CollectedItemSpecial(_type);
 		inCircle.DOKill();
 		outCircle.DOKill();
 		questionMark.DOKill();

@@ -257,18 +257,28 @@ public class GameController : Controller<GameApp>
 
 	public void Collected(DropItem dropItem)
 	{
-		switch (dropItem.type)
+
+		if(dropItem.type == DropItemType.Exp)
 		{
-			case DropItemType.Exp:
-				map.model.ExpCurrent += dropItem.value;
-				if(map.model.ExpCurrent > map.model.ExpMax)
-				{
-					map.model.ExpCurrent -= map.model.ExpMax;
-					map.model.LevelCharacter++;
-					map.model.ExpMax += 50;
-					app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
-				}
-				break;
+			map.model.ExpCurrent += dropItem.value;
+			if(map.model.ExpCurrent > map.model.ExpMax)
+			{
+				map.model.ExpCurrent -= map.model.ExpMax;
+				map.model.LevelCharacter++;
+				map.model.ExpMax += 50;
+				app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
+			}
+		}
+		else
+		{
+			CollectedItemSpecial(dropItem.type);
+		}
+	}
+
+	public void CollectedItemSpecial(DropItemType type)
+	{
+		switch (type)
+		{
 			case DropItemType.Magnet:
 				foreach(var item in poolController.GetPool(ItemPrefab.GemExp).usedList)
 				{

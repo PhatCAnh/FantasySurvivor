@@ -306,6 +306,10 @@ MonoBehaviour:
   outCircle: {fileID: 9110180275990478035}
   questionMark: {fileID: 1277720408159240724}
   rewardEffectPrefab: {fileID: 3317154161440043100, guid: 3f3561e8e3f7df74c84b3551df2ab903, type: 3}
+  originSprite: {fileID: 1102529328019528097}
+  bombSprite: {fileID: 21300000, guid: 17dfcb097f370b64ba58a0e69224820f, type: 2}
+  magnetSprite: {fileID: 21300000, guid: 0480913aec4b6f948a856c69f471b603, type: 2}
+  foodSprite: {fileID: 21300000, guid: d430d20dcaed62542bb9f931741bb8b4, type: 2}
 --- !u!50 &130785291937105053
 Rigidbody2D:
   serializedVersion: 4

@@ -123,10 +123,10 @@ public enum SkillDamagedType
 
 public enum DropItemType
 {
-    Exp,
-    Magnet,
-    Bomb,
-    Food,
+    Exp = -1,
+    Magnet = 0,
+    Bomb = 1,
+    Food = 2,
 }
 
 public enum MapHorizontalType
