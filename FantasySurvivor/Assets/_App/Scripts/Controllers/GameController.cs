@@ -34,8 +34,9 @@ public class GameController : Controller<GameApp>
 	private Vector3 _camSize;
 	private float _width;
 	private float _height;
-	
-	private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
+
+    private Vector3 _charPos => character.transform.position;
+    private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
 
 	private PoolController poolController => Singleton<PoolController>.instance;
 
@@ -324,7 +325,7 @@ public class GameController : Controller<GameApp>
 			.GetComponent<HealthBar>();
 		_healthBar.Init(characterPrefab);
 
-		var stat = new CharacterStat(2.5f, 100, 5, 20);
+		var stat = new CharacterStat(2.5f, 100, 13, 20);
 		characterPrefab.Init(stat);
 
 		return characterPrefab;
