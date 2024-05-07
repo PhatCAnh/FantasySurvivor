@@ -182,22 +182,21 @@ public class GameController : Controller<GameApp>
 		Destroy(mons.gameObject);
 	}
 
-	public Monster GetRandomMonster()
-	{
-		var characterPos = character.transform.position;
-		Rect myRect = new Rect(characterPos.x - _width / 2, characterPos.y - _height / 2, _width, _height);
-		var listMonsterInRect = new List<Monster>();
-		foreach(var mons in listMonster)
-		{
-			if(myRect.Contains(mons.transform.position))
-			{
-				listMonsterInRect.Add(mons);
-			}
-		}
-		return listMonsterInRect.Count != 0 ? listMonsterInRect[Random.Range(0, listMonsterInRect.Count)] : null;
-	}
+    public Monster GetRandomMonster()
+    {
+        var characterPos = _charPos;
+        var listMonsterInCircle = new List<Monster>();
+        foreach (var mons in listMonster)
+        {
+            if (Vector2.Distance(characterPos, mons.transform.position) <= character.model.attackRange)
+            {
+                listMonsterInCircle.Add(mons);
+            }
+        }
+        return listMonsterInCircle.Count != 0 ? listMonsterInCircle[Random.Range(0, listMonsterInCircle.Count)] : null;
+    }
 
-	public void CharacterDie(Character characterView)
+    public void CharacterDie(Character characterView)
 	{
 		LoseGame();
 	}
