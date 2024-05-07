@@ -22,13 +22,14 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[Required, SerializeField] private GameObject _gemExpPrefab;
 	
 	[Required, SerializeField] private GameObject _textPopup;
+	
+	[Required, SerializeField] private GameObject _supportItemPrefab;
 
 	private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
 
 	[Header("UI prefabs")]
 	[Required, SerializeField] private GameObject _mainUIInGame;
-
 
 	[Required, SerializeField] private GameObject _mainUI;
 
@@ -115,6 +116,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.TextPopup, _textPopup},
 			{ItemPrefab.GemExp, _gemExpPrefab},
 			{ItemPrefab.BlueZombie, _blueZombie},
+			{ItemPrefab.PurpleZombie, _purpleZombie},
+			{ItemPrefab.SupportItem, _supportItemPrefab},
 		};
 
 		_mapDic = new Dictionary<MapType, Map>

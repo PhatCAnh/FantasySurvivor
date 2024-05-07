@@ -77,7 +77,10 @@ public class GameController : Controller<GameApp>
 
 	public void StartGame(int chapter)
 	{
-		ChangeScene(GameConst.nameScene_Game, () => LoadMap(chapter));
+		ChangeScene(GameConst.nameScene_Game, () =>
+		{
+			LoadMap(chapter);
+		});
 	}
 
 	public void WinGame()
@@ -170,11 +173,11 @@ public class GameController : Controller<GameApp>
 
 		var type = (ItemPrefab) Enum.Parse(typeof(ItemPrefab), statMonster.monsterType);
 		
-		var monsterIns = Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).GetComponent<Monster>();
+		var monsterIns = Singleton<PoolController>.instance.GetObject(type, RandomPositionAroundCharacter(20)).GetComponent<Monster>();
 		
 		//var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
 
-		monsterIns.transform.position = RandomPositionSpawnMonster(20, monsterIns.justSpawnVertical);
+		monsterIns.transform.position = RandomPositionAroundCharacter(20, monsterIns.justSpawnVertical);
 
 		monsterIns.Init(monsterStat, wave, type);
 
@@ -306,11 +309,10 @@ public class GameController : Controller<GameApp>
 	}
 
 
-	public Vector2 RandomPositionSpawnMonster(float radius, bool justVertical = false)
+	public Vector2 RandomPositionAroundCharacter(float radius, bool justVertical = false)
 	{
 		float angle = Random.Range(0, 2 * Mathf.PI);
 		return new Vector2(radius * Mathf.Cos(angle) + _charPos.x , radius * Mathf.Sin(angle) + _charPos.y);
-
 
 		// int posX;
 		// int posY;
@@ -344,6 +346,13 @@ public class GameController : Controller<GameApp>
 		return characterPrefab;
 	}
 
+	
+	//sua lai cai nay
+	private float GetDistanceCharacter(Vector3 position)
+	{
+		return Vector3.Distance(position, _charPos);
+	}
+
 	private void LoadMap(int chapter)
 	{
 		_camSize = Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0));
@@ -357,6 +366,7 @@ public class GameController : Controller<GameApp>
 		listMonster.Clear();
 		app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
 		//app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
+
+		Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.SupportItem), Vector2.zero, Quaternion.identity);
 	}
-	
 }

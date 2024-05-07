@@ -338,6 +338,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8019563876969885780, guid: e455c20de49a1234b8832933daa6dd58, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _supportItemPrefab
+      value: 
+      objectReference: {fileID: 6809299494165481089, guid: 9e9e8f20962b9714890808476b0b5c89, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[0].canAppear
       value: 0
       objectReference: {fileID: 0}
