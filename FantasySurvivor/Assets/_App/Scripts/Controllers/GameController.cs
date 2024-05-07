@@ -329,6 +329,13 @@ public class GameController : Controller<GameApp>
 		// }
 		// return new Vector2(posX, posY);
 	}
+	
+	//sua lai cai nay
+	public float GetDistanceCharacter(Vector3 position)
+	{
+		return Vector3.Distance(position, _charPos) - character.sizeBase;
+	}
+
 
 	private Character SpawnCharacter()
 	{
@@ -347,12 +354,7 @@ public class GameController : Controller<GameApp>
 	}
 
 	
-	//sua lai cai nay
-	private float GetDistanceCharacter(Vector3 position)
-	{
-		return Vector3.Distance(position, _charPos);
-	}
-
+	
 	private void LoadMap(int chapter)
 	{
 		_camSize = Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0));

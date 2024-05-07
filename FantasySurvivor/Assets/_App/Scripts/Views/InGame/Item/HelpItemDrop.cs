@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
 using Unity.Mathematics;
@@ -12,16 +14,21 @@ public class HelpItemDrop : View<GameApp>
 	[SerializeField] private Transform outCircle;
 	[SerializeField] private Transform questionMark;
 	[SerializeField] private GameObject rewardEffectPrefab;
+	
+	private GameController gameController => Singleton<GameController>.instance;
 
 	private float _duration = 10;
-	private float speed;
+	private float _speed;
+	private float _size = 5;
 
 	protected override void OnViewInit()
 	{
 		base.OnViewInit();
 
 		// ReSharper disable once PossibleLossOfFraction
-		speed = 1 / _duration;
+		
+		outCircle.localScale = Vector3.one * _size;
+		_speed = _size / _duration;
 		
 		SetRotate(inCircle);
 		SetRotate(outCircle);
@@ -36,11 +43,12 @@ public class HelpItemDrop : View<GameApp>
 			.SetLoops(-1, LoopType.Restart);
 	}
 
-	private void Update()
+	private void FixedUpdate()
 	{
-		if(Input.GetMouseButton(0))
+		if(gameController.isStop) return;
+		if(gameController.GetDistanceCharacter(transform.position) < _size)
 		{
-			inCircle.localScale += speed * Time.deltaTime * Vector3.one ;
+			inCircle.localScale += _speed * Time.deltaTime * Vector3.one ;
 			if(inCircle.localScale.x >= outCircle.localScale.x)
 			{
 				Collected();
@@ -49,16 +57,20 @@ public class HelpItemDrop : View<GameApp>
 				return;
 			}
 		}
-		if(Input.GetMouseButton(1))
-		{
-			inCircle.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-		}
 	}
 
 	private void Collected()
 	{
+		foreach(var mob in gameController.listMonster.ToList())
+		{
+			if(Vector2.Distance(transform.position, mob.transform.position) < _size + mob.size)
+			{
+				gameController.MonsterDie(mob);
+			}
+		}
 		inCircle.DOKill();
 		outCircle.DOKill();
 		questionMark.DOKill();
+		
 	}
 }
