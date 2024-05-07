@@ -178,7 +178,13 @@ public class Character : ObjectRPG
 						case SkillName.Passive1:
 							skillIns = new Passive1();
 							break;
-						default:
+                        case SkillName.Boomerang:
+                            skillIns = new Boomerang();
+                            break;
+                        case SkillName.VongQuayMayMan:
+                            skillIns = new VongQuayMayMan();
+                            break;
+                        default:
 							skillIns = new ProactiveSkill();
 							break;
 					}

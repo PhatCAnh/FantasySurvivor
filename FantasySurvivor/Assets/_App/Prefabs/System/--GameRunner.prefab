@@ -392,6 +392,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4925867892422093208}
     m_Modifications:
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[7].name
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[7].imgUI
+      value: 
+      objectReference: {fileID: 21300000, guid: f775ffcc3d765824d9e61713de202913, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[7].skillPrefab
+      value: 
+      objectReference: {fileID: 7183301255097406363, guid: 278ec9da24c18dd4194e02bda6fe95d8, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[7].typeElemental
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7740478561442437962, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: m_Name
       value: ResourceManager

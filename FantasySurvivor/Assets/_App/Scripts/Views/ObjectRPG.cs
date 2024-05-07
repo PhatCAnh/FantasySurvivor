@@ -3,6 +3,6 @@
 namespace FantasySurvivor {
     public class ObjectRPG : View<GameApp>
     {
-        public ItemPrefab type;
+        
     }
 }

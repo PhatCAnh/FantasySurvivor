@@ -15,7 +15,7 @@ public class BombYellow : Monster
 		Die(true);
 	}
 
-	public override void Die(bool selfDie = false)
+	protected override void Die(bool selfDie = false)
 	{
 		base.Die(selfDie);
 		Instantiate(_deadEffect, transform.position, quaternion.identity);

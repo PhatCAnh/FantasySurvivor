@@ -54,6 +54,15 @@ namespace FantasySurvivor
 		}
 	}
 
+	public class Boomerang : ProactiveSkill
+	{
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+            timeDelaySkill = Mathf.RoundToInt(1000);
+        }
+    }
+
 	public class ZoneOfJudgment : ProactiveSkill
 	{
 		private float _sizeTouch = 2.5f;
@@ -104,7 +113,65 @@ namespace FantasySurvivor
 		}
 	}
 
-	public class ThunderStrike : ProactiveSkill
+
+    public class VongQuayMayMan : ProactiveSkill
+    {
+        private float _sizeTouch = 1.5f;
+
+        private List<Monster> _monstersTouched = new List<Monster>();
+
+        private GameObject _circle;
+
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+            var prefab = GameObject.Instantiate(skillPrefab, origin.transform.position, quaternion.identity, origin.transform);
+            prefab.transform.DORotate(new Vector3(0, 0, -360), 7.5f, RotateMode.FastBeyond360)
+                .SetLoops(-1, LoopType.Incremental)
+                .SetEase(Ease.Linear);
+            prefab.GetComponent<SpriteRenderer>().DOColor(new Color(1, 0.9f, 0.3f), 2)
+                .SetLoops(-1, LoopType.Yoyo)
+                .SetEase(Ease.Linear);
+            _circle = prefab;
+        }
+
+
+		public override void Active()
+		{
+			_monstersTouched.Clear();
+		}
+
+		//public override void CoolDownSkill(float deltaTime)
+		//{
+		//    base.CoolDownSkill(deltaTime);
+		//    foreach (var monster in gameController.listMonster.ToList())
+		//    {
+		//        if (_monstersTouched.Contains(monster)) continue;
+
+		//        if (Vector2.Distance(monster.transform.position, origin.transform.position) < _sizeTouch)
+		//        {
+		//            monster.TakeDamage(origin.model.attackDamage * levelData[level].value / 100);
+		//            _monstersTouched.Add(monster);
+		//        }
+		//    }
+		//}
+
+		public override void UpLevel()
+		{
+			base.UpLevel();
+			_sizeTouch += 0.5f;
+			_circle.transform.localScale = Vector2.one * _sizeTouch;
+		}
+	}
+
+
+
+
+
+
+
+
+    public class ThunderStrike : ProactiveSkill
 	{
 		public override void Init(SkillData data)
 		{

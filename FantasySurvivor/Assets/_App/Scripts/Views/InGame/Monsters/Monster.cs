@@ -79,7 +79,7 @@ public class Monster : ObjectRPG
 
 	#region Base Methods
 
-	public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave, ItemPrefab monsType)
+	public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave)
 	{
 		stat = monsterStat;
 		model = new MonsterModel(
@@ -89,10 +89,24 @@ public class Monster : ObjectRPG
 			stat.attackSpeed.BaseValue,
 			wave.expMonster);
 		this.wave = wave;
-		type = monsType;
 		sizeAttack = stat.attackRange.BaseValue != 0 ? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
+	}
 
-		InitializationStateMachine();
+	protected override void OnViewInit()
+	{
+		base.OnViewInit();
+		if(_stateMachine == null)
+		{
+			_stateMachine = new StateMachine();
+			_idleState = new MonsterIdle(this, _stateMachine);
+			_moveState = new MonsterMove(this, _stateMachine);
+			_attackState = new MonsterAttack(this, _stateMachine);
+			_stateMachine.Init(_idleState);
+		}
+		else
+		{
+			IdleState();
+		}
 	}
 
 	private void Update()
@@ -101,6 +115,7 @@ public class Monster : ObjectRPG
 		var time = Time.deltaTime;
 		cdAttack.Update(time);
 		_stateMachine.currentState.LogicUpdate(time);
+		HandlePhysicUpdate();
 	}
 
 	private void FixedUpdate()
@@ -110,7 +125,6 @@ public class Monster : ObjectRPG
 			Stop();
 			return;
 		}
-		HandlePhysicUpdate();
 		_stateMachine.currentState.PhysicUpdate(Time.fixedTime);
 	}
 
@@ -120,6 +134,7 @@ public class Monster : ObjectRPG
 	{
 		moveTarget = gameController.character.transform.position;
 		moveDirection = moveTarget - transform.position;
+
 
 		if(moveDirection.magnitude < sizeAttack)
 		{
@@ -139,8 +154,6 @@ public class Monster : ObjectRPG
 		}
 		SetAnimation(idleDirection);
 	}
-
-	
 
 	protected virtual void SetAnimation(Vector2 directionMove)
 	{
@@ -167,7 +180,7 @@ public class Monster : ObjectRPG
 		callBackKilled?.Invoke();
 	}
 
-	public virtual void Die(bool selfDie = false)
+	protected virtual void Die(bool selfDie = false)
 	{
 		gameController.MonsterDie(this, selfDie);
 	}
@@ -177,33 +190,12 @@ public class Monster : ObjectRPG
 		myRigid.velocity = Vector2.zero;
 	}
 
-	public void ResetWhenDie()
-	{
-		
-	}
-
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.DrawWireSphere(transform.position, size);
 	}
 
 	#region State Machine Method
-	
-	protected virtual void InitializationStateMachine()
-	{
-		if(_stateMachine != null)
-		{
-			IdleState();
-		}
-		else
-		{
-			_stateMachine = new StateMachine();
-			_idleState = new MonsterIdle(this, _stateMachine);
-			_moveState = new MonsterMove(this, _stateMachine);
-			_attackState = new MonsterAttack(this, _stateMachine);
-			_stateMachine.Init(_idleState);
-		}
-	}
 
 	public virtual void IdleState()
 	{

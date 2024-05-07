@@ -10,7 +10,6 @@ public class SkillData
 	public Sprite imgUI;
 	public GameObject skillPrefab;
 	public GameObject skillEvolvePrefab;
-	public bool canAppear = true;
 	
 	public Dictionary<int, LevelSkillData> levelSkillData;
 
