@@ -16,14 +16,35 @@ namespace FantasySurvivor
 		public override void UpLevel()
 		{
 			base.UpLevel();
-			if(level == 3)
+			if (level == 3 || level == 5)
 			{
 				numberProjectile++;
+			}
+			if (level == 6)
+			{
+				numberProjectile=1;
 			}
 		}
 	}
 
-	public class Twin : ProactiveSkill
+	/*public class ThunderBird : ProactiveSkill
+	{
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+            timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
+        }
+        public override void UpLevel()
+        {
+            base.UpLevel();
+            if (level == 3)
+            {
+                numberProjectile++;
+            }
+        }
+    }*/
+
+	/*public class Twin : ProactiveSkill
 	{
 		public override void Init(SkillData data)
 		{
@@ -39,9 +60,9 @@ namespace FantasySurvivor
 				numberProjectile++;
 			}
 		}
-	}
+	}*/
 
-	public class Shark : ProactiveSkill
+	/*public class Shark : ProactiveSkill
 	{
 		protected override void UpdatePrefab(SkillActive prefab)
 		{
@@ -52,9 +73,9 @@ namespace FantasySurvivor
 				prefab.size = 2;
 			}
 		}
-	}
+	}*/
 
-	public class ZoneOfJudgment : ProactiveSkill
+	/*public class ZoneOfJudgment : ProactiveSkill
 	{
 		private float _sizeTouch = 2.5f;
 
@@ -102,9 +123,9 @@ namespace FantasySurvivor
 			_sizeTouch += 0.5f;
 			_circle.transform.localScale = Vector2.one * _sizeTouch;
 		}
-	}
+	}*/
 
-	public class ThunderStrike : ProactiveSkill
+	/*public class ThunderStrike : ProactiveSkill
 	{
 		public override void Init(SkillData data)
 		{
@@ -124,14 +145,14 @@ namespace FantasySurvivor
 				prefab.skillDamagedType = SkillDamagedType.AreaOfEffect;
 			}
 		}
-	}
+	}*/
 
-	public class BlackDrum : ProactiveSkill
+	/*public class BlackDrum : ProactiveSkill
 	{
 		protected override void UpdatePrefab(SkillActive prefab)
 		{
 			base.UpdatePrefab(prefab);
 			prefab.GetComponent<SkillBombActive>().sizeExplosion += 0.5f * level;
 		}
-	}
+	}*/
 }

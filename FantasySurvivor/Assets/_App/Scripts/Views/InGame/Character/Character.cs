@@ -152,31 +152,13 @@ public class Character : ObjectRPG
 		}
 		switch (skillData.type)
 		{
-			case SkillType.Proactive:
+			case SkillType.Active:
 				{
 					Skill skillIns;
 					switch (skillData.name)
 					{
 						case SkillName.Fireball:
 							skillIns = new FireBall();
-							break;
-						case SkillName.Twin:
-							skillIns = new Twin();
-							break;
-						case SkillName.Shark:
-							skillIns = new Shark();
-							break;
-						case SkillName.ZoneOfJudgment:
-							skillIns = new ZoneOfJudgment();
-							break;
-						case SkillName.ThunderStrike:
-							skillIns = new ThunderStrike();
-							break;
-						case SkillName.BlackDrum:
-							skillIns = new BlackDrum();
-							break;
-						case SkillName.Passive1:
-							skillIns = new Passive1();
 							break;
 						default:
 							skillIns = new ProactiveSkill();
@@ -187,7 +169,7 @@ public class Character : ObjectRPG
 				}
 				break;
 			case SkillType.Buff:
-				if(skillData.name == SkillName.Food)
+				if (skillData.name == SkillName.Food)
 				{
 					model.currentHealthPoint += model.currentHealthPoint * 20 / 100;
 				}
