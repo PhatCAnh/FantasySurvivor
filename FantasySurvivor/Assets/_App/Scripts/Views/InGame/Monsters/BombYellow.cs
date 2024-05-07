@@ -10,8 +10,7 @@ public class BombYellow : Monster
 	
 	public override void Attack()
 	{
-		base.Attack();
-		
+		base.Attack();	
 		Die(true);
 	}
 

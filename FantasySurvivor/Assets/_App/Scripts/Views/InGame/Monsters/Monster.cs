@@ -3,6 +3,7 @@ using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.StateMachine;
 using FantasySurvivor;
+using Unity.Services.Analytics.Internal;
 using UnityEngine;
 
 public class Monster : ObjectRPG
@@ -126,9 +127,13 @@ public class Monster : ObjectRPG
 		{
 			if(cdAttack.isFinished)
 			{
-				AttackState();
+				AttackState();			
 				cdAttack.Restart(1 / model.attackSpeed);
-			}
+				animator.SetBool("Attack", true);
+			} else
+			{
+                animator.SetBool("Attack", false);
+            }
 		}
 		else if(moveDirection.magnitude > 25)
 		{
@@ -148,12 +153,17 @@ public class Monster : ObjectRPG
 		animator.SetFloat("SpeedMul", speedMul);
 		animator.SetFloat("Horizontal", directionMove.x);
 		animator.SetFloat("Vertical", directionMove.y);
-	}
-
-	public virtual void Attack()
+    }
+    public virtual void Attack()
 	{
-		target.TakeDamage(model.attackDamage);
-	}
+        target.TakeDamage(model.attackDamage);
+
+
+        if (cdAttack.isFinished == true)
+        {
+            animator.SetBool("Attack", true);
+        }
+    }
 
 	public void TakeDamage(float damage, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
 	{
@@ -221,7 +231,7 @@ public class Monster : ObjectRPG
 	public void AttackState()
 	{
 		if(isAttack) return;
-		_stateMachine.ChangeState(_attackState);
+		_stateMachine.ChangeState(_attackState);	
 	}
 
 	#endregion
