@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6642652176968535675}
   - component: {fileID: 1025375935730607505}
-  - component: {fileID: 4430300625266527152}
+  - component: {fileID: 135679078391123124}
   m_Layer: 0
   m_Name: KillerBee
   m_TagString: Untagged
@@ -62,7 +62,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4430300625266527152
+--- !u!114 &135679078391123124
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,15 +71,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 48425990686245726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d4cac00855d19d43b5b17cd5097a772, type: 3}
+  m_Script: {fileID: 11500000, guid: f999cc0f5ed74375b6f14d94d9638f2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 5
   myRigid: {fileID: 1025375935730607505}
   animator: {fileID: 8463392241125044750}
   firePoint: {fileID: 3920175741890169233}
-  justSpawnVertical: 0
-  size: 0.65
+  justSpawnVertical: 1
+  size: 0
+  bulletPrefab: {fileID: 4128420622295471649, guid: 21f0e3c66e7be4643873bca51dcbc84d, type: 3}
+  _numberBack: 0
 --- !u!1 &3312106001170155161
 GameObject:
   m_ObjectHideFlags: 0

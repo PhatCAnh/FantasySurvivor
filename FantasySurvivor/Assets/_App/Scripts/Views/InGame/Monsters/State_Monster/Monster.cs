@@ -157,12 +157,6 @@ public class Monster : ObjectRPG
     public virtual void Attack()
 	{
         target.TakeDamage(model.attackDamage);
-
-
-        if (cdAttack.isFinished == true)
-        {
-            animator.SetBool("Attack", true);
-        }
     }
 
 	public void TakeDamage(float damage, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
