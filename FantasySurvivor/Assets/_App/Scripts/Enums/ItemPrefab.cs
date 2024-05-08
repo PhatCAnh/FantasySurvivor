@@ -71,12 +71,12 @@ public enum TypeAds
 public enum SkillName
 {
     Fireball,
-   /* ThunderBird,*/
+    ThunderStrike,
+    /* ThunderBird,*/
     Food,
     /*Shark,
     Twin,
     ZoneOfJudgment,
-    ThunderStrike,
     BlackDrum,
     Passive1,
     */

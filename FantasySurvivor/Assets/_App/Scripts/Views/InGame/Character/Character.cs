@@ -160,6 +160,9 @@ public class Character : ObjectRPG
 						case SkillName.Fireball:
 							skillIns = new FireBall();
 							break;
+						case SkillName.ThunderStrike: 
+							skillIns = new ThunderStrike();
+							break;
 						default:
 							skillIns = new ProactiveSkill();
 							break;

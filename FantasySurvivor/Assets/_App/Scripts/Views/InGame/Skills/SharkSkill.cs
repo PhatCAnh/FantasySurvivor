@@ -75,13 +75,13 @@ public class ProactiveSkill : Skill
 	public override async void Active()
 	{
 		base.Active();
-		var mons = gameController.GetRandomMonster();
+		var mons = gameController.GetAllMonsterInAttackRange();
 		if(mons != null)
 		{
 			for(int i = 0; i < numberProjectile; i++)
 			{
 				var skill = GameObject.Instantiate(skillIns).GetComponent<SkillActive>();
-				skill.Init(origin.model.attackDamage * levelData[level].value / 100, mons, level);
+				skill.Init(origin.model.attackDamage * levelData[level].value / 100, mons[i], level);
 				UpdatePrefab(skill);
 				await Task.Delay(timeDelaySkill);
 			}

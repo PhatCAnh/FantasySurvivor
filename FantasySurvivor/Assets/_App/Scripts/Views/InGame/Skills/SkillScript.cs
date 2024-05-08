@@ -84,7 +84,7 @@ namespace FantasySurvivor
 		private GameObject _circle;
 
 		public override void Init(SkillData data)
-		{
+		{	
 			base.Init(data);
 			var prefab = GameObject.Instantiate(skillPrefab, origin.transform.position, quaternion.identity, origin.transform);
 			prefab.transform.DORotate(new Vector3(0, 0, -360), 7.5f, RotateMode.FastBeyond360)
@@ -125,27 +125,48 @@ namespace FantasySurvivor
 		}
 	}*/
 
-	/*public class ThunderStrike : ProactiveSkill
+	public class ThunderStrike : ProactiveSkill
 	{
 		public override void Init(SkillData data)
 		{
 			base.Init(data);
-			origin.isCharacterMoving += CoolDownSkill;
-		}
+        }
+        public override void UpLevel()
+        {
+            base.UpLevel();
+            if (level == 3 || level == 5)
+            {
+                numberProjectile++;
+            }
 
-		protected override void AddCooldown()
-		{
-		}
+        }
 
-		protected override void UpdatePrefab(SkillActive prefab)
+        public override void Active()
+        {
+            base.Active();
+            var mons = gameController.GetAllMonsterInAttackRange();
+            if (mons != null)
+            {
+                for (int i = 0; i < numberProjectile; i++)
+                {
+                    var skill = GameObject.Instantiate(skillIns).GetComponent<SkillActive>();
+                    skill.Init(origin.model.attackDamage * levelData[level].value / 100, mons[i], level);
+                    UpdatePrefab(skill);
+                }
+            }
+
+        }
+        protected override void UpdatePrefab(SkillActive prefab)
 		{
 			base.UpdatePrefab(prefab);
-			if(level >= 2)
+			
+			if (level == 6)
 			{
 				prefab.skillDamagedType = SkillDamagedType.AreaOfEffect;
 			}
+
 		}
-	}*/
+	}
 
 	/*public class BlackDrum : ProactiveSkill
 	{
