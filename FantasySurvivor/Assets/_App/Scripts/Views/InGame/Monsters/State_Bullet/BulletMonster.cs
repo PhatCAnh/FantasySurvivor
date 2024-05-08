@@ -15,27 +15,34 @@ namespace FantasySurvivor
 		[SerializeField] private float _speedBullet = 15f;
 
 		private Monster _origin;
+		private Vector2 _directionToTarget;
+		private Character _character => gameController.character;
 
-		private Character _target;
 		
 		protected GameController gameController => Singleton<GameController>.instance;
 
 		public void Init(Monster origin)
 		{
-			_origin = origin;
-			_target = origin.target;
-			var spawnPos = _origin.firePoint;
-			transform.SetPositionAndRotation(spawnPos.position, spawnPos.rotation);
-			//rigidbody2d.velocity = spawnPos.up * _speedBullet;
-		}
+            _origin = origin;
+            var spawnPos = _origin.firePoint;
+            transform.SetPositionAndRotation(spawnPos.position, spawnPos.rotation);
 
-		protected void FixedUpdate()
+             _directionToTarget = (origin.target.transform.position - transform.position).normalized;
+
+            float angle = Mathf.Atan2(_directionToTarget.y, _directionToTarget.x) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        }
+
+        protected void FixedUpdate()
 		{
 			if(gameController.isStop) return;
-			transform.position = Vector2.MoveTowards(transform.position, _target.transform.position, _speedBullet * Time.deltaTime);
-		}
+            //transform.position = Vector2.MoveTowards(transform.position, _target.transform.position, _speedBullet * Time.deltaTime);
+            
+			rigidbody2d.velocity = _directionToTarget * _speedBullet;
+        }
 
-		protected void Touch()
+        protected void Touch()
 		{
 			if(deadEffect != null)
 			{
@@ -44,12 +51,12 @@ namespace FantasySurvivor
 			
 			Destroy(gameObject);
 		}
-		
-		private void Update()
+
+        private void Update()
 		{
-			if(Vector2.Distance(transform.position, _target.transform.position) < 0.25f)
+			if(Vector2.Distance(transform.position, _character.transform.position) < 0.25f)
 			{
-				_target.TakeDamage(_origin.model.attackDamage);
+				_character.TakeDamage(_origin.model.attackDamage);
 				Touch();
 			}
 		}

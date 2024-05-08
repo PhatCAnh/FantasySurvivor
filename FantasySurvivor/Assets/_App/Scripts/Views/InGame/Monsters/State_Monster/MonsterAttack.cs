@@ -12,7 +12,6 @@ namespace FantasySurvivor
 		{
 			base.Enter();
 			agent.animator.SetFloat("Speed", 0f);
-	
 			agent.firePoint.up = agent.target.transform.position - agent.firePoint.position;
 			agent.Attack();
 			agent.IdleState();

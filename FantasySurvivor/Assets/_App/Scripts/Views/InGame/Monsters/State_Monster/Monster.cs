@@ -66,7 +66,7 @@ public class Monster : ObjectRPG
 	#endregion
 
 	public float size;
-	public Character target => gameController.character;
+	public Character target => gameController.character; 
 
 	public MapView.WaveData wave { get; private set; }
 

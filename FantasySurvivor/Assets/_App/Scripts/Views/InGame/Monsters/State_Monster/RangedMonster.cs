@@ -10,7 +10,7 @@ namespace FantasySurvivor
 
 		public BulletMonster bulletPrefab;
 
-		private Vector3 spawnPos { get; set; }
+        private Vector3 spawnPos { get; set; }
 
 		[SerializeField] private int _numberBack = 0;
 
@@ -62,11 +62,15 @@ namespace FantasySurvivor
 
         public override void Attack()
 		{
+            // Gây sát thương cho mục tiêu
             target.TakeDamage(model.attackDamage);
 
+            // Tạo một instance mới của viên đạn từ bulletPrefab
             var arrowIns = Instantiate(bulletPrefab);
-			arrowIns.Init(this);
-			_coolDownBack++;
+            // Khởi tạo viên đạn
+            arrowIns.Init(this);
+
+            _coolDownBack++;
 			if(_numberBack != 0)
 			{
 				if(CheckBack())
