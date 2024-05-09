@@ -91,7 +91,8 @@ public class Character : ObjectRPG
 			statInit.moveSpeed.BaseValue,
 			statInit.health.BaseValue,
 			statInit.attackRange.BaseValue,
-			statInit.attackDamage.BaseValue
+			statInit.attackDamage.BaseValue,
+			statInit.attackRange.BaseValue
 		);
 	}
 

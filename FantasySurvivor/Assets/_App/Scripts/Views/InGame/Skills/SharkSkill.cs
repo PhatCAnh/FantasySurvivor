@@ -81,7 +81,7 @@ public class ProactiveSkill : Skill
 			for(int i = 0; i < numberProjectile; i++)
 			{
 				var skill = GameObject.Instantiate(skillIns).GetComponent<SkillActive>();
-				skill.Init(origin.model.attackDamage * levelData[level].value / 100, mons[i], level);
+				skill.Init(origin.model.attackDamage * levelData[level].value / 100, mons, level);
 				UpdatePrefab(skill);
 				await Task.Delay(timeDelaySkill);
 			}

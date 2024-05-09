@@ -34,8 +34,6 @@ public class GameController : Controller<GameApp>
 	private Vector3 _camSize;
 	private float _width;
 	private float _height;
-
-	private Vector3 _charPos => character.transform.position;
 	
 	private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
 
@@ -77,10 +75,7 @@ public class GameController : Controller<GameApp>
 
 	public void StartGame(int chapter)
 	{
-		ChangeScene(GameConst.nameScene_Game, () =>
-		{
-			LoadMap(chapter);
-		});
+		ChangeScene(GameConst.nameScene_Game, () => LoadMap(chapter));
 	}
 
 	public void WinGame()
@@ -140,14 +135,6 @@ public class GameController : Controller<GameApp>
 	{
 	}
 
-	public void SkillAllMob()
-	{
-		foreach(var mons in listMonster.ToList())
-		{
-			MonsterDie(mons, true);
-		}
-	}
-
 	public void ClaimReward(TypeItemReward type, int value)
 	{
 		switch (type)
@@ -173,11 +160,11 @@ public class GameController : Controller<GameApp>
 
 		var type = (ItemPrefab) Enum.Parse(typeof(ItemPrefab), statMonster.monsterType);
 		
-		var monsterIns = Singleton<PoolController>.instance.GetObject(type, RandomPositionAroundCharacter(20)).GetComponent<Monster>();
+		var monsterIns = Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).GetComponent<Monster>();
 		
 		//var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
 
-		monsterIns.transform.position = RandomPositionAroundCharacter(20, monsterIns.justSpawnVertical);
+		monsterIns.transform.position = RandomPositionSpawnMonster(20, monsterIns.justSpawnVertical);
 
 		monsterIns.Init(monsterStat, wave, type);
 
@@ -200,24 +187,17 @@ public class GameController : Controller<GameApp>
 		//Destroy(mons.gameObject);
 	}
 
-	public Monster GetRandomMonster()
+	public void KillAllMonster()
 	{
-		var characterPos = _charPos;
-		var listMonsterInCircle = new List<Monster>();
-		foreach (var mons in listMonster)
+		foreach(var mob in listMonster)
 		{
-			if (Vector2.Distance(characterPos, mons.transform.position) <= character.model.attackRange)
-			{
-				listMonsterInCircle.Add(mons);
-			}
+			MonsterDie(mob, true);
 		}
-		return listMonsterInCircle.Count != 0 ? listMonsterInCircle[Random.Range(0, listMonsterInCircle.Count)] : null;
 	}
 
-
-	public List<Monster> GetAllMonsterInAttackRange()
+	public Monster GetAllMonsterInAttackRange()
 	{
-		var characterPos = _charPos;
+		var characterPos = character.transform.position;
 		Rect myRect = new Rect(characterPos.x - _width / 2, characterPos.y - _height / 2, _width, _height);
 		var listMonsterInRect = new List<Monster>();
 		foreach(var mons in listMonster)
@@ -227,25 +207,10 @@ public class GameController : Controller<GameApp>
 				listMonsterInRect.Add(mons);
 			}
 		}
-		return listMonsterInRect;
+		return listMonsterInRect.Count != 0 ? listMonsterInRect[Random.Range(0, listMonsterInRect.Count)] : null;
 	}
-	public List<Monster> GetAllMonsterInAttackRange()
-	{
-        var characterPos = character.transform.position;
-        Rect myRect = new Rect(characterPos.x - _width / 2, characterPos.y - _height / 2, _width, _height);
-        var listMonsterInRect = new List<Monster>();
-        foreach (var mons in listMonster)
-        {
-            if (myRect.Contains(mons.transform.position))
-            {
-                listMonsterInRect.Add(mons);
-            }
-        }
-        return listMonsterInRect.Count != 0 ? listMonsterInRect : null;
 
-    }
-
-    public void CharacterDie(Character characterView)
+	public void CharacterDie(Character characterView)
 	{
 		LoseGame();
 	}
@@ -278,16 +243,16 @@ public class GameController : Controller<GameApp>
 	// 	{
 	// 		var skill = Instantiate(
 	// 			app.resourceManager.GetSkill(name).skillPrefab,
-	// 			_charPos,
+	// 			character.transform.position,
 	// 			quaternion.identity
 	// 		);
 	// 		skill.GetComponent<BulletView>().Init(mons, name);
 	// 	}
 	// }
 
+	// ReSharper disable Unity.PerformanceAnalysis
 	public void Collected(DropItem dropItem)
 	{
-
 		if(dropItem.type == DropItemType.Exp)
 		{
 			map.model.ExpCurrent += dropItem.value;
@@ -322,7 +287,7 @@ public class GameController : Controller<GameApp>
 				character.AddHealth(character.model.maxHealthPoint * 20 / 100);
 				break;
 			case DropItemType.Bomb:
-				var characterPos = _charPos;
+				var characterPos = character.transform.position;
 				Rect myRect = new Rect(characterPos.x - _width / 2, characterPos.y - _height / 2, _width, _height);
 				foreach(var mons in listMonster.ToList())
 				{
@@ -349,10 +314,13 @@ public class GameController : Controller<GameApp>
 	}
 
 
-	public Vector2 RandomPositionAroundCharacter(float radius, bool justVertical = false)
+	public Vector2 RandomPositionSpawnMonster(float radius, bool justVertical = false)
 	{
 		float angle = Random.Range(0, 2 * Mathf.PI);
-		return new Vector2(radius * Mathf.Cos(angle) + _charPos.x , radius * Mathf.Sin(angle) + _charPos.y);
+		float x = radius * Mathf.Cos(angle);
+		float y = radius * Mathf.Sin(angle);
+		return new Vector2(x + character.transform.position.x, y + character.transform.position.y);
+
 
 		// int posX;
 		// int posY;
@@ -369,32 +337,28 @@ public class GameController : Controller<GameApp>
 		// }
 		// return new Vector2(posX, posY);
 	}
-	
-	//sua lai cai nay
-	public float GetDistanceCharacter(Vector3 position)
-	{
-		return Vector3.Distance(position, _charPos) - character.sizeBase;
-	}
-
 
 	private Character SpawnCharacter()
 	{
-		Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.Character))
-			.TryGetComponent(out Character characterPrefab);
-		
+		var characterPrefab = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.Character))
+			.GetComponent<Character>();
 		characterPrefab.transform.position = Vector2.zero;
 
 		_healthBar = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.HealthBar), app.resourceManager.rootContainer)
 			.GetComponent<HealthBar>();
 		_healthBar.Init(characterPrefab);
-		
-		characterPrefab.Init(new CharacterStat(2.5f, 100, 5, 20));
+
+		var stat = new CharacterStat(2.5f, 100, 5, 20);
+		characterPrefab.Init(stat);
 
 		return characterPrefab;
 	}
 
-	
-	
+	public float GetDistanceCharacter(Vector3 trans)
+	{
+		return 0;
+	}
+
 	private void LoadMap(int chapter)
 	{
 		_camSize = Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0));
@@ -408,7 +372,6 @@ public class GameController : Controller<GameApp>
 		listMonster.Clear();
 		app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
 		//app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
-
-		Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.SupportItem), Vector2.zero, Quaternion.identity);
 	}
+	
 }
