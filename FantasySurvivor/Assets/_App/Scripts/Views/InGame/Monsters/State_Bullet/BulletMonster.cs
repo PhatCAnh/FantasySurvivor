@@ -6,7 +6,10 @@ namespace FantasySurvivor
 {
 	public class BulletMonster : View<GameApp>
 	{
+		
 		public SpriteRenderer skin;
+		
+		[SerializeField] protected float size;
 
 		[SerializeField] protected GameObject deadEffect;
 
@@ -15,7 +18,6 @@ namespace FantasySurvivor
 		private Monster _origin;
 		private Vector2 _directionToTarget;
 		private Character _character => gameController.character;
-
 		
 		protected GameController gameController => Singleton<GameController>.instance;
 
@@ -51,12 +53,18 @@ namespace FantasySurvivor
 		}
 
         private void Update()
-		{
-			if(gameController.CheckTouchCharacter(transform.position, 0.25f + _character.sizeBase))
+        {
+	        if(gameController.isStop) return;
+			if(gameController.CheckTouchCharacter(transform.position, size + _character.sizeBase))
             {
                 _character.TakeDamage(_origin.model.attackDamage);
                 Touch();
             }
+        }
+        
+        protected void OnDrawGizmosSelected()
+        {
+	        Gizmos.DrawWireSphere(transform.position, size);
         }
 	}
 }

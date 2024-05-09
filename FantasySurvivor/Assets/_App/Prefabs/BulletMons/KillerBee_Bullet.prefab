@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1180482081522543767}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.433, y: 0.155, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -152,6 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skin: {fileID: 7868541475485436973}
-  rigidbody2d: {fileID: 0}
+  size: 0.17
   deadEffect: {fileID: 680874694143846828, guid: ddf12a4cc59bd3a48b449dbf7106228a, type: 3}
   _speedBullet: 10
