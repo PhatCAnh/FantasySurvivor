@@ -22,6 +22,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[Required, SerializeField] private GameObject _gemExpPrefab;
 	
 	[Required, SerializeField] private GameObject _textPopup;
+	
+	[Required, SerializeField] private GameObject _supportItem;
 
 	private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
@@ -122,6 +124,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.YellowBomb, _yellowBomb},
 			{ItemPrefab.PurpleDevil, _purpleDevil},
 			{ItemPrefab.KillerBee, _killerBee},
+			{ItemPrefab.SupportItem, _supportItem},
         };
 
 		_mapDic = new Dictionary<MapType, Map>

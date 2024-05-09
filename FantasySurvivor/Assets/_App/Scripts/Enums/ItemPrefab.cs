@@ -14,6 +14,7 @@ public enum ItemPrefab
     Character,
     TextPopup,
     GemExp,
+    SupportItem,
 }
 
 public enum MapType
