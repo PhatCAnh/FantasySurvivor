@@ -11,8 +11,7 @@ namespace FantasySurvivor {
         public override void LogicUpdate(float deltaTime) {
             base.LogicUpdate(deltaTime);
             
-            var distanceToTarget = Vector2.Distance(agent.transform.position, agent.character.transform.position);
-            if (distanceToTarget < agent.character.sizeBase)
+            if (agent.gameController.CheckTouchCharacter(agent.transform.position, agent.character.sizeBase))
             {
                 Singleton<GameController>.instance.Collected(agent);
                 agent.Complete();

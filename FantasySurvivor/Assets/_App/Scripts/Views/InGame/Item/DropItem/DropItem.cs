@@ -37,7 +37,7 @@ namespace FantasySurvivor
         
         public Character character { get; private set; }
 
-        private GameController gameController => Singleton<GameController>.instance;
+        public GameController gameController => Singleton<GameController>.instance;
 
         protected override void OnViewInit() {
             base.OnViewInit();

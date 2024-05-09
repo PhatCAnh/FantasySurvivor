@@ -356,16 +356,18 @@ public class GameController : Controller<GameApp>
 		return characterPrefab;
 	}
 
-	public float GetDistanceCharacter(Vector3 trans)
+	public bool CheckTouchCharacter(Vector3 trans, float number)
 	{
 		var x = trans.x - charPos.x;
 		var y = trans.y - charPos.y;
-		return x * x + y * y;
+		return x * x + y * y <= number * number;
 	}
 
-	public bool CheckTouchCharacter(Vector3 trans, float number)
+	public bool CheckTouch(Vector3 a, Vector3 b, float number)
 	{
-		return GetDistanceCharacter(trans) <= number * number;
+		var x = a.x - b.x;
+		var y = a.y - b.y;
+		return x * x + y * y <= number * number;
 	}
 
 	private void LoadMap(int chapter)
