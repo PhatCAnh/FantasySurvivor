@@ -3,6 +3,7 @@ using System.Linq;
 using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 namespace FantasySurvivor
 {
 	public class FireBall : ProactiveSkill
@@ -143,29 +144,16 @@ namespace FantasySurvivor
 
         public override void Active()
         {
-            base.Active();
             var mons = gameController.GetAllMonsterInAttackRange();
             if (mons != null)
             {
                 for (int i = 0; i < numberProjectile; i++)
                 {
                     var skill = GameObject.Instantiate(skillIns).GetComponent<SkillActive>();
-                    skill.Init(origin.model.attackDamage * levelData[level].value / 100, mons, level);
-                    UpdatePrefab(skill);
+                    skill.Init(origin.model.attackDamage * levelData[level].value / 100, mons[Random.Range(0, mons.Count)], level);
                 }
             }
-
         }
-        protected override void UpdatePrefab(SkillActive prefab)
-		{
-			base.UpdatePrefab(prefab);
-			
-			if (level == 6)
-			{
-				prefab.skillDamagedType = SkillDamagedType.AreaOfEffect;
-			}
-
-		}
 	}
 
 	/*public class BlackDrum : ProactiveSkill
