@@ -348,7 +348,7 @@ public class GameController : Controller<GameApp>
 			.GetComponent<HealthBar>();
 		_healthBar.Init(characterPrefab);
 
-		var stat = new CharacterStat(2.5f, 100, 5, 20);
+		var stat = new CharacterStat(2.5f, 100, 5, 20, 50);
 		characterPrefab.Init(stat);
 
 		return characterPrefab;
