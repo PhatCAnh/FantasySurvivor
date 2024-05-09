@@ -203,17 +203,17 @@ public class GameController : Controller<GameApp>
 	public Monster GetRandomMonster()
 	{
 		var characterPos = _charPos;
-		Rect myRect = new Rect(characterPos.x - _width / 2, characterPos.y - _height / 2, _width, _height);
-		var listMonsterInRect = new List<Monster>();
-		foreach(var mons in listMonster)
+		var listMonsterInCircle = new List<Monster>();
+		foreach (var mons in listMonster)
 		{
-			if(myRect.Contains(mons.transform.position))
+			if (Vector2.Distance(characterPos, mons.transform.position) <= character.model.attackRange)
 			{
-				listMonsterInRect.Add(mons);
+				listMonsterInCircle.Add(mons);
 			}
 		}
-		return listMonsterInRect.Count != 0 ? listMonsterInRect[Random.Range(0, listMonsterInRect.Count)] : null;
+		return listMonsterInCircle.Count != 0 ? listMonsterInCircle[Random.Range(0, listMonsterInCircle.Count)] : null;
 	}
+
 
 	public List<Monster> GetAllMonsterInAttackRange()
 	{

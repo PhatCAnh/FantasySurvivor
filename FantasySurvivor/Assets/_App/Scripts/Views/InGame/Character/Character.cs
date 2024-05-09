@@ -94,7 +94,6 @@ public class Character : ObjectRPG
             statInit.attackRange.BaseValue,
             statInit.attackDamage.BaseValue,
             statInit.attackRange.BaseValue
-
         );
     }
 
