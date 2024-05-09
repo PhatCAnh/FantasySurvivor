@@ -93,7 +93,8 @@ public class Character : ObjectRPG
             statInit.health.BaseValue,
             statInit.attackRange.BaseValue,
             statInit.attackDamage.BaseValue,
-            statInit.attackRange.BaseValue
+            statInit.attackRange.BaseValue,
+             statInit.armor.BaseValue
 
         );
     }
@@ -130,9 +131,13 @@ public class Character : ObjectRPG
     public void TakeDamage(int damage)
     {
         if (!IsAlive) return;
-        model.currentHealthPoint -= damage;
+
+        int armorReducedDamage = (int)(damage * 0.5f); 
+        int damageAfterArmor = Mathf.Max(damage - armorReducedDamage, 0);
+        model.currentHealthPoint -= damageAfterArmor;
         GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-        text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.MonsterDamage);
+        text.GetComponent<TextPopup>().Create(damageAfterArmor.ToString(), TextPopupType.MonsterDamage);
+
         if (!IsAlive) Die();
     }
 
