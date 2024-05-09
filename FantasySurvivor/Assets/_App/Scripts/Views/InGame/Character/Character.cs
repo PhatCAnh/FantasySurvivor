@@ -15,9 +15,11 @@ using StateMachine = ArbanFramework.StateMachine.StateMachine;
 
 public class Character : ObjectRPG
 {
+
+	[SerializeField] private Transform circleAttackRange;
+
 	[FormerlySerializedAs("a"),SerializeField] private int asd= 5;
 	public int b;
-	
 	
 	public float abc = 2.5f;
 
@@ -77,12 +79,23 @@ public class Character : ObjectRPG
 		}
 
 		myRigid = GetComponent<Rigidbody2D>();
+		circleAttackRange.DORotate(new Vector3(0, 0, 360), 5f, RotateMode.FastBeyond360)
+			.SetEase(Ease.Linear)
+			.SetLoops(-1, LoopType.Restart);
 
 		AddDataBinding("fieldCharacter-moveSpeedValue", animator, (control, e) =>
 			{
 				control.SetFloat("SpeedMul", model.moveSpeed / 2.5f);
-			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackSpeed), model)
+			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.moveSpeed), model)
 		);
+
+		AddDataBinding("fieldCharacter-attackRangeValue", circleAttackRange, (control, e) =>
+			{
+				control.localScale = Vector3.one * model.attackRange;
+			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackRange), model)
+		);
+		
+		
 	}
 
 	public void Init(CharacterStat statInit)
@@ -255,5 +268,6 @@ public class Character : ObjectRPG
 	{
 		Gizmos.DrawWireSphere(transform.position, sizeBase);
 		Gizmos.DrawWireSphere(transform.position, abc);
+		Gizmos.DrawWireSphere(transform.position, 1);
 	}
 }
