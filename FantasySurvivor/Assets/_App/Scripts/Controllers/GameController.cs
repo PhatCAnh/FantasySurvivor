@@ -229,8 +229,23 @@ public class GameController : Controller<GameApp>
 		}
 		return listMonsterInRect;
 	}
+	public List<Monster> GetAllMonsterInAttackRange()
+	{
+        var characterPos = character.transform.position;
+        Rect myRect = new Rect(characterPos.x - _width / 2, characterPos.y - _height / 2, _width, _height);
+        var listMonsterInRect = new List<Monster>();
+        foreach (var mons in listMonster)
+        {
+            if (myRect.Contains(mons.transform.position))
+            {
+                listMonsterInRect.Add(mons);
+            }
+        }
+        return listMonsterInRect.Count != 0 ? listMonsterInRect : null;
 
-	public void CharacterDie(Character characterView)
+    }
+
+    public void CharacterDie(Character characterView)
 	{
 		LoseGame();
 	}

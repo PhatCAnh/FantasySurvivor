@@ -80,31 +80,38 @@ public enum TypeAds
 
 public enum SkillName
 {
-    Shark,
     Fireball,
+    ThunderStrike,
+    /* ThunderBird,*/
+    Food,
+    /*Shark,
     Twin,
     ZoneOfJudgment,
-    ThunderStrike,
     BlackDrum,
     Passive1,
-    Food,
+    */
 }
 
 public enum SkillType
 {
-    Proactive,
+    Active,
     Passive,
     Buff,
 }
 
 public enum SkillElementalType
 {
-    Water,
+    /*Water,
     Fire,
     Wind,
     Dark,
     Electric,
-    Light,
+    Light,*/
+    Fire,
+    Water,
+    Thunder,
+    Wind,
+    Wood,
 }
 
 public enum PopupType

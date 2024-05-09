@@ -61,20 +61,16 @@ public class SkillUI : View<GameApp>
 				_fxRed.SetActive(_level >= 5);
 				break;
 			case SkillElementalType.Wind:
-				UpdateColor(_colorGreen);
-				_fxGreen.SetActive(_level >= 5);
+				UpdateColor(_colorWhite);
+				_fxWhite.SetActive(_level >= 5);
 				break;
-			case SkillElementalType.Dark:
-				UpdateColor(_colorPurple);
-				_fxPurple.SetActive(_level >= 5);
-				break;
-			case SkillElementalType.Electric:
+			case SkillElementalType.Thunder:
 				UpdateColor(_colorYellow);
 				_fxYellow.SetActive(_level >= 5);
 				break;
-			case SkillElementalType.Light:
-				UpdateColor(_colorWhite);
-				_fxWhite.SetActive(_level >= 5);
+			case SkillElementalType.Wood:
+				UpdateColor(_colorGreen);
+				_fxGreen.SetActive(_level >= 5);	
 				break;
 		}
 

@@ -15,256 +15,235 @@ using StateMachine = ArbanFramework.StateMachine.StateMachine;
 
 public class Character : ObjectRPG
 {
-    [FormerlySerializedAs("a"), SerializeField] private int asd = 5;
-    public int b;
+	[FormerlySerializedAs("a"),SerializeField] private int asd= 5;
+	public int b;
+	
+	
+	public float abc = 2.5f;
 
+	public float sizeBase;
 
-    public float abc = 2.5f;
+	[HideInInspector]
+	public Rigidbody2D myRigid;
 
-    public float sizeBase;
+	public Animator animator;
+	public CharacterModel model => app.models.characterModel;
 
-    [HideInInspector]
-    public Rigidbody2D myRigid;
+	public CharacterStat stat { get; private set; }
+	public float speedMul { get; set; } = 1;
+	public Vector2 idleDirection { get; private set; } = Vector2.down;
 
-    public Animator animator;
-    public CharacterModel model => app.models.characterModel;
+	public Vector2 moveDirection
+	{
+		get => _direction;
+		set {
+			if(value != Vector2.zero)
+			{
+				idleDirection = value;
+			}
+			_direction = value;
+		}
+	}
 
-    public CharacterStat stat { get; private set; }
-    public float speedMul { get; set; } = 1;
-    public Vector2 idleDirection { get; private set; } = Vector2.down;
+	public List<Skill> listSkills = new List<Skill>();
+	public List<Skill> listSkillCooldown = new List<Skill>();
 
-    public Vector2 moveDirection
-    {
-        get => _direction;
-        set
-        {
-            if (value != Vector2.zero)
-            {
-                idleDirection = value;
-            }
-            _direction = value;
-        }
-    }
+	public bool IsAlive => model.currentHealthPoint > 0;
+	public bool IsMove => _stateMachine.currentState == _moveSm;
 
-    public List<Skill> listSkills = new List<Skill>();
-    public List<Skill> listSkillCooldown = new List<Skill>();
+	public Action<float> isCharacterMoving;
 
-    public bool IsAlive => model.currentHealthPoint > 0;
-    public bool IsMove => _stateMachine.currentState == _moveSm;
+	private Vector2 _direction = Vector2.zero;
 
-    public Action<float> isCharacterMoving;
+	private StateMachine _stateMachine;
+	private CharacterIdle _idleSm;
+	private CharacterMove _moveSm;
+	
+	private GameController gameController => Singleton<GameController>.instance;
 
-    private Vector2 _direction = Vector2.zero;
+	protected override void OnViewInit()
+	{
+		base.OnViewInit();
+		if(_stateMachine == null)
+		{
+			_stateMachine = new StateMachine();
+			_idleSm = new CharacterIdle(this, _stateMachine);
+			_moveSm = new CharacterMove(this, _stateMachine);
+			_stateMachine.Init(_idleSm);
+		}
+		else
+		{
+			IdleState();
+		}
 
-    private StateMachine _stateMachine;
-    private CharacterIdle _idleSm;
-    private CharacterMove _moveSm;
+		myRigid = GetComponent<Rigidbody2D>();
 
-    private GameController gameController => Singleton<GameController>.instance;
+		AddDataBinding("fieldCharacter-moveSpeedValue", animator, (control, e) =>
+			{
+				control.SetFloat("SpeedMul", model.moveSpeed / 2.5f);
+			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackSpeed), model)
+		);
+	}
 
-    protected override void OnViewInit()
-    {
-        base.OnViewInit();
-        if (_stateMachine == null)
-        {
-            _stateMachine = new StateMachine();
-            _idleSm = new CharacterIdle(this, _stateMachine);
-            _moveSm = new CharacterMove(this, _stateMachine);
-            _stateMachine.Init(_idleSm);
-        }
-        else
-        {
-            IdleState();
-        }
+	public void Init(CharacterStat statInit)
+	{
+		app.models.characterModel = new CharacterModel(
+			statInit.moveSpeed.BaseValue,
+			statInit.health.BaseValue,
+			statInit.attackRange.BaseValue,
+			statInit.attackDamage.BaseValue
+		);
+	}
 
-        myRigid = GetComponent<Rigidbody2D>();
+	private void Update()
+	{
+		if(gameController.isStop) return;
+		Controlled(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+		var time = Time.deltaTime;
+		_stateMachine.currentState.LogicUpdate(time);
 
-        AddDataBinding("fieldCharacter-moveSpeedValue", animator, (control, e) =>
-        {
-            control.SetFloat("SpeedMul", model.moveSpeed / 2.5f);
-        }, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackSpeed), model)
-        );
-    }
+		HandlePhysicUpdate();
+		HandleProactiveSkill(Time.deltaTime);
+	}
 
-    public void Init(CharacterStat statInit)
-    {
-        app.models.characterModel = new CharacterModel(
-            statInit.moveSpeed.BaseValue,
-            statInit.health.BaseValue,
-            statInit.attackRange.BaseValue,
-            statInit.attackDamage.BaseValue,
-            statInit.attackRange.BaseValue
-        );
-    }
+	private void FixedUpdate()
+	{
+		if(gameController.isStop) return;
 
-    private void Update()
-    {
-        if (gameController.isStop) return;
-        Controlled(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
-        var time = Time.deltaTime;
-        _stateMachine.currentState.LogicUpdate(time);
+		_stateMachine.currentState.PhysicUpdate(Time.fixedTime);
+	}
 
-        HandlePhysicUpdate();
-        HandleProactiveSkill(Time.deltaTime);
-    }
+	private void LateUpdate()
+	{
+		var position = transform.position;
+		Camera.main.transform.position = new Vector3(position.x, position.y, -1);
+	}
 
-    private void FixedUpdate()
-    {
-        if (gameController.isStop) return;
+	public void Controlled(Vector2 moveForce)
+	{
+		moveDirection = moveForce;
+	}
 
-        _stateMachine.currentState.PhysicUpdate(Time.fixedTime);
-    }
+	public void TakeDamage(int damage)
+	{
+		if(!IsAlive) return;
+		model.currentHealthPoint -= damage;
+		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
+		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.MonsterDamage);
+		if(!IsAlive) Die();
+	}
 
-    private void LateUpdate()
-    {
-        var position = transform.position;
-        Camera.main.transform.position = new Vector3(position.x, position.y, -1);
-    }
+	public void AddHealth(float value)
+	{
+		model.currentHealthPoint += value; 
+	}
 
-    public void Controlled(Vector2 moveForce)
-    {
-        moveDirection = moveForce;
-    }
+	public void AddProactiveSkill(SkillData skillData)
+	{
+		var skill = GetSkill(skillData.name);
+		if(skill != null)
+		{
+			skill.UpLevel();
+			if(skill.level >= 6)
+			{
+				gameController.map.RemoveSkill(skill.skillName);
+			}
+			return;
+		}
+		switch (skillData.type)
+		{
+			case SkillType.Active:
+				{
+					Skill skillIns;
+					switch (skillData.name)
+					{
+						case SkillName.Fireball:
+							skillIns = new FireBall();
+							break;
+						case SkillName.ThunderStrike: 
+							skillIns = new ThunderStrike();
+							break;
+						default:
+							skillIns = new ProactiveSkill();
+							break;
+					}
+					skillIns.Init(skillData);
+					listSkills.Add(skillIns);
+				}
+				break;
+			case SkillType.Buff:
+				if (skillData.name == SkillName.Food)
+				{
+					model.currentHealthPoint += model.currentHealthPoint * 20 / 100;
+				}
+				break;
+		}
+	}
 
-    public void TakeDamage(int damage)
-    {
-        if (!IsAlive) return;
-        model.currentHealthPoint -= damage;
-        GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-        text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.MonsterDamage);
-        if (!IsAlive) Die();
-    }
+	public Skill GetSkill(SkillName skillName)
+	{
+		foreach(var skill in listSkills)
+		{
+			if(skill.skillName.Equals(skillName))
+			{
+				return skill;
+			}
+		}
+		return null;
+	}
 
-    public void AddHealth(float value)
-    {
-        model.currentHealthPoint += value;
-    }
+	private void Die()
+	{
+		gameController.CharacterDie(this);
+	}
 
-    public void AddProactiveSkill(SkillData skillData)
-    {
-        var skill = GetSkill(skillData.name);
-        if (skill != null)
-        {
-            skill.UpLevel();
-            if (skill.level >= 6)
-            {
-                gameController.map.RemoveSkill(skill.skillName);
-            }
-            return;
-        }
-        switch (skillData.type)
-        {
-            case SkillType.Proactive:
-                {
-                    Skill skillIns;
-                    switch (skillData.name)
-                    {
-                        case SkillName.Fireball:
-                            skillIns = new FireBall();
-                            break;
-                        case SkillName.Twin:
-                            skillIns = new Twin();
-                            break;
-                        case SkillName.Shark:
-                            skillIns = new Shark();
-                            break;
-                        case SkillName.ZoneOfJudgment:
-                            skillIns = new ZoneOfJudgment();
-                            break;
-                        case SkillName.ThunderStrike:
-                            skillIns = new ThunderStrike();
-                            break;
-                        case SkillName.BlackDrum:
-                            skillIns = new BlackDrum();
-                            break;
-                        case SkillName.Passive1:
-                            skillIns = new Passive1();
-                            break;
-                        default:
-                            skillIns = new ProactiveSkill();
-                            break;
-                    }
-                    skillIns.Init(skillData);
-                    listSkills.Add(skillIns);
-                }
-                break;
-            case SkillType.Buff:
-                if (skillData.name == SkillName.Food)
-                {
-                    model.currentHealthPoint += model.currentHealthPoint * 20 / 100;
-                }
-                break;
-        }
-    }
+	private void HandlePhysicUpdate()
+	{
 
-    public Skill GetSkill(SkillName skillName)
-    {
-        foreach (var skill in listSkills)
-        {
-            if (skill.skillName.Equals(skillName))
-            {
-                return skill;
-            }
-        }
-        return null;
-    }
+		if(moveDirection == Vector2.zero)
+			IdleState();
+		else
+			MoveState();
 
-    private void Die()
-    {
-        gameController.CharacterDie(this);
-    }
+		SetAnimation(moveDirection, idleDirection);
+	}
 
-    private void HandlePhysicUpdate()
-    {
+	// ReSharper disable Unity.PerformanceAnalysis
+	private void HandleProactiveSkill(float deltaTime)
+	{
+		foreach(var skill in listSkillCooldown)
+		{
+			skill.CoolDownSkill(deltaTime);
+		}
+	}
 
-        if (moveDirection == Vector2.zero)
-            IdleState();
-        else
-            MoveState();
+	private void SetAnimation(Vector2 dir, Vector2 idleDirection)
+	{
+		animator.SetFloat("Speed", dir.normalized.magnitude);
+		animator.SetFloat("Horizontal", idleDirection.x);
+		animator.SetFloat("Vertical", idleDirection.y);
+	}
 
-        SetAnimation(moveDirection, idleDirection);
-    }
+	#region State Machine Method
 
-    // ReSharper disable Unity.PerformanceAnalysis
-    private void HandleProactiveSkill(float deltaTime)
-    {
-        foreach (var skill in listSkillCooldown)
-        {
-            skill.CoolDownSkill(deltaTime);
-        }
-    }
+	public void IdleState() => _stateMachine.ChangeState(_idleSm);
 
-    private void SetAnimation(Vector2 dir, Vector2 idleDirection)
-    {
-        animator.SetFloat("Speed", dir.normalized.magnitude);
-        animator.SetFloat("Horizontal", idleDirection.x);
-        animator.SetFloat("Vertical", idleDirection.y);
-    }
+	public void MoveState()
+	{
+		if(IsMove) return;
+		_stateMachine.ChangeState(_moveSm);
+	}
 
-    #region State Machine Method
+	#endregion
 
-    public void IdleState() => _stateMachine.ChangeState(_idleSm);
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+	}
 
-    public void MoveState()
-    {
-        if (IsMove) return;
-        _stateMachine.ChangeState(_moveSm);
-    }
-
-    #endregion
-
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(transform.position, sizeBase);
-        Gizmos.DrawWireSphere(transform.position, abc);
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, model.attackRange);
-    }
+	private void OnDrawGizmosSelected()
+	{
+		Gizmos.DrawWireSphere(transform.position, sizeBase);
+		Gizmos.DrawWireSphere(transform.position, abc);
+	}
 }

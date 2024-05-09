@@ -16,14 +16,35 @@ namespace FantasySurvivor
 		public override void UpLevel()
 		{
 			base.UpLevel();
-			if(level == 3)
+			if (level == 3 || level == 5)
 			{
 				numberProjectile++;
+			}
+			if (level == 6)
+			{
+				numberProjectile=1;
 			}
 		}
 	}
 
-	public class Twin : ProactiveSkill
+	/*public class ThunderBird : ProactiveSkill
+	{
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+            timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
+        }
+        public override void UpLevel()
+        {
+            base.UpLevel();
+            if (level == 3)
+            {
+                numberProjectile++;
+            }
+        }
+    }*/
+
+	/*public class Twin : ProactiveSkill
 	{
 		public override void Init(SkillData data)
 		{
@@ -39,9 +60,9 @@ namespace FantasySurvivor
 				numberProjectile++;
 			}
 		}
-	}
+	}*/
 
-	public class Shark : ProactiveSkill
+	/*public class Shark : ProactiveSkill
 	{
 		protected override void UpdatePrefab(SkillActive prefab)
 		{
@@ -52,9 +73,9 @@ namespace FantasySurvivor
 				prefab.size = 2;
 			}
 		}
-	}
+	}*/
 
-	public class ZoneOfJudgment : ProactiveSkill
+	/*public class ZoneOfJudgment : ProactiveSkill
 	{
 		private float _sizeTouch = 2.5f;
 
@@ -63,7 +84,7 @@ namespace FantasySurvivor
 		private GameObject _circle;
 
 		public override void Init(SkillData data)
-		{
+		{	
 			base.Init(data);
 			var prefab = GameObject.Instantiate(skillPrefab, origin.transform.position, quaternion.identity, origin.transform);
 			prefab.transform.DORotate(new Vector3(0, 0, -360), 7.5f, RotateMode.FastBeyond360)
@@ -102,65 +123,57 @@ namespace FantasySurvivor
 			_sizeTouch += 0.5f;
 			_circle.transform.localScale = Vector2.one * _sizeTouch;
 		}
-	}
+	}*/
 
 	public class ThunderStrike : ProactiveSkill
 	{
-		private List<Monster> _monstersTouched = new List<Monster>();
-		
 		public override void Init(SkillData data)
 		{
 			base.Init(data);
-			origin.isCharacterMoving += CoolDownSkill;
-		}
+        }
+        public override void UpLevel()
+        {
+            base.UpLevel();
+            if (level == 3 || level == 5)
+            {
+                numberProjectile++;
+            }
 
-		protected override void AddCooldown()
-		{
-		}
+        }
 
-		public override void Active()
-		{
-			base.Active();
-			for(int i = 0; i < numberProjectile; i++)
-			{
-				foreach(var monster in gameController.GetAllMonsterInAttackRange())
-				{
-					if(_monstersTouched.Contains(monster)) continue;
-					monster.TakeDamage(origin.model.attackDamage * levelData[level].value / 100);
-					_monstersTouched.Add(monster);
-					break;
-				}
-			}
-		}
+        public override void Active()
+        {
+            base.Active();
+            var mons = gameController.GetAllMonsterInAttackRange();
+            if (mons != null)
+            {
+                for (int i = 0; i < numberProjectile; i++)
+                {
+                    var skill = GameObject.Instantiate(skillIns).GetComponent<SkillActive>();
+                    skill.Init(origin.model.attackDamage * levelData[level].value / 100, mons[i], level);
+                    UpdatePrefab(skill);
+                }
+            }
 
-		public override void CoolDownSkill(float deltaTime)
-		{
-			base.CoolDownSkill(deltaTime);
-			foreach(var monster in gameController.listMonster.ToList())
-			{
-				if(_monstersTouched.Contains(monster)) continue;
-
-					monster.TakeDamage(origin.model.attackDamage * levelData[level].value / 100);
-					_monstersTouched.Add(monster);
-			}
-		}
-
-		protected override void UpdatePrefab(SkillActive prefab)
+        }
+        protected override void UpdatePrefab(SkillActive prefab)
 		{
 			base.UpdatePrefab(prefab);
-			if(level >= 2)
+			
+			if (level == 6)
 			{
 				prefab.skillDamagedType = SkillDamagedType.AreaOfEffect;
 			}
+
 		}
 	}
 
-	public class BlackDrum : ProactiveSkill
+	/*public class BlackDrum : ProactiveSkill
 	{
 		protected override void UpdatePrefab(SkillActive prefab)
 		{
 			base.UpdatePrefab(prefab);
 			prefab.GetComponent<SkillBombActive>().sizeExplosion += 0.5f * level;
 		}
-	}
+	}*/
 }
