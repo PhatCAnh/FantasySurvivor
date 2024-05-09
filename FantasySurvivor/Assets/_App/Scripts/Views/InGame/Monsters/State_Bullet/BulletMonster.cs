@@ -48,17 +48,17 @@ namespace FantasySurvivor
 			{
 				Instantiate(deadEffect, transform.position, transform.rotation);
 			}
-			
-			Destroy(gameObject);
+            
+            Destroy(gameObject);
 		}
 
         private void Update()
 		{
-			if(Vector2.Distance(transform.position, _character.transform.position) < 0.25f)
-			{
-				_character.TakeDamage(_origin.model.attackDamage);
-				Touch();
-			}
-		}
+            if (Vector2.Distance(transform.position, _character.transform.position) < 0.25f)
+            {
+                _character.TakeDamage(_origin.model.attackDamage);
+                Touch();
+            }
+        }
 	}
 }

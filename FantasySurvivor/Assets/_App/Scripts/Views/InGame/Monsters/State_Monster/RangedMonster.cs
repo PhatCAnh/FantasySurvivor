@@ -62,9 +62,7 @@ namespace FantasySurvivor
 
         public override void Attack()
 		{
-            // Gây sát thương cho mục tiêu
-            target.TakeDamage(model.attackDamage);
-
+           
             // Tạo một instance mới của viên đạn từ bulletPrefab
             var arrowIns = Instantiate(bulletPrefab);
             // Khởi tạo viên đạn
