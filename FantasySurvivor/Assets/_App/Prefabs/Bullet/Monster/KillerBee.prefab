@@ -74,13 +74,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f999cc0f5ed74375b6f14d94d9638f2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 5
   myRigid: {fileID: 1025375935730607505}
   animator: {fileID: 8463392241125044750}
   firePoint: {fileID: 3920175741890169233}
   justSpawnVertical: 0
   size: 0.7
   bulletPrefab: {fileID: 4128420622295471649, guid: 21f0e3c66e7be4643873bca51dcbc84d, type: 3}
+  typeBullet: 11
   _numberBack: 0
 --- !u!1 &3312106001170155161
 GameObject:

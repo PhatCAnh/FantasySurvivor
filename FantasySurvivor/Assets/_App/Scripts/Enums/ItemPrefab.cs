@@ -15,6 +15,7 @@ public enum ItemPrefab
     TextPopup,
     GemExp,
     SupportItem,
+    BulletKillerBee,
 }
 
 public enum MapType
