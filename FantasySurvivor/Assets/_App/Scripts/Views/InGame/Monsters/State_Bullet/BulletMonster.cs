@@ -8,8 +8,6 @@ namespace FantasySurvivor
 	{
 		public SpriteRenderer skin;
 
-		public Rigidbody2D rigidbody2d;
-		
 		[SerializeField] protected GameObject deadEffect;
 
 		[SerializeField] private float _speedBullet = 15f;
