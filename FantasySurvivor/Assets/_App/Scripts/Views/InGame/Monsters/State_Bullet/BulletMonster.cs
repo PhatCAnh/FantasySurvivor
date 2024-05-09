@@ -38,9 +38,10 @@ namespace FantasySurvivor
 		{
 			if(gameController.isStop) return;
             //transform.position = Vector2.MoveTowards(transform.position, _target.transform.position, _speedBullet * Time.deltaTime);
-            
-			rigidbody2d.velocity = _directionToTarget * _speedBullet;
-        }
+            var position = transform.position;
+            position = Vector2.MoveTowards(position, position + _directionToTarget.normalized, _speedBullet * Time.deltaTime);
+            transform.position = position;
+		}
 
         protected void Touch()
 		{
