@@ -52,6 +52,7 @@ namespace FantasySurvivor
 					skin.up = direction;
 					if(gameController.CheckTouch(targetPos, transform.position, 0.1f))
 					{
+						//fix it
 						Destroy(gameObject);
 					}
 					break;
