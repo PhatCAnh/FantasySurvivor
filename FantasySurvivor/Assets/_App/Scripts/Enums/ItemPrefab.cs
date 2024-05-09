@@ -5,12 +5,15 @@ public enum ItemPrefab
 {
     Undefined = -1,
     BlueZombie = 0,
-    PurpleZombie,
+    PurpleZombie = 1,
+    BlueGhost = 2,
+    YellowBomb = 3,
+    PurpleDevil = 4,
+    KillerBee = 5,
     HealthBar,
     Character,
     TextPopup,
     GemExp,
-    SupportItem,
 }
 
 public enum MapType
@@ -25,6 +28,9 @@ public enum MonsterType
     BlueZombie = 0,
     PurpleZombie = 1,
     BlueGhost = 2,
+    YellowBomb = 3,
+    PurpleDevil = 4,
+    KillerBee = 5,
 }
 
 public enum TowerType
@@ -123,10 +129,10 @@ public enum SkillDamagedType
 
 public enum DropItemType
 {
-    Exp = -1,
-    Magnet = 0,
-    Bomb = 1,
-    Food = 2,
+    Exp,
+    Magnet,
+    Bomb,
+    Food,
 }
 
 public enum MapHorizontalType

@@ -44,7 +44,8 @@ public class MonsterModel : Model<GameApp>
             }
         }
     }
-    
+
+
     public float attackSpeed
     {
         get => _attackSpeed;
