@@ -54,7 +54,7 @@ namespace FantasySurvivor
 
         private void Update()
 		{
-            if (Vector2.Distance(transform.position, _character.transform.position) < 0.25f)
+            if (Vector2.Distance(transform.position, _character.transform.position) < 0.25f + _character.sizeBase)
             {
                 _character.TakeDamage(_origin.model.attackDamage);
                 Touch();
