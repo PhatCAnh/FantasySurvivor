@@ -34,6 +34,8 @@ public class GameController : Controller<GameApp>
 	private Vector3 _camSize;
 	private float _width;
 	private float _height;
+
+	private Vector3 charPos => character.transform.position;
 	
 	private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
 
@@ -356,7 +358,14 @@ public class GameController : Controller<GameApp>
 
 	public float GetDistanceCharacter(Vector3 trans)
 	{
-		return 0;
+		var x = trans.x - charPos.x;
+		var y = trans.y - charPos.y;
+		return x * x + y * y;
+	}
+
+	public bool CheckTouchCharacter(Vector3 trans, float number)
+	{
+		return GetDistanceCharacter(trans) <= number * number;
 	}
 
 	private void LoadMap(int chapter)
@@ -370,6 +379,7 @@ public class GameController : Controller<GameApp>
 		map.Init();
 		character = SpawnCharacter();
 		listMonster.Clear();
+		Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.SupportItem), Vector3.zero, quaternion.identity);
 		app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
 		//app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
 	}

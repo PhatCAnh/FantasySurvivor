@@ -67,7 +67,7 @@ public class HelpItemDrop : View<GameApp>
 	private void FixedUpdate()
 	{
 		if(gameController.isStop) return;
-		if(gameController.GetDistanceCharacter(transform.position) < _size)
+		if(gameController.CheckTouchCharacter(transform.position, _size))
 		{
 			inCircle.localScale += _speed * Time.deltaTime * Vector3.one ;
 			if(inCircle.localScale.x >= outCircle.localScale.x)
