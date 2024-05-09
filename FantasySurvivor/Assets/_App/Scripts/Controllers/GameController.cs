@@ -215,6 +215,21 @@ public class GameController : Controller<GameApp>
 		return listMonsterInRect.Count != 0 ? listMonsterInRect[Random.Range(0, listMonsterInRect.Count)] : null;
 	}
 
+	public List<Monster> GetAllMonsterInAttackRange()
+	{
+		var characterPos = _charPos;
+		Rect myRect = new Rect(characterPos.x - _width / 2, characterPos.y - _height / 2, _width, _height);
+		var listMonsterInRect = new List<Monster>();
+		foreach(var mons in listMonster)
+		{
+			if(myRect.Contains(mons.transform.position))
+			{
+				listMonsterInRect.Add(mons);
+			}
+		}
+		return listMonsterInRect;
+	}
+
 	public void CharacterDie(Character characterView)
 	{
 		LoseGame();

@@ -106,6 +106,8 @@ namespace FantasySurvivor
 
 	public class ThunderStrike : ProactiveSkill
 	{
+		private List<Monster> _monstersTouched = new List<Monster>();
+		
 		public override void Init(SkillData data)
 		{
 			base.Init(data);
@@ -114,6 +116,33 @@ namespace FantasySurvivor
 
 		protected override void AddCooldown()
 		{
+		}
+
+		public override void Active()
+		{
+			base.Active();
+			for(int i = 0; i < numberProjectile; i++)
+			{
+				foreach(var monster in gameController.GetAllMonsterInAttackRange())
+				{
+					if(_monstersTouched.Contains(monster)) continue;
+					monster.TakeDamage(origin.model.attackDamage * levelData[level].value / 100);
+					_monstersTouched.Add(monster);
+					break;
+				}
+			}
+		}
+
+		public override void CoolDownSkill(float deltaTime)
+		{
+			base.CoolDownSkill(deltaTime);
+			foreach(var monster in gameController.listMonster.ToList())
+			{
+				if(_monstersTouched.Contains(monster)) continue;
+
+					monster.TakeDamage(origin.model.attackDamage * levelData[level].value / 100);
+					_monstersTouched.Add(monster);
+			}
 		}
 
 		protected override void UpdatePrefab(SkillActive prefab)
