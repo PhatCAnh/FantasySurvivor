@@ -166,8 +166,6 @@ public class GameController : Controller<GameApp>
 		
 		//var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
 
-		monsterIns.transform.position = RandomPositionSpawnMonster(20, monsterIns.justSpawnVertical);
-
 		monsterIns.Init(monsterStat, wave, type);
 
 		listMonster.Add(monsterIns);

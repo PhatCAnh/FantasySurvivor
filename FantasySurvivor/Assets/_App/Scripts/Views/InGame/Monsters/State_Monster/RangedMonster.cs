@@ -4,7 +4,6 @@ using Sirenix.Utilities;
 using UnityEngine;
 namespace FantasySurvivor
 {
-
 	public class RangedMonster : Monster
 	{
 
