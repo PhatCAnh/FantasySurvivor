@@ -36,7 +36,7 @@ public class GameController : Controller<GameApp>
 	private float _height;
 
 	private Vector3 charPos => character.transform.position;
-	
+
 	private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
 
 	private PoolController poolController => Singleton<PoolController>.instance;
@@ -49,12 +49,12 @@ public class GameController : Controller<GameApp>
 	private void Start()
 	{
 		listMonster = new List<Monster>();
-		
+
 		foreach(var skill in app.resourceManager.GetListSkill())
 		{
 			skill.Init(app.configs.dataLevelSkill.GetConfig(skill.name).data);
 		}
-		
+
 		var data = app.resourceManager.GetDicDropItem();
 		float value = 0;
 		foreach(var item in data)
@@ -161,16 +161,15 @@ public class GameController : Controller<GameApp>
 		var monsterStat = new MonsterStat(statMonster.moveSpeed, wave.healthMonster, wave.adMonster, statMonster.attackSpeed, statMonster.attackRange, wave.expMonster);
 
 		var type = (ItemPrefab) Enum.Parse(typeof(ItemPrefab), statMonster.monsterType);
-		
-		var monsterIns = Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).GetComponent<Monster>();
-		
+
+		Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
+
 		//var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
+		monster.Init(monsterStat, wave, type);
 
-		monsterIns.Init(monsterStat, wave, type);
+		listMonster.Add(monster);
 
-		listMonster.Add(monsterIns);
-
-		return monsterIns;
+		return monster;
 	}
 	public void MonsterDie(Monster mons, bool selfDie = false)
 	{
@@ -387,5 +386,5 @@ public class GameController : Controller<GameApp>
 		app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
 		//app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
 	}
-	
+
 }

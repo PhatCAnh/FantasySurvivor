@@ -1,4 +1,5 @@
 ﻿using System;
+using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using UnityEngine;
@@ -10,6 +11,8 @@ namespace FantasySurvivor
 		public SpriteRenderer skin;
 
 		[SerializeField] protected float size;
+		
+		[SerializeField] protected ItemPrefab type;
 
 		[SerializeField] protected GameObject deadEffect;
 
@@ -50,24 +53,19 @@ namespace FantasySurvivor
 			distance = x * x + y * y;
 			var sizeTotal = size + _character.sizeBase;
 
-			if(distance <= sizeTotal * sizeTotal)
-			{
-				_character.TakeDamage(_origin.model.attackDamage);
-				Touch();
-			} else if(distance > 900)
-			{
-				Destroy(gameObject);
-			}
+			if(distance <= sizeTotal * sizeTotal) Touch();
+			else if(distance > 900) Singleton<PoolController>.instance.ReturnObject(type, gameObject);
 		}
 
 		protected void Touch()
 		{
+			_character.TakeDamage(_origin.model.attackDamage);
 			if(deadEffect != null)
 			{
 				Instantiate(deadEffect, transform.position, transform.rotation);
 			}
 
-			Destroy(gameObject);
+			Singleton<PoolController>.instance.ReturnObject(type, gameObject);
 		}
 
 		protected void OnDrawGizmosSelected()
