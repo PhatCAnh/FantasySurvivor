@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework;
 using ArbanFramework.MVC;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +10,8 @@ namespace FantasySurvivor
 {
 	public class PausePopup : View<GameApp>, IPopup
 	{
-		[SerializeField] private Button _btnExit;
-		[SerializeField] private Button _btnResume;
+		[Required, SerializeField] private Button _btnExit;
+		[Required, SerializeField] private Button _btnResume;
 		
 		private GameController gameController => Singleton<GameController>.instance;
 		

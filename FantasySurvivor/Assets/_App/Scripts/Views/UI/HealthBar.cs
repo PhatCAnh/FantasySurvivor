@@ -2,6 +2,7 @@ using System;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using FantasySurvivor;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -10,9 +11,9 @@ namespace FantasySurvivor
 {
 	public class HealthBar : View<GameApp>
 	{
-		[SerializeField] private Slider _sldHealthPoint;
+		[Required, SerializeField] private Slider _sldHealthPoint;
 
-		[SerializeField] private TextMeshProUGUI _txtPoint;
+		[Required, SerializeField] private TextMeshProUGUI _txtPoint;
 
 		private Character _character;
 		public GameController gameController => Singleton<GameController>.instance;

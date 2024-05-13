@@ -7,6 +7,7 @@ using ArbanFramework.MVC;
 using ArbanFramework.StateMachine;
 using DG.Tweening;
 using FantasySurvivor;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class TowerView : ObjectRPG

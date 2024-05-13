@@ -3,6 +3,7 @@ using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
 using FantasySurvivor;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,19 +14,19 @@ namespace FantasySurvivor
 
 	public class MainUIInGame : View<GameApp>, IPopup
 	{
-		[SerializeField] private Sprite _spriteArrowUp, _spriteArrowDown;
+		[Required, SerializeField] private Sprite _spriteArrowUp, _spriteArrowDown;
 
-		[SerializeField] private Button _btnSetting;
+		[Required, SerializeField] private Button _btnSetting;
 
-		[SerializeField] private Slider _sldExpCharacter;
+		[Required, SerializeField] private Slider _sldExpCharacter;
 
-		[SerializeField] private RectTransform _interactContainer;
+		[Required, SerializeField] private RectTransform _interactContainer;
 
-		[SerializeField] private Image _imgArrow, _imgStat, _imgElemental;
+		[Required, SerializeField] private Image _imgArrow, _imgStat, _imgElemental;
 
-		[SerializeField] private Toggle _toggleStat, _toggleDef, _toggleChangeStateInteract;
+		[Required, SerializeField] private Toggle _toggleStat, _toggleDef, _toggleChangeStateInteract;
 
-		[SerializeField] private GameObject _containerStatAtk, _containerStatDef;
+		[Required, SerializeField] private GameObject _containerStatAtk, _containerStatDef;
 
 		[SerializeField] private TextMeshProUGUI _txtLevelCharacter, _txtLevel, _txtTimeMinutes, _txtTimeSeconds, _txtMonsterKilled;
 		public GameController gameController => Singleton<GameController>.instance;

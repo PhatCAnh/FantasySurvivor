@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LoseGamePopup : View<GameApp>, IPopup
 {
-    [SerializeField] private Image _imageBackGround;
+    [Required, SerializeField] private Image _imageBackGround;
     
-    [SerializeField] private GameObject _title;
+    [Required, SerializeField] private GameObject _title;
     
-    [SerializeField] private TextMeshProUGUI _txtEnemyKilled, _txtWave;
+    [Required, SerializeField] private TextMeshProUGUI _txtEnemyKilled, _txtWave;
     
-    [SerializeField] private GameObject _leftArrow;
-    [SerializeField] private GameObject _rightArrow;
-    [SerializeField] private TextMeshProUGUI _txtReward;
-    [SerializeField] private Transform _containerReward;
+    [Required, SerializeField] private GameObject _leftArrow;
+    [Required, SerializeField] private GameObject _rightArrow;
+    [Required, SerializeField] private TextMeshProUGUI _txtReward;
+    [Required, SerializeField] private Transform _containerReward;
     
-    [SerializeField] private Button _btnHome;
-    [SerializeField] private Button _btnReward;
+    [Required, SerializeField] private Button _btnHome;
+    [Required, SerializeField] private Button _btnReward;
 
     private Sequence _sequence;
     private GameController gameController => Singleton<GameController>.instance;
