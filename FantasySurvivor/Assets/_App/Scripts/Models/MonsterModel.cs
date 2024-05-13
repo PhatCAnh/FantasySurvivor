@@ -77,7 +77,7 @@ public class MonsterModel : Model<GameApp>
     {
         get => _currentHealthPoint;
         set {
-            if(moveSpeed.Equals(value)) return;
+            if(currentHealthPoint.Equals(value)) return;
             _currentHealthPoint = value;
             RaiseDataChanged(nameof(currentHealthPoint));
         }
