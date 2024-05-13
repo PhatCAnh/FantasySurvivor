@@ -11,6 +11,7 @@ public enum ItemPrefab
     PurpleDevil = 4,
     KillerBee = 5,
     GlobloomSentry = 6,
+    ElectroBomber = 7,
     HealthBar,
     Character,
     TextPopup,
@@ -36,6 +37,7 @@ public enum MonsterType
     PurpleDevil = 4,
     KillerBee = 5,
     GlobloomSentry = 6,
+    ElectroBomber = 7,
 }
 
 public enum TowerType

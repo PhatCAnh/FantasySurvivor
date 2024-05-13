@@ -74,6 +74,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     [Required, SerializeField] private GameObject _globloomSentry;
 
+    [Required, SerializeField] private GameObject _electroBomber;
+    
     private Dictionary<string, GameObject> _typeMonsterDic;
 
 	[Header("Item reward prefabs")]
@@ -131,6 +133,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.PurpleDevil, _purpleDevil},
 			{ItemPrefab.KillerBee, _killerBee},
             {ItemPrefab.GlobloomSentry, _globloomSentry},
+			{ItemPrefab.ElectroBomber, _electroBomber},
 
             {ItemPrefab.SupportItem, _supportItem},
 			{ItemPrefab.BulletKillerBee, _bulletKillerBee},
@@ -152,6 +155,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{"M5", _purpleDevil},
             {"M6", _killerBee},
             {"M7", _globloomSentry},
+			{"M8", _electroBomber},            
 
         };
 
