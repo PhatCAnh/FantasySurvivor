@@ -15,6 +15,6 @@ namespace FantasySurvivor
 			agent.firePoint.up = agent.target.transform.position - agent.firePoint.position;
 			agent.Attack();
 			agent.IdleState();
-		}
+        }
 	}
 }

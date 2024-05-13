@@ -68,12 +68,10 @@ namespace FantasySurvivor
 		protected virtual bool CheckTouchMonsters(Monster monster)
 		{
 			sizeTouch = size + monster.size;
-			if(Vector2.Distance(monster.transform.position, transform.position) < sizeTouch)
-			{
-				TakeDamage(monster);
-				return true;
-			}
-			return false;
+
+			if(!gameController.CheckTouch(monster.transform.position, transform.position, sizeTouch)) return false;
+			TakeDamage(monster);
+			return true;
 		}
 
 		protected virtual void OnDrawGizmosSelected()
@@ -90,7 +88,7 @@ namespace FantasySurvivor
 		{
 			foreach(var mons in gameController.listMonster.ToList())
 			{
-				if(Vector2.Distance(mons.transform.position, transform.position) < sizeTouch)
+				if(gameController.CheckTouch(mons.transform.position, transform.position, sizeTouch))
 				{
 					TouchUnit(mons);
 				}

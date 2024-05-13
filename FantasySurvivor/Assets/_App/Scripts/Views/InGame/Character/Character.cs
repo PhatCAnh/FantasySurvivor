@@ -15,9 +15,11 @@ using StateMachine = ArbanFramework.StateMachine.StateMachine;
 
 public class Character : ObjectRPG
 {
+
+	[SerializeField] private Transform circleAttackRange;
+
 	[FormerlySerializedAs("a"),SerializeField] private int asd= 5;
 	public int b;
-	
 	
 	public float abc = 2.5f;
 
@@ -77,12 +79,23 @@ public class Character : ObjectRPG
 		}
 
 		myRigid = GetComponent<Rigidbody2D>();
+		circleAttackRange.DORotate(new Vector3(0, 0, 360), 5f, RotateMode.FastBeyond360)
+			.SetEase(Ease.Linear)
+			.SetLoops(-1, LoopType.Restart);
 
 		AddDataBinding("fieldCharacter-moveSpeedValue", animator, (control, e) =>
 			{
 				control.SetFloat("SpeedMul", model.moveSpeed / 2.5f);
-			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackSpeed), model)
+			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.moveSpeed), model)
 		);
+
+		AddDataBinding("fieldCharacter-attackRangeValue", circleAttackRange, (control, e) =>
+			{
+				control.localScale = Vector3.one * model.attackRange;
+			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackRange), model)
+		);
+		
+		
 	}
 
 	public void Init(CharacterStat statInit)
@@ -91,7 +104,9 @@ public class Character : ObjectRPG
 			statInit.moveSpeed.BaseValue,
 			statInit.health.BaseValue,
 			statInit.attackRange.BaseValue,
-			statInit.attackDamage.BaseValue
+			statInit.attackDamage.BaseValue,
+			statInit.attackRange.BaseValue,
+			statInit.armor.BaseValue
 		);
 	}
 
@@ -126,12 +141,15 @@ public class Character : ObjectRPG
 
 	public void TakeDamage(int damage)
 	{
-		if(!IsAlive) return;
+		if (!IsAlive) return;
+		damage = MinusDamage(damage);
 		model.currentHealthPoint -= damage;
 		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
 		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.MonsterDamage);
-		if(!IsAlive) Die();
+
+		if (!IsAlive) Die();
 	}
+	
 
 	public void AddHealth(float value)
 	{
@@ -152,7 +170,7 @@ public class Character : ObjectRPG
 		}
 		switch (skillData.type)
 		{
-			case SkillType.Proactive:
+			case SkillType.Active:
 				{
 					Skill skillIns;
 					switch (skillData.name)
@@ -160,23 +178,8 @@ public class Character : ObjectRPG
 						case SkillName.Fireball:
 							skillIns = new FireBall();
 							break;
-						case SkillName.Twin:
-							skillIns = new Twin();
-							break;
-						case SkillName.Shark:
-							skillIns = new Shark();
-							break;
-						case SkillName.ZoneOfJudgment:
-							skillIns = new ZoneOfJudgment();
-							break;
-						case SkillName.ThunderStrike:
+						case SkillName.ThunderStrike: 
 							skillIns = new ThunderStrike();
-							break;
-						case SkillName.BlackDrum:
-							skillIns = new BlackDrum();
-							break;
-						case SkillName.Passive1:
-							skillIns = new Passive1();
 							break;
 						default:
 							skillIns = new ProactiveSkill();
@@ -187,7 +190,7 @@ public class Character : ObjectRPG
 				}
 				break;
 			case SkillType.Buff:
-				if(skillData.name == SkillName.Food)
+				if (skillData.name == SkillName.Food)
 				{
 					model.currentHealthPoint += model.currentHealthPoint * 20 / 100;
 				}
@@ -210,6 +213,11 @@ public class Character : ObjectRPG
 	private void Die()
 	{
 		gameController.CharacterDie(this);
+	}
+
+	private int MinusDamage(int dmg)
+	{
+		return dmg * (100 - model.armor) / 100;
 	}
 
 	private void HandlePhysicUpdate()
@@ -260,5 +268,6 @@ public class Character : ObjectRPG
 	{
 		Gizmos.DrawWireSphere(transform.position, sizeBase);
 		Gizmos.DrawWireSphere(transform.position, abc);
+		Gizmos.DrawWireSphere(transform.position, 1);
 	}
 }

@@ -16,4 +16,20 @@ namespace FantasySurvivor
 			transform.position = target.transform.position;
 		}
 	}
+	// public class Thunder :SkillFallActive {
+ //        protected override void CheckAoeMons()
+ //        {
+ //            foreach(var mons in gameController.listMonster.ToList())
+	// 		{
+	// 			if(mons == target)
+	// 			{
+ //                    mons.TakeDamage(damage, isCritical);
+ //                }
+	// 			else
+	// 			{
+	// 				mons.TakeDamage(damage * 0.75f , isCritical);
+ //                }
+	// 		}
+ //        }
+ //    }
 }

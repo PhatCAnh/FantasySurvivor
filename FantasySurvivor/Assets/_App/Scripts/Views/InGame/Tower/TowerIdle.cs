@@ -11,9 +11,9 @@ namespace FantasySurvivor
 		public override void LogicUpdate(float deltaTime)
 		{
 			base.LogicUpdate(deltaTime);
-			agent.target = agent.gameController.GetRandomMonster();
-			if(agent.target != null)
-				agent.AttackState();
+			// agent.target = agent.gameController.GetAllMonsterInAttackRange();
+			// if(agent.target != null)
+			// 	agent.AttackState();
 		}
 	}
 }

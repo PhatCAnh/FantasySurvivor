@@ -22,6 +22,10 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[Required, SerializeField] private GameObject _gemExpPrefab;
 	
 	[Required, SerializeField] private GameObject _textPopup;
+	
+	[Required, SerializeField] private GameObject _supportItem;
+	
+	[Required, SerializeField] private GameObject _bulletKillerBee;
 
 	private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
@@ -64,7 +68,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	[Required, SerializeField] private GameObject _purpleDevil;
 
-	private Dictionary<string, GameObject> _typeMonsterDic;
+    [Required, SerializeField] private GameObject _killerBee;
+
+    private Dictionary<string, GameObject> _typeMonsterDic;
 
 	[Header("Item reward prefabs")]
 	[Required, SerializeField] private ItemReward _irCoin;
@@ -115,7 +121,14 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.TextPopup, _textPopup},
 			{ItemPrefab.GemExp, _gemExpPrefab},
 			{ItemPrefab.BlueZombie, _blueZombie},
-		};
+            {ItemPrefab.PurpleZombie, _purpleZombie},
+            {ItemPrefab.BlueGhost, _blueGhost},
+			{ItemPrefab.YellowBomb, _yellowBomb},
+			{ItemPrefab.PurpleDevil, _purpleDevil},
+			{ItemPrefab.KillerBee, _killerBee},
+			{ItemPrefab.SupportItem, _supportItem},
+			{ItemPrefab.BulletKillerBee, _bulletKillerBee},
+        };
 
 		_mapDic = new Dictionary<MapType, Map>
 		{
@@ -129,7 +142,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{"M3", _blueGhost},
 			{"M4", _yellowBomb},
 			{"M5", _purpleDevil},
-		};
+            {"M6", _killerBee},
+        };
 
 		_typeItemReward = new Dictionary<TypeItemReward, ItemReward>()
 		{
