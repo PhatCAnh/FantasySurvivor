@@ -21,8 +21,8 @@ namespace FantasySurvivor
 
 		public override void InitBaseData()
 		{
-			this.Coin = 100;
-
+			this.Coin = 99;
+			this.Health = 100;
 			firstTouchHand = true;
 			firstTutorialHandUi = true;
 			firstSeeBulletInteract = true;
@@ -30,7 +30,8 @@ namespace FantasySurvivor
 		}
 
 		[JsonProperty] private int _coin;
-		[JsonProperty] private int _levelAd;
+        [JsonProperty] private int _health;
+        [JsonProperty] private int _levelAd;
 		[JsonProperty] private int _levelAr;
 		[JsonProperty] private int _levelAs;
 		[JsonProperty] private int _levelCr;
@@ -130,5 +131,16 @@ namespace FantasySurvivor
 				RaiseDataChanged(nameof(LevelRegenHp));
 			}
 		}
-	}
+        public int Health
+        {
+            get => _health;
+            set
+            {
+                if (Health == value) return;
+                _health = value;
+                app.models.WriteModel<DataPlayerModel>();
+                RaiseDataChanged(nameof(Health));
+            }
+        }
+    }
 }
