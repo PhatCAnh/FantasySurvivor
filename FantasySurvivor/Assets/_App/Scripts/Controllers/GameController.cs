@@ -8,7 +8,6 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using FantasySurvivor;
 using JetBrains.Annotations;
-using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using UnityEngine.SceneManagement;
 using MonsterStat = FantasySurvivor.MonsterStat;
@@ -145,12 +144,6 @@ public class GameController : Controller<GameApp>
 				app.models.dataPlayerModel.Coin += value;
 				break;
 		}
-	}
-
-	[Button]
-	public void TestMethod()
-	{
-		character.AddHealth(0);
 	}
 
 

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework.MVC;
 using DG.Tweening;
-using Sirenix.OdinInspector;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,24 +20,24 @@ namespace FantasySurvivor
 	
 	public class ChoiceMapPopup : View<GameApp>, IPopup
 	{
-		[Required, SerializeField] private GameObject _title;
-		[Required, SerializeField] private TextMeshProUGUI _txtTitle;
-		[Required, SerializeField] private Button _btnClose;
-		[Required, SerializeField] private GameObject _icon;
-		[Required, SerializeField] private Button _leftArrow;
-		[Required, SerializeField] private Button _rightArrow;
-		[Required, SerializeField] private TextMeshProUGUI _txtChapterName;
-		[Required, SerializeField] private Slider _sldLevel;
+		[SerializeField] private GameObject _title;
+		[SerializeField] private TextMeshProUGUI _txtTitle;
+		[SerializeField] private Button _btnClose;
+		[SerializeField] private GameObject _icon;
+		[SerializeField] private Button _leftArrow;
+		[SerializeField] private Button _rightArrow;
+		[SerializeField] private TextMeshProUGUI _txtChapterName;
+		[SerializeField] private Slider _sldLevel;
 		
-		[Required, SerializeField] private GameObject _textContent;
-		[Required, SerializeField] private TextMeshProUGUI _txtPlayed;
-		[Required, SerializeField] private TextMeshProUGUI _txtBestWave;
+		[SerializeField] private GameObject _textContent;
+		[SerializeField] private TextMeshProUGUI _txtPlayed;
+		[SerializeField] private TextMeshProUGUI _txtBestWave;
 		
-		[Required, SerializeField] private Button _btnClaimGift;
-		[Required, SerializeField] private Button _btnPlay;
+		[SerializeField] private Button _btnClaimGift;
+		[SerializeField] private Button _btnPlay;
 
-		[Required, SerializeField] private Image _imgChapter;
-		[Required, SerializeField] private DataUiChapter[] _uiChapter;
+		[SerializeField] private Image _imgChapter;
+		[SerializeField] private DataUiChapter[] _uiChapter;
 
 		private int _currentChapter = 1;
 

@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -15,73 +14,73 @@ using UnityEngine.UI;
 public class ResourceManager : UIManagerBase<PopupType>
 {
 	[Header("Object prefabs")]
-	[Required, SerializeField] private GameObject _healthBarPrefab;
+	[SerializeField] private GameObject _healthBarPrefab;
 
-	[Required, SerializeField] private GameObject _characterPrefab;
+	[SerializeField] private GameObject _characterPrefab;
 
-	[Required, SerializeField] private GameObject _gemExpPrefab;
+	[SerializeField] private GameObject _gemExpPrefab;
 	
-	[Required, SerializeField] private GameObject _textPopup;
+	[SerializeField] private GameObject _textPopup;
 	
-	[Required, SerializeField] private GameObject _supportItem;
+	[SerializeField] private GameObject _supportItem;
 	
-	[Required, SerializeField] private GameObject _bulletKillerBee;
+	[SerializeField] private GameObject _bulletKillerBee;
 
 	private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
 
 	[Header("UI prefabs")]
-	[Required, SerializeField] private GameObject _mainUIInGame;
+	[SerializeField] private GameObject _mainUIInGame;
 
 
-	[Required, SerializeField] private GameObject _mainUI;
+	[SerializeField] private GameObject _mainUI;
 
-	[Required, SerializeField] private GameObject _pausePopup;
+	[SerializeField] private GameObject _pausePopup;
 
-	[Required, SerializeField] private GameObject _cheatPopup;
+	[SerializeField] private GameObject _cheatPopup;
 
-	[Required, SerializeField] private GameObject _choiceMapPopup;
+	[SerializeField] private GameObject _choiceMapPopup;
 
-	[Required, SerializeField] private GameObject _loseGamePopup;
+	[SerializeField] private GameObject _loseGamePopup;
 
-	[Required, SerializeField] private GameObject _choiceSkill;
+	[SerializeField] private GameObject _choiceSkill;
 
 
 	[Header("UI Tutorial prefabs")]
-	[Required, SerializeField] private GameObject _clickBulletTutorial;
+	[SerializeField] private GameObject _clickBulletTutorial;
 
 	[Header("Map prefabs")]
-	[Required, SerializeField] private Map _forestMap;
+	[SerializeField] private Map _forestMap;
 	
 	public MapInfinityController mapInfinity;
 
 	private Dictionary<MapType, Map> _mapDic;
 
 	[Header("Monster prefabs")]
-	[Required, SerializeField] private GameObject _blueZombie;
+	[SerializeField] private GameObject _blueZombie;
 
-	[Required, SerializeField] private GameObject _purpleZombie;
+	[SerializeField] private GameObject _purpleZombie;
 
-	[Required, SerializeField] private GameObject _blueGhost;
+	[SerializeField] private GameObject _blueGhost;
 
-	[Required, SerializeField] private GameObject _yellowBomb;
+	[SerializeField] private GameObject _yellowBomb;
 
-	[Required, SerializeField] private GameObject _purpleDevil;
+	[SerializeField] private GameObject _purpleDevil;
 
-    [Required, SerializeField] private GameObject _killerBee;
+    [SerializeField] private GameObject _killerBee;
 
     private Dictionary<string, GameObject> _typeMonsterDic;
 
 	[Header("Item reward prefabs")]
-	[Required, SerializeField] private ItemReward _irCoin;
+	[SerializeField] private ItemReward _irCoin;
 
 	private Dictionary<TypeItemReward, ItemReward> _typeItemReward;
 
 	[Header("Drop Item prefabs")]
-	[Required, SerializeField] private float _exp;
-	[Required, SerializeField] private float _magnet;
-	[Required, SerializeField] private float _food;
-	[Required, SerializeField] private float _bomb;
+	[SerializeField] private float _exp;
+	[SerializeField] private float _magnet;
+	[SerializeField] private float _food;
+	[SerializeField] private float _bomb;
 
 	private Dictionary<DropItemType, float> _dropItemDic;
 

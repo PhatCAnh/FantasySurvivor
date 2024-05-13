@@ -1,7 +1,5 @@
 ﻿using _App.Scripts.Controllers;
 using ArbanFramework;
-using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using UnityEngine;
 namespace FantasySurvivor
 {
