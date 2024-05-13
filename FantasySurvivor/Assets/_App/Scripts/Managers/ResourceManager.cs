@@ -27,7 +27,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 	
 	[Required, SerializeField] private GameObject _bulletKillerBee;
 
-	private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
+    [Required, SerializeField] private GameObject _bulletGlobloomSentry;
+
+    private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
 
 	[Header("UI prefabs")]
@@ -132,6 +134,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 
             {ItemPrefab.SupportItem, _supportItem},
 			{ItemPrefab.BulletKillerBee, _bulletKillerBee},
+            {ItemPrefab.BulletGlobloomSentry, _bulletGlobloomSentry},
+
         };
 
 		_mapDic = new Dictionary<MapType, Map>

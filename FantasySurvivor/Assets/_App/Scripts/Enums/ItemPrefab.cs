@@ -17,6 +17,7 @@ public enum ItemPrefab
     GemExp,
     SupportItem,
     BulletKillerBee,
+    BulletGlobloomSentry,
 }
 
 public enum MapType

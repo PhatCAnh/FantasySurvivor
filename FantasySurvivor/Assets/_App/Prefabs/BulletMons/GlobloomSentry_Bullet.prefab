@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 36d9207047c1e764cb86c53bac8dbf24, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 8efeae2b4737a404ab5834afe0545034, type: 3}
+  m_Color: {r: 1, g: 0.60002184, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 1180482081522543767}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4a2a82b7af8db4e41af6f5aa9317c20a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3db288b54542f36439873cfedd2586aa, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -133,7 +133,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.8937433, y: -55.808456, z: -0.22634603}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4409747285988997331}
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skin: {fileID: 7868541475485436973}
-  size: 0.17
-  type: 12
-  deadEffect: {fileID: 680874694143846828, guid: ddf12a4cc59bd3a48b449dbf7106228a, type: 3}
+  size: 0.14
+  type: 13
+  deadEffect: {fileID: 0}
   _speedBullet: 10
