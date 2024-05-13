@@ -1,14 +1,14 @@
-﻿using System.Linq;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 namespace FantasySurvivor
 {
-    public class SkillBulletActive : SkillActive
+    public class Waterball : SkillActive
     {
         [SerializeField] protected Transform skin;
-        [SerializeField] protected GameObject explosionEffectPrefab;  // Đổi thành GameObject để đảm bảo prefab có thể được instantiate
-        [SerializeField] private float explosionRadius = 5.0f;         // Bán kính nổ
-        [SerializeField] private float explosionDamage = 50.0f;        // Sát thương gây ra bởi vụ nổ
+        [SerializeField] protected Transform explosionEffectPrefab;  // Đổi thành GameObject để đảm bảo prefab có thể được instantiate
+        [SerializeField] private float explosionRadius = 2.0f;         // Bán kính nổ
+        [SerializeField] private float explosionDamage = 4.0f;        // Sát thương gây ra bởi vụ nổ
 
         public SpawnPos spawnPos;
         public TargetType targetType;
@@ -96,10 +96,11 @@ namespace FantasySurvivor
             }
 
             // Thêm hiệu ứng nổ tại vị trí đạn nổ (nếu có)
-            if (explosionEffectPrefab != null)
-            {
-                Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
-            }
+            //if (explosionEffectPrefab != null)
+            //{
+
+            Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
+            //}
         }
     }
 }

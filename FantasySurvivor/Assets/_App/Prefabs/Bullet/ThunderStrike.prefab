@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6105532977934052370}
-  - component: {fileID: 5316642750516455888}
+  - component: {fileID: 4316150733630178974}
   m_Layer: 0
   m_Name: ThunderStrike
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 6105532978333781264}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5316642750516455888
+--- !u!114 &4316150733630178974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6105532977934052371}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e05d15492fc0d5429e0af0c09bef462, type: 3}
+  m_Script: {fileID: 11500000, guid: 78efba5f9ea14fbc92a6ef6e117f29c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}

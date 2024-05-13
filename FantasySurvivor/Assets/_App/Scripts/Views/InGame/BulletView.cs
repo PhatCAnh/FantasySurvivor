@@ -49,7 +49,8 @@ public class BulletView : View<GameApp>
 		}
 		
 		transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-		if(Vector2.Distance(transform.position, targetPos) < 0.1f)
+		
+		if(gameController.CheckTouch(transform.position, targetPos, 0.1f))
 		{
 			target.TakeDamage(damage, isCritical);
 			TouchUnit(target);

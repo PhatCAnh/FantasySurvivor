@@ -1,16 +1,18 @@
-﻿using ArbanFramework;
+﻿using _App.Scripts.Controllers;
+using ArbanFramework;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
 namespace FantasySurvivor
 {
-
 	public class RangedMonster : Monster
 	{
 
 		public BulletMonster bulletPrefab;
 
         private Vector3 spawnPos { get; set; }
+
+        [SerializeField] private ItemPrefab typeBullet;
 
 		[SerializeField] private int _numberBack = 0;
 
@@ -64,9 +66,10 @@ namespace FantasySurvivor
 		{
            
             // Tạo một instance mới của viên đạn từ bulletPrefab
-            var arrowIns = Instantiate(bulletPrefab);
+           Singleton<PoolController>.instance.GetObject(typeBullet, firePoint.position).TryGetComponent(out BulletMonster bullet);
+            bullet.transform.rotation = firePoint.rotation;
             // Khởi tạo viên đạn
-            arrowIns.Init(this);
+            bullet.Init(this);
 
             _coolDownBack++;
 			if(_numberBack != 0)

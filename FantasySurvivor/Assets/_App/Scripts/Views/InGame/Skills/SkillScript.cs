@@ -3,6 +3,7 @@ using System.Linq;
 using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 namespace FantasySurvivor
 {
 	public class FireBall : ProactiveSkill
@@ -19,7 +20,8 @@ namespace FantasySurvivor
 			if (level == 3 || level == 5)
 			{
 				numberProjectile++;
-			}
+                Debug.Log("lua" + numberProjectile);
+            }
 			if (level == 6)
 			{
 				numberProjectile=1;
@@ -143,32 +145,43 @@ namespace FantasySurvivor
 
         public override void Active()
         {
-            base.Active();
             var mons = gameController.GetAllMonsterInAttackRange();
             if (mons != null)
             {
                 for (int i = 0; i < numberProjectile; i++)
                 {
                     var skill = GameObject.Instantiate(skillIns).GetComponent<SkillActive>();
-                    skill.Init(origin.model.attackDamage * levelData[level].value / 100, mons, level);
-                    UpdatePrefab(skill);
+                    skill.Init(origin.model.attackDamage * levelData[level].value / 100, mons[Random.Range(0, mons.Count)], level);
                 }
             }
-
         }
-        protected override void UpdatePrefab(SkillActive prefab)
-		{
-			base.UpdatePrefab(prefab);
-			
-			if (level == 6)
-			{
-				prefab.skillDamagedType = SkillDamagedType.AreaOfEffect;
-			}
-
-		}
 	}
+    public class waterball : ProactiveSkill
+    {
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+            timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
+        }
 
-	/*public class BlackDrum : ProactiveSkill
+        public override void UpLevel()
+        {
+            base.UpLevel();
+            if (level == 3 || level == 5)
+            {
+			
+                numberProjectile++;
+                Debug.Log("nuoc" + numberProjectile);
+            }
+            if (level == 6)
+            {
+                numberProjectile = 1;
+                Debug.Log("ulti" + numberProjectile);
+            }
+        }
+    }
+
+    /*public class BlackDrum : ProactiveSkill
 	{
 		protected override void UpdatePrefab(SkillActive prefab)
 		{

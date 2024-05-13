@@ -15,6 +15,7 @@ public enum ItemPrefab
     TextPopup,
     GemExp,
     SupportItem,
+    BulletKillerBee,
 }
 
 public enum MapType
@@ -81,9 +82,9 @@ public enum TypeAds
 public enum SkillName
 {
     Fireball,
-    ThunderStrike,
+    ThunderStrike,Waterball,
     /* ThunderBird,*/
-    Food,
+   Food,
     /*Shark,
     Twin,
     ZoneOfJudgment,

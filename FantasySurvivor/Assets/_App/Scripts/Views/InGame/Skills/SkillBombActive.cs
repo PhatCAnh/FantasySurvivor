@@ -49,7 +49,7 @@ namespace FantasySurvivor
 		{
 			foreach(var unit in gameController.listMonster.ToList())
 			{
-				if(Vector2.Distance(unit.transform.position, transform.position) < sizeExplosion + unit.size)
+				if(gameController.CheckTouch(unit.transform.position, transform.position, sizeExplosion + unit.size))
 				{
 					base.TouchUnit(unit);
 				}
