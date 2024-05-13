@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3192426052812612723}
   - component: {fileID: 3192426052812612720}
   - component: {fileID: 3192426052812612721}
-  - component: {fileID: 5294222602378034033}
+  - component: {fileID: -3525961801699918151}
   m_Layer: 0
   m_Name: ElectroBomber
   m_TagString: Untagged
@@ -98,7 +98,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5294222602378034033
+--- !u!114 &-3525961801699918151
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3192426052812612716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f98137579f1123447a0b76ec0bda4ccd, type: 3}
+  m_Script: {fileID: 11500000, guid: a6e85ede2ae711547b05a0890f5f521b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 7
@@ -116,7 +116,7 @@ MonoBehaviour:
   firePoint: {fileID: 3192426053512486235}
   justSpawnVertical: 0
   size: 0.65
-  _deadEffect: {fileID: 680874694143846828, guid: ddf12a4cc59bd3a48b449dbf7106228a, type: 3}
+  _deadEffect: {fileID: 76239542935541844, guid: de5cdad2f82c61b40b7e22ce37116fae, type: 3}
 --- !u!1 &3192426053512486228
 GameObject:
   m_ObjectHideFlags: 0
