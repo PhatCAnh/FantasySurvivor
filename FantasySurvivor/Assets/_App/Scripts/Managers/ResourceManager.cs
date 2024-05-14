@@ -29,13 +29,14 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _skillFireBall;
 	
 	[SerializeField] private GameObject _skillThunderStrike;
+	
+	[SerializeField] private GameObject _skillThunderStrikeSmall;
 
 	private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
 
 	[Header("UI prefabs")]
 	[SerializeField] private GameObject _mainUIInGame;
-
 
 	[SerializeField] private GameObject _mainUI;
 
@@ -133,6 +134,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.BulletKillerBee, _bulletKillerBee},
 			{ItemPrefab.SkillFireBall, _skillFireBall},
 			{ItemPrefab.ThunderStrike, _skillThunderStrike},
+			{ItemPrefab.ThunderStrikeSmall, _skillThunderStrikeSmall},
         };
 
 		_mapDic = new Dictionary<MapType, Map>

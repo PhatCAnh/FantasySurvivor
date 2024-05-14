@@ -17,6 +17,7 @@ public enum ItemPrefab
     SupportItem,
     BulletKillerBee,
     SkillFireBall,
+    ThunderStrikeSmall,
     ThunderStrike,
 }
 
