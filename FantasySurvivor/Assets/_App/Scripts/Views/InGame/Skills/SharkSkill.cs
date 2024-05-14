@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using _App.Scripts.Controllers;
 using ArbanFramework;
@@ -19,7 +20,7 @@ public class Skill
 	protected GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
 	protected SpawnPos spawnPos;
-	
+
 	protected ItemPrefab skillPrefab;
 
 	protected ItemPrefab normalSkillPrefab;
@@ -88,17 +89,22 @@ public class ProactiveSkill : Skill
 	public override async void Active()
 	{
 		base.Active();
-		var mons = gameController.GetAllMonsterInAttackRange();
-		if(mons != null)
+		var mons = gameController.GetAllMonsterInAttackRange().ToList();
+		if(mons.Count == 0)
+			return;
+		List<Monster> listMonsCheck = new();
+
+		for(int i = 0; i < numberProjectile; i++)
 		{
-			for(int i = 0; i < numberProjectile; i++)
-			{
-				var randomMob = mons[Random.Range(0, mons.Count)];
-				Singleton<PoolController>.instance.GetObject(skillPrefab, SetPositionSpawn(spawnPos, randomMob)).TryGetComponent(out SkillActive skill);
-				skill.Init(origin.model.attackDamage * levelData[level].value / 100, randomMob, level, skillPrefab);
-				UpdatePrefab(skill);
-				await Task.Delay(timeDelaySkill);
-			}
+			if(i > mons.Count - 1) return;
+			var randomMob = Random.Range(0, mons.Count);
+			if(listMonsCheck.Contains(mons[randomMob])) randomMob = randomMob >= mons.Count - 1 ? listMonsCheck.Count : randomMob + 1;
+			var mob = mons[randomMob];
+			listMonsCheck.Add(mob);
+			Singleton<PoolController>.instance.GetObject(skillPrefab, SetPositionSpawn(spawnPos, mob)).TryGetComponent(out SkillActive skill);
+			skill.Init(origin.model.attackDamage * levelData[level].value / 100, mob, level, skillPrefab);
+			UpdatePrefab(skill);
+			await Task.Delay(timeDelaySkill);
 		}
 	}
 
