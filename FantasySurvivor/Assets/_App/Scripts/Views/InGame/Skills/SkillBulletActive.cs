@@ -1,99 +1,103 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
+
 namespace FantasySurvivor
 {
-	public class SkillBulletActive : SkillActive
-	{
-		[SerializeField] protected Transform skin;
+    public class SkillBulletActive : SkillActive
+    {
+        [SerializeField] protected Transform skin;
 
-		public SpawnPos spawnPos;
+        public SpawnPos spawnPos;
 
-		public TargetType targetType;
+        public TargetType targetType;
 
-		public bool canBlock;
+        public bool canBlock;
 
-		public float moveSpeed;
+        public float moveSpeed;
 
-		protected Monster oldTarget;
+        protected Monster oldTarget;
 
-		protected Vector3 targetPos;
+        protected Vector3 targetPos;
 
-		protected Vector3 direction;
-		public override void Init(float damage, Monster target, int level)
-		{
-			base.Init(damage, target, level);
+        protected Vector3 direction;
+        public override void Init(float damage, Monster target, int level)
+        {
+            base.Init(damage, target, level);
 
-			if(target == null) return;
-			
-			transform.position = spawnPos == SpawnPos.Character ? origin.transform.position : target.transform.position;
+            if (target == null) return;
 
-			this.direction = target.transform.position - transform.position;
+            transform.position = spawnPos == SpawnPos.Character ? origin.transform.position : target.transform.position;
 
-			skin.up = direction;
-		}
+            this.direction = target.transform.position - transform.position;
 
-		private void FixedUpdate()
-		{
-			if(gameController.isStop) return;
+            skin.up = direction;
+        }
 
-			if(target != null && skillDamagedType == SkillDamagedType.Single)
-			{
-				targetPos = target.transform.position;
-			}
+        private void FixedUpdate()
+        {
+            if (gameController.isStop) return;
 
-			switch (targetType)
-			{
-				case TargetType.Shot:
-					transform.Translate(moveSpeed * Time.fixedDeltaTime * direction.normalized);
-					break;
-				case TargetType.Target:
-					transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.fixedDeltaTime);
-					skin.up = direction;
-					if(gameController.CheckTouch(targetPos, transform.position, 0.1f))
-					{
-						//fix it
-						Destroy(gameObject);
-					}
-					break;
-			}
-			HandleTouch();
-		}
+            if (target != null && skillDamagedType == SkillDamagedType.Single)
+            {
+                targetPos = target.transform.position;
+            }
 
-		protected virtual void HandleTouch()
-		{
-			if(!canBlock)
-			{
-				switch (skillDamagedType)
-				{
-					case SkillDamagedType.Single:
-						if(gameController.CheckTouch(targetPos, transform.position, sizeTouch))
-						{
-							TakeDamage();
-							Destroy(gameObject);
-						}
-						break;
-					case SkillDamagedType.AreaOfEffect:
-						foreach(var mons in gameController.listMonster.ToList())
-						{
-							CheckTouchMonsters(mons);
-						}
-						break;
-				}
+            switch (targetType)
+            {
+                case TargetType.Shot:
+                    transform.Translate(moveSpeed * Time.fixedDeltaTime * direction.normalized);
+                    break;
+                case TargetType.Target:
+                    transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.fixedDeltaTime);
+                    skin.up = direction;
+                    if (gameController.CheckTouch(targetPos, transform.position, 0.1f))
+                    {
+                        //fix it
+                        Destroy(gameObject);
+                    }
+                    break;
+            }
+            HandleTouch();
+        }
 
-			}
-			else
-			{
-				if(gameController.listMonster.ToList().Any(CheckTouchMonsters))
-				{
-					Destroy(gameObject);
-					return;
-				}
-			}
-			if(!gameController.CheckTouch(targetPos, transform.position, 30))
-			{
-				Destroy(gameObject);
-			}
-		}
-	}
+        protected virtual void HandleTouch()
+        {
+            if (!canBlock)
+            {
+                switch (skillDamagedType)
+                {
+                    case SkillDamagedType.Single:
+                        if (gameController.CheckTouch(targetPos, transform.position, sizeTouch))
+                        {
+                            TakeDamage();
+                            Destroy(gameObject);
+                        }
+                        break;
+                    case SkillDamagedType.AreaOfEffect:
+                        foreach (var mons in gameController.listMonster.ToList())
+                        {
+                            CheckTouchMonsters(mons);
+                        }
+                        break;
+                }
+
+            }
+            else
+            {
+                if (gameController.listMonster.ToList().Any(CheckTouchMonsters))
+                {
+                    Destroy(gameObject);
+                    return;
+                }
+            }
+            if (!gameController.CheckTouch(targetPos, transform.position, 30))
+            {
+                Destroy(gameObject);
+            }
+        }
+
+    }
 }

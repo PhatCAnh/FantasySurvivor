@@ -83,7 +83,7 @@ public enum SkillName
 {
     Fireball,
     ThunderStrike,
-    /* ThunderBird,*/
+    ThunderChanneling,
     Food,
     /*Shark,
     Twin,

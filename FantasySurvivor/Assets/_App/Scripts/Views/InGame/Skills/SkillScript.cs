@@ -28,22 +28,19 @@ namespace FantasySurvivor
 		}
 	}
 
-	/*public class ThunderBird : ProactiveSkill
+	public class ThunderChannelingFl : ProactiveSkill
 	{
-        public override void Init(SkillData data)
-        {
-            base.Init(data);
-            timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
-        }
-        public override void UpLevel()
-        {
-            base.UpLevel();
-            if (level == 3)
-            {
-                numberProjectile++;
-            }
-        }
-    }*/
+		public override void Init(SkillData data)
+		{
+			base.Init(data);
+			base.UpLevel();
+			timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
+		}
+		public override void UpLevel()
+		{
+			base.UpLevel();
+		}
+	}
 
 	/*public class Twin : ProactiveSkill
 	{
