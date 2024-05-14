@@ -6,26 +6,31 @@ namespace FantasySurvivor
     public class SkillBulletActive : SkillActive
     {
         [SerializeField] protected Transform skin;
-        [SerializeField] protected GameObject explosionEffectPrefab;  // Đổi thành GameObject để đảm bảo prefab có thể được instantiate
-        [SerializeField] private float explosionRadius = 5.0f;         // Bán kính nổ
-        [SerializeField] private float explosionDamage = 50.0f;        // Sát thương gây ra bởi vụ nổ
+        
 
         public SpawnPos spawnPos;
+
         public TargetType targetType;
+
         public bool canBlock;
+
         public float moveSpeed;
 
         protected Monster oldTarget;
-        protected Vector3 targetPos;
-        protected Vector3 direction;
 
+        protected Vector3 targetPos;
+
+        protected Vector3 direction;
         public override void Init(float damage, Monster target, int level)
         {
             base.Init(damage, target, level);
+
             if (target == null) return;
 
             transform.position = spawnPos == SpawnPos.Character ? origin.transform.position : target.transform.position;
+
             this.direction = target.transform.position - transform.position;
+
             skin.up = direction;
         }
 
@@ -48,7 +53,7 @@ namespace FantasySurvivor
                     skin.up = direction;
                     if (gameController.CheckTouch(targetPos, transform.position, 0.1f))
                     {
-                        Explode();
+                        //fix it
                         Destroy(gameObject);
                     }
                     break;
@@ -60,46 +65,37 @@ namespace FantasySurvivor
         {
             if (!canBlock)
             {
-                if (gameController.CheckTouch(targetPos, transform.position, sizeTouch))
+                switch (skillDamagedType)
                 {
-                    TakeDamage();
-                    Explode();
-                    Destroy(gameObject);
+                    case SkillDamagedType.Single:
+                        if (gameController.CheckTouch(targetPos, transform.position, sizeTouch))
+                        {
+                            TakeDamage();
+                            Destroy(gameObject);
+                        }
+                        break;
+                    case SkillDamagedType.AreaOfEffect:
+                        foreach (var mons in gameController.listMonster.ToList())
+                        {
+                            CheckTouchMonsters(mons);
+                        }
+                        break;
                 }
+
             }
             else
             {
                 if (gameController.listMonster.ToList().Any(CheckTouchMonsters))
                 {
-                    Explode();
                     Destroy(gameObject);
+                    return;
                 }
             }
-
             if (!gameController.CheckTouch(targetPos, transform.position, 30))
             {
                 Destroy(gameObject);
             }
         }
 
-        protected void Explode()
-        {
-            // Lấy tất cả các quái vật trong phạm vi nổ
-            var monstersInRange = gameController.listMonster
-                .Where(m => Vector3.Distance(transform.position, m.transform.position) <= explosionRadius)
-                .ToList();
-
-            foreach (var monster in monstersInRange)
-            {
-                // Gây sát thương cho mỗi quái vật trong phạm vi
-                monster.TakeDamage(explosionDamage);
-            }
-
-            // Thêm hiệu ứng nổ tại vị trí đạn nổ (nếu có)
-            if (explosionEffectPrefab != null)
-            {
-                Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
-            }
-        }
     }
 }

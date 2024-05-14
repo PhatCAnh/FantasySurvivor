@@ -162,7 +162,11 @@ namespace FantasySurvivor
         {
             base.Init(data);
             timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
+
         }
+        
+
+
 
         public override void UpLevel()
         {
@@ -179,6 +183,8 @@ namespace FantasySurvivor
                 Debug.Log("ulti" + numberProjectile);
             }
         }
+
+
     }
 
     /*public class BlackDrum : ProactiveSkill

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 25a98b2077d814f7290153ea69d10897
+guid: c46eaf15fba1d4d6fb03bf0075cb8a3d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_0
+      name: Water Splash 01 - Spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 256
-        width: 64
-        height: 64
+        y: 231
+        width: 66
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7eb79ab150579499b8a78ac090127efd
-      internalID: 1815588672
+      spriteID: d71e1eafb32234aa18ee25fc29cf7241
+      internalID: 1665660333
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_1
+      name: Water Splash 01 - Spritesheet_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 256
-        width: 64
-        height: 64
+        x: 66
+        y: 231
+        width: 66
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b3d907ef72a24e2ea45bf151233a427
-      internalID: -300189656
+      spriteID: 41d7d7b878e80419a891d1150049df64
+      internalID: 2012874825
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_2
+      name: Water Splash 01 - Spritesheet_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 256
-        width: 64
-        height: 64
+        x: 132
+        y: 231
+        width: 66
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e7998248eae4436099e3d3debf81859
-      internalID: -1179589170
+      spriteID: a37cd49a346fe4e0a93a0dc29a4633ea
+      internalID: 1769819538
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_3
+      name: Water Splash 01 - Spritesheet_3
       rect:
         serializedVersion: 2
-        x: 192
-        y: 256
-        width: 64
-        height: 64
+        x: 198
+        y: 231
+        width: 66
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4bc513ca7419c41a7a553b688a9ea725
-      internalID: -310499832
+      spriteID: a1d0fc0eac40441d2994b002e07a2e30
+      internalID: -1425107668
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_4
+      name: Water Splash 01 - Spritesheet_4
       rect:
         serializedVersion: 2
-        x: 256
-        y: 256
-        width: 64
-        height: 64
+        x: 264
+        y: 231
+        width: 66
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,125 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eff442b0fa453436787e4833ab47371e
-      internalID: 2040970928
+      spriteID: d7e215a9ea8e34c0d8ada2eba7d9686c
+      internalID: -377267404
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_5
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0f83e4baee1b54d839c478c17c0e99c4
-      internalID: 402998166
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_6
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 14601dab1311b4120b2be5396f5a08c8
-      internalID: -1794009414
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_7
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1953b584cd530435294dd83cc7ff93bd
-      internalID: 384057967
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_8
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c7d34382f473248c498ddbd017579eae
-      internalID: 1447156838
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_9
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c63d7114d8c194fc5ba89c56ccf64458
-      internalID: 461496996
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_10
+      name: Water Splash 01 - Spritesheet_5
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
-        width: 64
-        height: 64
+        y: 154
+        width: 66
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -347,20 +242,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa9de3bdec14a4048a4d54acd05244e1
-      internalID: -708381472
+      spriteID: 2f994437ac96247b3b4d3565e13b0824
+      internalID: 235275529
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_11
+      name: Water Splash 01 - Spritesheet_6
       rect:
         serializedVersion: 2
-        x: 64
-        y: 128
-        width: 64
-        height: 64
+        x: 66
+        y: 154
+        width: 66
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -368,20 +263,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 537ec505e9a3a428582962fd9e707e7e
-      internalID: -409203897
+      spriteID: f26f08f2f231a4cf8b4100d390dd3579
+      internalID: 643791773
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_12
+      name: Water Splash 01 - Spritesheet_7
       rect:
         serializedVersion: 2
-        x: 128
-        y: 128
-        width: 64
-        height: 64
+        x: 132
+        y: 154
+        width: 66
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -389,20 +284,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62f5715becf7b4fd6a21877c7794137d
-      internalID: -2050779335
+      spriteID: 97db42bf849c94ef18412fb8266f9750
+      internalID: -1832538614
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_13
+      name: Water Splash 01 - Spritesheet_8
       rect:
         serializedVersion: 2
-        x: 192
-        y: 128
-        width: 64
-        height: 64
+        x: 198
+        y: 154
+        width: 66
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -410,20 +305,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56ce4d59ba41b4f5a88548768a8bd9b1
-      internalID: -1258693696
+      spriteID: 2c0587679a76049a18cc326c4c81efe9
+      internalID: 1803115546
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_14
+      name: Water Splash 01 - Spritesheet_9
       rect:
         serializedVersion: 2
-        x: 256
-        y: 128
-        width: 64
-        height: 64
+        x: 264
+        y: 154
+        width: 66
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -431,20 +326,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fc912ac91bbc421db88d2fbd4555322
-      internalID: 275296345
+      spriteID: 2f91b972b5862468f994dd691de5eaef
+      internalID: -540767989
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_15
+      name: Water Splash 01 - Spritesheet_10
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
-        width: 64
-        height: 64
+        y: 77
+        width: 66
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -452,20 +347,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d211a955f17c42539c70854a7b241a6
-      internalID: -1556649393
+      spriteID: 25456244fa19e43a1807d480d4090a8d
+      internalID: 339509645
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_16
+      name: Water Splash 01 - Spritesheet_11
       rect:
         serializedVersion: 2
-        x: 64
-        y: 64
-        width: 64
-        height: 64
+        x: 66
+        y: 77
+        width: 66
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -473,20 +368,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 010db0997ec9549d482f9c9b91ae9c8d
-      internalID: 927119898
+      spriteID: f033aa4aa942d4ddbb8cfc7a79447b6d
+      internalID: 141096625
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_17
+      name: Water Splash 01 - Spritesheet_12
       rect:
         serializedVersion: 2
-        x: 128
-        y: 64
-        width: 64
-        height: 64
+        x: 132
+        y: 77
+        width: 66
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -494,20 +389,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9ac61959f0824f7a8e9a06db6269107
-      internalID: 119735203
+      spriteID: 4883d3011a92a4c518a742b32841ba0f
+      internalID: -1024017582
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_18
+      name: Water Splash 01 - Spritesheet_13
       rect:
         serializedVersion: 2
-        x: 192
-        y: 64
-        width: 64
-        height: 64
+        x: 198
+        y: 77
+        width: 66
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -515,20 +410,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b44a6b92cab72478aa988f4c062e4f10
-      internalID: -1651732439
+      spriteID: 7296d3dfff63f41f1b9f41e89d32b1b6
+      internalID: -138572264
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_19
+      name: Water Splash 01 - Spritesheet_14
       rect:
         serializedVersion: 2
-        x: 256
-        y: 64
-        width: 64
-        height: 64
+        x: 264
+        y: 77
+        width: 66
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -536,20 +431,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 769966a959c48461aa9f3fee63c7ea78
-      internalID: -1638713094
+      spriteID: bbd0ed04f5ce04e2eb1abc4dc952cce8
+      internalID: 1083946394
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WaterBall - Startup and Infinite_20
+      name: Water Splash 01 - Spritesheet_15
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 66
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -557,8 +452,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd7158b623cbf4ae694e5060ad08caf1
-      internalID: -65647003
+      spriteID: 7a93a920863984540852e6621af7b0bb
+      internalID: -31470294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Water Splash 01 - Spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 0
+        width: 66
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5051b26fba20e4fd38803027362731df
+      internalID: 1545908366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Water Splash 01 - Spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 0
+        width: 66
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93932683f920d4d9186fff8df4e1c2d1
+      internalID: 904302936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Water Splash 01 - Spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 0
+        width: 66
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab165b3cb4d1040aeb6c40bf6be16db8
+      internalID: 1296365353
       vertices: []
       indices: 
       edges: []
@@ -574,27 +532,25 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      WaterBall - Startup and Infinite_0: 1815588672
-      WaterBall - Startup and Infinite_1: -300189656
-      WaterBall - Startup and Infinite_10: -708381472
-      WaterBall - Startup and Infinite_11: -409203897
-      WaterBall - Startup and Infinite_12: -2050779335
-      WaterBall - Startup and Infinite_13: -1258693696
-      WaterBall - Startup and Infinite_14: 275296345
-      WaterBall - Startup and Infinite_15: -1556649393
-      WaterBall - Startup and Infinite_16: 927119898
-      WaterBall - Startup and Infinite_17: 119735203
-      WaterBall - Startup and Infinite_18: -1651732439
-      WaterBall - Startup and Infinite_19: -1638713094
-      WaterBall - Startup and Infinite_2: -1179589170
-      WaterBall - Startup and Infinite_20: -65647003
-      WaterBall - Startup and Infinite_3: -310499832
-      WaterBall - Startup and Infinite_4: 2040970928
-      WaterBall - Startup and Infinite_5: 402998166
-      WaterBall - Startup and Infinite_6: -1794009414
-      WaterBall - Startup and Infinite_7: 384057967
-      WaterBall - Startup and Infinite_8: 1447156838
-      WaterBall - Startup and Infinite_9: 461496996
+      Water Splash 01 - Spritesheet_0: 1665660333
+      Water Splash 01 - Spritesheet_1: 2012874825
+      Water Splash 01 - Spritesheet_10: 339509645
+      Water Splash 01 - Spritesheet_11: 141096625
+      Water Splash 01 - Spritesheet_12: -1024017582
+      Water Splash 01 - Spritesheet_13: -138572264
+      Water Splash 01 - Spritesheet_14: 1083946394
+      Water Splash 01 - Spritesheet_15: -31470294
+      Water Splash 01 - Spritesheet_16: 1545908366
+      Water Splash 01 - Spritesheet_17: 904302936
+      Water Splash 01 - Spritesheet_18: 1296365353
+      Water Splash 01 - Spritesheet_2: 1769819538
+      Water Splash 01 - Spritesheet_3: -1425107668
+      Water Splash 01 - Spritesheet_4: -377267404
+      Water Splash 01 - Spritesheet_5: 235275529
+      Water Splash 01 - Spritesheet_6: 643791773
+      Water Splash 01 - Spritesheet_7: -1832538614
+      Water Splash 01 - Spritesheet_8: 1803115546
+      Water Splash 01 - Spritesheet_9: -540767989
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

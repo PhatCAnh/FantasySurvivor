@@ -147,7 +147,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7180547673905776513}
-  - component: {fileID: 5729196836211513043}
+  - component: {fileID: 5771844762265413593}
   m_Layer: 0
   m_Name: WaterBall
   m_TagString: Untagged
@@ -171,7 +171,7 @@ Transform:
   - {fileID: 669353385597686255}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5729196836211513043
+--- !u!114 &5771844762265413593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8012577335008146410}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c9ac88881164f99a67a1eff7a5a5bac, type: 3}
+  m_Script: {fileID: 11500000, guid: eedd541ef96bc4536992492b4fad291c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
@@ -191,3 +191,4 @@ MonoBehaviour:
   targetType: 1
   canBlock: 1
   moveSpeed: 15
+  explosionEffectPrefab: {fileID: 8750911422680197313, guid: 0ae3ff84f7e6940e5a4fc9ed1c9eb680, type: 3}

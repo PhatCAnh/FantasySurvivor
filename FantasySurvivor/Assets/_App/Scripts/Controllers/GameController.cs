@@ -213,6 +213,23 @@ public class GameController : Controller<GameApp>
 		return listMonsterInRect.Count != 0 ? listMonsterInRect : null;
 	}
 
+	public List<Monster> GetAllMonsterInRange(Vector2 trans, float range)
+	{
+		var listMonsterInRange = new List<Monster>();
+		foreach(var mons in listMonster)
+		{
+			if(CheckTouch(mons.transform.position, trans, range))
+			{
+				listMonsterInRange.Add(mons);
+			}
+			// if(myRect.Contains(mons.transform.position))
+			// {
+			// 	listMonsterInRect.Add(mons);
+			// }
+		}
+		return listMonsterInRange;
+	}
+
 	public void CharacterDie(Character characterView)
 	{
 		LoseGame();
@@ -369,9 +386,10 @@ public class GameController : Controller<GameApp>
 		var x = a.x - b.x;
 		var y = a.y - b.y;
 		return x * x + y * y <= number * number;
-	}
+    }
 
-	private void LoadMap(int chapter)
+    
+    private void LoadMap(int chapter)
 	{
 		_camSize = Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0));
 		_width = 1 / (_camSize.x - 0.5f);
