@@ -11,7 +11,6 @@ public class SkillData
 	public ItemPrefab evolveSkillType;
 	public SkillElementalType typeElemental;
 	public Sprite imgUI;
-	public GameObject skillEvolvePrefab;
 	public bool canAppear = true;
 	
 	public Dictionary<int, LevelSkillData> levelSkillData;

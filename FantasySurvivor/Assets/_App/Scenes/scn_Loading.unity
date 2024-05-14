@@ -499,11 +499,15 @@ PrefabInstance:
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _skillThunderStrike
       value: 
-      objectReference: {fileID: 873336829918094235, guid: a6a831d5a3c80f44d8a599b2b220c529, type: 3}
+      objectReference: {fileID: 6105532977934052371, guid: 7755505eb2bb0b9448c97bde25b3c4cd, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _skillThunderStrikeSmall
+      value: 
+      objectReference: {fileID: 873336829918094235, guid: a6a831d5a3c80f44d8a599b2b220c529, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[1].spawnPos
       value: 1
@@ -518,7 +522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[1].evolveSkillType
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[1].normalSkillType
