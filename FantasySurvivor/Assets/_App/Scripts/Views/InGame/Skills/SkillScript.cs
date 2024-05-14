@@ -139,20 +139,6 @@ namespace FantasySurvivor
             {
                 numberProjectile++;
             }
-
-        }
-
-        public override void Active()
-        {
-            var mons = gameController.GetAllMonsterInAttackRange();
-            if (mons != null)
-            {
-                for (int i = 0; i < numberProjectile; i++)
-                {
-                    var skill = GameObject.Instantiate(skillIns).GetComponent<SkillActive>();
-                    skill.Init(origin.model.attackDamage * levelData[level].value / 100, mons[Random.Range(0, mons.Count)], level);
-                }
-            }
         }
 	}
 

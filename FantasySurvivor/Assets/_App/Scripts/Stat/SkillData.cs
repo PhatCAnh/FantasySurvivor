@@ -6,9 +6,11 @@ public class SkillData
 {
 	public SkillName name;
 	public SkillType type;
+	public SpawnPos spawnPos;
+	public ItemPrefab normalSkillType;
+	public ItemPrefab evolveSkillType;
 	public SkillElementalType typeElemental;
 	public Sprite imgUI;
-	public GameObject skillPrefab;
 	public GameObject skillEvolvePrefab;
 	public bool canAppear = true;
 	

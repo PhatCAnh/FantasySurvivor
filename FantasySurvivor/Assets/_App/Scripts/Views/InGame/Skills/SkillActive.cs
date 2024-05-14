@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using Unity.Mathematics;
@@ -14,28 +15,34 @@ namespace FantasySurvivor
 		public float size;
 
 		public SkillDamagedType skillDamagedType;
-
+		
+		public ItemPrefab type;
+		
 		protected float damage;
 
 		protected bool isCritical;
 
 		protected float sizeTouch;
 
+
 		protected Character origin;
 
 		protected GameObject hitEffect;
 
 		protected int level;
+		
 		protected Action callBackDamaged, callBackKilled;
 		protected GameController gameController => Singleton<GameController>.instance;
 
-		public virtual void Init(float damage, Monster target, int level)
+		public virtual void Init(float damage, Monster target, int level, ItemPrefab type)
 		{
 			this.origin = gameController.character;
 
+			this.type = type;
+
 			if(target == null)
 			{
-				Destroy(gameObject);
+				Singleton<PoolController>.instance.ReturnObject(this.type, gameObject);
 				return;
 			}
 
@@ -44,6 +51,8 @@ namespace FantasySurvivor
 			this.target = target;
 
 			this.damage = damage;
+			
+			this.
 
 			sizeTouch = size + target.size;
 		}
