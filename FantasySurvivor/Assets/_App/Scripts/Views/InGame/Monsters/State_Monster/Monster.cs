@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.StateMachine;
@@ -76,11 +76,19 @@ public class Monster : ObjectRPG
 
 	protected Vector3 moveTarget;
 
-	#endregion
+    protected float moveSpeedDecreaseAmount;
 
-	#region Base Methods
+ 
 
-	public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave, ItemPrefab monsType)
+    protected Cooldown moveSpeedCooldown = new Cooldown();
+
+    protected float moveSpeedCooldownTime = 3f;
+
+    #endregion
+
+    #region Base Methods
+
+    public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave, ItemPrefab monsType)
 	{
 		stat = monsterStat;
 		model = new MonsterModel(
@@ -165,13 +173,15 @@ public class Monster : ObjectRPG
 		callBackDamaged?.Invoke();
 		var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
 		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.TowerDamage, isCritical);
-		if(isAlive)
+
+        if (isAlive)
 			return;
 		Die();
 		callBackKilled?.Invoke();
-	}
+    }
 
-	public virtual void Die(bool selfDie = false)
+
+    public virtual void Die(bool selfDie = false)
 	{
 		gameController.MonsterDie(this, selfDie);
 	}
@@ -227,5 +237,17 @@ public class Monster : ObjectRPG
 		_stateMachine.ChangeState(_attackState);	
 	}
 
-	#endregion
+    #endregion
+
+    public void UpdateStats()
+    {
+        
+        speedMul = 0.5f; 
+        if (speedMul < 0.1f)
+        {
+            speedMul = 0.1f; 
+        }
+    }
+
+
 }
