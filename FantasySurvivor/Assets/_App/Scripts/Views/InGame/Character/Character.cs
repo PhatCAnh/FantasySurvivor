@@ -32,6 +32,7 @@ public class Character : ObjectRPG
 	public CharacterModel model => app.models.characterModel;
 
 	public CharacterStat stat { get; private set; }
+	
 	public float speedMul { get; set; } = 1;
 	public Vector2 idleDirection { get; private set; } = Vector2.down;
 
@@ -77,6 +78,9 @@ public class Character : ObjectRPG
 		{
 			IdleState();
 		}
+		
+		
+		
 
 		myRigid = GetComponent<Rigidbody2D>();
 		circleAttackRange.DORotate(new Vector3(0, 0, 360), 5f, RotateMode.FastBeyond360)
@@ -92,7 +96,7 @@ public class Character : ObjectRPG
 		AddDataBinding("fieldCharacter-attackRangeValue", circleAttackRange, (control, e) =>
 			{
 				control.localScale = Vector3.one * model.attackRange;
-			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackRange), model)
+			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackRange),model)
 		);
 		
 		
@@ -100,14 +104,16 @@ public class Character : ObjectRPG
 
 	public void Init(CharacterStat statInit)
 	{
+		
 		app.models.characterModel = new CharacterModel(
 			statInit.moveSpeed.BaseValue,
-			statInit.health.BaseValue,
+			statInit.maxHealth.BaseValue,
 			statInit.attackRange.BaseValue,
 			statInit.attackDamage.BaseValue,
-			statInit.attackRange.BaseValue,
+			statInit.itemAttractionRange.BaseValue,
 			statInit.armor.BaseValue
 		);
+		stat = statInit;
 	}
 
 	private void Update()

@@ -51,4 +51,24 @@ namespace FantasySurvivor
 			
 		}
 	}
+	
+	public class CharacterStat
+	{
+		public StatFloat maxHealth = new();
+		public StatFloat moveSpeed = new();
+		public StatFloat attackDamage = new();
+		public StatFloat attackRange = new();
+		public StatFloat itemAttractionRange = new();
+		public StatInt armor = new();
+
+		public CharacterStat(float health,float ms,  float ad, float itemRange, float ar, int armor)
+		{
+			this.moveSpeed.BaseValue = ms;
+			this.maxHealth.BaseValue = health;
+			this.attackRange.BaseValue = ar;
+			this.attackDamage.BaseValue = ad;
+			this.armor.BaseValue = armor;
+			this.itemAttractionRange.BaseValue = itemRange;
+		}
+	}
 }
