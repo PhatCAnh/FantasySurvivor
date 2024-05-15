@@ -10,7 +10,6 @@ using FantasySurvivor;
 using JetBrains.Annotations;
 using Unity.Mathematics;
 using UnityEngine.SceneManagement;
-using MonsterStat = FantasySurvivor.MonsterStat;
 
 public class GameController : Controller<GameApp>
 {

@@ -31,11 +31,17 @@ public class LevelSkillData
 	public float value;
 	public float cooldown;
 	public string description;
+	public float valueSpecial1;
+	public float valueSpecial2;
+	public float valueSpecial3;
 
-	public LevelSkillData(float value, float cooldown, string description)
+	public LevelSkillData(float value, float cooldown, string description, float vs1, float vs2, float vs3)
 	{
 		this.value = value;
 		this.cooldown = cooldown;
 		this.description = $"{description}";
+		this.valueSpecial1 = vs1;
+		this.valueSpecial2 = vs2;
+		this.valueSpecial3 = vs3;
 	}
 }
