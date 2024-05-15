@@ -4,6 +4,7 @@ using System.Transactions;
 using ArbanFramework.MVC;
 using Newtonsoft.Json;
 using Unity.Collections.LowLevel.Unsafe;
+using UnityEngine;
 namespace FantasySurvivor
 {
 	public class DataPlayerModel : Model<GameApp>
@@ -22,7 +23,11 @@ namespace FantasySurvivor
 		public override void InitBaseData()
 		{
 			this.Coin = 99;
-			this.Health = 100;
+            this.Gem = 10;
+            this.Health = 100;
+            this.Atkdamage = 20;
+			this.Armor = 50;
+            this.Movespeed = 2.5f; 
 			firstTouchHand = true;
 			firstTutorialHandUi = true;
 			firstSeeBulletInteract = true;
@@ -30,7 +35,11 @@ namespace FantasySurvivor
 		}
 
 		[JsonProperty] private int _coin;
+        [JsonProperty] private int _gem;
+        [JsonProperty] private float _movespeed;
         [JsonProperty] private int _health;
+        [JsonProperty] private int _atkdamage;
+        [JsonProperty] private int _armor;
         [JsonProperty] private int _levelAd;
 		[JsonProperty] private int _levelAr;
 		[JsonProperty] private int _levelAs;
@@ -54,8 +63,40 @@ namespace FantasySurvivor
 				RaiseDataChanged(nameof(Coin));
 			}
 		}
-
-		public int LevelAd
+        public int Armor
+        {
+            get => _armor;
+            set
+            {
+                if (Armor == value) return;
+                _armor = Mathf.Clamp(value, 0, 100); // Giữ giá trị giáp trong phạm vi hợp lệ (0-100)
+                app.models.WriteModel<DataPlayerModel>();
+                RaiseDataChanged(nameof(Armor));
+            }
+        }
+        public int Atkdamage
+        {
+            get => _atkdamage;
+            set
+            {
+                if (Atkdamage == value) return;
+                _atkdamage = value;
+                app.models.WriteModel<DataPlayerModel>();
+                RaiseDataChanged(nameof(Atkdamage));
+            }
+        }
+        public int Gem
+        {
+            get => _gem;
+            set
+            {
+                if (Gem == value) return;
+                _gem = value;
+                app.models.WriteModel<DataPlayerModel>();
+                RaiseDataChanged(nameof(Gem));
+            }
+        }
+        public int LevelAd
 		{
 			get => _levelAd;
 			set {
@@ -142,5 +183,17 @@ namespace FantasySurvivor
                 RaiseDataChanged(nameof(Health));
             }
         }
+        public float Movespeed
+        {
+            get => _movespeed;
+            set
+            {
+                if (Movespeed == value) return;
+                _movespeed = value;
+                app.models.WriteModel<DataPlayerModel>();
+                RaiseDataChanged(nameof(Movespeed));
+            }
+        }
+    
     }
 }
