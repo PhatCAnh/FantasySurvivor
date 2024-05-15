@@ -173,7 +173,7 @@ public class Monster : ObjectRPG
 		callBackDamaged?.Invoke();
 		var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
 		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.TowerDamage, isCritical);
-
+		UpdateStats(1f);
         if (isAlive)
 			return;
 		Die();
@@ -239,13 +239,13 @@ public class Monster : ObjectRPG
 
     #endregion
 
-    public void UpdateStats()
+    public void UpdateStats(float amount)
     {
         
-        speedMul = 0.5f; 
-        if (speedMul < 0.1f)
+        model.moveSpeed = amount; 
+        if (model.moveSpeed < 0.1f)
         {
-            speedMul = 0.1f; 
+            model.moveSpeed = 0.1f; 
         }
     }
 
