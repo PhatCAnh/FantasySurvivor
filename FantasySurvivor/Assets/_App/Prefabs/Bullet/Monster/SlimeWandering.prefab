@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 1706603804179102798}
   - component: {fileID: 289926341574071653}
   - component: {fileID: 6329200737386286769}
+  - component: {fileID: 3687177381424279232}
   m_Layer: 0
   m_Name: SlimeWandering
   m_TagString: Untagged
@@ -198,7 +199,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &6329200737386286769
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -228,9 +229,27 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.016329527, y: -0.38685155}
   m_Size: {x: 0.9898858, y: 0.9898858}
   m_Direction: 0
+--- !u!114 &3687177381424279232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424864141763079353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d4cac00855d19d43b5b17cd5097a772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 8
+  myRigid: {fileID: 289926341574071653}
+  animator: {fileID: 316287452850693537}
+  firePoint: {fileID: 9044405164423132591}
+  justSpawnVertical: 0
+  size: 0
