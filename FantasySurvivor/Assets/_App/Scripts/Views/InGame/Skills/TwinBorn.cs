@@ -1,6 +1,7 @@
 ﻿using System;
+using _App.Scripts.Controllers;
+using ArbanFramework;
 using ArbanFramework.MVC;
-using Unity.VisualScripting;
 using UnityEngine;
 namespace FantasySurvivor
 {
@@ -36,7 +37,7 @@ namespace FantasySurvivor
 			bullet.GetComponent<TwinBorn>().InitTwin(new Vector2(-direction.y, direction.x), moveSpeed, damage/2, target, level);
 			var bullet2 = Instantiate(_twinInstantiate, transform.position, new Quaternion(0, 0, -90, 0));
 			bullet2.GetComponent<TwinBorn>().InitTwin(new Vector2(direction.y, -direction.x), moveSpeed, damage/2, target, level);
-			Destroy(gameObject);
+			Singleton<PoolController>.instance.ReturnObject(this.type, gameObject);
 		}
 	}
 }

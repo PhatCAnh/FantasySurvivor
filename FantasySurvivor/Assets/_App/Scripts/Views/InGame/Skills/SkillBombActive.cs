@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using _App.Scripts.Controllers;
 using ArbanFramework;
 using Unity.Mathematics;
 using UnityEngine;
@@ -10,7 +11,6 @@ namespace FantasySurvivor
 	{
 		public float sizeExplosion;
 		
-		[SerializeField] private SpawnPos spawnPos;
 		
 		[SerializeField] private float _time;
 		
@@ -18,13 +18,11 @@ namespace FantasySurvivor
 
 		private readonly Cooldown _cdTime = new Cooldown();
 		
-		public override void Init(float damage, Monster target, int level)
+		public override void Init(float damage, Monster target, int level, ItemPrefab type)
 		{
-			base.Init(damage, target, level);
+			base.Init(damage, target, level, type);
 
 			if(target == null) return;
-
-			transform.position = spawnPos == SpawnPos.Character ? origin.transform.position : base.target.transform.position;
 			
 			_cdTime.Restart(_time);
 		}
@@ -56,7 +54,7 @@ namespace FantasySurvivor
 			}
 			var explosion = Instantiate(_explosionEffect, transform.position, quaternion.identity);
 			explosion.transform.localScale = sizeExplosion * Vector3.one;
-			Destroy(gameObject);
+			Singleton<PoolController>.instance.ReturnObject(this.type, gameObject);
 		}
 
 		protected override void OnDrawGizmosSelected()

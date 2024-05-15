@@ -208,7 +208,7 @@ public class GameController : Controller<GameApp>
 			// 	listMonsterInRect.Add(mons);
 			// }
 		}
-		return listMonsterInRect.Count != 0 ? listMonsterInRect : null;
+		return listMonsterInRect;
 	}
 
 	public void CharacterDie(Character characterView)

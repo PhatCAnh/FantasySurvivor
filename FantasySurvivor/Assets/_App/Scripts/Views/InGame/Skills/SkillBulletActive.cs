@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using _App.Scripts.Controllers;
+using ArbanFramework;
 using UnityEditor;
 using UnityEngine;
 namespace FantasySurvivor
@@ -6,8 +8,6 @@ namespace FantasySurvivor
 	public class SkillBulletActive : SkillActive
 	{
 		[SerializeField] protected Transform skin;
-
-		public SpawnPos spawnPos;
 
 		public TargetType targetType;
 
@@ -20,13 +20,11 @@ namespace FantasySurvivor
 		protected Vector3 targetPos;
 
 		protected Vector3 direction;
-		public override void Init(float damage, Monster target, int level)
+		public override void Init(float damage, Monster target, int level, ItemPrefab type)
 		{
-			base.Init(damage, target, level);
+			base.Init(damage, target, level, type);
 
 			if(target == null) return;
-			
-			transform.position = spawnPos == SpawnPos.Character ? origin.transform.position : target.transform.position;
 
 			this.direction = target.transform.position - transform.position;
 
@@ -53,7 +51,7 @@ namespace FantasySurvivor
 					if(gameController.CheckTouch(targetPos, transform.position, 0.1f))
 					{
 						//fix it
-						Destroy(gameObject);
+						Singleton<PoolController>.instance.ReturnObject(this.type, gameObject);
 					}
 					break;
 			}
@@ -70,7 +68,7 @@ namespace FantasySurvivor
 						if(gameController.CheckTouch(targetPos, transform.position, sizeTouch))
 						{
 							TakeDamage();
-							Destroy(gameObject);
+							Singleton<PoolController>.instance.ReturnObject(this.type, gameObject);
 						}
 						break;
 					case SkillDamagedType.AreaOfEffect:
@@ -86,13 +84,13 @@ namespace FantasySurvivor
 			{
 				if(gameController.listMonster.ToList().Any(CheckTouchMonsters))
 				{
-					Destroy(gameObject);
+					Singleton<PoolController>.instance.ReturnObject(this.type, gameObject);
 					return;
 				}
 			}
 			if(!gameController.CheckTouch(targetPos, transform.position, 30))
 			{
-				Destroy(gameObject);
+				Singleton<PoolController>.instance.ReturnObject(this.type, gameObject);
 			}
 		}
 	}

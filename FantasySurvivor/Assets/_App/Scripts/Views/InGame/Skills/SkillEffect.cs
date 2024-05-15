@@ -1,4 +1,6 @@
-﻿namespace FantasySurvivor
+﻿using _App.Scripts.Controllers;
+using ArbanFramework;
+namespace FantasySurvivor
 {
 	public class SkillEffect : Effect
 	{
@@ -17,7 +19,7 @@
 
 		protected override void DoneEffect()
 		{
-			Destroy(_skillActive.gameObject);			
+			Singleton<PoolController>.instance.ReturnObject(_skillActive.type, _skillActive.gameObject);
 		}
 	}
 }

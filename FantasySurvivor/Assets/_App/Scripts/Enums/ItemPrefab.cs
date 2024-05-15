@@ -16,6 +16,9 @@ public enum ItemPrefab
     GemExp,
     SupportItem,
     BulletKillerBee,
+    SkillFireBall,
+    ThunderStrikeSmall,
+    ThunderStrike,
 }
 
 public enum MapType
@@ -163,6 +166,7 @@ public enum SpawnPos
     Character,
     Monster,
     OldBullet,
+    Other,
 }
 
 public enum TargetType

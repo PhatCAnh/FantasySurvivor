@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6642652176968535675}
   - component: {fileID: 1025375935730607505}
   - component: {fileID: 135679078391123124}
+  - component: {fileID: -5552881832965953998}
   m_Layer: 8
   m_Name: KillerBee
   m_TagString: Untagged
@@ -83,6 +84,41 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4128420622295471649, guid: 21f0e3c66e7be4643873bca51dcbc84d, type: 3}
   typeBullet: 11
   _numberBack: 0
+--- !u!58 &-5552881832965953998
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48425990686245726}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.7
 --- !u!1 &3312106001170155161
 GameObject:
   m_ObjectHideFlags: 0
