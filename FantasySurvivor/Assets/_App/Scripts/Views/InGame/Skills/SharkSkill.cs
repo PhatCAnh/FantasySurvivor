@@ -102,7 +102,7 @@ public class ProactiveSkill : Skill
 			var mob = mons[randomMob];
 			listMonsCheck.Add(mob);
 			Singleton<PoolController>.instance.GetObject(skillPrefab, SetPositionSpawn(spawnPos, mob)).TryGetComponent(out SkillActive skill);
-			skill.Init(origin.model.attackDamage * levelData[level].value / 100, mob, level, skillPrefab);
+			skill.Init(levelData[level], mob, level, skillPrefab);
 			UpdatePrefab(skill);
 			await Task.Delay(timeDelaySkill);
 		}

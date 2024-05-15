@@ -9,9 +9,9 @@ namespace _App.Scripts.Views.InGame.Skills
 	{
 		[SerializeField] private SkillActive _twinInstantiate;
 
-		public override void Init(float damage, Monster target, int level, ItemPrefab type)
+		public override void Init(LevelSkillData data, Monster target, int level, ItemPrefab type)
 		{
-			base.Init(damage, target, level, type);
+			base.Init(data, target, level, type);
 			callBackDamaged += SpawnTwinBorn;
 		}
 

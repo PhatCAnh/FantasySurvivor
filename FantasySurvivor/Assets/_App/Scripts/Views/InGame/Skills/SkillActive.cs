@@ -24,6 +24,7 @@ namespace FantasySurvivor
 
 		protected float sizeTouch;
 
+		protected LevelSkillData data;
 
 		protected Character origin;
 
@@ -34,7 +35,7 @@ namespace FantasySurvivor
 		protected Action callBackDamaged, callBackKilled;
 		protected GameController gameController => Singleton<GameController>.instance;
 
-		public virtual void Init(float damage, Monster target, int level, ItemPrefab type)
+		public virtual void Init(LevelSkillData dataLevel, Monster target, int level, ItemPrefab type)
 		{
 			this.origin = gameController.character;
 
@@ -50,7 +51,9 @@ namespace FantasySurvivor
 
 			this.target = target;
 
-			this.damage = damage;
+			data = dataLevel;
+
+			this.damage = origin.model.attackDamage * data.value / 100;
 			
 			this.
 
