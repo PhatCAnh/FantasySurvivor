@@ -1,4 +1,5 @@
 ﻿using ArbanFramework;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -14,8 +15,16 @@ public class MonsterWandering : Monster
 
     private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
     private bool isFirstMove = true;
+    private float dieCountdown;
+    private float initialDieCountdown;
 
     Vector3 wayPoint;
+
+    public MonsterWandering()
+    {
+        dieCountdown = 10f;
+        initialDieCountdown = dieCountdown;
+    }    
 
     public override void Attack()
     {
@@ -26,6 +35,13 @@ public class MonsterWandering : Monster
     {
         moveTarget = gameController.character.transform.position;
         moveDirection = moveTarget - transform.position;
+
+        dieCountdown -= Time.deltaTime;
+        if (dieCountdown <= 0f)
+        {
+            Die();
+            dieCountdown = initialDieCountdown;
+        }
 
         if (isFirstMove)
         {
@@ -52,6 +68,13 @@ public class MonsterWandering : Monster
         }
         SetAnimation(idleDirection);
     }
+
+
+    public override void Die(bool selfDie = true)
+    {
+        gameController.MonsterDie(this, selfDie);
+    }
+
 
     void SetNewDestination()
     {
