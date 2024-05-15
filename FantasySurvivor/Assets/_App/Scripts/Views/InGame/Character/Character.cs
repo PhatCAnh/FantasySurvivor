@@ -18,9 +18,9 @@ public class Character : ObjectRPG
 
 	[SerializeField] private Transform circleAttackRange;
 
-	[FormerlySerializedAs("a"),SerializeField] private int asd= 5;
+	[FormerlySerializedAs("a"), SerializeField] private int asd = 5;
 	public int b;
-	
+
 	public float abc = 2.5f;
 
 	public float sizeBase;
@@ -32,7 +32,7 @@ public class Character : ObjectRPG
 	public CharacterModel model => app.models.characterModel;
 
 	public CharacterStat stat { get; private set; }
-	
+
 	public float speedMul { get; set; } = 1;
 	public Vector2 idleDirection { get; private set; } = Vector2.down;
 
@@ -50,6 +50,7 @@ public class Character : ObjectRPG
 
 	public List<Skill> listSkills = new List<Skill>();
 	public List<Skill> listSkillCooldown = new List<Skill>();
+	public List<CharacterUpdateStat> listUpdateStat = new List<CharacterUpdateStat>();
 
 	public bool IsAlive => model.currentHealthPoint > 0;
 	public bool IsMove => _stateMachine.currentState == _moveSm;
@@ -61,7 +62,7 @@ public class Character : ObjectRPG
 	private StateMachine _stateMachine;
 	private CharacterIdle _idleSm;
 	private CharacterMove _moveSm;
-	
+
 	private GameController gameController => Singleton<GameController>.instance;
 
 	protected override void OnViewInit()
@@ -78,9 +79,7 @@ public class Character : ObjectRPG
 		{
 			IdleState();
 		}
-		
-		
-		
+
 
 		myRigid = GetComponent<Rigidbody2D>();
 		circleAttackRange.DORotate(new Vector3(0, 0, 360), 5f, RotateMode.FastBeyond360)
@@ -96,15 +95,13 @@ public class Character : ObjectRPG
 		AddDataBinding("fieldCharacter-attackRangeValue", circleAttackRange, (control, e) =>
 			{
 				control.localScale = Vector3.one * model.attackRange;
-			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackRange),model)
+			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackRange), model)
 		);
-		
-		
 	}
 
 	public void Init(CharacterStat statInit)
 	{
-		
+
 		app.models.characterModel = new CharacterModel(
 			statInit.moveSpeed.BaseValue,
 			statInit.maxHealth.BaseValue,
@@ -125,6 +122,7 @@ public class Character : ObjectRPG
 
 		HandlePhysicUpdate();
 		HandleProactiveSkill(Time.deltaTime);
+		HandleUpdateStat(Time.deltaTime);
 	}
 
 	private void FixedUpdate()
@@ -147,23 +145,25 @@ public class Character : ObjectRPG
 
 	public void TakeDamage(int damage)
 	{
-		if (!IsAlive) return;
+		if(!IsAlive) return;
 		damage = MinusDamage(damage);
 		model.currentHealthPoint -= damage;
 		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
 		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.MonsterDamage);
 
-		if (!IsAlive) Die();
+		if(!IsAlive) Die();
 	}
-	
+
 
 	public void AddHealth(float value)
 	{
-		model.currentHealthPoint += value; 
+		model.currentHealthPoint += value;
 	}
 
 	public void AddProactiveSkill(SkillData skillData)
 	{
+		UpdateStat(StatModifierType.Add, 10, 0, 0, 0, 0, 0, 4);
+		
 		var skill = GetSkill(skillData.name);
 		if(skill != null)
 		{
@@ -177,26 +177,26 @@ public class Character : ObjectRPG
 		switch (skillData.type)
 		{
 			case SkillType.Active:
+			{
+				Skill skillIns;
+				switch (skillData.name)
 				{
-					Skill skillIns;
-					switch (skillData.name)
-					{
-						case SkillName.Fireball:
-							skillIns = new FireBall();
-							break;
-						case SkillName.ThunderStrike: 
-							skillIns = new ThunderStrike();
-							break;
-						default:
-							skillIns = new ProactiveSkill();
-							break;
-					}
-					skillIns.Init(skillData);
-					listSkills.Add(skillIns);
+					case SkillName.Fireball:
+						skillIns = new FireBall();
+						break;
+					case SkillName.ThunderStrike:
+						skillIns = new ThunderStrike();
+						break;
+					default:
+						skillIns = new ProactiveSkill();
+						break;
 				}
+				skillIns.Init(skillData);
+				listSkills.Add(skillIns);
+			}
 				break;
 			case SkillType.Buff:
-				if (skillData.name == SkillName.Food)
+				if(skillData.name == SkillName.Food)
 				{
 					model.currentHealthPoint += model.currentHealthPoint * 20 / 100;
 				}
@@ -214,6 +214,47 @@ public class Character : ObjectRPG
 			}
 		}
 		return null;
+	}
+
+	public void UpdateStat(StatModifierType typeStat, float maxH, float ms, float ad, float ar, float itemR, int armor, float duration)
+	{
+		var updateStat = new CharacterUpdateStat(typeStat, maxH, ms, ad, ar, itemR, armor, duration);
+
+		{
+			stat.maxHealth.AddModifier(updateStat.maxHealth);
+			stat.moveSpeed.AddModifier(updateStat.moveSpeed);
+			stat.attackDamage.AddModifier(updateStat.attackDamage);
+			stat.attackRange.AddModifier(updateStat.attackRange);
+			stat.itemAttractionRange.AddModifier(updateStat.itemAttractionRange);
+			stat.armor.AddModifier(updateStat.armor);
+		}
+
+		listUpdateStat.Add(updateStat);
+		UpdateModel();
+	}
+
+	private void RemoveStat(CharacterUpdateStat statModifier)
+	{
+		{
+			stat.maxHealth.RemoveModifier(statModifier.maxHealth);
+			stat.moveSpeed.RemoveModifier(statModifier.moveSpeed);
+			stat.attackDamage.RemoveModifier(statModifier.attackDamage);
+			stat.attackRange.RemoveModifier(statModifier.attackRange);
+			stat.itemAttractionRange.RemoveModifier(statModifier.itemAttractionRange);
+			stat.armor.RemoveModifier(statModifier.armor);
+		}
+		listUpdateStat.Remove(statModifier);
+
+		UpdateModel();
+	}
+	private void UpdateModel()
+	{
+		model.maxHealthPoint = stat.maxHealth.Value;
+		model.moveSpeed = stat.moveSpeed.Value;
+		model.attackDamage = stat.attackDamage.Value;
+		model.ItemAttractionRange = stat.itemAttractionRange.Value;
+		model.attackRange = stat.attackRange.Value;
+		model.armor = stat.armor.Value;
 	}
 
 	private void Die()
@@ -243,6 +284,18 @@ public class Character : ObjectRPG
 		foreach(var skill in listSkillCooldown)
 		{
 			skill.CoolDownSkill(deltaTime);
+		}
+	}
+
+	private void HandleUpdateStat(float deltaTime)
+	{
+		foreach(var item in listUpdateStat.ToList())
+		{
+			item.cdTime.Update(deltaTime);
+			if(item.cdTime.isFinished)
+			{
+				RemoveStat(item);
+			}
 		}
 	}
 
