@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 1706603804179102798}
   - component: {fileID: 289926341574071653}
   - component: {fileID: 6329200737386286769}
-  - component: {fileID: 3687177381424279232}
+  - component: {fileID: 1698218184133345040}
   m_Layer: 0
   m_Name: SlimeWandering
   m_TagString: Untagged
@@ -235,7 +235,7 @@ CapsuleCollider2D:
   m_Offset: {x: -0.016329527, y: -0.38685155}
   m_Size: {x: 0.9898858, y: 0.9898858}
   m_Direction: 0
---- !u!114 &3687177381424279232
+--- !u!114 &1698218184133345040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,10 +244,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7424864141763079353}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d4cac00855d19d43b5b17cd5097a772, type: 3}
+  m_Script: {fileID: 11500000, guid: ca1aef5d1f5012b40a49d449682ee90b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 8
+  type: 0
   myRigid: {fileID: 289926341574071653}
   animator: {fileID: 316287452850693537}
   firePoint: {fileID: 9044405164423132591}

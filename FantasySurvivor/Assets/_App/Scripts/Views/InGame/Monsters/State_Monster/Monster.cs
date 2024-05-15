@@ -180,6 +180,13 @@ public class Monster : ObjectRPG
 		callBackKilled?.Invoke();
     }
 
+	public virtual void Move(Vector2 dir, float deltaTime)
+	{
+        var movement = model.moveSpeed * GameConst.MOVE_SPEED_ANIMATION_RATIO * deltaTime * speedMul * dir;
+        var newPosition = myRigid.position + movement;
+        myRigid.MovePosition(newPosition);
+    }
+
 
     public virtual void Die(bool selfDie = false)
 	{
