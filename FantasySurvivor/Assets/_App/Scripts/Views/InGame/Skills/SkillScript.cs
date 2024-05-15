@@ -3,6 +3,8 @@ using System.Linq;
 using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 using Random = UnityEngine.Random;
 namespace FantasySurvivor
 {
@@ -39,41 +41,42 @@ namespace FantasySurvivor
 		public override void UpLevel()
 		{
 			base.UpLevel();
-		}
+
+        }
 	}
 
-	/*public class Twin : ProactiveSkill
+	public class FireShieldLv : ProactiveSkill 
 	{
-		public override void Init(SkillData data)
-		{
-			base.Init(data);
-			timeDelaySkill = Mathf.RoundToInt(1000);
-		}
+        private List<Monster> _monstersTouched = new List<Monster>();
 
-		public override void UpLevel()
-		{
-			base.UpLevel();
-			if(level == 3)
-			{
-				numberProjectile++;
-			}
-		}
-	}*/
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
 
-	/*public class Shark : ProactiveSkill
-	{
-		protected override void UpdatePrefab(SkillActive prefab)
-		{
-			base.UpdatePrefab(prefab);
-			if(level == 6)
-			{
-				prefab.transform.localScale = Vector3.one * 2;
-				prefab.size = 2;
-			}
-		}
-	}*/
+            float x = origin.transform.position.x + 5 * Mathf.Cos(0);
+            float y = origin.transform.position.y + 5 * Mathf.Sin(0);
+            Vector3 Firepos = new Vector3(x, y);
+            var prefab = GameObject.Instantiate(skillIns, Firepos, Quaternion.identity);
 
-	/*public class ZoneOfJudgment : ProactiveSkill
+            base.UpLevel();
+        }
+        public override void UpLevel()
+        {
+            base.UpLevel();
+            float x = origin.transform.position.x + 5 * Mathf.Cos(0);
+            float y = origin.transform.position.y + 5 * Mathf.Sin(0);
+            Vector3 Firepos = new Vector3(x, y);
+            var prefab = GameObject.Instantiate(skillIns, Firepos, Quaternion.identity);
+        }
+
+        public override void Active()
+        {
+            _monstersTouched.Clear();
+        }
+
+
+
+    }/*public class ZoneOfJudgment : ProactiveSkill
 	{
 		private float _sizeTouch = 2.5f;
 
@@ -122,6 +125,40 @@ namespace FantasySurvivor
 			_circle.transform.localScale = Vector2.one * _sizeTouch;
 		}
 	}*/
+
+
+	/*public class Twin : ProactiveSkill
+	{
+		public override void Init(SkillData data)
+		{
+			base.Init(data);
+			timeDelaySkill = Mathf.RoundToInt(1000);
+		}
+
+		public override void UpLevel()
+		{
+			base.UpLevel();
+			if(level == 3)
+			{
+				numberProjectile++;
+			}
+		}
+	}*/
+
+	/*public class Shark : ProactiveSkill
+	{
+		protected override void UpdatePrefab(SkillActive prefab)
+		{
+			base.UpdatePrefab(prefab);
+			if(level == 6)
+			{
+				prefab.transform.localScale = Vector3.one * 2;
+				prefab.size = 2;
+			}
+		}
+	}*/
+
+	
 
 	public class ThunderStrike : ProactiveSkill
 	{

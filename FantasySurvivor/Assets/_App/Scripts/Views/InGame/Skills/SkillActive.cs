@@ -33,7 +33,7 @@ namespace FantasySurvivor
 		{
 			this.origin = gameController.character;
 
-			if(target == null)
+			if (target == null)
 			{
 				Destroy(gameObject);
 				return;
@@ -48,6 +48,7 @@ namespace FantasySurvivor
 			sizeTouch = size + target.size;
 		}
 
+		
 		public virtual void TakeDamage(Monster monster = null)
 		{
 			switch (skillDamagedType)

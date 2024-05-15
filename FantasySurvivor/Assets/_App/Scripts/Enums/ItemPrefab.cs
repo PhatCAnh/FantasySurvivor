@@ -84,6 +84,7 @@ public enum SkillName
     Fireball,
     ThunderStrike,
     ThunderChanneling,
+    FireShield, 
     Food,
     /*Shark,
     Twin,

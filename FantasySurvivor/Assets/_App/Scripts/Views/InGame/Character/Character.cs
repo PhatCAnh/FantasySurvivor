@@ -184,6 +184,9 @@ public class Character : ObjectRPG
 						case SkillName.ThunderChanneling:
 							skillIns = new ThunderChannelingFl();
 							break;
+						case SkillName.FireShield:
+							skillIns = new FireShieldLv();
+							break;
                         default:
 							skillIns = new ProactiveSkill();
 							break;
