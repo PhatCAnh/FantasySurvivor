@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,6 +64,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
@@ -75,6 +77,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -87,6 +90,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -99,6 +103,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -111,6 +116,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -123,76 +129,77 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PurpleDevil_0
+      name: BoneWeaver_0
       rect:
         serializedVersion: 2
         x: 11
         y: 146
         width: 26
         height: 31
-      alignment: 9
-      pivot: {x: 0.5, y: 0.4516129}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1fbbb0b90a4b3e44884a569175936b12
-      internalID: 2013359722
+      spriteID: 25df39f971ef08449992ce56ba1bf6b6
+      internalID: -610725717
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PurpleDevil_1
+      name: BoneWeaver_1
       rect:
         serializedVersion: 2
         x: 59
         y: 145
         width: 27
         height: 34
-      alignment: 9
-      pivot: {x: 0.4814815, y: 0.47058824}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dea934989e539a24da9b7edacdff794a
-      internalID: -1626129483
+      spriteID: f56f970f2b808dc4f8d3d9f308d1982e
+      internalID: 1314332282
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PurpleDevil_2
+      name: BoneWeaver_2
       rect:
         serializedVersion: 2
         x: 108
         y: 146
         width: 25
         height: 34
-      alignment: 9
-      pivot: {x: 0.48, y: 0.47058824}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6dfc7c9d59940f4c8ab93e5751ba0d4
-      internalID: 232082101
+      spriteID: b686ca55f5cbecb409db34472d4af66a
+      internalID: -1262960590
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PurpleDevil_4
+      name: BoneWeaver_4
       rect:
         serializedVersion: 2
         x: 8
@@ -206,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1124d9cca7b60b24299aecb83f0ac15f
-      internalID: 1338226598
+      spriteID: 1f69d2af49bf50a40b8df57efe926f79
+      internalID: -896981618
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PurpleDevil_5
+      name: BoneWeaver_5
       rect:
         serializedVersion: 2
         x: 56
@@ -227,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 848a522e193546d4599af57cfcae0fa5
-      internalID: -230825985
+      spriteID: 3d17249f3d76ea04fbd1b93fa708db42
+      internalID: -189385771
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PurpleDevil_6
+      name: BoneWeaver_6
       rect:
         serializedVersion: 2
         x: 105
@@ -248,14 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0165ad3e5ed94f84abcb555373e1f1ab
-      internalID: 1714400952
+      spriteID: 8552d2bb480564f43bb8e3afee428d42
+      internalID: 36044829
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PurpleDevil_7
+      name: BoneWeaver_7
       rect:
         serializedVersion: 2
         x: 14
@@ -269,14 +276,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b920283cfe1b8746807bbc92623b790
-      internalID: -1169967689
+      spriteID: 88e98102082346d408e675be0a3ec860
+      internalID: 1693932680
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PurpleDevil_8
+      name: BoneWeaver_8
       rect:
         serializedVersion: 2
         x: 61
@@ -290,14 +297,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16b09d9b431fa264ebb0f3c21d02ac31
-      internalID: 736461358
+      spriteID: 265b9a3c182c7db408fda39143f6e4a3
+      internalID: -416081017
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PurpleDevil_9
+      name: BoneWeaver_9
       rect:
         serializedVersion: 2
         x: 110
@@ -311,14 +318,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c182d897e6a1e204eb0a8cee8744a682
-      internalID: -1190555092
+      spriteID: 8839754006abcfa4d875a5046ecca144
+      internalID: -133247417
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PurpleDevil_10
+      name: BoneWeaver_10
       rect:
         serializedVersion: 2
         x: 11
@@ -332,14 +339,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2a58c27b5b411047af7ada2638759c9
-      internalID: 944498476
+      spriteID: befcd6a79ec2a0f4eb09cce354795d05
+      internalID: 750062837
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PurpleDevil_11
+      name: BoneWeaver_11
       rect:
         serializedVersion: 2
         x: 59
@@ -353,14 +360,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9205d5a0c57de34d94ccad34739947b
-      internalID: -1927316
+      spriteID: 54cacabff500ba84ab20db01af876826
+      internalID: 1103892150
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PurpleDevil_13
+      name: BoneWeaver_13
       rect:
         serializedVersion: 2
         x: 108
@@ -374,8 +381,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 497a79300025aee4db33254cf02644f6
-      internalID: -1095676678
+      spriteID: 33b7edad649fc3f4ab18d55e7f3df614
+      internalID: 127722124
       vertices: []
       indices: 
       edges: []
@@ -391,24 +398,23 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PurpleDevil_0: 2013359722
-      PurpleDevil_1: -1626129483
-      PurpleDevil_10: 944498476
-      PurpleDevil_11: -1927316
-      PurpleDevil_12: 1177130694
-      PurpleDevil_13: -1095676678
-      PurpleDevil_14: -1249891187
-      PurpleDevil_2: 232082101
-      PurpleDevil_3: 772251140
-      PurpleDevil_4: 1338226598
-      PurpleDevil_5: -230825985
-      PurpleDevil_6: 1714400952
-      PurpleDevil_7: -1169967689
-      PurpleDevil_8: 736461358
-      PurpleDevil_9: -1190555092
-  spritePackingTag: 
+      BoneWeaver_0: -610725717
+      BoneWeaver_1: 1314332282
+      BoneWeaver_10: 750062837
+      BoneWeaver_11: 1103892150
+      BoneWeaver_12: 351440979
+      BoneWeaver_13: 127722124
+      BoneWeaver_14: 2061568106
+      BoneWeaver_2: -1262960590
+      BoneWeaver_3: 2056690457
+      BoneWeaver_4: -896981618
+      BoneWeaver_5: -189385771
+      BoneWeaver_6: 36044829
+      BoneWeaver_7: 1693932680
+      BoneWeaver_8: -416081017
+      BoneWeaver_9: -133247417
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

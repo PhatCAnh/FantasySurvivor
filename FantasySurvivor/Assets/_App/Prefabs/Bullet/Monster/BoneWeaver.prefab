@@ -74,12 +74,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2013359722, guid: 1925fb40fcdede44f8a9ff97b1bce147, type: 3}
+  m_Sprite: {fileID: 1314332282, guid: 1925fb40fcdede44f8a9ff97b1bce147, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.625, y: 1.9375}
+  m_Size: {x: 1.6875, y: 2.125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -117,9 +117,8 @@ GameObject:
   - component: {fileID: 2251807672777610878}
   - component: {fileID: 2251807672777610879}
   - component: {fileID: 2251807672777610848}
-  - component: {fileID: -4347378579596186312}
   m_Layer: 0
-  m_Name: PurpleDevil
+  m_Name: BoneWeaver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,7 +133,7 @@ Transform:
   m_GameObject: {fileID: 2251807672777610876}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 5, z: -0.105970494}
+  m_LocalPosition: {x: -0.07, y: -3.32, z: -0.105970494}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -149,7 +148,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2251807672777610876}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -204,24 +203,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-4347378579596186312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2251807672777610876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4182d4d77dcd9ed47b0fc4756759719b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 4
-  myRigid: {fileID: 2251807672777610848}
-  animator: {fileID: 2251807671681993195}
-  firePoint: {fileID: 2251807672918116610}
-  justSpawnVertical: 0
-  size: 0
 --- !u!1 &2251807672918116611
 GameObject:
   m_ObjectHideFlags: 0
