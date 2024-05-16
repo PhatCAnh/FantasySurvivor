@@ -68,7 +68,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	[Required, SerializeField] private GameObject _yellowBomb;
 
-	[Required, SerializeField] private GameObject _purpleDevil;
+	[Required, SerializeField] private GameObject _boneWeaver;
 
     [Required, SerializeField] private GameObject _killerBee;
 
@@ -132,7 +132,7 @@ public class ResourceManager : UIManagerBase<PopupType>
             {ItemPrefab.PurpleZombie, _purpleZombie},
             {ItemPrefab.BlueGhost, _blueGhost},
 			{ItemPrefab.YellowBomb, _yellowBomb},
-			{ItemPrefab.PurpleDevil, _purpleDevil},
+			{ItemPrefab.BoneWeaver, _boneWeaver},
 			{ItemPrefab.KillerBee, _killerBee},
             {ItemPrefab.GlobloomSentry, _globloomSentry},
 			{ItemPrefab.ElectroBomber, _electroBomber},
@@ -155,7 +155,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{"M2", _purpleZombie},
 			{"M3", _blueGhost},
 			{"M4", _yellowBomb},
-			{"M5", _purpleDevil},
+			{"M5", _boneWeaver},
             {"M6", _killerBee},
             {"M7", _globloomSentry},
 			{"M8", _electroBomber},            
