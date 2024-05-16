@@ -15,16 +15,15 @@ public class MonsterWandering : Monster
 
     private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
     private bool isFirstMove = true;
-    private float dieCountdown;
+    public float dieCountdown;
     private float initialDieCountdown;
 
     Vector3 wayPoint;
 
-    public MonsterWandering()
+    private void Awake()
     {
-        dieCountdown = 10f;
         initialDieCountdown = dieCountdown;
-    }    
+    }
 
     public override void Attack()
     {
@@ -36,11 +35,11 @@ public class MonsterWandering : Monster
         moveTarget = gameController.character.transform.position;
         moveDirection = moveTarget - transform.position;
 
+
         dieCountdown -= Time.deltaTime;
         if (dieCountdown <= 0f)
         {
             Die();
-            dieCountdown = initialDieCountdown;
         }
 
         if (isFirstMove)
@@ -66,13 +65,15 @@ public class MonsterWandering : Monster
         {
             MoveState();
         }
+
         SetAnimation(idleDirection);
     }
 
 
     public override void Die(bool selfDie = true)
     {
-        gameController.MonsterDie(this, selfDie);
+        base.Die(selfDie);
+        dieCountdown = initialDieCountdown;
     }
 
 
