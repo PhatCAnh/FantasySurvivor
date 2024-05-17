@@ -32,7 +32,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 	
 	[SerializeField] private GameObject _skillThunderStrikeSmall;
 
-	private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
+    [SerializeField] private GameObject _bulletGlobloomSentry;
+
+    private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
 
 	[Header("UI prefabs")]
@@ -73,6 +75,12 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _purpleDevil;
 
     [SerializeField] private GameObject _killerBee;
+
+    [SerializeField] private GameObject _globloomSentry;
+
+    [SerializeField] private GameObject _electroBomber;
+
+    [SerializeField] private GameObject _slimeWandering;
 
     private Dictionary<string, GameObject> _typeMonsterDic;
 
@@ -130,11 +138,15 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.YellowBomb, _yellowBomb},
 			{ItemPrefab.PurpleDevil, _purpleDevil},
 			{ItemPrefab.KillerBee, _killerBee},
-			{ItemPrefab.SupportItem, _supportItem},
+            {ItemPrefab.GlobloomSentry, _globloomSentry},
+			{ItemPrefab.ElectroBomber, _electroBomber},
+            {ItemPrefab.SlimeWandering, _slimeWandering},
+            {ItemPrefab.SupportItem, _supportItem},
 			{ItemPrefab.BulletKillerBee, _bulletKillerBee},
 			{ItemPrefab.SkillFireBall, _skillFireBall},
 			{ItemPrefab.ThunderStrike, _skillThunderStrike},
 			{ItemPrefab.ThunderStrikeSmall, _skillThunderStrikeSmall},
+            {ItemPrefab.BulletGlobloomSentry, _bulletGlobloomSentry},
         };
 
 		_mapDic = new Dictionary<MapType, Map>
@@ -150,6 +162,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{"M4", _yellowBomb},
 			{"M5", _purpleDevil},
             {"M6", _killerBee},
+            {"M7", _globloomSentry},
+			{"M8", _electroBomber},            
         };
 
 		_typeItemReward = new Dictionary<TypeItemReward, ItemReward>()

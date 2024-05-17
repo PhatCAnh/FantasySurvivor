@@ -10,6 +10,9 @@ public enum ItemPrefab
     YellowBomb = 3,
     PurpleDevil = 4,
     KillerBee = 5,
+    GlobloomSentry = 6,
+    ElectroBomber = 7,
+    SlimeWandering = 8,
     HealthBar,
     Character,
     TextPopup,
@@ -19,6 +22,7 @@ public enum ItemPrefab
     SkillFireBall,
     ThunderStrikeSmall,
     ThunderStrike,
+    BulletGlobloomSentry,
 }
 
 public enum MapType
@@ -36,6 +40,9 @@ public enum MonsterType
     YellowBomb = 3,
     PurpleDevil = 4,
     KillerBee = 5,
+    GlobloomSentry = 6,
+    ElectroBomber = 7,
+    SlimeWandering = 8,
 }
 
 public enum TowerType

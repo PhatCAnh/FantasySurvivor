@@ -21,14 +21,13 @@ namespace FantasySurvivor
 		{
 			base.PhysicUpdate(fixedDeltaTime);
 			var directionUnit = agent.moveDirection.normalized;
-			Move(directionUnit, Time.fixedDeltaTime);
+            
+            Move(directionUnit, Time.fixedDeltaTime);
 		}
     
 		private void Move(Vector2 dir, float deltaTime)
 		{
-			var movement = agent.model.moveSpeed  * GameConst.MOVE_SPEED_ANIMATION_RATIO * deltaTime * agent.speedMul * dir;
-			var newPosition = agent.myRigid.position + movement;
-			agent.myRigid.MovePosition(newPosition);
-		}
+            agent.Move(dir, deltaTime);
+        }
 	}
 }
