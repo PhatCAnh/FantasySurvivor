@@ -43,6 +43,8 @@ public class Skill
 		this.origin = gameController.character;
 
 		level = 1;
+		
+		skillPrefab = data.normalSkillType;
 
 		spawnPos = data.spawnPos;
 

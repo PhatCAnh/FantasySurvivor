@@ -83,7 +83,12 @@ namespace FantasySurvivor
 
 			if(!gameController.CheckTouch(monster.transform.position, transform.position, sizeTouch)) return false;
 			TakeDamage(monster);
-			return true;
+			CreateExplo();
+            return true;
+		}
+
+		protected virtual void CreateExplo()
+		{
 		}
 
 		protected virtual void OnDrawGizmosSelected()

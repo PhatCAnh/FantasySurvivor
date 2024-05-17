@@ -1,23 +1,22 @@
 ﻿using System.Linq;
 using _App.Scripts.Controllers;
 using ArbanFramework;
-using UnityEditor;
 using UnityEngine;
 namespace FantasySurvivor
 {
-	public class SkillBulletActive : SkillActive
-	{
-		[SerializeField] protected Transform skin;
-
+    public class SkillBulletActive : SkillActive
+    {
+        [SerializeField] protected Transform skin;
+        
 		public TargetType targetType;
 
-		public bool canBlock;
+        public bool canBlock;
 
-		public float moveSpeed;
+        public float moveSpeed;
 
-		protected Monster oldTarget;
+        protected Monster oldTarget;
 
-		protected Vector3 targetPos;
+        protected Vector3 targetPos;
 
 		protected Vector3 direction;
 		public override void Init(LevelSkillData data, Monster target, int level, ItemPrefab type)
@@ -26,20 +25,15 @@ namespace FantasySurvivor
 
 			if(target == null) return;
 
-			this.direction = target.transform.position - transform.position;
 
-			skin.up = direction;
-		}
+            this.direction = target.transform.position - transform.position;
 
-		private void FixedUpdate()
-		{
-			if(gameController.isStop) return;
+            skin.up = direction;
+        }
 
-			if(target != null && skillDamagedType == SkillDamagedType.Single)
-			{
-				targetPos = target.transform.position;
-			}
-
+        private void FixedUpdate()
+        {
+            if (gameController.isStop) return;
 			switch (targetType)
 			{
 				case TargetType.Shot:

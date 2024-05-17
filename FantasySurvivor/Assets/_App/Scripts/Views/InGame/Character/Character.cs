@@ -18,9 +18,9 @@ public class Character : ObjectRPG
 
 	[SerializeField] private Transform circleAttackRange;
 
-	[FormerlySerializedAs("a"), SerializeField] private int asd = 5;
+	[FormerlySerializedAs("a"),SerializeField] private int asd= 5;
 	public int b;
-
+	
 	public float abc = 2.5f;
 
 	public float sizeBase;
@@ -97,6 +97,8 @@ public class Character : ObjectRPG
 				control.localScale = Vector3.one * model.attackRange;
 			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackRange), model)
 		);
+		
+		
 	}
 
 	public void Init(CharacterStat statInit)
@@ -178,23 +180,27 @@ public class Character : ObjectRPG
 		{
 			case SkillType.Active:
 			{
-				Skill skillIns;
-				switch (skillData.name)
-				{
-					case SkillName.Fireball:
-						skillIns = new FireBall();
-						break;
-					case SkillName.ThunderStrike:
-						skillIns = new ThunderStrike();
-						break;
-					default:
-						skillIns = new ProactiveSkill();
-						break;
-				}
-				skillIns.Init(skillData);
-				listSkills.Add(skillIns);
+					Skill skillIns;
+					switch (skillData.name)
+					{
+						case SkillName.Fireball:
+							skillIns = new FireBall();
+							break;
+						case SkillName.ThunderStrike: 
+							skillIns = new ThunderStrike();
+							break;
+						
+                        case SkillName.Waterball:
+                            skillIns = new waterball();
+                            break;
+                        default:
+                            skillIns = new ProactiveSkill();
+                            break;
+                    }
+					skillIns.Init(skillData);
+					listSkills.Add(skillIns);
+					break;
 			}
-				break;
 			case SkillType.Buff:
 				if(skillData.name == SkillName.Food)
 				{

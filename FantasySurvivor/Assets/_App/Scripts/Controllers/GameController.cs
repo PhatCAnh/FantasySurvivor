@@ -370,7 +370,8 @@ public class GameController : Controller<GameApp>
 		return x * x + y * y <= number * number;
 	}
 
-	private void LoadMap(int chapter)
+    
+    private void LoadMap(int chapter)
 	{
 		_camSize = Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0));
 		_width = 1 / (_camSize.x - 0.5f);
