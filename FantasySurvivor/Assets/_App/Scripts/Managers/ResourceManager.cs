@@ -164,7 +164,7 @@ public class ResourceManager : UIManagerBase<PopupType>
             {"M7", _globloomSentry},
 			{"M8", _electroBomber},
 			{"M9", _slimeWandering},
-			{"M10", _minionSkeleton},
+			{"Skeleton", _minionSkeleton},
 
         };
 

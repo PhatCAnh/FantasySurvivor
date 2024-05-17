@@ -13,7 +13,9 @@ public enum ItemPrefab
     GlobloomSentry = 6,
     ElectroBomber = 7,
     SlimeWandering = 8,
-    MinionSkeleton = 9,
+
+    MinionSkeleton,
+    
     HealthBar,
     Character,
     TextPopup,
@@ -41,7 +43,8 @@ public enum MonsterType
     GlobloomSentry = 6,
     ElectroBomber = 7,
     SlimeWandering = 8,
-    MinionSkeleton = 9,
+
+    MinionSkeleton,
 }
 
 public enum TowerType
