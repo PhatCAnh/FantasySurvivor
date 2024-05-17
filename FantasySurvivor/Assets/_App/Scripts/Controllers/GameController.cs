@@ -171,6 +171,18 @@ public class GameController : Controller<GameApp>
 
 		return monster;
 	}
+
+	public Monster SpawnMonster(string id, int ad, int health, int exp)
+	{
+        var statMonster = app.configs.dataStatMonster.GetConfig(id);
+        var monsterStat = new MonsterStat(statMonster.moveSpeed, health, health, statMonster.attackSpeed, statMonster.attackRange, exp);
+        var type = (ItemPrefab)Enum.Parse(typeof(ItemPrefab), statMonster.monsterType);
+        Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
+        monster.Init(monsterStat, null, type);
+        listMonster.Add(monster);
+        return monster;
+	}	
+
 	public void MonsterDie(Monster mons, bool selfDie = false)
 	{
 		if(!selfDie)
@@ -181,8 +193,11 @@ public class GameController : Controller<GameApp>
 		}
 
 		listMonster.Remove(mons);
-		mons.wave.monsterInWave.Remove(mons);
-		Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
+		if(mons.wave != null)
+		{
+            mons.wave.monsterInWave.Remove(mons);
+        }
+        Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
 		//Destroy(mons.gameObject);
 	}
 

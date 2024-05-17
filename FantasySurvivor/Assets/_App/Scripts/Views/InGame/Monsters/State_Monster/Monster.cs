@@ -91,14 +91,21 @@ public class Monster : ObjectRPG
     public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave, ItemPrefab monsType)
 	{
 		stat = monsterStat;
-		model = new MonsterModel(
+
+		var exp = 0;
+
+		if(wave != null)
+		{
+            this.wave = wave;
+			exp = wave.expMonster;
+        }
+
+        model = new MonsterModel(
 			stat.moveSpeed.BaseValue,
 			stat.health.BaseValue,
 			stat.attackDamage.BaseValue,
 			stat.attackSpeed.BaseValue,
-			wave.expMonster);
-		this.wave = wave;
-		type = monsType;
+			exp);
 		sizeAttack = stat.attackRange.BaseValue != 0 ? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
 
 		InitializationStateMachine();

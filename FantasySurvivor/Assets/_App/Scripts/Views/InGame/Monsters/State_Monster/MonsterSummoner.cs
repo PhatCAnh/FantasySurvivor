@@ -5,26 +5,14 @@ using UnityEngine;
 public class MonsterSummoner : Monster
 {
 
-
     private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
-    protected override void HandlePhysicUpdate()
+    public override void Attack()
     {
-
-
-
-
-        if (moveDirection.magnitude > 25)
-        {
-            transform.position = gameController.RandomPositionSpawnMonster(20);
-        }
-        else
-        {
-            MoveState();
-        }
-
-        SetAnimation(idleDirection);
+        var mob = gameController.SpawnMonster("M1", model.attackDamage, Mathf.RoundToInt(model.maxHealthPoint), 0);
+        mob.transform.position = transform.position;
+    
+    
     }
-
 
 }
