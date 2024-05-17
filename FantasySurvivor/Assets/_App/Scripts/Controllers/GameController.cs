@@ -200,8 +200,19 @@ public class GameController : Controller<GameApp>
         Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
 		//Destroy(mons.gameObject);
 	}
+    public void MonsterDestroy(Monster mons)
+	{
+        listMonster.Remove(mons);
+        if (mons.wave != null)
+        {
+            mons.wave.monsterInWave.Remove(mons);
+        }
+        Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
+    }
 
-	public void KillAllMonster()
+
+
+    public void KillAllMonster()
 	{
 		foreach(var mob in listMonster)
 		{

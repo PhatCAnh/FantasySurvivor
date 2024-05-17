@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1826074468067616837}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.03, y: -0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 100997737560221637}
   - component: {fileID: 5322406464849481447}
   - component: {fileID: 5246377371996700095}
-  - component: {fileID: 5655194940815072268}
+  - component: {fileID: -7111087510856518958}
   m_Layer: 0
   m_Name: Minion_Skeleton
   m_TagString: Untagged
@@ -129,7 +129,7 @@ CapsuleCollider2D:
   m_Offset: {x: -0.012411118, y: -0.018617153}
   m_Size: {x: 0.35106277, y: 0.7641821}
   m_Direction: 0
---- !u!114 &5655194940815072268
+--- !u!114 &-7111087510856518958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2241977195184255279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d4cac00855d19d43b5b17cd5097a772, type: 3}
+  m_Script: {fileID: 11500000, guid: 3baee317a03089b46a2f32138d3de842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 9
@@ -146,7 +146,7 @@ MonoBehaviour:
   animator: {fileID: 7242010948659581762}
   firePoint: {fileID: 2695068309090979061}
   justSpawnVertical: 0
-  size: 0
+  size: 0.3
 --- !u!1 &8445857744007758466
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +220,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1978398420, guid: 390444a56a9c50f41bf5ca32e767f490, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
