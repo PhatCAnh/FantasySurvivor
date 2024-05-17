@@ -30,37 +30,6 @@ namespace FantasySurvivor
 			return _coolDownBack >= _numberBack;
 		}
 		
-		protected override void HandlePhysicUpdate()
-		{
-            moveTarget = gameController.character.transform.position;
-            moveDirection = moveTarget - transform.position;
-
-
-            if (moveDirection.magnitude < sizeAttack)
-            {
-                if (cdAttack.isFinished)
-                {
-                    AttackState();
-                    cdAttack.Restart(1 / model.attackSpeed);
-                    animator.SetBool("Attack", true);
-                }
-                else
-                {
-                    animator.SetBool("Attack", false);
-                }
-            }
-            else if (moveDirection.magnitude > 25)
-            {
-                transform.position = gameController.RandomPositionSpawnMonster(20);
-            }
-            else
-            {
-                MoveState();
-            }
-            SetAnimation(idleDirection);
-        }
-
-
 
         public override void Attack()
 		{

@@ -146,6 +146,7 @@ public class Monster : ObjectRPG
 				animator.SetBool("Attack", true);
 			} else
 			{
+				IdleState();
                 animator.SetBool("Attack", false);
             }
 		}
@@ -245,23 +246,12 @@ public class Monster : ObjectRPG
 		_stateMachine.ChangeState(_moveState);
 	}
 
-	public void AttackState()
+	public virtual void AttackState()
 	{
 		if(isAttack) return;
-		_stateMachine.ChangeState(_attackState);	
+		_stateMachine.ChangeState(_attackState);
 	}
 
     #endregion
-
-    public void UpdateStats(float amount)
-    {
-
-        model.moveSpeed = amount; 
-        if (model.moveSpeed < 0.1f)
-        {
-            model.moveSpeed = 0.1f; 
-        }
-    }
-
 
 }
