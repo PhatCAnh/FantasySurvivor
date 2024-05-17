@@ -83,9 +83,13 @@ public class HelpItemDrop : View<GameApp>
 	private void Collected()
 	{
 		gameController.CollectedItemSpecial(_type);
+	}
+
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
 		inCircle.DOKill();
 		outCircle.DOKill();
 		questionMark.DOKill();
-		
 	}
 }

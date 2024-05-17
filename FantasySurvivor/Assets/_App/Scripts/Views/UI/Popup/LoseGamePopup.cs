@@ -53,7 +53,7 @@ public class LoseGamePopup : View<GameApp>, IPopup
     }
     public void Close()
     {
-        gameController.KillAllMonster();
+        gameController.ResetPool();
         gameController.ChangeSceneHome();
         gameController.isEndGame = false;
         Destroy(gameObject);

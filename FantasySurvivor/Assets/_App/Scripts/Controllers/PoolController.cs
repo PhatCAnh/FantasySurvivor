@@ -57,5 +57,13 @@ namespace _App.Scripts.Controllers
 				value.ReturnAllObject();
 			}
 		}
+
+		public void RemoveAllPool()
+		{
+			foreach(var item in _dictionaryPool)
+			{
+				item.Value.ReturnAllObject();
+			}
+		}
 	}
 }

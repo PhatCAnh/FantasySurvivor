@@ -144,10 +144,12 @@ public class GameController : Controller<GameApp>
 				break;
 		}
 	}
+	
+	
 
-	public void TestMethod()
+	public void ResetPool()
 	{
-		character.AddHealth(0);
+		Singleton<PoolController>.instance.RemoveAllPool();
 	}
 
 

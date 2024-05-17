@@ -41,6 +41,10 @@ namespace FantasySurvivor
 		{
 			if(gameController.isStop) return;
 			//transform.position = Vector2.MoveTowards(transform.position, _target.transform.position, _speedBullet * Time.deltaTime);
+			
+			
+			
+			
 			Vector3 directionToTarget = _directionToTarget.normalized;
 			var position = transform.position;
 			position = Vector2.MoveTowards(position, position + directionToTarget, _speedBullet * Time.deltaTime);

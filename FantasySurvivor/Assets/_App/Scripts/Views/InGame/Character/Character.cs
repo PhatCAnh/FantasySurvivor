@@ -262,6 +262,7 @@ public class Character : ObjectRPG
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
+		circleAttackRange.DOKill();
 	}
 
 	private void OnDrawGizmosSelected()
