@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1314332282, guid: 1925fb40fcdede44f8a9ff97b1bce147, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -171,7 +171,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.1}
@@ -222,9 +222,6 @@ MonoBehaviour:
   firePoint: {fileID: 2251807672918116610}
   justSpawnVertical: 0
   size: 0
-  _summonPrefab: {fileID: 0}
-  _minimumSpawnTime: 3
-  _maximumSpawnTime: 5
 --- !u!1 &2251807672918116611
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +247,7 @@ Transform:
   m_GameObject: {fileID: 2251807672918116611}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.42, y: -1.04, z: 0}
+  m_LocalPosition: {x: 2.11, y: -1.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
