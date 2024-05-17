@@ -23,6 +23,7 @@ public enum ItemPrefab
     ThunderStrikeSmall,
     ThunderStrike,
     BulletGlobloomSentry,
+    SkillWaterBall,
 }
 
 public enum MapType
