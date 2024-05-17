@@ -110,6 +110,7 @@ namespace FantasySurvivor
 
 		private void OnClickBtnSetting()
 		{
+			if(gameController.isStop) return;
 			//gameController.ChangeScene(GameConst.nameScene_Game, null);
 			app.resourceManager.ShowPopup(PopupType.Pause);
 		}

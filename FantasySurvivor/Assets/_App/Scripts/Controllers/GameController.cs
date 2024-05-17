@@ -185,7 +185,7 @@ public class GameController : Controller<GameApp>
 
 	public void KillAllMonster()
 	{
-		foreach(var mob in listMonster)
+		foreach(var mob in listMonster.ToList())
 		{
 			MonsterDie(mob, true);
 		}
