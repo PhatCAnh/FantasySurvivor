@@ -222,6 +222,9 @@ MonoBehaviour:
   firePoint: {fileID: 2251807672918116610}
   justSpawnVertical: 0
   size: 0
+  _summonPrefab: {fileID: 0}
+  _minimumSpawnTime: 3
+  _maximumSpawnTime: 5
 --- !u!1 &2251807672918116611
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,7 +250,7 @@ Transform:
   m_GameObject: {fileID: 2251807672918116611}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.42, y: -1.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
