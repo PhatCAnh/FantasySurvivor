@@ -20,7 +20,15 @@ namespace FantasySurvivor
 			this.attackRange.BaseValue = attackRange;
 			this.exp.BaseValue = exp;
 		}
-	}
+        public MonsterStat(float moveSpeed, int health, int attackDamage, float attackSpeed, float attackRange)
+        {
+            this.moveSpeed.BaseValue = moveSpeed;
+            this.health.BaseValue = health;
+            this.attackDamage.BaseValue = attackDamage;
+            this.attackSpeed.BaseValue = attackSpeed;
+            this.attackRange.BaseValue = attackRange;
+        }
+    }
 	
 	public class TowerStat
 	{
