@@ -84,9 +84,10 @@ public enum SkillName
     Fireball,
     ThunderStrike,Waterball,
     /* ThunderBird,*/
-   Food,
-    /*Shark,
-    Twin,
+   Food,Swamp,
+    Shark, BlackDrum,
+
+    /*Twin,
     ZoneOfJudgment,
     BlackDrum,
     Passive1,

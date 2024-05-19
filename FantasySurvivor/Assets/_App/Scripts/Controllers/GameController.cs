@@ -213,7 +213,25 @@ public class GameController : Controller<GameApp>
 		return listMonsterInRect.Count != 0 ? listMonsterInRect : null;
 	}
 
-	public List<Monster> GetAllMonsterInRange(Vector2 trans, float range)
+    public List<Monster> GetAllMonsterInSence()
+    {
+        var characterPos = character.transform.position;
+        Rect myRect = new Rect(characterPos.x - _width / 2, characterPos.y - _height / 2, _width, _height);
+        var listMonsterInRect = new List<Monster>();
+        foreach (var mons in listMonster)
+        {
+            //if (CheckTouchCharacter(mons.transform.position, character.model.attackRange))
+            //{
+            //    listMonsterInRect.Add(mons);
+            //}
+             if(myRect.Contains(mons.transform.position))
+             {
+             	listMonsterInRect.Add(mons);
+             }
+        }
+        return listMonsterInRect.Count != 0 ? listMonsterInRect : null;
+    }
+    public List<Monster> GetAllMonsterInRange(Vector2 trans, float range)
 	{
 		var listMonsterInRange = new List<Monster>();
 		foreach(var mons in listMonster)

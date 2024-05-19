@@ -180,8 +180,16 @@ public class Monster : ObjectRPG
 	{
 		myRigid.velocity = Vector2.zero;
 	}
+    public void UpdateStats(float amount)
+    {
 
-	public void ResetWhenDie()
+        model.moveSpeed = amount;
+        if (model.moveSpeed < 0.1f)
+        {
+            model.moveSpeed = 0.1f;
+        }
+    }
+    public void ResetWhenDie()
 	{
 		
 	}

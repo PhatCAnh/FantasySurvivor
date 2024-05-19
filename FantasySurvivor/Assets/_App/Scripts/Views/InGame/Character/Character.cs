@@ -185,6 +185,15 @@ public class Character : ObjectRPG
                         case SkillName.Waterball:
                             skillIns = new waterball();
                             break;
+                        case SkillName.Swamp:
+                            skillIns = new swamp();
+                            break;
+                        case SkillName.Shark:
+                            skillIns = new Shark();
+                            break;
+                        case SkillName.BlackDrum:
+                            skillIns = new BlackDrum();
+                            break;
                         default:
                             skillIns = new ProactiveSkill();
                             break;

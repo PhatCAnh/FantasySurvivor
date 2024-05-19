@@ -150,7 +150,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 873336829788441046}
-  - {fileID: 2988061103550409636}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &873336829918094234
@@ -168,65 +167,3 @@ MonoBehaviour:
   target: {fileID: 0}
   size: 1
   skillDamagedType: 0
---- !u!1001 &9064774472971159478
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 873336829918094237}
-    m_Modifications:
-    - target: {fileID: 6105532977934052370, guid: 7755505eb2bb0b9448c97bde25b3c4cd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6105532977934052370, guid: 7755505eb2bb0b9448c97bde25b3c4cd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6105532977934052370, guid: 7755505eb2bb0b9448c97bde25b3c4cd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6105532977934052370, guid: 7755505eb2bb0b9448c97bde25b3c4cd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6105532977934052370, guid: 7755505eb2bb0b9448c97bde25b3c4cd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6105532977934052370, guid: 7755505eb2bb0b9448c97bde25b3c4cd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6105532977934052370, guid: 7755505eb2bb0b9448c97bde25b3c4cd, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6105532977934052370, guid: 7755505eb2bb0b9448c97bde25b3c4cd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6105532977934052370, guid: 7755505eb2bb0b9448c97bde25b3c4cd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6105532977934052370, guid: 7755505eb2bb0b9448c97bde25b3c4cd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6105532977934052371, guid: 7755505eb2bb0b9448c97bde25b3c4cd, type: 3}
-      propertyPath: m_Name
-      value: ThunderStrike
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7755505eb2bb0b9448c97bde25b3c4cd, type: 3}
---- !u!4 &2988061103550409636 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6105532977934052370, guid: 7755505eb2bb0b9448c97bde25b3c4cd, type: 3}
-  m_PrefabInstance: {fileID: 9064774472971159478}
-  m_PrefabAsset: {fileID: 0}
