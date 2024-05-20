@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 100997737560221637}
   - component: {fileID: 5322406464849481447}
   - component: {fileID: 5246377371996700095}
-  - component: {fileID: -7111087510856518958}
+  - component: {fileID: 2243007479603103711}
   m_Layer: 0
   m_Name: Minion_Skeleton
   m_TagString: Untagged
@@ -129,7 +129,7 @@ CapsuleCollider2D:
   m_Offset: {x: -0.012411118, y: -0.018617153}
   m_Size: {x: 0.35106277, y: 0.7641821}
   m_Direction: 0
---- !u!114 &-7111087510856518958
+--- !u!114 &2243007479603103711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,7 +146,7 @@ MonoBehaviour:
   animator: {fileID: 7242010948659581762}
   firePoint: {fileID: 2695068309090979061}
   justSpawnVertical: 0
-  size: 0.3
+  size: 0
 --- !u!1 &8445857744007758466
 GameObject:
   m_ObjectHideFlags: 0

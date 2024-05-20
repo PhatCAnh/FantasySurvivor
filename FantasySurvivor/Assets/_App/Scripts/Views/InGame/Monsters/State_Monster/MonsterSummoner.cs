@@ -19,7 +19,7 @@ public class MonsterSummoner : Monster
     {
         for (int i = 0; i < numMonster; i++)
         {
-            var mob = gameController.SpawnMonster("Skeleton", 0, 10,3);
+            var mob = gameController.SpawnMonster("Skeleton", 10, stat.attackDamage.BaseValue);
 
             Vector2 randomPosition = new Vector2(firePoint.position.x + Random.Range(-range, range),
                                                  firePoint.position.y + Random.Range(-range, range));

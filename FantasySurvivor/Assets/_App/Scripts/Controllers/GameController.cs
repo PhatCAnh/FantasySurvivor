@@ -172,10 +172,10 @@ public class GameController : Controller<GameApp>
 		return monster;
 	}
 
-	public Monster SpawnMonster(string id, int ad, int health)
+	public Monster SpawnMonster(string id, int health, int attackDamage)
 	{
         var statMonster = app.configs.dataStatMonster.GetConfig(id);
-        var monsterStat = new MonsterStat(statMonster.moveSpeed, ad, health, statMonster.attackSpeed, statMonster.attackRange);
+        var monsterStat = new MonsterStat(statMonster.moveSpeed, health, attackDamage, statMonster.attackSpeed, statMonster.attackRange);
         var type = (ItemPrefab)Enum.Parse(typeof(ItemPrefab), statMonster.monsterType);
         Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
         monster.Init(monsterStat, null, type);
