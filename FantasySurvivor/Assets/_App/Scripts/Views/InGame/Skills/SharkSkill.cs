@@ -55,7 +55,8 @@ public class Skill
 		skillPrefab = normalSkillPrefab;
 
 		levelData = data.levelSkillData;
-	}
+
+    }
 
 	public virtual void UpLevel()
 	{

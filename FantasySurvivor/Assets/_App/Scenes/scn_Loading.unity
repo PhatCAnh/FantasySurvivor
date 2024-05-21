@@ -472,67 +472,6 @@ Material:
     - _r: {r: 0, g: 0, b: 10, a: 10}
     - _rect2props: {r: 0.0000076293945, g: 5, b: 37.830215, a: 37.830215}
   m_BuildTextureStacks: []
---- !u!1001 &1402433274
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5771844762265413593, guid: 3c5829c5a3cfb48b9a2b54356353f51b, type: 3}
-      propertyPath: size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7180547673905776513, guid: 3c5829c5a3cfb48b9a2b54356353f51b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7180547673905776513, guid: 3c5829c5a3cfb48b9a2b54356353f51b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7180547673905776513, guid: 3c5829c5a3cfb48b9a2b54356353f51b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7180547673905776513, guid: 3c5829c5a3cfb48b9a2b54356353f51b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7180547673905776513, guid: 3c5829c5a3cfb48b9a2b54356353f51b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7180547673905776513, guid: 3c5829c5a3cfb48b9a2b54356353f51b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7180547673905776513, guid: 3c5829c5a3cfb48b9a2b54356353f51b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7180547673905776513, guid: 3c5829c5a3cfb48b9a2b54356353f51b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7180547673905776513, guid: 3c5829c5a3cfb48b9a2b54356353f51b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7180547673905776513, guid: 3c5829c5a3cfb48b9a2b54356353f51b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8012577335008146410, guid: 3c5829c5a3cfb48b9a2b54356353f51b, type: 3}
-      propertyPath: m_Name
-      value: WaterBall
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3c5829c5a3cfb48b9a2b54356353f51b, type: 3}
 --- !u!1001 &1725897519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -553,6 +492,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 1965712088}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _skillShark
+      value: 
+      objectReference: {fileID: 8206914173546746077, guid: 5092a53af760915459def15d68544006, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _electroBomber
       value: 
@@ -582,6 +525,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3789013429719267303, guid: bfd583f73e63fa0439dd8ee8775546e8, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _skillThunderStrikeSmall
       value: 
       objectReference: {fileID: 873336829918094235, guid: a6a831d5a3c80f44d8a599b2b220c529, type: 3}
@@ -590,11 +537,27 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[3].name
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[2].imgUI
       value: 
       objectReference: {fileID: 21300000, guid: 06ce499fc948e4526af9ff76839bc1ca, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[3].imgUI
+      value: 
+      objectReference: {fileID: 21300000, guid: 06ce499fc948e4526af9ff76839bc1ca, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[3].canAppear
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[2].typeElemental
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[3].typeElemental
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
@@ -620,6 +583,14 @@ PrefabInstance:
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[2].normalSkillType
       value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[3].evolveSkillType
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[3].normalSkillType
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4760561319027522255, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: m_Material
@@ -773,4 +744,3 @@ SceneRoots:
   - {fileID: 1725897519}
   - {fileID: 1061815518}
   - {fileID: 526710544}
-  - {fileID: 1402433274}

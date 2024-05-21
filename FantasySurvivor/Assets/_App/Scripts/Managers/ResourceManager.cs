@@ -36,6 +36,9 @@ public class ResourceManager : UIManagerBase<PopupType>
     
     [SerializeField] private GameObject _skillWaterBall;
 
+    [SerializeField] private GameObject _skillShark;
+
+
     private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
 
@@ -150,6 +153,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.ThunderStrikeSmall, _skillThunderStrikeSmall},
             {ItemPrefab.BulletGlobloomSentry, _bulletGlobloomSentry},
             {ItemPrefab.SkillWaterBall, _skillWaterBall},
+			{ItemPrefab.Shark,_skillShark },
         };
 
 		_mapDic = new Dictionary<MapType, Map>

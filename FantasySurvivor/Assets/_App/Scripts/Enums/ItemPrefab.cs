@@ -24,6 +24,7 @@ public enum ItemPrefab
     ThunderStrike,
     BulletGlobloomSentry,
     SkillWaterBall,
+    Shark,
 }
 
 public enum MapType
@@ -93,10 +94,12 @@ public enum TypeAds
 public enum SkillName
 {
     Fireball,
-    ThunderStrike,Waterball,
-    /* ThunderBird,*/
-   Food,
-    /*Shark,
+    ThunderStrike,
+    Waterball,
+    Shark,
+    ThunderBird,
+    Food,
+    /*
     Twin,
     ZoneOfJudgment,
     BlackDrum,
