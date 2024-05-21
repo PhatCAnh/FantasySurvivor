@@ -33,19 +33,15 @@ namespace FantasySurvivor
 		{
 			this.origin = gameController.character;
 
-			if (target == null)
+			if (target != null)
 			{
-				Destroy(gameObject);
-				return;
+				sizeTouch = size + target.size;
+				this.target = target;
 			}
 
 			this.level = level;
 
-			this.target = target;
-
 			this.damage = damage;
-
-			sizeTouch = size + target.size;
 		}
 
 		

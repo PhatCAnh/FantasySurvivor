@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _App.Scripts.Controllers;
 using _App.Scripts.Views.InGame.Skills;
+using _App.Scripts.Views.InGame.Skills.SkillMono;
 using ArbanFramework;
 using ArbanFramework.Config;
 using ArbanFramework.MVC;
@@ -185,7 +186,7 @@ public class Character : ObjectRPG
 							skillIns = new ThunderChannelingFl();
 							break;
 						case SkillName.FireShield:
-							skillIns = new FireShieldLv();
+							skillIns = new FireShieldControl();
 							break;
                         default:
 							skillIns = new ProactiveSkill();
