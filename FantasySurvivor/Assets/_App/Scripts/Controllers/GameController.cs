@@ -153,10 +153,10 @@ public class GameController : Controller<GameApp>
 		character.AddHealth(0);
 	}
 
-
-	public Monster SpawnMonster(MapView.WaveData wave)
+    public Monster SpawnMonster(MapView.WaveData wave)
 	{
-		var statMonster = app.configs.dataStatMonster.GetConfig(wave.idMonster);
+
+        var statMonster = app.configs.dataStatMonster.GetConfig(wave.idMonster);
 
 		var monsterStat = new MonsterStat(statMonster.moveSpeed, wave.healthMonster, wave.adMonster, statMonster.attackSpeed, statMonster.attackRange, wave.expMonster);
 
@@ -164,12 +164,14 @@ public class GameController : Controller<GameApp>
 
 		Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
 
-		//var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
-		monster.Init(monsterStat, wave, type);
+        //var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
 
-		listMonster.Add(monster);
+        monster.Init(monsterStat, wave, type);
+		monster.ResetAttackCountdown();
 
-		return monster;
+        listMonster.Add(monster);
+
+        return monster;
 	}
 
 	public Monster SpawnMonster(string id, int health, int attackDamage)
@@ -179,6 +181,7 @@ public class GameController : Controller<GameApp>
         var type = (ItemPrefab)Enum.Parse(typeof(ItemPrefab), statMonster.monsterType);
         Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
         monster.Init(monsterStat, null, type);
+		monster.ResetAttackCountdown();
         listMonster.Add(monster);
         return monster;
 	}	

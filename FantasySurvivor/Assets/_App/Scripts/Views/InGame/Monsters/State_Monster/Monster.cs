@@ -4,6 +4,7 @@ using ArbanFramework;
 using ArbanFramework.StateMachine;
 using FantasySurvivor;
 using Unity.Services.Analytics.Internal;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class Monster : ObjectRPG
@@ -18,9 +19,9 @@ public class Monster : ObjectRPG
 
 	public bool justSpawnVertical = false;
 
-	#region Properties
+    #region Properties
 
-	private Vector2 _direction = Vector2.zero;
+    private Vector2 _direction = Vector2.zero;
 
 	public MonsterModel model { get; protected set; }
 
@@ -78,8 +79,6 @@ public class Monster : ObjectRPG
 
     protected float moveSpeedDecreaseAmount;
 
- 
-
     protected Cooldown moveSpeedCooldown = new Cooldown();
 
     protected float moveSpeedCooldownTime = 3f;
@@ -108,10 +107,11 @@ public class Monster : ObjectRPG
 			exp);
 		sizeAttack = stat.attackRange.BaseValue != 0 ? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
 
-		InitializationStateMachine();
+
+        InitializationStateMachine();
 	}
 
-	private void Update()
+    private void Update()
 	{
 		if(gameController.isStop) return;
 		var time = Time.deltaTime;
@@ -137,7 +137,7 @@ public class Monster : ObjectRPG
 		moveTarget = gameController.character.transform.position;
 		moveDirection = moveTarget - transform.position;
 
-		if(moveDirection.magnitude < sizeAttack)
+		if(moveDirection.magnitude < sizeAttack || !cdAttack.isFinished)
 		{
 			if(cdAttack.isFinished)
 			{
@@ -150,7 +150,7 @@ public class Monster : ObjectRPG
                 animator.SetBool("Attack", false);
             }
 		}
-		else if(moveDirection.magnitude > 25)
+		else if (moveDirection.magnitude > 25)
 		{
 			transform.position = gameController.RandomPositionSpawnMonster(20);
 		}
@@ -161,9 +161,7 @@ public class Monster : ObjectRPG
 		SetAnimation(idleDirection);
 	}
 
-	
-
-	protected virtual void SetAnimation(Vector2 directionMove)
+    protected virtual void SetAnimation(Vector2 directionMove)
 	{
 		animator.SetFloat("SpeedMul", speedMul);
 		animator.SetFloat("Horizontal", directionMove.x);
@@ -188,7 +186,12 @@ public class Monster : ObjectRPG
 		callBackKilled?.Invoke();
     }
 
-	public virtual void Move(Vector2 dir, float deltaTime)
+    public void ResetAttackCountdown()
+    {
+        cdAttack.Restart(model.attackSpeed);
+    }
+
+    public virtual void Move(Vector2 dir, float deltaTime)
 	{
         var movement = model.moveSpeed * GameConst.MOVE_SPEED_ANIMATION_RATIO * deltaTime * speedMul * dir;
         var newPosition = myRigid.position + movement;
