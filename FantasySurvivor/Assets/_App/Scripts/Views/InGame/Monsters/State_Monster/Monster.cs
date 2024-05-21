@@ -172,6 +172,7 @@ public class Monster : ObjectRPG
         target.TakeDamage(model.attackDamage);
     }
 
+
 	public void TakeDamage(float damage, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
 	{
 		if(!isAlive) return;
@@ -229,7 +230,7 @@ public class Monster : ObjectRPG
 		}
 		else
 		{
-			_stateMachine = new StateMachine();
+            _stateMachine = new StateMachine();
 			_idleState = new MonsterIdle(this, _stateMachine);
 			_moveState = new MonsterMove(this, _stateMachine);
 			_attackState = new MonsterAttack(this, _stateMachine);
@@ -237,7 +238,7 @@ public class Monster : ObjectRPG
 		}
 	}
 
-	public virtual void IdleState()
+    public virtual void IdleState()
 	{
 		if(isIdle) return;
 		_stateMachine.ChangeState(_idleState);
@@ -254,6 +255,8 @@ public class Monster : ObjectRPG
 		if(isAttack) return;
 		_stateMachine.ChangeState(_attackState);
 	}
+
+
 
     #endregion
 
