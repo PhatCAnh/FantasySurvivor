@@ -12,8 +12,6 @@ namespace FantasySurvivor
     {
         [SerializeField] protected Transform skin;
         
-		public TargetType targetType;
-
         public bool canBlock;
 
         public float moveSpeed;
@@ -26,8 +24,6 @@ namespace FantasySurvivor
 		public override void Init(LevelSkillData data, Monster target, int level, ItemPrefab type)
 		{
 			base.Init(data, target, level, type);
-
-			if(target == null) return;
 
             this.direction = target.transform.position - transform.position;
 

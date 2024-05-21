@@ -185,4 +185,5 @@ public enum TargetType
 {
 	Target,
 	Shot,
+	None,
 }

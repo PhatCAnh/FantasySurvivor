@@ -191,7 +191,7 @@ public class Character : ObjectRPG
 							skillIns = new ThunderStrike();
 							break;
                         case SkillName.Waterball:
-                            skillIns = new WaterBall();
+                            skillIns = new WaterBallControl();
                             break;
 						// case SkillName.ThunderChanneling:
 						// 	skillIns = new ThunderChanneling();

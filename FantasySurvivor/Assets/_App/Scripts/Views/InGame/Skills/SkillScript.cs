@@ -20,7 +20,6 @@ namespace FantasySurvivor
 			if(level == 3 || level == 5)
 			{
 				numberProjectile++;
-				Debug.Log("lua" + numberProjectile);
 			}
 			if(level == 6)
 			{
@@ -142,7 +141,7 @@ namespace FantasySurvivor
 			}
 		}
 	}
-	public class waterball : ProactiveSkill
+	public class WaterBallControl : ProactiveSkill
 	{
 		public override void Init(SkillData data)
 		{
@@ -157,14 +156,11 @@ namespace FantasySurvivor
 			base.UpLevel();
 			if(level == 3 || level == 5)
 			{
-
 				numberProjectile++;
-				Debug.Log("nuoc" + numberProjectile);
 			}
-			if(level == 6)
+			else if(level == 6)
 			{
 				numberProjectile = 1;
-				Debug.Log("ulti" + numberProjectile);
 			}
 		}
 

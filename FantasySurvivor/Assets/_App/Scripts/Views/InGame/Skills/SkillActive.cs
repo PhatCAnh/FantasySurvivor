@@ -15,6 +15,8 @@ namespace FantasySurvivor
 		public float size;
 
 		public SkillDamagedType skillDamagedType;
+
+		public TargetType targetType;
 		
 		public ItemPrefab type;
 		
@@ -41,23 +43,18 @@ namespace FantasySurvivor
 
 			this.type = type;
 
-			if(target == null)
+			if(targetType != TargetType.None)
 			{
-				Singleton<PoolController>.instance.ReturnObject(this.type, gameObject);
-				return;
+				this.target = target;
+				
+				this.sizeTouch = size + target.size;
 			}
 
 			this.level = level;
-
-			this.target = target;
-
+			
 			data = dataLevel;
 
 			this.damage = origin.model.attackDamage * data.value / 100;
-			
-			this.
-
-			sizeTouch = size + target.size;
 		}
 
 		

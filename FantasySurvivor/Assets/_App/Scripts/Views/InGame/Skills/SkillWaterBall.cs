@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 namespace FantasySurvivor
 {
-    public class Waterball : SkillBulletActive
+    public class SkillWaterBall : SkillBulletActive
     {
         [SerializeField] protected GameObject explosionEffectPrefab;  // Prefab hiệu ứng nổ
         private float sizee = 5.0f;       // Bán kính nổ
