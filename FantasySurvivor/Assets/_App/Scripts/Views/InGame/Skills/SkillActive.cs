@@ -60,6 +60,7 @@ namespace FantasySurvivor
 			sizeTouch = size + target.size;
 		}
 
+		
 		public virtual void TakeDamage(Monster monster = null)
 		{
 			switch (skillDamagedType)

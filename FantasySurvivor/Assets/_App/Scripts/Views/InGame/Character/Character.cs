@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _App.Scripts.Controllers;
 using _App.Scripts.Views.InGame.Skills;
+using _App.Scripts.Views.InGame.Skills.SkillMono;
 using ArbanFramework;
 using ArbanFramework.Config;
 using ArbanFramework.MVC;
@@ -189,14 +190,19 @@ public class Character : ObjectRPG
 						case SkillName.ThunderStrike: 
 							skillIns = new ThunderStrike();
 							break;
-						
                         case SkillName.Waterball:
-                            skillIns = new waterball();
+                            skillIns = new WaterBall();
                             break;
+						// case SkillName.ThunderChanneling:
+						// 	skillIns = new ThunderChanneling();
+						// 	break;
+						case SkillName.FireShield:
+							skillIns = new FireShieldControl();
+							break;
                         default:
-                            skillIns = new ProactiveSkill();
-                            break;
-                    }
+							skillIns = new ProactiveSkill();
+							break;
+					}
 					skillIns.Init(skillData);
 					listSkills.Add(skillIns);
 					break;

@@ -16,7 +16,6 @@ public class Skill
 	public int level;
 
 	protected Character origin;
-
 	protected GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
 	protected SpawnPos spawnPos;

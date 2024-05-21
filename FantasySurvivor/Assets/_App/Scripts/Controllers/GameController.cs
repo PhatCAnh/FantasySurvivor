@@ -144,14 +144,12 @@ public class GameController : Controller<GameApp>
 				break;
 		}
 	}
-	
-	
+
 
 	public void ResetPool()
 	{
 		Singleton<PoolController>.instance.RemoveAllPool();
 	}
-
 
 	public Monster SpawnMonster(MapView.WaveData wave)
 	{
@@ -212,45 +210,34 @@ public class GameController : Controller<GameApp>
 		return listMonsterInRect;
 	}
 
+
+	public Monster FindNearestMonster(Vector3 bulletPosition, float range, Monster origin = null)
+	{
+		Monster nearestMonster = null;
+		float minDistance = float.MaxValue;
+
+		if(listMonster == null) return null;
+
+		foreach(Monster monster in listMonster)
+		{
+			if(monster == origin) continue;
+
+			float distance = Vector3.Distance(bulletPosition, monster.transform.position);
+
+			if(distance <= range && distance < minDistance)
+			{
+				nearestMonster = monster;
+				minDistance = distance;
+			}
+		}
+		return nearestMonster;
+	}
+
+
 	public void CharacterDie(Character characterView)
 	{
 		LoseGame();
 	}
-
-	public GameObject SpawnBullet(GameObject prefab)
-	{
-		var bullet = Instantiate(prefab);
-		return bullet;
-	}
-
-	// public (GameObject, Monster) UseSkill(SkillName name)
-	// {
-	// 	var mons = GetRandomMonster();
-	// 	if(mons != null)
-	// 	{
-	// 		var skill = Instantiate(
-	// 			app.resourceManager.GetSkill(name).skillPrefab,
-	// 			new Vector3(mons.transform.position.x, mons.transform.position.y),
-	// 			quaternion.identity
-	// 		);
-	// 		return (skill, mons);
-	// 	}
-	// 	return (null, null);
-	// }
-
-	// public void UseSkillHaveFlightRoute(SkillName name)
-	// {
-	// 	var mons = GetRandomMonster();
-	// 	if(mons != null)
-	// 	{
-	// 		var skill = Instantiate(
-	// 			app.resourceManager.GetSkill(name).skillPrefab,
-	// 			character.transform.position,
-	// 			quaternion.identity
-	// 		);
-	// 		skill.GetComponent<BulletView>().Init(mons, name);
-	// 	}
-	// }
 
 	// ReSharper disable Unity.PerformanceAnalysis
 	public void Collected(DropItem dropItem)
@@ -315,7 +302,6 @@ public class GameController : Controller<GameApp>
 		return DropItemType.Exp;
 	}
 
-
 	public Vector2 RandomPositionSpawnMonster(float radius, bool justVertical = false)
 	{
 		float angle = Random.Range(0, 2 * Mathf.PI);
@@ -350,12 +336,11 @@ public class GameController : Controller<GameApp>
 			.GetComponent<HealthBar>();
 		_healthBar.Init(characterPrefab);
 
-		var stat = new CharacterStat(100f, 3, 20, 1,7, 50);
+		var stat = new CharacterStat(100, 2.5f, 10, 1, 10, 50);
 		characterPrefab.Init(stat);
 
 		return characterPrefab;
 	}
-
 	public bool CheckTouchCharacter(Vector3 trans, float number)
 	{
 		var x = trans.x - charPos.x;
@@ -370,8 +355,7 @@ public class GameController : Controller<GameApp>
 		return x * x + y * y <= number * number;
 	}
 
-    
-    private void LoadMap(int chapter)
+	private void LoadMap(int chapter)
 	{
 		_camSize = Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0));
 		_width = 1 / (_camSize.x - 0.5f);
@@ -386,5 +370,6 @@ public class GameController : Controller<GameApp>
 		app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
 		//app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
 	}
+
 
 }

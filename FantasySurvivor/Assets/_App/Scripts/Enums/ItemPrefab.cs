@@ -3,186 +3,186 @@ using UnityEngine;
 using UnityEngine.Serialization;
 public enum ItemPrefab
 {
-    Undefined = -1,
-    BlueZombie = 0,
-    PurpleZombie = 1,
-    BlueGhost = 2,
-    YellowBomb = 3,
-    PurpleDevil = 4,
-    KillerBee = 5,
-    GlobloomSentry = 6,
-    ElectroBomber = 7,
-    SlimeWandering = 8,
-    HealthBar,
-    Character,
-    TextPopup,
-    GemExp,
-    SupportItem,
-    BulletKillerBee,
-    SkillFireBall,
-    ThunderStrikeSmall,
-    ThunderStrike,
-    BulletGlobloomSentry,
-    SkillWaterBall,
+	Undefined = -1,
+	BlueZombie = 0,
+	PurpleZombie = 1,
+	BlueGhost = 2,
+	YellowBomb = 3,
+	PurpleDevil = 4,
+	KillerBee = 5,
+	GlobloomSentry = 6,
+	ElectroBomber = 7,
+	SlimeWandering = 8,
+	HealthBar,
+	Character,
+	TextPopup,
+	GemExp,
+	SupportItem,
+	BulletKillerBee,
+	SkillFireBall,
+	ThunderStrikeSmall,
+	ThunderStrike,
+	BulletGlobloomSentry,
+	SkillWaterBall,
+	FireShield,
 }
 
 public enum MapType
 {
-    Undefined = -1,
-    Forest = 1,
-    Ocean = 2,
+	Undefined = -1,
+	Forest = 1,
+	Ocean = 2,
 }
 
 public enum MonsterType
 {
-    BlueZombie = 0,
-    PurpleZombie = 1,
-    BlueGhost = 2,
-    YellowBomb = 3,
-    PurpleDevil = 4,
-    KillerBee = 5,
-    GlobloomSentry = 6,
-    ElectroBomber = 7,
-    SlimeWandering = 8,
+	BlueZombie = 0,
+	PurpleZombie = 1,
+	BlueGhost = 2,
+	YellowBomb = 3,
+	PurpleDevil = 4,
+	KillerBee = 5,
+	GlobloomSentry = 6,
+	ElectroBomber = 7,
+	SlimeWandering = 8,
 }
 
 public enum TowerType
 {
-    Basic = 0,
-    Speed = 1,
-    Tank = 2,
+	Basic = 0,
+	Speed = 1,
+	Tank = 2,
 }
 
 public enum TextPopupType
 {
-    MonsterDamage,
-    TowerDamage,
+	MonsterDamage,
+	TowerDamage,
 }
 
 public enum TypeStatTower
 {
-    AttackDamage,
-    AttackRange,
-    AttackSpeed,
-    CriticalRate,
-    CriticalDamage,
-    Health,
-    RegenHp,
+	AttackDamage,
+	AttackRange,
+	AttackSpeed,
+	CriticalRate,
+	CriticalDamage,
+	Health,
+	RegenHp,
 }
 
 public enum TypeItemReward
 {
-    Coin,
+	Coin,
 }
 
 public enum LevelResult
 {
-    Start,
-    Failure,
-    Completed,
-    Exit,
+	Start,
+	Failure,
+	Completed,
+	Exit,
 }
 
 public enum TypeAds
 {
-    Interstitial,
-    Reward,
-    Banner,
+	Interstitial,
+	Reward,
+	Banner,
 }
 
 public enum SkillName
 {
-    Fireball,
-    ThunderStrike,Waterball,
-    /* ThunderBird,*/
-   Food,
-    /*Shark,
-    Twin,
-    ZoneOfJudgment,
-    BlackDrum,
-    Passive1,
-    */
+	Fireball,
+	ThunderStrike,
+	Waterball,
+	Food,
+	ThunderChanneling,
+	FireShield,
+	/* ThunderBird,*/
+	/*Shark,
+	Twin,
+	ZoneOfJudgment,
+	BlackDrum,
+	Passive1,
+	*/
 }
 
 public enum SkillType
 {
-    Active,
-    Passive,
-    Buff,
+	Active,
+	Passive,
+	Buff,
 }
 
 public enum SkillElementalType
 {
-    /*Water,
-    Fire,
-    Wind,
-    Dark,
-    Electric,
-    Light,*/
-    Fire,
-    Water,
-    Thunder,
-    Wind,
-    Wood,
+	/*Water,
+	Fire,
+	Wind,
+	Dark,
+	Electric,
+	Light,*/
+	Fire,
+	Water,
+	Thunder,
+	Wind,
+	Wood,
 }
 
 public enum PopupType
 {
-    MainUI,
-    Notification,
-    Pause,
-    WinGame,
-    LoseGame,
-    ChoiceMap,
-    MainInGame,
-    ClickBulletTutorial,
-    HealthBar,
-    Cheat,
-    ChoiceSkill,
+	MainUI,
+	Notification,
+	Pause,
+	WinGame,
+	LoseGame,
+	ChoiceMap,
+	MainInGame,
+	ClickBulletTutorial,
+	HealthBar,
+	Cheat,
+	ChoiceSkill,
 }
 
 public enum SkillDamagedType
 {
-    Single,
-    AreaOfEffect,
+	Single,
+	AreaOfEffect,
 }
 
 public enum DropItemType
 {
-    Exp,
-    Magnet,
-    Bomb,
-    Food,
+	Exp,
+	Magnet,
+	Bomb,
+	Food,
 }
 
 public enum MapHorizontalType
- {
-     Top = 0,
-     Mid = 1,
-     Bot = 2,
- }
+{
+	Top = 0,
+	Mid = 1,
+	Bot = 2,
+}
 
 public enum MapVerticalType
 {
-    Left = 0,
-    Mid = 1,
-    Right = 2,
+	Left = 0,
+	Mid = 1,
+	Right = 2,
 }
 
 public enum SpawnPos
 {
-    Character,
-    Monster,
-    OldBullet,
-    Other,
+	Character,
+	Monster,
+	OldBullet,
+	Other,
 }
 
 public enum TargetType
 {
-    Target,
-    Shot,
+	Target,
+	Shot,
 }
-
-
-
-

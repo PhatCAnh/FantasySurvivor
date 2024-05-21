@@ -1,7 +1,11 @@
 ﻿using System.Linq;
 using _App.Scripts.Controllers;
 using ArbanFramework;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
+
 namespace FantasySurvivor
 {
     public class SkillBulletActive : SkillActive
@@ -24,7 +28,6 @@ namespace FantasySurvivor
 			base.Init(data, target, level, type);
 
 			if(target == null) return;
-
 
             this.direction = target.transform.position - transform.position;
 
