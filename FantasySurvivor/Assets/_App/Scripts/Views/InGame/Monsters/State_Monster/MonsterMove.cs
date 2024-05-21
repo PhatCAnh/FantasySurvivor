@@ -23,25 +23,24 @@ namespace FantasySurvivor
             base.Enter();
             agent.animator.SetFloat("Speed", 1f);
         }
-		
+
 		public override void PhysicUpdate(float fixedDeltaTime)
 		{
 			base.PhysicUpdate(fixedDeltaTime);
 			var directionUnit = agent.moveDirection.normalized;
-            
+            flip();
             Move(directionUnit, Time.fixedDeltaTime);
         }
     
 		private void Move(Vector2 dir, float deltaTime)
 		{
             agent.Move(dir, deltaTime);
-            flip();
         }
 		
 		public void flip() 
         {
 
-            if (agent.transform.localScale.x > gameController.character.transform.position.x)
+            if (agent.transform.position.x > gameController.character.transform.position.x)
             {
                 Vector2 localScale = agent.animator.transform.localScale;
                 localScale.x = -1;
