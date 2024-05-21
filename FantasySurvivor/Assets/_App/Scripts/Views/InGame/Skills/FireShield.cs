@@ -37,23 +37,24 @@ public class FireShield : SkillActive
 
 	void Update()
 	{
-		// // Kiểm tra giá trị của gameController.isStop
-		// if (gameController.isStop)
-		// {
-		//     // Dừng Tween nếu isStop là true
-		//     if (rotationTween != null && rotationTween.IsPlaying())
-		//     {
-		//         rotationTween.Pause();
-		//     }
-		// }
-		// else
-		// {
-		//     // Nếu isStop là false và Tween chưa được tạo hoặc không chạy, khởi động lại Tween
-		//     if (rotationTween == null || !rotationTween.IsPlaying())
-		//     {
-		//         rotationTween.Play();
-		//     }
-		// }
+		//Fix lại cái này
+		// Kiểm tra giá trị của gameController.isStop
+		if (gameController.isStop)
+		{
+		    // Dừng Tween nếu isStop là true
+		    if (_tween.IsPlaying())
+		    {
+			    _tween.Pause();
+		    }
+		}
+		else
+		{
+		    // Nếu isStop là false và Tween chưa được tạo hoặc không chạy, khởi động lại Tween
+		    if (!_tween.IsPlaying())
+		    {
+			    _tween.Play();
+		    }
+		}
 	}
 
 	protected virtual void HandleTouch()

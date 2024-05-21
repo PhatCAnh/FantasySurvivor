@@ -81,7 +81,7 @@ namespace FantasySurvivor
 					return;
 				}
 			}
-			if(!gameController.CheckTouch(targetPos, transform.position, 30))
+			if(!gameController.CheckTouch(origin.transform.position, transform.position, 30))
 			{
 				Singleton<PoolController>.instance.ReturnObject(this.type, gameObject);
 			}
