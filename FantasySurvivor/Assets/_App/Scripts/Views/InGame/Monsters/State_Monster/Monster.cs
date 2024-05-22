@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.StateMachine;
@@ -57,6 +58,8 @@ public class Monster : ObjectRPG
 	public bool isAlive => model.currentHealthPoint > 0;
 
     public bool isDead;
+
+	public bool isNoMove = false;
 
 	public bool isStandStill { get; private set; } = false;
 
@@ -225,6 +228,8 @@ public class Monster : ObjectRPG
 
     public virtual void flip()
     {
+		if (isNoMove) return;
+		
         if (transform.position.x > gameController.character.transform.position.x)
         {
             Vector2 localScale = animator.transform.localScale;
@@ -263,7 +268,7 @@ public class Monster : ObjectRPG
 		_stateMachine.ChangeState(_idleState);
 	}
 
-	public void MoveState()
+	public virtual void MoveState()
 	{
 		flip();
 		if(isMove) return;
