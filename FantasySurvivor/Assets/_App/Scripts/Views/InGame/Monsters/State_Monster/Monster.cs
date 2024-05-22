@@ -56,7 +56,7 @@ public class Monster : ObjectRPG
 
 	public bool isAlive => model.currentHealthPoint > 0;
 
-    public bool isDead { get; private set; } = false;
+    public bool isDead;
 
 	public bool isStandStill { get; private set; } = false;
 
@@ -68,8 +68,6 @@ public class Monster : ObjectRPG
 	private MonsterMove _moveState;
 
 	private MonsterAttack _attackState;
-
-    [SerializeField] private GameObject _deadEffect;
 
     #endregion
 
@@ -115,6 +113,7 @@ public class Monster : ObjectRPG
 		sizeAttack = stat.attackRange.BaseValue != 0 ? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
 
         InitializationStateMachine();
+
 	}
 
     private void Update()
@@ -184,15 +183,14 @@ public class Monster : ObjectRPG
 
 	public virtual void TakeDamage(float damage, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
 	{
-		if (!isAlive) return;
+        if (!isAlive) return;
 		model.currentHealthPoint -= damage;
 		callBackDamaged?.Invoke();
 
-		//var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-		//text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.TowerDamage, isCritical);
-
+		var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
+		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.TowerDamage, isCritical);
         if (isAlive) return;
-        Die();
+		Die();
         callBackKilled?.Invoke();
     }
 
@@ -208,13 +206,11 @@ public class Monster : ObjectRPG
         myRigid.MovePosition(newPosition);
     }
 
-
     public virtual void Die(bool selfDie = false)
 	{
         isDead = true;
-        animator.SetBool("Dead", true);
+        animator.SetBool("Dead", isDead);
         gameController.MonsterDie(this, selfDie);
-		//Instantiate(_deadEffect, transform.position, quaternion.identity);
     }
 
 	protected virtual void Stop()

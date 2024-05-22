@@ -168,7 +168,8 @@ public class GameController : Controller<GameApp>
 
         monster.Init(monsterStat, wave, type);
 		monster.ResetAttackCountdown();
-
+		monster.isDead = false;
+		monster.animator.SetBool("Dead", false);
         listMonster.Add(monster);
 
         return monster;
@@ -200,7 +201,8 @@ public class GameController : Controller<GameApp>
 		{
             mons.wave.monsterInWave.Remove(mons);
         }
-        Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
+
+        //Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
 		//Destroy(mons.gameObject);
 	}
     public void MonsterDestroy(Monster mons)
