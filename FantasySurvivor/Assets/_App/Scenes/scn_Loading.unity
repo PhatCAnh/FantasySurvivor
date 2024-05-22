@@ -497,6 +497,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8206914173546746077, guid: 5092a53af760915459def15d68544006, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _skillSkyBoom
+      value: 
+      objectReference: {fileID: 5452461095947604650, guid: 201f367a0c4e90f448a177ff3b802636, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _electroBomber
       value: 
       objectReference: {fileID: 3192426052812612716, guid: 16bc33004787cc04c9942aac3975eb99, type: 3}
@@ -517,6 +521,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7424864141763079353, guid: 583fe81bb4245f041a6e7e0f7986836c, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _skillEarthPunch
+      value: 
+      objectReference: {fileID: 3036217153635190231, guid: cc14fbf766c734844a054c73e21f268c, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _skillEarthpunch
+      value: 
+      objectReference: {fileID: 3036217153635190231, guid: cc14fbf766c734844a054c73e21f268c, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _skillPoisonBullet
       value: 
       objectReference: {fileID: 445555888757746086, guid: be6e93258c41fb2469fa35bbf434547c, type: 3}
@@ -530,7 +542,7 @@ PrefabInstance:
       objectReference: {fileID: 3789013429719267303, guid: bfd583f73e63fa0439dd8ee8775546e8, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.size
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _skillThunderStrikeSmall
@@ -549,17 +561,41 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[5].name
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[6].name
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[2].imgUI
       value: 
       objectReference: {fileID: 21300000, guid: 06ce499fc948e4526af9ff76839bc1ca, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[3].imgUI
       value: 
-      objectReference: {fileID: 21300000, guid: 06ce499fc948e4526af9ff76839bc1ca, type: 3}
+      objectReference: {fileID: 916065826, guid: 7c453045a9cedc149b94c4078b2d2ce1, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[4].imgUI
       value: 
-      objectReference: {fileID: 21300000, guid: 06ce499fc948e4526af9ff76839bc1ca, type: 3}
+      objectReference: {fileID: 21300000, guid: 65d81833a9705374299a503a6186aa2f, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[5].imgUI
+      value: 
+      objectReference: {fileID: 21300000, guid: d7d3a080ded1f4d6d896c42322e1124f, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[6].imgUI
+      value: 
+      objectReference: {fileID: 21300000, guid: bac771ac1d348e14d88c045f0f8fd067, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[6].spawnPos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[0].canAppear
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[1].canAppear
       value: 0
@@ -577,6 +613,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[5].canAppear
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[6].canAppear
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[2].typeElemental
       value: 1
       objectReference: {fileID: 0}
@@ -587,6 +631,14 @@ PrefabInstance:
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[4].typeElemental
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[5].typeElemental
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[6].typeElemental
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[0].evolveSkillType
@@ -627,6 +679,22 @@ PrefabInstance:
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[4].normalSkillType
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[5].evolveSkillType
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[5].normalSkillType
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[6].evolveSkillType
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[6].normalSkillType
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 4760561319027522255, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: m_Material

@@ -199,6 +199,12 @@ public class Character : ObjectRPG
 						case SkillName.PoisonBullet:
 							skillIns = new Poisonball();
 							break;
+						case SkillName.Earthpunch:
+							skillIns = new EarthPunch();
+							break;
+						case SkillName.SkyBoom:
+							skillIns = new Skyboom();
+							break;
                         default:
                             skillIns = new ProactiveSkill();
                             break;

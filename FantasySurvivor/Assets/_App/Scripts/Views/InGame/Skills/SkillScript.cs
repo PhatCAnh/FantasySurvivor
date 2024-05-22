@@ -28,16 +28,21 @@ namespace FantasySurvivor
         }
     }
 
+    public class EarthPunch : ProactiveSkill
+    {
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+        }
+    }
+
     public class Poisonball : ProactiveSkill
     {
         public override void Init(SkillData data)
         {
             base.Init(data);
         }
-        public override void UpLevel() 
-        {
-            base.UpLevel();
-        }
+
     }
 
     /*public class ThunderBird : ProactiveSkill
@@ -80,11 +85,9 @@ namespace FantasySurvivor
         protected override void UpdatePrefab(SkillActive prefab)
         {
             base.UpdatePrefab(prefab);
-            if (level > 1)
-            {
-                prefab.transform.localScale = Vector3.one * levelData[level].valueSpecial1;
-                prefab.size = levelData[level].valueSpecial1;
-            }
+            prefab.transform.localScale = Vector3.one * levelData[level].valueSpecial1;
+            prefab.size = levelData[level].valueSpecial1;
+
         }
     }
 
@@ -151,6 +154,20 @@ namespace FantasySurvivor
             {
                 numberProjectile++;
             }
+        }
+    }
+
+    public class Skyboom : ProactiveSkill
+    {
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+        }
+        protected override void UpdatePrefab(SkillActive prefab)
+        {
+            base.UpdatePrefab(prefab);
+            prefab.transform.localScale = Vector3.one * levelData[level].valueSpecial1;
+            prefab.size = levelData[level].valueSpecial1;
         }
     }
     public class waterball : ProactiveSkill

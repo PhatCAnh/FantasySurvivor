@@ -26,6 +26,8 @@ public enum ItemPrefab
     SkillWaterBall,
     Shark,
     PoisonBullet,
+    EarthPunch,
+    SkyBoom,
 }
 
 public enum MapType
@@ -99,7 +101,9 @@ public enum SkillName
     Waterball,
     Shark,
     ThunderBird,
-    PoisonBullet,
+    PoisonBullet, 
+    Earthpunch,
+    SkyBoom,
     Food,
     /*
     Twin,
