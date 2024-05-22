@@ -196,6 +196,9 @@ public class Character : ObjectRPG
 						case SkillName.Shark: 
 							skillIns = new Shark();
 							break;
+						case SkillName.PoisonBullet:
+							skillIns = new Poisonball();
+							break;
                         default:
                             skillIns = new ProactiveSkill();
                             break;

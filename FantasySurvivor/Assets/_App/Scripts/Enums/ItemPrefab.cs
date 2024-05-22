@@ -25,6 +25,7 @@ public enum ItemPrefab
     BulletGlobloomSentry,
     SkillWaterBall,
     Shark,
+    PoisonBullet,
 }
 
 public enum MapType
@@ -98,6 +99,7 @@ public enum SkillName
     Waterball,
     Shark,
     ThunderBird,
+    PoisonBullet,
     Food,
     /*
     Twin,

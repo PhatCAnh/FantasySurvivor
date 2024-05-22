@@ -20,12 +20,23 @@ namespace FantasySurvivor
             if (level == 3 || level == 5)
             {
                 numberProjectile++;
-                Debug.Log("lua" + numberProjectile);
             }
             if (level == 6)
             {
                 numberProjectile = 1;
             }
+        }
+    }
+
+    public class Poisonball : ProactiveSkill
+    {
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+        }
+        public override void UpLevel() 
+        {
+            base.UpLevel();
         }
     }
 
@@ -74,7 +85,6 @@ namespace FantasySurvivor
                 prefab.transform.localScale = Vector3.one * levelData[level].valueSpecial1;
                 prefab.size = levelData[level].valueSpecial1;
             }
-            Debug.Log(levelData[level].valueSpecial1);
         }
     }
 
@@ -160,12 +170,10 @@ namespace FantasySurvivor
             {
 
                 numberProjectile++;
-                Debug.Log("nuoc" + numberProjectile);
             }
             if (level == 6)
             {
                 numberProjectile = 1;
-                Debug.Log("ulti" + numberProjectile);
             }
         }
 

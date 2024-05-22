@@ -38,6 +38,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     [SerializeField] private GameObject _skillShark;
 
+    [SerializeField] private GameObject _skillPoisonBullet;
+
 
     private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
@@ -154,6 +156,7 @@ public class ResourceManager : UIManagerBase<PopupType>
             {ItemPrefab.BulletGlobloomSentry, _bulletGlobloomSentry},
             {ItemPrefab.SkillWaterBall, _skillWaterBall},
 			{ItemPrefab.Shark,_skillShark },
+			{ItemPrefab.PoisonBullet,_skillPoisonBullet },
         };
 
 		_mapDic = new Dictionary<MapType, Map>
