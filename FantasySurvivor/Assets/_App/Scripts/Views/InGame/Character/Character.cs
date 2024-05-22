@@ -11,6 +11,7 @@ using FantasySurvivor;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
+using static FantasySurvivor.Shark;
 using StateMachine = ArbanFramework.StateMachine.StateMachine;
 
 public class Character : ObjectRPG
@@ -49,7 +50,8 @@ public class Character : ObjectRPG
 	}
 
 	public List<Skill> listSkills = new List<Skill>();
-	public List<Skill> listSkillCooldown = new List<Skill>();
+    public List<SkillData> listSkillDataCurrents = new List<SkillData>();
+    public List<Skill> listSkillCooldown = new List<Skill>();
 	public List<CharacterUpdateStat> listUpdateStat = new List<CharacterUpdateStat>();
 
 	public bool IsAlive => model.currentHealthPoint > 0;
@@ -176,6 +178,9 @@ public class Character : ObjectRPG
 			}
 			return;
 		}
+		listSkillDataCurrents.Add(skillData);
+		gameController.CheckExistSkill();
+		
 		switch (skillData.type)
 		{
 			case SkillType.Active:
@@ -193,6 +198,15 @@ public class Character : ObjectRPG
                         case SkillName.Waterball:
                             skillIns = new waterball();
                             break;
+                        case SkillName.BlackDrum:
+                            skillIns = new BlackDrum();
+                            break;
+                        case SkillName.ZoneOfJudgment:
+                            skillIns = new ZoneOfJudgment();
+                            break;
+                        case SkillName.Twin:
+                            skillIns = new Twin();
+                            break;
                         default:
                             skillIns = new ProactiveSkill();
                             break;
@@ -209,7 +223,7 @@ public class Character : ObjectRPG
 				break;
 		}
 	}
-
+	//ham check exist skill
 	public Skill GetSkill(SkillName skillName)
 	{
 		foreach(var skill in listSkills)

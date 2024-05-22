@@ -42,6 +42,8 @@ public class MapView : View<GameApp>
 	private readonly List<WaveData> _listWaveData = new List<WaveData>();
 	private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
+	
+
 	public void Init()
 	{
 		model = new();
@@ -53,21 +55,21 @@ public class MapView : View<GameApp>
 	{
 		int count = 3;
 		List<SkillData> newList = new List<SkillData>();
-		if(listSkill.Count < 3)
+		if (listSkill.Count < 3)
 		{
 			count = listSkill.Count;
 		}
-		for(int i = 0; i < count; i++)
+		for (int i = 0; i < count; i++)
 		{
 			SkillData skill;
 			do
 			{
 				skill = listSkill[Random.Range(0, listSkill.Count)];
-			} while(newList.Contains(skill));
+			} while (newList.Contains(skill));
 			newList.Add(skill);
 		}
 
-		if(listSkill.Count == 0)
+		if (listSkill.Count == 0)
 		{
 			newList.Add(app.resourceManager.GetSkill(SkillName.Food));
 		}
@@ -77,9 +79,9 @@ public class MapView : View<GameApp>
 
 	public void RemoveSkill(SkillName skillName)
 	{
-		foreach(var skill in listSkill.ToList())
+		foreach (var skill in listSkill.ToList())
 		{
-			if(skill.name.Equals(skillName))
+			if (skill.name.Equals(skillName))
 			{
 				listSkill.Remove(skill);
 			}
@@ -89,7 +91,7 @@ public class MapView : View<GameApp>
 	private void StartLevel(int level)
 	{
 		var dataChapter = app.configs.dataChapter.GetConfig(level);
-		foreach(var wave in dataChapter.waves)
+		foreach (var wave in dataChapter.waves)
 		{
 			var waveData = new WaveData
 			{
@@ -110,15 +112,15 @@ public class MapView : View<GameApp>
 
 	private void Update()
 	{
-		if(gameController.isStop) return;
+		if (gameController.isStop) return;
 
 		var deltaTime = Time.deltaTime;
-		
+
 		model.timeInGame += deltaTime;
-		
+
 		_cdEndLevel.Update(deltaTime);
 
-		if(_cdEndLevel.isFinished)
+		if (_cdEndLevel.isFinished)
 		{
 			_listWaveData.Clear();
 			gameController.AddReward(dictionaryReward, TypeItemReward.Coin, _coinOfLevel);
@@ -127,14 +129,14 @@ public class MapView : View<GameApp>
 			return;
 		}
 
-		foreach(var wave in _listWaveData.ToList())
+		foreach (var wave in _listWaveData.ToList())
 		{
-			if(wave.number >= wave.maxNumber)
+			if (wave.number >= wave.maxNumber)
 			{
-				if(wave.monsterInWave.Count == 0)
+				if (wave.monsterInWave.Count == 0)
 				{
 					_listWaveData.Remove(wave);
-					if(_listWaveData.Count == 0)
+					if (_listWaveData.Count == 0)
 					{
 						gameController.AddReward(dictionaryReward, TypeItemReward.Coin, _coinOfLevel);
 						model.levelInGame++;
@@ -144,7 +146,7 @@ public class MapView : View<GameApp>
 				continue;
 			}
 			wave.coolDownTime.Update(deltaTime);
-			if(wave.coolDownTime.isFinished)
+			if (wave.coolDownTime.isFinished)
 			{
 				wave.monsterInWave.Add(gameController.SpawnMonster(wave));
 				wave.coolDownTime.Restart(wave.stepTime);
