@@ -3,6 +3,7 @@ using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.StateMachine;
 using FantasySurvivor;
+using Unity.Mathematics;
 using Unity.Services.Analytics.Internal;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
@@ -55,7 +56,10 @@ public class Monster : ObjectRPG
 
 	public bool isAlive => model.currentHealthPoint > 0;
 
-	private StateMachine _stateMachine;
+    public bool isDead { get; private set; } = false;
+
+
+    private StateMachine _stateMachine;
 	private GameController gameController => Singleton<GameController>.instance;
 
 	private MonsterIdle _idleState;
@@ -64,9 +68,11 @@ public class Monster : ObjectRPG
 
 	private MonsterAttack _attackState;
 
-	#endregion
+    [SerializeField] private GameObject _deadEffect;
 
-	public float size;
+    #endregion
+
+    public float size;
 	public Character target => gameController.character; 
 
 	public MapView.WaveData wave { get; private set; }
@@ -107,7 +113,6 @@ public class Monster : ObjectRPG
 			exp);
 		sizeAttack = stat.attackRange.BaseValue != 0 ? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
 
-
         InitializationStateMachine();
 	}
 
@@ -134,7 +139,9 @@ public class Monster : ObjectRPG
 
 	protected virtual void HandlePhysicUpdate()
 	{
-		moveTarget = gameController.character.transform.position;
+        if (isDead) return;
+        
+        moveTarget = gameController.character.transform.position;
 		moveDirection = moveTarget - transform.position;
 
 		if(moveDirection.magnitude < sizeAttack || !cdAttack.isFinished)
@@ -159,7 +166,8 @@ public class Monster : ObjectRPG
 			MoveState();
 		}
 		SetAnimation(idleDirection);
-	}
+
+    }
 
     protected virtual void SetAnimation(Vector2 directionMove)
 	{
@@ -175,16 +183,18 @@ public class Monster : ObjectRPG
 
 	public void TakeDamage(float damage, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
 	{
-		if(!isAlive) return;
+		if (!isAlive) return;
 		model.currentHealthPoint -= damage;
 		callBackDamaged?.Invoke();
-		var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.TowerDamage, isCritical);
 
-        if (isAlive)
-			return;
-		Die();
-		callBackKilled?.Invoke();
+		//var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
+		//text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.TowerDamage, isCritical);
+
+        if (isAlive) return;
+        Die();
+        Instantiate(_deadEffect, transform.position, quaternion.identity);
+
+        callBackKilled?.Invoke();
     }
 
     public void ResetAttackCountdown()
@@ -202,17 +212,13 @@ public class Monster : ObjectRPG
 
     public virtual void Die(bool selfDie = false)
 	{
+        isDead = true;
 		gameController.MonsterDie(this, selfDie);
-	}
+    }
 
 	protected virtual void Stop()
 	{
 		myRigid.velocity = Vector2.zero;
-	}
-
-	public void ResetWhenDie()
-	{
-		
 	}
 
 	private void OnDrawGizmosSelected()
@@ -255,8 +261,6 @@ public class Monster : ObjectRPG
 		if(isAttack) return;
 		_stateMachine.ChangeState(_attackState);
 	}
-
-
 
     #endregion
 
