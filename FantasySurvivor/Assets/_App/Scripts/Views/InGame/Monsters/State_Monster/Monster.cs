@@ -58,6 +58,7 @@ public class Monster : ObjectRPG
 
     public bool isDead { get; private set; } = false;
 
+	public bool isStandStill { get; private set; } = false;
 
     private StateMachine _stateMachine;
 	private GameController gameController => Singleton<GameController>.instance;
@@ -181,7 +182,7 @@ public class Monster : ObjectRPG
     }
 
 
-	public void TakeDamage(float damage, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
+	public virtual void TakeDamage(float damage, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
 	{
 		if (!isAlive) return;
 		model.currentHealthPoint -= damage;
@@ -192,8 +193,6 @@ public class Monster : ObjectRPG
 
         if (isAlive) return;
         Die();
-        Instantiate(_deadEffect, transform.position, quaternion.identity);
-
         callBackKilled?.Invoke();
     }
 
@@ -213,7 +212,9 @@ public class Monster : ObjectRPG
     public virtual void Die(bool selfDie = false)
 	{
         isDead = true;
-		gameController.MonsterDie(this, selfDie);
+        animator.SetBool("Dead", true);
+        gameController.MonsterDie(this, selfDie);
+		//Instantiate(_deadEffect, transform.position, quaternion.identity);
     }
 
 	protected virtual void Stop()
@@ -226,9 +227,25 @@ public class Monster : ObjectRPG
 		Gizmos.DrawWireSphere(transform.position, size);
 	}
 
-	#region State Machine Method
-	
-	protected virtual void InitializationStateMachine()
+    public virtual void flip()
+    {
+        if (transform.position.x > gameController.character.transform.position.x)
+        {
+            Vector2 localScale = animator.transform.localScale;
+            localScale.x = -1;
+            animator.transform.localScale = localScale;
+        }
+        else
+        {
+            Vector2 localScale = animator.transform.localScale;
+            localScale.x = 1;
+            animator.transform.localScale = localScale;
+        }
+    }
+
+    #region State Machine Method
+
+    protected virtual void InitializationStateMachine()
 	{
 		if(_stateMachine != null)
 		{
@@ -252,14 +269,16 @@ public class Monster : ObjectRPG
 
 	public void MoveState()
 	{
+		flip();
 		if(isMove) return;
-		_stateMachine.ChangeState(_moveState);
+        _stateMachine.ChangeState(_moveState);
 	}
 
 	public virtual void AttackState()
 	{
+		flip();
 		if(isAttack) return;
-		_stateMachine.ChangeState(_attackState);
+        _stateMachine.ChangeState(_attackState);
 	}
 
     #endregion

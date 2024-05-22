@@ -15,27 +15,10 @@ namespace FantasySurvivor
 		public override void Enter()
 		{
 			base.Enter();
-            flip();
             agent.animator.SetFloat("Speed", 0f);
 			agent.firePoint.up = agent.target.transform.position - agent.firePoint.position;
             agent.Attack();
 			agent.IdleState();
-        }
-
-        public void flip()
-        {
-            if (agent.transform.position.x > gameController.character.transform.position.x)
-            {
-                Vector2 localScale = agent.animator.transform.localScale;
-                localScale.x = -1;
-                agent.animator.transform.localScale = localScale;
-            }
-            else
-            {
-                Vector2 localScale = agent.animator.transform.localScale;
-                localScale.x = 1;
-                agent.animator.transform.localScale = localScale;
-            }
         }
     }
 }
