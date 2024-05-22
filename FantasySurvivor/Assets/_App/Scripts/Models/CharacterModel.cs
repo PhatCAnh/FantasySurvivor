@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework.MVC;
 using UnityEngine;
@@ -36,6 +36,11 @@ public class CharacterModel : Model<GameApp>
     private float _attackRange;
     
 	private int _armor;
+    private bool _isHealing;
+    private float _healingCooldown = 6f; 
+    private float _healingTimer;
+    private float _healingRate = 0.05f;
+ 
 
     public float moveSpeed
 	{
@@ -107,4 +112,45 @@ public class CharacterModel : Model<GameApp>
             _armor = value;
         }
     }
+
+    public bool isHealing
+    {
+        get => _isHealing;
+        set
+        {
+            if (_isHealing == value) return;
+            _isHealing = value;
+        }
+    }
+
+    public float healingCooldown
+    {
+        get => _healingCooldown;
+        set
+        {
+            if (_healingCooldown == value) return;
+            _healingCooldown = value;
+        }
+    }
+
+    public float healingTimer
+    {
+        get => _healingTimer;
+        set
+        {
+            if (_healingTimer == value) return;
+            _healingTimer = value;
+        }
+    }
+
+    public float healingRate
+    {
+        get => _healingRate;
+        set
+        {
+            if (_healingRate == value) return;
+            _healingRate = value;
+        }
+    }
+
 }

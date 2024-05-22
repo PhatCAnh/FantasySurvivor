@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using _App.Scripts.Controllers;
@@ -20,8 +20,9 @@ public class Character : ObjectRPG
 
 	[FormerlySerializedAs("a"),SerializeField] private int asd= 5;
 	public int b;
-	
-	public float abc = 2.5f;
+	public float healingAmount;
+
+    public float abc = 2.5f;
 
 	public float sizeBase;
 
@@ -125,7 +126,8 @@ public class Character : ObjectRPG
 		HandlePhysicUpdate();
 		HandleProactiveSkill(Time.deltaTime);
 		HandleUpdateStat(Time.deltaTime);
-	}
+		HandleHealing();
+    }
 
 	private void FixedUpdate()
 	{
@@ -153,8 +155,11 @@ public class Character : ObjectRPG
 		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
 		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.MonsterDamage);
 
-		if(!IsAlive) Die();
-	}
+        if (!IsAlive)
+        {
+            Die();
+        }
+    }
 
 
 	public void AddHealth(float value)
@@ -330,7 +335,38 @@ public class Character : ObjectRPG
 		circleAttackRange.DOKill();
 	}
 
-	private void OnDrawGizmosSelected()
+
+    private void HandleHealing()
+    {
+        {
+            model.healingTimer += Time.deltaTime;
+            if (model.healingTimer >= model.healingCooldown && CheckHeal()) // Kiểm tra điều kiện trước khi hồi máu
+            {
+                model.healingTimer = 0f;
+                AddHealth(model.maxHealthPoint * model.healingRate); // Hồi máu
+                ActivateHealing();
+            }
+        }
+
+    }
+
+    public void ActivateHealing()
+    {
+        int roundedHealingRate = Mathf.RoundToInt(model.healingRate * 100);
+        GameObject healingText = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
+        healingText.GetComponent<TextPopup>().Create(roundedHealingRate.ToString(), TextPopupType.Healing);
+    }
+
+    public void DeactivateHealing()
+    {
+        model.isHealing = false;
+        model.healingTimer = 0f; 
+    }
+    private bool CheckHeal()
+    {
+        return model.currentHealthPoint < model.maxHealthPoint;
+    }
+    private void OnDrawGizmosSelected()
 	{
 		Gizmos.DrawWireSphere(transform.position, sizeBase);
 		Gizmos.DrawWireSphere(transform.position, abc);

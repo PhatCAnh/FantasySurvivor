@@ -136,10 +136,10 @@ public class Monster : ObjectRPG
 			{
 				AttackState();			
 				cdAttack.Restart(1 / model.attackSpeed);
-				animator.SetBool("Attack", true);
+			
 			} else
 			{
-                animator.SetBool("Attack", false);
+             
             }
 		}
 		else if(moveDirection.magnitude > 25)
