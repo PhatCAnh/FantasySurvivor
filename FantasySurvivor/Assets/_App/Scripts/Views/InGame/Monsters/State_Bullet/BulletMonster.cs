@@ -14,7 +14,7 @@ namespace FantasySurvivor
 		
 		[SerializeField] protected ItemPrefab type;
 
-		[SerializeField] protected GameObject deadEffect;
+		//[SerializeField] protected GameObject deadEffect;
 
 		[SerializeField] private float _speedBullet = 15f;
 
@@ -59,11 +59,11 @@ namespace FantasySurvivor
 
 		protected void Touch()
 		{
-			_character.TakeDamage(_origin.model.attackDamage);
+			/*_character.TakeDamage(_origin.model.attackDamage);
 			if(deadEffect != null)
 			{
 				Instantiate(deadEffect, transform.position, transform.rotation);
-			}
+			}*/
 
 			Singleton<PoolController>.instance.ReturnObject(type, gameObject);
 		}
