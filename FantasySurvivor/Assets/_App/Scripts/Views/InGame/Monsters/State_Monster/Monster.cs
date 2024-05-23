@@ -204,6 +204,7 @@ public class Monster : ObjectRPG
 
     public virtual void Move(Vector2 dir, float deltaTime)
 	{
+		if(isDead) return;
         var movement = model.moveSpeed * GameConst.MOVE_SPEED_ANIMATION_RATIO * deltaTime * speedMul * dir;
         var newPosition = myRigid.position + movement;
         myRigid.MovePosition(newPosition);
