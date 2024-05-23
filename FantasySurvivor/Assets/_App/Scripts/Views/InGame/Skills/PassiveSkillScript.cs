@@ -20,7 +20,7 @@ namespace FantasySurvivor
 		public override void UpdateBuff()
 		{
 			base.UpdateBuff();
-			origin.model.ItemAttractionRange += levelData[level].value;
+			origin.model.itemAttractionRange += levelData[level].value;
 		}
 	}
 }

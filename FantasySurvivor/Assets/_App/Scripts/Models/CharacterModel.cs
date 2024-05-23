@@ -76,15 +76,17 @@ public class CharacterModel : Model<GameApp>
 		set {
 			if(attackDamage.Equals(value)) return;
 			_attackDamage = value;
+			RaiseDataChanged(nameof(attackDamage));
 		}
 	}
 
-	public float ItemAttractionRange
+	public float itemAttractionRange
 	{
 		get => _itemAttractionRange;
 		set {
-			if(ItemAttractionRange.Equals(value)) return;
+			if(itemAttractionRange.Equals(value)) return;
 			_itemAttractionRange = value;
+			RaiseDataChanged(nameof(itemAttractionRange));
 		}
 	}
     public float attackRange
@@ -105,6 +107,7 @@ public class CharacterModel : Model<GameApp>
         {
             if (armor.Equals(value)) return;
             _armor = value;
+            RaiseDataChanged(nameof(armor));
         }
     }
 }

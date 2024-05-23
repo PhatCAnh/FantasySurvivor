@@ -12,7 +12,7 @@ namespace FantasySurvivor {
 
             if (agent.character == null)
                 return;
-            if(agent.gameController.CheckTouchCharacter(agent.transform.position, agent.character.model.ItemAttractionRange))
+            if(agent.gameController.CheckTouchCharacter(agent.transform.position, agent.character.model.itemAttractionRange))
             {
                 agent.Collect();
             }

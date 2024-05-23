@@ -2,61 +2,78 @@ using ArbanFramework.MVC;
 using FantasySurvivor;
 using System.Collections;
 using System.Collections.Generic;
+using ArbanFramework;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class StatUI : View<GameApp>
 {
-    [SerializeField] private TextMeshProUGUI _txtHealth;
-    [SerializeField] private TextMeshProUGUI _txtCoin;
-    [SerializeField] private TextMeshProUGUI _txtGem;
-    [SerializeField] private TextMeshProUGUI _txtMovespeed;
-    [SerializeField] private TextMeshProUGUI _txtAtkdamage;
-    [SerializeField] private TextMeshProUGUI _txtArmor;
+    [SerializeField] private TextMeshProUGUI _txtHealth, _txtMoveSpeed, _txtAtkDamage, _txtArmor;
+
+    [SerializeField] private Transform _slotItemEquipContainer;
+    
+    [SerializeField] private GameObject _slotItemEquipPrefab;
+
+    [SerializeField] private ItemSlotEquipUI _slotWeapon;
+
+    private Dictionary<ItemEquipType, ItemSlotEquipUI> _dicItemEquip;
+
+    private ItemController itemController => Singleton<ItemController>.instance;
     protected override void OnViewInit()
     {
         base.OnViewInit();
-        AddDataBinding("fieldDataCharacter-healthValue", _txtHealth, (control, e) =>
+
+        InitDispatcher();
+
+        Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
+        item.Init(itemController.GetDataItemEquip(ItemEquipId.Item1), this);
+        
+        _slotWeapon.Init(null, this);
+        
+        _dicItemEquip = new Dictionary<ItemEquipType, ItemSlotEquipUI>
         {
-            control.text = $"{app.models.dataPlayerModel.Health}";
-        }, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.Health), app.models.dataPlayerModel)
+            {ItemEquipType.Weapon, _slotWeapon},
+        };
+    }
+
+    public void EquipItem(ItemEquipType type, ItemEquipData data)
+    {
+        _dicItemEquip[type].Init(data);
+        itemController.EquipItem(data);
+    }
+    
+    public void UnEquipItem(ItemEquipType type, ItemEquipData data)
+    {
+        _dicItemEquip[type].ResetData();
+        itemController.UnEquipItem(data);
+        Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
+        item.Init(data, this);
+    }
+
+    private void InitDispatcher()
+    {
+        AddDataBinding("fieldCharacterModel-healthValue", _txtHealth, (control, e) =>
+            {
+                control.text = $"{app.models.characterModel.maxHealthPoint}";
+            }, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.maxHealthPoint), app.models.characterModel)
         );
 
-
-        base.OnViewInit();
-        AddDataBinding("fieldDataCharacter-gemValue", _txtGem, (control, e) =>
-        {
-            control.text = $"{app.models.dataPlayerModel.Gem}";
-        }, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.Gem), app.models.dataPlayerModel)
+        AddDataBinding("fieldCharacterModel-moveSpeedValue", _txtMoveSpeed, (control, e) =>
+            {
+                control.text = $"{app.models.characterModel.moveSpeed}";
+            }, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.moveSpeed), app.models.characterModel)
         );
 
-        base.OnViewInit();
-        AddDataBinding("fieldDataCharacter-coinValue", _txtCoin, (control, e) =>
-        {
-            control.text = $"{app.models.dataPlayerModel.Coin}";
-        }, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.Coin), app.models.dataPlayerModel)
+        AddDataBinding("fieldCharacterModel-atkDamageValue", _txtAtkDamage, (control, e) =>
+            {
+                control.text = $"{app.models.characterModel.attackDamage}";
+            }, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackDamage), app.models.characterModel)
         );
-
-        base.OnViewInit();
-        AddDataBinding("fieldDataCharacter-movespeedValue", _txtMovespeed, (control, e) =>
-        {
-            control.text = $"{app.models.dataPlayerModel.Movespeed}";
-        }, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.Movespeed), app.models.dataPlayerModel)
-        );
-
-        base.OnViewInit();
-        AddDataBinding("fieldDataCharacter-atkdamageValue", _txtAtkdamage, (control, e) =>
-        {
-            control.text = $"{app.models.dataPlayerModel.Atkdamage}";
-        }, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.Atkdamage), app.models.dataPlayerModel)
-        );
-
-        base.OnViewInit();
-        AddDataBinding("fieldDataCharacter-armorValue", _txtArmor, (control, e) => {
-            float armorPercent = (float)app.models.dataPlayerModel.Armor / 100f;
+        
+        AddDataBinding("fieldCharacterModel-armorValue", _txtArmor, (control, e) => {
+            float armorPercent = (float)app.models.characterModel.armor / 100f;
             control.text = $"{armorPercent * 100f}%"; 
-        }, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.Armor), app.models.dataPlayerModel));
-
-
+        }, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.armor), app.models.characterModel));
     }
 }

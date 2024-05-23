@@ -104,7 +104,6 @@ public class Character : ObjectRPG
 
 	public void Init(CharacterStat statInit)
 	{
-
 		app.models.characterModel = new CharacterModel(
 			statInit.moveSpeed.BaseValue,
 			statInit.maxHealth.BaseValue,
@@ -231,7 +230,6 @@ public class Character : ObjectRPG
 	public void UpdateStat(StatModifierType typeStat, float maxH, float ms, float ad, float ar, float itemR, int armor, float duration)
 	{
 		var updateStat = new CharacterUpdateStat(typeStat, maxH, ms, ad, ar, itemR, armor, duration);
-
 		{
 			stat.maxHealth.AddModifier(updateStat.maxHealth);
 			stat.moveSpeed.AddModifier(updateStat.moveSpeed);
@@ -264,7 +262,7 @@ public class Character : ObjectRPG
 		model.maxHealthPoint = stat.maxHealth.Value;
 		model.moveSpeed = stat.moveSpeed.Value;
 		model.attackDamage = stat.attackDamage.Value;
-		model.ItemAttractionRange = stat.itemAttractionRange.Value;
+		model.itemAttractionRange = stat.itemAttractionRange.Value;
 		model.attackRange = stat.attackRange.Value;
 		model.armor = stat.armor.Value;
 	}

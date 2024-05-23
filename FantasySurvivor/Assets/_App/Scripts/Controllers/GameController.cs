@@ -325,7 +325,20 @@ public class GameController : Controller<GameApp>
 		// }
 		// return new Vector2(posX, posY);
 	}
+	
+	public bool CheckTouchCharacter(Vector3 trans, float number)
+	{
+		var x = trans.x - charPos.x;
+		var y = trans.y - charPos.y;
+		return x * x + y * y <= number * number;
+	}
 
+	public bool CheckTouch(Vector3 a, Vector3 b, float number)
+	{
+		var x = a.x - b.x;
+		var y = a.y - b.y;
+		return x * x + y * y <= number * number;
+	}
 	private Character SpawnCharacter()
 	{
 		var characterPrefab = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.Character))
@@ -341,19 +354,7 @@ public class GameController : Controller<GameApp>
 
 		return characterPrefab;
 	}
-	public bool CheckTouchCharacter(Vector3 trans, float number)
-	{
-		var x = trans.x - charPos.x;
-		var y = trans.y - charPos.y;
-		return x * x + y * y <= number * number;
-	}
-
-	public bool CheckTouch(Vector3 a, Vector3 b, float number)
-	{
-		var x = a.x - b.x;
-		var y = a.y - b.y;
-		return x * x + y * y <= number * number;
-	}
+	
 
 	private void LoadMap(int chapter)
 	{
