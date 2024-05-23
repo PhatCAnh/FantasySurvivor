@@ -157,6 +157,14 @@ namespace FantasySurvivor
         }
     }
 
+    public class Boomerangl : ProactiveSkill
+    {
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+        }
+    }
+
     public class Skyboom : ProactiveSkill
     {
         public override void Init(SkillData data)
