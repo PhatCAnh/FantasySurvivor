@@ -104,14 +104,7 @@ public class Character : ObjectRPG
 
 	public void Init(CharacterStat statInit)
 	{
-		app.models.characterModel = new CharacterModel(
-			statInit.moveSpeed.BaseValue,
-			statInit.maxHealth.BaseValue,
-			statInit.attackRange.BaseValue,
-			statInit.attackDamage.BaseValue,
-			statInit.itemAttractionRange.BaseValue,
-			statInit.armor.BaseValue
-		);
+		
 		stat = statInit;
 	}
 

@@ -9,10 +9,7 @@
 	Gloves,
 }
 
-public enum ItemEquipId
-{
-	Item1,
-}
+
 
 public enum RankItemEquip : byte
 {

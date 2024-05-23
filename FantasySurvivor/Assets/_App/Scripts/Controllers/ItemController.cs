@@ -10,7 +10,7 @@ public class ItemController : Controller<GameApp>
 
 	[SerializeField] private Sprite _spriteNormal, _spriteRare, _spriteEpic, _spriteUnique, _spriteLegendary;
 	
-	private Dictionary<RankItemEquip, Sprite> _dicItemEquip;
+	private Dictionary<RankItemEquip, Sprite> _dicRankItemEquip;
 
 	private List<ItemEquipData> listItemEquipped;
 
@@ -21,7 +21,7 @@ public class ItemController : Controller<GameApp>
 
 	private void Start()
 	{
-		_dicItemEquip = new Dictionary<RankItemEquip, Sprite>
+		_dicRankItemEquip = new Dictionary<RankItemEquip, Sprite>
 		{
 			{RankItemEquip.Normal, _spriteNormal},
 			{RankItemEquip.Rare, _spriteRare},
@@ -42,7 +42,7 @@ public class ItemController : Controller<GameApp>
 	public ItemEquipData GetDataItemEquip(ItemEquipId id)
 	{
 		var dataUI = _equipDataTable.listItemEquipData.Find(item => item.id == id);
-		return new ItemEquipData(dataUI, app.configs.dataItemEquip.GetConfig(id), _dicItemEquip[dataUI.rank]);
+		return new ItemEquipData(dataUI, app.configs.dataItemEquip.GetConfig(id), _dicRankItemEquip[dataUI.rank]);
 	}
 
 	public void EquipItem(ItemEquipData data)
