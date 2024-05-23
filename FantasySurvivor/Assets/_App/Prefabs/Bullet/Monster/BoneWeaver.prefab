@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2251807671681993192}
   - component: {fileID: 2251807671681993194}
   - component: {fileID: 2251807671681993195}
+  - component: {fileID: 3695643805138152443}
   m_Layer: 0
   m_Name: Skin
   m_TagString: Untagged
@@ -109,6 +110,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3695643805138152443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2251807671681993193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164a3ae04c0b8e149b58a5d26bf775c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2251807672777610876
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +342,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: -1783128310, guid: 1daf002bfb27ab744b23d2f16af9d276, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
