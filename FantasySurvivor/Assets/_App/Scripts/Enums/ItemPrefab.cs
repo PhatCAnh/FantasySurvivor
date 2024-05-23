@@ -29,6 +29,7 @@ public enum ItemPrefab
     EarthPunch,
     SkyBoom,
     Boomerang,
+    SmilingFace,
 }
 
 public enum MapType
@@ -107,6 +108,7 @@ public enum SkillName
     Earthpunch,
     SkyBoom,
     Boomerang,
+    SmilingFace,
     Food,
     /*
     Twin,
