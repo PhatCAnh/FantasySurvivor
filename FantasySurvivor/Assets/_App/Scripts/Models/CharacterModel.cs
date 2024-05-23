@@ -6,7 +6,7 @@ using UnityEngine.U2D;
 
 public class CharacterModel : Model<GameApp>
 {
-	public static EventTypeBase dataChangedEvent = new EventTypeBase(nameof(CharacterModel) + ".dataChanged");
+    public static EventTypeBase dataChangedEvent = new EventTypeBase(nameof(CharacterModel) + ".dataChanged");
     public CharacterModel(float moveSpeed, float maxHp, float attackRange, float attackDamage, float itemAttractionRange, int armor) : base(dataChangedEvent)
     {
         this.currentHealthPoint = maxHp;
@@ -19,81 +19,91 @@ public class CharacterModel : Model<GameApp>
     }
 
     public CharacterModel() : base(dataChangedEvent)
-	{
-		
-	}
+    {
 
-	private float _currentHealthPoint;
+    }
 
-	private float _maxHealthPoint;
-	
-	private float _moveSpeed;
-	
-	private float _attackDamage;
+    private float _currentHealthPoint;
 
-	private float _itemAttractionRange;
-	
+    private float _maxHealthPoint;
+
+    private float _moveSpeed;
+
+    private float _attackDamage;
+
+    private float _itemAttractionRange;
+
     private float _attackRange;
-    
-	private int _armor;
+
+    private int _armor;
+    private bool _isHealing;
+    private float _healingCooldown = 6f;
+    private float _healingTimer;
+    private float _healingRate = 0.05f;
+
 
     public float moveSpeed
-	{
-		get => _moveSpeed;
-		set {
-			if(moveSpeed.Equals(value)) return;
-			_moveSpeed = value;
-			RaiseDataChanged(nameof(moveSpeed));
-		}
-	}
+    {
+        get => _moveSpeed;
+        set
+        {
+            if (moveSpeed.Equals(value)) return;
+            _moveSpeed = value;
+            RaiseDataChanged(nameof(moveSpeed));
+        }
+    }
 
-	public float currentHealthPoint
-	{
-		get => _currentHealthPoint;
-		set {
-			if(currentHealthPoint.Equals(value)) return;
-			_currentHealthPoint = Mathf.Clamp(value, 0, maxHealthPoint);
-			RaiseDataChanged(nameof(currentHealthPoint));
-		}
-	}
-        
-	public float maxHealthPoint
-	{
-		get => _maxHealthPoint;
-		set {
-			if(maxHealthPoint.Equals(value)) return;
-			var currentMaxHp = _maxHealthPoint;
-			_maxHealthPoint = value;
-			RaiseDataChanged(nameof(maxHealthPoint));
-				
-			currentHealthPoint += (value - currentMaxHp);
-		}
-	}
-	
-	public float attackDamage
-	{
-		get => _attackDamage;
-		set {
-			if(attackDamage.Equals(value)) return;
-			_attackDamage = value;
-		}
-	}
+    public float currentHealthPoint
+    {
+        get => _currentHealthPoint;
+        set
+        {
+            if (currentHealthPoint.Equals(value)) return;
+            _currentHealthPoint = Mathf.Clamp(value, 0, maxHealthPoint);
+            RaiseDataChanged(nameof(currentHealthPoint));
+        }
+    }
 
-	public float ItemAttractionRange
-	{
-		get => _itemAttractionRange;
-		set {
-			if(ItemAttractionRange.Equals(value)) return;
-			_itemAttractionRange = value;
-		}
-	}
+    public float maxHealthPoint
+    {
+        get => _maxHealthPoint;
+        set
+        {
+            if (maxHealthPoint.Equals(value)) return;
+            var currentMaxHp = _maxHealthPoint;
+            _maxHealthPoint = value;
+            RaiseDataChanged(nameof(maxHealthPoint));
+
+            currentHealthPoint += (value - currentMaxHp);
+        }
+    }
+
+    public float attackDamage
+    {
+        get => _attackDamage;
+        set
+        {
+            if (attackDamage.Equals(value)) return;
+            _attackDamage = value;
+        }
+    }
+
+    public float ItemAttractionRange
+    {
+        get => _itemAttractionRange;
+        set
+        {
+            if (ItemAttractionRange.Equals(value)) return;
+            _itemAttractionRange = value;
+        }
+    }
     public float attackRange
     {
         get => _attackRange;
         set
         {
             if (attackRange.Equals(value)) return;
-            
+
             _attackRange = value;
             RaiseDataChanged(nameof(attackRange));
         }
@@ -107,4 +117,45 @@ public class CharacterModel : Model<GameApp>
             _armor = value;
         }
     }
+
+    public bool isHealing
+    {
+        get => _isHealing;
+        set
+        {
+            if (_isHealing == value) return;
+            _isHealing = value;
+        }
+    }
+
+    public float healingCooldown
+    {
+        get => _healingCooldown;
+        set
+        {
+            if (_healingCooldown == value) return;
+            _healingCooldown = value;
+        }
+    }
+
+    public float healingTimer
+    {
+        get => _healingTimer;
+        set
+        {
+            if (_healingTimer == value) return;
+            _healingTimer = value;
+        }
+    }
+
+    public float healingRate
+    {
+        get => _healingRate;
+        set
+        {
+            if (_healingRate == value) return;
+            _healingRate = value;
+        }
+    }
+
 }

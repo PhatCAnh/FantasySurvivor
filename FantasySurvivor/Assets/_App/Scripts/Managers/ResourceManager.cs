@@ -44,6 +44,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     [SerializeField] private GameObject _skillSkyBoom;
 
+    [SerializeField] private GameObject _skillBoomerang;
+
 
     private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
@@ -163,6 +165,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.PoisonBullet,_skillPoisonBullet },
 			{ItemPrefab.EarthPunch,_skillEarthPunch	 },
 			{ItemPrefab.SkyBoom,_skillSkyBoom    },
+			{ItemPrefab.Boomerang,_skillBoomerang    },
         };
 
 		_mapDic = new Dictionary<MapType, Map>

@@ -28,6 +28,7 @@ public enum ItemPrefab
     PoisonBullet,
     EarthPunch,
     SkyBoom,
+    Boomerang,
 }
 
 public enum MapType
@@ -59,6 +60,7 @@ public enum TowerType
 
 public enum TextPopupType
 {
+    Healing,
     MonsterDamage,
     TowerDamage,
 }
@@ -104,6 +106,7 @@ public enum SkillName
     PoisonBullet, 
     Earthpunch,
     SkyBoom,
+    Boomerang,
     Food,
     /*
     Twin,
@@ -190,6 +193,7 @@ public enum TargetType
 {
     Target,
     Shot,
+    None,
 }
 
 

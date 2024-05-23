@@ -16,336 +16,371 @@ using StateMachine = ArbanFramework.StateMachine.StateMachine;
 public class Character : ObjectRPG
 {
 
-	[SerializeField] private Transform circleAttackRange;
+    [SerializeField] private Transform circleAttackRange;
 
-	[FormerlySerializedAs("a"),SerializeField] private int asd= 5;
-	public int b;
-	
-	public float abc = 2.5f;
+    [FormerlySerializedAs("a"), SerializeField] private int asd = 5;
+    public int b;
+    public float healingAmount;
 
-	public float sizeBase;
+    public float abc = 2.5f;
 
-	[HideInInspector]
-	public Rigidbody2D myRigid;
+    public float sizeBase;
 
-	public Animator animator;
-	public CharacterModel model => app.models.characterModel;
+    [HideInInspector]
+    public Rigidbody2D myRigid;
 
-	public CharacterStat stat { get; private set; }
+    public Animator animator;
+    public CharacterModel model => app.models.characterModel;
 
-	public float speedMul { get; set; } = 1;
-	public Vector2 idleDirection { get; private set; } = Vector2.down;
+    public CharacterStat stat { get; private set; }
 
-	public Vector2 moveDirection
-	{
-		get => _direction;
-		set {
-			if(value != Vector2.zero)
-			{
-				idleDirection = value;
-			}
-			_direction = value;
-		}
-	}
+    public float speedMul { get; set; } = 1;
+    public Vector2 idleDirection { get; private set; } = Vector2.down;
 
-	public List<Skill> listSkills = new List<Skill>();
-	public List<Skill> listSkillCooldown = new List<Skill>();
-	public List<CharacterUpdateStat> listUpdateStat = new List<CharacterUpdateStat>();
+    public Vector2 moveDirection
+    {
+        get => _direction;
+        set
+        {
+            if (value != Vector2.zero)
+            {
+                idleDirection = value;
+            }
+            _direction = value;
+        }
+    }
 
-	public bool IsAlive => model.currentHealthPoint > 0;
-	public bool IsMove => _stateMachine.currentState == _moveSm;
+    public List<Skill> listSkills = new List<Skill>();
+    public List<Skill> listSkillCooldown = new List<Skill>();
+    public List<CharacterUpdateStat> listUpdateStat = new List<CharacterUpdateStat>();
 
-	public Action<float> isCharacterMoving;
+    public bool IsAlive => model.currentHealthPoint > 0;
+    public bool IsMove => _stateMachine.currentState == _moveSm;
 
-	private Vector2 _direction = Vector2.zero;
+    public Action<float> isCharacterMoving;
 
-	private StateMachine _stateMachine;
-	private CharacterIdle _idleSm;
-	private CharacterMove _moveSm;
+    private Vector2 _direction = Vector2.zero;
 
-	private GameController gameController => Singleton<GameController>.instance;
+    private StateMachine _stateMachine;
+    private CharacterIdle _idleSm;
+    private CharacterMove _moveSm;
 
-	protected override void OnViewInit()
-	{
-		base.OnViewInit();
-		if(_stateMachine == null)
-		{
-			_stateMachine = new StateMachine();
-			_idleSm = new CharacterIdle(this, _stateMachine);
-			_moveSm = new CharacterMove(this, _stateMachine);
-			_stateMachine.Init(_idleSm);
-		}
-		else
-		{
-			IdleState();
-		}
+    private GameController gameController => Singleton<GameController>.instance;
 
-
-		myRigid = GetComponent<Rigidbody2D>();
-		circleAttackRange.DORotate(new Vector3(0, 0, 360), 5f, RotateMode.FastBeyond360)
-			.SetEase(Ease.Linear)
-			.SetLoops(-1, LoopType.Restart);
-
-		AddDataBinding("fieldCharacter-moveSpeedValue", animator, (control, e) =>
-			{
-				control.SetFloat("SpeedMul", model.moveSpeed / 2.5f);
-			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.moveSpeed), model)
-		);
-
-		AddDataBinding("fieldCharacter-attackRangeValue", circleAttackRange, (control, e) =>
-			{
-				control.localScale = Vector3.one * model.attackRange;
-			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackRange), model)
-		);
-		
-		
-	}
-
-	public void Init(CharacterStat statInit)
-	{
-
-		app.models.characterModel = new CharacterModel(
-			statInit.moveSpeed.BaseValue,
-			statInit.maxHealth.BaseValue,
-			statInit.attackRange.BaseValue,
-			statInit.attackDamage.BaseValue,
-			statInit.itemAttractionRange.BaseValue,
-			statInit.armor.BaseValue
-		);
-		stat = statInit;
-	}
-
-	private void Update()
-	{
-		if(gameController.isStop) return;
-		Controlled(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
-		var time = Time.deltaTime;
-		_stateMachine.currentState.LogicUpdate(time);
-
-		HandlePhysicUpdate();
-		HandleProactiveSkill(Time.deltaTime);
-		HandleUpdateStat(Time.deltaTime);
-	}
-
-	private void FixedUpdate()
-	{
-		if(gameController.isStop) return;
-
-		_stateMachine.currentState.PhysicUpdate(Time.fixedTime);
-	}
-
-	private void LateUpdate()
-	{
-		var position = transform.position;
-		Camera.main.transform.position = new Vector3(position.x, position.y, -1);
-	}
-
-	public void Controlled(Vector2 moveForce)
-	{
-		moveDirection = moveForce;
-	}
-
-	public void TakeDamage(int damage)
-	{
-		if(!IsAlive) return;
-		damage = MinusDamage(damage);
-		model.currentHealthPoint -= damage;
-		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.MonsterDamage);
-
-		if(!IsAlive) Die();
-	}
+    protected override void OnViewInit()
+    {
+        base.OnViewInit();
+        if (_stateMachine == null)
+        {
+            _stateMachine = new StateMachine();
+            _idleSm = new CharacterIdle(this, _stateMachine);
+            _moveSm = new CharacterMove(this, _stateMachine);
+            _stateMachine.Init(_idleSm);
+        }
+        else
+        {
+            IdleState();
+        }
 
 
-	public void AddHealth(float value)
-	{
-		model.currentHealthPoint += value;
-	}
+        myRigid = GetComponent<Rigidbody2D>();
+        circleAttackRange.DORotate(new Vector3(0, 0, 360), 5f, RotateMode.FastBeyond360)
+            .SetEase(Ease.Linear)
+            .SetLoops(-1, LoopType.Restart);
 
-	public void AddProactiveSkill(SkillData skillData)
-	{
-		UpdateStat(StatModifierType.Add, 10, 0, 0, 0, 0, 0, 4);
-		
-		var skill = GetSkill(skillData.name);
-		if(skill != null)
-		{
-			skill.UpLevel();
-			if(skill.level >= 6)
-			{
-				gameController.map.RemoveSkill(skill.skillName);
-			}
-			return;
-		}
-		switch (skillData.type)
-		{
-			case SkillType.Active:
-			{
-					Skill skillIns;
-					switch (skillData.name)
-					{
-						case SkillName.Fireball:
-							skillIns = new FireBall();
-							break;
-						case SkillName.ThunderStrike: 
-							skillIns = new ThunderStrike();
-							break;
-						
+        AddDataBinding("fieldCharacter-moveSpeedValue", animator, (control, e) =>
+        {
+            control.SetFloat("SpeedMul", model.moveSpeed / 2.5f);
+        }, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.moveSpeed), model)
+        );
+
+        AddDataBinding("fieldCharacter-attackRangeValue", circleAttackRange, (control, e) =>
+        {
+            control.localScale = Vector3.one * model.attackRange;
+        }, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackRange), model)
+        );
+
+
+    }
+
+    public void Init(CharacterStat statInit)
+    {
+
+        app.models.characterModel = new CharacterModel(
+            statInit.moveSpeed.BaseValue,
+            statInit.maxHealth.BaseValue,
+            statInit.attackRange.BaseValue,
+            statInit.attackDamage.BaseValue,
+            statInit.itemAttractionRange.BaseValue,
+            statInit.armor.BaseValue
+        );
+        stat = statInit;
+    }
+
+    private void Update()
+    {
+        if (gameController.isStop) return;
+        Controlled(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+        var time = Time.deltaTime;
+        _stateMachine.currentState.LogicUpdate(time);
+
+        HandlePhysicUpdate();
+        HandleProactiveSkill(Time.deltaTime);
+        HandleUpdateStat(Time.deltaTime);
+        HandleHealing();
+    }
+
+    private void FixedUpdate()
+    {
+        if (gameController.isStop) return;
+
+        _stateMachine.currentState.PhysicUpdate(Time.fixedTime);
+    }
+
+    private void LateUpdate()
+    {
+        var position = transform.position;
+        Camera.main.transform.position = new Vector3(position.x, position.y, -1);
+    }
+
+    public void Controlled(Vector2 moveForce)
+    {
+        moveDirection = moveForce;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (!IsAlive) return;
+        damage = MinusDamage(damage);
+        model.currentHealthPoint -= damage;
+        GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
+        text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.MonsterDamage);
+
+        if (!IsAlive)
+        {
+            Die();
+        }
+    }
+
+
+    public void AddHealth(float value)
+    {
+        model.currentHealthPoint += value;
+    }
+
+    public void AddProactiveSkill(SkillData skillData)
+    {
+        UpdateStat(StatModifierType.Add, 10, 0, 0, 0, 0, 0, 4);
+
+        var skill = GetSkill(skillData.name);
+        if (skill != null)
+        {
+            skill.UpLevel();
+            if (skill.level >= 6)
+            {
+                gameController.map.RemoveSkill(skill.skillName);
+            }
+            return;
+        }
+        switch (skillData.type)
+        {
+            case SkillType.Active:
+                {
+                    Skill skillIns;
+                    switch (skillData.name)
+                    {
+                        case SkillName.Fireball:
+                            skillIns = new FireBall();
+                            break;
+                        case SkillName.ThunderStrike:
+                            skillIns = new ThunderStrike();
+                            break;
+
                         case SkillName.Waterball:
                             skillIns = new waterball();
                             break;
-						case SkillName.Shark: 
-							skillIns = new Shark();
-							break;
-						case SkillName.PoisonBullet:
-							skillIns = new Poisonball();
-							break;
-						case SkillName.Earthpunch:
-							skillIns = new EarthPunch();
-							break;
-						case SkillName.SkyBoom:
-							skillIns = new Skyboom();
-							break;
+                        case SkillName.Shark:
+                            skillIns = new Shark();
+                            break;
+                        case SkillName.PoisonBullet:
+                            skillIns = new Poisonball();
+                            break;
+                        case SkillName.Earthpunch:
+                            skillIns = new EarthPunch();
+                            break;
+                        case SkillName.SkyBoom:
+                            skillIns = new Skyboom();
+                            break;
+                        case SkillName.Boomerang:
+                            skillIns = new Boomerangl();
+                            break;
                         default:
                             skillIns = new ProactiveSkill();
                             break;
                     }
-					skillIns.Init(skillData);
-					listSkills.Add(skillIns);
-					break;
-			}
-			case SkillType.Buff:
-				if(skillData.name == SkillName.Food)
-				{
-					model.currentHealthPoint += model.currentHealthPoint * 20 / 100;
-				}
-				break;
-		}
-	}
+                    skillIns.Init(skillData);
+                    listSkills.Add(skillIns);
+                    break;
 
-	public Skill GetSkill(SkillName skillName)
-	{
-		foreach(var skill in listSkills)
-		{
-			if(skill.skillName.Equals(skillName))
-			{
-				return skill;
-			}
-		}
-		return null;
-	}
+                }
+        }
+    }
 
-	public void UpdateStat(StatModifierType typeStat, float maxH, float ms, float ad, float ar, float itemR, int armor, float duration)
-	{
-		var updateStat = new CharacterUpdateStat(typeStat, maxH, ms, ad, ar, itemR, armor, duration);
+        public Skill GetSkill(SkillName skillName)
+        {
+            foreach (var skill in listSkills)
+            {
+                if (skill.skillName.Equals(skillName))
+                {
+                    return skill;
+                }
+            }
+            return null;
+        }
 
-		{
-			stat.maxHealth.AddModifier(updateStat.maxHealth);
-			stat.moveSpeed.AddModifier(updateStat.moveSpeed);
-			stat.attackDamage.AddModifier(updateStat.attackDamage);
-			stat.attackRange.AddModifier(updateStat.attackRange);
-			stat.itemAttractionRange.AddModifier(updateStat.itemAttractionRange);
-			stat.armor.AddModifier(updateStat.armor);
-		}
+        public void UpdateStat(StatModifierType typeStat, float maxH, float ms, float ad, float ar, float itemR, int armor, float duration)
+        {
+            var updateStat = new CharacterUpdateStat(typeStat, maxH, ms, ad, ar, itemR, armor, duration);
 
-		listUpdateStat.Add(updateStat);
-		UpdateModel();
-	}
+            {
+                stat.maxHealth.AddModifier(updateStat.maxHealth);
+                stat.moveSpeed.AddModifier(updateStat.moveSpeed);
+                stat.attackDamage.AddModifier(updateStat.attackDamage);
+                stat.attackRange.AddModifier(updateStat.attackRange);
+                stat.itemAttractionRange.AddModifier(updateStat.itemAttractionRange);
+                stat.armor.AddModifier(updateStat.armor);
+            }
 
-	private void RemoveStat(CharacterUpdateStat statModifier)
-	{
-		{
-			stat.maxHealth.RemoveModifier(statModifier.maxHealth);
-			stat.moveSpeed.RemoveModifier(statModifier.moveSpeed);
-			stat.attackDamage.RemoveModifier(statModifier.attackDamage);
-			stat.attackRange.RemoveModifier(statModifier.attackRange);
-			stat.itemAttractionRange.RemoveModifier(statModifier.itemAttractionRange);
-			stat.armor.RemoveModifier(statModifier.armor);
-		}
-		listUpdateStat.Remove(statModifier);
+            listUpdateStat.Add(updateStat);
+            UpdateModel();
+        }
 
-		UpdateModel();
-	}
-	private void UpdateModel()
-	{
-		model.maxHealthPoint = stat.maxHealth.Value;
-		model.moveSpeed = stat.moveSpeed.Value;
-		model.attackDamage = stat.attackDamage.Value;
-		model.ItemAttractionRange = stat.itemAttractionRange.Value;
-		model.attackRange = stat.attackRange.Value;
-		model.armor = stat.armor.Value;
-	}
+        private void RemoveStat(CharacterUpdateStat statModifier)
+        {
+            {
+                stat.maxHealth.RemoveModifier(statModifier.maxHealth);
+                stat.moveSpeed.RemoveModifier(statModifier.moveSpeed);
+                stat.attackDamage.RemoveModifier(statModifier.attackDamage);
+                stat.attackRange.RemoveModifier(statModifier.attackRange);
+                stat.itemAttractionRange.RemoveModifier(statModifier.itemAttractionRange);
+                stat.armor.RemoveModifier(statModifier.armor);
+            }
+            listUpdateStat.Remove(statModifier);
 
-	private void Die()
-	{
-		gameController.CharacterDie(this);
-	}
+            UpdateModel();
+        }
+        private void UpdateModel()
+        {
+            model.maxHealthPoint = stat.maxHealth.Value;
+            model.moveSpeed = stat.moveSpeed.Value;
+            model.attackDamage = stat.attackDamage.Value;
+            model.ItemAttractionRange = stat.itemAttractionRange.Value;
+            model.attackRange = stat.attackRange.Value;
+            model.armor = stat.armor.Value;
+        }
 
-	private int MinusDamage(int dmg)
-	{
-		return dmg * (100 - model.armor) / 100;
-	}
+        private void Die()
+        {
+            gameController.CharacterDie(this);
+        }
 
-	private void HandlePhysicUpdate()
-	{
+        private int MinusDamage(int dmg)
+        {
+            return dmg * (100 - model.armor) / 100;
+        }
 
-		if(moveDirection == Vector2.zero)
-			IdleState();
-		else
-			MoveState();
+        private void HandlePhysicUpdate()
+        {
 
-		SetAnimation(moveDirection, idleDirection);
-	}
+            if (moveDirection == Vector2.zero)
+                IdleState();
+            else
+                MoveState();
 
-	// ReSharper disable Unity.PerformanceAnalysis
-	private void HandleProactiveSkill(float deltaTime)
-	{
-		foreach(var skill in listSkillCooldown)
-		{
-			skill.CoolDownSkill(deltaTime);
-		}
-	}
+            SetAnimation(moveDirection, idleDirection);
+        }
 
-	private void HandleUpdateStat(float deltaTime)
-	{
-		foreach(var item in listUpdateStat.ToList())
-		{
-			item.cdTime.Update(deltaTime);
-			if(item.cdTime.isFinished)
-			{
-				RemoveStat(item);
-			}
-		}
-	}
+        // ReSharper disable Unity.PerformanceAnalysis
+        private void HandleProactiveSkill(float deltaTime)
+        {
+            foreach (var skill in listSkillCooldown)
+            {
+                skill.CoolDownSkill(deltaTime);
+            }
+        }
 
-	private void SetAnimation(Vector2 dir, Vector2 idleDirection)
-	{
-		animator.SetFloat("Speed", dir.normalized.magnitude);
-		animator.SetFloat("Horizontal", idleDirection.x);
-		animator.SetFloat("Vertical", idleDirection.y);
-	}
+        private void HandleUpdateStat(float deltaTime)
+        {
+            foreach (var item in listUpdateStat.ToList())
+            {
+                item.cdTime.Update(deltaTime);
+                if (item.cdTime.isFinished)
+                {
+                    RemoveStat(item);
+                }
+            }
+        }
 
-	#region State Machine Method
+        private void SetAnimation(Vector2 dir, Vector2 idleDirection)
+        {
+            animator.SetFloat("Speed", dir.normalized.magnitude);
+            animator.SetFloat("Horizontal", idleDirection.x);
+            animator.SetFloat("Vertical", idleDirection.y);
+        }
 
-	public void IdleState() => _stateMachine.ChangeState(_idleSm);
+        #region State Machine Method
 
-	public void MoveState()
-	{
-		if(IsMove) return;
-		_stateMachine.ChangeState(_moveSm);
-	}
+        public void IdleState() => _stateMachine.ChangeState(_idleSm);
 
-	#endregion
+        public void MoveState()
+        {
+            if (IsMove) return;
+            _stateMachine.ChangeState(_moveSm);
+        }
 
-	protected override void OnDestroy()
-	{
-		base.OnDestroy();
-		circleAttackRange.DOKill();
-	}
+    #endregion
 
-	private void OnDrawGizmosSelected()
-	{
-		Gizmos.DrawWireSphere(transform.position, sizeBase);
-		Gizmos.DrawWireSphere(transform.position, abc);
-		Gizmos.DrawWireSphere(transform.position, 1);
-	}
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        circleAttackRange.DOKill();
+    }
+
+
+    private void HandleHealing()
+    {
+        {
+            model.healingTimer += Time.deltaTime;
+            if (model.healingTimer >= model.healingCooldown && CheckHeal()) // Kiểm tra điều kiện trước khi hồi máu
+            {
+                model.healingTimer = 0f;
+                AddHealth(model.maxHealthPoint * model.healingRate); // Hồi máu
+                ActivateHealing();
+            }
+        }
+
+    }
+
+    public void ActivateHealing()
+    {
+        int roundedHealingRate = Mathf.RoundToInt(model.healingRate * 100);
+        GameObject healingText = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
+        healingText.GetComponent<TextPopup>().Create(roundedHealingRate.ToString(), TextPopupType.Healing);
+    }
+
+    public void DeactivateHealing()
+    {
+        model.isHealing = false;
+        model.healingTimer = 0f;
+    }
+    private bool CheckHeal()
+    {
+        return model.currentHealthPoint < model.maxHealthPoint;
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, sizeBase);
+        Gizmos.DrawWireSphere(transform.position, abc);
+        Gizmos.DrawWireSphere(transform.position, 1);
+    }
 }
