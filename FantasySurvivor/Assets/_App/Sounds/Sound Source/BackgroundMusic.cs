@@ -14,7 +14,7 @@ public class BackgroundMusic : MonoBehaviour
         if (backgroundMusic == null)
         {
             backgroundMusic = this;
-            DontDestroyOnLoad(gameObject);
+            
 
             // Add AudioSource component if it does not exist
             audioSource = gameObject.GetComponent<AudioSource>();
