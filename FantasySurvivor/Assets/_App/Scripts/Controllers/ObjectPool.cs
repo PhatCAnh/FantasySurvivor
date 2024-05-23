@@ -46,8 +46,11 @@ public class ObjectPool
 	{
 		foreach(var item in usedList.ToList())
 		{
-			item.SetActive(false);
-			freeList.Add(item);
+			if(item != null)
+			{
+				item.SetActive(false);
+				freeList.Add(item);
+			}
 			usedList.Remove(item);
 		}
 	}

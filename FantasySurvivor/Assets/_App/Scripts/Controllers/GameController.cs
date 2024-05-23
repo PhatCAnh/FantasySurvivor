@@ -86,7 +86,6 @@ public class GameController : Controller<GameApp>
 	public void LoseGame()
 	{
 		isEndGame = true;
-		Singleton<PoolController>.instance.RemoveAllObject(ItemPrefab.GemExp);
 		app.resourceManager.ShowPopup(PopupType.LoseGame);
 		//app.analytics.TrackPlay(LevelResult.Failure, map.model.levelInGame);
 	}

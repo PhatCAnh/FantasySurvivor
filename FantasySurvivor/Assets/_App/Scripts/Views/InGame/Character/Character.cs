@@ -157,7 +157,7 @@ public class Character : ObjectRPG
 
 	public void AddProactiveSkill(SkillData skillData)
 	{
-		UpdateStat(StatModifierType.Add, 10, 0, 0, 0, 0, 0, 4);
+		//UpdateStat(StatModifierType.Add, 10, 0, 0, 0, 0, 0, 4);
 		
 		var skill = GetSkill(skillData.name);
 		if(skill != null)
