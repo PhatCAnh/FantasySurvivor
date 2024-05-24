@@ -37,7 +37,7 @@ public class CharacterModel : Model<GameApp>
     
 	private int _armor;
     private bool _isHealing;
-    private float _healingCooldown = 6f; 
+    private float _healingCooldown = 4f; 
     private float _healingTimer;
     private float _healingRate = 0.05f;
  
