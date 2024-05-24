@@ -27,10 +27,8 @@ public class MonsterSummoner : Monster
         {
             if (cdAttack.isFinished)
             {
-                animator.SetBool("Attack", true);
-                AttackState();
+                Attack();
                 cdAttack.Restart(1 / model.attackSpeed);
-                IdleState();
             }
             else
             {
@@ -51,6 +49,7 @@ public class MonsterSummoner : Monster
 
     public override void Attack()
     {
+        animator.SetBool("Attack", true);
         for (int i = 0; i < numMonster; i++)
         {
             var mob = gameController.SpawnMonster("Skeleton", 10, stat.attackDamage.BaseValue);
