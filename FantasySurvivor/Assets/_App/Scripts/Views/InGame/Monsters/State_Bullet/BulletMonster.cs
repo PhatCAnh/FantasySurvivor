@@ -59,8 +59,9 @@ namespace FantasySurvivor
 
 		protected void Touch()
 		{
-			/*_character.TakeDamage(_origin.model.attackDamage);
-			if(deadEffect != null)
+			_character.TakeDamage(_origin.model.attackDamage);
+
+			/*if(deadEffect != null)
 			{
 				Instantiate(deadEffect, transform.position, transform.rotation);
 			}*/
