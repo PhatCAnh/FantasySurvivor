@@ -7,6 +7,8 @@ public class CharacterController: Controller<GameApp>
 {
 	[SerializeField] private CharacterDataTable _charDataTable;
 
+	private List<ItemEquipData> _listItemEquip;
+
 	private Dictionary<CharacterId, CharacterData> _dicCharData;
 
 	private void Awake()
@@ -33,6 +35,8 @@ public class CharacterController: Controller<GameApp>
 			data.itemAttractionRange,
 			data.armor
 		);
+
+		_listItemEquip = new List<ItemEquipData>();
 	}
 
 	public CharacterData GetDataCharacter(CharacterId id)

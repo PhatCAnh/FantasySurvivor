@@ -35,7 +35,7 @@ public class ItemSlotUI : View<GameApp>
         parent.EquipItem(data.dataUi.type, data);
         Destroy(gameObject);
     }
-    
+
     private void InitData(ItemEquipData data)
     {
         this.data = data;

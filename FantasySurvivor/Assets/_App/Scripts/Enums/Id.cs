@@ -7,4 +7,5 @@
 	public enum ItemEquipId
 	{
 		Item1,
+		Item2,
 	}
