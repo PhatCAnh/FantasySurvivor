@@ -166,7 +166,8 @@ public class Monster : ObjectRPG
 		else
 		{
             MoveState();
-		}
+            animator.SetBool("Attack", false);
+        }
 
         SetAnimation(idleDirection);
     }
