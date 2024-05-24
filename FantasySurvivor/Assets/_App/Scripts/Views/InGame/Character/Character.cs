@@ -19,9 +19,10 @@ public class Character : ObjectRPG
 
 	[SerializeField] private Transform circleAttackRange;
 
-	[FormerlySerializedAs("a"),SerializeField] private int asd= 5;
+	[FormerlySerializedAs("a"), SerializeField] private int asd = 5;
 	public int b;
-	
+	public float healingAmount;
+
 	public float abc = 2.5f;
 
 	public float sizeBase;
@@ -98,13 +99,13 @@ public class Character : ObjectRPG
 				control.localScale = Vector3.one * model.attackRange;
 			}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackRange), model)
 		);
-		
-		
+
+
 	}
 
 	public void Init(CharacterStat statInit)
 	{
-		
+
 		stat = statInit;
 	}
 
@@ -157,8 +158,8 @@ public class Character : ObjectRPG
 
 	public void AddProactiveSkill(SkillData skillData)
 	{
-		//UpdateStat(StatModifierType.Add, 10, 0, 0, 0, 0, 0, 4);
-		
+		UpdateStat(StatModifierType.Add, 10, 0, 0, 0, 0, 0, 4);
+
 		var skill = GetSkill(skillData.name);
 		if(skill != null)
 		{
@@ -173,31 +174,46 @@ public class Character : ObjectRPG
 		{
 			case SkillType.Active:
 			{
-					Skill skillIns;
-					switch (skillData.name)
-					{
-						case SkillName.Fireball:
-							skillIns = new FireBall();
-							break;
-						case SkillName.ThunderStrike: 
-							skillIns = new ThunderStrike();
-							break;
-                        case SkillName.Waterball:
-                            skillIns = new WaterBallControl();
-                            break;
-						// case SkillName.ThunderChanneling:
-						// 	skillIns = new ThunderChanneling();
-						// 	break;
-						case SkillName.FireShield:
-							skillIns = new FireShieldControl();
-							break;
-                        default:
-							skillIns = new ProactiveSkill();
-							break;
-					}
-					skillIns.Init(skillData);
-					listSkills.Add(skillIns);
-					break;
+				Skill skillIns;
+				switch (skillData.name)
+				{
+					case SkillName.Fireball:
+						skillIns = new FireBall();
+						break;
+					case SkillName.ThunderStrike:
+						skillIns = new ThunderStrike();
+						break;
+					case SkillName.Waterball:
+						skillIns = new WaterBallControl();
+						break;
+					// case SkillName.ThunderChanneling:
+					// 	skillIns = new ThunderChanneling();
+					// 	break;
+					case SkillName.FireShield:
+						skillIns = new FireShieldControl();
+						break;
+					case SkillName.Shark:
+						skillIns = new Shark();
+						break;
+					case SkillName.PoisonBullet:
+						skillIns = new Poisonball();
+						break;
+					case SkillName.Earthpunch:
+						skillIns = new EarthPunch();
+						break;
+					case SkillName.SkyBoom:
+						skillIns = new Skyboom();
+						break;
+					case SkillName.Boomerang:
+						skillIns = new Boomerangl();
+						break;
+					default:
+						skillIns = new ProactiveSkill();
+						break;
+				}
+				skillIns.Init(skillData);
+				listSkills.Add(skillIns);
+				break;
 			}
 			case SkillType.Buff:
 				if(skillData.name == SkillName.Food)
@@ -247,9 +263,9 @@ public class Character : ObjectRPG
 			stat.armor.RemoveModifier(statModifier.armor);
 		}
 		listUpdateStat.Remove(statModifier);
-
 		UpdateModel();
 	}
+
 	private void UpdateModel()
 	{
 		model.maxHealthPoint = stat.maxHealth.Value;
@@ -281,7 +297,7 @@ public class Character : ObjectRPG
 		SetAnimation(moveDirection, idleDirection);
 	}
 
-	// ReSharper disable Unity.PerformanceAnalysis
+// ReSharper disable Unity.PerformanceAnalysis
 	private void HandleProactiveSkill(float deltaTime)
 	{
 		foreach(var skill in listSkillCooldown)
@@ -325,6 +341,39 @@ public class Character : ObjectRPG
 	{
 		base.OnDestroy();
 		circleAttackRange.DOKill();
+	}
+
+
+	private void HandleHealing()
+	{
+		{
+			model.healingTimer += Time.deltaTime;
+			if(model.healingTimer >= model.healingCooldown && CheckHeal()) // Kiểm tra điều kiện trước khi hồi máu
+			{
+				model.healingTimer = 0f;
+				AddHealth(model.maxHealthPoint * model.healingRate); // Hồi máu
+				ActivateHealing();
+			}
+		}
+
+	}
+
+	public void ActivateHealing()
+	{
+		int roundedHealingRate = Mathf.RoundToInt(model.healingRate * 100);
+		GameObject healingText = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
+		healingText.GetComponent<TextPopup>().Create(roundedHealingRate.ToString(), TextPopupType.Healing);
+	}
+
+	public void DeactivateHealing()
+	{
+		model.isHealing = false;
+		model.healingTimer = 0f;
+	}
+
+	private bool CheckHeal()
+	{
+		return model.currentHealthPoint < model.maxHealthPoint;
 	}
 
 	private void OnDrawGizmosSelected()

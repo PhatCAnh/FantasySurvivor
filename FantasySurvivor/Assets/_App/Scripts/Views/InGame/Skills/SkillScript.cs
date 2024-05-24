@@ -6,13 +6,13 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 namespace FantasySurvivor
 {
-	public class FireBall : ProactiveSkill
-	{
-		public override void Init(SkillData data)
-		{
-			base.Init(data);
-			timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
-		}
+    public class FireBall : ProactiveSkill
+    {
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+            timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
+        }
 
 		public override void UpLevel()
 		{
@@ -21,14 +21,31 @@ namespace FantasySurvivor
 			{
 				numberProjectile++;
 			}
-			if(level == 6)
+			else if(level == 6)
 			{
 				numberProjectile = 1;
 			}
 		}
 	}
 
-	/*public class ThunderBird : ProactiveSkill
+    public class EarthPunch : ProactiveSkill
+    {
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+        }
+    }
+
+    public class Poisonball : ProactiveSkill
+    {
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+        }
+
+    }
+
+    /*public class ThunderBird : ProactiveSkill
 	{
         public override void Init(SkillData data)
         {
@@ -45,7 +62,7 @@ namespace FantasySurvivor
         }
     }*/
 
-	/*public class Twin : ProactiveSkill
+    /*public class Twin : ProactiveSkill
 	{
 		public override void Init(SkillData data)
 		{
@@ -63,20 +80,18 @@ namespace FantasySurvivor
 		}
 	}*/
 
-	/*public class Shark : ProactiveSkill
-	{
-		protected override void UpdatePrefab(SkillActive prefab)
-		{
-			base.UpdatePrefab(prefab);
-			if(level == 6)
-			{
-				prefab.transform.localScale = Vector3.one * 2;
-				prefab.size = 2;
-			}
-		}
-	}*/
+    public class Shark : ProactiveSkill
+    {
+        protected override void UpdatePrefab(SkillActive prefab)
+        {
+            base.UpdatePrefab(prefab);
+            prefab.transform.localScale = Vector3.one * levelData[level].valueSpecial1;
+            prefab.size = levelData[level].valueSpecial1;
 
-	/*public class ZoneOfJudgment : ProactiveSkill
+        }
+    }
+
+    /*public class ZoneOfJudgment : ProactiveSkill
 	{
 		private float _sizeTouch = 2.5f;
 
@@ -147,24 +162,31 @@ namespace FantasySurvivor
 		{
 			base.Init(data);
 			timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
-
 		}
-
-
-		public override void UpLevel()
-		{
-			base.UpLevel();
-			if(level == 3 || level == 5)
-			{
-				numberProjectile++;
-			}
-			else if(level == 6)
-			{
-				numberProjectile = 1;
-			}
-		}
-
 	}
+
+
+	public class Boomerangl : ProactiveSkill
+    {
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+        }
+    }
+
+    public class Skyboom : ProactiveSkill
+    {
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+        }
+        protected override void UpdatePrefab(SkillActive prefab)
+        {
+            base.UpdatePrefab(prefab);
+            prefab.transform.localScale = Vector3.one * levelData[level].valueSpecial1;
+            prefab.size = levelData[level].valueSpecial1;
+        }
+    }
 }
 
 

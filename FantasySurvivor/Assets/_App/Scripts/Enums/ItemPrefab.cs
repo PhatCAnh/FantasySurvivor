@@ -25,6 +25,11 @@ public enum ItemPrefab
 	BulletGlobloomSentry,
 	SkillWaterBall,
 	FireShield,
+    Shark,
+    PoisonBullet,
+    EarthPunch,
+    SkyBoom,
+    Boomerang,
 }
 
 public enum MapType
@@ -56,8 +61,9 @@ public enum TowerType
 
 public enum TextPopupType
 {
-	MonsterDamage,
-	TowerDamage,
+    Healing,
+    MonsterDamage,
+    TowerDamage,
 }
 
 public enum TypeStatTower
@@ -99,6 +105,12 @@ public enum SkillName
 	Food,
 	ThunderChanneling,
 	FireShield,
+	Shark,
+	ThunderBird,
+	PoisonBullet, 
+	Earthpunch,
+	SkyBoom,
+	Boomerang,
 	/* ThunderBird,*/
 	/*Shark,
 	Twin,
@@ -106,6 +118,12 @@ public enum SkillName
 	BlackDrum,
 	Passive1,
 	*/
+    /*
+    Twin,
+    ZoneOfJudgment,
+    BlackDrum,
+    Passive1,
+    */
 }
 
 public enum SkillType
@@ -183,7 +201,7 @@ public enum SpawnPos
 
 public enum TargetType
 {
-	Target,
-	Shot,
-	None,
+    Target,
+    Shot,
+    None,
 }

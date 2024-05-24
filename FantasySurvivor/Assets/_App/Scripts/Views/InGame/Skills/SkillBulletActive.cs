@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using _App.Scripts.Controllers;
 using ArbanFramework;
 using System.Linq;
@@ -12,6 +13,10 @@ namespace FantasySurvivor
     {
         [SerializeField] protected Transform skin;
         
+		public TargetType targetType;
+
+		protected HashSet<Monster> attackedMonsters = new HashSet<Monster>();
+
         public bool canBlock;
 
         public float moveSpeed;
@@ -30,7 +35,7 @@ namespace FantasySurvivor
             skin.up = direction;
         }
 
-        private void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
             if (gameController.isStop) return;
 			switch (targetType)
