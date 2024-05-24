@@ -78,7 +78,8 @@ MonoBehaviour:
   animator: {fileID: 8463392241125044750}
   firePoint: {fileID: 3920175741890169233}
   justSpawnVertical: 0
-  _deadEffect: {fileID: 4898653236964536428, guid: 2a8dc718fd0dca04c8e918b82d5d0247, type: 3}
+  isDead: 0
+  isNoMove: 0
   size: 0.5
   bulletPrefab: {fileID: 4128420622295471649, guid: 21f0e3c66e7be4643873bca51dcbc84d, type: 3}
   typeBullet: 15
