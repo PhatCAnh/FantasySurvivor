@@ -1,9 +1,10 @@
+using System;
 using ArbanFramework.MVC;
 using FantasySurvivor;
 using System.Collections;
 using System.Collections.Generic;
-using ArbanFramework;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -19,25 +20,33 @@ public class StatUI : View<GameApp>
 
 	private Dictionary<ItemEquipType, ItemSlotEquipUI> _dicItemEquip;
 
-	private ItemController itemController => Singleton<ItemController>.instance;
+	private ItemController itemController => ArbanFramework.Singleton<ItemController>.instance;
+
+	protected override void Start()
+	{
+		InitDispatcher();
+
+		base.Start();
+	}
+
 	protected override void OnViewInit()
 	{
 		base.OnViewInit();
-
-		InitDispatcher();
-
-		Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
-		item.Init(itemController.GetDataItemEquip(ItemEquipId.Item1), this);
-
-		Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item2);
-		item2.Init(itemController.GetDataItemEquip(ItemEquipId.Item2), this);
-
+		
 		_slotWeapon.Init(null, this);
 
 		_dicItemEquip = new Dictionary<ItemEquipType, ItemSlotEquipUI>
 		{
 			{ItemEquipType.Weapon, _slotWeapon},
 		};
+
+		foreach(var item in app.models.dataPlayerModel.BagItemEquip)
+		{
+			Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item1);
+			var id =itemController.GetDataItemEquip((ItemEquipId) Enum.Parse(typeof(ItemEquipId), item.id));
+			var data = new ItemEquipData(id.dataUi, item, id.spriteRank);
+			item1.Init(data, this);
+		}
 	}
 
 	public void EquipItem(ItemEquipType type, ItemEquipData data)
@@ -82,5 +91,15 @@ public class StatUI : View<GameApp>
 			float armorPercent = (float) app.models.characterModel.armor / 100f;
 			control.text = $"{armorPercent * 100f}%";
 		}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.armor), app.models.characterModel));
+		
+		AddDataBinding("fieldDataPlayerModel-BagItemEquipValue", this, (control, e) =>
+			{
+				Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
+				var dataStat = app.models.dataPlayerModel.GetFirstItemEquipAdded();
+				var id =itemController.GetDataItemEquip((ItemEquipId) Enum.Parse(typeof(ItemEquipId), dataStat.id));
+				var data = new ItemEquipData(id.dataUi, dataStat, id.spriteRank);
+				item.Init(data, this);
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.BagItemEquip), app.models.dataPlayerModel)
+		);
 	}
 }

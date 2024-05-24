@@ -5,11 +5,14 @@ using UnityEngine;
 using UnityEngine.Serialization;
 public class CharacterController: Controller<GameApp>
 {
+	public int numberLimitBagEquip;
+	public int numberLimitBagETC;
+	
 	[SerializeField] private CharacterDataTable _charDataTable;
 
-	private List<ItemEquipData> _listItemEquip;
-
 	private Dictionary<CharacterId, CharacterData> _dicCharData;
+
+	private ItemController itemController => Singleton<ItemController>.instance;
 
 	private void Awake()
 	{
@@ -35,8 +38,6 @@ public class CharacterController: Controller<GameApp>
 			data.itemAttractionRange,
 			data.armor
 		);
-
-		_listItemEquip = new List<ItemEquipData>();
 	}
 
 	public CharacterData GetDataCharacter(CharacterId id)

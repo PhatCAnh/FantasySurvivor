@@ -17,10 +17,6 @@ public class ItemController : Controller<GameApp>
 	private void Awake()
 	{
 		Singleton<ItemController>.Set(this);
-	}
-
-	private void Start()
-	{
 		_dicRankItemEquip = new Dictionary<RankItemEquip, Sprite>
 		{
 			{RankItemEquip.Normal, _spriteNormal},
@@ -33,6 +29,11 @@ public class ItemController : Controller<GameApp>
 		listItemEquipped = new List<ItemEquipData>();
 	}
 
+	private void Start()
+	{
+		
+	}
+
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
@@ -42,13 +43,14 @@ public class ItemController : Controller<GameApp>
 	public ItemEquipData GetDataItemEquip(ItemEquipId id)
 	{
 		var dataUI = _equipDataTable.listItemEquipData.Find(item => item.id == id);
-		return new ItemEquipData(dataUI, app.configs.dataItemEquip.GetConfig(id), _dicRankItemEquip[dataUI.rank]);
+		var dataStat = new ItemEquipStat(app.configs.dataItemEquip.GetConfig(id));
+		return new ItemEquipData(dataUI, dataStat, _dicRankItemEquip[dataUI.rank]);
 	}
 
 	public void EquipItem(ItemEquipData data)
 	{
 		listItemEquipped.Add(data);
-		var stat = data.dataStat;
+		var stat = data.dataStat.dataStatConfig;
 		var model = app.models.characterModel;
 		model.maxHealthPoint += stat.hp;
 		model.moveSpeed += stat.moveSpeed;
@@ -61,7 +63,7 @@ public class ItemController : Controller<GameApp>
 	{
 		if(!listItemEquipped.Contains(data)) return;
 		listItemEquipped.Remove(data);
-		var stat = data.dataStat;
+		var stat = data.dataStat.dataStatConfig;
 		var model = app.models.characterModel;
 		model.maxHealthPoint -= stat.hp;
 		model.moveSpeed -= stat.moveSpeed;

@@ -10,6 +10,12 @@
 }
 
 
+public enum ItemType
+{
+	Equip,
+	ETC,
+}
+
 
 public enum RankItemEquip : byte
 {

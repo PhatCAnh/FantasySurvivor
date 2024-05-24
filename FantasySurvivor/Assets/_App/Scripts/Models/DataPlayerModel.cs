@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
 using ArbanFramework.MVC;
 using Newtonsoft.Json;
 using Unity.Collections.LowLevel.Unsafe;
+using UnityEditor;
 using UnityEngine;
 namespace FantasySurvivor
 {
@@ -31,6 +33,9 @@ namespace FantasySurvivor
 			firstTouchHand = true;
 			firstTutorialHandUi = true;
 			firstSeeBulletInteract = true;
+
+			_bagItemEquip = new List<ItemEquipStat>();
+			
 			app.models.WriteModel<DataPlayerModel>();
 		}
 
@@ -52,6 +57,9 @@ namespace FantasySurvivor
 		[JsonProperty] public bool firstTouchHand;
 		[JsonProperty] public bool firstTutorialHandUi;
 		[JsonProperty] public bool firstSeeBulletInteract;
+		
+		
+		[JsonProperty] private List<ItemEquipStat> _bagItemEquip;
 		
 		public int Coin
 		{
@@ -194,6 +202,27 @@ namespace FantasySurvivor
                 RaiseDataChanged(nameof(Movespeed));
             }
         }
-    
-    }
+        
+        public List<ItemEquipStat> BagItemEquip
+        {
+	        get => _bagItemEquip;
+        }
+
+        public void AddItemEquipToBag(ItemEquipStat item)
+        {
+	        _bagItemEquip.Add(item);
+	        app.models.WriteModel<DataPlayerModel>();
+	        RaiseDataChanged(nameof(BagItemEquip));
+        }
+
+        public ItemEquipStat GetItemEquip(ItemEquipId id)
+        {
+	        return _bagItemEquip.FirstOrDefault(item =>(ItemEquipId) Enum.Parse(typeof(ItemEquipId),item.id) ==  id);
+        }
+        
+        public ItemEquipStat GetFirstItemEquipAdded()
+        {
+	        return _bagItemEquip.LastOrDefault();
+        }
+	}
 }

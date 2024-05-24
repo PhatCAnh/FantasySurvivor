@@ -24,13 +24,30 @@ public class ItemEquipDataUI
 public class ItemEquipData
 {
     public readonly ItemEquipDataUI dataUi;
-    public readonly DataItemEquipConfig dataStat;
+    public readonly ItemEquipStat dataStat;
     public readonly Sprite spriteRank;
 
-    public ItemEquipData(ItemEquipDataUI dataUI,DataItemEquipConfig dataStat, Sprite spriteRank)
+    public ItemEquipData(ItemEquipDataUI dataUI, ItemEquipStat dataStat, Sprite spriteRank)
     {
         this.dataUi = dataUI;
         this.dataStat = dataStat;
         this.spriteRank = spriteRank;
     }
+}
+
+public class ItemEquipStat
+{
+    public string id;
+    public DataItemEquipConfig dataStatConfig;
+
+    public ItemEquipStat(DataItemEquipConfig dataStatConfig)
+    {
+        this.id = dataStatConfig.id;
+        this.dataStatConfig = dataStatConfig;
+    }
+}
+
+public class ItemETC
+{
+    
 }
