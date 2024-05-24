@@ -143,20 +143,19 @@ public class Monster : ObjectRPG
 	protected virtual void HandlePhysicUpdate()
 	{
         if (isDead) return;
-        
         moveTarget = gameController.character.transform.position;
 		moveDirection = moveTarget - transform.position;
 
-		if(moveDirection.magnitude < sizeAttack || !cdAttack.isFinished)
+		if(moveDirection.magnitude < sizeAttack)
 		{
 			if(cdAttack.isFinished)
 			{
-				AttackState();			
+                animator.SetBool("Attack", true);
+                AttackState();			
 				cdAttack.Restart(1 / model.attackSpeed);
-				animator.SetBool("Attack", true);
-			} else
+            } else
 			{
-				IdleState();
+                IdleState();
                 animator.SetBool("Attack", false);
             }
 		}
@@ -166,10 +165,10 @@ public class Monster : ObjectRPG
 		}
 		else
 		{
-			MoveState();
+            MoveState();
 		}
-		SetAnimation(idleDirection);
 
+        SetAnimation(idleDirection);
     }
 
     protected virtual void SetAnimation(Vector2 directionMove)
