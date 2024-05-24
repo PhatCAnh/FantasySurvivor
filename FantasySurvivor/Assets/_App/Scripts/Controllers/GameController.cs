@@ -181,8 +181,13 @@ public class GameController : Controller<GameApp>
         var monsterStat = new MonsterStat(statMonster.moveSpeed, health, attackDamage, statMonster.attackSpeed, statMonster.attackRange);
         var type = (ItemPrefab)Enum.Parse(typeof(ItemPrefab), statMonster.monsterType);
         Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
+
         monster.Init(monsterStat, null, type);
+
 		monster.ResetAttackCountdown();
+        monster.isDead = false;
+        monster.animator.SetBool("Dead", false);
+
         listMonster.Add(monster);
         return monster;
 	}	

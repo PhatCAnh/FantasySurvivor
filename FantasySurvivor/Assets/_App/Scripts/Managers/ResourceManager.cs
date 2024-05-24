@@ -80,6 +80,11 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     [Required, SerializeField] private GameObject _minionSkeleton;
 
+    [Required, SerializeField] private GameObject _swampOoze;
+
+
+
+
 
     private Dictionary<string, GameObject> _typeMonsterDic;
 
@@ -141,6 +146,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.ElectroBomber, _electroBomber},
             {ItemPrefab.SlimeWandering, _slimeWandering},
 			{ItemPrefab.MinionSkeleton, _minionSkeleton},
+			{ItemPrefab.SwampOoze, _swampOoze},
 
             {ItemPrefab.SupportItem, _supportItem},
 			{ItemPrefab.BulletKillerBee, _bulletKillerBee},
@@ -164,6 +170,7 @@ public class ResourceManager : UIManagerBase<PopupType>
             {"M7", _globloomSentry},
 			{"M8", _electroBomber},
 			{"M9", _slimeWandering},
+			{"M10", _swampOoze},
 			{"Skeleton", _minionSkeleton},
 
         };
