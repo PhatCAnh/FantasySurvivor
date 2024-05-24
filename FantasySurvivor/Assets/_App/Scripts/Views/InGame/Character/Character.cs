@@ -117,8 +117,8 @@ public class Character : ObjectRPG
 		_stateMachine.currentState.LogicUpdate(time);
 
 		HandlePhysicUpdate();
-		HandleProactiveSkill(Time.deltaTime);
-		HandleUpdateStat(Time.deltaTime);
+		HandleProactiveSkill(time);
+		HandleUpdateStat(time);
 	}
 
 	private void FixedUpdate()
@@ -239,14 +239,13 @@ public class Character : ObjectRPG
 	public void UpdateStat(StatModifierType typeStat, float maxH, float ms, float ad, float ar, float itemR, int armor, float duration)
 	{
 		var updateStat = new CharacterUpdateStat(typeStat, maxH, ms, ad, ar, itemR, armor, duration);
-		{
-			stat.maxHealth.AddModifier(updateStat.maxHealth);
-			stat.moveSpeed.AddModifier(updateStat.moveSpeed);
-			stat.attackDamage.AddModifier(updateStat.attackDamage);
-			stat.attackRange.AddModifier(updateStat.attackRange);
-			stat.itemAttractionRange.AddModifier(updateStat.itemAttractionRange);
-			stat.armor.AddModifier(updateStat.armor);
-		}
+		
+		stat.maxHealth.AddModifier(updateStat.maxHealth);
+		stat.moveSpeed.AddModifier(updateStat.moveSpeed);
+		stat.attackDamage.AddModifier(updateStat.attackDamage);
+		stat.attackRange.AddModifier(updateStat.attackRange);
+		stat.itemAttractionRange.AddModifier(updateStat.itemAttractionRange);
+		stat.armor.AddModifier(updateStat.armor);
 
 		listUpdateStat.Add(updateStat);
 		UpdateModel();
@@ -254,14 +253,13 @@ public class Character : ObjectRPG
 
 	private void RemoveStat(CharacterUpdateStat statModifier)
 	{
-		{
-			stat.maxHealth.RemoveModifier(statModifier.maxHealth);
-			stat.moveSpeed.RemoveModifier(statModifier.moveSpeed);
-			stat.attackDamage.RemoveModifier(statModifier.attackDamage);
-			stat.attackRange.RemoveModifier(statModifier.attackRange);
-			stat.itemAttractionRange.RemoveModifier(statModifier.itemAttractionRange);
-			stat.armor.RemoveModifier(statModifier.armor);
-		}
+		stat.maxHealth.RemoveModifier(statModifier.maxHealth);
+		stat.moveSpeed.RemoveModifier(statModifier.moveSpeed);
+		stat.attackDamage.RemoveModifier(statModifier.attackDamage);
+		stat.attackRange.RemoveModifier(statModifier.attackRange);
+		stat.itemAttractionRange.RemoveModifier(statModifier.itemAttractionRange);
+		stat.armor.RemoveModifier(statModifier.armor);
+
 		listUpdateStat.Remove(statModifier);
 		UpdateModel();
 	}

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.StateMachine;
@@ -66,7 +68,7 @@ public class Monster : ObjectRPG
 	#endregion
 
 	public float size;
-	public Character target => gameController.character; 
+	public Character target => gameController.character;
 
 	public MapView.WaveData wave { get; private set; }
 
@@ -76,24 +78,18 @@ public class Monster : ObjectRPG
 
 	protected Vector3 moveTarget;
 
-    protected float moveSpeedDecreaseAmount;
+	public List<MonsterUpdateStat> listUpdateStat = new List<MonsterUpdateStat>();
 
- 
+	#endregion
 
-    protected Cooldown moveSpeedCooldown = new Cooldown();
+	#region Base Methods
 
-    protected float moveSpeedCooldownTime = 3f;
-
-    #endregion
-
-    #region Base Methods
-
-    public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave, ItemPrefab monsType)
+	public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave, ItemPrefab monsType)
 	{
 		stat = monsterStat;
 		model = new MonsterModel(
 			stat.moveSpeed.BaseValue,
-			stat.health.BaseValue,
+			stat.maxHealth.BaseValue,
 			stat.attackDamage.BaseValue,
 			stat.attackSpeed.BaseValue,
 			wave.expMonster);
@@ -110,6 +106,7 @@ public class Monster : ObjectRPG
 		var time = Time.deltaTime;
 		cdAttack.Update(time);
 		_stateMachine.currentState.LogicUpdate(time);
+		HandleUpdateStat(time);
 	}
 
 	private void FixedUpdate()
@@ -134,13 +131,14 @@ public class Monster : ObjectRPG
 		{
 			if(cdAttack.isFinished)
 			{
-				AttackState();			
+				AttackState();
 				cdAttack.Restart(1 / model.attackSpeed);
 				animator.SetBool("Attack", true);
-			} else
+			}
+			else
 			{
-                animator.SetBool("Attack", false);
-            }
+				animator.SetBool("Attack", false);
+			}
 		}
 		else if(moveDirection.magnitude > 25)
 		{
@@ -153,18 +151,16 @@ public class Monster : ObjectRPG
 		SetAnimation(idleDirection);
 	}
 
-	
-
 	protected virtual void SetAnimation(Vector2 directionMove)
 	{
 		animator.SetFloat("SpeedMul", speedMul);
 		animator.SetFloat("Horizontal", directionMove.x);
 		animator.SetFloat("Vertical", directionMove.y);
-    }
-    public virtual void Attack()
+	}
+	public virtual void Attack()
 	{
-        target.TakeDamage(model.attackDamage);
-    }
+		target.TakeDamage(model.attackDamage);
+	}
 
 	public void TakeDamage(float damage, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
 	{
@@ -174,21 +170,21 @@ public class Monster : ObjectRPG
 		var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
 		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.TowerDamage, isCritical);
 
-        if (isAlive)
+		if(isAlive)
 			return;
 		Die();
 		callBackKilled?.Invoke();
-    }
+	}
 
 	public virtual void Move(Vector2 dir, float deltaTime)
 	{
-        var movement = model.moveSpeed * GameConst.MOVE_SPEED_ANIMATION_RATIO * deltaTime * speedMul * dir;
-        var newPosition = myRigid.position + movement;
-        myRigid.MovePosition(newPosition);
-    }
+		var movement = model.moveSpeed * GameConst.MOVE_SPEED_ANIMATION_RATIO * deltaTime * speedMul * dir;
+		var newPosition = myRigid.position + movement;
+		myRigid.MovePosition(newPosition);
+	}
 
 
-    public virtual void Die(bool selfDie = false)
+	public virtual void Die(bool selfDie = false)
 	{
 		gameController.MonsterDie(this, selfDie);
 	}
@@ -200,8 +196,53 @@ public class Monster : ObjectRPG
 
 	public void ResetWhenDie()
 	{
-		
+
 	}
+
+	public void UpdateStat(StatModifierType typeStat, int maxH, float ms, int ad, int attackSpeed, float duration)
+	{
+		var updateStat = new MonsterUpdateStat(typeStat, maxH, ms, ad, attackSpeed, duration);
+
+		stat.maxHealth.AddModifier(updateStat.maxHealth);
+		stat.moveSpeed.AddModifier(updateStat.moveSpeed);
+		stat.attackDamage.AddModifier(updateStat.attackDamage);
+		stat.attackRange.AddModifier(updateStat.attackSpeed);
+
+		listUpdateStat.Add(updateStat);
+		UpdateModel();
+	}
+
+	private void RemoveStat(MonsterUpdateStat statModifier)
+	{
+		stat.maxHealth.RemoveModifier(statModifier.maxHealth);
+		stat.moveSpeed.RemoveModifier(statModifier.moveSpeed);
+		stat.attackDamage.RemoveModifier(statModifier.attackDamage);
+		stat.attackRange.RemoveModifier(statModifier.attackSpeed);
+
+		listUpdateStat.Remove(statModifier);
+		UpdateModel();
+	}
+
+	private void UpdateModel()
+	{
+		model.maxHealthPoint = stat.maxHealth.Value;
+		model.moveSpeed = stat.moveSpeed.Value;
+		model.attackDamage = stat.attackDamage.Value;
+		model.attackSpeed = stat.attackSpeed.Value;
+	}
+
+	private void HandleUpdateStat(float deltaTime)
+	{
+		foreach(var item in listUpdateStat.ToList())
+		{
+			item.cdTime.Update(deltaTime);
+			if(item.cdTime.isFinished)
+			{
+				RemoveStat(item);
+			}
+		}
+	}
+
 
 	private void OnDrawGizmosSelected()
 	{
@@ -209,7 +250,7 @@ public class Monster : ObjectRPG
 	}
 
 	#region State Machine Method
-	
+
 	protected virtual void InitializationStateMachine()
 	{
 		if(_stateMachine != null)
@@ -241,20 +282,20 @@ public class Monster : ObjectRPG
 	public void AttackState()
 	{
 		if(isAttack) return;
-		_stateMachine.ChangeState(_attackState);	
+		_stateMachine.ChangeState(_attackState);
 	}
 
-    #endregion
+	#endregion
 
-    public void UpdateStats(float amount)
-    {
+	public void UpdateStats(float amount)
+	{
 
-        model.moveSpeed = amount; 
-        if (model.moveSpeed < 0.1f)
-        {
-            model.moveSpeed = 0.1f; 
-        }
-    }
+		model.moveSpeed = amount;
+		if(model.moveSpeed < 0.1f)
+		{
+			model.moveSpeed = 0.1f;
+		}
+	}
 
 
 }
