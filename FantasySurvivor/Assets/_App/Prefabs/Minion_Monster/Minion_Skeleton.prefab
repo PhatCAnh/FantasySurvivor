@@ -141,11 +141,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3baee317a03089b46a2f32138d3de842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 9
+  type: 10
   myRigid: {fileID: 5322406464849481447}
   animator: {fileID: 7242010948659581762}
   firePoint: {fileID: 2695068309090979061}
   justSpawnVertical: 0
+  isDead: 0
+  isNoMove: 0
   size: 0
 --- !u!1 &8445857744007758466
 GameObject:

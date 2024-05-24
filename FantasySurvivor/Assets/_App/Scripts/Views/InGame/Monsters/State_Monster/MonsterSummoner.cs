@@ -3,6 +3,7 @@ using ArbanFramework;
 using FantasySurvivor;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class MonsterSummoner : Monster
@@ -14,6 +15,39 @@ public class MonsterSummoner : Monster
     private float range = 2f;
 
 
+
+    protected override void HandlePhysicUpdate()
+    {
+        if (isDead) return;
+
+        moveTarget = gameController.character.transform.position;
+        moveDirection = moveTarget - transform.position;
+
+        if (moveDirection.magnitude < sizeAttack || !cdAttack.isFinished)
+        {
+            if (cdAttack.isFinished)
+            {
+                animator.SetBool("Attack", true);
+                AttackState();
+                cdAttack.Restart(1 / model.attackSpeed);
+                IdleState();
+            }
+            else
+            {
+                IdleState();
+                animator.SetBool("Attack", false);
+            }
+        }
+        else if (moveDirection.magnitude > 25)
+        {
+            transform.position = gameController.RandomPositionSpawnMonster(20);
+        }
+        else
+        {
+            MoveState();
+        }
+        SetAnimation(idleDirection);
+    }
 
     public override void Attack()
     {
@@ -27,5 +61,5 @@ public class MonsterSummoner : Monster
             mob.transform.position = randomPosition;
         }
     }
- 
+
 }
