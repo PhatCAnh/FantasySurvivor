@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f999cc0f5ed74375b6f14d94d9638f2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 6
+  type: 7
   myRigid: {fileID: 6416496041919007720}
   animator: {fileID: 4589075905217086081}
   firePoint: {fileID: 5239373447629045049}
@@ -163,7 +163,7 @@ MonoBehaviour:
   isNoMove: 0
   size: 0.5
   bulletPrefab: {fileID: 4128420622295471649, guid: bfd583f73e63fa0439dd8ee8775546e8, type: 3}
-  typeBullet: 17
+  typeBullet: 28
   _numberBack: 0
 --- !u!58 &2381421882778776729
 CircleCollider2D:

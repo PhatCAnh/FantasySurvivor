@@ -23,7 +23,7 @@ public enum ItemPrefab
 	EarthPunch,
 	SkyBoom,
 	Boomerang,
-	SwampOoze = 9,
+	SwampOoze,
 	MinionSkeleton,
 	HealthBar,
 	Character,
