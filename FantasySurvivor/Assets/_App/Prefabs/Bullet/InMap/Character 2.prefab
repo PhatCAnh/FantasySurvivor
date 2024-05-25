@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e6fee6bf5a9e6a45989d9828649a478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 10
+  type: -1
   circleAttackRange: {fileID: 5974482344180942779}
   asd: 5
   b: 0
@@ -57,6 +57,7 @@ MonoBehaviour:
   sizeBase: 0.5
   myRigid: {fileID: 9002796302552243306}
   animator: {fileID: 9168551400482943207}
+  listSkillDataCurrents: []
 --- !u!70 &2306783371579253258
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

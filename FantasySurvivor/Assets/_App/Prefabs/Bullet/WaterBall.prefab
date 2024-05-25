@@ -154,7 +154,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7180547673905776513
 Transform:
   m_ObjectHideFlags: 0
@@ -186,7 +186,8 @@ MonoBehaviour:
   target: {fileID: 0}
   size: 0.55
   skillDamagedType: 0
-  type: 0
+  targetType: 1
+  type: 12
   skin: {fileID: 669353385597686255}
   targetType: 1
   canBlock: 1

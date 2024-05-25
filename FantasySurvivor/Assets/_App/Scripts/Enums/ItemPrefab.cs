@@ -3,16 +3,16 @@ using UnityEngine;
 using UnityEngine.Serialization;
 public enum ItemPrefab
 {
-	Undefined = -1,
-	BlueZombie = 0,
-	PurpleZombie = 1,
-	BlueGhost = 2,
-	YellowBomb = 3,
-	LupineStag = 4,
-	KillerBee = 5,
-	GlobloomSentry = 6,
-	ElectroBomber = 7,
-	SlimeWandering = 8,
+	Undefined,
+	BlueZombie,
+	PurpleZombie,
+	BlueGhost,
+	YellowBomb,
+	LupineStag,
+	KillerBee,
+	GlobloomSentry,
+	ElectroBomber,
+	SlimeWandering,
 	SkillFireBall,
 	ThunderStrikeSmall,
 	ThunderStrike,
@@ -44,25 +44,18 @@ public enum MapType
 
 public enum MonsterType
 {
-	PurpleDevil = 4,
-    BlueZombie = 0,
-    PurpleZombie = 1,
-    BlueGhost = 2,
-    YellowBomb = 3,
-    LupineStag = 4,
-    KillerBee = 5,
-    GlobloomSentry = 6,
-    ElectroBomber = 7,
-    SlimeWandering = 8,
-    SwampOoze = 9,
+	PurpleDevil,
+    BlueZombie,
+    PurpleZombie,
+    BlueGhost,
+    YellowBomb,
+    LupineStag,
+    KillerBee,
+    GlobloomSentry,
+    ElectroBomber,
+    SlimeWandering,
+    SwampOoze,
     MinionSkeleton,
-}
-
-public enum TowerType
-{
-	Basic = 0,
-	Speed = 1,
-	Tank = 2,
 }
 
 public enum TextPopupType
@@ -117,20 +110,7 @@ public enum SkillName
 	Earthpunch,
 	SkyBoom,
 	Boomerang,
-	/* ThunderBird,*/
-	/*Shark,
-	Twin,
-	ZoneOfJudgment,
-	BlackDrum,
-	Passive1,
-	*/
     SmilingFace,
-    /*
-    Twin,
-    ZoneOfJudgment,
-    BlackDrum,
-    Passive1,
-    */
 }
 
 public enum SkillType
