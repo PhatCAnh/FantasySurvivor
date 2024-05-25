@@ -1,11 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.StateMachine;
 using FantasySurvivor;
+using Unity.Mathematics;
 using Unity.Services.Analytics.Internal;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class Monster : ObjectRPG
@@ -20,9 +23,9 @@ public class Monster : ObjectRPG
 
 	public bool justSpawnVertical = false;
 
-	#region Properties
+    #region Properties
 
-	private Vector2 _direction = Vector2.zero;
+    private Vector2 _direction = Vector2.zero;
 
 	public MonsterModel model { get; protected set; }
 
@@ -56,7 +59,13 @@ public class Monster : ObjectRPG
 
 	public bool isAlive => model.currentHealthPoint > 0;
 
-	private StateMachine _stateMachine;
+    public bool isDead;
+
+	public bool isNoMove = false;
+
+	public bool isStandStill { get; private set; } = false;
+
+    private StateMachine _stateMachine;
 	private GameController gameController => Singleton<GameController>.instance;
 
 	private MonsterIdle _idleState;
@@ -65,10 +74,11 @@ public class Monster : ObjectRPG
 
 	private MonsterAttack _attackState;
 
-	#endregion
+    #endregion
 
 	public float size;
 	public Character target => gameController.character;
+
 
 	public MapView.WaveData wave { get; private set; }
 
@@ -83,24 +93,33 @@ public class Monster : ObjectRPG
 	#endregion
 
 	#region Base Methods
+    protected Cooldown moveSpeedCooldown = new Cooldown();
 
 	public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave, ItemPrefab monsType)
 	{
 		stat = monsterStat;
-		model = new MonsterModel(
+
+		var exp = 0;
+
+		if(wave != null)
+		{
+            this.wave = wave;
+			exp = wave.expMonster;
+        }
+
+        model = new MonsterModel(
 			stat.moveSpeed.BaseValue,
 			stat.maxHealth.BaseValue,
 			stat.attackDamage.BaseValue,
 			stat.attackSpeed.BaseValue,
-			wave.expMonster);
-		this.wave = wave;
-		type = monsType;
+			exp);
 		sizeAttack = stat.attackRange.BaseValue != 0 ? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
 
-		InitializationStateMachine();
+        InitializationStateMachine();
+
 	}
 
-	private void Update()
+    private void Update()
 	{
 		if(gameController.isStop) return;
 		var time = Time.deltaTime;
@@ -124,6 +143,7 @@ public class Monster : ObjectRPG
 
 	protected virtual void HandlePhysicUpdate()
 	{
+		if(isDead) return;
 		moveTarget = gameController.character.transform.position;
 		moveDirection = moveTarget - transform.position;
 
@@ -131,12 +151,13 @@ public class Monster : ObjectRPG
 		{
 			if(cdAttack.isFinished)
 			{
+				animator.SetBool("Attack", true);
 				AttackState();
 				cdAttack.Restart(1 / model.attackSpeed);
-				animator.SetBool("Attack", true);
 			}
 			else
 			{
+				IdleState();
 				animator.SetBool("Attack", false);
 			}
 		}
@@ -147,9 +168,10 @@ public class Monster : ObjectRPG
 		else
 		{
 			MoveState();
+			animator.SetBool("Attack", false);
 		}
-		SetAnimation(idleDirection);
 	}
+
 
 	protected virtual void SetAnimation(Vector2 directionMove)
 	{
@@ -162,32 +184,40 @@ public class Monster : ObjectRPG
 		target.TakeDamage(model.attackDamage);
 	}
 
-	public void TakeDamage(float damage, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
+
+	public virtual void TakeDamage(float damage, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
 	{
-		if(!isAlive) return;
+        if (!isAlive) return;
 		model.currentHealthPoint -= damage;
 		callBackDamaged?.Invoke();
+
 		var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
 		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.TowerDamage, isCritical);
 
-		if(isAlive)
-			return;
+        if (isAlive) return;
 		Die();
-		callBackKilled?.Invoke();
-	}
+        callBackKilled?.Invoke();
+    }
 
-	public virtual void Move(Vector2 dir, float deltaTime)
+    public void ResetAttackCountdown()
+    {
+        cdAttack.Restart(model.attackSpeed);
+    }
+
+    public virtual void Move(Vector2 dir, float deltaTime)
 	{
 		var movement = model.moveSpeed * GameConst.MOVE_SPEED_ANIMATION_RATIO * deltaTime * speedMul * dir;
 		var newPosition = myRigid.position + movement;
 		myRigid.MovePosition(newPosition);
 	}
 
-
-	public virtual void Die(bool selfDie = false)
+    
+    public virtual void Die(bool selfDie = false)
 	{
-		gameController.MonsterDie(this, selfDie);
-	}
+        isDead = true;
+        animator.SetBool("Dead", isDead);
+        gameController.MonsterDie(this, selfDie);
+    }
 
 	protected virtual void Stop()
 	{
@@ -242,8 +272,6 @@ public class Monster : ObjectRPG
 			}
 		}
 	}
-
-
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.DrawWireSphere(transform.position, size);
@@ -251,7 +279,25 @@ public class Monster : ObjectRPG
 
 	#region State Machine Method
 
-	protected virtual void InitializationStateMachine()
+    public virtual void flip()
+    {
+		if (isNoMove) return;
+		
+        if (transform.position.x > gameController.character.transform.position.x)
+        {
+            Vector2 localScale = animator.transform.localScale;
+            localScale.x = -1;
+            animator.transform.localScale = localScale;
+        }
+        else
+        {
+            Vector2 localScale = animator.transform.localScale;
+            localScale.x = 1;
+            animator.transform.localScale = localScale;
+        }
+    }
+
+    protected virtual void InitializationStateMachine()
 	{
 		if(_stateMachine != null)
 		{
@@ -259,7 +305,7 @@ public class Monster : ObjectRPG
 		}
 		else
 		{
-			_stateMachine = new StateMachine();
+            _stateMachine = new StateMachine();
 			_idleState = new MonsterIdle(this, _stateMachine);
 			_moveState = new MonsterMove(this, _stateMachine);
 			_attackState = new MonsterAttack(this, _stateMachine);
@@ -267,20 +313,22 @@ public class Monster : ObjectRPG
 		}
 	}
 
-	public virtual void IdleState()
+    public virtual void IdleState()
 	{
 		if(isIdle) return;
 		_stateMachine.ChangeState(_idleState);
 	}
 
-	public void MoveState()
+	public virtual void MoveState()
 	{
+		flip();
 		if(isMove) return;
-		_stateMachine.ChangeState(_moveState);
+        _stateMachine.ChangeState(_moveState);
 	}
 
-	public void AttackState()
+	public virtual void AttackState()
 	{
+		flip();
 		if(isAttack) return;
 		_stateMachine.ChangeState(_attackState);
 	}
@@ -296,6 +344,4 @@ public class Monster : ObjectRPG
 			model.moveSpeed = 0.1f;
 		}
 	}
-
-
 }

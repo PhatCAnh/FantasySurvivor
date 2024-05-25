@@ -31,6 +31,8 @@ public class MonsterWandering : Monster
 
     protected override void HandlePhysicUpdate()
     {
+        if (isDead) return;
+
         moveTarget = gameController.character.transform.position;
         moveDirection = moveTarget - transform.position;
 
@@ -74,7 +76,6 @@ public class MonsterWandering : Monster
         base.Die(selfDie);
         dieCountdown = initialDieCountdown;
     }
-
 
     void SetNewDestination()
     {

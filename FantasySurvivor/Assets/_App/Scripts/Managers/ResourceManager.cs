@@ -88,6 +88,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _yellowBomb;
 
 	[SerializeField] private GameObject _purpleDevil;
+	
+	[SerializeField] private GameObject _lupineStag;
 
     [SerializeField] private GameObject _killerBee;
 
@@ -96,6 +98,10 @@ public class ResourceManager : UIManagerBase<PopupType>
     [SerializeField] private GameObject _electroBomber;
 
     [SerializeField] private GameObject _slimeWandering;
+
+    [SerializeField] private GameObject _minionSkeleton;
+
+    [SerializeField] private GameObject _swampOoze;
 
     private Dictionary<string, GameObject> _typeMonsterDic;
 
@@ -151,11 +157,13 @@ public class ResourceManager : UIManagerBase<PopupType>
             {ItemPrefab.PurpleZombie, _purpleZombie},
             {ItemPrefab.BlueGhost, _blueGhost},
 			{ItemPrefab.YellowBomb, _yellowBomb},
-			{ItemPrefab.PurpleDevil, _purpleDevil},
+			{ItemPrefab.LupineStag, _lupineStag},
 			{ItemPrefab.KillerBee, _killerBee},
             {ItemPrefab.GlobloomSentry, _globloomSentry},
 			{ItemPrefab.ElectroBomber, _electroBomber},
             {ItemPrefab.SlimeWandering, _slimeWandering},
+			{ItemPrefab.MinionSkeleton, _minionSkeleton},
+			{ItemPrefab.SwampOoze, _swampOoze},
             {ItemPrefab.SupportItem, _supportItem},
 			{ItemPrefab.BulletKillerBee, _bulletKillerBee},
 			{ItemPrefab.SkillFireBall, _skillFireBall},
@@ -182,10 +190,13 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{"M2", _purpleZombie},
 			{"M3", _blueGhost},
 			{"M4", _yellowBomb},
-			{"M5", _purpleDevil},
+			{"M5", _lupineStag},
             {"M6", _killerBee},
             {"M7", _globloomSentry},
-			{"M8", _electroBomber},            
+			{"M8", _electroBomber},
+			{"M9", _slimeWandering},
+			{"M10", _swampOoze},
+			{"Skeleton", _minionSkeleton},
         };
 
 		_typeItemReward = new Dictionary<TypeItemReward, ItemReward>()

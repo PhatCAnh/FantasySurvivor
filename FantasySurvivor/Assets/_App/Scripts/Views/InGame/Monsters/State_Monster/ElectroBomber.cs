@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class ElectroBomber : Monster
 {
-
-    [SerializeField] private GameObject _deadEffect;
-
     public override void Attack()
     {
         base.Attack();
@@ -17,6 +14,5 @@ public class ElectroBomber : Monster
     public override void Die(bool selfDie = false)
     {
         base.Die(selfDie);
-        Instantiate(_deadEffect, transform.position, quaternion.identity);
     }
 }

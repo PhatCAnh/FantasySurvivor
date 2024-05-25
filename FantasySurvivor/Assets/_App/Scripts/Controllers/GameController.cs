@@ -149,10 +149,9 @@ public class GameController : Controller<GameApp>
 	{
 		Singleton<PoolController>.instance.RemoveAllPool();
 	}
-
-	public Monster SpawnMonster(MapView.WaveData wave)
+    public Monster SpawnMonster(MapView.WaveData wave)
 	{
-		var statMonster = app.configs.dataStatMonster.GetConfig(wave.idMonster);
+        var statMonster = app.configs.dataStatMonster.GetConfig(wave.idMonster);
 
 		var monsterStat = new MonsterStat(statMonster.moveSpeed, wave.healthMonster, wave.adMonster, statMonster.attackSpeed, statMonster.attackRange, wave.expMonster);
 
@@ -160,13 +159,34 @@ public class GameController : Controller<GameApp>
 
 		Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
 
-		//var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
-		monster.Init(monsterStat, wave, type);
+        //var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
 
-		listMonster.Add(monster);
+        monster.Init(monsterStat, wave, type);
+		monster.ResetAttackCountdown();
+		monster.isDead = false;
+		monster.animator.SetBool("Dead", false);
+        listMonster.Add(monster);
 
-		return monster;
+        return monster;
 	}
+
+	public Monster SpawnMonster(string id, int health, int attackDamage)
+	{
+        var statMonster = app.configs.dataStatMonster.GetConfig(id);
+        var monsterStat = new MonsterStat(statMonster.moveSpeed, health, attackDamage, statMonster.attackSpeed, statMonster.attackRange);
+        var type = (ItemPrefab)Enum.Parse(typeof(ItemPrefab), statMonster.monsterType);
+        Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
+
+        monster.Init(monsterStat, null, type);
+
+		monster.ResetAttackCountdown();
+        monster.isDead = false;
+        monster.animator.SetBool("Dead", false);
+
+        listMonster.Add(monster);
+        return monster;
+	}	
+
 	public void MonsterDie(Monster mons, bool selfDie = false)
 	{
 		if(!selfDie)
@@ -177,12 +197,27 @@ public class GameController : Controller<GameApp>
 		}
 
 		listMonster.Remove(mons);
-		mons.wave.monsterInWave.Remove(mons);
-		Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
+		if(mons.wave != null)
+		{
+            mons.wave.monsterInWave.Remove(mons);
+        }
+
+        //Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
 		//Destroy(mons.gameObject);
 	}
+    public void MonsterDestroy(Monster mons)
+	{
+        listMonster.Remove(mons);
+        if (mons.wave != null)
+        {
+            mons.wave.monsterInWave.Remove(mons);
+        }
+        Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
+    }
 
-	public void KillAllMonster()
+
+
+    public void KillAllMonster()
 	{
 		foreach(var mob in listMonster.ToList())
 		{
