@@ -29,7 +29,10 @@ public class GameController : Controller<GameApp>
 
 	private HealthBar _healthBar;
 
-	private Vector3 _camSize;
+    private int _limitSkill = 2;
+    public int currentSkill = 0;
+
+    private Vector3 _camSize;
 	private float _width;
 	private float _height;
 
@@ -97,6 +100,15 @@ public class GameController : Controller<GameApp>
 		{
 			callback?.Invoke();
 		};
+	}
+
+	public void CheckExistSkill()
+	{
+		currentSkill++;
+		if(currentSkill == _limitSkill)
+		{
+			map.listSkill = character.listSkillDataCurrents;
+		}
 	}
 
 	public void ChangeSceneHome()
