@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using _App.Scripts.Controllers;
@@ -149,8 +149,11 @@ public class Character : ObjectRPG
 		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
 		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.MonsterDamage);
 
-		if(!IsAlive) Die();
-	}
+        if (!IsAlive)
+        {
+            Die();
+        }
+    }
 
 
 	public void AddHealth(float value)
@@ -379,7 +382,8 @@ public class Character : ObjectRPG
 		return model.currentHealthPoint < model.maxHealthPoint;
 	}
 
-	private void OnDrawGizmosSelected()
+
+    private void OnDrawGizmosSelected()
 	{
 		Gizmos.DrawWireSphere(transform.position, sizeBase);
 		Gizmos.DrawWireSphere(transform.position, abc);

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework.MVC;
 using UnityEngine;
@@ -35,12 +35,12 @@ public class CharacterModel : Model<GameApp>
 
     private float _attackRange;
 
-    private int _armor;
+    
+	private int _armor;
     private bool _isHealing;
-    private float _healingCooldown = 6f;
+    private float _healingCooldown = 4f; 
     private float _healingTimer;
     private float _healingRate = 0.05f;
-
 
     public float moveSpeed
     {

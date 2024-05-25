@@ -58,7 +58,12 @@ public class TextPopup : MonoBehaviour
 				_textMesh.color = new Color(0.8207547f, 0, 0.007291546f);
 				_textMesh.fontSize = 7.5f;
 				break;
-		}
+            case TextPopupType.Healing: // Thêm x? lý cho lo?i Healing
+                textValue = "+" + value; // Thêm d?u "+" tr??c giá tr? ?? bi?u th? là h?i máu
+                _textMesh.color = new Color(0, 1, 0); // Màu xanh lá cây cho hi?n th? h?i máu
+                _textMesh.fontSize = 7.5f; // Có th? ?i?u ch?nh kích th??c font cho phù h?p
+                break;
+        }
 		
 		Setup(textValue);
 	}
