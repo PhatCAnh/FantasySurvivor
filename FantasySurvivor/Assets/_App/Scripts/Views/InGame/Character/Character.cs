@@ -215,6 +215,9 @@ public class Character : ObjectRPG
 					case SkillName.Boomerang:
 						skillIns = new Boomerangl();
 						break;
+					case SkillName.SmilingFace:
+						skillIns = new SmilingFacel();
+						break;
 					default:
 						skillIns = new ProactiveSkill();
 						break;

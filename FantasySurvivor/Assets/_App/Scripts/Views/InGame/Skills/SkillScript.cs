@@ -164,9 +164,15 @@ namespace FantasySurvivor
 			timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
 		}
 	}
+	public class SmilingFacel : ProactiveSkill
+    {
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+        }
+    }
 
-
-	public class Boomerangl : ProactiveSkill
+    public class Boomerangl : ProactiveSkill
     {
         public override void Init(SkillData data)
         {
