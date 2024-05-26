@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6642652176968535675}
   - component: {fileID: 1025375935730607505}
   - component: {fileID: 135679078391123124}
-  - component: {fileID: -5552881832965953998}
   m_Layer: 8
   m_Name: KillerBee
   m_TagString: Untagged
@@ -33,7 +32,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2009686161638854152}
-  - {fileID: 3920175741890169233}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1025375935730607505
@@ -82,45 +80,10 @@ MonoBehaviour:
   justSpawnVertical: 0
   isDead: 0
   isNoMove: 0
-  size: 0.7
+  size: 0.5
   bulletPrefab: {fileID: 4128420622295471649, guid: 21f0e3c66e7be4643873bca51dcbc84d, type: 3}
   typeBullet: 27
   _numberBack: 0
---- !u!58 &-5552881832965953998
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48425990686245726}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.7
 --- !u!1 &3312106001170155161
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,6 +95,7 @@ GameObject:
   - component: {fileID: 2009686161638854152}
   - component: {fileID: 1502734508865474078}
   - component: {fileID: 8463392241125044750}
+  - component: {fileID: 8133045444054412213}
   m_Layer: 0
   m_Name: Skin
   m_TagString: Untagged
@@ -151,7 +115,8 @@ Transform:
   m_LocalPosition: {x: -0, y: -0.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3920175741890169233}
   m_Father: {fileID: 6642652176968535675}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1502734508865474078
@@ -195,7 +160,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: cac076f7853cbdb4c9feb73892a4eff8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 978807ac3af621249b8e63adde7473e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -227,6 +192,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8133045444054412213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312106001170155161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164a3ae04c0b8e149b58a5d26bf775c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4458254274867305023
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,10 +228,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4458254274867305023}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.03, y: -0.63, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.24999997, y: -0.5099998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6642652176968535675}
+  m_Father: {fileID: 2009686161638854152}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
