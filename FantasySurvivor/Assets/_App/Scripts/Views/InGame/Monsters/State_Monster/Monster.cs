@@ -170,7 +170,8 @@ public class Monster : ObjectRPG
 			MoveState();
 			animator.SetBool("Attack", false);
 		}
-	}
+        SetAnimation(idleDirection);
+    }
 
 
 	protected virtual void SetAnimation(Vector2 directionMove)
