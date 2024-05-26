@@ -4,16 +4,20 @@ using UnityEngine.Serialization;
 public enum ItemPrefab
 {
 	Undefined,
-	BlueZombie,
-	PurpleZombie,
-	BlueGhost,
-	YellowBomb,
-	LupineStag,
-	KillerBee,
-	GlobloomSentry,
-	ElectroBomber,
+
+    SwampOoze,
+    KillerBee,
+    GlobloomSentry,
+    LupineStag,
+    ElectroBomber,
 	SlimeWandering,
-	SkillFireBall,
+
+    MinionSkeleton,
+
+    BulletKillerBee,
+    BulletGlobloomSentry,
+
+    SkillFireBall,
 	ThunderStrikeSmall,
 	ThunderStrike,
 	SkillWaterBall,
@@ -23,15 +27,12 @@ public enum ItemPrefab
 	EarthPunch,
 	SkyBoom,
 	Boomerang,
-	SwampOoze,
-	MinionSkeleton,
+
 	HealthBar,
 	Character,
 	TextPopup,
 	GemExp,
 	SupportItem,
-	BulletKillerBee,
-	BulletGlobloomSentry,
 	SmilingFace,
 }
 
@@ -44,18 +45,7 @@ public enum MapType
 
 public enum MonsterType
 {
-	PurpleDevil,
-    BlueZombie,
-    PurpleZombie,
-    BlueGhost,
-    YellowBomb,
-    LupineStag,
-    KillerBee,
-    GlobloomSentry,
-    ElectroBomber,
-    SlimeWandering,
-    SwampOoze,
-    MinionSkeleton,
+	
 }
 
 public enum TextPopupType

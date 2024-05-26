@@ -81,21 +81,14 @@ public class ResourceManager : UIManagerBase<PopupType>
 	private Dictionary<MapType, Map> _mapDic;
 
 	[Header("Monster prefabs")]
-	[SerializeField] private GameObject _blueZombie;
 
-	[SerializeField] private GameObject _purpleZombie;
-
-	[SerializeField] private GameObject _blueGhost;
-
-	[SerializeField] private GameObject _yellowBomb;
-
-	[SerializeField] private GameObject _purpleDevil;
-	
-	[SerializeField] private GameObject _lupineStag;
+    [SerializeField] private GameObject _swampOoze;
 
     [SerializeField] private GameObject _killerBee;
 
     [SerializeField] private GameObject _globloomSentry;
+
+    [SerializeField] private GameObject _lupineStag;
 
     [SerializeField] private GameObject _electroBomber;
 
@@ -103,7 +96,6 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     [SerializeField] private GameObject _minionSkeleton;
 
-    [SerializeField] private GameObject _swampOoze;
 
     private Dictionary<string, GameObject> _typeMonsterDic;
 
@@ -155,23 +147,23 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.Character, _characterPrefab},
 			{ItemPrefab.TextPopup, _textPopup},
 			{ItemPrefab.GemExp, _gemExpPrefab},
-			{ItemPrefab.BlueZombie, _blueZombie},
-            {ItemPrefab.PurpleZombie, _purpleZombie},
-            {ItemPrefab.BlueGhost, _blueGhost},
-			{ItemPrefab.YellowBomb, _yellowBomb},
-			{ItemPrefab.LupineStag, _lupineStag},
-			{ItemPrefab.KillerBee, _killerBee},
+
+            {ItemPrefab.SwampOoze, _swampOoze},
+            {ItemPrefab.KillerBee, _killerBee},
             {ItemPrefab.GlobloomSentry, _globloomSentry},
+            {ItemPrefab.LupineStag, _lupineStag},
 			{ItemPrefab.ElectroBomber, _electroBomber},
             {ItemPrefab.SlimeWandering, _slimeWandering},
 			{ItemPrefab.MinionSkeleton, _minionSkeleton},
-			{ItemPrefab.SwampOoze, _swampOoze},
+
+            {ItemPrefab.BulletKillerBee, _bulletKillerBee},
+            {ItemPrefab.BulletGlobloomSentry, _bulletGlobloomSentry},
+
             {ItemPrefab.SupportItem, _supportItem},
-			{ItemPrefab.BulletKillerBee, _bulletKillerBee},
+			
 			{ItemPrefab.SkillFireBall, _skillFireBall},
 			{ItemPrefab.ThunderStrike, _skillThunderStrike},
 			{ItemPrefab.ThunderStrikeSmall, _skillThunderStrikeSmall},
-            {ItemPrefab.BulletGlobloomSentry, _bulletGlobloomSentry},
             {ItemPrefab.SkillWaterBall, _skillWaterBall},
 			{ItemPrefab.FireShield, _skillFireShield},
 			{ItemPrefab.Shark,_skillShark },
@@ -189,16 +181,11 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 		_typeMonsterDic = new Dictionary<string, GameObject>
 		{
-			{"M1", _blueZombie},
-			{"M2", _purpleZombie},
-			{"M3", _blueGhost},
-			{"M4", _yellowBomb},
-			{"M5", _lupineStag},
-            {"M6", _killerBee},
-            {"M7", _globloomSentry},
-			{"M8", _electroBomber},
-			{"M9", _slimeWandering},
-			{"M10", _swampOoze},
+			{"M1", _swampOoze},
+			{"M2", _killerBee},
+			{"M3", _globloomSentry},
+			{"M4", _lupineStag},
+			{"M6", _slimeWandering},
 			{"Skeleton", _minionSkeleton},
         };
 
