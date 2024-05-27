@@ -96,6 +96,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     [SerializeField] private GameObject _minionSkeleton;
 
+    [SerializeField] private GameObject _minionWolf;
+
 
     private Dictionary<string, GameObject> _typeMonsterDic;
 
@@ -155,6 +157,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.ElectroBomber, _electroBomber},
             {ItemPrefab.SlimeWandering, _slimeWandering},
 			{ItemPrefab.MinionSkeleton, _minionSkeleton},
+            {ItemPrefab.MinionWolf, _minionWolf},
 
             {ItemPrefab.BulletKillerBee, _bulletKillerBee},
             {ItemPrefab.BulletGlobloomSentry, _bulletGlobloomSentry},
@@ -186,7 +189,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{"M3", _globloomSentry},
 			{"M4", _lupineStag},
 			{"M6", _slimeWandering},
-			{"Skeleton", _minionSkeleton},
+            {"Skeleton", _minionSkeleton},
+            {"Wolf", _minionWolf},
         };
 
 		_typeItemReward = new Dictionary<TypeItemReward, ItemReward>()

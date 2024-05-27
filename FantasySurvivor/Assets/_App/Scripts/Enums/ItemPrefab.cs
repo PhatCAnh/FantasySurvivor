@@ -13,6 +13,7 @@ public enum ItemPrefab
 	SlimeWandering,
 
     MinionSkeleton,
+	MinionWolf,
 
     BulletKillerBee,
     BulletGlobloomSentry,
