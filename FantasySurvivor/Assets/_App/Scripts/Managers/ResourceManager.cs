@@ -94,6 +94,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     [SerializeField] private GameObject _slimeWandering;
 
+    [SerializeField] private GameObject _owlStriker;
+
     [SerializeField] private GameObject _minionSkeleton;
 
     [SerializeField] private GameObject _minionWolf;
@@ -150,31 +152,33 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.TextPopup, _textPopup},
 			{ItemPrefab.GemExp, _gemExpPrefab},
 
-            {ItemPrefab.SwampOoze, _swampOoze},
-            {ItemPrefab.KillerBee, _killerBee},
-            {ItemPrefab.GlobloomSentry, _globloomSentry},
-            {ItemPrefab.LupineStag, _lupineStag},
+			{ItemPrefab.SwampOoze, _swampOoze},
+			{ItemPrefab.KillerBee, _killerBee},
+			{ItemPrefab.GlobloomSentry, _globloomSentry},
+			{ItemPrefab.LupineStag, _lupineStag},
 			{ItemPrefab.ElectroBomber, _electroBomber},
-            {ItemPrefab.SlimeWandering, _slimeWandering},
+			{ItemPrefab.SlimeWandering, _slimeWandering},
 			{ItemPrefab.MinionSkeleton, _minionSkeleton},
-            {ItemPrefab.MinionWolf, _minionWolf},
+			{ItemPrefab.MinionWolf, _minionWolf},
 
-            {ItemPrefab.BulletKillerBee, _bulletKillerBee},
-            {ItemPrefab.BulletGlobloomSentry, _bulletGlobloomSentry},
+			{ItemPrefab.BulletKillerBee, _bulletKillerBee},
+			{ItemPrefab.BulletGlobloomSentry, _bulletGlobloomSentry},
 
-            {ItemPrefab.SupportItem, _supportItem},
-			
+			{ItemPrefab.SupportItem, _supportItem},
+
 			{ItemPrefab.SkillFireBall, _skillFireBall},
 			{ItemPrefab.ThunderStrike, _skillThunderStrike},
 			{ItemPrefab.ThunderStrikeSmall, _skillThunderStrikeSmall},
-            {ItemPrefab.SkillWaterBall, _skillWaterBall},
+			{ItemPrefab.SkillWaterBall, _skillWaterBall},
 			{ItemPrefab.FireShield, _skillFireShield},
 			{ItemPrefab.Shark,_skillShark },
 			{ItemPrefab.PoisonBullet,_skillPoisonBullet },
-			{ItemPrefab.EarthPunch,_skillEarthPunch	 },
+			{ItemPrefab.EarthPunch,_skillEarthPunch  },
 			{ItemPrefab.SkyBoom,_skillSkyBoom    },
 			{ItemPrefab.Boomerang,_skillBoomerang    },
 			{ItemPrefab.SmilingFace,_skillSmilingface    },
+
+			{ItemPrefab.OwlStriker, _owlStriker},
         };
 
 		_mapDic = new Dictionary<MapType, Map>
@@ -189,6 +193,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{"M3", _globloomSentry},
 			{"M4", _lupineStag},
 			{"M6", _slimeWandering},
+			{"M7", _owlStriker},
             {"Skeleton", _minionSkeleton},
             {"Wolf", _minionWolf},
         };

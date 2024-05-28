@@ -35,6 +35,8 @@ public enum ItemPrefab
 	GemExp,
 	SupportItem,
 	SmilingFace,
+
+    OwlStriker,
 }
 
 public enum MapType
