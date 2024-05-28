@@ -50,6 +50,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     [SerializeField] private GameObject _skillSmilingface;
 
+    [SerializeField] private GameObject _bulletOwlStriker;
+
 
     private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
@@ -179,6 +181,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.SmilingFace,_skillSmilingface    },
 
 			{ItemPrefab.OwlStriker, _owlStriker},
+			{ItemPrefab.BulletOwlStriker, _bulletOwlStriker },
         };
 
 		_mapDic = new Dictionary<MapType, Map>

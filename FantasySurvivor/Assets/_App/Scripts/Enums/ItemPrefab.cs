@@ -37,6 +37,7 @@ public enum ItemPrefab
 	SmilingFace,
 
     OwlStriker,
+	BulletOwlStriker,
 }
 
 public enum MapType
