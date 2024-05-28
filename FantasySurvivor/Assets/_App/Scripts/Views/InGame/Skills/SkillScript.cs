@@ -6,7 +6,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 namespace FantasySurvivor
 {
-    public class FireBallControl : ProactiveSkill
+    public class FireBall : ProactiveSkill
     {
         public override void Init(SkillData data)
         {
@@ -28,7 +28,7 @@ namespace FantasySurvivor
 		}
 	}
 
-    public class EarthPunchControl : ProactiveSkill
+    public class EarthPunch : ProactiveSkill
     {
         public override void Init(SkillData data)
         {
@@ -36,7 +36,7 @@ namespace FantasySurvivor
         }
     }
 
-    public class PoisonballControl : ProactiveSkill
+    public class Poisonball : ProactiveSkill
     {
         public override void Init(SkillData data)
         {
@@ -80,14 +80,14 @@ namespace FantasySurvivor
 		}
 	}*/
 
-    public class SharkControl : ProactiveSkill
+    public class Shark : ProactiveSkill
     {
         protected override void UpdatePrefab(SkillActive prefab)
         {
             base.UpdatePrefab(prefab);
             prefab.transform.localScale = Vector3.one * levelData[level].valueSpecial1;
             prefab.size = levelData[level].valueSpecial1;
-			level = 6;
+
         }
     }
 
@@ -141,7 +141,7 @@ namespace FantasySurvivor
 		}
 	}*/
 
-	public class ThunderStrikeControl : ProactiveSkill
+	public class ThunderStrike : ProactiveSkill
 	{
 		public override void Init(SkillData data)
 		{
@@ -164,7 +164,7 @@ namespace FantasySurvivor
 			timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
 		}
 	}
-	public class SmilingFaceControl : ProactiveSkill
+	public class SmilingFacel : ProactiveSkill
     {
         public override void Init(SkillData data)
         {
@@ -172,7 +172,7 @@ namespace FantasySurvivor
         }
     }
 
-    public class BoomerangControl : ProactiveSkill
+    public class Boomerangl : ProactiveSkill
     {
         public override void Init(SkillData data)
         {
@@ -180,7 +180,7 @@ namespace FantasySurvivor
         }
     }
 
-    public class SkyboomControl : ProactiveSkill
+    public class Skyboom : ProactiveSkill
     {
         public override void Init(SkillData data)
         {

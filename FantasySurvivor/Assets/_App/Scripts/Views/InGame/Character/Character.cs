@@ -12,6 +12,7 @@ using FantasySurvivor;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
+using static FantasySurvivor.Shark;
 using StateMachine = ArbanFramework.StateMachine.StateMachine;
 
 public class Character : ObjectRPG
@@ -185,10 +186,10 @@ public class Character : ObjectRPG
 				switch (skillData.name)
 				{
 					case SkillName.Fireball:
-						skillIns = new FireBallControl();
+						skillIns = new FireBall();
 						break;
 					case SkillName.ThunderStrike:
-						skillIns = new ThunderStrikeControl();
+						skillIns = new ThunderStrike();
 						break;
 					case SkillName.Waterball:
 						skillIns = new WaterBallControl();
@@ -200,22 +201,22 @@ public class Character : ObjectRPG
 						skillIns = new FireShieldControl();
 						break;
 					case SkillName.Shark:
-						skillIns = new SharkControl();
+						skillIns = new Shark();
 						break;
 					case SkillName.PoisonBullet:
-						skillIns = new PoisonballControl();
+						skillIns = new Poisonball();
 						break;
 					case SkillName.Earthpunch:
-						skillIns = new EarthPunchControl();
+						skillIns = new EarthPunch();
 						break;
 					case SkillName.SkyBoom:
-						skillIns = new SkyboomControl();
+						skillIns = new Skyboom();
 						break;
 					case SkillName.Boomerang:
-						skillIns = new BoomerangControl();
+						skillIns = new Boomerangl();
 						break;
 					case SkillName.SmilingFace:
-						skillIns = new SmilingFaceControl();
+						skillIns = new SmilingFacel();
 						break;
 					default:
 						skillIns = new ProactiveSkill();
