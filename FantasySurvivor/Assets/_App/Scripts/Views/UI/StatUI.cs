@@ -3,6 +3,7 @@ using ArbanFramework.MVC;
 using FantasySurvivor;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -24,9 +25,12 @@ public class StatUI : View<GameApp>
 
 	protected override void Start()
 	{
-		InitDispatcher();
-
 		base.Start();
+
+		//fix cho nay
+		Task.Delay(500);
+
+		InitDispatcher();
 	}
 
 	protected override void OnViewInit()
@@ -39,6 +43,8 @@ public class StatUI : View<GameApp>
 		{
 			{ItemEquipType.Weapon, _slotWeapon},
 		};
+		
+		//app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.Item1).dataStat);
 
 		foreach(var item in app.models.dataPlayerModel.BagItemEquip)
 		{
@@ -47,6 +53,8 @@ public class StatUI : View<GameApp>
 			var data = new ItemEquipData(id.dataUi, item, id.spriteRank);
 			item1.Init(data, this);
 		}
+		
+		
 	}
 
 	public void EquipItem(ItemEquipType type, ItemEquipData data)
