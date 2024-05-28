@@ -87,7 +87,6 @@ namespace FantasySurvivor
             base.UpdatePrefab(prefab);
             prefab.transform.localScale = Vector3.one * levelData[level].valueSpecial1;
             prefab.size = levelData[level].valueSpecial1;
-			level = 6;
         }
     }
 
