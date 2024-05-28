@@ -26,16 +26,16 @@ namespace FantasySurvivor
 
 		protected float sizeTouch;
 
-		protected LevelSkillData data;
+		public LevelSkillData data;
 
-		protected Character origin;
+		public Character origin;
 
 		protected GameObject hitEffect;
 
 		protected int level;
 		
 		protected Action callBackDamaged, callBackKilled;
-		protected GameController gameController => Singleton<GameController>.instance;
+		public GameController gameController => Singleton<GameController>.instance;
 
 		public virtual void Init(LevelSkillData dataLevel, Monster target, int level, ItemPrefab type)
 		{
