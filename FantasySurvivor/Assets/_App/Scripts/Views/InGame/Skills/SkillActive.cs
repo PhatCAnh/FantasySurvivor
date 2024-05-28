@@ -26,9 +26,11 @@ namespace FantasySurvivor
 
 		protected float sizeTouch;
 
-		public LevelSkillData data;
+        [HideInInspector]
+        public LevelSkillData data;
 
-		public Character origin;
+        [HideInInspector]
+        public Character origin;
 
 		protected GameObject hitEffect;
 

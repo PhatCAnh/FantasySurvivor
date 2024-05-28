@@ -36,6 +36,14 @@ namespace FantasySurvivor
         }
     }
 
+    public class IceSpearControl : ProactiveSkill
+    {
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+        }
+    }
+
     public class PoisonballControl : ProactiveSkill
     {
         public override void Init(SkillData data)
