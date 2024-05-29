@@ -146,7 +146,7 @@ public class Character : ObjectRPG
 		damage = MinusDamage(damage);
 		model.currentHealthPoint -= damage;
 		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.MonsterDamage);
+		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.Red);
 
         if (!IsAlive)
         {

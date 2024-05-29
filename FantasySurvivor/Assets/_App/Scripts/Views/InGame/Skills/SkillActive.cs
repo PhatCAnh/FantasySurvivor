@@ -17,9 +17,9 @@ namespace FantasySurvivor
 		public SkillDamagedType skillDamagedType;
 
 		public TargetType targetType;
-		
+
 		public ItemPrefab type;
-		
+
 		protected float damage;
 
 		protected bool isCritical;
@@ -33,7 +33,7 @@ namespace FantasySurvivor
 		protected GameObject hitEffect;
 
 		protected int level;
-		
+
 		protected Action callBackDamaged, callBackKilled;
 		public GameController gameController => Singleton<GameController>.instance;
 
@@ -46,18 +46,18 @@ namespace FantasySurvivor
 			if(targetType != TargetType.None)
 			{
 				this.target = target;
-				
+
 				this.sizeTouch = size + target.size;
 			}
 
 			this.level = level;
-			
+
 			data = dataLevel;
 
 			this.damage = origin.model.attackDamage * data.value / 100;
 		}
 
-		
+
 		public virtual void TakeDamage(Monster monster = null)
 		{
 			switch (skillDamagedType)
@@ -67,7 +67,7 @@ namespace FantasySurvivor
 					{
 						monster = target;
 					}
-					monster.TakeDamage(damage, isCritical, callBackDamaged, callBackKilled);
+					monster.TakeDamage(damage, TextPopupType.Normal, isCritical, callBackDamaged, callBackKilled);
 					break;
 				case SkillDamagedType.AreaOfEffect:
 					CheckAoeMons();
@@ -82,7 +82,7 @@ namespace FantasySurvivor
 			if(!gameController.CheckTouch(monster.transform.position, transform.position, sizeTouch)) return false;
 			TakeDamage(monster);
 			CreateExplo();
-            return true;
+			return true;
 		}
 
 		protected virtual void CreateExplo()
@@ -96,7 +96,7 @@ namespace FantasySurvivor
 
 		protected virtual void TouchUnit(Monster mons)
 		{
-			mons.TakeDamage(damage, isCritical);
+			mons.TakeDamage(damage,TextPopupType.Normal, isCritical);
 		}
 
 		protected virtual void CheckAoeMons()
