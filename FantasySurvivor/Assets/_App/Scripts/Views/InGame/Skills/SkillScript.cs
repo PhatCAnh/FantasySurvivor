@@ -53,7 +53,7 @@ namespace FantasySurvivor
 
     }
 
-    /*public class ThunderBird : ProactiveSkill
+	/*public class ThunderBird : ProactiveSkill
 	{
         public override void Init(SkillData data)
         {
@@ -70,25 +70,16 @@ namespace FantasySurvivor
         }
     }*/
 
-    /*public class Twin : ProactiveSkill
+	public class TwinControl : ProactiveSkill
 	{
 		public override void Init(SkillData data)
 		{
 			base.Init(data);
 			timeDelaySkill = Mathf.RoundToInt(1000);
 		}
+	}
 
-		public override void UpLevel()
-		{
-			base.UpLevel();
-			if(level == 3)
-			{
-				numberProjectile++;
-			}
-		}
-	}*/
-
-    public class SharkControl : ProactiveSkill
+	public class SharkControl : ProactiveSkill
     {
         protected override void UpdatePrefab(SkillActive prefab)
         {

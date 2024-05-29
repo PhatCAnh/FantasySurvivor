@@ -29,6 +29,7 @@ public enum ItemPrefab
 	Boomerang,
 	SmilingFace,
 	IceSpear,
+	Twin,
 
 	HealthBar,
 	Character,
@@ -103,6 +104,7 @@ public enum SkillName
 	Boomerang,
     SmilingFace,
 	IceSpear,
+	Twin,
 }
 
 public enum SkillType
