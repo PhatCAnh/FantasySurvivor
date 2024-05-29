@@ -187,8 +187,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.025174737, y: -0.07622194}
-  m_Size: {x: 1.1996505, y: 2.1475558}
+  m_Offset: {x: 0.025174737, y: -0.02507639}
+  m_Size: {x: 1.1996505, y: 2.2089305}
   m_Direction: 0
 --- !u!50 &2251807672777610848
 Rigidbody2D:
@@ -236,7 +236,7 @@ MonoBehaviour:
   justSpawnVertical: 0
   isDead: 0
   isNoMove: 0
-  size: 0
+  size: 1.05
 --- !u!1 &2251807672918116611
 GameObject:
   m_ObjectHideFlags: 0

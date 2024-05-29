@@ -67,9 +67,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.12, y: 0}
+  m_Offset: {x: -0.03592074, y: -0.00000011920929}
   serializedVersion: 2
-  m_Radius: 0.65
+  m_Radius: 0.47039664
 --- !u!50 &3192426052812612721
 Rigidbody2D:
   serializedVersion: 4
@@ -116,7 +116,7 @@ MonoBehaviour:
   justSpawnVertical: 0
   isDead: 0
   isNoMove: 0
-  size: 0.65
+  size: 0.45
 --- !u!1 &3192426053512486228
 GameObject:
   m_ObjectHideFlags: 0
