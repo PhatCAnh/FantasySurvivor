@@ -15,7 +15,7 @@ public class Dead : View<GameApp>
         mons = transform.parent.GetComponent<Monster>();
     }
 
-    private void DeadEffect()
+    private void MonsterDeadEffect()
     {
         Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
     }
