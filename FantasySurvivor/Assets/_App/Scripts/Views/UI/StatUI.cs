@@ -102,8 +102,9 @@ public class StatUI : View<GameApp>
 		
 		AddDataBinding("fieldDataPlayerModel-BagItemEquipValue", this, (control, e) =>
 			{
-				Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
-				var dataStat = app.models.dataPlayerModel.GetFirstItemEquipAdded();
+                var dataStat = app.models.dataPlayerModel.GetFirstItemEquipAdded();
+				if (dataStat == null) return;
+                Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
 				var id =itemController.GetDataItemEquip((ItemEquipId) Enum.Parse(typeof(ItemEquipId), dataStat.id));
 				var data = new ItemEquipData(id.dataUi, dataStat, id.spriteRank);
 				item.Init(data, this);

@@ -57,6 +57,7 @@ public class ItemController : Controller<GameApp>
 		model.attackDamage += stat.damage;
 		model.itemAttractionRange += stat.attackRange;
 		model.armor += stat.armor;
+		model.attackRange += stat.attackRange;
 	}
 
 	public void UnEquipItem(ItemEquipData data)
@@ -70,5 +71,6 @@ public class ItemController : Controller<GameApp>
 		model.attackDamage -= stat.damage;
 		model.itemAttractionRange -= stat.attackRange;
 		model.armor -= stat.armor;
-	}
+        model.attackRange -= stat.attackRange;
+    }
 }
