@@ -88,6 +88,8 @@ public class Monster : ObjectRPG
 
 	protected Vector3 moveTarget;
 
+	public List<StatusEffect> listStatusEffect = new List<StatusEffect>();
+
 	public List<MonsterUpdateStat> listUpdateStat = new List<MonsterUpdateStat>();
 
 	#endregion
@@ -116,7 +118,6 @@ public class Monster : ObjectRPG
 		sizeAttack = stat.attackRange.BaseValue != 0 ? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
 
         InitializationStateMachine();
-
 	}
 
     private void Update()
@@ -126,6 +127,7 @@ public class Monster : ObjectRPG
 		cdAttack.Update(time);
 		_stateMachine.currentState.LogicUpdate(time);
 		HandleUpdateStat(time);
+		HandleStatusEffect(time);
 	}
 
 	private void FixedUpdate()
@@ -275,6 +277,15 @@ public class Monster : ObjectRPG
 			}
 		}
 	}
+
+	private void HandleStatusEffect(float deltaTime)
+	{
+		foreach(var item in listStatusEffect.ToList())
+		{
+			item.Cooldown(deltaTime);
+		}
+	}
+	
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.DrawWireSphere(transform.position, size);
