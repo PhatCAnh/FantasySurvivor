@@ -118,8 +118,6 @@ public class Monster : ObjectRPG
 		sizeAttack = stat.attackRange.BaseValue != 0 ? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
 
         InitializationStateMachine();
-
-        var ignite = new Ignite(this, 2, 10);
 	}
 
     private void Update()
