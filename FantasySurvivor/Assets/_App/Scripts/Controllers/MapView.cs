@@ -33,6 +33,7 @@ public class MapView : View<GameApp>
 
 	public MapModel model { get; private set; }
 
+
 	[SerializeField] private Vector2 _size;
 
 	private int _coinOfLevel = 0;
@@ -47,10 +48,9 @@ public class MapView : View<GameApp>
 	public void Init()
 	{
 		model = new();
-		listSkill = app.resourceManager.GetListSkill().Where(p => p.canAppear).ToList();
+		listSkill = app.resourceManager.GetListSkill().Where(p => p.canAppear&&p.ChoiceSkill).ToList();
 		StartLevel(model.levelInGame);
 	}
-
 	public List<SkillData> GetRandomSkill()
 	{
 		int count = 3;

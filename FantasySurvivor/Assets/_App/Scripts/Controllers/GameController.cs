@@ -27,18 +27,19 @@ public class GameController : Controller<GameApp>
 
 	public Action<Monster> onMonsterDie;
 
-	private HealthBar _healthBar;
-
-    private int _limitSkill = 2;
-    public int currentSkill = 0;
-
+    public int numberLimitChoiceSkill = 4;// limit skill out game
+    private HealthBar _healthBar;
+    private int _limitSkill = 2;// limit skill in game
+    private int currentSkill = 0;// điếm số skill in game
+    public int currentNumberSkill = 0;// điếm số skill outr game
     private Vector3 _camSize;
 	private float _width;
 	private float _height;
 
 	private Vector3 charPos => character.transform.position;
+   public List<SkillData> _listSkill = new List<SkillData>();
 
-	private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
+    private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
 
 	private PoolController poolController => Singleton<PoolController>.instance;
 
@@ -102,7 +103,7 @@ public class GameController : Controller<GameApp>
 			callback?.Invoke();
 		};
 	}
-
+	// check exit skill in game 
 	public void CheckExistSkill()
 	{
 		currentSkill++;

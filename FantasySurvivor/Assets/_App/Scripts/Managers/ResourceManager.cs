@@ -35,6 +35,8 @@ public class ResourceManager : UIManagerBase<PopupType>
     [SerializeField] private GameObject _bulletGlobloomSentry;
     
     [SerializeField] private GameObject _skillWaterBall;
+    [SerializeField] private GameObject _skillZoneOfJudgment;
+	[SerializeField] private GameObject _skillBlackDrum;
 
     private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
@@ -53,9 +55,10 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _loseGamePopup;
 
 	[SerializeField] private GameObject _choiceSkill;
+    [SerializeField] private GameObject _ChoiceSkillPopup;
 
 
-	[Header("UI Tutorial prefabs")]
+    [Header("UI Tutorial prefabs")]
 	[SerializeField] private GameObject _clickBulletTutorial;
 
 	[Header("Map prefabs")]
@@ -124,7 +127,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 		RegisterPopup(PopupType.Pause, _pausePopup);
 		RegisterPopup(PopupType.Cheat, _cheatPopup);
 		RegisterPopup(PopupType.ChoiceSkill, _choiceSkill);
-	}
+        RegisterPopup(PopupType.ChoiceSkillOutGame, _ChoiceSkillPopup);
+    }
 
 	private void InitDic()
 	{
@@ -135,21 +139,23 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.TextPopup, _textPopup},
 			{ItemPrefab.GemExp, _gemExpPrefab},
 			{ItemPrefab.BlueZombie, _blueZombie},
-            {ItemPrefab.PurpleZombie, _purpleZombie},
-            {ItemPrefab.BlueGhost, _blueGhost},
+			{ItemPrefab.PurpleZombie, _purpleZombie},
+			{ItemPrefab.BlueGhost, _blueGhost},
 			{ItemPrefab.YellowBomb, _yellowBomb},
 			{ItemPrefab.PurpleDevil, _purpleDevil},
 			{ItemPrefab.KillerBee, _killerBee},
-            {ItemPrefab.GlobloomSentry, _globloomSentry},
+			{ItemPrefab.GlobloomSentry, _globloomSentry},
 			{ItemPrefab.ElectroBomber, _electroBomber},
-            {ItemPrefab.SlimeWandering, _slimeWandering},
-            {ItemPrefab.SupportItem, _supportItem},
+			{ItemPrefab.SlimeWandering, _slimeWandering},
+			{ItemPrefab.SupportItem, _supportItem},
 			{ItemPrefab.BulletKillerBee, _bulletKillerBee},
 			{ItemPrefab.SkillFireBall, _skillFireBall},
 			{ItemPrefab.ThunderStrike, _skillThunderStrike},
 			{ItemPrefab.ThunderStrikeSmall, _skillThunderStrikeSmall},
-            {ItemPrefab.BulletGlobloomSentry, _bulletGlobloomSentry},
-            {ItemPrefab.SkillWaterBall, _skillWaterBall},
+			{ItemPrefab.BulletGlobloomSentry, _bulletGlobloomSentry},
+			{ItemPrefab.SkillWaterBall, _skillWaterBall},
+			{ItemPrefab.ZoneOfJudgment,_skillZoneOfJudgment },
+			{ItemPrefab.BlackDrum, _skillBlackDrum },
         };
 
 		_mapDic = new Dictionary<MapType, Map>

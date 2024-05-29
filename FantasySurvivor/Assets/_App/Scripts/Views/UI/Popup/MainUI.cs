@@ -28,6 +28,7 @@ public class MainUI : View<GameApp>, IPopup
 	private float _durationAnim = 0.3f;
 
 	private GameController gameController => Singleton<GameController>.instance;
+	private PopupChoiceSkill popupChoiceSkill => Singleton<PopupChoiceSkill>.instance;
 
 	protected override void OnViewInit()
 	{
@@ -38,13 +39,13 @@ public class MainUI : View<GameApp>, IPopup
 		_itemUpdate.toggle.onValueChanged.AddListener(OnClickTglUpdate);
 		_itemLock.toggle.onValueChanged.AddListener(OnClickTglLock);
 		_btnBattle.onClick.AddListener(OnClickBtnBattle);
-		
-		_btnCheat.onClick.AddListener(() =>
+       
+        _btnCheat.onClick.AddListener(() =>
 		{
 			app.resourceManager.ShowPopup(PopupType.Cheat);
 		});
 		
-		AddEventChangeStat();
+        AddEventChangeStat();
 		
 	}
 
@@ -109,11 +110,12 @@ public class MainUI : View<GameApp>, IPopup
 
 	private void OnClickBtnBattle()
 	{
-		gameController.StartGame(1);
-		Close();
+        app.resourceManager.ShowPopup(PopupType.ChoiceSkillOutGame);
+  
 	}
 	
-	private void AddEventChangeStat()
+
+    private void AddEventChangeStat()
 	{
 		AddDataBinding("fieldPlayerTower-goldCoinValue", _txtGoldCoin, (control, e) =>
 			{
