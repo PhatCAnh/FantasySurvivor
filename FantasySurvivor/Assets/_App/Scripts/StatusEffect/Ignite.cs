@@ -14,7 +14,7 @@ public class Ignite : StatusEffect
 	public override void Active()
 	{
 		base.Active();
-		target.TakeDamage(value);
+		target.TakeDamage(value, TextPopupType.Fire);
 	}
 
 	public override bool Cooldown(float deltaTime)

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dba9130fbe6fbb9428c42e8ab06cca92
+guid: 080cb6d98b00c2645b2c41df5f69bc78
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -120,7 +120,20 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -136,13 +149,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IconSprite_0
+      name: Healing
       rect:
         serializedVersion: 2
-        x: 61
-        y: 912
-        width: 114
-        height: 119
+        x: 0
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +163,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76c82c46b1fb948478d4152bf7ca4dab
-      internalID: 277595012
+      spriteID: b2f962e47f71d5145b7a830999b156b5
+      internalID: -651057808
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconSprite_1
+      name: Stun
       rect:
         serializedVersion: 2
-        x: 203
-        y: 918
-        width: 100
-        height: 106
+        x: 256
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +184,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d21de073686f6674d9938d32a54a0ba1
-      internalID: 1821994460
+      spriteID: 3dea8753b98a9544fae8b775eb74a6a7
+      internalID: -1611920951
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconSprite_9
+      name: Sleep
       rect:
         serializedVersion: 2
-        x: 61
-        y: 767
-        width: 112
-        height: 128
+        x: 512
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,20 +205,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: feff7f112299ac94088a97076a9f7d35
-      internalID: -1281581297
+      spriteID: 7e21b165dbf254847b756369d6d0dda7
+      internalID: 1812906440
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconSprite_11
+      name: Speed
       rect:
         serializedVersion: 2
-        x: 363
-        y: 854
-        width: 58
-        height: 58
+        x: 768
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +226,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e7113cb5b9e44f48a3c014dbce19ded
-      internalID: -1875974262
+      spriteID: e4a18c91b4135574aa797a30479fc26e
+      internalID: 485823971
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconSprite_6
+      name: Freezing
       rect:
         serializedVersion: 2
-        x: 458
-        y: 945
-        width: 52
-        height: 52
+        x: 0
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,20 +247,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c2209f9ef0e90b40be578e9214cd3a9
-      internalID: 221560941
+      spriteID: 5b2f30f7fa6ab2d4e9a827f289613f7c
+      internalID: 1401011104
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconSprite_7
+      name: Bleeding
       rect:
         serializedVersion: 2
-        x: 555
-        y: 945
-        width: 60
-        height: 48
+        x: 256
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,20 +268,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48c3cb301f81f9a4f844393a88ed8156
-      internalID: 470915293
+      spriteID: 7af1657105023a34993007562662e976
+      internalID: 374495580
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconSprite_8
+      name: Poison
       rect:
         serializedVersion: 2
-        x: 369
-        y: 944
-        width: 45
-        height: 54
+        x: 512
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -276,20 +289,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc7c05dcf5497ab4ba76a5e8fd9a2694
-      internalID: 768643838
+      spriteID: d32fc785b2d6a414eba3ab0f67b981d5
+      internalID: 2047992146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconSprite_10
+      name: Fire
       rect:
         serializedVersion: 2
-        x: 224
-        y: 800
-        width: 64
-        height: 68
+        x: 768
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -297,20 +310,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38ade3dc80b8d1247bf399d9d02a5502
-      internalID: -103468335
+      spriteID: e4089619450f73049afe32f25bd43c5a
+      internalID: 695775810
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconSprite_17
+      name: Curse
       rect:
         serializedVersion: 2
-        x: 417
-        y: 587
-        width: 128
-        height: 128
+        x: 0
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -318,20 +331,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5dd5a1e3cd22a7e45a6e1e530651cb35
-      internalID: 41189062
+      spriteID: 4702287934378f245a0800c887cf8cdb
+      internalID: -606357570
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconSprite_18
+      name: Bless
       rect:
         serializedVersion: 2
-        x: 591
-        y: 590
-        width: 128
-        height: 128
+        x: 256
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -339,20 +352,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8d1b471768b8334490817b0250256c3
-      internalID: -1969866760
+      spriteID: cbb62f2e69369fc4d8aae139f025d033
+      internalID: -214298916
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconSprite_19
+      name: Slowdown
       rect:
         serializedVersion: 2
-        x: 56
-        y: 593
-        width: 128
-        height: 128
+        x: 512
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -360,197 +373,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7fa10e450d06ba24ca734ab888aada91
-      internalID: 1371056272
+      spriteID: 94fee00c5523d294bb97023ee5f11c32
+      internalID: 1019859777
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconSprite_21
+      name: Thunder
       rect:
         serializedVersion: 2
-        x: 57
-        y: 413
-        width: 128
-        height: 128
+        x: 768
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c6ec68763c140d409f959efc45b39af
-      internalID: -122581456
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconSprite_22
-      rect:
-        serializedVersion: 2
-        x: 233
-        y: 404
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 01b0cf7ab819cd349bd6468f35617eaa
-      internalID: -1450280643
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconSprite_23
-      rect:
-        serializedVersion: 2
-        x: 413
-        y: 408
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4c95058e4ae7f3a41ad54d0e54594f9a
-      internalID: -874181576
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconSprite_24
-      rect:
-        serializedVersion: 2
-        x: 591
-        y: 411
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 478969a52d4b8d1409604a544b1a48ac
-      internalID: -1235925278
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconSprite_25
-      rect:
-        serializedVersion: 2
-        x: 56
-        y: 231
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 415c92e706d5179438ed848fdc6a1f35
-      internalID: 1372629734
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconSprite_26
-      rect:
-        serializedVersion: 2
-        x: 235
-        y: 230
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5380319933ac2ac46a205ee716fd4ef4
-      internalID: 572686317
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconSprite_27
-      rect:
-        serializedVersion: 2
-        x: 412
-        y: 230
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ca127932f0e289849a3f81de8ff066a4
-      internalID: -1137181986
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconSprite_28
-      rect:
-        serializedVersion: 2
-        x: 592
-        y: 230
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0ca705eb43198714e950bec3e3d72771
-      internalID: -60484212
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconSprite_12
-      rect:
-        serializedVersion: 2
-        x: 235
-        y: 586
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 03766c1006c178540a96a5a01958457c
-      internalID: -1501093494
+      spriteID: 635506bdc9f5f594797862970e4f47c7
+      internalID: 2062015785
       vertices: []
       indices: 
       edges: []
@@ -566,35 +411,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      IconSprite_0: 277595012
-      IconSprite_1: 1821994460
-      IconSprite_10: -103468335
-      IconSprite_11: -1875974262
-      IconSprite_12: -1501093494
-      IconSprite_13: -1496702538
-      IconSprite_14: 1530435212
-      IconSprite_15: -2064268042
-      IconSprite_16: 868587554
-      IconSprite_17: 41189062
-      IconSprite_18: -1969866760
-      IconSprite_19: 1371056272
-      IconSprite_2: -606398564
-      IconSprite_20: 860972376
-      IconSprite_21: -122581456
-      IconSprite_22: -1450280643
-      IconSprite_23: -874181576
-      IconSprite_24: -1235925278
-      IconSprite_25: 1372629734
-      IconSprite_26: 572686317
-      IconSprite_27: -1137181986
-      IconSprite_28: -60484212
-      IconSprite_3: -1264765702
-      IconSprite_4: 24244632
-      IconSprite_5: 1034146240
-      IconSprite_6: 221560941
-      IconSprite_7: 470915293
-      IconSprite_8: 768643838
-      IconSprite_9: -1281581297
+      Bleeding: 374495580
+      Bless: -214298916
+      Curse: -606357570
+      Fire: 695775810
+      Freezing: 1401011104
+      Healing: -651057808
+      Poison: 2047992146
+      Sleep: 1812906440
+      Slowdown: 1019859777
+      Speed: 485823971
+      Stun: -1611920951
+      Thunder: 2062015785
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

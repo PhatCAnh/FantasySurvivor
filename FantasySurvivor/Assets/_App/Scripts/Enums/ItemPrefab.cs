@@ -53,8 +53,9 @@ public enum MonsterType
 public enum TextPopupType
 {
     Healing,
-    MonsterDamage,
-    TowerDamage,
+    Red,
+    Normal,
+    Fire,
 }
 
 public enum TypeStatTower

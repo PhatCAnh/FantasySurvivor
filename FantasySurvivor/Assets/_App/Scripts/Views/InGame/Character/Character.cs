@@ -141,13 +141,13 @@ public class Character : ObjectRPG
         moveDirection = moveForce;
     }
 
-    public void TakeDamage(int damage)
-    {
-        if (!IsAlive) return;
-        damage = MinusDamage(damage);
-        model.currentHealthPoint -= damage;
-        GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-        text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.MonsterDamage);
+	public void TakeDamage(int damage)
+	{
+		if(!IsAlive) return;
+		damage = MinusDamage(damage);
+		model.currentHealthPoint -= damage;
+		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
+		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.Red);
 
         if (!IsAlive)
         {

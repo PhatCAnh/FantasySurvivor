@@ -40,12 +40,10 @@ public class TextPopup : MonoBehaviour
 
 		switch (type)
 		{
-			case TextPopupType.TowerDamage:
+			case TextPopupType.Normal:
 				textValue = value;
 				_textMesh.color = Color.white;
 				_textMesh.fontSize = 5;
-
-
 				if(isCritical)
 				{
 					textValue = $"{value} <sprite=6>";
@@ -53,16 +51,22 @@ public class TextPopup : MonoBehaviour
 					_textMesh.fontSize *= 1.5f;
 				}
 				break;
-			case TextPopupType.MonsterDamage:
+			case TextPopupType.Red:
 				textValue = value;
 				_textMesh.color = new Color(0.8207547f, 0, 0.007291546f);
 				_textMesh.fontSize = 7.5f;
 				break;
-            case TextPopupType.Healing: // Thêm x? lý cho lo?i Healing
-                textValue = "+" + value; // Thêm d?u "+" tr??c giá tr? ?? bi?u th? là h?i máu
-                _textMesh.color = new Color(0, 1, 0); // Màu xanh lá cây cho hi?n th? h?i máu
-                _textMesh.fontSize = 7.5f; // Có th? ?i?u ch?nh kích th??c font cho phù h?p
+            case TextPopupType.Healing: // Thï¿½m x? lï¿½ cho lo?i Healing
+                textValue = "+" + value; // Thï¿½m d?u "+" tr??c giï¿½ tr? ?? bi?u th? lï¿½ h?i mï¿½u
+                _textMesh.color = new Color(0, 1, 0); // Mï¿½u xanh lï¿½ cï¿½y cho hi?n th? h?i mï¿½u
+                _textMesh.fontSize = 7.5f; // Cï¿½ th? ?i?u ch?nh kï¿½ch th??c font cho phï¿½ h?p
                 break;
+            case TextPopupType.Fire:
+	            textValue = $"{value} <sprite=13>"; // Thï¿½m d?u "+" tr??c giï¿½ tr? ?? bi?u th? lï¿½ h?i mï¿½u
+	            _textMesh.color = new Color(0.9882354f, 0.6862745f, 0.1f); // Mï¿½u xanh lï¿½ cï¿½y cho hi?n th? h?i mï¿½u
+	            _textMesh.fontSize = 7.5f; 
+	            break;
+            
         }
 		
 		Setup(textValue);
