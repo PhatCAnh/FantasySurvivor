@@ -50,7 +50,6 @@ namespace FantasySurvivor
         {
             base.Init(data);
         }
-
     }
 
 	/*public class ThunderBird : ProactiveSkill

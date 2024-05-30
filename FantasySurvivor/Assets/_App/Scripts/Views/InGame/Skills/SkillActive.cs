@@ -34,7 +34,8 @@ namespace FantasySurvivor
 
 		protected GameObject hitEffect;
 
-		protected int level;
+        [HideInInspector]
+        public int level;
 
 		protected Action callBackDamaged, callBackKilled;
 		public GameController gameController => Singleton<GameController>.instance;

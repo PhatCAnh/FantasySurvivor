@@ -39,7 +39,7 @@ public class IceSpear : SkillBulletActive
 
     protected override void TouchUnit(Monster mons)
     {
-        mons.TakeDamage(damage, isCritical);
+        mons.TakeDamage(damage, TextPopupType.Normal,isCritical);
         if (IsActionSuccessful(data.valueSpecial2))
         {
             mons.UpdateStat(StatModifierType.Mul, 1, 0, 1, 1, data.valueSpecial1);
