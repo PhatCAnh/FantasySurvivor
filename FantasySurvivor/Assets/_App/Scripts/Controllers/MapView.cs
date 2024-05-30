@@ -48,7 +48,9 @@ public class MapView : View<GameApp>
 	{
 		model = new();
 		listSkill = app.resourceManager.GetListSkill().Where(p => p.canAppear).ToList();
-		StartLevel(model.levelInGame);
+		
+		//fix it
+		StartLevel(1,model.levelInGame);
 	}
 
 	public List<SkillData> GetRandomSkill()
@@ -88,10 +90,11 @@ public class MapView : View<GameApp>
 		}
 	}
 
-	private void StartLevel(int level)
+	private void StartLevel(int chapter, int level)
 	{
-		var dataChapter = app.configs.dataChapter.GetConfig(level);
-		foreach (var wave in dataChapter.waves)
+		var dataLevel = app.configs.dataChapter.GetConfigLevel(chapter, level)[level];
+		var dataWave =dataLevel.waves;
+		foreach (var wave in dataWave)
 		{
 			var waveData = new WaveData
 			{
@@ -102,12 +105,12 @@ public class MapView : View<GameApp>
 				healthMonster = wave.healthMonster,
 				expMonster = wave.expMonster,
 			};
-
+		
 			waveData.coolDownTime.Restart(0);
 			_listWaveData.Add(waveData);
 		}
-		_coinOfLevel = dataChapter.coin;
-		_cdEndLevel.Restart(dataChapter.timeEnd);
+		_coinOfLevel = dataLevel.coin;
+		_cdEndLevel.Restart(dataLevel.timeEnd);
 	}
 
 	private void Update()
@@ -125,7 +128,7 @@ public class MapView : View<GameApp>
 			_listWaveData.Clear();
 			gameController.AddReward(dictionaryReward, TypeItemReward.Coin, _coinOfLevel);
 			model.levelInGame++;
-			StartLevel(model.levelInGame);
+			StartLevel(1, model.levelInGame);
 			return;
 		}
 
@@ -140,7 +143,7 @@ public class MapView : View<GameApp>
 					{
 						gameController.AddReward(dictionaryReward, TypeItemReward.Coin, _coinOfLevel);
 						model.levelInGame++;
-						StartLevel(model.levelInGame);
+						StartLevel(1, model.levelInGame);
 					}
 				}
 				continue;
