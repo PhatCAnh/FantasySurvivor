@@ -138,7 +138,7 @@ public enum PopupType
     ClickBulletTutorial,
     HealthBar,
     Cheat,
-    ChoiceSkill,
+    ChoiceSkill, ChoiceSkillOutGame
 }
 
 public enum SkillDamagedType

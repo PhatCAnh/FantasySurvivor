@@ -154,8 +154,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.ThunderStrikeSmall, _skillThunderStrikeSmall},
 			{ItemPrefab.BulletGlobloomSentry, _bulletGlobloomSentry},
 			{ItemPrefab.SkillWaterBall, _skillWaterBall},
-			{ItemPrefab.ZoneOfJudgment,_skillZoneOfJudgment },
-			{ItemPrefab.BlackDrum, _skillBlackDrum },
+			//{ItemPrefab.ZoneOfJudgment,_skillZoneOfJudgment },
+			//{ItemPrefab.BlackDrum, _skillBlackDrum },
         };
 
 		_mapDic = new Dictionary<MapType, Map>

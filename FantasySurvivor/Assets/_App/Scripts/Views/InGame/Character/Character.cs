@@ -11,7 +11,7 @@ using FantasySurvivor;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
-using static FantasySurvivor.Shark;
+//using static FantasySurvivor.Shark;
 using StateMachine = ArbanFramework.StateMachine.StateMachine;
 
 public class Character : ObjectRPG
@@ -198,15 +198,15 @@ public class Character : ObjectRPG
                         case SkillName.Waterball:
                             skillIns = new waterball();
                             break;
-                        case SkillName.BlackDrum:
-                            skillIns = new BlackDrum();
-                            break;
-                        case SkillName.ZoneOfJudgment:
-                            skillIns = new ZoneOfJudgment();
-                            break;
-                        case SkillName.Twin:
-                            skillIns = new Twin();
-                            break;
+                        //case SkillName.BlackDrum:
+                        //    skillIns = new BlackDrum();
+                        //    break;
+                        //case SkillName.ZoneOfJudgment:
+                        //    skillIns = new ZoneOfJudgment();
+                        //    break;
+                        //case SkillName.Twin:
+                        //    skillIns = new Twin();
+                           // break;
                         default:
                             skillIns = new ProactiveSkill();
                             break;
