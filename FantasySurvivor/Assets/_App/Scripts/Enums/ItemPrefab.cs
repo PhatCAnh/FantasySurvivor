@@ -40,7 +40,8 @@ public enum MapType
 {
 	Undefined = -1,
 	Forest = 1,
-	Ocean = 2,
+	Meadow = 2,
+	Ocean = 3,
 }
 
 public enum MonsterType

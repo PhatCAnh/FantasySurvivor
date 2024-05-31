@@ -86,14 +86,14 @@ namespace FantasySurvivor
 			_txtTitle.text = $"CHAPTER {_currentChapter}";
 			_imgChapter.sprite = chapterIndex.image;
 			_txtChapterName.text = chapterIndex.name;
-			SetAnimOpen();
+			// SetAnimOpen();
 		}
 
 		private void OnClickBtnPlay()
 		{
-			var load = SceneManager.LoadSceneAsync(GameConst.nameScene_Game, LoadSceneMode.Single);
+			/*var load = SceneManager.LoadSceneAsync(GameConst.nameScene_Game, LoadSceneMode.Single);
 			load.completed += o => gameController.StartGame(_currentChapter);
-			Close();
+			Close();*/
 		}
 
 		private void SetAnimOpen()

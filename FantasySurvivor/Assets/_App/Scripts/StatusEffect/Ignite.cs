@@ -24,7 +24,6 @@ public class Ignite : StatusEffect
 		if(cd.isFinished)
 		{
 			Active();
-			Debug.Log("Active, current hp of target: " + target.model.currentHealthPoint);
 			cd.Restart(0.5f);
 		}
 		return false;

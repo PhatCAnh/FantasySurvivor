@@ -74,6 +74,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _clickBulletTutorial;
 
 	[Header("Map prefabs")]
+	[SerializeField] private Map _meadowMap;
+	
 	[SerializeField] private Map _forestMap;
 	
 	public MapInfinityController mapInfinity;
@@ -176,6 +178,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 		_mapDic = new Dictionary<MapType, Map>
 		{
+			{MapType.Meadow, _meadowMap},
 			{MapType.Forest, _forestMap},
 		};
 

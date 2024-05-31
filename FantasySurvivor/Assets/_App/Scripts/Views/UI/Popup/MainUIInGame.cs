@@ -63,8 +63,8 @@ namespace FantasySurvivor
 
 			AddDataBinding("fieldMap-levelInGameValue", _txtLevel, (control, e) =>
 				{
-					control.text = $"WAVE: {mapModel.levelInGame}";
-				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.levelInGame), mapModel)
+					control.text = $"WAVE: {mapModel.WaveInGame}";
+				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.WaveInGame), mapModel)
 			);
 
 			AddDataBinding("fieldMap-monsterKilledValue", _txtMonsterKilled, (control, e) =>

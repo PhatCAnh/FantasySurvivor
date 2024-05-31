@@ -39,7 +39,7 @@ public class LoseGamePopup : View<GameApp>, IPopup
         
         _btnReward.onClick.AddListener(OnClickBtnReward);
 
-        _txtWave.text = $"Best wave: {gameController.map.model.levelInGame}";
+        _txtWave.text = $"Best wave: {gameController.map.model.WaveInGame}";
 
         _txtEnemyKilled.text = $"Monster killed: {gameController.map.model.monsterKilled}";
 

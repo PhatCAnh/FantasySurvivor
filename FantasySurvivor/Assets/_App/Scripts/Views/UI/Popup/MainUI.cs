@@ -109,7 +109,7 @@ public class MainUI : View<GameApp>, IPopup
 
 	private void OnClickBtnBattle()
 	{
-		gameController.StartGame(1);
+		//gameController.StartGame(1);
 		Close();
 	}
 	

@@ -14,7 +14,7 @@ namespace FantasySurvivor
 		{
 			_levelCharacter = 1;
 			_expMax = 10;
-			levelInGame = 1;
+			WaveInGame = 1;
 		}
 
 		private float _timeInGame;
@@ -25,7 +25,7 @@ namespace FantasySurvivor
 
 		private int _expMax;
 
-		private int _levelInGame;
+		private int _waveInGame;
 
 		private int _monsterKilled;
 
@@ -70,13 +70,13 @@ namespace FantasySurvivor
 			}
 		}
 		
-		public int levelInGame
+		public int WaveInGame
 		{
-			get => _levelInGame;
+			get => _waveInGame;
 			set {
-				if(levelInGame == value) return;
-				_levelInGame = value;
-				RaiseDataChanged(nameof(levelInGame));
+				if(WaveInGame == value) return;
+				_waveInGame = value;
+				RaiseDataChanged(nameof(WaveInGame));
 			}
 		}
 		

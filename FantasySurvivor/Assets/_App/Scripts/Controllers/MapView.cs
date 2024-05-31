@@ -33,9 +33,13 @@ public class MapView : View<GameApp>
 
 	public MapModel model { get; private set; }
 
+	public int currentLevel = 0;
+
 	[SerializeField] private Vector2 _size;
 
 	private int _coinOfLevel = 0;
+
+	private LevelConfig[] _dataLevelArr;
 
 	private Cooldown _cdEndLevel = new Cooldown();
 
@@ -44,13 +48,13 @@ public class MapView : View<GameApp>
 
 	
 
-	public void Init()
+	public void Init(int chapter, int level)
 	{
 		model = new();
 		listSkill = app.resourceManager.GetListSkill().Where(p => p.canAppear).ToList();
 		
 		//fix it
-		StartLevel(1,model.levelInGame);
+		StartLevel(chapter, level);
 	}
 
 	public List<SkillData> GetRandomSkill()
@@ -90,10 +94,15 @@ public class MapView : View<GameApp>
 		}
 	}
 
-	private void StartLevel(int chapter, int level)
+	public void StartLevel(int chapter, int level)
 	{
-		var dataLevel = app.configs.dataChapter.GetConfigLevel(chapter, level)[level];
-		var dataWave =dataLevel.waves;
+		_dataLevelArr = app.configs.dataChapter.GetConfigLevel(chapter, level);
+		UpdateLevel();
+	}
+	private void UpdateLevel()
+	{
+		var dataLevel = _dataLevelArr[model.WaveInGame - 1];
+		var dataWave = dataLevel.waves;
 		foreach (var wave in dataWave)
 		{
 			var waveData = new WaveData
@@ -127,8 +136,8 @@ public class MapView : View<GameApp>
 		{
 			_listWaveData.Clear();
 			gameController.AddReward(dictionaryReward, TypeItemReward.Coin, _coinOfLevel);
-			model.levelInGame++;
-			StartLevel(1, model.levelInGame);
+			model.WaveInGame++;
+			UpdateLevel();
 			return;
 		}
 
@@ -142,8 +151,8 @@ public class MapView : View<GameApp>
 					if (_listWaveData.Count == 0)
 					{
 						gameController.AddReward(dictionaryReward, TypeItemReward.Coin, _coinOfLevel);
-						model.levelInGame++;
-						StartLevel(1, model.levelInGame);
+						model.WaveInGame++;
+						UpdateLevel();
 					}
 				}
 				continue;
