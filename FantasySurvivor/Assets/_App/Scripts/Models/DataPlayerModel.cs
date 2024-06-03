@@ -59,7 +59,7 @@ namespace FantasySurvivor
 		[JsonProperty] public bool firstSeeBulletInteract;
 		
 		
-		[JsonProperty] private List<ItemEquipStat> _bagItemEquip;
+		[JsonProperty] private List<ItemEquipStat> _bagItemEquip = new List<ItemEquipStat>();
 		
 		public int Coin
 		{
@@ -215,11 +215,6 @@ namespace FantasySurvivor
 	        RaiseDataChanged(nameof(BagItemEquip));
         }
 
-        public ItemEquipStat GetItemEquip(ItemEquipId id)
-        {
-	        return _bagItemEquip.FirstOrDefault(item =>(ItemEquipId) Enum.Parse(typeof(ItemEquipId),item.id) ==  id);
-        }
-        
         public ItemEquipStat GetFirstItemEquipAdded()
         {
 	        return _bagItemEquip.LastOrDefault();

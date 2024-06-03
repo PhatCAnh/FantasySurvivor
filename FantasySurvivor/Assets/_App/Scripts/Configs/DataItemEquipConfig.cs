@@ -1,21 +1,23 @@
-﻿using ArbanFramework.Config;
+﻿using System;
+using ArbanFramework.Config;
 namespace FantasySurvivor
 {
+	[Serializable]
 	public class DataItemEquipConfig : IConfigItem
 	{
-		public string id { get; private set; }
+		public string id { get; set; }
 
-		public int hp { get; private set; }
+		public int hp { get; set; }
 
-		public int moveSpeed { get; private set; }
+		public int moveSpeed { get; set; }
 
-		public int damage { get; private set; }
+		public int damage { get; set; }
 
-		public float itemAttractionRange { get; private set; }
+		public float itemAttractionRange { get; set; }
 
-		public float attackRange { get; private set; }
+		public float attackRange { get; set; }
 
-		public int armor { get; private set; }
+		public int armor { get; set; }
 
 		public void OnReadImpl(IConfigReader reader)
 		{

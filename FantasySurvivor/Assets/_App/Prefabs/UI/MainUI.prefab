@@ -34031,6 +34031,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4517874775808894529}
     m_Modifications:
+    - target: {fileID: 586161888121895419, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 627366839415166521, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3378395337090897113, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3378395337090897113, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3378395337090897113, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3378395337090897113, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3378395337090897113, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3378395337090897113, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3893715719603201418, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -244766095, guid: ae3ce6c94150b0249bb729cf9a71f012, type: 3}
     - target: {fileID: 4052364480650660409, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
       propertyPath: imageRank
       value: 
@@ -34043,13 +34079,29 @@ PrefabInstance:
       propertyPath: _baseSpriteRank
       value: 
       objectReference: {fileID: 21300000, guid: dd77367546bf4433dbbb2317a935df54, type: 3}
+    - target: {fileID: 4462472800656597526, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5092614275285453532, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
       propertyPath: m_Name
       value: UpdateStat
       objectReference: {fileID: 0}
     - target: {fileID: 5092614275285453532, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5421219823172910308, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
+      propertyPath: m_Type
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5421219823172910308, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2437969a2b17b41b0a10bef95252a284, type: 3}
+    - target: {fileID: 7164706365977369316, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8135926211466111966, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
       propertyPath: m_Pivot.x
