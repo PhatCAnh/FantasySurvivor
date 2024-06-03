@@ -56,8 +56,12 @@ public class ResourceManager : UIManagerBase<PopupType>
 	
 	[SerializeField] private GameObject _bulletOwlStriker;
 
+    [SerializeField] private GameObject _bulletGoblinswift;
 
-	private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
+
+
+
+    private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
 
 	[Header("UI prefabs")]
@@ -190,6 +194,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.MinionWolf, _minionWolf},
 			{ItemPrefab.OwlStriker, _owlStriker},
 			{ItemPrefab.BulletOwlStriker, _bulletOwlStriker},
+			{ItemPrefab.BulletGoblinswift, _bulletGoblinswift},
 		};
 
 		_mapDic = new Dictionary<MapType, Map>
