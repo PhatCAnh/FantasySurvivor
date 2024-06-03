@@ -15,7 +15,7 @@ public class Ignite : StatusEffect
 	{
 		base.Active();
 		target.TakeDamage(value, TextPopupType.Fire);
-	}
+    }
 
 	public override bool Cooldown(float deltaTime)
 	{

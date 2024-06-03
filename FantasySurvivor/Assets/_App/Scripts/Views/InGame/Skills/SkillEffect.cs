@@ -1,5 +1,7 @@
 ﻿using _App.Scripts.Controllers;
 using ArbanFramework;
+using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 namespace FantasySurvivor
 {
     public class SkillEffect : Effect
@@ -21,4 +23,5 @@ namespace FantasySurvivor
             Singleton<PoolController>.instance.ReturnObject(_skillActive.type, _skillActive.gameObject);
         }
     }
+    
 }

@@ -27,13 +27,15 @@ public enum ItemPrefab
 	EarthPunch,
 	SkyBoom,
 	Boomerang,
+	SmilingFace,
+	IceSpear,
+	Twin,
 
 	HealthBar,
 	Character,
 	TextPopup,
 	GemExp,
 	SupportItem,
-	SmilingFace,
 }
 
 public enum MapType
@@ -103,6 +105,8 @@ public enum SkillName
 	SkyBoom,
 	Boomerang,
     SmilingFace,
+	IceSpear,
+	Twin,
 }
 
 public enum SkillType
