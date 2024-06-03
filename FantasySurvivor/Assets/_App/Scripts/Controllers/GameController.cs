@@ -220,11 +220,7 @@ public class GameController : Controller<GameApp>
     public void MonsterDestroy(Monster mons)
 	{
         listMonster.Remove(mons);
-        if (mons.wave != null)
-        {
-            mons.wave.monsterInWave.Remove(mons);
-        }
-        Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
+        //Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
     }
 
 
