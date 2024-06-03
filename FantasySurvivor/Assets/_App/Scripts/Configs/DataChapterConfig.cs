@@ -23,17 +23,14 @@ namespace FantasySurvivor
 		}
 	}
 
-	public class LevelConfig
+	public class ControlWaveeConfig
 	{
-		public int wave { get; private set; }
 		public int timeEnd { get; private set; }
 		public WaveConfig[] waves { get; private set; }
 		public int coin { get; private set; }
 
-		public LevelConfig(int wave, int timeEnd, WaveConfig[] waves, int coin)
+		public ControlWaveeConfig(int timeEnd, WaveConfig[] waves, int coin)
 		{
-			this.wave = wave;
-
 			this.timeEnd = timeEnd;
 
 			this.waves = waves;
@@ -45,9 +42,8 @@ namespace FantasySurvivor
 	public class DataChapterConfig : IConfigItem
 	{
 		public int chapter { get; private set; }
-		public int level { get; private set; }
 
-		public Dictionary<int, LevelConfig[]> dataLevel;
+		public Dictionary<int, ControlWaveeConfig[]> dataLevel;
 		public string GetId()
 		{
 			return chapter.ToString();
@@ -58,7 +54,7 @@ namespace FantasySurvivor
 			// var arrTimeStart = reader.ReadString().Split(lineDelimiter);
 			var lineDelimiter = '_';
 
-			dataLevel = new Dictionary<int, LevelConfig[]>();
+			dataLevel = new Dictionary<int, ControlWaveeConfig[]>();
 
 			chapter = reader.ReadInt();
 
@@ -95,7 +91,7 @@ namespace FantasySurvivor
 
 			foreach(var currentLevel in listLevel)
 			{
-				List<LevelConfig> levelData = new List<LevelConfig>();
+				List<ControlWaveeConfig> levelData = new List<ControlWaveeConfig>();
 
 				for(int i = 0; i < levelArr.Length; i++)
 				{
@@ -122,8 +118,7 @@ namespace FantasySurvivor
 							waves[j] = wave;
 						}
 
-						LevelConfig level = new LevelConfig(
-							waveArr[i],
+						ControlWaveeConfig level = new ControlWaveeConfig(
 							endTimeArr[i],
 							waves,
 							coinArr[i]
@@ -144,7 +139,7 @@ namespace FantasySurvivor
 			return GetConfig(id.ToString());
 		}
 
-		public LevelConfig[] GetConfigLevel(int chapter, int level)
+		public ControlWaveeConfig[] GetConfigLevel(int chapter, int level)
 		{
 			return GetConfig(chapter).dataLevel[level];
 		}

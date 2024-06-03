@@ -39,7 +39,7 @@ public class MapView : View<GameApp>
 
 	private int _coinOfLevel = 0;
 
-	private LevelConfig[] _dataLevelArr;
+	private ControlWaveeConfig[] _dataLevelArr;
 
 	private Cooldown _cdEndLevel = new Cooldown();
 
