@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using ArbanFramework.Config;
 namespace FantasySurvivor
 {
@@ -21,20 +22,31 @@ namespace FantasySurvivor
 			this.expMonster = expMonster;
 		}
 	}
-	
-	public class DataChapterConfig : IConfigItem
+
+	public class ControlWaveeConfig
 	{
-		public int level { get; private set; }
-		
 		public int timeEnd { get; private set; }
-		
 		public WaveConfig[] waves { get; private set; }
-		
 		public int coin { get; private set; }
 
+		public ControlWaveeConfig(int timeEnd, WaveConfig[] waves, int coin)
+		{
+			this.timeEnd = timeEnd;
+
+			this.waves = waves;
+
+			this.coin = coin;
+		}
+	}
+
+	public class DataChapterConfig : IConfigItem
+	{
+		public int chapter { get; private set; }
+
+		public Dictionary<int, ControlWaveeConfig[]> dataLevel;
 		public string GetId()
 		{
-			return level.ToString();
+			return chapter.ToString();
 		}
 
 		public void OnReadImpl(IConfigReader reader)
@@ -42,42 +54,94 @@ namespace FantasySurvivor
 			// var arrTimeStart = reader.ReadString().Split(lineDelimiter);
 			var lineDelimiter = '_';
 
-			level = reader.ReadInt();
-			var idMonsterArr = reader.ReadString();
-			var idMonster = idMonsterArr.Split(lineDelimiter);
-			timeEnd = reader.ReadInt();
-			var stepTime = reader.ReadString().Split(lineDelimiter);
-			var number = reader.ReadString().Split(lineDelimiter);
-			var atkDamage = reader.ReadString().Split(lineDelimiter);
-			var healthPoint = reader.ReadString().Split(lineDelimiter);
-			var exp = reader.ReadString().Split(lineDelimiter);
-			coin = reader.ReadInt();
+			dataLevel = new Dictionary<int, ControlWaveeConfig[]>();
 
-			waves = new WaveConfig[idMonster.Length];
+			chapter = reader.ReadInt();
 
-			for(int i = 0; i < waves.Length; i++)
+			var levelArr = reader.ReadIntArr();
+
+			var waveArr = reader.ReadIntArr();
+
+			var idMonsterArr = reader.ReadStringArr();
+
+			var endTimeArr = reader.ReadIntArr();
+
+			var stepTimeArr = reader.ReadStringArr();
+
+			var numberArr = reader.ReadStringArr();
+
+			var atkDamageArr = reader.ReadStringArr();
+
+			var healthPointArr = reader.ReadStringArr();
+
+			var expArr = reader.ReadStringArr();
+
+			var coinArr = reader.ReadIntArr();
+
+			var checkLevel = 0;
+			List<int> listLevel = new List<int>();
+			for(int i = 0; i < levelArr.Length; i++)
 			{
-				WaveConfig wave = new WaveConfig(
-					idMonster[i],
-					int.Parse(stepTime[i]),
-					int.Parse(number[i]),
-					int.Parse(atkDamage[i]),
-					int.Parse(healthPoint[i]),
-					int.Parse(exp[i])
-				);
+				if(levelArr[i] != checkLevel)
+				{
+					checkLevel = levelArr[i];
+					listLevel.Add(checkLevel);
+				}
+			}
 
-				waves[i] = wave;
+			foreach(var currentLevel in listLevel)
+			{
+				List<ControlWaveeConfig> levelData = new List<ControlWaveeConfig>();
+
+				for(int i = 0; i < levelArr.Length; i++)
+				{
+					if(currentLevel == levelArr[i])
+					{
+						var idMonster = idMonsterArr[i].Split(lineDelimiter);
+						var stepTime = stepTimeArr[i].Split(lineDelimiter);
+						var number = numberArr[i].Split(lineDelimiter);
+						var atkDamage = atkDamageArr[i].Split(lineDelimiter);
+						var healthPoint = healthPointArr[i].Split(lineDelimiter);
+						var exp = expArr[i].Split(lineDelimiter);
+
+						WaveConfig[] waves = new WaveConfig[idMonster.Length];
+						for(int j = 0; j < waves.Length; j++)
+						{
+							WaveConfig wave = new WaveConfig(
+								idMonster[j],
+								int.Parse(stepTime[j]),
+								int.Parse(number[j]),
+								int.Parse(atkDamage[j]),
+								int.Parse(healthPoint[j]),
+								int.Parse(exp[j])
+							);
+							waves[j] = wave;
+						}
+
+						ControlWaveeConfig level = new ControlWaveeConfig(
+							endTimeArr[i],
+							waves,
+							coinArr[i]
+						);
+						levelData.Add(level);
+					}
+				}
+				dataLevel.Add(currentLevel, levelData.ToArray());
 			}
 		}
 	}
-
 	public class DataChapterConfigTable : Configs<DataChapterConfig>
 	{
 		public override string FileName => nameof(DataChapterConfig);
 
-		public DataChapterConfig GetConfig(int level)
+		public DataChapterConfig GetConfig(int id)
 		{
-			return GetConfig(level.ToString());
+			return GetConfig(id.ToString());
+		}
+
+		public ControlWaveeConfig[] GetConfigLevel(int chapter, int level)
+		{
+			return GetConfig(chapter).dataLevel[level];
 		}
 	}
 }

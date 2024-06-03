@@ -75,11 +75,12 @@ public class GameController : Controller<GameApp>
 	public void ShowMainHome()
 	{
 		app.resourceManager.ShowPopup(PopupType.MainUI);
+		app.resourceManager.ShowPopup(PopupType.ChoiceMap);
 	}
 
-	public void StartGame(int chapter)
+	public void StartGame(int chapter, int level)
 	{
-		ChangeScene(GameConst.nameScene_Game, () => LoadMap(chapter));
+		ChangeScene(GameConst.nameScene_Game, () => LoadMap(chapter, level));
 	}
 
 	public void WinGame()
@@ -403,7 +404,7 @@ public class GameController : Controller<GameApp>
 	}
 	
 
-	private void LoadMap(int chapter)
+	private void LoadMap(int chapter, int level)
 	{
 		_camSize = Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0));
 		_width = 1 / (_camSize.x - 0.5f);
@@ -411,7 +412,7 @@ public class GameController : Controller<GameApp>
 		Instantiate(app.resourceManager.mapInfinity, Vector3.zero, quaternion.identity).Init(chapter);
 
 		map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
-		map.Init();
+		map.Init(chapter, level);
 		character = SpawnCharacter();
 		listMonster.Clear();
 		Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.SupportItem), Vector3.zero, quaternion.identity);

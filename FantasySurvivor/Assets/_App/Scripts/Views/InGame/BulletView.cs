@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 public class BulletView : View<GameApp>
 {
 	[SerializeField] protected float moveSpeed;
-	
+
 	private Character _origin;
 
 	protected GameObject callBackEffect;
@@ -23,20 +23,20 @@ public class BulletView : View<GameApp>
 	protected bool isCritical;
 
 	protected float damage;
-	
+
 	protected GameController gameController => Singleton<GameController>.instance;
 
 	public void Init(Character character, Monster target, GameObject effect)
 	{
 		_origin = character;
-		
+
 		this.target = target;
 
 		callBackEffect = effect;
-		
+
 		damage = _origin.model.attackDamage;
 	}
-	
+
 	protected void FixedUpdate()
 	{
 		//sua lai
@@ -47,12 +47,12 @@ public class BulletView : View<GameApp>
 			targetPos = target.transform.position;
 			transform.up = targetPos - transform.position;
 		}
-		
+
 		transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-		
+
 		if(gameController.CheckTouch(transform.position, targetPos, 0.1f))
 		{
-			target.TakeDamage(damage, isCritical);
+			target.TakeDamage(damage, TextPopupType.Normal, isCritical);
 			TouchUnit(target);
 		}
 	}
@@ -63,7 +63,7 @@ public class BulletView : View<GameApp>
 		{
 			Instantiate(callBackEffect, unit.transform.position, quaternion.identity);
 		}
-		
+
 		Destroy(gameObject);
 	}
 
@@ -71,7 +71,7 @@ public class BulletView : View<GameApp>
 	{
 		if(other.TryGetComponent(out Monster monster))
 		{
-			monster.TakeDamage(damage, isCritical);
+			monster.TakeDamage(damage, TextPopupType.Normal, isCritical);
 			TouchUnit(monster);
 		}
 	}

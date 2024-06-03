@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8206914172386293144}
   - component: {fileID: 8206914172386293141}
   - component: {fileID: 8206914172386293146}
-  - component: {fileID: 2969946264049436035}
+  - component: {fileID: 8841955376112960210}
   m_Layer: 0
   m_Name: Skin
   m_TagString: Untagged
@@ -107,7 +107,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2969946264049436035
+--- !u!114 &8841955376112960210
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8206914172386293145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48c5d9a3fee442bc925825020698beb9, type: 3}
+  m_Script: {fileID: 11500000, guid: adf27a6a20e357042b00a375ebec148f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8206914173546746077
@@ -169,3 +169,4 @@ MonoBehaviour:
   skillDamagedType: 1
   targetType: 0
   type: 15
+  origin: {fileID: 0}

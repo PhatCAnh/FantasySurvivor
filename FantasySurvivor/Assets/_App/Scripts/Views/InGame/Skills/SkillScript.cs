@@ -6,7 +6,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 namespace FantasySurvivor
 {
-    public class FireBall : ProactiveSkill
+    public class FireBallControl : ProactiveSkill
     {
         public override void Init(SkillData data)
         {
@@ -28,7 +28,7 @@ namespace FantasySurvivor
 		}
 	}
 
-    public class EarthPunch : ProactiveSkill
+    public class EarthPunchControl : ProactiveSkill
     {
         public override void Init(SkillData data)
         {
@@ -36,7 +36,7 @@ namespace FantasySurvivor
         }
     }
 
-    public class Poisonball : ProactiveSkill
+    public class PoisonballControl : ProactiveSkill
     {
         public override void Init(SkillData data)
         {
@@ -80,14 +80,13 @@ namespace FantasySurvivor
 		}
 	}*/
 
-    public class Shark : ProactiveSkill
+    public class SharkControl : ProactiveSkill
     {
         protected override void UpdatePrefab(SkillActive prefab)
         {
             base.UpdatePrefab(prefab);
             prefab.transform.localScale = Vector3.one * levelData[level].valueSpecial1;
             prefab.size = levelData[level].valueSpecial1;
-
         }
     }
 
@@ -141,7 +140,7 @@ namespace FantasySurvivor
 		}
 	}*/
 
-	public class ThunderStrike : ProactiveSkill
+	public class ThunderStrikeControl : ProactiveSkill
 	{
 		public override void Init(SkillData data)
 		{
@@ -164,7 +163,7 @@ namespace FantasySurvivor
 			timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
 		}
 	}
-	public class SmilingFacel : ProactiveSkill
+	public class SmilingFaceControl : ProactiveSkill
     {
         public override void Init(SkillData data)
         {
@@ -172,7 +171,7 @@ namespace FantasySurvivor
         }
     }
 
-    public class Boomerangl : ProactiveSkill
+    public class BoomerangControl : ProactiveSkill
     {
         public override void Init(SkillData data)
         {
@@ -180,7 +179,7 @@ namespace FantasySurvivor
         }
     }
 
-    public class Skyboom : ProactiveSkill
+    public class SkyboomControl : ProactiveSkill
     {
         public override void Init(SkillData data)
         {
