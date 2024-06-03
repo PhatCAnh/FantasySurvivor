@@ -63,6 +63,7 @@ public class Monster : ObjectRPG
 
 	public bool isNoMove = false;
 
+	private Collider2D monsCollider;
 	public bool isStandStill { get; private set; } = false;
 
     private StateMachine _stateMachine;
@@ -116,8 +117,9 @@ public class Monster : ObjectRPG
 		sizeAttack = stat.attackRange.BaseValue != 0 ? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
 
         InitializationStateMachine();
-
-	}
+        monsCollider = GetComponent<Collider2D>();
+		monsCollider.isTrigger = false;
+    }
 
     private void Update()
 	{
@@ -218,6 +220,7 @@ public class Monster : ObjectRPG
     public virtual void Die(bool selfDie = false)
 	{
         isDead = true;
+        monsCollider.isTrigger = true;
         animator.SetBool("Dead", isDead);
         gameController.MonsterDie(this, selfDie);
     }
