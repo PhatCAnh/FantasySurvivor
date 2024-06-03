@@ -347,6 +347,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5413659250902458259, guid: a5bdafbf3c8a6fc46965f9005d3ef13b, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _skillTwin
+      value: 
+      objectReference: {fileID: 5969974768321339375, guid: bccfbe3ac4d1a834387290001c1a7597, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _swampOoze
       value: 
       objectReference: {fileID: 6749447720324306465, guid: a1825d6b1a427f14abecda703cdf0061, type: 3}
@@ -374,6 +378,10 @@ PrefabInstance:
       propertyPath: _electroBomber
       value: 
       objectReference: {fileID: 3192426052812612716, guid: 2ade275be3b886440aeed52a0ed216ca, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _skillIceSpear
+      value: 
+      objectReference: {fileID: 170600247094605654, guid: 5a973968a5c56f3429e3e56a11e579ef, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _globloomSentry
       value: 
@@ -406,6 +414,10 @@ PrefabInstance:
       propertyPath: _skillPoisonBullet
       value: 
       objectReference: {fileID: 445555888757746086, guid: be6e93258c41fb2469fa35bbf434547c, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _choiceSkillOutGame
+      value: 
+      objectReference: {fileID: 3285721868862599866, guid: 9eab12720a0830f40b01464627cb88a3, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.size
       value: 9
@@ -468,27 +480,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[0].canAppear
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[1].canAppear
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[2].canAppear
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[3].canAppear
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[4].canAppear
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[5].canAppear
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[6].canAppear
@@ -496,7 +508,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[7].canAppear
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[8].canAppear
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[4].typeElemental
@@ -520,75 +536,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[0].evolveSkillType
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[0].normalSkillType
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[1].evolveSkillType
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
-      propertyPath: _poolSkill.Array.data[1].normalSkillType
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[1].normalSkillType
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[2].evolveSkillType
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[2].normalSkillType
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[3].evolveSkillType
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[3].normalSkillType
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[4].evolveSkillType
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[4].normalSkillType
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[5].evolveSkillType
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[5].normalSkillType
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[6].evolveSkillType
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[6].normalSkillType
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[7].evolveSkillType
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[7].normalSkillType
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[8].evolveSkillType
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[8].normalSkillType
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 4925867890613326577, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: m_Name

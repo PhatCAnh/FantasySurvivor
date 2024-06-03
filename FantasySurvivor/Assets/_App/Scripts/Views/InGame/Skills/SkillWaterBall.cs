@@ -46,7 +46,7 @@ namespace FantasySurvivor
                 if(gameController.CheckTouch(transform.position, mob.transform.position, 3))
                 {
                     if (mob == target) continue;
-                    mob.TakeDamage(damage/2);
+                    mob.TakeDamage(damage/2, TextPopupType.Normal);
                 }
             }
         }

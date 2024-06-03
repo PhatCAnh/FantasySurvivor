@@ -28,6 +28,7 @@ public class MainUI : View<GameApp>, IPopup
 	private float _durationAnim = 0.3f;
 
 	private GameController gameController => Singleton<GameController>.instance;
+	private PopupChoiceSkill popupChoiceSkill => Singleton<PopupChoiceSkill>.instance;
 
 	protected override void OnViewInit()
 	{
@@ -38,14 +39,14 @@ public class MainUI : View<GameApp>, IPopup
 		_itemUpdate.toggle.onValueChanged.AddListener(OnClickTglUpdate);
 		_itemLock.toggle.onValueChanged.AddListener(OnClickTglLock);
 		_btnBattle.onClick.AddListener(OnClickBtnBattle);
-		
+
 		_btnCheat.onClick.AddListener(() =>
 		{
 			app.resourceManager.ShowPopup(PopupType.Cheat);
 		});
-		
+
 		AddEventChangeStat();
-		
+
 	}
 
 	public void Open()
@@ -94,13 +95,13 @@ public class MainUI : View<GameApp>, IPopup
 		ChangeAnimToggle(_itemShop);
 		_goLock.SetActive(_itemShop.isLock && value);
 	}
-	
+
 	private void OnClickTglUpdate(bool value)
 	{
 		ChangeAnimToggle(_itemUpdate);
 		_goUpdateStat.SetActive(value);
 	}
-	
+
 	private void OnClickTglLock(bool value)
 	{
 		ChangeAnimToggle(_itemLock);
@@ -109,10 +110,11 @@ public class MainUI : View<GameApp>, IPopup
 
 	private void OnClickBtnBattle()
 	{
-		//gameController.StartGame(1);
-		Close();
+		app.resourceManager.ShowPopup(PopupType.ChoiceSkillOutGame);
+
 	}
-	
+
+
 	private void AddEventChangeStat()
 	{
 		AddDataBinding("fieldPlayerTower-goldCoinValue", _txtGoldCoin, (control, e) =>
@@ -121,5 +123,4 @@ public class MainUI : View<GameApp>, IPopup
 			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.Coin), app.models.dataPlayerModel)
 		);
 	}
-
 }

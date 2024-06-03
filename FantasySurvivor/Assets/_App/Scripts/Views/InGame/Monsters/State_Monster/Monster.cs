@@ -23,9 +23,9 @@ public class Monster : ObjectRPG
 
 	public bool justSpawnVertical = false;
 
-    #region Properties
+	#region Properties
 
-    private Vector2 _direction = Vector2.zero;
+	private Vector2 _direction = Vector2.zero;
 
 	public MonsterModel model { get; protected set; }
 
@@ -59,14 +59,14 @@ public class Monster : ObjectRPG
 
 	public bool isAlive => model.currentHealthPoint > 0;
 
-    public bool isDead;
+	public bool isDead;
 
 	public bool isNoMove = false;
 
 	private Collider2D monsCollider;
 	public bool isStandStill { get; private set; } = false;
 
-    private StateMachine _stateMachine;
+	private StateMachine _stateMachine;
 	private GameController gameController => Singleton<GameController>.instance;
 
 	private MonsterIdle _idleState;
@@ -75,7 +75,7 @@ public class Monster : ObjectRPG
 
 	private MonsterAttack _attackState;
 
-    #endregion
+	#endregion
 
 	public float size;
 	public Character target => gameController.character;
@@ -94,7 +94,9 @@ public class Monster : ObjectRPG
 	#endregion
 
 	#region Base Methods
-    protected Cooldown moveSpeedCooldown = new Cooldown();
+
+	protected Cooldown moveSpeedCooldown = new Cooldown();
+	public List<StatusEffect> listStatusEffect;
 
 	public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave, ItemPrefab monsType)
 	{
@@ -104,11 +106,11 @@ public class Monster : ObjectRPG
 
 		if(wave != null)
 		{
-            this.wave = wave;
+			this.wave = wave;
 			exp = wave.expMonster;
-        }
+		}
 
-        model = new MonsterModel(
+		model = new MonsterModel(
 			stat.moveSpeed.BaseValue,
 			stat.maxHealth.BaseValue,
 			stat.attackDamage.BaseValue,
@@ -116,12 +118,12 @@ public class Monster : ObjectRPG
 			exp);
 		sizeAttack = stat.attackRange.BaseValue != 0 ? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
 
-        InitializationStateMachine();
-        monsCollider = GetComponent<Collider2D>();
+		InitializationStateMachine();
+		monsCollider = GetComponent<Collider2D>();
 		monsCollider.isTrigger = false;
-    }
+	}
 
-    private void Update()
+	private void Update()
 	{
 		if(gameController.isStop) return;
 		var time = Time.deltaTime;
@@ -172,8 +174,8 @@ public class Monster : ObjectRPG
 			MoveState();
 			animator.SetBool("Attack", false);
 		}
-        SetAnimation(idleDirection);
-    }
+		SetAnimation(idleDirection);
+	}
 
 
 	protected virtual void SetAnimation(Vector2 directionMove)
@@ -188,42 +190,42 @@ public class Monster : ObjectRPG
 	}
 
 
-	public virtual void TakeDamage(float damage, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
+	public virtual void TakeDamage(float damage, TextPopupType type, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
 	{
-        if (!isAlive) return;
+		if(!isAlive) return;
 		model.currentHealthPoint -= damage;
 		callBackDamaged?.Invoke();
 
 		var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.TowerDamage, isCritical);
+		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.Normal, isCritical);
 
-        if (isAlive) return;
+		if(isAlive) return;
 		Die();
-        callBackKilled?.Invoke();
-    }
+		callBackKilled?.Invoke();
+	}
 
-    public void ResetAttackCountdown()
-    {
-        cdAttack.Restart(model.attackSpeed);
-    }
-
-    public virtual void Move(Vector2 dir, float deltaTime)
+	public void ResetAttackCountdown()
 	{
-		if (isDead) return;
+		cdAttack.Restart(model.attackSpeed);
+	}
+
+	public virtual void Move(Vector2 dir, float deltaTime)
+	{
+		if(isDead) return;
 
 		var movement = model.moveSpeed * GameConst.MOVE_SPEED_ANIMATION_RATIO * deltaTime * speedMul * dir;
 		var newPosition = myRigid.position + movement;
 		myRigid.MovePosition(newPosition);
 	}
 
-    
-    public virtual void Die(bool selfDie = false)
+
+	public virtual void Die(bool selfDie = false)
 	{
-        isDead = true;
-        monsCollider.isTrigger = true;
-        animator.SetBool("Dead", isDead);
-        gameController.MonsterDie(this, selfDie);
-    }
+		isDead = true;
+		monsCollider.isTrigger = true;
+		animator.SetBool("Dead", isDead);
+		gameController.MonsterDie(this, selfDie);
+	}
 
 	protected virtual void Stop()
 	{
@@ -285,25 +287,25 @@ public class Monster : ObjectRPG
 
 	#region State Machine Method
 
-    public virtual void flip()
-    {
-		if (isNoMove) return;
-		
-        if (transform.position.x > gameController.character.transform.position.x)
-        {
-            Vector2 localScale = animator.transform.localScale;
-            localScale.x = -1;
-            animator.transform.localScale = localScale;
-        }
-        else
-        {
-            Vector2 localScale = animator.transform.localScale;
-            localScale.x = 1;
-            animator.transform.localScale = localScale;
-        }
-    }
+	public virtual void flip()
+	{
+		if(isNoMove) return;
 
-    protected virtual void InitializationStateMachine()
+		if(transform.position.x > gameController.character.transform.position.x)
+		{
+			Vector2 localScale = animator.transform.localScale;
+			localScale.x = -1;
+			animator.transform.localScale = localScale;
+		}
+		else
+		{
+			Vector2 localScale = animator.transform.localScale;
+			localScale.x = 1;
+			animator.transform.localScale = localScale;
+		}
+	}
+
+	protected virtual void InitializationStateMachine()
 	{
 		if(_stateMachine != null)
 		{
@@ -311,7 +313,7 @@ public class Monster : ObjectRPG
 		}
 		else
 		{
-            _stateMachine = new StateMachine();
+			_stateMachine = new StateMachine();
 			_idleState = new MonsterIdle(this, _stateMachine);
 			_moveState = new MonsterMove(this, _stateMachine);
 			_attackState = new MonsterAttack(this, _stateMachine);
@@ -319,7 +321,7 @@ public class Monster : ObjectRPG
 		}
 	}
 
-    public virtual void IdleState()
+	public virtual void IdleState()
 	{
 		if(isIdle) return;
 		_stateMachine.ChangeState(_idleState);
@@ -329,7 +331,7 @@ public class Monster : ObjectRPG
 	{
 		flip();
 		if(isMove) return;
-        _stateMachine.ChangeState(_moveState);
+		_stateMachine.ChangeState(_moveState);
 	}
 
 	public virtual void AttackState()

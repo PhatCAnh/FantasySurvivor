@@ -21,7 +21,7 @@ namespace FantasySurvivor
 		public void Attack()
 		{
 			if(_target == null) return;
-			_target.TakeDamage(Mathf.RoundToInt(_damage));
+			_target.TakeDamage(Mathf.RoundToInt(_damage), TextPopupType.Normal);
 			if(callBackEffect != null)
 			{
 				Instantiate(callBackEffect, _target.transform.position, quaternion.identity);

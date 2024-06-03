@@ -11,12 +11,9 @@ public enum ItemPrefab
     LupineStag,
     ElectroBomber,
 	SlimeWandering,
-
     MinionSkeleton,
-
     BulletKillerBee,
     BulletGlobloomSentry,
-
     SkillFireBall,
 	ThunderStrikeSmall,
 	ThunderStrike,
@@ -30,12 +27,14 @@ public enum ItemPrefab
 	SmilingFace,
 	IceSpear,
 	Twin,
-
 	HealthBar,
 	Character,
 	TextPopup,
 	GemExp,
 	SupportItem,
+	BulletOwlStriker,
+	OwlStriker,
+	MinionWolf,
 }
 
 public enum MapType
@@ -144,6 +143,7 @@ public enum PopupType
 	HealthBar,
 	Cheat,
 	ChoiceSkill,
+	ChoiceSkillOutGame,
 }
 
 public enum SkillDamagedType
