@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5173040675757702781}
   - component: {fileID: 4589075905217086081}
   - component: {fileID: 7924729917233237540}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 2381421882778776729}
   - component: {fileID: 6416496041919007720}
   - component: {fileID: 7867771942458735023}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GlobloomSentry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -236,9 +236,9 @@ MonoBehaviour:
   justSpawnVertical: 0
   isDead: 0
   isNoMove: 0
-  size: 0
+  size: 0.52
   bulletPrefab: {fileID: 4128420622295471649, guid: bfd583f73e63fa0439dd8ee8775546e8, type: 3}
-  typeBullet: 9
+  typeBullet: 10
   _numberBack: 0
 --- !u!1 &6679784147536924023
 GameObject:
@@ -249,7 +249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5239373447629045049}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

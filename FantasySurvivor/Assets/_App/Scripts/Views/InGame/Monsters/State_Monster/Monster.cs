@@ -63,6 +63,7 @@ public class Monster : ObjectRPG
 
 	public bool isNoMove = false;
 
+	private Collider2D monsCollider;
 	public bool isStandStill { get; private set; } = false;
 
     private StateMachine _stateMachine;
@@ -87,8 +88,6 @@ public class Monster : ObjectRPG
 	protected Cooldown cdAttack = new Cooldown();
 
 	protected Vector3 moveTarget;
-
-	public List<StatusEffect> listStatusEffect = new List<StatusEffect>();
 
 	public List<MonsterUpdateStat> listUpdateStat = new List<MonsterUpdateStat>();
 
@@ -118,9 +117,9 @@ public class Monster : ObjectRPG
 		sizeAttack = stat.attackRange.BaseValue != 0 ? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
 
         InitializationStateMachine();
-        
-        var ignite = new Ignite(this, 2, 10);
-	}
+        monsCollider = GetComponent<Collider2D>();
+		monsCollider.isTrigger = false;
+    }
 
     private void Update()
 	{
@@ -129,7 +128,6 @@ public class Monster : ObjectRPG
 		cdAttack.Update(time);
 		_stateMachine.currentState.LogicUpdate(time);
 		HandleUpdateStat(time);
-		HandleStatusEffect(time);
 	}
 
 	private void FixedUpdate()
@@ -190,14 +188,14 @@ public class Monster : ObjectRPG
 	}
 
 
-	public virtual void TakeDamage(float damage, TextPopupType dmgType = TextPopupType.Normal, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
+	public virtual void TakeDamage(float damage, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
 	{
         if (!isAlive) return;
 		model.currentHealthPoint -= damage;
 		callBackDamaged?.Invoke();
 
 		var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-		text.GetComponent<TextPopup>().Create(damage.ToString(), dmgType, isCritical);
+		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.TowerDamage, isCritical);
 
         if (isAlive) return;
 		Die();
@@ -222,6 +220,7 @@ public class Monster : ObjectRPG
     public virtual void Die(bool selfDie = false)
 	{
         isDead = true;
+        monsCollider.isTrigger = true;
         animator.SetBool("Dead", isDead);
         gameController.MonsterDie(this, selfDie);
     }
@@ -279,15 +278,6 @@ public class Monster : ObjectRPG
 			}
 		}
 	}
-
-	private void HandleStatusEffect(float deltaTime)
-	{
-		foreach(var item in listStatusEffect.ToList())
-		{
-			item.Cooldown(deltaTime);
-		}
-	}
-	
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.DrawWireSphere(transform.position, size);
