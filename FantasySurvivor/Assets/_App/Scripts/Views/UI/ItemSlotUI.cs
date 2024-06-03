@@ -12,9 +12,9 @@ public class ItemSlotUI : View<GameApp>
     [SerializeField] protected Image imageRank;
     [SerializeField] protected Button btn;
 
-    protected StatUI parent;
+    protected CharacterInformation parent;
     
-    public void Init(ItemEquipData data, StatUI ui)
+    public void Init(ItemEquipData data, CharacterInformation ui)
     {
         parent = ui;
         if(data != null)

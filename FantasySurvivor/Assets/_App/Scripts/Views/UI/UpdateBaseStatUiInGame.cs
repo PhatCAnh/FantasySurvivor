@@ -8,7 +8,7 @@
 //
 // public class UpdateBaseStatUiInGame : View<GameApp>
 // {
-// 	[Required, SerializeField] private StatUI _attackDamage, _attackRange, _attackSpeed, _health, _criticalRate, _criticalDamage, _regenHp;
+// 	[Required, SerializeField] private CharacterInformation _attackDamage, _attackRange, _attackSpeed, _health, _criticalRate, _criticalDamage, _regenHp;
 // 	private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 // 	private MapModel mapModel => gameController.map.model;
 // 	private CharacterModel towerModel => gameController.character.model;
@@ -100,7 +100,7 @@
 // 		);
 // 	}
 //
-// 	private float ChangeStatEvent(TypeStatTower type, int level, StatUI statUI)
+// 	private float ChangeStatEvent(TypeStatTower type, int level, CharacterInformation statUI)
 // 	{
 // 		var dataBase = gameController.tower.GetBaseStat(type);
 // 		var dataCurrent = app.configs.dataLevelTowerInGame.GetConfigStat(level, type);
@@ -166,7 +166,7 @@
 // 		//app.analytics.TrackUpStat(true, TypeStatTower.RegenHp, towerModel.levelRegenHp);
 // 	}
 //
-// 	private void CheckInteractableBtnStat(StatUI button, int coin)
+// 	private void CheckInteractableBtnStat(CharacterInformation button, int coin)
 // 	{
 // 		button.button.interactable = coin >= button.price && (button.currentLevel <= button.maxLevel);
 // 	}

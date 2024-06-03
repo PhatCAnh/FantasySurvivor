@@ -22433,6 +22433,7 @@ MonoBehaviour:
   _imgLineFocus: {fileID: 3982987167419258250}
   _btnBattle: {fileID: 86872664}
   _btnCheat: {fileID: 8840631335821913033}
+  _btnTest: {fileID: 1856873232}
   _txtGoldCoin: {fileID: 8114161817288681542}
 --- !u!1 &4544456657365309012
 GameObject:
@@ -34089,7 +34090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5092614275285453532, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5421219823172910308, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
       propertyPath: m_Type
@@ -34181,6 +34182,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8135926211466111966, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8322258187409932422, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8322258187409932422, guid: dc299a4db164f3d4d9c2dca452ca1557, type: 3}

@@ -76,6 +76,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _choiceSkill;
 
 	[SerializeField] private GameObject _choiceSkillOutGame;
+	
+	[SerializeField] private GameObject _characterInformation;
 
 
 	[Header("UI Tutorial prefabs")]
@@ -150,6 +152,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 		RegisterPopup(PopupType.Cheat, _cheatPopup);
 		RegisterPopup(PopupType.ChoiceSkill, _choiceSkill);
 		RegisterPopup(PopupType.ChoiceSkillOutGame, _choiceSkillOutGame);
+		RegisterPopup(PopupType.CharacterInformation, _characterInformation);
 	}
 
 	private void InitDic()

@@ -75,7 +75,7 @@ public class GameController : Controller<GameApp>
 	public void ShowMainHome()
 	{
 		app.resourceManager.ShowPopup(PopupType.MainUI);
-		//app.resourceManager.ShowPopup(PopupType.ChoiceMap);
+		app.resourceManager.ShowPopup(PopupType.CharacterInformation);
 	}
 
 	public void StartGame(int chapter, int level)
