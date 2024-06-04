@@ -105,10 +105,10 @@ public class Character : ObjectRPG
 
     }
 
-    public void Init(CharacterStat statInit)
+    public void Init(CharacterStat statInit, CharacterModel model)
     {
-
         stat = statInit;
+        app.models.characterModel = model;
     }
 
     private void Update()
@@ -163,8 +163,6 @@ public class Character : ObjectRPG
 
     public void AddProactiveSkill(SkillData skillData)
     {
-        UpdateStat(StatModifierType.Add, 10, 0, 0, 0, 0, 0, 4);
-
         var skill = GetSkill(skillData.name);
         if (skill != null)
         {
