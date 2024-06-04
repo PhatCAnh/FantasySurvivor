@@ -108,7 +108,7 @@ public class TowerView : ObjectRPG
 		if(!isAlive) return;
 		model.currentHealthPoint -= damage;
 		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.Red);
+		text.GetComponent<TextPopup>().Create(damage, TextPopupType.Red);
 		if(!isAlive) Die();
 	}
 

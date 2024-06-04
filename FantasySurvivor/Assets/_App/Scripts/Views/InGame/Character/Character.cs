@@ -147,7 +147,7 @@ public class Character : ObjectRPG
 		damage = MinusDamage(damage);
 		model.currentHealthPoint -= damage;
 		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.Red);
+		text.GetComponent<TextPopup>().Create(damage, TextPopupType.Red);
 
         if (!IsAlive)
         {
@@ -375,7 +375,7 @@ public class Character : ObjectRPG
     {
         int roundedHealingRate = Mathf.RoundToInt(model.healingRate * 100);
         GameObject healingText = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-        healingText.GetComponent<TextPopup>().Create(roundedHealingRate.ToString(), TextPopupType.Healing);
+        healingText.GetComponent<TextPopup>().Create(roundedHealingRate, TextPopupType.Healing);
     }
 
     public void DeactivateHealing()

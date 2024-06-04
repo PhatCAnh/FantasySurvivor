@@ -121,8 +121,6 @@ public class Monster : ObjectRPG
 		InitializationStateMachine();
 		monsCollider = GetComponent<Collider2D>();
 		monsCollider.isTrigger = false;
-
-		var ignite = new Ignite(this, 2, 10f);
 	}
 
 	private void Update()
@@ -200,7 +198,7 @@ public class Monster : ObjectRPG
 		callBackDamaged?.Invoke();
 
 		var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-		text.GetComponent<TextPopup>().Create(damage.ToString(), type, isCritical);
+		text.GetComponent<TextPopup>().Create(damage, type, isCritical);
 
 		if(isAlive) return;
 		Die();
@@ -225,9 +223,11 @@ public class Monster : ObjectRPG
 	public virtual void Die(bool selfDie = false)
 	{
 		isDead = true;
+		listStatusEffect.Clear();
 		monsCollider.isTrigger = true;
 		animator.SetBool("Dead", isDead);
 		gameController.MonsterDie(this, selfDie);
+		
 	}
 
 	protected virtual void Stop()

@@ -58,6 +58,7 @@ public enum TextPopupType
     Red,
     Normal,
     Fire,
+    Poison,
 }
 
 public enum TypeStatTower

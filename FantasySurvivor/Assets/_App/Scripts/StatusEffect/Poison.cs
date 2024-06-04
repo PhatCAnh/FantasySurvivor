@@ -7,60 +7,29 @@ using UnityEngine;
 public class Poison : StatusEffect
 {
     public Cooldown cd;
-    public bool burnDie = false;
-    public float duration;
-    public float level;
-    private GameController gameController => Singleton<GameController>.instance;
 
-    public Poison(Monster target, float value, float duration , float level) : base(target, value, duration)
+    public Poison(Monster target, float duration) : base(target, duration)
     {
         type = EffectType.Debuff;
-        this.value = value / 2;
         cd = new Cooldown();
-        this.duration = duration;
-        this.level = level;
     }
-
-    public void PoisonTranf(Monster monster)
-    {
-        var poison = new Poison(monster, value, duration, level);
-    }
-
 
     public override void Active()
     {
-
-        target.TakeDamage(value, TextPopupType.Fire);
-
-        if (burnDie && level == 6 )
-        {
-            burnDie = false;
-            var nearestMonster = gameController.FindNearestMonster(target.transform.position, 3f);
-            if (nearestMonster != null)
-            {
-                PoisonTranf(nearestMonster);
-            }
-        }
+        base.Active();
+        value = target.model.currentHealthPoint / 100;
+        target.TakeDamage(value, TextPopupType.Poison);
     }
 
     public override bool Cooldown(float deltaTime)
     {
-        if (base.Cooldown(deltaTime)) return true;
-
+        if(base.Cooldown(deltaTime)) return true;
         cd.Update(deltaTime);
-
-        if (cd.isFinished)
+        if(cd.isFinished)
         {
             Active();
-
-            if (target.isDead)
-            {
-                burnDie = true;
-            }
-
             cd.Restart(0.5f);
         }
-
         return false;
     }
 }
