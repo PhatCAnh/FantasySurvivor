@@ -96,9 +96,9 @@ public class Monster : ObjectRPG
 	#region Base Methods
 
 	protected Cooldown moveSpeedCooldown = new Cooldown();
-	public List<StatusEffect> listStatusEffect;
+    public List<StatusEffect> listStatusEffect = new List<StatusEffect>();
 
-	public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave, ItemPrefab monsType)
+    public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave, ItemPrefab monsType)
 	{
 		stat = monsterStat;
 
@@ -130,7 +130,9 @@ public class Monster : ObjectRPG
 		cdAttack.Update(time);
 		_stateMachine.currentState.LogicUpdate(time);
 		HandleUpdateStat(time);
-	}
+		HandleStatusEffect(time);
+
+    }
 
 	private void FixedUpdate()
 	{
@@ -280,7 +282,14 @@ public class Monster : ObjectRPG
 			}
 		}
 	}
-	private void OnDrawGizmosSelected()
+    private void HandleStatusEffect(float deltaTime)
+    {
+        foreach (var item in listStatusEffect.ToList())
+        {
+            item.Cooldown(deltaTime);
+        }
+    }
+    private void OnDrawGizmosSelected()
 	{
 		Gizmos.DrawWireSphere(transform.position, size);
 	}
