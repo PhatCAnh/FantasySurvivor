@@ -37,6 +37,7 @@ public enum ItemPrefab
 	MinionWolf,
 	BulletGoblinswift,
 	GoblinSwift,
+	MinionGoblin,
 }
 
 public enum MapType
