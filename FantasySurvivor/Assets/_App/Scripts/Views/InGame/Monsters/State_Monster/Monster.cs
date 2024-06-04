@@ -121,8 +121,6 @@ public class Monster : ObjectRPG
 		InitializationStateMachine();
 		monsCollider = GetComponent<Collider2D>();
 		monsCollider.isTrigger = false;
-
-		var ignite = new Ignite(this, 2, 10f);
 	}
 
 	private void Update()
