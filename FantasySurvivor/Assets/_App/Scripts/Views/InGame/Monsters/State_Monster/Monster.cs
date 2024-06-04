@@ -121,6 +121,8 @@ public class Monster : ObjectRPG
 		InitializationStateMachine();
 		monsCollider = GetComponent<Collider2D>();
 		monsCollider.isTrigger = false;
+
+		var ignite = new Ignite(this, 2, 10f);
 	}
 
 	private void Update()
@@ -131,8 +133,7 @@ public class Monster : ObjectRPG
 		_stateMachine.currentState.LogicUpdate(time);
 		HandleUpdateStat(time);
 		HandleStatusEffect(time);
-
-    }
+	}
 
 	private void FixedUpdate()
 	{
@@ -199,7 +200,7 @@ public class Monster : ObjectRPG
 		callBackDamaged?.Invoke();
 
 		var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.Normal, isCritical);
+		text.GetComponent<TextPopup>().Create(damage.ToString(), type, isCritical);
 
 		if(isAlive) return;
 		Die();

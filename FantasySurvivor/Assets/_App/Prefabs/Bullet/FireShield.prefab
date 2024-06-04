@@ -46,10 +46,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  size: 2
+  size: 0.55
   skillDamagedType: 0
   targetType: 2
   type: 14
+  origin: {fileID: 0}
+  level: 0
   centerPoint: {fileID: 0}
   radius: 5
   duration: 2
