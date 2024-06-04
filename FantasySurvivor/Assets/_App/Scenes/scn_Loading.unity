@@ -371,6 +371,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8206914173546746077, guid: 5092a53af760915459def15d68544006, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _skillCyclone
+      value: 
+      objectReference: {fileID: 2824138957750563773, guid: 7352b3dee434b354295f275870412f3c, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _skillSkyBoom
       value: 
       objectReference: {fileID: 5452461095947604650, guid: 201f367a0c4e90f448a177ff3b802636, type: 3}
@@ -411,6 +415,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3806459577947016325, guid: 998a1c4ff78465f41ae02ec9dcd7204d, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _bulletGoblinswift
+      value: 
+      objectReference: {fileID: 8113089588768341060, guid: f9b8f363c11665a49829e6ae66cec902, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _skillPoisonBullet
       value: 
       objectReference: {fileID: 445555888757746086, guid: be6e93258c41fb2469fa35bbf434547c, type: 3}
@@ -424,7 +432,7 @@ PrefabInstance:
       objectReference: {fileID: 600288446271700532, guid: 82be189692e1ecf458bb30c74edb5d76, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.size
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[4].name
@@ -447,6 +455,10 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[9].name
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[4].imgUI
       value: 
       objectReference: {fileID: 21300000, guid: 65d81833a9705374299a503a6186aa2f, type: 3}
@@ -466,6 +478,10 @@ PrefabInstance:
       propertyPath: _poolSkill.Array.data[8].imgUI
       value: 
       objectReference: {fileID: 769298545, guid: a526ce7ebcb6f9948bfd0005c4739868, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[9].imgUI
+      value: 
+      objectReference: {fileID: -1465992396, guid: 93842066dc3297043a07034152193dbc, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[1].spawnPos
       value: 1
@@ -519,6 +535,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[9].canAppear
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[4].typeElemental
       value: 1
       objectReference: {fileID: 0}
@@ -536,6 +556,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[8].typeElemental
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[9].typeElemental
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
@@ -610,6 +634,14 @@ PrefabInstance:
       propertyPath: _poolSkill.Array.data[8].normalSkillType
       value: 19
       objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[9].evolveSkillType
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _poolSkill.Array.data[9].normalSkillType
+      value: 33
+      objectReference: {fileID: 0}
     - target: {fileID: 4925867890613326577, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: m_Name
       value: --GameRunner
@@ -670,6 +702,63 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 216718925}
   m_SourcePrefab: {fileID: 100100000, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+--- !u!1001 &3077931029822058813
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2824138957750563773, guid: 7352b3dee434b354295f275870412f3c, type: 3}
+      propertyPath: m_Name
+      value: CycloneBullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 3027486048318471971, guid: 7352b3dee434b354295f275870412f3c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.27162498
+      objectReference: {fileID: 0}
+    - target: {fileID: 3027486048318471971, guid: 7352b3dee434b354295f275870412f3c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.8582044
+      objectReference: {fileID: 0}
+    - target: {fileID: 3027486048318471971, guid: 7352b3dee434b354295f275870412f3c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3027486048318471971, guid: 7352b3dee434b354295f275870412f3c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3027486048318471971, guid: 7352b3dee434b354295f275870412f3c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3027486048318471971, guid: 7352b3dee434b354295f275870412f3c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3027486048318471971, guid: 7352b3dee434b354295f275870412f3c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3027486048318471971, guid: 7352b3dee434b354295f275870412f3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3027486048318471971, guid: 7352b3dee434b354295f275870412f3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3027486048318471971, guid: 7352b3dee434b354295f275870412f3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7352b3dee434b354295f275870412f3c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -678,3 +767,4 @@ SceneRoots:
   - {fileID: 1725897519}
   - {fileID: 1061815518}
   - {fileID: 526710544}
+  - {fileID: 3077931029822058813}

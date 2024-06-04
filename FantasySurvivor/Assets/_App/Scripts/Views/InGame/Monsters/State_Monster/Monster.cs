@@ -191,14 +191,14 @@ public class Monster : ObjectRPG
 	}
 
 
-	public virtual void TakeDamage(float damage, TextPopupType dmgType = TextPopupType.Normal, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
+	public virtual void TakeDamage(float damage, TextPopupType type, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
 	{
 		if(!isAlive) return;
 		model.currentHealthPoint -= damage;
 		callBackDamaged?.Invoke();
 
 		var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-		text.GetComponent<TextPopup>().Create(damage.ToString(), dmgType, isCritical);
+		text.GetComponent<TextPopup>().Create(damage, type, isCritical);
 
 		if(isAlive) return;
 		Die();
@@ -223,9 +223,11 @@ public class Monster : ObjectRPG
 	public virtual void Die(bool selfDie = false)
 	{
 		isDead = true;
+		listStatusEffect.Clear();
 		monsCollider.isTrigger = true;
 		animator.SetBool("Dead", isDead);
 		gameController.MonsterDie(this, selfDie);
+		
 	}
 
 	protected virtual void Stop()
