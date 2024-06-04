@@ -113,6 +113,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	[SerializeField] private GameObject _owlStriker;
 
+	[SerializeField] private GameObject _goblinSwift;
+
 	private Dictionary<string, GameObject> _typeMonsterDic;
 
 	[Header("Item reward prefabs")]
@@ -195,6 +197,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.OwlStriker, _owlStriker},
 			{ItemPrefab.BulletOwlStriker, _bulletOwlStriker},
 			{ItemPrefab.BulletGoblinswift, _bulletGoblinswift},
+			{ItemPrefab.GoblinSwift, _goblinSwift},
 		};
 
 		_mapDic = new Dictionary<MapType, Map>
@@ -212,7 +215,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{"M5", _electroBomber},
 			{"M6", _slimeWandering},
 			{"M7", _owlStriker},
-			{"Skeleton", _minionSkeleton},
+            {"M8", _goblinSwift},
+
+            {"Skeleton", _minionSkeleton},
 			{"Wolf", _minionWolf},
 		};
 
