@@ -78,7 +78,14 @@ namespace FantasySurvivor
 		}
 	}
 
-	public class SharkControl : ProactiveSkill
+    public class CycloneControl : ProactiveSkill
+    {
+        public override void Init(SkillData data)
+        {
+            base.Init(data);
+        }
+    }
+    public class SharkControl : ProactiveSkill
     {
         protected override void UpdatePrefab(SkillActive prefab)
         {

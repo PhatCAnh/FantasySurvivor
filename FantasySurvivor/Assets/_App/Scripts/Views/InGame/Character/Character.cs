@@ -222,6 +222,9 @@ public class Character : ObjectRPG
                         case SkillName.Twin: 
                             skillIns = new TwinControl(); 
                             break;
+                        case SkillName.Cyclone: 
+                            skillIns = new CycloneControl();
+                            break;
                         default:
                             skillIns = new ProactiveSkill();
                             break;

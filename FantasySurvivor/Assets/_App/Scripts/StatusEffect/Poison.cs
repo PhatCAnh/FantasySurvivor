@@ -30,7 +30,7 @@ public class Poison : StatusEffect
     public override void Active()
     {
 
-        target.TakeDamage(value, TextPopupType.Fire);
+        target.TakeDamage(value, TextPopupType.Poison);
 
         if (burnDie && level == 6 )
         {

@@ -66,7 +66,12 @@ public class TextPopup : MonoBehaviour
 	            _textMesh.color = new Color(0.9882354f, 0.6862745f, 0.1f); // M�u xanh l� c�y cho hi?n th? h?i m�u
 	            _textMesh.fontSize = 7.5f; 
 	            break;
-            
+			case TextPopupType.Poison:
+				textValue = $"{value} <sprite=14>"; // Th�m d?u "+" tr??c gi� tr? ?? bi?u th? l� h?i m�u
+                _textMesh.color = new Color(0, 1, 0); // M�u xanh l� c�y cho hi?n th? h?i m�u
+                _textMesh.fontSize = 7.5f;
+                break;
+
         }
 		
 		Setup(textValue);

@@ -121,8 +121,6 @@ public class Monster : ObjectRPG
 		InitializationStateMachine();
 		monsCollider = GetComponent<Collider2D>();
 		monsCollider.isTrigger = false;
-
-		var ignite = new Ignite(this, 2, 10f);
 	}
 
 	private void Update()
@@ -193,14 +191,14 @@ public class Monster : ObjectRPG
 	}
 
 
-	public virtual void TakeDamage(float damage, TextPopupType type, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
+	public virtual void TakeDamage(float damage, TextPopupType dmgType = TextPopupType.Normal, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
 	{
 		if(!isAlive) return;
 		model.currentHealthPoint -= damage;
 		callBackDamaged?.Invoke();
 
 		var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-		text.GetComponent<TextPopup>().Create(damage.ToString(), type, isCritical);
+		text.GetComponent<TextPopup>().Create(damage.ToString(), dmgType, isCritical);
 
 		if(isAlive) return;
 		Die();

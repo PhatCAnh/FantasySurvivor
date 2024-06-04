@@ -1,16 +1,15 @@
+using ArbanFramework;
 using FantasySurvivor;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
+using System.Diagnostics;
+
 using UnityEngine;
 
-public class PoisonBullet : SkillBulletActive
+public class Cyclone : SkillBulletActive
 {
-
-    private bool check = false;
     public override void Init(LevelSkillData data, Monster target, int level, ItemPrefab type)
     {
         base.Init(data, target, level, type);
+        callBackKilled += SpeedUP;
     }
 
     protected override bool CheckTouchMonsters(Monster monster)
@@ -18,8 +17,15 @@ public class PoisonBullet : SkillBulletActive
         sizeTouch = size + monster.size;
         if (!gameController.CheckTouch(monster.transform.position, transform.position, sizeTouch)) return false;
         TakeDamage(monster);
-        var poison = new Poison(monster, damage * 2, data.valueSpecial2, level);
         return true;
     }
-}
 
+    private void SpeedUP()
+    {
+        if (origin.model.moveSpeed == origin.stat.moveSpeed.BaseValue)
+        {
+            origin.UpdateStat(StatModifierType.Mul,1,data.valueSpecial1,1,1,1,1,data.valueSpecial2);
+            
+        }
+    }
+}
