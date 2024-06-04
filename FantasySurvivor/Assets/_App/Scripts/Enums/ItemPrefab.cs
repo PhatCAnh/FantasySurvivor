@@ -35,6 +35,8 @@ public enum ItemPrefab
 	BulletOwlStriker,
 	OwlStriker,
 	MinionWolf,
+	BulletGoblinswift,
+	GoblinSwift,
 }
 
 public enum MapType
