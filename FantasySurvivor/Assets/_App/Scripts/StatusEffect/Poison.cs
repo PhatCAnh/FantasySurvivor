@@ -29,7 +29,6 @@ public class Poison : StatusEffect
 
     public override void Active()
     {
-        base.Active();
 
         target.TakeDamage(value, TextPopupType.Fire);
 

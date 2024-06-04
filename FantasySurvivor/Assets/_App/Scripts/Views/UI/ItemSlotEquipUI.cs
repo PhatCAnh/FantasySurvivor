@@ -7,16 +7,16 @@ using UnityEngine.UI;
 
 public class ItemSlotEquipUI : ItemSlotUI
 {
-    [SerializeField] private Sprite _baseSprite;
-    [SerializeField] private Sprite _baseSpriteRank;
-    
-    [FormerlySerializedAs("_isEquip")]
+    [SerializeField] private GameObject _imgEquip, _imgUnEquip;
+    [SerializeField] private Sprite _baseRank;
     public bool isEquip;
     
     public override void Init(ItemEquipData dataUI)
     {
         base.Init(dataUI);
         isEquip = true;
+        _imgEquip.SetActive(true);
+        _imgUnEquip.SetActive(false);
     }
     
     protected override void OnClickBtn()
@@ -29,8 +29,9 @@ public class ItemSlotEquipUI : ItemSlotUI
     {
         if(!isEquip) return;
         data = null;
-        image.sprite = _baseSprite;
-        imageRank.sprite = _baseSpriteRank;
+        _imgEquip.SetActive(false);
+        _imgUnEquip.SetActive(true);
+        imageRank.sprite = _baseRank;
         isEquip = false;
         btn.onClick.RemoveAllListeners();
     }

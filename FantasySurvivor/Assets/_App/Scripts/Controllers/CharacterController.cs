@@ -40,12 +40,11 @@ public class CharacterController: Controller<GameApp>
 		);
 
 		app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.WP1).dataStat);
-        app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.WP2).dataStat);
-        app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.WP3).dataStat);
-        app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.WP4).dataStat);
-        app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.WP5).dataStat);
-
-    }
+        app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.AR1).dataStat);
+        app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.BE1).dataStat);
+        app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.GL1).dataStat);
+        app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.PE1).dataStat);
+	}
 
 	public CharacterData GetDataCharacter(CharacterId id)
 	{

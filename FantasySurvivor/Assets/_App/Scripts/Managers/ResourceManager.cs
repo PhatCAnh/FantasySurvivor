@@ -56,8 +56,12 @@ public class ResourceManager : UIManagerBase<PopupType>
 	
 	[SerializeField] private GameObject _bulletOwlStriker;
 
+    [SerializeField] private GameObject _bulletGoblinswift;
 
-	private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
+
+
+
+    private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
 
 	[Header("UI prefabs")]
@@ -76,6 +80,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _choiceSkill;
 
 	[SerializeField] private GameObject _choiceSkillOutGame;
+	
+	[SerializeField] private GameObject _characterInformation;
 
 
 	[Header("UI Tutorial prefabs")]
@@ -108,6 +114,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _minionWolf;
 
 	[SerializeField] private GameObject _owlStriker;
+
+	[SerializeField] private GameObject _goblinSwift;
 
 	private Dictionary<string, GameObject> _typeMonsterDic;
 
@@ -150,6 +158,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 		RegisterPopup(PopupType.Cheat, _cheatPopup);
 		RegisterPopup(PopupType.ChoiceSkill, _choiceSkill);
 		RegisterPopup(PopupType.ChoiceSkillOutGame, _choiceSkillOutGame);
+		RegisterPopup(PopupType.CharacterInformation, _characterInformation);
 	}
 
 	private void InitDic()
@@ -190,6 +199,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.MinionWolf, _minionWolf},
 			{ItemPrefab.OwlStriker, _owlStriker},
 			{ItemPrefab.BulletOwlStriker, _bulletOwlStriker},
+			{ItemPrefab.BulletGoblinswift, _bulletGoblinswift},
+			{ItemPrefab.GoblinSwift, _goblinSwift},
 		};
 
 		_mapDic = new Dictionary<MapType, Map>
@@ -207,7 +218,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{"M5", _electroBomber},
 			{"M6", _slimeWandering},
 			{"M7", _owlStriker},
-			{"Skeleton", _minionSkeleton},
+            {"M8", _goblinSwift},
+
+            {"Skeleton", _minionSkeleton},
 			{"Wolf", _minionWolf},
 		};
 

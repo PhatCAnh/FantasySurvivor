@@ -75,7 +75,7 @@ public class GameController : Controller<GameApp>
 	public void ShowMainHome()
 	{
 		app.resourceManager.ShowPopup(PopupType.MainUI);
-		//app.resourceManager.ShowPopup(PopupType.ChoiceMap);
+		app.resourceManager.ShowPopup(PopupType.CharacterInformation);
 	}
 
 	public void StartGame(int chapter, int level)
@@ -393,8 +393,41 @@ public class GameController : Controller<GameApp>
 			.GetComponent<HealthBar>();
 		_healthBar.Init(characterPrefab);
 
-		var stat = new CharacterStat(100, 2.5f, 10, 1, 10, 50);
-		characterPrefab.Init(stat);
+		List<ItemEquipInBag> listItem = app.models.dataPlayerModel.BagItemEquip.Where(item => item.isEquip).ToList();
+
+		var dataChar = app.configs.dataCharacter.GetConfig(CharacterId.Char1);
+
+		var model = new CharacterModel(
+			dataChar.hp,
+			dataChar.moveSpeed,
+			dataChar.damage,
+			dataChar.itemAttractionRange,
+			dataChar.attackRange,
+			dataChar.armor
+			);
+
+		foreach(var item in listItem)
+		{
+			var itemData = item.itemEquipStat.dataStatConfig;
+			model.AddStatFormItemEquip(
+				itemData.hp,
+				itemData.moveSpeed,
+				itemData.damage,
+				itemData.itemAttractionRange,
+				itemData.attackRange,
+				itemData.armor
+				);
+		}
+
+		var stat = new CharacterStat(
+			model.maxHealthPoint,
+			model.moveSpeed,
+			model.attackDamage,
+			model.itemAttractionRange,
+			model.attackRange,
+			model.armor
+			);
+		characterPrefab.Init(stat, model);
 
 		return characterPrefab;
 	}
