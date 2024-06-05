@@ -4,6 +4,7 @@ using UnityEngine;
 [Serializable]
 public class SkillData
 {
+	public SkillId id;
 	public SkillName name;
 	public SkillType type;
 	public SpawnPos spawnPos;
