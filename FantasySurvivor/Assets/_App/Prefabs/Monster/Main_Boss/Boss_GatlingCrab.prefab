@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4067744832134226557}
   - component: {fileID: 105766822974865168}
-  - component: {fileID: 6657852081368820106}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Boss_GatlingCrab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,29 +60,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &6657852081368820106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142622185076917216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f999cc0f5ed74375b6f14d94d9638f2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  myRigid: {fileID: 105766822974865168}
-  animator: {fileID: 447482296261929045}
-  firePoint: {fileID: 2456488772675752657}
-  justSpawnVertical: 0
-  isDead: 0
-  isNoMove: 0
-  size: 0
-  bulletPrefab: {fileID: 0}
-  typeBullet: 0
-  _numberBack: 0
 --- !u!1 &3838255146860274423
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,8 +69,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4790529623898961803}
-  m_Layer: 6
-  m_Name: FirePoint
+  m_Layer: 9
+  m_Name: FirePoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,8 +100,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2456488772675752657}
-  m_Layer: 6
-  m_Name: FirePoint
+  m_Layer: 9
+  m_Name: FirePoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,7 +133,8 @@ GameObject:
   - component: {fileID: 4910354155545197857}
   - component: {fileID: 2998328604696572718}
   - component: {fileID: 447482296261929045}
-  m_Layer: 6
+  - component: {fileID: 6455037758280101776}
+  m_Layer: 9
   m_Name: Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,3 +231,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6455037758280101776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5390571668340868777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164a3ae04c0b8e149b58a5d26bf775c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
