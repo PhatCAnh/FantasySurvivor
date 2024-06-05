@@ -38,6 +38,7 @@ public enum ItemPrefab
 	BulletGoblinswift,
 	GoblinSwift,
 	Cyclone,
+    WindField,
 }
 
 public enum MapType
@@ -111,6 +112,7 @@ public enum SkillName
 	IceSpear,
 	Twin,
 	Cyclone,
+	WindField,
 }
 
 public enum SkillType

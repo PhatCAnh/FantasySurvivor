@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ArbanFramework;
 using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
@@ -94,6 +95,16 @@ namespace FantasySurvivor
             prefab.size = levelData[level].valueSpecial1;
         }
     }
+    public class WindFieldControl : ProactiveSkill
+    {
+        protected override void UpdatePrefab(SkillActive prefab)
+        {
+            base.UpdatePrefab(prefab);
+            prefab.transform.localScale = Vector3.one * levelData[level].valueSpecial1;
+            prefab.size = levelData[level].valueSpecial1;
+        }
+
+    }
 
     /*public class ZoneOfJudgment : ProactiveSkill
 	{
@@ -145,7 +156,7 @@ namespace FantasySurvivor
 		}
 	}*/
 
-	public class ThunderStrikeControl : ProactiveSkill
+    public class ThunderStrikeControl : ProactiveSkill
 	{
 		public override void Init(SkillData data)
 		{

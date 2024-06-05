@@ -60,6 +60,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	[SerializeField] private GameObject _skillCyclone;
 
+	[SerializeField] private GameObject _skillWindfield;
+
 
 
 
@@ -204,6 +206,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.BulletGoblinswift, _bulletGoblinswift},
 			{ItemPrefab.GoblinSwift, _goblinSwift},
 			{ItemPrefab.Cyclone, _skillCyclone},
+			{ItemPrefab.WindField, _skillWindfield},
 		};
 
 		_mapDic = new Dictionary<MapType, Map>
