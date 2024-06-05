@@ -18,7 +18,10 @@ public class PoisonBullet : SkillBulletActive
         sizeTouch = size + monster.size;
         if (!gameController.CheckTouch(monster.transform.position, transform.position, sizeTouch)) return false;
         TakeDamage(monster);
-        var poison = new Poison(monster, data.valueSpecial1, level);
+        if (monster.isAlive)
+        {
+            var poison = new Poison(monster, data.valueSpecial1, level);
+        }
         return true;
     }
 }
