@@ -58,6 +58,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     [SerializeField] private GameObject _bulletGoblinswift;
 
+    [SerializeField] private GameObject _bulletBossGatlingCrab;
+
 
 
 
@@ -208,6 +210,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.GoblinSwift, _goblinSwift},
 			{ItemPrefab.MinionGoblin, _minionGoblin},
 			{ItemPrefab.GatlingCrab, _gatlingCrab },
+			{ItemPrefab.BulletBossGatlingCrab, _bulletBossGatlingCrab},
 		};
 
 		_mapDic = new Dictionary<MapType, Map>

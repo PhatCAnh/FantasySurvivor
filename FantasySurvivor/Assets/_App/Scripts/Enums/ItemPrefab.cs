@@ -39,6 +39,8 @@ public enum ItemPrefab
 	GoblinSwift,
 	MinionGoblin,
 	GatlingCrab,
+    BulletBossGatlingCrab,
+
 }
 
 public enum MapType
