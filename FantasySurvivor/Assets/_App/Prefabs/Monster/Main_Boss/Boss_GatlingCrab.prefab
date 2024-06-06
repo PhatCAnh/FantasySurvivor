@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4067744832134226557}
   - component: {fileID: 105766822974865168}
+  - component: {fileID: 9111900201732795075}
+  - component: {fileID: 4740617157485917428}
   m_Layer: 9
   m_Name: Boss_GatlingCrab
   m_TagString: Untagged
@@ -60,6 +62,67 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &9111900201732795075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142622185076917216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4c0247c33b884a41af91d0922c191c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 34
+  myRigid: {fileID: 105766822974865168}
+  animator: {fileID: 447482296261929045}
+  firePoint: {fileID: 2456488772675752657}
+  justSpawnVertical: 0
+  isDead: 0
+  isNoMove: 0
+  size: 2.3
+  firePoint2: {fileID: 4790529623898961803}
+  bulletPrefab: {fileID: 8094329372227174719, guid: f9b8f363c11665a49829e6ae66cec902, type: 3}
+  bulletPrefab2: {fileID: 3588278710162090116, guid: 4d1d72244aa05294aa603ad7092c27f4, type: 3}
+  typeBullet: 31
+  typeBullet2: 28
+  _numberBack: 0
+--- !u!58 &4740617157485917428
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142622185076917216}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.09233832}
+  serializedVersion: 2
+  m_Radius: 2.0697596
 --- !u!1 &3838255146860274423
 GameObject:
   m_ObjectHideFlags: 0
@@ -85,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 3838255146860274423}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.49, y: 0.69, z: 0}
+  m_LocalPosition: {x: -2.01, y: -3.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -101,7 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2456488772675752657}
   m_Layer: 9
-  m_Name: FirePoint1
+  m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +179,7 @@ Transform:
   m_GameObject: {fileID: 5132988337723596792}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.44, y: 0.74, z: 0}
+  m_LocalPosition: {x: 1.93, y: -3.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -150,7 +213,7 @@ Transform:
   m_GameObject: {fileID: 5390571668340868777}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.89, y: -1.85, z: 0}
+  m_LocalPosition: {x: -0.06, y: 1.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
