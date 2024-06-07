@@ -34,22 +34,40 @@ public class ItemData
 	}
 }
 
+[Serializable]
 public class ItemInBag
 {
-	public readonly ItemId id;
+	public ItemId id;
 	public ItemRank rank;
 	public int level;
 	public int quantity;
-	public ItemInBag(ItemId id, ItemRank rank, int level = 1)
+	
+	public ItemInBag(string id, string rank, int level = 1, int quantity = 0)
 	{
-		this.id = id;
-		this.rank = rank;
+		this.id = (ItemId)Enum.Parse(typeof(ItemId), id);
+		this.rank = (ItemRank)Enum.Parse(typeof(ItemRank), rank);
 		this.level = level;
-	}
-
-	public ItemInBag(ItemId id, int quantity = 1)
-	{
-		this.id = id;
 		this.quantity = quantity;
 	}
+	
+	// public ItemInBag(ItemId id, ItemRank rank, int level = 1, int quantity = 0)
+	// {
+	// 	this.id = id.ToString();
+	// 	this.rank = rank.ToString();
+	// 	this.level = level;
+	// 	this.quantity = quantity;
+	// }
+	//
+	// public ItemInBag(ItemId id, ItemRank rank, int level = 1)
+	// {
+	// 	this.id = id;
+	// 	this.rank = rank;
+	// 	this.level = level;
+	// }
+	//
+	// public ItemInBag(ItemId id, int quantity = 1)
+	// {
+	// 	this.id = id;
+	// 	this.quantity = quantity;
+	// }
 }

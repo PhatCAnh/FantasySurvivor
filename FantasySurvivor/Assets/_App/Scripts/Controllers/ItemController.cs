@@ -13,7 +13,6 @@ public class ItemController : Controller<GameApp>
 
 	private Dictionary<ItemRank, Sprite> _dicRankItemEquip;
 
-	private List<ItemInBag> listItemEquipped; //fix it, chuyen cai nay vao đataplayermodel
 
 	private void Awake()
 	{
@@ -26,8 +25,6 @@ public class ItemController : Controller<GameApp>
 			{ItemRank.Unique, _spriteUnique},
 			{ItemRank.Legendary, _spriteLegendary},
 		};
-
-		listItemEquipped = new List<ItemInBag>();
 	}
 
 	protected override void OnDestroy()
@@ -50,7 +47,7 @@ public class ItemController : Controller<GameApp>
 
 	public void EquipItem(ItemInBag data)
 	{
-		listItemEquipped.Add(data);
+		app.models.dataPlayerModel.EquipItem(data);
 		var itemData = GetDataItem(data.id, data.rank, data.level);
 		var model = app.models.characterModel;
 		switch (itemData.dataConfig.type)
@@ -67,8 +64,7 @@ public class ItemController : Controller<GameApp>
 	}
 	public void UnEquipItem(ItemInBag data)
 	{
-		if(!listItemEquipped.Contains(data)) return;
-		var item = listItemEquipped.Remove(data);
+		app.models.dataPlayerModel.UnEquipItem(data);
 		var itemData = GetDataItem(data.id, data.rank, data.level);
 		var model = app.models.characterModel;
 		switch (itemData.dataConfig.type)

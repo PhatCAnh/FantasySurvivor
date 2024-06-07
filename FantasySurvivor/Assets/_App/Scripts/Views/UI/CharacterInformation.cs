@@ -59,47 +59,38 @@ public class CharacterInformation : View<GameApp>, IPopup
 		};
 		
 		_btnBack.onClick.AddListener(Close);
-		
-		//app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.Item1).dataConfig);
+
+		//app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Axe, ItemRank.Legendary, 2);
 
 		foreach(var item in app.models.dataPlayerModel.BagItem)
 		{
-			
-			//fix it
-			/*if(item.isEquip)
-			{
-				var id = itemController.GetDataItemEquip((ItemEquipId) Enum.Parse(typeof(ItemEquipId), item.itemEquipStat.id));
-				var data = new ItemEquipData(id.dataUi,  item.itemEquipStat, id.spriteRank);
-				EquipItem(data.dataUi.type, id);
-			}
-			else
-			{*/
-				Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item1);
-				//var data = itemController.GetDataItem(item.id, ItemRank.Epic, 5);
-				item1.Init(item, this);
-			//}
+			Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item1);
+			item1.Init(item, this);
 		}
-		//item2.Init(data1, this);
+
+		foreach(var item in app.models.dataPlayerModel.ListItemEquipped)
+		{
+			var data = itemController.GetDataItem(item.id, item.rank, item.level);
+			var slot = _dicItemEquip[data.dataConfig.type];
+			if(slot.isEquip) UnEquipItem(data.dataConfig.type, item);
+			slot.Init(item);
+		}
 	}
 
 	public void EquipItem(ItemType type, ItemInBag data)
 	{
 		var slot = _dicItemEquip[type];
 		if(slot.isEquip) UnEquipItem(type, data);
-		var itemData = itemController.GetDataItem(data.id, data.rank, data.level);
 		slot.Init(data);
 		itemController.EquipItem(data);
-		app.models.dataPlayerModel.EquipItemInToBag(itemData, true);
 	}
 
 	public void UnEquipItem(ItemType type, ItemInBag data)
 	{
 		_dicItemEquip[type].ResetData();
 		itemController.UnEquipItem(data);
-		var itemData = itemController.GetDataItem(data.id, data.rank, data.level);
 		Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
 		item.Init(data, this);
-		app.models.dataPlayerModel.EquipItemInToBag(itemData, false);
 	}
 
 	private void InitDispatcher()

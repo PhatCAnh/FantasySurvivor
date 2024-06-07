@@ -248,7 +248,7 @@ MonoBehaviour:
     m_Right: 65
     m_Top: 40
     m_Bottom: 40
-  m_ChildAlignment: 1
+  m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 170, y: 180}
@@ -18483,6 +18483,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34889578f104d4fb82b4a62312aef72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemInBag:
+    id: 0
+    rank: 0
+    level: 0
+    quantity: 0
   image: {fileID: 7682642126564716926}
   imageRank: {fileID: 4773957023038272723}
   btn: {fileID: 7517056245149370598}
@@ -19316,6 +19321,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34889578f104d4fb82b4a62312aef72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemInBag:
+    id: 0
+    rank: 0
+    level: 0
+    quantity: 0
   image: {fileID: 1674920406203750237}
   imageRank: {fileID: 2262321118174886520}
   btn: {fileID: 4834669062654209412}
@@ -19686,7 +19696,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200.31989, y: -130}
+  m_AnchoredPosition: {x: 156, y: -130}
   m_SizeDelta: {x: 170, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8050273758764341341
@@ -22754,6 +22764,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34889578f104d4fb82b4a62312aef72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemInBag:
+    id: 0
+    rank: 0
+    level: 0
+    quantity: 0
   image: {fileID: 4262298383310937128}
   imageRank: {fileID: 7986835766140719256}
   btn: {fileID: 7848294526806590559}
@@ -25259,6 +25274,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34889578f104d4fb82b4a62312aef72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemInBag:
+    id: 0
+    rank: 0
+    level: 0
+    quantity: 0
   image: {fileID: 8078594035074313605}
   imageRank: {fileID: 5420876477106535962}
   btn: {fileID: 1343852138510608966}
@@ -27164,6 +27184,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34889578f104d4fb82b4a62312aef72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemInBag:
+    id: 0
+    rank: 0
+    level: 0
+    quantity: 0
   image: {fileID: 2452552653872252889}
   imageRank: {fileID: 717294139920623791}
   btn: {fileID: 8147068321669138596}
@@ -36493,6 +36518,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34889578f104d4fb82b4a62312aef72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemInBag:
+    id: 0
+    rank: 0
+    level: 0
+    quantity: 0
   image: {fileID: 15701601786658944}
   imageRank: {fileID: 4065027749417826390}
   btn: {fileID: 6769332013216795001}
