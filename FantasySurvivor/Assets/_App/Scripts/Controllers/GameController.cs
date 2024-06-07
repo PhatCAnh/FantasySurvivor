@@ -402,8 +402,9 @@ public class GameController : Controller<GameApp>
 			dataChar.damage,
 			dataChar.itemAttractionRange,
 			dataChar.attackRange,
-			dataChar.armor
-			);
+			dataChar.armor,
+			dataChar.shield
+            );
 
 		foreach(var item in listItem)
 		{
@@ -424,7 +425,8 @@ public class GameController : Controller<GameApp>
 			model.attackDamage,
 			model.itemAttractionRange,
 			model.attackRange,
-			model.armor
+			model.armor,
+			model.shield
 			);
 		characterPrefab.Init(stat, model);
 

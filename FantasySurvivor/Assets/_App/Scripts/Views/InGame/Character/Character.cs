@@ -141,20 +141,65 @@ public class Character : ObjectRPG
         moveDirection = moveForce;
     }
 
-	public void TakeDamage(int damage)
-	{
-		if(!IsAlive) return;
-		damage = MinusDamage(damage);
-		model.currentHealthPoint -= damage;
-		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-		text.GetComponent<TextPopup>().Create(damage, TextPopupType.Red);
+    public void ActivateShield(float shieldValue)
+    {
+        model.shield += shieldValue;
+    }
 
-        if (!IsAlive)
+    public void TakeDamage(int damage)
+	{
+        if (!IsAlive) return;
+
+        damage = MinusDamage(damage);
+
+        // Kiểm tra shield
+        bool isShieldAbsorbedDamage = CheckShield(damage);
+
+        // Nếu không có shield hoặc shield không đủ chặn hết sát thương
+        if (!isShieldAbsorbedDamage)
         {
-            Die();
+            // Trừ sát thương vào máu
+            model.currentHealthPoint -= damage;
+
+            if (damage > 0)
+            {
+                // Hiển thị popup hiệu ứng sát thương
+                GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
+                text.GetComponent<TextPopup>().Create(damage, TextPopupType.Red);
+            }
+
+            if (!IsAlive)
+            {
+                Die();
+            }
         }
     }
 
+    private bool CheckShield(int damage)
+    {
+        if (model.shield > 0)
+        {
+            // Trừ sát thương từ shield
+            model.shield -= damage;
+
+            // Nếu shield không đủ chặn hết sát thương
+            if (model.shield <= 0)
+            {
+                // Tính toán sát thương còn dư và trả về true
+                damage = Mathf.RoundToInt(Mathf.Abs(model.shield));
+                model.shield = 0;
+                return true;
+            }
+            else
+            {
+                // Sát thương đã được chặn bởi shield, trả về true
+                return true;
+            }
+        }
+
+        // Không có shield hoặc shield không đủ chặn sát thương, trả về false
+        return false;
+    }
 
     public void AddHealth(float value)
     {
@@ -251,9 +296,9 @@ public class Character : ObjectRPG
         return null;
     }
 
-    public void UpdateStat(StatModifierType typeStat, float maxH, float ms, float ad, float ar, float itemR, int armor, float duration)
+    public void UpdateStat(StatModifierType typeStat, float maxH, float ms, float ad, float ar, float itemR, int armor , float shield, float duration)
     {
-        var updateStat = new CharacterUpdateStat(typeStat, maxH, ms, ad, ar, itemR, armor, duration);
+        var updateStat = new CharacterUpdateStat(typeStat, maxH, ms, ad, ar, itemR, armor, shield, duration);
 
         stat.maxHealth.AddModifier(updateStat.maxHealth);
         stat.moveSpeed.AddModifier(updateStat.moveSpeed);
@@ -261,6 +306,7 @@ public class Character : ObjectRPG
         stat.attackRange.AddModifier(updateStat.attackRange);
         stat.itemAttractionRange.AddModifier(updateStat.itemAttractionRange);
         stat.armor.AddModifier(updateStat.armor);
+        stat.shield.AddModifier(updateStat.shield);
 
         listUpdateStat.Add(updateStat);
         UpdateModel();
@@ -274,6 +320,7 @@ public class Character : ObjectRPG
         stat.attackRange.RemoveModifier(statModifier.attackRange);
         stat.itemAttractionRange.RemoveModifier(statModifier.itemAttractionRange);
         stat.armor.RemoveModifier(statModifier.armor);
+        stat.shield.RemoveModifier(statModifier.shield);
 
         listUpdateStat.Remove(statModifier);
         UpdateModel();
@@ -287,6 +334,7 @@ public class Character : ObjectRPG
         model.itemAttractionRange = stat.itemAttractionRange.Value;
         model.attackRange = stat.attackRange.Value;
         model.armor = stat.armor.Value;
+        model.shield = stat.shield.Value;
     }
 
     private void Die()

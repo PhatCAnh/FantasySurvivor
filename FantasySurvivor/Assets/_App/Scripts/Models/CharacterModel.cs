@@ -7,21 +7,21 @@ using UnityEngine.U2D;
 public class CharacterModel : Model<GameApp>
 {
 	public static EventTypeBase dataChangedEvent = new EventTypeBase(nameof(CharacterModel) + ".dataChanged");
-	public CharacterModel(float maxHp, float moveSpeed, float attackDamage, float itemAttractionRange, float attackRange, int armor) : base(dataChangedEvent)
-	{
-		this.currentHealthPoint = maxHp;
-		this.maxHealthPoint = maxHp;
-		this.moveSpeed = moveSpeed;
-		this._attackDamage = attackDamage;
-		this._itemAttractionRange = itemAttractionRange;
-		this.attackRange = attackRange;
-		this._armor = armor;
-	}
+    public CharacterModel(float maxHp, float moveSpeed, float attackDamage, float itemAttractionRange, float attackRange, int armor, float shield )
+           : base(dataChangedEvent)
+    {
+        this.currentHealthPoint = maxHp;
+        this.maxHealthPoint = maxHp;
+        this.moveSpeed = moveSpeed;
+        this._attackDamage = attackDamage;
+        this._itemAttractionRange = itemAttractionRange;
+        this.attackRange = attackRange;
+        this._armor = armor;
+        this.shield = shield;
+    }
 
-	public CharacterModel() : base(dataChangedEvent)
-	{
-
-	}
+    public CharacterModel() : base(dataChangedEvent)
+	{	}
 
 	private float _currentHealthPoint;
 
@@ -41,8 +41,20 @@ public class CharacterModel : Model<GameApp>
 	private float _healingCooldown = 4f;
 	private float _healingTimer;
 	private float _healingRate = 0.05f;
+    private float _shield;
 
-	public float moveSpeed
+    public float shield
+    {
+        get => _shield;
+        set
+        {
+            if (_shield.Equals(value)) return;
+            _shield = Mathf.Clamp(value, 0, value); // Đảm bảo shield không âm
+            RaiseDataChanged(nameof(shield));
+        }
+    }
+
+    public float moveSpeed
 	{
 		get => _moveSpeed;
 		set {

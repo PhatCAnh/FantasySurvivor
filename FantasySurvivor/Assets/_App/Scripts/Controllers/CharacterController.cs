@@ -36,8 +36,10 @@ public class CharacterController: Controller<GameApp>
 			data.attackRange,
 			data.damage,
 			data.itemAttractionRange,
-			data.armor
-		);
+			data.armor,
+            data.shield
+
+        );
 
 		app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.WP1).dataStat);
         app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.AR1).dataStat);

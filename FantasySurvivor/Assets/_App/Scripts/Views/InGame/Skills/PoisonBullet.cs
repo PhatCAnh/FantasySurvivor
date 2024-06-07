@@ -1,3 +1,4 @@
+using ArbanFramework;
 using FantasySurvivor;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ public class PoisonBullet : SkillBulletActive
         if (!gameController.CheckTouch(monster.transform.position, transform.position, sizeTouch)) return false;
         TakeDamage(monster);
         var poison = new Poison(monster, data.valueSpecial1);
+        origin.UpdateStat(StatModifierType.Add,0,0,0,0,0,0,5,10);
         return true;
     }
 }
