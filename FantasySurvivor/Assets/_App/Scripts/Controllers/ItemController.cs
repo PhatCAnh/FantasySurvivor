@@ -7,31 +7,30 @@ using UnityEngine.Serialization;
 public class ItemController : Controller<GameApp>
 {
 	[SerializeField] private ItemEquipDataTable _equipDataTable;
+	
+	[SerializeField] private ItemPieceDataTable _pieceDataTable;
 
 	[SerializeField] private Sprite _spriteNormal, _spriteRare, _spriteEpic, _spriteUnique, _spriteLegendary;
 	
-	private Dictionary<RankItemEquip, Sprite> _dicRankItemEquip;
+	private Dictionary<ItemRank, Sprite> _dicRankItemEquip;
 
 	private List<ItemEquipData> listItemEquipped;
+	
+	
 
 	private void Awake()
 	{
 		Singleton<ItemController>.Set(this);
-		_dicRankItemEquip = new Dictionary<RankItemEquip, Sprite>
+		_dicRankItemEquip = new Dictionary<ItemRank, Sprite>
 		{
-			{RankItemEquip.Normal, _spriteNormal},
-			{RankItemEquip.Rare, _spriteRare},
-			{RankItemEquip.Epic, _spriteEpic},
-			{RankItemEquip.Unique, _spriteUnique},
-			{RankItemEquip.Legendary, _spriteLegendary},
+			{ItemRank.Normal, _spriteNormal},
+			{ItemRank.Rare, _spriteRare},
+			{ItemRank.Epic, _spriteEpic},
+			{ItemRank.Unique, _spriteUnique},
+			{ItemRank.Legendary, _spriteLegendary},
 		};
 
 		listItemEquipped = new List<ItemEquipData>();
-	}
-
-	private void Start()
-	{
-		
 	}
 
 	protected override void OnDestroy()
@@ -42,9 +41,16 @@ public class ItemController : Controller<GameApp>
 
 	public ItemEquipData GetDataItemEquip(ItemEquipId id)
 	{
-		var dataUI = _equipDataTable.listItemEquipData.Find(item => item.id == id);
-		var dataStat = new ItemEquipStat(app.configs.dataItemEquip.GetConfig(id), app.models.dataPlayerModel.GetNumberItemEquipCreated());
-		return new ItemEquipData(dataUI, dataStat, _dicRankItemEquip[dataUI.rank]);
+		// var dataUI = _equipDataTable.listItemEquipData.Find(item => item.id == id);
+		// var dataStat = new ItemEquipStat(app.configs.dataItemEquip.GetConfig(id), app.models.dataPlayerModel.GetNumberItemEquipCreated());
+		// return new ItemEquipData(dataUI, dataStat, _dicRankItemEquip[dataUI.rank]);
+		return null;
+	}
+	
+	public ItemPieceData GetDataItemPiece(ItemPieceId id)
+	{
+		var dataUI = _pieceDataTable.listItemPieceData.Find(item => item.id == id);
+		return new ItemPieceData(dataUI, _dicRankItemEquip[dataUI.rank]);
 	}
 
 	public void EquipItem(ItemEquipData data)

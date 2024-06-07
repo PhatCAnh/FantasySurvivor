@@ -38,12 +38,6 @@ public class CharacterController: Controller<GameApp>
 			data.itemAttractionRange,
 			data.armor
 		);
-
-		app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.WP1).dataStat);
-        app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.AR1).dataStat);
-        app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.BE1).dataStat);
-        app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.GL1).dataStat);
-        app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.PE1).dataStat);
 	}
 
 	public CharacterData GetDataCharacter(CharacterId id)

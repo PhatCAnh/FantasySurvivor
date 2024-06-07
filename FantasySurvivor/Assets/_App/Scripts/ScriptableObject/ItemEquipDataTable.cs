@@ -18,7 +18,7 @@ public class ItemEquipDataUI
 	public string itemName;
 	public ItemEquipType type;
 	public Sprite skin;
-	public RankItemEquip rank;
+	public ItemRank rank;
 }
 
 public class ItemEquipData

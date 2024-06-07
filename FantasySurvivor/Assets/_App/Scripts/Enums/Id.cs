@@ -13,6 +13,16 @@ public enum SkillId
 	Electric1, Electric2, Electric3, Electric4, Electric5,
 }
 
+public enum ItemId
+{
+	
+}
+
+public enum ItemPieceId
+{
+	PieceFire, PieceWater, PieceWind, PieceEarth, PieceElectric,
+}
+
 public enum ItemEquipId
 {
 	Item1,

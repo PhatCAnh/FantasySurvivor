@@ -9,15 +9,19 @@
 	Gloves,
 }
 
+public enum ItemPieceType
+{
+	Undefined = -1,
+	PieceElemental,
+}
 
 public enum ItemType
 {
-	Equip,
-	ETC,
+	Piece,
+	Weapon,
 }
 
-
-public enum RankItemEquip : byte
+public enum ItemRank : byte
 {
 	Normal,
 	Rare,

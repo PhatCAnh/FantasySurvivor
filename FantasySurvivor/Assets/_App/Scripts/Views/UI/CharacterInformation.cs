@@ -78,6 +78,9 @@ public class CharacterInformation : View<GameApp>, IPopup
 				item1.Init(data, this);
 			}
 		}
+		Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item2);
+		var data1 = itemController.GetDataItemPiece(ItemPieceId.PieceFire);
+		//item2.Init(data1, this);
 	}
 
 	public void EquipItem(ItemEquipType type, ItemEquipData data)
