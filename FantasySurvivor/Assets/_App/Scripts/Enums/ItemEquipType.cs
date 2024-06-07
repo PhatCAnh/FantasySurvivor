@@ -1,15 +1,4 @@
-﻿public enum ItemEquipType
-{
-	Undefined = -1,
-	Weapon,
-	Armor,
-	Hat,
-	Ring,
-	Shoes,
-	Gloves,
-}
-
-public enum ItemPieceType
+﻿public enum ItemPieceType
 {
 	Undefined = -1,
 	PieceElemental,
@@ -19,6 +8,11 @@ public enum ItemType
 {
 	Piece,
 	Weapon,
+	Armor,
+	Shoes,
+	Gloves,
+	Hat,
+	Ring,
 }
 
 public enum ItemRank : byte

@@ -33,7 +33,7 @@ namespace FantasySurvivor
 	{
 		public override string FileName => nameof(DataItemConfig);
 		
-		public DataItemConfig GetConfig(ItemEquipId id)
+		public DataItemConfig GetConfig(ItemId id)
 		{
 			return GetConfig(id.ToString());
 		}

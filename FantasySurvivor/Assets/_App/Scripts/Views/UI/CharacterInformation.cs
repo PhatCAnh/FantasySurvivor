@@ -23,7 +23,7 @@ public class CharacterInformation : View<GameApp>, IPopup
 
 	[SerializeField] private Button _btnBack;
 
-	private Dictionary<ItemEquipType, ItemSlotEquipUI> _dicItemEquip;
+	private Dictionary<ItemType, ItemSlotEquipUI> _dicItemEquip;
 
 	private ItemController itemController => ArbanFramework.Singleton<ItemController>.instance;
 
@@ -48,57 +48,58 @@ public class CharacterInformation : View<GameApp>, IPopup
 		_slotShoes.Init(null, this);
 		_slotGloves.Init(null, this);
 
-		_dicItemEquip = new Dictionary<ItemEquipType, ItemSlotEquipUI>
+		_dicItemEquip = new Dictionary<ItemType, ItemSlotEquipUI>
 		{
-			{ItemEquipType.Weapon, _slotWeapon},
-			{ItemEquipType.Armor, _slotArmor},
-			{ItemEquipType.Hat, _slotHat},
-			{ItemEquipType.Ring, _slotRing},
-			{ItemEquipType.Shoes, _slotShoes},
-			{ItemEquipType.Gloves, _slotGloves},
+			{ItemType.Weapon, _slotWeapon},
+			{ItemType.Armor, _slotArmor},
+			{ItemType.Hat, _slotHat},
+			{ItemType.Ring, _slotRing},
+			{ItemType.Shoes, _slotShoes},
+			{ItemType.Gloves, _slotGloves},
 		};
 		
 		_btnBack.onClick.AddListener(Close);
 		
-		//app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.Item1).dataStat);
+		//app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.Item1).dataConfig);
 
-		foreach(var item in app.models.dataPlayerModel.BagItemEquip)
+		foreach(var item in app.models.dataPlayerModel.BagItem)
 		{
-			if(item.isEquip)
+			
+			//fix it
+			/*if(item.isEquip)
 			{
 				var id = itemController.GetDataItemEquip((ItemEquipId) Enum.Parse(typeof(ItemEquipId), item.itemEquipStat.id));
 				var data = new ItemEquipData(id.dataUi,  item.itemEquipStat, id.spriteRank);
 				EquipItem(data.dataUi.type, id);
 			}
 			else
-			{
+			{*/
 				Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item1);
-				var id = itemController.GetDataItemEquip((ItemEquipId) Enum.Parse(typeof(ItemEquipId), item.itemEquipStat.id));
-				var data = new ItemEquipData(id.dataUi,  item.itemEquipStat, id.spriteRank);
-				item1.Init(data, this);
-			}
+				//var data = itemController.GetDataItem(item.id, ItemRank.Epic, 5);
+				item1.Init(item, this);
+			//}
 		}
-		Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item2);
-		var data1 = itemController.GetDataItemPiece(ItemPieceId.PieceFire);
 		//item2.Init(data1, this);
 	}
 
-	public void EquipItem(ItemEquipType type, ItemEquipData data)
+	public void EquipItem(ItemType type, ItemInBag data)
 	{
 		var slot = _dicItemEquip[type];
-		if(slot.isEquip) UnEquipItem(type, slot.data);
+		if(slot.isEquip) UnEquipItem(type, data);
+		var itemData = itemController.GetDataItem(data.id, data.rank, data.level);
 		slot.Init(data);
 		itemController.EquipItem(data);
-		app.models.dataPlayerModel.EquipItemInToBag(data.dataStat, true);
+		app.models.dataPlayerModel.EquipItemInToBag(itemData, true);
 	}
 
-	public void UnEquipItem(ItemEquipType type, ItemEquipData data)
+	public void UnEquipItem(ItemType type, ItemInBag data)
 	{
 		_dicItemEquip[type].ResetData();
 		itemController.UnEquipItem(data);
+		var itemData = itemController.GetDataItem(data.id, data.rank, data.level);
 		Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
 		item.Init(data, this);
-		app.models.dataPlayerModel.EquipItemInToBag(data.dataStat, false);
+		app.models.dataPlayerModel.EquipItemInToBag(itemData, false);
 	}
 
 	private void InitDispatcher()
@@ -132,10 +133,8 @@ public class CharacterInformation : View<GameApp>, IPopup
                 var dataStat = app.models.dataPlayerModel.GetFirstItemEquipAdded();
 				if (dataStat == null) return;
                 Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
-				var id =itemController.GetDataItemEquip((ItemEquipId) Enum.Parse(typeof(ItemEquipId), dataStat.itemEquipStat.id));
-				var data = new ItemEquipData(id.dataUi, dataStat.itemEquipStat, id.spriteRank);
-				item.Init(data, this);
-			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.BagItemEquip), app.models.dataPlayerModel)
+                item.Init(dataStat, this);
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.BagItem), app.models.dataPlayerModel)
 		);
 	}
 	public void Open()

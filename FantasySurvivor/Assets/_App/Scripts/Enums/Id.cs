@@ -15,12 +15,12 @@ public enum SkillId
 
 public enum ItemId
 {
-	
+	PieceFire, PieceWater, PieceWind, PieceEarth, PieceElectric,
+	Axe,
 }
 
 public enum ItemPieceId
 {
-	PieceFire, PieceWater, PieceWind, PieceEarth, PieceElectric,
 }
 
 public enum ItemEquipId

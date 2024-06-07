@@ -378,8 +378,8 @@ public class GameController : Controller<GameApp>
 			.GetComponent<HealthBar>();
 		_healthBar.Init(characterPrefab);
 
-		List<ItemEquipInBag> listItem = app.models.dataPlayerModel.BagItemEquip.Where(item => item.isEquip).ToList();
-
+		//List<ItemInBag> listItem = app.models.dataPlayerModel.BagItem.Where(item => item.isEquip).ToList();
+		//fix it
 		var dataChar = app.configs.dataCharacter.GetConfig(CharacterId.Char1);
 
 		var model = new CharacterModel(
@@ -391,18 +391,18 @@ public class GameController : Controller<GameApp>
 			dataChar.armor
 			);
 
-		foreach(var item in listItem)
-		{
-			var itemData = item.itemEquipStat.dataStatConfig;
-			model.AddStatFormItemEquip(
-				itemData.hp,
-				itemData.moveSpeed,
-				itemData.damage,
-				itemData.itemAttractionRange,
-				itemData.attackRange,
-				itemData.armor
-				);
-		}
+		// foreach(var item in listItem)
+		// {
+		// 	var itemData = item.itemEquipStat.dataStatConfig;
+		// 	model.AddStatFormItemEquip(
+		// 		itemData.hp,
+		// 		itemData.moveSpeed,
+		// 		itemData.damage,
+		// 		itemData.itemAttractionRange,
+		// 		itemData.attackRange,
+		// 		itemData.armor
+		// 		);
+		// }
 
 		var stat = new CharacterStat(
 			model.maxHealthPoint,

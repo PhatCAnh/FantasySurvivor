@@ -27,7 +27,7 @@ namespace FantasySurvivor
 			this.Coin = 99;
 			this.Gem = 10;
 
-			_bagItemEquip = new List<ItemEquipInBag>();
+			_bagItem = new List<ItemInBag>();
 
 			app.models.WriteModel<DataPlayerModel>();
 
@@ -37,7 +37,8 @@ namespace FantasySurvivor
 		[JsonProperty] private int _coin;
 		[JsonProperty] private int _gem;
 
-		[JsonProperty] private List<ItemEquipInBag> _bagItemEquip = new List<ItemEquipInBag>();
+		[JsonProperty] private List<ItemInBag> _bagItem = new List<ItemInBag>()
+			{new ItemInBag(ItemId.Axe, ItemRank.Epic, 3)};
 		[JsonProperty] private int numberItemCreated;
 
 		public int Coin
@@ -67,23 +68,24 @@ namespace FantasySurvivor
 			return "Goty_" + numberItemCreated;
 		}
 
-		public List<ItemEquipInBag> BagItemEquip
+		public List<ItemInBag> BagItem
 		{
-			get => _bagItemEquip;
+			get => _bagItem;
 		}
 
-		public void AddItemEquipToBag(ItemEquipStat item)
+		//fix it
+		public void AddItemEquipToBag(ItemData item)
 		{
-			ItemEquipInBag itemInBag = new ItemEquipInBag(item);
-			numberItemCreated++;
-			_bagItemEquip.Add(itemInBag);
+			ItemInBag itemInBag = new ItemInBag(ItemId.Axe);
+			//numberItemCreated++;
+			_bagItem.Add(itemInBag);
 			app.models.WriteModel<DataPlayerModel>();
-			RaiseDataChanged(nameof(BagItemEquip));
+			RaiseDataChanged(nameof(BagItem));
 		}
 
-		public void EquipItemInToBag(ItemEquipStat data, bool value)
+		public void EquipItemInToBag(ItemData data, bool value)
 		{
-			foreach(var item in BagItemEquip)
+			/*foreach(var item in BagItem)
 			{
 				if(item.itemEquipStat.idOwner == data.idOwner)
 				{
@@ -91,12 +93,12 @@ namespace FantasySurvivor
 					break;
 				}
 			}
-			app.models.WriteModel<DataPlayerModel>();
+			app.models.WriteModel<DataPlayerModel>();*/
 		}
 
-		public ItemEquipInBag GetFirstItemEquipAdded()
+		public ItemInBag GetFirstItemEquipAdded()
 		{
-			return _bagItemEquip.LastOrDefault();
+			return _bagItem.LastOrDefault();
 		}
 	}
 }

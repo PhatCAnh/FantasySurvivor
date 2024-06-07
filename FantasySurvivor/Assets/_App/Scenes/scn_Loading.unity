@@ -365,6 +365,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4756559215553902207, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _pieceDataTable
+      value: 
+      objectReference: {fileID: 11400000, guid: 3fc29209e21996444a25fe9f4291eda1, type: 2}
+    - target: {fileID: 4756559215553902207, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _itemDataUITable
+      value: 
+      objectReference: {fileID: 11400000, guid: 3fc29209e21996444a25fe9f4291eda1, type: 2}
     - target: {fileID: 4925867890613326577, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: m_Name
       value: --GameRunner

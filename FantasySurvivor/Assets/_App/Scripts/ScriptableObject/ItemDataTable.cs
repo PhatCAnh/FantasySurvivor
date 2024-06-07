@@ -18,29 +18,19 @@ public class ItemDataUI
 	public Sprite skin;
 }
 
-public class ItemStat
-{
-	public string id;
-	public DataItemEquipConfig dataStatConfig;
-
-	public ItemStat(DataItemEquipConfig dataStatConfig)
-	{
-		this.id = dataStatConfig.id;
-		this.dataStatConfig = dataStatConfig;
-	}
-}
-
 public class ItemData
 {
 	public readonly ItemId id;
+	public readonly ItemRank rank;
 	public readonly ItemDataUI dataUi;
-	public readonly DataItemConfig dataStat;
+	public readonly DataItemConfig dataConfig;
 
-	public ItemData(ItemDataUI dataUI, DataItemConfig dataStat)
+	public ItemData(ItemDataUI dataUI, DataItemConfig dataConfig, ItemRank rank = ItemRank.Normal)
 	{
 		this.id = dataUI.id;
 		this.dataUi = dataUI;
-		this.dataStat = dataStat;
+		this.dataConfig = dataConfig;
+		this.rank = rank;
 	}
 }
 
