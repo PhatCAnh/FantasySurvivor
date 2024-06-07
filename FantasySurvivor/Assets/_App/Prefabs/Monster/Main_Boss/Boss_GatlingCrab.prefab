@@ -81,7 +81,7 @@ MonoBehaviour:
   justSpawnVertical: 0
   isDead: 0
   isNoMove: 0
-  size: 2.3
+  size: 3
   bulletPrefab: {fileID: -7805141340533506810, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
   bulletPrefab2: {fileID: -7805141340533506810, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
   firePoint2: {fileID: 4790529623898961803}
@@ -120,9 +120,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.09233832}
+  m_Offset: {x: -0.025247574, y: -0.11758566}
   serializedVersion: 2
-  m_Radius: 2.0697596
+  m_Radius: 2.7766953
 --- !u!1 &3838255146860274423
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 3838255146860274423}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.57, y: 0.72, z: 0}
+  m_LocalPosition: {x: -2.05, y: 0.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -179,7 +179,7 @@ Transform:
   m_GameObject: {fileID: 5132988337723596792}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.35, y: 0.57, z: 0}
+  m_LocalPosition: {x: 1.97, y: 0.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
