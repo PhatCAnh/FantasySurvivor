@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using _App.Datas.DataScript;
 using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
@@ -8,9 +9,9 @@ namespace FantasySurvivor
 {
     public class FireBallControl : ProactiveSkill
     {
-        public override void Init(SkillData data)
+        public override void Init(SkillDataTotal dataTotal)
         {
-            base.Init(data);
+            base.Init(dataTotal);
             timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
         }
 
@@ -30,26 +31,14 @@ namespace FantasySurvivor
 
     public class EarthPunchControl : ProactiveSkill
     {
-        public override void Init(SkillData data)
-        {
-            base.Init(data);
-        }
     }
 
     public class IceSpearControl : ProactiveSkill
     {
-        public override void Init(SkillData data)
-        {
-            base.Init(data);
-        }
     }
 
     public class PoisonballControl : ProactiveSkill
     {
-        public override void Init(SkillData data)
-        {
-            base.Init(data);
-        }
     }
 
 	/*public class ThunderBird : ProactiveSkill
@@ -71,9 +60,9 @@ namespace FantasySurvivor
 
 	public class TwinControl : ProactiveSkill
 	{
-		public override void Init(SkillData data)
+		public override void Init(SkillDataTotal dataTotal)
 		{
-			base.Init(data);
+			base.Init(dataTotal);
 			timeDelaySkill = Mathf.RoundToInt(1000);
 		}
 	}
@@ -140,10 +129,6 @@ namespace FantasySurvivor
 
 	public class ThunderStrikeControl : ProactiveSkill
 	{
-		public override void Init(SkillData data)
-		{
-			base.Init(data);
-		}
 		public override void UpLevel()
 		{
 			base.UpLevel();
@@ -155,34 +140,22 @@ namespace FantasySurvivor
 	}
 	public class WaterBallControl : ProactiveSkill
 	{
-		public override void Init(SkillData data)
+		public override void Init(SkillDataTotal dataTotal)
 		{
-			base.Init(data);
+			base.Init(dataTotal);
 			timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
 		}
 	}
 	public class SmilingFaceControl : ProactiveSkill
     {
-        public override void Init(SkillData data)
-        {
-            base.Init(data);
-        }
     }
 
     public class BoomerangControl : ProactiveSkill
     {
-        public override void Init(SkillData data)
-        {
-            base.Init(data);
-        }
     }
 
     public class SkyboomControl : ProactiveSkill
     {
-        public override void Init(SkillData data)
-        {
-            base.Init(data);
-        }
         protected override void UpdatePrefab(SkillActive prefab)
         {
             base.UpdatePrefab(prefab);

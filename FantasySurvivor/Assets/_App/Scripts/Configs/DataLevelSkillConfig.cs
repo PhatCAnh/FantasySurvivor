@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ArbanFramework.Config;
 using UnityEngine;
 namespace FantasySurvivor
@@ -37,7 +38,7 @@ namespace FantasySurvivor
     {
         public override string FileName => nameof(DataLevelSkillConfig);
 
-        public DataLevelSkillConfig GetConfig(SkillName skillName)
+        public DataLevelSkillConfig GetConfig(SkillId skillName)
         {
             return GetConfig(skillName.ToString());
         }

@@ -14,18 +14,6 @@ public class SkillData
 	public Sprite imgUI;
 	public bool canAppear = true;
 	public bool ChoiceSkill = false;
-	
-	public Dictionary<int, LevelSkillData> levelSkillData;
-
-	public void Init(Dictionary<int, LevelSkillData> data)
-	{
-		levelSkillData = data;
-	}
-
-	public LevelSkillData GetData(int level)
-	{
-		return levelSkillData[level];
-	}
 }
 
 public class LevelSkillData

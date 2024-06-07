@@ -29,8 +29,6 @@ public class GameController : Controller<GameApp>
 
     public int numberLimitChoiceSkill = 4;// limit skill out game
     private HealthBar _healthBar;
-    private int _limitSkill = 2;// limit skill in game
-    private int currentSkill = 0;// điếm số skill in game
     public int currentNumberSkill = 0;// điếm số skill outr game
     private Vector3 _camSize;
 	private float _width;
@@ -51,12 +49,7 @@ public class GameController : Controller<GameApp>
 	private void Start()
 	{
 		listMonster = new List<Monster>();
-
-		foreach(var skill in app.resourceManager.GetListSkill())
-		{
-			skill.Init(app.configs.dataLevelSkill.GetConfig(skill.name).data);
-		}
-
+		
 		var data = app.resourceManager.GetDicDropItem();
 		float value = 0;
 		foreach(var item in data)
@@ -103,15 +96,7 @@ public class GameController : Controller<GameApp>
 			callback?.Invoke();
 		};
 	}
-	// check exit skill in game 
-	public void CheckExistSkill()
-	{
-		currentSkill++;
-		if(currentSkill == _limitSkill)
-		{
-			map.listSkill = character.listSkillDataCurrents;
-		}
-	}
+	
 
 	public void ChangeSceneHome()
 	{

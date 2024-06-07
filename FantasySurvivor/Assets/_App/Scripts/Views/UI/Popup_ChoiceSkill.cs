@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
@@ -25,7 +26,7 @@ public class PopupChoiceSkill : View<GameApp>, IPopup
 		foreach(var skill in gameController._listSkill) // lấy list skill
 		{
 			Instantiate(iconSkillPrefab, container).TryGetComponent(out Icon_ChoiceSkill icon);
-			icon.Init(skill, this);
+			icon.Init(skill.id, this);
 		}
 		closeBtn.onClick.AddListener(Close);
 		Open();
@@ -64,7 +65,6 @@ public class PopupChoiceSkill : View<GameApp>, IPopup
 
 	public void UpdateTextNumberChoiceSkill(bool value)
 	{
-
 		gameController.currentNumberSkill += value ? 1 : -1;
 
 		NumberTaget.text = $"{gameController.currentNumberSkill}/{gameController.numberLimitChoiceSkill}";

@@ -1,11 +1,12 @@
 ﻿using System.Transactions;
+using _App.Datas.DataScript;
 namespace FantasySurvivor
 {
 	public class PassiveSkill : Skill
 	{
-		public override void Init(SkillData data)
+		public override void Init(SkillDataTotal dataTotal)
 		{
-			base.Init(data);
+			base.Init(dataTotal);
 			UpdateBuff();
 		}
 

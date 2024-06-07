@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _App.Datas.DataScript;
+using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
@@ -11,7 +13,9 @@ using UnityEngine.UI;
 
 public class SkillUI : View<GameApp>
 {
-	public SkillData skillData;
+	public SkillData skillDataUI;
+	
+	public SkillDataTotal skillData;
 
 	public Transform objectParent, objectChain, objectContent;
 
@@ -40,17 +44,17 @@ public class SkillUI : View<GameApp>
 	{
 		base.OnViewInit();
 		buttonInteract.onClick.AddListener(SelectedSkill);
-		_imgSkill.sprite = skillData.imgUI;
-		_txtNameSkill.text = skillData.name.ToString();
-		var skill = gameController.character.GetSkill(skillData.name);
+		_imgSkill.sprite = skillDataUI.imgUI;
+		_txtNameSkill.text = skillDataUI.name.ToString();
+		var skill = Singleton<SkillController>.instance.GetSkillChoose(skillData.id);
 		if(skill != null)
 		{
 			_level = skill.level;
 		}
 
-		_txtDescription.text = skillData.levelSkillData[_level + 1].description;
+		_txtDescription.text = skillData.statSkillData.data[_level + 1].description;
 
-		switch (skillData.typeElemental)
+		switch (skillDataUI.typeElemental)
 		{
 			case SkillElementalType.Water:
 				UpdateColor(_colorBlue);
@@ -90,15 +94,16 @@ public class SkillUI : View<GameApp>
 		}
 	}
 
-	public void Init(SkillData data, ChoiceSkill parent)
+	public void Init(SkillDataTotal data, ChoiceSkill parent)
 	{
+		skillDataUI = data.skillDataUI;
 		skillData = data;
 		_parent = parent;
 	}
 
 	private void SelectedSkill()
 	{
-		gameController.character.AddProactiveSkill(skillData);
+		gameController.character.AddProactiveSkill(skillData.id);
 		_parent.Selected(this);
 	}
 

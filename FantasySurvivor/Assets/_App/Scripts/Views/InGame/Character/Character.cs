@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using _App.Datas.DataScript;
 using _App.Scripts.Controllers;
 using _App.Scripts.Views.InGame.Skills;
 using _App.Scripts.Views.InGame.Skills.SkillMono;
@@ -50,10 +51,7 @@ public class Character : ObjectRPG
             _direction = value;
         }
     }
-
-    public List<Skill> listSkills = new List<Skill>();
-    public List<SkillData> listSkillDataCurrents = new List<SkillData>();
-    public List<Skill> listSkillCooldown = new List<Skill>();
+    
     public List<CharacterUpdateStat> listUpdateStat = new List<CharacterUpdateStat>();
 
     public bool IsAlive => model.currentHealthPoint > 0;
@@ -68,6 +66,7 @@ public class Character : ObjectRPG
     private CharacterMove _moveSm;
 
     private GameController gameController => Singleton<GameController>.instance;
+    private SkillController skillController => Singleton<SkillController>.instance;
 
     protected override void OnViewInit()
     {
@@ -161,94 +160,9 @@ public class Character : ObjectRPG
         model.currentHealthPoint += value;
     }
 
-    public void AddProactiveSkill(SkillData skillData)
+    public void AddProactiveSkill(SkillId id)
     {
-        var skill = GetSkill(skillData.name);
-        if (skill != null)
-        {
-            skill.UpLevel();
-            if (skill.level >= 6)
-            {
-                gameController.map.RemoveSkill(skill.skillName);
-            }
-            return;
-        }
-        listSkillDataCurrents.Add(skillData);
-        gameController.CheckExistSkill();
-
-        switch (skillData.type)
-        {
-            case SkillType.Active:
-                {
-                    Skill skillIns;
-                    switch (skillData.name)
-                    {
-                        case SkillName.Fireball:
-                            skillIns = new FireBallControl();
-                            break;
-                        case SkillName.ThunderStrike:
-                            skillIns = new ThunderStrikeControl();
-                            break;
-                        case SkillName.Waterball:
-                            skillIns = new WaterBallControl();
-                            break;
-                        // case SkillName.ThunderChanneling:
-                        // 	skillIns = new ThunderChanneling();
-                        // 	break;
-                        case SkillName.FireShield:
-                            skillIns = new FireShieldControl();
-                            break;
-                        case SkillName.Shark:
-                            skillIns = new SharkControl();
-                            break;
-                        case SkillName.PoisonBullet:
-                            skillIns = new PoisonballControl();
-                            break;
-                        case SkillName.Earthpunch:
-                            skillIns = new EarthPunchControl();
-                            break;
-                        case SkillName.SkyBoom:
-                            skillIns = new SkyboomControl();
-                            break;
-                        case SkillName.Boomerang:
-                            skillIns = new BoomerangControl();
-                            break;
-                        case SkillName.SmilingFace:
-                            skillIns = new SmilingFaceControl();
-                            break;
-                        case SkillName.IceSpear:
-                            skillIns = new IceSpearControl();
-                            break;
-                        case SkillName.Twin: 
-                            skillIns = new TwinControl(); 
-                            break;
-                        default:
-                            skillIns = new ProactiveSkill();
-                            break;
-                    }
-                    skillIns.Init(skillData);
-                    listSkills.Add(skillIns);
-                    break;
-                }
-            case SkillType.Buff:
-                if (skillData.name == SkillName.Food)
-                {
-                    model.currentHealthPoint += model.currentHealthPoint * 20 / 100;
-                }
-                break;
-        }
-    }
-    //ham check exist skill
-    public Skill GetSkill(SkillName skillName)
-    {
-        foreach (var skill in listSkills)
-        {
-            if (skill.skillName.Equals(skillName))
-            {
-                return skill;
-            }
-        }
-        return null;
+        skillController.ChoiceSkillInGame(id);
     }
 
     public void UpdateStat(StatModifierType typeStat, float maxH, float ms, float ad, float ar, float itemR, int armor, float duration)
@@ -313,7 +227,7 @@ public class Character : ObjectRPG
     // ReSharper disable Unity.PerformanceAnalysis
     private void HandleProactiveSkill(float deltaTime)
     {
-        foreach (var skill in listSkillCooldown)
+        foreach (var skill in skillController.listSkills)
         {
             skill.CoolDownSkill(deltaTime);
         }

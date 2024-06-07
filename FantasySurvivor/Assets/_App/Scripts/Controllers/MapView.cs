@@ -29,8 +29,6 @@ public class MapView : View<GameApp>
 
 	public Dictionary<TypeItemReward, int> dictionaryReward = new Dictionary<TypeItemReward, int>();
 
-	public List<SkillData> listSkill;
-
 	public MapModel model { get; private set; }
 
 	public int currentLevel = 0;
@@ -51,48 +49,11 @@ public class MapView : View<GameApp>
 	public void Init(int chapter, int level)
 	{
 		model = new();
-		listSkill = app.resourceManager.GetListSkill().Where(p => p.canAppear && p.ChoiceSkill).ToList();
-		
 		//fix it
 		StartLevel(chapter, level);
 	}
 
-	public List<SkillData> GetRandomSkill()
-	{
-		int count = 3;
-		List<SkillData> newList = new List<SkillData>();
-		if (listSkill.Count < 3)
-		{
-			count = listSkill.Count;
-		}
-		for (int i = 0; i < count; i++)
-		{
-			SkillData skill;
-			do
-			{
-				skill = listSkill[Random.Range(0, listSkill.Count)];
-			} while (newList.Contains(skill));
-			newList.Add(skill);
-		}
-
-		if (listSkill.Count == 0)
-		{
-			newList.Add(app.resourceManager.GetSkill(SkillName.Food));
-		}
-
-		return newList;
-	}
-
-	public void RemoveSkill(SkillName skillName)
-	{
-		foreach (var skill in listSkill.ToList())
-		{
-			if (skill.name.Equals(skillName))
-			{
-				listSkill.Remove(skill);
-			}
-		}
-	}
+	
 
 	public void StartLevel(int chapter, int level)
 	{
