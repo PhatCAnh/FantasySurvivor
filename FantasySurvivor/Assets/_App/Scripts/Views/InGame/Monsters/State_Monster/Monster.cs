@@ -346,6 +346,7 @@ public class Monster : ObjectRPG
 		flip();
 		if(isAttack) return;
 		_stateMachine.ChangeState(_attackState);
+		IdleState();
 	}
 
 	#endregion

@@ -82,9 +82,9 @@ MonoBehaviour:
   isDead: 0
   isNoMove: 0
   size: 2.3
+  bulletPrefab: {fileID: -7805141340533506810, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
+  bulletPrefab2: {fileID: -7805141340533506810, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
   firePoint2: {fileID: 4790529623898961803}
-  bulletPrefab: {fileID: -6610895450072902330, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
-  bulletPrefab2: {fileID: -6610895450072902330, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
   typeBullet: 35
   typeBullet2: 35
   _numberBack: 0
@@ -148,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 3838255146860274423}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.01, y: -3.09, z: 0}
+  m_LocalPosition: {x: -1.57, y: 0.72, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -179,7 +179,7 @@ Transform:
   m_GameObject: {fileID: 5132988337723596792}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.93, y: -3.02, z: 0}
+  m_LocalPosition: {x: 1.35, y: 0.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

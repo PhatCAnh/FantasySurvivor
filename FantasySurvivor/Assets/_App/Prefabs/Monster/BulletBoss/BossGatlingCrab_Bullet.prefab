@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8276098572264279208}
-  - component: {fileID: 2917832476162667064}
-  - component: {fileID: -6610895450072902330}
+  - component: {fileID: -7805141340533506810}
   m_Layer: 0
   m_Name: BossGatlingCrab_Bullet
   m_TagString: Untagged
@@ -34,7 +33,7 @@ Transform:
   - {fileID: 8499688641397612221}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2917832476162667064
+--- !u!114 &-7805141340533506810
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,29 +42,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5619392962214509051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ccc2bde958ccc94293813f25c9a0d6e, type: 3}
+  m_Script: {fileID: 11500000, guid: f5c9f32b74782984ebe4f16a5aa1cde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skin: {fileID: 4909433785364661648}
-  size: 0.27
+  size: 0.3
   type: 35
-  _speedBullet: 10
---- !u!114 &-6610895450072902330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5619392962214509051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d573c67d9ec4d7cbdd493bb56ff59ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skin: {fileID: 0}
-  size: 0
-  type: 0
-  _speedBullet: 15
+  _speedBullet: 5
 --- !u!1 &6477525359231895078
 GameObject:
   m_ObjectHideFlags: 0
