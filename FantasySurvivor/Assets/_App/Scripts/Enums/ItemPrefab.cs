@@ -147,6 +147,8 @@ public enum PopupType
 	ChoiceSkill,
 	ChoiceSkillOutGame,
 	CharacterInformation,
+	ItemEquipDetail,
+	ItemPieceDetail,
 }
 
 public enum SkillDamagedType

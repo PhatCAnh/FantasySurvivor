@@ -34,6 +34,12 @@ public class ItemSlotUI : View<GameApp>
 
     protected virtual void OnClickBtn()
     {
+        app.resourceManager.ShowPopup(PopupType.ItemEquipDetail).TryGetComponent(out PopupItemEquipDetail popup);
+        popup.Init(this, itemInBag, itemData, image, imageRank);
+    }
+
+    public void Action()
+    {
         parent.EquipItem(itemData.dataConfig.type, itemInBag);
         Destroy(gameObject);
     }
