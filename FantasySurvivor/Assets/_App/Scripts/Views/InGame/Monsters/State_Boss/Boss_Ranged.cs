@@ -49,7 +49,7 @@ namespace FantasySurvivor
         {
             animator.SetBool("Attack", true);
 
-            int bulletCount = 6; // Số lượng đạn trong vòng tròn
+            int bulletCount = 8; // Số lượng đạn trong vòng tròn
             float radius = 1f; // Bán kính của vòng tròn đạn
 
             for (int i = 0; i < bulletCount; i++)
