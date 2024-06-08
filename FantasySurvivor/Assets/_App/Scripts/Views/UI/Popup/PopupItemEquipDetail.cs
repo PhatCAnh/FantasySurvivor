@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PopupItemEquipDetail : View<GameApp>, IPopup
 {
     [SerializeField] private Image _imgSkin, _imgRank, _imgIcon;
-    [SerializeField] private TextMeshProUGUI _txtName, _txtDescription, _txtValue;
+    [SerializeField] private TextMeshProUGUI _txtName, _txtDescription, _txtValue, _txtBtnAction;
     [SerializeField] private Button _btnAction, _btnClose, _btnUpdate;
     [SerializeField] private GameObject _goIcon, _goText;
 
@@ -16,9 +16,14 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
 
     private ItemSlotUI _itemSlotUI;
 
-    public void Init(ItemSlotUI itemSlotEquipUI, ItemInBag dataInBag, ItemData itemData, Image imgSkin, Image imgRank)
+    public void Init(ItemSlotUI itemSlotEquipUI, ItemInBag dataInBag, ItemData itemData, Image imgSkin, Image imgRank, bool isEquip = false)
     {
         _itemSlotUI = itemSlotEquipUI;
+        if(isEquip)
+        {
+            _txtBtnAction.text = "Unequip";
+        }
+        
         _imgSkin.sprite = imgSkin.sprite;
         _imgRank.sprite = imgRank.sprite;
         _txtName.text = itemData.dataConfig.name;
@@ -65,6 +70,7 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
     }
     public void Close()
     {
+        _itemSlotUI.isShow = false;
         Destroy(gameObject);
     }
 }

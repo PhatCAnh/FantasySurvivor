@@ -21,7 +21,17 @@ public class ItemSlotEquipUI : ItemSlotUI
     
     protected override void OnClickBtn()
     {
+        if(isShow) return;
+        isShow = true;
+        app.resourceManager.ShowPopup(PopupType.ItemEquipDetail).TryGetComponent(out PopupItemEquipDetail popup);
+        popup.Init(this, itemInBag, itemData, image, imageRank, isEquip);
+        
+    }
+
+    public override void Action()
+    {
         if(!isEquip) return;
+        isShow = false;
         parent.UnEquipItem(itemData.dataConfig.type, itemInBag);
     }
 

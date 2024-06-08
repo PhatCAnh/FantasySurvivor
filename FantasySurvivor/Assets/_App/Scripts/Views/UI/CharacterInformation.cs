@@ -65,6 +65,7 @@ public class CharacterInformation : View<GameApp>, IPopup
 		foreach(var item in app.models.dataPlayerModel.BagItem)
 		{
 			Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item1);
+			item1.isShow = true;
 			item1.Init(item, this);
 		}
 

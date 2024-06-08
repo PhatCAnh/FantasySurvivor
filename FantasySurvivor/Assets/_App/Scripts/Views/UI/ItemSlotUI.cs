@@ -15,6 +15,8 @@ public class ItemSlotUI : View<GameApp>
     [SerializeField] protected Button btn;
 
     protected CharacterInformation parent;
+
+    public bool isShow = false;
     
     public void Init(ItemInBag data, CharacterInformation ui)
     {
@@ -34,11 +36,13 @@ public class ItemSlotUI : View<GameApp>
 
     protected virtual void OnClickBtn()
     {
+        if(isShow) return;
+        isShow = true;
         app.resourceManager.ShowPopup(PopupType.ItemEquipDetail).TryGetComponent(out PopupItemEquipDetail popup);
         popup.Init(this, itemInBag, itemData, image, imageRank);
     }
 
-    public void Action()
+    public virtual void Action()
     {
         parent.EquipItem(itemData.dataConfig.type, itemInBag);
         Destroy(gameObject);
