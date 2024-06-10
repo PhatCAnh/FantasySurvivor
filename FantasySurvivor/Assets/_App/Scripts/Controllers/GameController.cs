@@ -10,7 +10,6 @@ using FantasySurvivor;
 using JetBrains.Annotations;
 using Unity.Mathematics;
 using UnityEngine.SceneManagement;
-
 public class GameController : Controller<GameApp>
 {
 	public bool isStop => isEndGame || isStopGame;
@@ -27,7 +26,7 @@ public class GameController : Controller<GameApp>
 
 	public Action<Monster> onMonsterDie;
 
-    public int numberLimitChoiceSkill = 4;// limit skill out game
+    public int numberLimitChoiceSkill = 3;// limit skill out game
     private HealthBar _healthBar;
     private int _limitSkill = 2;// limit skill in game
     private int currentSkill = 0;// điếm số skill in game
@@ -402,10 +401,11 @@ public class GameController : Controller<GameApp>
 			dataChar.damage,
 			dataChar.itemAttractionRange,
 			dataChar.attackRange,
-			dataChar.armor
-			);
+			dataChar.armor,
+            dataChar.shield
+            );
 
-		foreach(var item in listItem)
+        foreach (var item in listItem)
 		{
 			var itemData = item.itemEquipStat.dataStatConfig;
 			model.AddStatFormItemEquip(
@@ -424,8 +424,9 @@ public class GameController : Controller<GameApp>
 			model.attackDamage,
 			model.itemAttractionRange,
 			model.attackRange,
-			model.armor
-			);
+            model.armor,
+            model.shield
+            );
 		characterPrefab.Init(stat, model);
 
 		return characterPrefab;

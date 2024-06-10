@@ -95,16 +95,14 @@ namespace FantasySurvivor
             prefab.size = levelData[level].valueSpecial1;
         }
     }
-    public class WindFieldControl : ProactiveSkill
+    public class ThunderPunchControl : ProactiveSkill
     {
-        protected override void UpdatePrefab(SkillActive prefab)
+        public override void Init(SkillData data)
         {
-            base.UpdatePrefab(prefab);
-            prefab.transform.localScale = Vector3.one * levelData[level].valueSpecial1;
-            prefab.size = levelData[level].valueSpecial1;
+            base.Init(data);
         }
-
     }
+
 
     /*public class ZoneOfJudgment : ProactiveSkill
 	{

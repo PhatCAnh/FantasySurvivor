@@ -39,6 +39,8 @@ public enum ItemPrefab
 	GoblinSwift,
 	Cyclone,
     WindField,
+	ThunderPunch,
+    ZoneOfJudgment,
 }
 
 public enum MapType
@@ -113,6 +115,8 @@ public enum SkillName
 	Twin,
 	Cyclone,
 	WindField,
+	ThunderPunch,
+    ZoneOfJudgment,
 }
 
 public enum SkillType

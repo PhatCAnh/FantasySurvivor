@@ -16,8 +16,9 @@ namespace FantasySurvivor
 		public float attackRange { get; private set; }
 
 		public int armor { get; private set; }
+        public int shield { get; private set; } // Thêm thuộc tính shield
 
-		public void OnReadImpl(IConfigReader reader)
+        public void OnReadImpl(IConfigReader reader)
 		{
 			id = reader.ReadString();
 			hp = reader.ReadInt();
@@ -26,8 +27,9 @@ namespace FantasySurvivor
 			itemAttractionRange = reader.ReadFloat();
 			attackRange = reader.ReadFloat();
 			armor = reader.ReadInt();
-		}
-		public string GetId()
+            shield = reader.ReadInt();
+        }
+        public string GetId()
 		{
 			return id;
 		}
