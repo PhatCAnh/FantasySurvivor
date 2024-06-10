@@ -55,9 +55,10 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _skillTwin;
 	
 	[SerializeField] private GameObject _bulletOwlStriker;
+   
 
 
-	private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
+    private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
 
 	[Header("UI prefabs")]

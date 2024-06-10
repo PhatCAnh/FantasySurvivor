@@ -51,10 +51,11 @@ public class MapView : View<GameApp>
 	public void Init(int chapter, int level)
 	{
 		model = new();
-		listSkill = app.resourceManager.GetListSkill().Where(p => p.canAppear).ToList();
-		
-		//fix it
-		StartLevel(chapter, level);
+        listSkill = app.resourceManager.GetListSkill().Where(p => p.canAppear && p.ChoiceSkill).ToList();
+
+
+        //fix it
+        StartLevel(chapter, level);
 	}
 
 	public List<SkillData> GetRandomSkill()

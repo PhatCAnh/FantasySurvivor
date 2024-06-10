@@ -13,7 +13,7 @@ namespace FantasySurvivor
         }
         protected override void Attack()
         {
-            base.Attack();
+          
             _skillActive.TakeDamage();
 
             foreach (var mons in _skillActive.gameController.listMonster)
