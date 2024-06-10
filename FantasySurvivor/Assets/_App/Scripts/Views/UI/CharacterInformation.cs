@@ -90,7 +90,19 @@ public class CharacterInformation : View<GameApp>, IPopup
 	[ContextMenu("Test item Equip")]
 	public void TestEquip()
 	{
-		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Axe, ItemRank.Legendary, 5);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Axe, ItemRank.Normal, 1);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Armor, ItemRank.Rare, 2);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Shoes, ItemRank.Epic, 3); 
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Gloves, ItemRank.Unique, 4);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Hat, ItemRank.Legendary, 5);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Ring, ItemRank.Epic, 6);
+		
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Axe1, ItemRank.Normal, 1);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Armor1, ItemRank.Rare, 2);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Shoes1, ItemRank.Epic, 3);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Gloves1, ItemRank.Unique, 4);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Hat1, ItemRank.Legendary, 5);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Ring1, ItemRank.Epic, 6);
 	}
 
 	public void EquipItem(ItemType type, ItemInBag data)

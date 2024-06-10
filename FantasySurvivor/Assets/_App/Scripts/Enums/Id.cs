@@ -16,7 +16,8 @@ public enum SkillId
 public enum ItemId
 {
 	PieceFire, PieceWater, PieceWind, PieceEarth, PieceElectric,
-	Axe,
+	Axe, Armor, Shoes, Gloves, Hat, Ring,
+	Axe1, Armor1, Shoes1, Gloves1, Hat1, Ring1,
 }
 
 public enum ItemPieceId
