@@ -27,6 +27,8 @@ public class CharacterInformation : View<GameApp>, IPopup
 
 	private ItemController itemController => ArbanFramework.Singleton<ItemController>.instance;
 
+	private List<GameObject> _listItemSlot = new List<GameObject>();
+
 	protected override void Start()
 	{
 		base.Start();
@@ -64,9 +66,10 @@ public class CharacterInformation : View<GameApp>, IPopup
 
 		foreach(var item in app.models.dataPlayerModel.BagItem)
 		{
-			Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item1);
-			item1.isShow = true;
+			var go = Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer);
+			go.TryGetComponent(out ItemSlotUI item1);
 			item1.Init(item, this);
+			_listItemSlot.Add(go);
 		}
 
 		foreach(var item in app.models.dataPlayerModel.ListItemEquipped)
@@ -76,6 +79,18 @@ public class CharacterInformation : View<GameApp>, IPopup
 			if(slot.isEquip) UnEquipItem(data.dataConfig.type, item);
 			slot.Init(item);
 		}
+	}
+
+	[ContextMenu("Test item piece")]
+	public void Test()
+	{
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.PieceFire, 2);
+	}
+	
+	[ContextMenu("Test item Equip")]
+	public void TestEquip()
+	{
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Axe, ItemRank.Legendary, 5);
 	}
 
 	public void EquipItem(ItemType type, ItemInBag data)
@@ -116,16 +131,30 @@ public class CharacterInformation : View<GameApp>, IPopup
 
 		AddDataBinding("fieldCharacterModel-armorValue", _txtArmor, (control, e) =>
 		{
-			float armorPercent = (float) app.models.characterModel.armor / 100f;
+			float armorPercent = app.models.characterModel.armor / 100f;
 			control.text = $"{armorPercent * 100f}%";
 		}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.armor), app.models.characterModel));
 		
 		AddDataBinding("fieldDataPlayerModel-BagItemEquipValue", this, (control, e) =>
 			{
-                var dataStat = app.models.dataPlayerModel.GetFirstItemEquipAdded();
-				if (dataStat == null) return;
-                Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
-                item.Init(dataStat, this);
+				foreach(var itemSlot in _listItemSlot.ToList())
+				{
+					Destroy(itemSlot);
+				}
+				_listItemSlot.Clear();
+				
+				foreach(var itemSlot in app.models.dataPlayerModel.BagItem)
+				{
+					var go = Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer);
+					go.TryGetComponent(out ItemSlotUI item1);
+					item1.Init(itemSlot, this);
+					_listItemSlot.Add(go);
+				}
+				
+    //             var dataStat = app.models.dataPlayerModel.GetFirstItemEquipAdded();
+				// if (dataStat == null) return;
+    //             Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
+    //             item.Init(dataStat, this);
 			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.BagItem), app.models.dataPlayerModel)
 		);
 	}

@@ -49,6 +49,12 @@ public class ItemInBag
 		this.level = level;
 		this.quantity = quantity;
 	}
+
+	// public ItemInBag(ItemId id, int quantity)
+	// {
+	// 	this.id = id;
+	// 	this.quantity = quantity;
+	// }
 	
 	// public ItemInBag(ItemId id, ItemRank rank, int level = 1, int quantity = 0)
 	// {

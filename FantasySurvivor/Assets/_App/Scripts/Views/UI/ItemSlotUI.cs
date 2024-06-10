@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework;
 using ArbanFramework.MVC;
+using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -13,6 +15,7 @@ public class ItemSlotUI : View<GameApp>
     [SerializeField] protected Image image;
     [SerializeField] protected Image imageRank;
     [SerializeField] protected Button btn;
+    [SerializeField] private TextMeshProUGUI txtNumber;
 
     protected CharacterInformation parent;
 
@@ -24,6 +27,7 @@ public class ItemSlotUI : View<GameApp>
         if(data != null)
         {
             InitData(data);
+            
         }
         btn.onClick.AddListener(OnClickBtn);
     }
@@ -38,8 +42,18 @@ public class ItemSlotUI : View<GameApp>
     {
         if(isShow) return;
         isShow = true;
-        app.resourceManager.ShowPopup(PopupType.ItemEquipDetail).TryGetComponent(out PopupItemEquipDetail popup);
-        popup.Init(this, itemInBag, itemData, image, imageRank);
+        var type = itemData.dataConfig.type;
+        if(type == 0)
+        {
+            app.resourceManager.ShowPopup(PopupType.ItemPieceDetail).TryGetComponent(out PopupItemPieceDetail popup);
+            popup.Init(this, itemInBag, itemData, image, imageRank);
+        }
+        else
+        {
+            app.resourceManager.ShowPopup(PopupType.ItemEquipDetail).TryGetComponent(out PopupItemEquipDetail popup);
+            popup.Init(this, itemInBag, itemData, image, imageRank);
+        }
+
     }
 
     public virtual void Action()
@@ -55,5 +69,9 @@ public class ItemSlotUI : View<GameApp>
         this.itemData = itemController.GetDataItem(data.id, data.rank, data.level);
         image.sprite = itemData.dataUi.skin;
         imageRank.sprite = itemController.GetSpriteRank(data.rank);
+        if(data.quantity != 0)
+        {
+            txtNumber.text = $"{data.quantity}";
+        }
     }
 }

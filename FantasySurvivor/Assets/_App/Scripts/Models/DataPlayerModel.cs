@@ -85,6 +85,22 @@ namespace FantasySurvivor
 			app.models.WriteModel<DataPlayerModel>();
 			RaiseDataChanged(nameof(BagItem));
 		}
+		
+		public void AddItemEquipToBag(ItemId id, int quantity)
+		{
+			var check = _bagItem.Find(item => item.id == id);
+			if(check == null)
+			{
+				_bagItem.Add(new ItemInBag(id.ToString(), "Rare", 0, quantity));
+			}
+			else
+			{
+				check.quantity += quantity;
+			}
+			RaiseDataChanged(nameof(BagItem));
+			app.models.WriteModel<DataPlayerModel>();
+		}
+
 
 		public void EquipItem(ItemInBag item)
 		{

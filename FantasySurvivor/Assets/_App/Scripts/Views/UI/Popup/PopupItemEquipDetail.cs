@@ -10,7 +10,6 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
     [SerializeField] private Image _imgSkin, _imgRank, _imgIcon;
     [SerializeField] private TextMeshProUGUI _txtName, _txtDescription, _txtValue, _txtBtnAction;
     [SerializeField] private Button _btnAction, _btnClose, _btnUpdate;
-    [SerializeField] private GameObject _goIcon, _goText;
 
     [SerializeField] private Sprite _spriteWeapon, _spriteArmor, _spriteShoes, _spriteGloves, _spriteHat, _spriteRing;
 
@@ -50,11 +49,6 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
                 break;
             case ItemType.Ring:
                 _imgIcon.sprite = _spriteRing;
-                break;
-            case ItemType.Piece:
-                _goIcon.SetActive(false);
-                _goText.SetActive(true);
-                _goText.GetComponent<TextMeshProUGUI>().text = dataInBag.quantity.ToString();
                 break;
         }
     }

@@ -420,6 +420,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e42a88db81fff488bbe53cf64c1b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemInBag:
+    id: 0
+    rank: 0
+    level: 0
+    quantity: 0
   image: {fileID: 2427906785250105905}
   imageRank: {fileID: 8463475107542584844}
   btn: {fileID: 138080558738237051}
+  txtNumber: {fileID: 2089635383404158796}
+  isShow: 0
