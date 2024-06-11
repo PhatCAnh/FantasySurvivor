@@ -159,6 +159,18 @@ namespace _App.Scripts.Controllers
 		{
 			return listSkills.FirstOrDefault(skill => skill.skillId == id);
 		}
+
+		public void AddSkillSet(SkillId id)
+		{
+			_listSkillSelected.Add(id);
+			app.models.dataPlayerModel.AddSkillSet(id);
+		}
+
+		public void RemoveSkillSet(SkillId id)
+		{
+			_listSkillSelected.Remove(id);
+			app.models.dataPlayerModel.RemoveSkillSet(id);
+		}
 		
 		protected override void OnDestroy()
 		{

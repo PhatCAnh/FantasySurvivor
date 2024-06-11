@@ -13,7 +13,6 @@ public class SkillData
 	public SkillElementalType typeElemental;
 	public Sprite imgUI;
 	public bool canAppear = true;
-	public bool ChoiceSkill = false;
 }
 
 public class LevelSkillData

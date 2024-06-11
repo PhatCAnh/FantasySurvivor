@@ -26,7 +26,7 @@ public class PopupChoiceSkill : View<GameApp>, IPopup
 		foreach(var skill in gameController._listSkill) // lấy list skill
 		{
 			Instantiate(iconSkillPrefab, container).TryGetComponent(out Icon_ChoiceSkill icon);
-			icon.Init(skill.id, this);
+			icon.Init(skill.id, this,CheckSkillSet(skill.id));
 		}
 		closeBtn.onClick.AddListener(Close);
 		Open();
@@ -79,6 +79,11 @@ public class PopupChoiceSkill : View<GameApp>, IPopup
 			GoBtn.interactable = true;
 
 		}
+	}
+
+	private bool CheckSkillSet(SkillId id)
+	{
+		return app.models.dataPlayerModel.GetSkillSet().Contains(id);
 	}
 
 

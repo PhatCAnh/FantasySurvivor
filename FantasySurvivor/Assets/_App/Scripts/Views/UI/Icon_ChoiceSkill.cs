@@ -14,42 +14,42 @@ public class Icon_ChoiceSkill : View<GameApp>
     private SkillData _skillData;
 
     private GameController gameController => Singleton<GameController>.instance;
+    private SkillController skillController => Singleton<SkillController>.instance;
 
-    public void Init(SkillId id, PopupChoiceSkill parent)
+    public void Init(SkillId id, PopupChoiceSkill parent, bool checkSKillSet)
     {
         this.id = id;
         this.parent = parent;
-        _skillData = Singleton<SkillController>.instance.GetDataSkill(id).skillDataUI;
-
+        _skillData = skillController.GetDataSkill(id).skillDataUI;
+        toggle.isOn = checkSKillSet;
+        if(checkSKillSet)
+        {
+            skillController.GetListSkillInGame().Add(id);
+            parent.UpdateTextNumberChoiceSkill(true);
+        }
     }
     protected override void OnViewInit()
     {
         base.OnViewInit();
         image.sprite = _skillData.imgUI;
-        toggle.isOn = _skillData.ChoiceSkill;
         toggle.onValueChanged.AddListener(OnClickTgl);
         
     }
     private void OnClickTgl(bool value)
     {
-        _skillData.ChoiceSkill = value;
         parent.UpdateTextNumberChoiceSkill(value);
-        var skillController = Singleton<SkillController>.instance;
-        var listSkill = skillController.GetListSkillInGame();
-        var skill = skillController.GetDataSkill(id);
         if(value)
         {
-            listSkill.Add(id);
+            skillController.AddSkillSet(id);
         }
         else
         {
-            listSkill.Remove(id);
+            skillController.RemoveSkillSet(id);
         }
         if (gameController.currentNumberSkill > gameController.numberLimitChoiceSkill)
         {
             toggle.isOn = false;
             return;
         }
-       
     }
 }
