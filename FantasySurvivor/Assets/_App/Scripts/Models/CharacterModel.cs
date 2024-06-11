@@ -52,9 +52,7 @@ public class CharacterModel : Model<GameApp>
         set
         {
             if (_shield.Equals(value)) return;
-            Debug.Log($"shield after: {_shield}");
             _shield = Mathf.Clamp(value, 0, value); 
-            Debug.Log($"shield before: {_shield}");
             RaiseDataChanged(nameof(shield));
         }
     }

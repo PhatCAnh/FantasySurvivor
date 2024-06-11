@@ -40,7 +40,7 @@ public enum ItemPrefab
 	Cyclone,
     WindField,
 	ThunderPunch,
-    ZoneOfJudgment,
+    EarthShield,
 }
 
 public enum MapType
@@ -63,6 +63,7 @@ public enum TextPopupType
     Normal,
     Fire,
 	Poison,
+	Lightning
 }
 
 public enum TypeStatTower
@@ -116,7 +117,7 @@ public enum SkillName
 	Cyclone,
 	WindField,
 	ThunderPunch,
-    ZoneOfJudgment,
+    EarthShield,
 }
 
 public enum SkillType

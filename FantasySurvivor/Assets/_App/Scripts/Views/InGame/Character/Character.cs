@@ -148,10 +148,7 @@ public class Character : ObjectRPG
 	{
         damage = MinusDamage(damage);
 
-
-        // Kiểm tra shield
         bool isShieldAbsorbedDamage = CheckShield(damage);
-        Debug.Log($"shield before: {app.models.characterModel.shield}");
 
         // Nếu không có shield hoặc shield không đủ chặn hết sát thương
         if (!isShieldAbsorbedDamage)

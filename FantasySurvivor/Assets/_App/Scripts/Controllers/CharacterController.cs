@@ -41,7 +41,6 @@ public class CharacterController: Controller<GameApp>
 
         );
 
-		Debug.Log($"shield: {app.models.characterModel.shield}");
 	}
 
 	public CharacterData GetDataCharacter(CharacterId id)
