@@ -142,7 +142,7 @@ public class Character : ObjectRPG
 		moveDirection = moveForce;
 	}
 
-	public void ActivateShield(float shieldValue)
+	public void ActivateShield(int shieldValue)
 	{
 		model.shield += shieldValue;
 	}
@@ -152,8 +152,9 @@ public class Character : ObjectRPG
 		if(!IsAlive) return;
 
 		damage = MinusDamage(damage);
-
-		damage = Mathf.RoundToInt(damage - model.shield);
+		var currentShield = model.shield;
+		model.shield -= damage;
+		damage = Mathf.RoundToInt(damage - currentShield);
 		if(damage < 0) damage = 0;
 
 		model.currentHealthPoint -= damage;
@@ -262,7 +263,7 @@ public class Character : ObjectRPG
 		return null;
 	}
 
-	public void UpdateStat(StatModifierType typeStat, float maxH, float ms, float ad, float ar, float itemR, int armor, float shield, float duration)
+	public void UpdateStat(StatModifierType typeStat, float maxH, float ms, float ad, float ar, float itemR, int armor, int shield, float duration)
 	{
 		var updateStat = new CharacterUpdateStat(typeStat, maxH, ms, ad, ar, itemR, armor, shield, duration);
 

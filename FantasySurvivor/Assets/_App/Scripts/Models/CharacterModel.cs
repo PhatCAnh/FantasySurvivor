@@ -7,7 +7,7 @@ using UnityEngine.U2D;
 public class CharacterModel : Model<GameApp>
 {
 	public static EventTypeBase dataChangedEvent = new EventTypeBase(nameof(CharacterModel) + ".dataChanged");
-    public CharacterModel(float maxHp, float moveSpeed, float attackDamage, float itemAttractionRange, float attackRange, int armor, float shield )
+    public CharacterModel(float maxHp, float moveSpeed, float attackDamage, float itemAttractionRange, float attackRange, int armor, int shield )
            : base(dataChangedEvent)
     {
         this.currentHealthPoint = maxHp;
@@ -40,15 +40,15 @@ public class CharacterModel : Model<GameApp>
 	private bool _isHealing;
 	private float _healingCooldown = 4f;
 	private float _healingTimer;
-	private float _healingRate = 0.05f;
-    private float _shield;
+	private float _healingRate = 0.05f; 
+    private int _shield;
 
-    public float shield
+    public int shield
     {
         get => _shield;
         set
         {
-            if (_shield.Equals(value)) return;
+            if (shield.Equals(value)) return;
             _shield = Mathf.Clamp(value, 0, value); // Đảm bảo shield không âm
             RaiseDataChanged(nameof(shield));
         }

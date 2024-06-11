@@ -15,11 +15,11 @@ namespace FantasySurvivor
 		
 		public StatModifierInt armor;
 
-        public StatModifierFloat shield;
+        public StatModifierInt shield;
 
         public Cooldown cdTime;
 
-		public CharacterUpdateStat(StatModifierType type, float maxH,float ms, float ad, float ar, float itemR, int armor,float shield, float duration)
+		public CharacterUpdateStat(StatModifierType type, float maxH,float ms, float ad, float ar, float itemR, int armor,int shield, float duration)
 		{
 			this.maxHealth = new StatModifierFloat(maxH, type, maxHealth);
 			this.moveSpeed = new StatModifierFloat(ms, type, moveSpeed);
@@ -27,7 +27,7 @@ namespace FantasySurvivor
 			this.attackRange = new StatModifierFloat(ar, type, attackRange);
 			this.itemAttractionRange = new StatModifierFloat(itemR, type, itemAttractionRange);
 			this.armor = new StatModifierInt(armor, type, armor);
-			this.shield = new StatModifierFloat(shield, type, shield);
+			this.shield = new StatModifierInt(shield, type, shield);
 			cdTime = new Cooldown(duration);
 		}
 	}
