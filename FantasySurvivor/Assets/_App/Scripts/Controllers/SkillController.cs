@@ -115,23 +115,50 @@ namespace _App.Scripts.Controllers
 				{
 					Skill skillIns;
 					switch (dataUI.name)
-					{
-						case SkillName.Fireball:
-							skillIns = new FireBallControl();
-							break;
-						case SkillName.Waterball:
-							skillIns = new WaterBallControl();
-							break;
-						// case SkillName.ThunderChanneling:
-						// 	skillIns = new ThunderChanneling();
-						// 	break;
-						case SkillName.Twin:
-							skillIns = new TwinControl();
-							break;
-						default:
-							skillIns = new ProactiveSkill();
-							break;
-					}
+                    {
+                        case SkillName.Fireball:
+                            skillIns = new FireBallControl();
+                            break;
+                        case SkillName.ThunderStrike:
+                            skillIns = new ThunderStrikeControl();
+                            break;
+                        case SkillName.Waterball:
+                            skillIns = new WaterBallControl();
+                            break;
+                        // case SkillName.ThunderChanneling:
+                        // 	skillIns = new ThunderChanneling();
+                        // 	break;
+                        case SkillName.FireShield:
+                            skillIns = new FireShieldControl();
+                            break;
+                        case SkillName.Shark:
+                            skillIns = new SharkControl();
+                            break;
+                        case SkillName.PoisonBullet:
+                            skillIns = new PoisonballControl();
+                            break;
+                        case SkillName.Earthpunch:
+                            skillIns = new EarthPunchControl();
+                            break;
+                        case SkillName.SkyBoom:
+                            skillIns = new SkyboomControl();
+                            break;
+                        case SkillName.Boomerang:
+                            skillIns = new BoomerangControl();
+                            break;
+                        case SkillName.SmilingFace:
+                            skillIns = new SmilingFaceControl();
+                            break;
+                        case SkillName.IceSpear:
+                            skillIns = new IceSpearControl();
+                            break;
+                        case SkillName.Twin: 
+                            skillIns = new TwinControl(); 
+                            break;
+                        default:
+                            skillIns = new ProactiveSkill();
+                            break;
+                    }
 					skillIns.Init(data);
 					listSkills.Add(skillIns);
 					_listSkillChoose.Add(id);
