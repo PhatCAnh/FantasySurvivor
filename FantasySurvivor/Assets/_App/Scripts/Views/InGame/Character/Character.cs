@@ -146,7 +146,7 @@ public class Character : ObjectRPG
 	public void TakeDamage(int damage)
 	{
 		if(!IsAlive) return;
-		damage = MinusDamage(damage);
+		damage -= Convert.ToInt32(damage * DamageReductionByArmor());
 		model.currentHealthPoint -= damage;
 		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
 		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.Red);
@@ -185,6 +185,13 @@ public class Character : ObjectRPG
 		UpdateModel();
 	}
 
+	private float DamageReductionByArmor()
+	{
+		var delta = 0.06f;
+		var armor = model.armor;
+		return 1 - delta * armor / (1 + delta * Mathf.Abs(armor));
+	}
+
 	private void RemoveStat(CharacterUpdateStat statModifier)
 	{
 		stat.maxHealth.RemoveModifier(statModifier.maxHealth);
@@ -213,15 +220,10 @@ public class Character : ObjectRPG
 		gameController.CharacterDie(this);
 	}
 
-	private int MinusDamage(int dmg)
-	{
-		return dmg * (100 - model.armor) / 100;
-	}
-	
 	private void HandleUpdateHealing(float deltaTime)
 	{
 		if(model.currentHealthPoint >= model.maxHealthPoint || model.regen == 0) return;
-		
+
 		_cdRegen.Update(deltaTime);
 		if(_cdRegen.isFinished) // Kiểm tra điều kiện trước khi hồi máu
 		{
