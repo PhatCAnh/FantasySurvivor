@@ -37,7 +37,7 @@ public class CharacterController: Controller<GameApp>
 			data.damage,
 			data.itemAttractionRange,
 			data.armor,
-			1
+			data.regen
 		);
 	}
 

@@ -389,7 +389,7 @@ public class GameController : Controller<GameApp>
 			dataChar.itemAttractionRange,
 			dataChar.attackRange,
 			dataChar.armor,
-			1
+			dataChar.regen
 			);
 
 		// foreach(var item in listItem)
