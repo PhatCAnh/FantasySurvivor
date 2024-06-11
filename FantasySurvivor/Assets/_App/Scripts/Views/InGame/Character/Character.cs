@@ -226,9 +226,9 @@ public class Character : ObjectRPG
                         case SkillName.Fireball:
                             skillIns = new FireBallControl();
                             break;
-                        case SkillName.ThunderStrike:
+                        /*case SkillName.ThunderStrike:
                             skillIns = new ThunderStrikeControl();
-                            break;
+                            break;*/
                         case SkillName.Waterball:
                             skillIns = new WaterBallControl();
                             break;
@@ -238,35 +238,14 @@ public class Character : ObjectRPG
                         case SkillName.FireShield:
                             skillIns = new FireShieldControl();
                             break;
-                        case SkillName.Shark:
+                        /*case SkillName.Shark:
                             skillIns = new SharkControl();
-                            break;
-                        case SkillName.PoisonBullet:
-                            skillIns = new PoisonballControl();
-                            break;
-                        case SkillName.Earthpunch:
-                            skillIns = new EarthPunchControl();
-                            break;
-                        case SkillName.SkyBoom:
+                            break;*/
+                        /*case SkillName.SkyBoom:
                             skillIns = new SkyboomControl();
-                            break;
-                        case SkillName.Boomerang:
-                            skillIns = new BoomerangControl();
-                            break;
-                        case SkillName.SmilingFace:
-                            skillIns = new SmilingFaceControl();
-                            break;
-                        case SkillName.IceSpear:
-                            skillIns = new IceSpearControl();
-                            break;
+                            break;*/
                         case SkillName.Twin: 
                             skillIns = new TwinControl(); 
-                            break;
-                        case SkillName.Cyclone: 
-                            skillIns = new CycloneControl();
-                            break;
-                        case SkillName.WindField: 
-                            skillIns = new WindFieldControl();
                             break;
                         default:
                             skillIns = new ProactiveSkill();

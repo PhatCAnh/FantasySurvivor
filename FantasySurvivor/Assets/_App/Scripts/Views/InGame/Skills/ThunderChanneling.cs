@@ -1,44 +1,46 @@
+using _App.Scripts.Controllers;
+using ArbanFramework;
 using FantasySurvivor;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ThunderChanneling : SkillBulletActive
 {
-	[SerializeField] private GameObject _ChannelingInstantiate;
-	[SerializeField] private float maxRange;
-	private int channelingTime = 3;
+    [SerializeField] private float maxRange;
 
-	public override void Init(LevelSkillData data, Monster target, int level, ItemPrefab type)
-	{
-		base.Init(data, target, level, type);
+    private float channelingTime;
 
-		if(target == null) return;
+    private bool check = false;
 
-		this.direction = target.transform.position - transform.position;
+    public override void Init(LevelSkillData data, Monster target, int level, ItemPrefab type)
+    {
+        base.Init(data, target, level, type);
 
-		skin.up = direction;
-		if(channelingTime > 0)
-		{
-			callBackDamaged += SpawnChanneling;
-		}
-	}
+        channelingTime = data.valueSpecial1;
 
+        if (target == null) return;
 
-	private void SpawnChanneling()
-	{
+        this.direction = target.transform.position - transform.position;
 
-		// channelingTime -= 1;
-		// Monster nearestMonster = gameController.FindNearestMonster(this.transform.position, maxRange, target);
-		//
-		// if(nearestMonster != null)
-		// {
-		// 	var bullet = Instantiate(_ChannelingInstantiate, transform.position, Quaternion.identity);
-		// 	bullet.GetComponent<ThunderChanneling>().Init(damage, nearestMonster, level);
-		// }
-		//
-		// Destroy(gameObject);
-	}
+        skin.up = direction;
+
+        callBackDamaged += SpawnChanneling;
+
+        check = false;
+    }
+    private void SpawnChanneling()
+    {
+        if (check) return;
+        Monster nearestMonster = gameController.FindNearestMonster( maxRange, target);
+        if (nearestMonster != null)
+        {
+            var Channeling = new Channeling(nearestMonster, damage/2, 0.1f,level, channelingTime - 1);
+        }
+        else 
+        {
+            var Channeling = new Channeling(target,damage/2, 0.1f, level, channelingTime - 1);
+        }
+        Singleton<PoolController>.instance.ReturnObject(this.type, gameObject);
+        check = true;
+    }
 }

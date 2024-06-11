@@ -42,6 +42,7 @@ public enum ItemPrefab
 	ThunderPunch,
     EarthShield,
     LightningWeb,
+    ThunderChanneling,
 }
 
 public enum MapType

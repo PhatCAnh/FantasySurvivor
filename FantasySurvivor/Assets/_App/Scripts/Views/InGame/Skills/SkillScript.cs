@@ -67,7 +67,7 @@ namespace FantasySurvivor
         }
     }
 
-	/*public class ThunderBird : ProactiveSkill
+	public class ThunderChannelingControl : ProactiveSkill
 	{
         public override void Init(SkillData data)
         {
@@ -82,7 +82,7 @@ namespace FantasySurvivor
                 numberProjectile++;
             }
         }
-    }*/
+    }
 
 	public class TwinControl : ProactiveSkill
 	{

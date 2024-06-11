@@ -72,9 +72,13 @@ public class TextPopup : MonoBehaviour
 				_textMesh.color = new Color(0.4313726f, 0.8274511f, 0); // M�u xanh l� c�y cho hi?n th? h?i m�u
 				_textMesh.fontSize = 7.5f;
 				break;
+			case TextPopupType.Lightning:
+				textValue = $"{value} <sprite=19>"; // Th�m d?u "+" tr??c gi� tr? ?? bi?u th? l� h?i m�u
+                _textMesh.color = new Color(255, 255, 0); // M�u xanh l� c�y cho hi?n th? h?i m�u
+                _textMesh.fontSize = 7.5f;
+                break;
 
-
-		}
+        }
 
 		Setup(textValue);
 	}

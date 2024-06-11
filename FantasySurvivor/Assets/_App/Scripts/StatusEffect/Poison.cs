@@ -28,7 +28,7 @@ public class Poison : StatusEffect
         if (burnDie && level == 6)
         {
             burnDie = false;
-            var nearestMonster = gameController.FindNearestMonster(target.transform.position, 3f);
+            var nearestMonster = gameController.FindNearestMonster( 3f, target);
             if (nearestMonster != null)
             {
                 PoisonTranf(nearestMonster);
