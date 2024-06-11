@@ -41,6 +41,7 @@ public enum ItemPrefab
     WindField,
 	ThunderPunch,
     EarthShield,
+    LightningWeb,
 }
 
 public enum MapType
@@ -118,6 +119,7 @@ public enum SkillName
 	WindField,
 	ThunderPunch,
     EarthShield,
+    LightningWeb,
 }
 
 public enum SkillType

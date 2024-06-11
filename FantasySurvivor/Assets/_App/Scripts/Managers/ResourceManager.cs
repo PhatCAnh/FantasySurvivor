@@ -66,6 +66,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	[SerializeField] private GameObject _skillEarthShield;
 
+	[SerializeField] private GameObject _skillLightningWeb;
+
 
 
 
@@ -213,6 +215,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.WindField, _skillWindfield},
 			{ItemPrefab.ThunderPunch, _skillThunderPunch},
 			{ItemPrefab.EarthShield, _skillEarthShield},
+			{ItemPrefab.LightningWeb, _skillLightningWeb},
 		};
 
 		_mapDic = new Dictionary<MapType, Map>
