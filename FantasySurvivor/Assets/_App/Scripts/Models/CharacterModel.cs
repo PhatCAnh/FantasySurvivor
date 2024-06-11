@@ -7,7 +7,7 @@ using UnityEngine.U2D;
 public class CharacterModel : Model<GameApp>
 {
 	public static EventTypeBase dataChangedEvent = new EventTypeBase(nameof(CharacterModel) + ".dataChanged");
-	public CharacterModel(float maxHp, float moveSpeed, float attackDamage, float itemAttractionRange, float attackRange, int armor) : base(dataChangedEvent)
+	public CharacterModel(float maxHp, float moveSpeed, float attackDamage, float itemAttractionRange, float attackRange, int armor, float regen) : base(dataChangedEvent)
 	{
 		this.currentHealthPoint = maxHp;
 		this.maxHealthPoint = maxHp;
@@ -16,6 +16,7 @@ public class CharacterModel : Model<GameApp>
 		this._itemAttractionRange = itemAttractionRange;
 		this.attackRange = attackRange;
 		this._armor = armor;
+		this._regen = regen;
 	}
 
 	public CharacterModel() : base(dataChangedEvent)
@@ -35,12 +36,9 @@ public class CharacterModel : Model<GameApp>
 
 	private float _attackRange;
 
-
 	private int _armor;
-	private bool _isHealing;
-	private float _healingCooldown = 4f;
-	private float _healingTimer;
-	private float _healingRate = 0.05f;
+	
+	private float _regen;
 
 	public float moveSpeed
 	{
@@ -113,40 +111,14 @@ public class CharacterModel : Model<GameApp>
 			RaiseDataChanged(nameof(armor));
 		}
 	}
-
-	public bool isHealing
+	
+	public float regen
 	{
-		get => _isHealing;
+		get => _regen;
 		set {
-			if(_isHealing == value) return;
-			_isHealing = value;
-		}
-	}
-
-	public float healingCooldown
-	{
-		get => _healingCooldown;
-		set {
-			if(_healingCooldown == value) return;
-			_healingCooldown = value;
-		}
-	}
-
-	public float healingTimer
-	{
-		get => _healingTimer;
-		set {
-			if(_healingTimer == value) return;
-			_healingTimer = value;
-		}
-	}
-
-	public float healingRate
-	{
-		get => _healingRate;
-		set {
-			if(_healingRate == value) return;
-			_healingRate = value;
+			if(regen.Equals(value)) return;
+			_regen = value;
+			RaiseDataChanged(nameof(regen));
 		}
 	}
 

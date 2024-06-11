@@ -388,7 +388,8 @@ public class GameController : Controller<GameApp>
 			dataChar.damage,
 			dataChar.itemAttractionRange,
 			dataChar.attackRange,
-			dataChar.armor
+			dataChar.armor,
+			1
 			);
 
 		// foreach(var item in listItem)
