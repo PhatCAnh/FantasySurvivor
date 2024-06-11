@@ -242,10 +242,10 @@ public class GameController : Controller<GameApp>
 
 	public Monster FindNearestMonster(Vector3 bulletPosition, float range, Monster origin = null)
 	{
+		if(listMonster.Count == 0) return null;
+		
 		Monster nearestMonster = null;
 		float minDistance = float.MaxValue;
-
-		if(listMonster == null) return null;
 
 		foreach(Monster monster in listMonster)
 		{
