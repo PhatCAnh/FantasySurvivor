@@ -14,13 +14,13 @@ public class WindField : SkillActive
     protected HashSet<Monster> attackedMonsters = new HashSet<Monster>();
     public Cooldown cdTime;
     public Cooldown reActive;
-    public float reAct;
-    public float duration;
 
     protected override void OnViewInit()
     {
         base.OnViewInit();
         cdTime = new Cooldown(data.cooldown);
+        this.transform.localScale = Vector3.one * data.valueSpecial1;
+        this.size = data.valueSpecial1;
     }
 
     protected virtual void FixedUpdate()
@@ -44,7 +44,6 @@ public class WindField : SkillActive
             if (gameController.CheckTouch(mons.transform.position, transform.position, size) && !attackedMonsters.Contains(mons))
             {
                 mons.UpdateStat(StatModifierType.Mul, 1, data.valueSpecial2, 1, 1, data.cooldown);
-                Debug.Log( mons.speedMul);
                 attackedMonsters.Add(mons);
             }
         }
