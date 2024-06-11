@@ -58,6 +58,16 @@ namespace FantasySurvivor
             base.Init(data);
         }
     }
+    public class TimeBoomControl : ProactiveSkill
+    {
+        protected override void UpdatePrefab(SkillActive prefab)
+        {
+            base.UpdatePrefab(prefab);
+            prefab.GetComponent<SkillBombActive>().sizeExplosion += 0.5f * level;
+        }
+    }
+
+
 
     public class PoisonballControl : ProactiveSkill
     {

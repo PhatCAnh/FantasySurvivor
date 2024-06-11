@@ -43,6 +43,7 @@ public enum ItemPrefab
     EarthShield,
     LightningWeb,
     ThunderChanneling,
+    TimeBoom,
 }
 
 public enum MapType
@@ -121,6 +122,7 @@ public enum SkillName
 	ThunderPunch,
     EarthShield,
     LightningWeb,
+    TimeBoom,
 }
 
 public enum SkillType
