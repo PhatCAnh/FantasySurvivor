@@ -15,6 +15,7 @@ public class ConfigManager : ConfigManagerBase
 	public DataStatMonsterConfigTable dataStatMonster;
 	public DataItemConfigTable dataItem;
 	public DataCharacterConfigTable dataCharacter;
+	public DataStatRankItemEquipTable dataStatRankItemEquip;
 
 	//private bool _isCanLoadRemoteConfig = false;
 	public void Init()
@@ -26,6 +27,7 @@ public class ConfigManager : ConfigManagerBase
 		Register(out constConfig);
 		Register(out dataItem);
 		Register(out dataCharacter);
+		Register(out dataStatRankItemEquip);
 		LoadConfigs();
 	}
 

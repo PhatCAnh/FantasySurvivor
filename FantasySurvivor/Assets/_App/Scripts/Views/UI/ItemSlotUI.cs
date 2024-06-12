@@ -72,6 +72,9 @@ public class ItemSlotUI : View<GameApp>
         if(data.quantity != 0)
         {
             txtNumber.text = $"{data.quantity}";
+        } else if(data.level != 0)
+        {
+            txtNumber.text = $"{data.level}/{app.configs.dataStatRankItemEquip.GetConfig(data.rank).levelLimit}";
         }
     }
 }

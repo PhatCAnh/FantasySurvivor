@@ -25,7 +25,7 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
         
         _imgSkin.sprite = imgSkin.sprite;
         _imgRank.sprite = imgRank.sprite;
-        _txtName.text = itemData.dataConfig.name;
+        _txtName.text = $"{itemData.dataConfig.name} - Level: {dataInBag.level} / {app.configs.dataStatRankItemEquip.GetConfig(dataInBag.rank).levelLimit}";
         _txtValue.text = $"+ {itemData.dataConfig.baseValue}";
         _txtDescription.text = itemData.dataConfig.description;
         _btnClose.onClick.AddListener(Close);
