@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using FantasySurvivor;
@@ -12,7 +13,9 @@ namespace FantasySurvivor
 	{
 		[SerializeField] private Slider _sldHealthPoint;
 
-		[SerializeField] private TextMeshProUGUI _txtPoint;
+		[SerializeField] private TextMeshProUGUI _txtPoint, _txtShieldPoint;
+		
+		[SerializeField] private GameObject _goShield;
 
 		private Character _character;
 		public GameController gameController => Singleton<GameController>.instance;
@@ -35,6 +38,19 @@ namespace FantasySurvivor
 					control.value = model.currentHealthPoint;
 				},
 				new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.currentHealthPoint), _character.model)
+			);
+			
+			AddDataBinding("sldShieldBar-value", _txtShieldPoint, (control, e) =>
+				{
+					if(model.shield <= 0)
+					{
+						_goShield.SetActive(false);
+						return;
+					}
+					_goShield.SetActive(true);
+					control.text = $"{model.shield}";
+				},
+				new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.shield), _character.model)
 			);
 		}
 

@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ce036a13ee43d58b04b1874e4a1f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberLimitBagEquip: 0
+  numberLimitBagETC: 0
   _charDataTable: {fileID: 11400000, guid: 9e00d1965133fb9468a916dd14a5d7a2, type: 2}
 --- !u!1 &4925867890600014224
 GameObject:
@@ -229,6 +231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4925867891092163753}
   - component: {fileID: 4925867891092163752}
+  - component: {fileID: 6046844023069793444}
   m_Layer: 0
   m_Name: SoundBackground
   m_TagString: Untagged
@@ -347,6 +350,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6046844023069793444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925867891092163734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94df2dcb157e1db4dbbdbb237ed2262e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundClip: {fileID: 8300000, guid: e37bdf1510ee1654cb0bd7545844c754, type: 3}
 --- !u!1 &4925867891668576827
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,25 +492,69 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 48425990686245726, guid: 6f9b6ff3c81c3a34b8fa73ef81bcee39, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _meadowMap
+      value: 
+      objectReference: {fileID: 5413659250902458259, guid: a5bdafbf3c8a6fc46965f9005d3ef13b, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _skillTwin
+      value: 
+      objectReference: {fileID: 5969974768321339375, guid: bccfbe3ac4d1a834387290001c1a7597, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _swampOoze
+      value: 
+      objectReference: {fileID: 6749447720324306465, guid: a1825d6b1a427f14abecda703cdf0061, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _textPopup
       value: 
       objectReference: {fileID: 8019563876969885780, guid: e455c20de49a1234b8832933daa6dd58, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _lupineStag
+      value: 
+      objectReference: {fileID: 2251807672777610876, guid: 670dd8759cd83704eb62ec88344c4da0, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _minionWolf
+      value: 
+      objectReference: {fileID: 8395253988798178124, guid: 5eac4858ee571984495cc111bac71019, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _owlStriker
+      value: 
+      objectReference: {fileID: 2782247707436774238, guid: b479d3c8a65f4094fb1300bd3a3dfe82, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _skillShark
+      value: 
+      objectReference: {fileID: 8206914173546746077, guid: 5092a53af760915459def15d68544006, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _supportItem
       value: 
       objectReference: {fileID: 6809299494165481089, guid: 9e9e8f20962b9714890808476b0b5c89, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _skillSkyBoom
+      value: 
+      objectReference: {fileID: 5452461095947604650, guid: 201f367a0c4e90f448a177ff3b802636, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _electroBomber
       value: 
-      objectReference: {fileID: 3192426052812612716, guid: 16bc33004787cc04c9942aac3975eb99, type: 3}
+      objectReference: {fileID: 3192426052812612716, guid: 2ade275be3b886440aeed52a0ed216ca, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _skillFireBall
       value: 
       objectReference: {fileID: 9075703475211245482, guid: 7c860169edcee5747bf90d4ebca6da2e, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _skillIceSpear
+      value: 
+      objectReference: {fileID: 170600247094605654, guid: 5a973968a5c56f3429e3e56a11e579ef, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _globloomSentry
       value: 
       objectReference: {fileID: 2144476565162649941, guid: ee823cd92fe065b449ee678cc9e621c0, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _minionSkeleton
+      value: 
+      objectReference: {fileID: 2241977195184255279, guid: 78498c27fa410084ca921a8b0fb87edf, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _skillBoomerang
+      value: 
+      objectReference: {fileID: 2099909295418588887, guid: 34e26b39bb16d7d40b24fb14600b3103, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _skillWaterBall
       value: 
@@ -508,9 +568,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3789013429719267303, guid: 21f0e3c66e7be4643873bca51dcbc84d, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _healthBarPrefab
+      value: 
+      objectReference: {fileID: 1867674957666603258, guid: 3cdb5f442e1887847a47081da1f84b1e, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _skillEarthPunch
+      value: 
+      objectReference: {fileID: 3036217153635190231, guid: cc14fbf766c734844a054c73e21f268c, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _skillFireShield
       value: 
       objectReference: {fileID: 315473790416054733, guid: 653dc770a8abfbf45a642ff649eb6f55, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _bulletOwlStriker
+      value: 
+      objectReference: {fileID: 3512402234098681755, guid: 4d1d72244aa05294aa603ad7092c27f4, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _skillSmilingface
+      value: 
+      objectReference: {fileID: 3806459577947016325, guid: 998a1c4ff78465f41ae02ec9dcd7204d, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _skillPoisonBullet
+      value: 
+      objectReference: {fileID: 445555888757746086, guid: be6e93258c41fb2469fa35bbf434547c, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _choiceSkillOutGame
+      value: 
+      objectReference: {fileID: 3285721868862599866, guid: 9eab12720a0830f40b01464627cb88a3, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _skillThunderStrike
       value: 
@@ -520,8 +604,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3789013429719267303, guid: bfd583f73e63fa0439dd8ee8775546e8, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _characterInformation
+      value: 
+      objectReference: {fileID: 600288446271700532, guid: 82be189692e1ecf458bb30c74edb5d76, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _poolSkill.Array.size
-      value: 4
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _skillThunderStrikeSmall
@@ -534,6 +622,30 @@ PrefabInstance:
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _poolSkill.Array.data[3].name
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[4].name
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[5].name
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[6].name
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[6].type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[7].name
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[8].name
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _poolSkill.Array.data[0].imgUI
@@ -551,6 +663,46 @@ PrefabInstance:
       propertyPath: _poolSkill.Array.data[3].imgUI
       value: 
       objectReference: {fileID: 21300000, guid: c7237909beaa7cd4581e735fe01a5247, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[4].imgUI
+      value: 
+      objectReference: {fileID: 21300000, guid: 65d81833a9705374299a503a6186aa2f, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[5].imgUI
+      value: 
+      objectReference: {fileID: -459867299, guid: 7c453045a9cedc149b94c4078b2d2ce1, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[6].imgUI
+      value: 
+      objectReference: {fileID: 769298545, guid: a526ce7ebcb6f9948bfd0005c4739868, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[7].imgUI
+      value: 
+      objectReference: {fileID: 769298545, guid: a526ce7ebcb6f9948bfd0005c4739868, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[8].imgUI
+      value: 
+      objectReference: {fileID: 769298545, guid: a526ce7ebcb6f9948bfd0005c4739868, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[1].spawnPos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[4].spawnPos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[7].spawnPos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[7].canAppear
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[8].canAppear
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _poolSkill.Array.data[0].skillPrefab
       value: 
@@ -576,36 +728,92 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[4].typeElemental
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[5].typeElemental
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[6].typeElemental
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[8].typeElemental
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _poolSkill.Array.data[0].evolveSkillType
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _poolSkill.Array.data[0].normalSkillType
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _poolSkill.Array.data[1].evolveSkillType
-      value: 17
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _poolSkill.Array.data[1].normalSkillType
-      value: 16
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _poolSkill.Array.data[2].evolveSkillType
-      value: 19
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _poolSkill.Array.data[2].normalSkillType
-      value: 19
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _poolSkill.Array.data[3].evolveSkillType
-      value: 20
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _poolSkill.Array.data[3].normalSkillType
-      value: 20
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[4].evolveSkillType
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[4].normalSkillType
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[5].evolveSkillType
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[5].normalSkillType
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[6].evolveSkillType
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[6].normalSkillType
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[7].evolveSkillType
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[7].normalSkillType
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[8].evolveSkillType
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _poolSkill.Array.data[8].normalSkillType
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _poolSkill.Array.data[1].skillEvolvePrefab
