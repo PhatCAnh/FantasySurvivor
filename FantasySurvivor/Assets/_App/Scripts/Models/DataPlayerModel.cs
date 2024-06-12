@@ -135,6 +135,13 @@ namespace FantasySurvivor
 			app.models.WriteModel<DataPlayerModel>();
 		}
 
+		public void UpdateItem(ItemInBag item)
+		{
+			if(item.level >= app.configs.dataStatRankItemEquip.GetConfig(item.rank).levelLimit) return;
+			item.level += 1;
+			app.models.WriteModel<DataPlayerModel>();
+		}
+
 		public List<SkillId> GetSkillSet()
 		{
 			return _skillSet;
