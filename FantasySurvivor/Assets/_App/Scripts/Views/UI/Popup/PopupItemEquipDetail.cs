@@ -15,7 +15,7 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
 
     [SerializeField] private Sprite _spriteWeapon, _spriteArmor, _spriteShoes, _spriteGloves, _spriteHat, _spriteRing;
 
-    [SerializeField] private Transform _goCostUpdate;
+    [SerializeField] private Transform _goCostUpdate, _goMainContent;
 
     private ItemSlotUI _itemSlotUI;
 
@@ -74,6 +74,7 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
                 _imgIcon.sprite = _spriteRing;
                 break;
         }
+        Open();
     }
 
     public void Action()
@@ -84,11 +85,18 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
 
     public void Open()
     {
+        _goMainContent.localScale = Vector3.zero;
+        
+        _goMainContent.DOScale(Vector3.one, 0.15f);
     }
     public void Close()
     {
-        _itemSlotUI.isShow = false;
-        Destroy(gameObject);
+        _goMainContent.DOScale(Vector3.zero, 0.15f)
+            .OnComplete(() =>
+            {
+                _itemSlotUI.isShow = false;
+                Destroy(gameObject);
+            });
     }
 
     private void UpdateLevel()
