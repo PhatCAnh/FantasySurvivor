@@ -62,6 +62,11 @@ public class ItemSlotUI : View<GameApp>
         Destroy(gameObject);
     }
 
+    public void UpdateLevel(ItemInBag data)
+    {
+        txtNumber.text = $"{data.level}/{app.configs.dataStatRankItemEquip.GetConfig(data.rank).levelLimit}";
+    }
+
     private void InitData(ItemInBag data)
     {
         var itemController = Singleton<ItemController>.instance;
