@@ -54,10 +54,12 @@ public class ItemController : Controller<GameApp>
 		{
 			case ItemType.Weapon:
 			case ItemType.Gloves:
+			case ItemType.Ring:
 				model.attackDamage += itemData.dataConfig.baseValue; //cong them chi so cua level nua
 				break;
 			case ItemType.Armor:
 			case ItemType.Shoes:
+			case ItemType.Hat:
 				model.maxHealthPoint += itemData.dataConfig.baseValue;
 				break;
 		}

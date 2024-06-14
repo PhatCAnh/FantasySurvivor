@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
 using FantasySurvivor;
@@ -10,12 +12,18 @@ using UnityEngine.UI;
 public class PopupItemEquipDetail : View<GameApp>, IPopup
 {
     [SerializeField] private Image _imgSkin, _imgRank, _imgIcon;
+    
     [SerializeField] private TextMeshProUGUI _txtName, _txtDescription, _txtValue, _txtBtnAction, _txtPriceUpdate;
+    
     [SerializeField] private Button _btnAction, _btnClose, _btnUpdate;
 
     [SerializeField] private Sprite _spriteWeapon, _spriteArmor, _spriteShoes, _spriteGloves, _spriteHat, _spriteRing;
 
+    [SerializeField] private Sprite _spriteAtk, _spriteHealth;
+
     [SerializeField] private Transform _goCostUpdate, _goMainContent;
+    
+    [SerializeField] private GameObject _prefabStat, _statContainer;
 
     private ItemSlotUI _itemSlotUI;
 
@@ -53,27 +61,50 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
         _btnClose.onClick.AddListener(Close);
         _btnAction.onClick.AddListener(Action);
         _btnUpdate.onClick.AddListener(UpdateLevel);
+        var nameStat = "";
         switch (itemData.dataConfig.type)
         {
             case ItemType.Weapon:
                 _imgIcon.sprite = _spriteWeapon;
+                nameStat = "Atk";
                 break;
             case ItemType.Armor:
                 _imgIcon.sprite = _spriteArmor;
+                nameStat = "Health";
                 break;
             case ItemType.Shoes:
                 _imgIcon.sprite = _spriteShoes;
+                nameStat = "Health";
                 break;
             case ItemType.Gloves:
                 _imgIcon.sprite = _spriteGloves;
+                nameStat = "Atk";
                 break;
             case ItemType.Hat:
                 _imgIcon.sprite = _spriteHat;
+                nameStat = "Health";
                 break;
             case ItemType.Ring:
                 _imgIcon.sprite = _spriteRing;
+                nameStat = "Atk";
                 break;
         }
+
+        Instantiate(_prefabStat, _statContainer.transform).TryGetComponent(out StatInPopupDescription statInPopupDescription);
+        var data = Singleton<GameController>.instance.GetDataStat(nameStat, dataInBag.rank);
+        var number = _itemData.dataConfig.baseValue + data.Item2 * dataInBag.level;
+        Sprite sprite = null;
+        switch (data.Item3)
+        {
+            case StatId.Atk:
+                sprite = _spriteAtk;
+                break;
+            case StatId.Health:
+                sprite = _spriteHealth;
+                break;
+            
+        }
+        statInPopupDescription.Init(data.Item1, number, sprite);
         Open();
     }
 

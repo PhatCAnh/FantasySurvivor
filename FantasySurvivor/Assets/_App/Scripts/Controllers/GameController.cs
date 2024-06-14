@@ -354,6 +354,26 @@ public class GameController : Controller<GameApp>
 		// }
 		// return new Vector2(posX, posY);
 	}
+
+	public (string, int, StatId) GetDataStat(string text, ItemRank rank)
+	{
+		int number = 0;
+		string nameReturn = "";
+		var type = (StatId) Enum.Parse(typeof(StatId), text);
+		var statRank = app.configs.dataStatRankItemEquip.GetConfig(rank);
+		switch (type)
+		{
+			case StatId.Atk:
+				nameReturn = "AttackDamage";
+				number = statRank.atk;
+				break;
+			case StatId.Health:
+				nameReturn = "HealthPoint";
+				number = statRank.health;
+				break;
+		}
+		return (nameReturn, number, type);
+	}
 	
 	public bool CheckTouchCharacter(Vector3 trans, float number)
 	{
