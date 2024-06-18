@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using TMPro;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 namespace FantasySurvivor
 {
     public class BulletBossGatlingCrab : View<GameApp>
@@ -23,13 +25,26 @@ namespace FantasySurvivor
 
         public void Init(Monster origin)
         {
+            /*_origin = origin;
+            _directionToTarget = (origin.target.transform.position - origin.transform.position).normalized;*/
             _origin = origin;
-            _directionToTarget = (origin.target.transform.position - origin.transform.position).normalized;
+            _directionToTarget = (transform.position - origin.target.transform.position).normalized;
+            /*float angle = Mathf.Atan2(_directionToTarget.y, _directionToTarget.x) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);*/
         }
+
+        // Thêm phương thức mới để thiết lập hướng di chuyển
+        public void SetDirection(Vector2 direction)
+        {
+            _directionToTarget = direction.normalized;
+        }
+
         protected void FixedUpdate()
         {
             if (gameController.isStop) return;
 
+            // Di chuyển viên đạn theo hướng được thiết lập
             Vector3 directionToTarget = _directionToTarget.normalized;
             var position = transform.position;
             position = Vector2.MoveTowards(position, position + directionToTarget, _speedBullet * Time.deltaTime);
@@ -46,6 +61,7 @@ namespace FantasySurvivor
             else if (distance > 900) Singleton<PoolController>.instance.ReturnObject(type, gameObject);
         }
 
+        
         protected void Touch()
         {
             _character.TakeDamage(_origin.model.attackDamage);
