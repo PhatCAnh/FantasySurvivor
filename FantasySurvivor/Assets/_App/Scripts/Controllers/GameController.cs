@@ -374,6 +374,11 @@ public class GameController : Controller<GameApp>
 		}
 		return (nameReturn, number, type);
 	}
+
+	public (string, string) GetTypeStatItemEquip(ItemType type)
+	{
+		
+	}
 	
 	public bool CheckTouchCharacter(Vector3 trans, float number)
 	{

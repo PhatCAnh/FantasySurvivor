@@ -37,6 +37,8 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
 
     private Tween _punchCostPrice;
 
+    private int _numberValue;
+
     public void Init(ItemSlotUI itemSlotEquipUI, ItemInBag dataInBag, ItemData itemData, Image imgSkin, Image imgRank, bool isEquip = false)
     {
         _itemSlotUI = itemSlotEquipUI;
@@ -92,7 +94,7 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
 
         Instantiate(_prefabStat, _statContainer.transform).TryGetComponent(out StatInPopupDescription statInPopupDescription);
         var data = Singleton<GameController>.instance.GetDataStat(nameStat, dataInBag.rank);
-        var number = _itemData.dataConfig.baseValue + data.Item2 * dataInBag.level;
+        _numberValue = _itemData.dataConfig.baseValue + data.Item2 * (dataInBag.level - 1);
         Sprite sprite = null;
         switch (data.Item3)
         {
@@ -104,13 +106,13 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
                 break;
             
         }
-        statInPopupDescription.Init(data.Item1, number, sprite);
+        statInPopupDescription.Init(data.Item1, _numberValue, sprite);
         Open();
     }
 
     public void Action()
     {
-        _itemSlotUI.Action();
+        _itemSlotUI.Action(_numberValue);
         Close();
     }
 

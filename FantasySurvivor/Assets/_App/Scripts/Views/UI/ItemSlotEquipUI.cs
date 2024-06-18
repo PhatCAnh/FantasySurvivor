@@ -28,11 +28,11 @@ public class ItemSlotEquipUI : ItemSlotUI
         
     }
 
-    public override void Action()
+    public override void Action(int value)
     {
         if(!isEquip) return;
         isShow = false;
-        parent.UnEquipItem(itemData.dataConfig.type, itemInBag);
+        parent.UnEquipItem(itemData.dataConfig.type, itemInBag, value);
     }
 
     public void ResetData()

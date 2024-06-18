@@ -5,8 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ArbanFramework;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -71,13 +71,19 @@ public class CharacterInformation : View<GameApp>, IPopup
 			item1.Init(item, this);
 			_listItemSlot.Add(go);
 		}
+		
+		
 
 		foreach(var item in app.models.dataPlayerModel.ListItemEquipped)
 		{
-			var data = itemController.GetDataItem(item.id, item.rank, item.level);
-			var slot = _dicItemEquip[data.dataConfig.type];
-			if(slot.isEquip) UnEquipItem(data.dataConfig.type, item);
-			slot.Init(item);
+			var data = Singleton<GameController>.instance.GetDataStat(nameStat, dataInBag.rank);
+			_numberValue = _itemData.dataConfig.baseValue + data.Item2 * (dataInBag.level - 1);
+			itemController.EquipItem(item);
+			
+			// var data = itemController.GetDataItem(item.id, item.rank, item.level);
+			// var slot = _dicItemEquip[data.dataConfig.type];
+			// if(slot.isEquip) UnEquipItem(data.dataConfig.type, item);
+			// slot.Init(item);
 		}
 	}
 
@@ -105,18 +111,18 @@ public class CharacterInformation : View<GameApp>, IPopup
 		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Ring1, ItemRank.Epic, 6);
 	}
 
-	public void EquipItem(ItemType type, ItemInBag data)
+	public void EquipItem(ItemType type, ItemInBag data, int value)
 	{
 		var slot = _dicItemEquip[type];
-		if(slot.isEquip) UnEquipItem(type, data);
+		if(slot.isEquip) UnEquipItem(type, data, value);
 		slot.Init(data);
-		itemController.EquipItem(data);
+		itemController.EquipItem(data, value);
 	}
 
-	public void UnEquipItem(ItemType type, ItemInBag data)
+	public void UnEquipItem(ItemType type, ItemInBag data, int value)
 	{
 		_dicItemEquip[type].ResetData();
-		itemController.UnEquipItem(data);
+		itemController.UnEquipItem(data, value);
 		Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
 		item.Init(data, this);
 	}

@@ -106,6 +106,7 @@ namespace FantasySurvivor
 
 		public void EquipItem(ItemInBag item)
 		{
+			if(_listItemEquipped.Contains(item)) return;
 			_bagItem.Remove(item);
 			_listItemEquipped.Add(item);
 			app.models.WriteModel<DataPlayerModel>();

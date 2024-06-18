@@ -45,7 +45,7 @@ public class ItemController : Controller<GameApp>
 		return new ItemData(dataUI, data, rank);
 	}
 
-	public void EquipItem(ItemInBag data)
+	public void EquipItem(ItemInBag data, int value)
 	{
 		app.models.dataPlayerModel.EquipItem(data);
 		var itemData = GetDataItem(data.id, data.rank, data.level);
@@ -55,16 +55,16 @@ public class ItemController : Controller<GameApp>
 			case ItemType.Weapon:
 			case ItemType.Gloves:
 			case ItemType.Ring:
-				model.attackDamage += itemData.dataConfig.baseValue; //cong them chi so cua level nua
+				model.attackDamage += value; //cong them chi so cua level nua
 				break;
 			case ItemType.Armor:
 			case ItemType.Shoes:
 			case ItemType.Hat:
-				model.maxHealthPoint += itemData.dataConfig.baseValue;
+				model.maxHealthPoint += value;
 				break;
 		}
 	}
-	public void UnEquipItem(ItemInBag data)
+	public void UnEquipItem(ItemInBag data, int value)
 	{
 		app.models.dataPlayerModel.UnEquipItem(data);
 		var itemData = GetDataItem(data.id, data.rank, data.level);
@@ -73,11 +73,11 @@ public class ItemController : Controller<GameApp>
 		{
 			case ItemType.Weapon:
 			case ItemType.Gloves:
-				model.attackDamage -= itemData.dataConfig.baseValue; //cong them chi so cua level nua
+				model.attackDamage -= value; //cong them chi so cua level nua
 				break;
 			case ItemType.Armor:
 			case ItemType.Shoes:
-				model.maxHealthPoint -= itemData.dataConfig.baseValue;
+				model.maxHealthPoint -= value;
 				break;
 		}
 	}
