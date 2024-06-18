@@ -3588,7 +3588,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8135926211466111966}
-  - component: {fileID: 8322258187409932422}
   m_Layer: 0
   m_Name: UpdateStat
   m_TagString: Untagged
@@ -3616,25 +3615,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 175}
   m_SizeDelta: {x: 0, y: -350}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8322258187409932422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5092614275285453532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 195870ace3f90f2409c3c8654191ab0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _txtHealth: {fileID: 31398714126185288}
-  _txtMoveSpeed: {fileID: 7188246367996660436}
-  _txtAtkDamage: {fileID: 4217237804747218642}
-  _txtArmor: {fileID: 1365018686474070432}
-  _slotItemEquipContainer: {fileID: 6481088647514636885}
-  _slotItemEquipPrefab: {fileID: 6544359212072426736, guid: 42665abf3ed876248af13a52768338c5, type: 3}
-  _slotWeapon: {fileID: 4052364480650660409}
 --- !u!1 &5240345741527076663
 GameObject:
   m_ObjectHideFlags: 0
@@ -6356,14 +6336,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34889578f104d4fb82b4a62312aef72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data:
-    id: 0
-    itemName: 
-    type: 0
-    skin: {fileID: 0}
-    rank: 0
   image: {fileID: 6561916844856333744}
+  imageRank: {fileID: 0}
   btn: {fileID: 8884400608908241402}
+  _imgEquip: {fileID: 0}
+  _imgUnEquip: {fileID: 0}
+  _baseRank: {fileID: 0}
+  isEquip: 0
 --- !u!224 &3710002027804190142 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5322594988334836287, guid: 42665abf3ed876248af13a52768338c5, type: 3}
