@@ -25,42 +25,45 @@ namespace FantasySurvivor
 		public override void InitBaseData()
 		{
 			this.Coin = 99;
-            this.Gem = 10;
-            this.Health = 100;
-            this.Atkdamage = 20;
+			this.Gem = 10;
+			this.Health = 100;
+			this.Atkdamage = 20;
 			this.Armor = 50;
-            this.Movespeed = 2.5f; 
+			this.Movespeed = 2.5f;
 			firstTouchHand = true;
 			firstTutorialHandUi = true;
 			firstSeeBulletInteract = true;
 
-			_bagItemEquip = new List<ItemEquipStat>();
-			
+			_bagItemEquip = new List<ItemEquipInBag>();
+
 			app.models.WriteModel<DataPlayerModel>();
+
+			numberItemCreated = 0;
 		}
 
 		[JsonProperty] private int _coin;
-        [JsonProperty] private int _gem;
-        [JsonProperty] private float _movespeed;
-        [JsonProperty] private int _health;
-        [JsonProperty] private int _atkdamage;
-        [JsonProperty] private int _armor;
-        [JsonProperty] private int _levelAd;
+		[JsonProperty] private int _gem;
+		[JsonProperty] private float _movespeed;
+		[JsonProperty] private int _health;
+		[JsonProperty] private int _atkdamage;
+		[JsonProperty] private int _armor;
+		[JsonProperty] private int _levelAd;
 		[JsonProperty] private int _levelAr;
 		[JsonProperty] private int _levelAs;
 		[JsonProperty] private int _levelCr;
 		[JsonProperty] private int _levelCd;
-		
+
 		[JsonProperty] private int _levelHealth;
 		[JsonProperty] private int _levelRegenHp;
-		
+
 		[JsonProperty] public bool firstTouchHand;
 		[JsonProperty] public bool firstTutorialHandUi;
 		[JsonProperty] public bool firstSeeBulletInteract;
-		
-		
-		[JsonProperty] private List<ItemEquipStat> _bagItemEquip = new List<ItemEquipStat>();
-		
+
+
+		[JsonProperty] private List<ItemEquipInBag> _bagItemEquip = new List<ItemEquipInBag>();
+		[JsonProperty] private int numberItemCreated;
+
 		public int Coin
 		{
 			get => _coin;
@@ -71,40 +74,37 @@ namespace FantasySurvivor
 				RaiseDataChanged(nameof(Coin));
 			}
 		}
-        public int Armor
-        {
-            get => _armor;
-            set
-            {
-                if (Armor == value) return;
-                _armor = Mathf.Clamp(value, 0, 100); // Giữ giá trị giáp trong phạm vi hợp lệ (0-100)
-                app.models.WriteModel<DataPlayerModel>();
-                RaiseDataChanged(nameof(Armor));
-            }
-        }
-        public int Atkdamage
-        {
-            get => _atkdamage;
-            set
-            {
-                if (Atkdamage == value) return;
-                _atkdamage = value;
-                app.models.WriteModel<DataPlayerModel>();
-                RaiseDataChanged(nameof(Atkdamage));
-            }
-        }
-        public int Gem
-        {
-            get => _gem;
-            set
-            {
-                if (Gem == value) return;
-                _gem = value;
-                app.models.WriteModel<DataPlayerModel>();
-                RaiseDataChanged(nameof(Gem));
-            }
-        }
-        public int LevelAd
+		public int Armor
+		{
+			get => _armor;
+			set {
+				if(Armor == value) return;
+				_armor = Mathf.Clamp(value, 0, 100); // Giữ giá trị giáp trong phạm vi hợp lệ (0-100)
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(Armor));
+			}
+		}
+		public int Atkdamage
+		{
+			get => _atkdamage;
+			set {
+				if(Atkdamage == value) return;
+				_atkdamage = value;
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(Atkdamage));
+			}
+		}
+		public int Gem
+		{
+			get => _gem;
+			set {
+				if(Gem == value) return;
+				_gem = value;
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(Gem));
+			}
+		}
+		public int LevelAd
 		{
 			get => _levelAd;
 			set {
@@ -136,7 +136,7 @@ namespace FantasySurvivor
 				RaiseDataChanged(nameof(LevelAs));
 			}
 		}
-		
+
 		public int LevelCr
 		{
 			get => _levelCr;
@@ -147,7 +147,7 @@ namespace FantasySurvivor
 				RaiseDataChanged(nameof(LevelCr));
 			}
 		}
-		
+
 		public int LevelCd
 		{
 			get => _levelCd;
@@ -158,7 +158,7 @@ namespace FantasySurvivor
 				RaiseDataChanged(nameof(LevelCd));
 			}
 		}
-		
+
 		public int LevelHealth
 		{
 			get => _levelHealth;
@@ -169,7 +169,7 @@ namespace FantasySurvivor
 				RaiseDataChanged(nameof(LevelHealth));
 			}
 		}
-		
+
 		public int LevelRegenHp
 		{
 			get => _levelRegenHp;
@@ -180,44 +180,62 @@ namespace FantasySurvivor
 				RaiseDataChanged(nameof(LevelRegenHp));
 			}
 		}
-        public int Health
-        {
-            get => _health;
-            set
-            {
-                if (Health == value) return;
-                _health = value;
-                app.models.WriteModel<DataPlayerModel>();
-                RaiseDataChanged(nameof(Health));
-            }
-        }
-        public float Movespeed
-        {
-            get => _movespeed;
-            set
-            {
-                if (Movespeed == value) return;
-                _movespeed = value;
-                app.models.WriteModel<DataPlayerModel>();
-                RaiseDataChanged(nameof(Movespeed));
-            }
-        }
-        
-        public List<ItemEquipStat> BagItemEquip
-        {
-	        get => _bagItemEquip;
-        }
+		public int Health
+		{
+			get => _health;
+			set {
+				if(Health == value) return;
+				_health = value;
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(Health));
+			}
+		}
+		public float Movespeed
+		{
+			get => _movespeed;
+			set {
+				if(Movespeed == value) return;
+				_movespeed = value;
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(Movespeed));
+			}
+		}
 
-        public void AddItemEquipToBag(ItemEquipStat item)
-        {
-	        _bagItemEquip.Add(item);
-	        app.models.WriteModel<DataPlayerModel>();
-	        RaiseDataChanged(nameof(BagItemEquip));
-        }
+		public string GetNumberItemEquipCreated()
+		{
+			return "Goty_" + numberItemCreated;
+		}
 
-        public ItemEquipStat GetFirstItemEquipAdded()
-        {
-	        return _bagItemEquip.LastOrDefault();
-        }
+		public List<ItemEquipInBag> BagItemEquip
+		{
+			get => _bagItemEquip;
+		}
+
+		public void AddItemEquipToBag(ItemEquipStat item)
+		{
+			ItemEquipInBag itemInBag = new ItemEquipInBag(item);
+			numberItemCreated++;
+			_bagItemEquip.Add(itemInBag);
+			app.models.WriteModel<DataPlayerModel>();
+			RaiseDataChanged(nameof(BagItemEquip));
+		}
+
+		public void EquipItemInToBag(ItemEquipStat data, bool value)
+		{
+			foreach(var item in BagItemEquip)
+			{
+				if(item.itemEquipStat.idOwner == data.idOwner)
+				{
+					item.isEquip = value;
+					break;
+				}
+			}
+			app.models.WriteModel<DataPlayerModel>();
+		}
+
+		public ItemEquipInBag GetFirstItemEquipAdded()
+		{
+			return _bagItemEquip.LastOrDefault();
+		}
 	}
 }

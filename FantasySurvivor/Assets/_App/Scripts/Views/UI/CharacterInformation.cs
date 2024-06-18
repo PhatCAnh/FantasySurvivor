@@ -3,13 +3,15 @@ using ArbanFramework.MVC;
 using FantasySurvivor;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
-public class StatUI : View<GameApp>
+public class CharacterInformation : View<GameApp>, IPopup
 {
 	[SerializeField] private TextMeshProUGUI _txtHealth, _txtMoveSpeed, _txtAtkDamage, _txtArmor;
 
@@ -17,7 +19,9 @@ public class StatUI : View<GameApp>
 
 	[SerializeField] private GameObject _slotItemEquipPrefab;
 
-	[SerializeField] private ItemSlotEquipUI _slotWeapon;
+	[SerializeField] private ItemSlotEquipUI _slotWeapon, _slotArmor, _slotHat, _slotRing, _slotShoes, _slotGloves;
+
+	[SerializeField] private Button _btnBack;
 
 	private Dictionary<ItemEquipType, ItemSlotEquipUI> _dicItemEquip;
 
@@ -38,23 +42,42 @@ public class StatUI : View<GameApp>
 		base.OnViewInit();
 		
 		_slotWeapon.Init(null, this);
+		_slotArmor.Init(null, this);
+		_slotHat.Init(null, this);
+		_slotRing.Init(null, this);
+		_slotShoes.Init(null, this);
+		_slotGloves.Init(null, this);
 
 		_dicItemEquip = new Dictionary<ItemEquipType, ItemSlotEquipUI>
 		{
 			{ItemEquipType.Weapon, _slotWeapon},
+			{ItemEquipType.Armor, _slotArmor},
+			{ItemEquipType.Hat, _slotHat},
+			{ItemEquipType.Ring, _slotRing},
+			{ItemEquipType.Shoes, _slotShoes},
+			{ItemEquipType.Gloves, _slotGloves},
 		};
+		
+		_btnBack.onClick.AddListener(Close);
 		
 		//app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.Item1).dataStat);
 
 		foreach(var item in app.models.dataPlayerModel.BagItemEquip)
 		{
-			Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item1);
-			var id =itemController.GetDataItemEquip((ItemEquipId) Enum.Parse(typeof(ItemEquipId), item.id));
-			var data = new ItemEquipData(id.dataUi, item, id.spriteRank);
-			item1.Init(data, this);
+			if(item.isEquip)
+			{
+				var id = itemController.GetDataItemEquip((ItemEquipId) Enum.Parse(typeof(ItemEquipId), item.itemEquipStat.id));
+				var data = new ItemEquipData(id.dataUi,  item.itemEquipStat, id.spriteRank);
+				EquipItem(data.dataUi.type, id);
+			}
+			else
+			{
+				Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item1);
+				var id = itemController.GetDataItemEquip((ItemEquipId) Enum.Parse(typeof(ItemEquipId), item.itemEquipStat.id));
+				var data = new ItemEquipData(id.dataUi,  item.itemEquipStat, id.spriteRank);
+				item1.Init(data, this);
+			}
 		}
-		
-		
 	}
 
 	public void EquipItem(ItemEquipType type, ItemEquipData data)
@@ -63,7 +86,7 @@ public class StatUI : View<GameApp>
 		if(slot.isEquip) UnEquipItem(type, slot.data);
 		slot.Init(data);
 		itemController.EquipItem(data);
-
+		app.models.dataPlayerModel.EquipItemInToBag(data.dataStat, true);
 	}
 
 	public void UnEquipItem(ItemEquipType type, ItemEquipData data)
@@ -72,6 +95,7 @@ public class StatUI : View<GameApp>
 		itemController.UnEquipItem(data);
 		Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
 		item.Init(data, this);
+		app.models.dataPlayerModel.EquipItemInToBag(data.dataStat, false);
 	}
 
 	private void InitDispatcher()
@@ -105,10 +129,18 @@ public class StatUI : View<GameApp>
                 var dataStat = app.models.dataPlayerModel.GetFirstItemEquipAdded();
 				if (dataStat == null) return;
                 Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
-				var id =itemController.GetDataItemEquip((ItemEquipId) Enum.Parse(typeof(ItemEquipId), dataStat.id));
-				var data = new ItemEquipData(id.dataUi, dataStat, id.spriteRank);
+				var id =itemController.GetDataItemEquip((ItemEquipId) Enum.Parse(typeof(ItemEquipId), dataStat.itemEquipStat.id));
+				var data = new ItemEquipData(id.dataUi, dataStat.itemEquipStat, id.spriteRank);
 				item.Init(data, this);
 			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.BagItemEquip), app.models.dataPlayerModel)
 		);
+	}
+	public void Open()
+	{
+		
+	}
+	public void Close()
+	{
+		Destroy(gameObject);
 	}
 }

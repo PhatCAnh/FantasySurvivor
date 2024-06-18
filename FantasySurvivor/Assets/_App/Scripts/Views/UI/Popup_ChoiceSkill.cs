@@ -21,19 +21,19 @@ public class PopupChoiceSkill : View<GameApp>, IPopup
 	protected override void OnViewInit()
 	{
 		base.OnViewInit();
-		gameController._listSkill = app.resourceManager.GetListSkill();
-		foreach(var skill in gameController._listSkill) // lấy list skill
-		{
-			Instantiate(iconSkillPrefab, container).TryGetComponent(out Icon_ChoiceSkill icon);
-			icon.Init(skill, this);
-		}
+		//gameController._listSkill = app.resourceManager.GetListSkill();
+		// foreach(var skill in gameController._listSkill) // lấy list skill
+		// {
+		// 	Instantiate(iconSkillPrefab, container).TryGetComponent(out Icon_ChoiceSkill icon);
+		// 	icon.Init(skill, this);
+		// }
 		closeBtn.onClick.AddListener(Close);
 		Open();
-		NumberTaget.text = $"{gameController.currentNumberSkill}/{gameController.numberLimitChoiceSkill}"; //fix text numberskill khi mới vào
-		if(gameController.currentNumberSkill < gameController.numberLimitChoiceSkill) //ẩn nút go
-		{
-			GoBtn.interactable = false;
-		}
+		// NumberTaget.text = $"{gameController.currentNumberSkill}/{gameController.numberLimitChoiceSkill}"; //fix text numberskill khi mới vào
+		// if(gameController.currentNumberSkill < gameController.numberLimitChoiceSkill) //ẩn nút go
+		// {
+		// 	GoBtn.interactable = false;
+		// }
 		GoBtn.onClick.AddListener(Close_Go);
 	}
 	public void Open()
@@ -65,20 +65,20 @@ public class PopupChoiceSkill : View<GameApp>, IPopup
 	public void UpdateTextNumberChoiceSkill(bool value)
 	{
 
-		gameController.currentNumberSkill += value ? 1 : -1;
-
-		NumberTaget.text = $"{gameController.currentNumberSkill}/{gameController.numberLimitChoiceSkill}";
-
-		if(gameController.currentNumberSkill < gameController.numberLimitChoiceSkill)
-		{
-
-			GoBtn.interactable = false;
-		}
-		else
-		{
-			GoBtn.interactable = true;
-
-		}
+		// gameController.currentNumberSkill += value ? 1 : -1;
+		//
+		// NumberTaget.text = $"{gameController.currentNumberSkill}/{gameController.numberLimitChoiceSkill}";
+		//
+		// if(gameController.currentNumberSkill < gameController.numberLimitChoiceSkill)
+		// {
+		//
+		// 	GoBtn.interactable = false;
+		// }
+		// else
+		// {
+		// 	GoBtn.interactable = true;
+		//
+		// }
 	}
 
 

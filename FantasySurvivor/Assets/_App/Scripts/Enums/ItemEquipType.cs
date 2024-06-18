@@ -3,8 +3,8 @@
 	Undefined = -1,
 	Weapon,
 	Armor,
-	Pendant,
-	Belt,
+	Hat,
+	Ring,
 	Shoes,
 	Gloves,
 }

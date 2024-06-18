@@ -13,7 +13,7 @@ public class MinionMonster : Monster
         monsCollider = GetComponent<Collider2D>();
         monsCollider.isTrigger = true;
         animator.SetBool("Dead", isDead);
-        gameController.MonsterDestroy(this);
+        //gameController.MonsterDestroy(this);
     }
 
 }

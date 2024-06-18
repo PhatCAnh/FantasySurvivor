@@ -8,7 +8,6 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using FantasySurvivor;
 using JetBrains.Annotations;
-using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using UnityEngine.SceneManagement;
 using MonsterStat = FantasySurvivor.MonsterStat;
@@ -75,9 +74,9 @@ public class GameController : Controller<GameApp>
 		app.resourceManager.ShowPopup(PopupType.MainUI);
 	}
 
-	public void StartGame(int chapter)
+	public void StartGame(int chapter, int level)
 	{
-		ChangeScene(GameConst.nameScene_Game, () => LoadMap(chapter));
+		ChangeScene(GameConst.nameScene_Game, () => LoadMap(chapter, level));
 	}
 
 	public void WinGame()
@@ -147,7 +146,6 @@ public class GameController : Controller<GameApp>
 		}
 	}
 
-	[Button]
 	public void TestMethod()
 	{
 		character.AddHealth(0);
@@ -386,8 +384,9 @@ public class GameController : Controller<GameApp>
 			.GetComponent<HealthBar>();
 		_healthBar.Init(characterPrefab);
 
-		var stat = new CharacterStat(2.5f, 100, 5, 20, 50);
-		characterPrefab.Init(stat);
+		var stat = new CharacterStat(2.5f, 100, 5, 20, 50, 50);
+		var model = new CharacterModel(2.5f, 10, 100, 100, 100, 100);
+		characterPrefab.Init(stat, model);
 
 		return characterPrefab;
 	}
@@ -405,9 +404,9 @@ public class GameController : Controller<GameApp>
 		var y = a.y - b.y;
 		return x * x + y * y <= number * number;
     }
+	
 
-    
-    private void LoadMap(int chapter)
+	private void LoadMap(int chapter, int level)
 	{
 		_camSize = Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0));
 		_width = 1 / (_camSize.x - 0.5f);
@@ -415,7 +414,7 @@ public class GameController : Controller<GameApp>
 		Instantiate(app.resourceManager.mapInfinity, Vector3.zero, quaternion.identity).Init(chapter);
 
 		map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
-		map.Init();
+		map.Init(chapter, level);
 		character = SpawnCharacter();
 		listMonster.Clear();
 		Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.SupportItem), Vector3.zero, quaternion.identity);

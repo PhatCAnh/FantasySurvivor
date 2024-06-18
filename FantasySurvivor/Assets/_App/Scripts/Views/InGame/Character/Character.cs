@@ -105,10 +105,10 @@ public class Character : ObjectRPG
 
     }
 
-    public void Init(CharacterStat statInit)
+    public void Init(CharacterStat statInit, CharacterModel model)
     {
-
         stat = statInit;
+        app.models.characterModel = model;
     }
 
     private void Update()
@@ -147,7 +147,7 @@ public class Character : ObjectRPG
 		damage = MinusDamage(damage);
 		model.currentHealthPoint -= damage;
 		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.Red);
+		text.GetComponent<TextPopup>().Create(damage, TextPopupType.Red);
 
         if (!IsAlive)
         {
@@ -163,8 +163,6 @@ public class Character : ObjectRPG
 
     public void AddProactiveSkill(SkillData skillData)
     {
-        UpdateStat(StatModifierType.Add, 10, 0, 0, 0, 0, 0, 4);
-
         var skill = GetSkill(skillData.name);
         if (skill != null)
         {
@@ -176,7 +174,7 @@ public class Character : ObjectRPG
             return;
         }
         listSkillDataCurrents.Add(skillData);
-        gameController.CheckExistSkill();
+        //gameController.CheckExistSkill();
 
         switch (skillData.type)
         {
@@ -221,14 +219,8 @@ public class Character : ObjectRPG
                         case SkillName.Twin: 
                             skillIns = new TwinControl(); 
                             break;
-                        case SkillName.Swamp:
-                            skillIns = new swamp();
-                            break;
                         case SkillName.Shark:
-                            skillIns = new Shark();
-                            break;
-                        case SkillName.BlackDrum:
-                            skillIns = new BlackDrum();
+                            skillIns = new SharkControl();
                             break;
                         default:
                             skillIns = new ProactiveSkill();
@@ -383,7 +375,7 @@ public class Character : ObjectRPG
     {
         int roundedHealingRate = Mathf.RoundToInt(model.healingRate * 100);
         GameObject healingText = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-        healingText.GetComponent<TextPopup>().Create(roundedHealingRate.ToString(), TextPopupType.Healing);
+        healingText.GetComponent<TextPopup>().Create(roundedHealingRate, TextPopupType.Healing);
     }
 
     public void DeactivateHealing()

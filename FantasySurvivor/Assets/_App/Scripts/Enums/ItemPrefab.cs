@@ -35,6 +35,8 @@ public enum ItemPrefab
 	BulletOwlStriker,
 	OwlStriker,
 	MinionWolf,
+	BulletGoblinswift,
+	GoblinSwift,
 }
 
 public enum MapType
@@ -56,6 +58,7 @@ public enum TextPopupType
     Red,
     Normal,
     Fire,
+    Poison,
 }
 
 public enum TypeStatTower
@@ -155,6 +158,7 @@ public enum PopupType
 	Cheat,
 	ChoiceSkill,
 	ChoiceSkillOutGame,
+	CharacterInformation,
 }
 
 public enum SkillDamagedType

@@ -96,9 +96,9 @@ public class Monster : ObjectRPG
 	#region Base Methods
 
 	protected Cooldown moveSpeedCooldown = new Cooldown();
-	public List<StatusEffect> listStatusEffect;
+    public List<StatusEffect> listStatusEffect = new List<StatusEffect>();
 
-	public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave, ItemPrefab monsType)
+    public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave, ItemPrefab monsType)
 	{
 		stat = monsterStat;
 
@@ -130,6 +130,7 @@ public class Monster : ObjectRPG
 		cdAttack.Update(time);
 		_stateMachine.currentState.LogicUpdate(time);
 		HandleUpdateStat(time);
+		HandleStatusEffect(time);
 	}
 
 	private void FixedUpdate()
@@ -197,7 +198,7 @@ public class Monster : ObjectRPG
 		callBackDamaged?.Invoke();
 
 		var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-		text.GetComponent<TextPopup>().Create(damage.ToString(), TextPopupType.Normal, isCritical);
+		text.GetComponent<TextPopup>().Create(damage, type, isCritical);
 
 		if(isAlive) return;
 		Die();
@@ -222,9 +223,11 @@ public class Monster : ObjectRPG
 	public virtual void Die(bool selfDie = false)
 	{
 		isDead = true;
+		listStatusEffect.Clear();
 		monsCollider.isTrigger = true;
 		animator.SetBool("Dead", isDead);
 		gameController.MonsterDie(this, selfDie);
+		
 	}
 
 	protected virtual void Stop()
@@ -279,7 +282,14 @@ public class Monster : ObjectRPG
 			}
 		}
 	}
-	private void OnDrawGizmosSelected()
+    private void HandleStatusEffect(float deltaTime)
+    {
+        foreach (var item in listStatusEffect.ToList())
+        {
+            item.Cooldown(deltaTime);
+        }
+    }
+    private void OnDrawGizmosSelected()
 	{
 		Gizmos.DrawWireSphere(transform.position, size);
 	}

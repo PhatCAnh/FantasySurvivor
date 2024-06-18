@@ -31,11 +31,10 @@ public class Icon_ChoiceSkill : View<GameApp>
     {
         skillData.ChoiceSkill = value;
         parent.UpdateTextNumberChoiceSkill(value);
-        if (gameController.currentNumberSkill > gameController.numberLimitChoiceSkill)
-        {
-            toggle.isOn = false;
-            return;
-        }
-       
+        // if (gameController.currentNumberSkill > gameController.numberLimitChoiceSkill)
+        // {
+        //     toggle.isOn = false;
+        //     return;
+        // }
     }
 }

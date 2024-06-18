@@ -34,14 +34,15 @@ public class TextPopup : MonoBehaviour
 		_moveVector = new Vector3(0, Random.Range(0, 3f), 0f) * 10f;
 	}
 
-	public void Create(string value, TextPopupType type, bool isCritical = false)
+	public void Create(float value, TextPopupType type, bool isCritical = false)
 	{
 		string textValue = "";
+		value = (float) Math.Round(value, 2);
 
 		switch (type)
 		{
 			case TextPopupType.Normal:
-				textValue = value;
+				textValue = $"{value}";
 				_textMesh.color = Color.white;
 				_textMesh.fontSize = 5;
 				if(isCritical)
@@ -52,23 +53,29 @@ public class TextPopup : MonoBehaviour
 				}
 				break;
 			case TextPopupType.Red:
-				textValue = value;
+				textValue = $"{value}";
 				_textMesh.color = new Color(0.8207547f, 0, 0.007291546f);
 				_textMesh.fontSize = 7.5f;
 				break;
-            case TextPopupType.Healing: // Th�m x? l� cho lo?i Healing
-                textValue = "+" + value; // Th�m d?u "+" tr??c gi� tr? ?? bi?u th? l� h?i m�u
-                _textMesh.color = new Color(0, 1, 0); // M�u xanh l� c�y cho hi?n th? h?i m�u
-                _textMesh.fontSize = 7.5f; // C� th? ?i?u ch?nh k�ch th??c font cho ph� h?p
-                break;
-            case TextPopupType.Fire:
-	            textValue = $"{value} <sprite=13>"; // Th�m d?u "+" tr??c gi� tr? ?? bi?u th? l� h?i m�u
-	            _textMesh.color = new Color(0.9882354f, 0.6862745f, 0.1f); // M�u xanh l� c�y cho hi?n th? h?i m�u
-	            _textMesh.fontSize = 7.5f; 
-	            break;
-            
-        }
-		
+			case TextPopupType.Healing: // Th�m x? l� cho lo?i Healing
+				textValue = "+" + value; // Th�m d?u "+" tr??c gi� tr? ?? bi?u th? l� h?i m�u
+				_textMesh.color = new Color(0, 1, 0); // M�u xanh l� c�y cho hi?n th? h?i m�u
+				_textMesh.fontSize = 7.5f; // C� th? ?i?u ch?nh k�ch th??c font cho ph� h?p
+				break;
+			case TextPopupType.Fire:
+				textValue = $"{value} <sprite=13>"; // Th�m d?u "+" tr??c gi� tr? ?? bi?u th? l� h?i m�u
+				_textMesh.color = new Color(0.9882354f, 0.6862745f, 0.1f); // M�u xanh l� c�y cho hi?n th? h?i m�u
+				_textMesh.fontSize = 7.5f;
+				break;
+			case TextPopupType.Poison:
+				textValue = $"{value} <sprite=14>"; // Th�m d?u "+" tr??c gi� tr? ?? bi?u th? l� h?i m�u
+				_textMesh.color = new Color(0.4313726f, 0.8274511f, 0); // M�u xanh l� c�y cho hi?n th? h?i m�u
+				_textMesh.fontSize = 7.5f;
+				break;
+
+
+		}
+
 		Setup(textValue);
 	}
 

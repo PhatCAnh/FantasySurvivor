@@ -23,6 +23,14 @@ public class StatusEffect
 		cdTotal.Restart(duration);
 	}
 	
+	public StatusEffect(Monster target, float duration)
+	{
+		this.target = target;
+		this.target.listStatusEffect.Add(this);
+		cdTotal = new Cooldown();
+		cdTotal.Restart(duration);
+	}
+	
 	public virtual bool Cooldown(float deltaTime)
 	{
 		cdTotal.Update(deltaTime);

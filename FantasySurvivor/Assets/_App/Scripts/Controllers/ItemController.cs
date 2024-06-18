@@ -43,7 +43,7 @@ public class ItemController : Controller<GameApp>
 	public ItemEquipData GetDataItemEquip(ItemEquipId id)
 	{
 		var dataUI = _equipDataTable.listItemEquipData.Find(item => item.id == id);
-		var dataStat = new ItemEquipStat(app.configs.dataItemEquip.GetConfig(id));
+		var dataStat = new ItemEquipStat(app.configs.dataItemEquip.GetConfig(id), app.models.dataPlayerModel.GetNumberItemEquipCreated());
 		return new ItemEquipData(dataUI, dataStat, _dicRankItemEquip[dataUI.rank]);
 	}
 

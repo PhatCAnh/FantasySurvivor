@@ -12,17 +12,17 @@ public class ItemSlotUI : View<GameApp>
     [SerializeField] protected Image imageRank;
     [SerializeField] protected Button btn;
 
-    protected StatUI parent;
-    
-    public void Init(ItemEquipData data, StatUI ui)
-    {
-        parent = ui;
-        if(data != null)
-        {
-            InitData(data);
-        }
-        btn.onClick.AddListener(OnClickBtn);
-    }
+    // protected CharacterInformation parent;
+    //
+    // public void Init(ItemEquipData data, CharacterInformation ui)
+    // {
+    //     parent = ui;
+    //     if(data != null)
+    //     {
+    //         InitData(data);
+    //     }
+    //     btn.onClick.AddListener(OnClickBtn);
+    // }
     
     public virtual void Init(ItemEquipData data)
     {
@@ -32,7 +32,7 @@ public class ItemSlotUI : View<GameApp>
 
     protected virtual void OnClickBtn()
     {
-        parent.EquipItem(data.dataUi.type, data);
+        //parent.EquipItem(data.dataUi.type, data);
         Destroy(gameObject);
     }
 
