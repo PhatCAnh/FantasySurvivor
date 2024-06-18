@@ -22,14 +22,13 @@ namespace FantasySurvivor
 
         [SerializeField] private int _numberBack = 0;
 
-        private int _coolDownBack = 0;
         private GameController gameController => Singleton<GameController>.instance;
 
-        // Các biến mới
+        private int _coolDownBack = 0;
         private int attackCounter = 0; // count so lan attack
-        private bool isDisappeared = false; // kiem tra bien mat 
-        private float disappearTimer = 0f; // count time bien mat
-        private float attackTimer = 0f; // count attack sau khi tele
+        private bool isState1 = false;
+        private bool isState2 = false;
+        private bool isState3 = false;
 
         protected override void OnViewInit()
         {
@@ -44,75 +43,56 @@ namespace FantasySurvivor
 
         protected override void HandlePhysicUpdate()
         {
-            if (!isAlive) return;
+            if (isAlive) return;
 
             moveTarget = gameController.character.transform.position;
             moveDirection = moveTarget - transform.position;
 
-
-            if (isDisappeared)
+            //tele
+            if (moveDirection.magnitude > 20)
             {
-                //count time bien mat
-                disappearTimer -= Time.deltaTime;
-                attackTimer -= Time.deltaTime;
-                if (disappearTimer <= 0f)
-                {
-                    SetVisible(true);
-                    transform.position = moveTarget;
-                    isDisappeared = false;
-                }
+                transform.position = moveTarget;
                 return;
             }
-            else if (moveDirection.magnitude > 20)
-            {
-                disappearTimer = 2f; // bien mat 2s
-                SetVisible(false);
-                isDisappeared = true;
-            }
-            else if (moveDirection.magnitude < sizeAttack)
+
+            //sizeAttack
+            if (moveDirection.magnitude < sizeAttack)
             {
                 if (cdAttack.isFinished)
                 {
-                    if (attackCounter < 3)
+                    if (attackCounter <= 5)
                     {
-                        AttackState();
+                        SecondAttack();
                         attackCounter++;
                         cdAttack.Restart(1 / model.attackSpeed);
                     }
-                    else if (attackCounter >= 3)
-                    {
-                        MoveState();
-                        animator.SetBool("Attack", false);
-                    }
+
+
+                    /* if (attackCounter > 3)
+                     {
+                         AttackState();
+                         attackCounter = 0;
+                         cdAttack.Restart(1 / model.attackSpeed);
+                     }*/
                 }
             }
             else
             {
                 MoveState();
                 animator.SetBool("Attack", false);
-                attackCounter = 0; // Reset đếm số lần tấn công nếu di chuyển ra ngoài khoảng cách attack
+                attackCounter = 0;
             }
 
             SetAnimation(idleDirection);
-        }
-
-        private void SetVisible(bool visible)
-        {
-            // Ví dụ: ẩn hoặc hiện MeshRenderer của boss
-            var renderers = GetComponentsInChildren<Renderer>();
-            foreach (var renderer in renderers)
-            {
-                renderer.enabled = visible;
-            }
         }
 
         public override void Attack()
         {
             animator.SetBool("Attack", true);
 
-            float coneAngle = 70f; 
-            int bulletsAmount = 7; 
-            float angleStep = coneAngle / (bulletsAmount - 1); 
+            float coneAngle = 70f;
+            int bulletsAmount = 7;
+            float angleStep = coneAngle / (bulletsAmount - 1);
 
             Vector2 directionToCharacter = (gameController.character.transform.position - transform.position).normalized;
 
@@ -168,42 +148,77 @@ namespace FantasySurvivor
 
         private void SecondAttack()
         {
+            animator.SetBool("Attack", true);
+            int bulletCount = 10; // Số lượng đạn trong vòng tròn
+            float radius = 1.5f; // Bán kính của vòng tròn đạn
+
+            for (int i = 0; i < bulletCount; i++)
+            {
+                float angle = i * Mathf.PI * 2 / bulletCount;
+                Vector3 bulletPosition = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
+                Vector3 spawnPosition = firePoint.position + bulletPosition;
+
+                Singleton<PoolController>.instance.GetObject(typeBullet, spawnPosition).TryGetComponent(out BulletBossGatlingCrab bullet);
+                bullet.transform.position = spawnPosition;
+                bullet.transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg);
+
+                bullet.Init(this);
+            }
+
+            for (int i = 0; i < bulletCount; i++)
+            {
+                float angle = i * Mathf.PI * 2 / bulletCount;
+                Vector3 bulletPosition = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
+                Vector3 spawnPosition = firePoint2.position + bulletPosition;
+
+                Singleton<PoolController>.instance.GetObject(typeBullet, spawnPosition).TryGetComponent(out BulletBossGatlingCrab bullet2);
+                bullet2.transform.position = spawnPosition;
+                bullet2.transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg);
+
+                bullet2.Init(this);
+            }
+
             /*animator.SetBool("Attack", true);
-           int bulletCount = 8; // Số lượng đạn trong vòng tròn
-           float radius = 1.5f; // Bán kính của vòng tròn đạn
+            int bulletCount = 8;
+            float radius = 1.5f; 
+            Vector2 directionToCharacter = (gameController.character.transform.position - transform.position).normalized;
+            float baseAngle = Mathf.Atan2(directionToCharacter.y, directionToCharacter.x) * Mathf.Rad2Deg;
 
            for (int i = 0; i < bulletCount; i++)
-           {
-               float angle = i * Mathf.PI * 2 / bulletCount;
-               Vector3 bulletPosition = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
-               Vector3 spawnPosition = firePoint.position + bulletPosition;
+            {
+                // Tính toán góc hiện tại cho viên đạn
+                float angle = baseAngle + i * 360f / bulletCount;
 
-               Singleton<PoolController>.instance.GetObject(typeBullet, spawnPosition).TryGetComponent(out BulletBossGatlingCrab bullet);
-               bullet.transform.position = spawnPosition;
-               bullet.transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg); // Xoay viên đạn theo góc
+                // Tính toán vị trí của viên đạn dựa trên góc và bán kính
+                float bulDirX = Mathf.Cos(angle * Mathf.Deg2Rad);
+                float bulDirY = Mathf.Sin(angle * Mathf.Deg2Rad);
 
-               bullet.Init(this);
-           }
+                Vector3 bulletPosition = firePoint.position + new Vector3(bulDirX * radius, bulDirY * radius, 0f);
 
-           for (int i = 0; i < bulletCount; i++)
-           {
-               float angle = i * Mathf.PI * 2 / bulletCount;
-               Vector3 bulletPosition = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
-               Vector3 spawnPosition = firePoint2.position + bulletPosition;
+                var bulletObject = Singleton<PoolController>.instance.GetObject(typeBullet, firePoint.position);
 
-               Singleton<PoolController>.instance.GetObject(typeBullet2, spawnPosition).TryGetComponent(out BulletBossGatlingCrab bullet2);
-               bullet2.transform.position = spawnPosition;
-               bullet2.Init(this);
-           }
+                // Kiểm tra và cài đặt vị trí và hướng cho viên đạn
+                if (bulletObject.TryGetComponent(out BulletBossGatlingCrab bullet))
+                {
+                    bullet.transform.position = bulletPosition;
+                    bullet.transform.rotation = Quaternion.Euler(0, 0, angle);
+                    bullet.Init(this);
 
-           _coolDownBack++;
-           if (_numberBack != 0)
-           {
-               if (CheckBack())
-               {
-                   moveTarget = spawnPos;
-               }
-           }*/
+                    // Đặt hướng di chuyển cho viên đạn dựa trên góc
+                    Vector2 bulMoveDirection = new Vector2(bulDirX, bulDirY).normalized;
+                    bullet.SetDirection(bulMoveDirection);
+                }
+            }
+            }*/
+
+            _coolDownBack++;
+            if (_numberBack != 0)
+            {
+                if (CheckBack())
+                {
+                    moveTarget = spawnPos;
+                }
+            }
         }
     }
 }
