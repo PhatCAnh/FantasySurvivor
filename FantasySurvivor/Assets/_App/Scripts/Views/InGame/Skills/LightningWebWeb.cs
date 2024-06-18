@@ -44,7 +44,7 @@ public class LightningWebWeb : SkillActive
         {
             if (gameController.CheckTouch(mons.transform.position, transform.position, size))
             {
-                mons.UpdateStat(StatModifierType.Mul, 1, slow, 1, 1, duration);
+                mons.UpdateStat(StatModifierType.Mul, 1, slow, 1, 1, duration+0.2f);
             }
         }
         reActive.Restart();

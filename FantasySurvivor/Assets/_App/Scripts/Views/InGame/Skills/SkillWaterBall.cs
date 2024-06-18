@@ -8,7 +8,11 @@ namespace FantasySurvivor
         [SerializeField] protected GameObject explosionEffectPrefab;  // Prefab hiệu ứng nổ
         private float sizee = 5.0f;       // Bán kính nổ
         private float Damage = 6.0F;      // Sát thương gây ra bởi vụ nổ
-        
+
+        public override void Init(LevelSkillData data, Monster target, int level, ItemPrefab type)
+        {
+            base.Init(data, target, level, type);
+        }
         private void FixedUpdate()
         {
             if (gameController.isStop) return;

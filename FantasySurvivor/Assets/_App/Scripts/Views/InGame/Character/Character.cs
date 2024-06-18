@@ -226,26 +226,26 @@ public class Character : ObjectRPG
                         case SkillName.Fireball:
                             skillIns = new FireBallControl();
                             break;
-                        /*case SkillName.ThunderStrike:
+                        case SkillName.ThunderStrike:
                             skillIns = new ThunderStrikeControl();
-                            break;*/
+                            break;
                         case SkillName.Waterball:
                             skillIns = new WaterBallControl();
                             break;
-                        // case SkillName.ThunderChanneling:
-                        // 	skillIns = new ThunderChanneling();
-                        // 	break;
+                        case SkillName.TimeBoom:
+                            skillIns = new TimeBoomControl();
+                            break;
                         case SkillName.FireShield:
                             skillIns = new FireShieldControl();
                             break;
-                        /*case SkillName.Shark:
+                        case SkillName.WindField:
+                            skillIns = new WindFieldControl();
+                            break;
+                        case SkillName.Shark:
                             skillIns = new SharkControl();
-                            break;*/
-                        /*case SkillName.SkyBoom:
+                            break;
+                        case SkillName.SkyBoom:
                             skillIns = new SkyboomControl();
-                            break;*/
-                        case SkillName.Twin: 
-                            skillIns = new TwinControl(); 
                             break;
                         default:
                             skillIns = new ProactiveSkill();

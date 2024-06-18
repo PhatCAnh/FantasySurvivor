@@ -272,7 +272,7 @@ public class GameController : Controller<GameApp>
 
             }*/
             float distance = Vector3.Distance(origin.transform.position, monster.transform.position);
-            if (distance <= range && distance < minDistance)
+            if (distance <= range && distance < minDistance && distance < 30f)
             {
                 nearestMonster = monster;
                 minDistance = distance;

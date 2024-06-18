@@ -12,7 +12,7 @@ namespace FantasySurvivor
         public override void Init(SkillData data)
         {
             base.Init(data);
-            timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
+            timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 100);
         }
 
 		public override void UpLevel()
@@ -49,6 +49,12 @@ namespace FantasySurvivor
         {
             base.Init(data);
         }
+        protected override void UpdatePrefab(SkillActive prefab)
+        {
+            base.UpdatePrefab(prefab);
+            prefab.transform.localScale = Vector3.one * levelData[level].valueSpecial1;
+            prefab.size = levelData[level].valueSpecial1;
+        }
     }
 
     public class IceSpearControl : ProactiveSkill
@@ -82,16 +88,8 @@ namespace FantasySurvivor
         public override void Init(SkillData data)
         {
             base.Init(data);
-            timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
         }
-        public override void UpLevel()
-        {
-            base.UpLevel();
-            if (level == 3)
-            {
-                numberProjectile++;
-            }
-        }
+        
     }
 
 	public class TwinControl : ProactiveSkill
@@ -99,7 +97,6 @@ namespace FantasySurvivor
 		public override void Init(SkillData data)
 		{
 			base.Init(data);
-			timeDelaySkill = Mathf.RoundToInt(1000);
 		}
 	}
 
@@ -198,9 +195,21 @@ namespace FantasySurvivor
 		public override void Init(SkillData data)
 		{
 			base.Init(data);
-			timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
+			timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 100);
 		}
-	}
+        public override void UpLevel()
+        {
+            base.UpLevel();
+            if (level == 3 || level == 5)
+            {
+                numberProjectile++;
+            }
+            if (level == 6)
+            {
+                numberProjectile = 1;
+            }
+        }
+    }
 	public class SmilingFaceControl : ProactiveSkill
     {
         public override void Init(SkillData data)

@@ -23,8 +23,13 @@ public class Poison : StatusEffect
     public override void Active()
     {
         base.Active();
-        value = target.model.maxHealthPoint / 20;
+        //value = 5;
+        value = target.model.maxHealthPoint / 10;
         target.TakeDamage(value, TextPopupType.Poison);
+        if (target.isDead)
+        {
+            burnDie = true;
+        }
         if (burnDie && level == 6)
         {
             burnDie = false;
@@ -48,11 +53,6 @@ public class Poison : StatusEffect
         {
             Active();
             cd.Restart(0.5f);
-            if (target.isDead)
-            {
-                burnDie = true;
-            }
-
         }
         return false;
     }
