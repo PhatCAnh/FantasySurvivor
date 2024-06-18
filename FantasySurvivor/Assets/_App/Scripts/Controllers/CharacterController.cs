@@ -37,8 +37,10 @@ public class CharacterController: Controller<GameApp>
 			data.damage,
 			data.itemAttractionRange,
 			data.armor,
-			data.regen
-		);
+			data.regen,
+            data.shield
+        );
+
 	}
 
 	public CharacterData GetDataCharacter(CharacterId id)

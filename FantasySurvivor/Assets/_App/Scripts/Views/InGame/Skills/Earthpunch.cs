@@ -16,34 +16,6 @@ public class Earthpunch : SkillBulletActive
     {
         return random.NextDouble() < probability;
     }
-    protected override void HandleTouch()
-    {
-        if (!canBlock)
-        {
-            switch (skillDamagedType)
-            {
-                case SkillDamagedType.Single:
-                    if (gameController.CheckTouch(targetPos, transform.position, sizeTouch))
-                    {
-                        TakeDamage();
-                        Singleton<PoolController>.instance.ReturnObject(this.type, gameObject);
-                    }
-                    break;
-            }
-        }
-        else
-        {
-            if (gameController.listMonster.ToList().Any(CheckTouchMonsters))
-            {
-                Singleton<PoolController>.instance.ReturnObject(this.type, gameObject);
-                return;
-            }
-        }
-        if (!gameController.CheckTouch(origin.transform.position, transform.position, 30))
-        {
-            Singleton<PoolController>.instance.ReturnObject(this.type, gameObject);
-        }
-    }
     protected override bool CheckTouchMonsters(Monster monster)
     {
         sizeTouch = size + monster.size;
@@ -54,7 +26,6 @@ public class Earthpunch : SkillBulletActive
         {
             monster.UpdateStat(StatModifierType.Mul, 1, 0, 1, 1, data.valueSpecial1);
         }
-        CreateExplo();
         return true;
     }
 }

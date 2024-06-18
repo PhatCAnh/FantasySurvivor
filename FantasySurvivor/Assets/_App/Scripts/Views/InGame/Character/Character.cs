@@ -158,6 +158,11 @@ public class Character : ObjectRPG
 		}
 	}
 
+    public void ActivateShield(float shieldValue)
+    {
+        model.shield += shieldValue;
+    }
+
 
 	public void AddHealth(float value)
 	{
@@ -171,9 +176,9 @@ public class Character : ObjectRPG
 		skillController.ChoiceSkillInGame(id);
 	}
 
-	public void UpdateStat(StatModifierType typeStat, float maxH, float ms, float ad, float ar, float itemR, int armor, float duration)
+	public void UpdateStat(StatModifierType typeStat, float maxH, float ms, float ad, float ar, float itemR, int armor, float shield, float duration)
 	{
-		var updateStat = new CharacterUpdateStat(typeStat, maxH, ms, ad, ar, itemR, armor, duration);
+		var updateStat = new CharacterUpdateStat(typeStat, maxH, ms, ad, ar, itemR, armor, shield, duration);
 
 		stat.maxHealth.AddModifier(updateStat.maxHealth);
 		stat.moveSpeed.AddModifier(updateStat.moveSpeed);
@@ -185,36 +190,38 @@ public class Character : ObjectRPG
 		listUpdateStat.Add(updateStat);
 		UpdateModel();
 	}
-
-	private float DamageReductionByArmor()
+    private float DamageReductionByArmor()
 	{
 		var delta = 0.06f;
 		var armor = model.armor;
 		return 1 - delta * armor / (1 + delta * Mathf.Abs(armor));
 	}
 
-	private void RemoveStat(CharacterUpdateStat statModifier)
-	{
-		stat.maxHealth.RemoveModifier(statModifier.maxHealth);
-		stat.moveSpeed.RemoveModifier(statModifier.moveSpeed);
-		stat.attackDamage.RemoveModifier(statModifier.attackDamage);
-		stat.attackRange.RemoveModifier(statModifier.attackRange);
-		stat.itemAttractionRange.RemoveModifier(statModifier.itemAttractionRange);
-		stat.armor.RemoveModifier(statModifier.armor);
+
+    private void RemoveStat(CharacterUpdateStat statModifier)
+    {
+        stat.maxHealth.RemoveModifier(statModifier.maxHealth);
+        stat.moveSpeed.RemoveModifier(statModifier.moveSpeed);
+        stat.attackDamage.RemoveModifier(statModifier.attackDamage);
+        stat.attackRange.RemoveModifier(statModifier.attackRange);
+        stat.itemAttractionRange.RemoveModifier(statModifier.itemAttractionRange);
+        stat.armor.RemoveModifier(statModifier.armor);
+        stat.shield.RemoveModifier(statModifier.shield);
 
 		listUpdateStat.Remove(statModifier);
 		UpdateModel();
 	}
-
-	private void UpdateModel()
-	{
-		model.maxHealthPoint = stat.maxHealth.Value;
-		model.moveSpeed = stat.moveSpeed.Value;
-		model.attackDamage = stat.attackDamage.Value;
-		model.itemAttractionRange = stat.itemAttractionRange.Value;
-		model.attackRange = stat.attackRange.Value;
-		model.armor = stat.armor.Value;
-	}
+    
+    private void UpdateModel()
+    {
+        model.maxHealthPoint = stat.maxHealth.Value;
+        model.moveSpeed = stat.moveSpeed.Value;
+        model.attackDamage = stat.attackDamage.Value;
+        model.itemAttractionRange = stat.itemAttractionRange.Value;
+        model.attackRange = stat.attackRange.Value;
+        model.armor = stat.armor.Value;
+        model.shield = stat.shield.Value;
+    }
 
 	private void Die()
 	{

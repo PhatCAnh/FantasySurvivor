@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722149164735392549}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8696734879439127392}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &722149164735392571
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 537409057
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 704797902, guid: e4ffbed7851f5774ca9f8acb8fce1d5e, type: 3}
+  m_Sprite: {fileID: -1303080711, guid: b8e5ff0f221b921478e432d8d7ad526c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -188,6 +188,8 @@ MonoBehaviour:
   skillDamagedType: 0
   targetType: 1
   type: 10
+  origin: {fileID: 0}
+  level: 0
   skin: {fileID: 8696734879439127392}
   targetType: 1
   canBlock: 1

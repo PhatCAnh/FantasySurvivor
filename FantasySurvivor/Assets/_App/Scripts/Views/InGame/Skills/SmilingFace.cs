@@ -28,33 +28,22 @@ public class SmilingFace : SkillBulletActive
 
     protected override void HandleTouch()
     {
-        if (!canBlock)
+
+
+        if (Vector2.Distance(targetPos, transform.position) <= 0.5)
         {
-            switch (skillDamagedType)
+            foreach (var unit in gameController.listMonster.ToList())
             {
-                case SkillDamagedType.AreaOfEffect:
-                    /*foreach (var mons in gameController.listMonster.ToList())
-                    {
-                        CheckTouchMonsters(mons);
-                    }*/
-
-                    if (Vector2.Distance(targetPos, transform.position) <= 0.5)
-                    {
-                        foreach (var unit in gameController.listMonster.ToList())
-                        {
-                            if (gameController.CheckTouch(unit.transform.position, transform.position, data.valueSpecial1 + unit.size))
-                            {
-                                base.TouchUnit(unit);
-                            }
-                        }
-                        var explosion = Instantiate(_explosionEffect, transform.position, quaternion.identity);
-                        explosion.transform.localScale = data.valueSpecial1 * Vector3.one;
-                        Destroy(gameObject);
-                    }
-                    break;
+                if (gameController.CheckTouch(unit.transform.position, transform.position, data.valueSpecial1 + unit.size))
+                {
+                    base.TouchUnit(unit);
+                }
             }
-
+            var explosion = Instantiate(_explosionEffect, transform.position, quaternion.identity);
+            explosion.transform.localScale = data.valueSpecial1 * Vector3.one;
+            Destroy(gameObject);
         }
+
     }
     protected override void OnDrawGizmosSelected()
     {

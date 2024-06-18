@@ -47,7 +47,7 @@ public class Boomeerang : SkillBulletActive
 
                     case MoveState.ToB:
                         transform.position = Vector2.MoveTowards(transform.position, initialPosition, step);
-                        if (Vector2.Distance(transform.position, initialPosition) <= 0.01f) 
+                        if (Vector2.Distance(transform.position, initialPosition) <= 0.01f)
                         {
                             currentState = MoveState.ToA;
                         }
@@ -57,11 +57,11 @@ public class Boomeerang : SkillBulletActive
                         transform.position = Vector2.MoveTowards(transform.position, endPosition, step);
                         if (Vector2.Distance(transform.position, endPosition) < 0.01f)
                         {
-                            Destroy(gameObject);    
+                            Destroy(gameObject);
                         }
                         break;
                 }
-             break;
+                break;
         }
 
         HandleTouch();
@@ -69,23 +69,14 @@ public class Boomeerang : SkillBulletActive
 
     protected override void HandleTouch()
     {
-        if (!canBlock)
+        foreach (var mons in gameController.listMonster.ToList())
         {
-            switch (skillDamagedType)
+            if (!attackedMonsters.Contains(mons) && gameController.CheckTouch(mons.transform.position, transform.position, sizeTouch))
             {
-                case SkillDamagedType.AreaOfEffect:
-                    foreach (var mons in gameController.listMonster.ToList())
-                    {
-                        if (!attackedMonsters.Contains(mons) && gameController.CheckTouch(mons.transform.position, transform.position, sizeTouch))
-                        {
-                            TouchUnit(mons);
-                            attackedMonsters.Add(mons);
-                        }
-                    }
-                    break;
+                TouchUnit(mons);
+                attackedMonsters.Add(mons);
             }
-
         }
-    }
+    } 
 }
 

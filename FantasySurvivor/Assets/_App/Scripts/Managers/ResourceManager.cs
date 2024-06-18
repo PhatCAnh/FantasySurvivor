@@ -58,6 +58,20 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     [SerializeField] private GameObject _bulletGoblinswift;
 
+	[SerializeField] private GameObject _skillCyclone;
+
+	[SerializeField] private GameObject _skillWindfield;
+
+	[SerializeField] private GameObject _skillThunderPunch;
+
+	[SerializeField] private GameObject _skillEarthShield;
+
+	[SerializeField] private GameObject _skillLightningWeb;
+
+	[SerializeField] private GameObject _skillThunderChanneling;
+
+	[SerializeField] private GameObject _skillTimeBoom;
+
 
 
 
@@ -207,6 +221,13 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.BulletOwlStriker, _bulletOwlStriker},
 			{ItemPrefab.BulletGoblinswift, _bulletGoblinswift},
 			{ItemPrefab.GoblinSwift, _goblinSwift},
+			{ItemPrefab.Cyclone, _skillCyclone},
+			{ItemPrefab.WindField, _skillWindfield},
+			{ItemPrefab.ThunderPunch, _skillThunderPunch},
+			{ItemPrefab.EarthShield, _skillEarthShield},
+			{ItemPrefab.LightningWeb, _skillLightningWeb},
+			{ItemPrefab.ThunderChanneling, _skillThunderChanneling},
+			{ItemPrefab.TimeBoom, _skillTimeBoom},
 		};
 
 		_mapDic = new Dictionary<MapType, Map>

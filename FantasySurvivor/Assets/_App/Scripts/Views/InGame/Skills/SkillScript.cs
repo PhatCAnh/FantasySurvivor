@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using _App.Datas.DataScript;
-using DG.Tweening;
-using Unity.Mathematics;
 using UnityEngine;
-using Random = UnityEngine.Random;
 namespace FantasySurvivor
 {
     public class FireBallControl : ProactiveSkill
@@ -32,31 +28,53 @@ namespace FantasySurvivor
     public class EarthPunchControl : ProactiveSkill
     {
     }
+    public class LightningWebControl : ProactiveSkill
+    {
+        public override void Init(SkillDataTotal data)
+        {
+            base.Init(data);
+        }
+    }
+    public class WindFieldControl : ProactiveSkill
+    {
+        public override void Init(SkillDataTotal data)
+        {
+            base.Init(data);
+        }
+        protected override void UpdatePrefab(SkillActive prefab)
+        {
+            base.UpdatePrefab(prefab);
+            prefab.transform.localScale = Vector3.one * levelData[level].valueSpecial1;
+            prefab.size = levelData[level].valueSpecial1;
+        }
+    }
 
     public class IceSpearControl : ProactiveSkill
     {
     }
+    public class TimeBoomControl : ProactiveSkill
+    {
+        protected override void UpdatePrefab(SkillActive prefab)
+        {
+            base.UpdatePrefab(prefab);
+            prefab.GetComponent<SkillBombActive>().sizeExplosion += 0.5f * level;
+        }
+    }
+
+
 
     public class PoisonballControl : ProactiveSkill
     {
     }
 
-	/*public class ThunderBird : ProactiveSkill
+	public class ThunderChannelingControl : ProactiveSkill
 	{
-        public override void Init(SkillData data)
+        public override void Init(SkillDataTotal data)
         {
             base.Init(data);
-            timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
         }
-        public override void UpLevel()
-        {
-            base.UpLevel();
-            if (level == 3)
-            {
-                numberProjectile++;
-            }
-        }
-    }*/
+        
+    }
 
 	public class TwinControl : ProactiveSkill
 	{
@@ -67,7 +85,14 @@ namespace FantasySurvivor
 		}
 	}
 
-	public class SharkControl : ProactiveSkill
+    public class CycloneControl : ProactiveSkill
+    {
+        public override void Init(SkillDataTotal data)
+        {
+            base.Init(data);
+        }
+    }
+    public class SharkControl : ProactiveSkill
     {
         protected override void UpdatePrefab(SkillActive prefab)
         {
@@ -76,6 +101,14 @@ namespace FantasySurvivor
             prefab.size = levelData[level].valueSpecial1;
         }
     }
+    public class ThunderPunchControl : ProactiveSkill
+    {
+        public override void Init(SkillDataTotal data)
+        {
+            base.Init(data);
+        }
+    }
+
 
     /*public class ZoneOfJudgment : ProactiveSkill
 	{
@@ -127,7 +160,7 @@ namespace FantasySurvivor
 		}
 	}*/
 
-	public class ThunderStrikeControl : ProactiveSkill
+    public class ThunderStrikeControl : ProactiveSkill
 	{
 		public override void UpLevel()
 		{
@@ -145,7 +178,19 @@ namespace FantasySurvivor
 			base.Init(dataTotal);
 			timeDelaySkill = Mathf.RoundToInt(levelData.Last().Value.cooldown / 2 * 1000);
 		}
-	}
+        public override void UpLevel()
+        {
+            base.UpLevel();
+            if (level == 3 || level == 5)
+            {
+                numberProjectile++;
+            }
+            if (level == 6)
+            {
+                numberProjectile = 1;
+            }
+        }
+    }
 	public class SmilingFaceControl : ProactiveSkill
     {
     }

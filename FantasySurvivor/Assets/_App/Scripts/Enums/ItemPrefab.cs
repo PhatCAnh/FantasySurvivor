@@ -37,6 +37,13 @@ public enum ItemPrefab
 	MinionWolf,
 	BulletGoblinswift,
 	GoblinSwift,
+	Cyclone,
+    WindField,
+	ThunderPunch,
+    EarthShield,
+    LightningWeb,
+    ThunderChanneling,
+    TimeBoom,
 }
 
 public enum MapType
@@ -58,7 +65,8 @@ public enum TextPopupType
     Red,
     Normal,
     Fire,
-    Poison,
+	Poison,
+	Lightning
 }
 
 public enum TypeStatTower
@@ -109,6 +117,12 @@ public enum SkillName
     SmilingFace,
 	IceSpear,
 	Twin,
+	Cyclone,
+	WindField,
+	ThunderPunch,
+    EarthShield,
+    LightningWeb,
+    TimeBoom,
 }
 
 public enum SkillType
