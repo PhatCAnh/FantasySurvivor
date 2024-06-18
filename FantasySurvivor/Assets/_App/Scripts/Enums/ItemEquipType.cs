@@ -6,7 +6,7 @@
 
 public enum ItemType
 {
-	Piece,
+    Piece,
 	Weapon,
 	Armor,
 	Shoes,
