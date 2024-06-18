@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using ArbanFramework.MVC;
 using FantasySurvivor;
 using System.Collections;

@@ -28,13 +28,14 @@ public class PopupChoiceSkill : View<GameApp>, IPopup
 			Instantiate(iconSkillPrefab, container).TryGetComponent(out Icon_ChoiceSkill icon);
 			icon.Init(skill.id, this,CheckSkillSet(skill.id));
 		}
+
 		closeBtn.onClick.AddListener(Close);
 		Open();
-		NumberTaget.text = $"{gameController.currentNumberSkill}/{gameController.numberLimitChoiceSkill}"; //fix text numberskill khi mới vào
-		if(gameController.currentNumberSkill < gameController.numberLimitChoiceSkill) //ẩn nút go
-		{
-			GoBtn.interactable = false;
-		}
+		// NumberTaget.text = $"{gameController.currentNumberSkill}/{gameController.numberLimitChoiceSkill}"; //fix text numberskill khi mới vào
+		// if(gameController.currentNumberSkill < gameController.numberLimitChoiceSkill) //ẩn nút go
+		// {
+		// 	GoBtn.interactable = false;
+		// }
 		GoBtn.onClick.AddListener(Close_Go);
 	}
 	public void Open()

@@ -234,8 +234,7 @@ public class Monster : ObjectRPG
 	{
 		myRigid.velocity = Vector2.zero;
 	}
-
-	public void ResetWhenDie()
+    public void ResetWhenDie()
 	{
 
 	}

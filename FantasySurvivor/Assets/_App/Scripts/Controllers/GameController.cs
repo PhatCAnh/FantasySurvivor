@@ -10,6 +10,9 @@ using FantasySurvivor;
 using JetBrains.Annotations;
 using Unity.Mathematics;
 using UnityEngine.SceneManagement;
+
+using MonsterStat = FantasySurvivor.MonsterStat;
+
 public class GameController : Controller<GameApp>
 {
     public bool isStop => isEndGame || isStopGame;
@@ -36,7 +39,8 @@ public class GameController : Controller<GameApp>
     private Vector3 charPos => character.transform.position;
     public List<SkillData> _listSkill = new List<SkillData>();
 
-    private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
+
+	private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
 
     private PoolController poolController => Singleton<PoolController>.instance;
 
@@ -86,6 +90,7 @@ public class GameController : Controller<GameApp>
         //app.analytics.TrackPlay(LevelResult.Failure, map.model.levelInGame);
     }
 
+
 	public void ChangeScene(string nameScene, [CanBeNull] Action callback)
 	{
 		var load = SceneManager.LoadSceneAsync(nameScene, LoadSceneMode.Single);
@@ -103,6 +108,28 @@ public class GameController : Controller<GameApp>
             if (_healthBar != null) Destroy(_healthBar.gameObject);
             ShowMainHome();
         };
+    }
+
+    public Monster FindNearestMonster(Vector3 bulletPosition, float range, Monster origin = null)
+    {
+	    if(listMonster.Count == 0) return null;
+	
+	    Monster nearestMonster = null;
+	    float minDistance = float.MaxValue;
+
+	    foreach(Monster monster in listMonster)
+	    {
+		    if(monster == origin) continue;
+
+		    float distance = Vector3.Distance(bulletPosition, monster.transform.position);
+
+		    if(distance <= range && distance < minDistance)
+		    {
+			    nearestMonster = monster;
+			    minDistance = distance;
+		    }
+	    }
+	    return nearestMonster;
     }
 
     public void AddReward(Dictionary<TypeItemReward, int> listReward, TypeItemReward type, int value)
@@ -148,15 +175,17 @@ public class GameController : Controller<GameApp>
     {
         var statMonster = app.configs.dataStatMonster.GetConfig(wave.idMonster);
 
+
         var monsterStat = new MonsterStat(statMonster.moveSpeed, wave.healthMonster, wave.adMonster, statMonster.attackSpeed, statMonster.attackRange, wave.expMonster);
 
         var type = (ItemPrefab)Enum.Parse(typeof(ItemPrefab), statMonster.monsterType);
 
         Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
 
-        //var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
+		//var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
+		monster.Init(monsterStat, wave, type);
 
-        monster.Init(monsterStat, wave, type);
+
         monster.ResetAttackCountdown();
         monster.isDead = false;
         monster.animator.SetBool("Dead", false);
@@ -236,24 +265,23 @@ public class GameController : Controller<GameApp>
     }
 
 
-	public Monster FindNearestMonster(Vector3 bulletPosition, float range, Monster origin = null)
-	{
-		if(listMonster.Count == 0) return null;
-		
-		Monster nearestMonster = null;
-		float minDistance = float.MaxValue;
-
-		foreach(Monster monster in listMonster)
-		{
-			if(monster == origin) continue;
-            float distance = Vector3.Distance(origin.transform.position, monster.transform.position);
-            if (distance <= range && distance < minDistance && distance < 30f)
-            {
-                nearestMonster = monster;
-                minDistance = distance;
-            }
+    public List<Monster> GetAllMonsterInSence()
+    {
+        var characterPos = character.transform.position;
+        Rect myRect = new Rect(characterPos.x - _width / 2, characterPos.y - _height / 2, _width, _height);
+        var listMonsterInRect = new List<Monster>();
+        foreach (var mons in listMonster)
+        {
+            //if (CheckTouchCharacter(mons.transform.position, character.model.attackRange))
+            //{
+            //    listMonsterInRect.Add(mons);
+            //}
+             if(myRect.Contains(mons.transform.position))
+             {
+             	listMonsterInRect.Add(mons);
+             }
         }
-        return nearestMonster;
+        return listMonsterInRect.Count != 0 ? listMonsterInRect : null;
     }
 
     public void CharacterDie(Character characterView)
@@ -404,8 +432,6 @@ public class GameController : Controller<GameApp>
         return characterPrefab;
     }
 
-
-
 	public (string, int, StatId) GetDataStat(string text, ItemRank rank)
 	{
 		int number = 0;
@@ -439,7 +465,6 @@ public class GameController : Controller<GameApp>
 			_ => ""
 		};
 	}
-
 	private void LoadMap(int chapter, int level)
 	{
 		_camSize = Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0));
@@ -455,5 +480,4 @@ public class GameController : Controller<GameApp>
 		app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
 		//app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
 	}
-
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using _App.Datas.DataScript;
 using _App.Scripts.Controllers;
 using _App.Scripts.Views.InGame.Skills;
 using _App.Scripts.Views.InGame.Skills.SkillMono;

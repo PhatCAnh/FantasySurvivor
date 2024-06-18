@@ -123,6 +123,8 @@ public enum SkillName
     EarthShield,
     LightningWeb,
     TimeBoom,
+    Swamp,
+    BlackDrum,
 }
 
 public enum SkillType

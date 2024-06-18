@@ -1,5 +1,3 @@
-
-
 using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.MVC;

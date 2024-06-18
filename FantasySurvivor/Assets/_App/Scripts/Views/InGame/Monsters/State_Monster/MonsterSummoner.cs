@@ -52,12 +52,12 @@ public class MonsterSummoner : Monster
         animator.SetBool("Attack", true);
         for (int i = 0; i < numMonster; i++)
         {
-            var mob = gameController.SpawnMonster("Wolf", 5, stat.attackDamage.BaseValue);
-
-            Vector2 randomPosition = new Vector2(firePoint.position.x + Random.Range(-range, range),
-                                                 firePoint.position.y + Random.Range(-range, range));
-
-            mob.transform.position = randomPosition;
+            // var mob = gameController.SpawnMonster("Wolf", 5, stat.attackDamage.BaseValue);
+            //
+            // Vector2 randomPosition = new Vector2(firePoint.position.x + Random.Range(-range, range),
+            //                                      firePoint.position.y + Random.Range(-range, range));
+            //
+            // mob.transform.position = randomPosition;
         }
     }
 

@@ -31,6 +31,7 @@ public class ItemSlotUI : View<GameApp>
         }
         btn.onClick.AddListener(OnClickBtn);
     }
+
     
     public virtual void Init(ItemInBag data)
     {
@@ -59,6 +60,7 @@ public class ItemSlotUI : View<GameApp>
     public virtual void Action(int value)
     {
         parent.EquipItem(itemData.dataConfig.type, itemInBag, value);
+
         Destroy(gameObject);
     }
 
