@@ -1,6 +1,7 @@
 ﻿using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.StateMachine;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEditor.Timeline;
 using UnityEngine;
@@ -29,6 +30,8 @@ namespace FantasySurvivor
         private bool isState1 = false;
         private bool isState2 = false;
         private bool isState3 = false;
+
+        private bool isStateAttack = false;
 
         protected override void OnViewInit()
         {
@@ -60,20 +63,43 @@ namespace FantasySurvivor
             {
                 if (cdAttack.isFinished)
                 {
-                    if (attackCounter <= 5)
+                    if (attackCounter < 5)
                     {
-                        SecondAttack();
-                        attackCounter++;
-                        cdAttack.Restart(1 / model.attackSpeed);
+                        if (!isState2)
+                        {
+                            isState1 = true;
+                            SecondAttack();
+                            MoveState();
+                            attackCounter++;
+                            cdAttack.Restart(1 / model.attackSpeed);
+                        }
+                    }
+                    else
+                    {
+                        attackCounter = 0;
+                        isState2 = true;
+                        cdAttack.Restart(3 / model.attackSpeed);
+                        IdleState();
                     }
 
-
-                    /* if (attackCounter > 3)
-                     {
-                         AttackState();
-                         attackCounter = 0;
-                         cdAttack.Restart(1 / model.attackSpeed);
-                     }*/
+                    if (isState2 && cdAttack.isFinished)
+                    {
+                       
+                        if (attackCounter < 3)
+                        {
+                            isState2 = true;
+                            AttackState();
+                            attackCounter++;
+                            cdAttack.Restart(1 / model.attackSpeed);
+                        }
+                        else
+                        {
+                            isState2 = false;
+                            attackCounter = 0;
+                            cdAttack.Restart(1 / model.attackSpeed);
+                            return;
+                        }
+                    }
                 }
             }
             else
@@ -149,8 +175,8 @@ namespace FantasySurvivor
         private void SecondAttack()
         {
             animator.SetBool("Attack", true);
-            int bulletCount = 10; // Số lượng đạn trong vòng tròn
-            float radius = 1.5f; // Bán kính của vòng tròn đạn
+            int bulletCount = 10;
+            float radius = 1.5f;
 
             for (int i = 0; i < bulletCount; i++)
             {
@@ -178,6 +204,7 @@ namespace FantasySurvivor
                 bullet2.Init(this);
             }
 
+            //logic bullet new
             /*animator.SetBool("Attack", true);
             int bulletCount = 8;
             float radius = 1.5f; 
@@ -186,10 +213,9 @@ namespace FantasySurvivor
 
            for (int i = 0; i < bulletCount; i++)
             {
-                // Tính toán góc hiện tại cho viên đạn
+                
                 float angle = baseAngle + i * 360f / bulletCount;
 
-                // Tính toán vị trí của viên đạn dựa trên góc và bán kính
                 float bulDirX = Mathf.Cos(angle * Mathf.Deg2Rad);
                 float bulDirY = Mathf.Sin(angle * Mathf.Deg2Rad);
 
@@ -197,14 +223,12 @@ namespace FantasySurvivor
 
                 var bulletObject = Singleton<PoolController>.instance.GetObject(typeBullet, firePoint.position);
 
-                // Kiểm tra và cài đặt vị trí và hướng cho viên đạn
                 if (bulletObject.TryGetComponent(out BulletBossGatlingCrab bullet))
                 {
                     bullet.transform.position = bulletPosition;
                     bullet.transform.rotation = Quaternion.Euler(0, 0, angle);
                     bullet.Init(this);
 
-                    // Đặt hướng di chuyển cho viên đạn dựa trên góc
                     Vector2 bulMoveDirection = new Vector2(bulDirX, bulDirY).normalized;
                     bullet.SetDirection(bulMoveDirection);
                 }
