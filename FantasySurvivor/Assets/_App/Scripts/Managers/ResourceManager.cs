@@ -72,9 +72,6 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	[SerializeField] private GameObject _skillTimeBoom;
 
-
-
-
     private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
 

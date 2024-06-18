@@ -51,6 +51,7 @@ public class MapView : View<GameApp>
 		model = new();
 		//fix it
 		StartLevel(chapter, level);
+
 	}
 
 	
