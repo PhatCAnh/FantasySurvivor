@@ -1,37 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using UnityEngine;
 using UnityEngine.Serialization;
 public class ItemController : Controller<GameApp>
 {
-	[SerializeField] private ItemEquipDataTable _equipDataTable;
+	[SerializeField] private ItemDataTable _itemDataUITable;
 
 	[SerializeField] private Sprite _spriteNormal, _spriteRare, _spriteEpic, _spriteUnique, _spriteLegendary;
-	
-	private Dictionary<RankItemEquip, Sprite> _dicRankItemEquip;
 
-	private List<ItemEquipData> listItemEquipped;
+	private Dictionary<ItemRank, Sprite> _dicRankItemEquip;
+
 
 	private void Awake()
 	{
 		Singleton<ItemController>.Set(this);
-		_dicRankItemEquip = new Dictionary<RankItemEquip, Sprite>
+		_dicRankItemEquip = new Dictionary<ItemRank, Sprite>
 		{
-			{RankItemEquip.Normal, _spriteNormal},
-			{RankItemEquip.Rare, _spriteRare},
-			{RankItemEquip.Epic, _spriteEpic},
-			{RankItemEquip.Unique, _spriteUnique},
-			{RankItemEquip.Legendary, _spriteLegendary},
+			{ItemRank.Normal, _spriteNormal},
+			{ItemRank.Rare, _spriteRare},
+			{ItemRank.Epic, _spriteEpic},
+			{ItemRank.Unique, _spriteUnique},
+			{ItemRank.Legendary, _spriteLegendary},
 		};
-
-		listItemEquipped = new List<ItemEquipData>();
-	}
-
-	private void Start()
-	{
-		
 	}
 
 	protected override void OnDestroy()
@@ -40,37 +33,52 @@ public class ItemController : Controller<GameApp>
 		Singleton<ItemController>.Unset(this);
 	}
 
-	public ItemEquipData GetDataItemEquip(ItemEquipId id)
+	public Sprite GetSpriteRank(ItemRank rank)
 	{
-		var dataUI = _equipDataTable.listItemEquipData.Find(item => item.id == id);
-		var dataStat = new ItemEquipStat(app.configs.dataItemEquip.GetConfig(id), app.models.dataPlayerModel.GetNumberItemEquipCreated());
-		return new ItemEquipData(dataUI, dataStat, _dicRankItemEquip[dataUI.rank]);
+		return _dicRankItemEquip[rank];
 	}
 
-	public void EquipItem(ItemEquipData data)
+	public ItemData GetDataItem(ItemId id, ItemRank rank, int level)
 	{
-		listItemEquipped.Add(data);
-		var stat = data.dataStat.dataStatConfig;
-		var model = app.models.characterModel;
-		model.maxHealthPoint += stat.hp;
-		model.moveSpeed += stat.moveSpeed;
-		model.attackDamage += stat.damage;
-		model.itemAttractionRange += stat.attackRange;
-		model.armor += stat.armor;
-		model.attackRange += stat.attackRange;
+		var dataUI = _itemDataUITable.listItemEquipData.FirstOrDefault(item => item.id == id);
+		var data = app.configs.dataItem.GetConfig(id);
+		return new ItemData(dataUI, data, rank);
 	}
 
-	public void UnEquipItem(ItemEquipData data)
+	public void EquipItem(ItemInBag data, int value)
 	{
-		if(!listItemEquipped.Contains(data)) return;
-		listItemEquipped.Remove(data);
-		var stat = data.dataStat.dataStatConfig;
+		app.models.dataPlayerModel.EquipItem(data);
+		var itemData = GetDataItem(data.id, data.rank, data.level);
 		var model = app.models.characterModel;
-		model.maxHealthPoint -= stat.hp;
-		model.moveSpeed -= stat.moveSpeed;
-		model.attackDamage -= stat.damage;
-		model.itemAttractionRange -= stat.attackRange;
-		model.armor -= stat.armor;
-        model.attackRange -= stat.attackRange;
-    }
+		switch (itemData.dataConfig.type)
+		{
+			case ItemType.Weapon:
+			case ItemType.Gloves:
+			case ItemType.Ring:
+				model.attackDamage += value; //cong them chi so cua level nua
+				break;
+			case ItemType.Armor:
+			case ItemType.Shoes:
+			case ItemType.Hat:
+				model.maxHealthPoint += value;
+				break;
+		}
+	}
+	public void UnEquipItem(ItemInBag data, int value)
+	{
+		app.models.dataPlayerModel.UnEquipItem(data);
+		var itemData = GetDataItem(data.id, data.rank, data.level);
+		var model = app.models.characterModel;
+		switch (itemData.dataConfig.type)
+		{
+			case ItemType.Weapon:
+			case ItemType.Gloves:
+				model.attackDamage -= value; //cong them chi so cua level nua
+				break;
+			case ItemType.Armor:
+			case ItemType.Shoes:
+				model.maxHealthPoint -= value;
+				break;
+		}
+	}
 }

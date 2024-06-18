@@ -29,8 +29,6 @@ public class GameController : Controller<GameApp>
 
     public int numberLimitChoiceSkill = 4;// limit skill out game
     private HealthBar _healthBar;
-    private int _limitSkill = 2;// limit skill in game
-    private int currentSkill = 0;// điếm số skill in game
     public int currentNumberSkill = 0;// điếm số skill outr game
     private Vector3 _camSize;
 	private float _width;
@@ -51,12 +49,7 @@ public class GameController : Controller<GameApp>
 	private void Start()
 	{
 		listMonster = new List<Monster>();
-
-		foreach(var skill in app.resourceManager.GetListSkill())
-		{
-			skill.Init(app.configs.dataLevelSkill.GetConfig(skill.name).data);
-		}
-
+		
 		var data = app.resourceManager.GetDicDropItem();
 		float value = 0;
 		foreach(var item in data)
@@ -102,15 +95,7 @@ public class GameController : Controller<GameApp>
 			callback?.Invoke();
 		};
 	}
-	// check exit skill in game 
-	public void CheckExistSkill()
-	{
-		currentSkill++;
-		if(currentSkill == _limitSkill)
-		{
-			map.listSkill = character.listSkillDataCurrents;
-		}
-	}
+	
 
 	public void ChangeSceneHome()
 	{
@@ -256,10 +241,10 @@ public class GameController : Controller<GameApp>
 
 	public Monster FindNearestMonster(Vector3 bulletPosition, float range, Monster origin = null)
 	{
+		if(listMonster.Count == 0) return null;
+		
 		Monster nearestMonster = null;
 		float minDistance = float.MaxValue;
-
-		if(listMonster == null) return null;
 
 		foreach(Monster monster in listMonster)
 		{
@@ -368,6 +353,40 @@ public class GameController : Controller<GameApp>
 		// }
 		// return new Vector2(posX, posY);
 	}
+
+	public (string, int, StatId) GetDataStat(string text, ItemRank rank)
+	{
+		int number = 0;
+		string nameReturn = "";
+		var type = (StatId) Enum.Parse(typeof(StatId), text);
+		var statRank = app.configs.dataStatRankItemEquip.GetConfig(rank);
+		switch (type)
+		{
+			case StatId.Atk:
+				nameReturn = "AttackDamage";
+				number = statRank.atk;
+				break;
+			case StatId.Health:
+				nameReturn = "HealthPoint";
+				number = statRank.health;
+				break;
+		}
+		return (nameReturn, number, type);
+	}
+
+	public string GetTypeStatItemEquip(ItemType type)
+	{
+		return type switch
+		{
+			ItemType.Weapon => "Atk",
+			ItemType.Armor => "Health",
+			ItemType.Shoes => "Health",
+			ItemType.Gloves => "Atk",
+			ItemType.Hat => "Health",
+			ItemType.Ring => "Atk",
+			_ => ""
+		};
+	}
 	
 	public bool CheckTouchCharacter(Vector3 trans, float number)
 	{
@@ -392,8 +411,8 @@ public class GameController : Controller<GameApp>
 			.GetComponent<HealthBar>();
 		_healthBar.Init(characterPrefab);
 
-		List<ItemEquipInBag> listItem = app.models.dataPlayerModel.BagItemEquip.Where(item => item.isEquip).ToList();
-
+		//List<ItemInBag> listItem = app.models.dataPlayerModel.BagItem.Where(item => item.isEquip).ToList();
+		//fix it
 		var dataChar = app.configs.dataCharacter.GetConfig(CharacterId.Char1);
 
 		var model = new CharacterModel(
@@ -402,21 +421,22 @@ public class GameController : Controller<GameApp>
 			dataChar.damage,
 			dataChar.itemAttractionRange,
 			dataChar.attackRange,
-			dataChar.armor
+			dataChar.armor,
+			dataChar.regen
 			);
 
-		foreach(var item in listItem)
-		{
-			var itemData = item.itemEquipStat.dataStatConfig;
-			model.AddStatFormItemEquip(
-				itemData.hp,
-				itemData.moveSpeed,
-				itemData.damage,
-				itemData.itemAttractionRange,
-				itemData.attackRange,
-				itemData.armor
-				);
-		}
+		// foreach(var item in listItem)
+		// {
+		// 	var itemData = item.itemEquipStat.dataStatConfig;
+		// 	model.AddStatFormItemEquip(
+		// 		itemData.hp,
+		// 		itemData.moveSpeed,
+		// 		itemData.damage,
+		// 		itemData.itemAttractionRange,
+		// 		itemData.attackRange,
+		// 		itemData.armor
+		// 		);
+		// }
 
 		var stat = new CharacterStat(
 			model.maxHealthPoint,

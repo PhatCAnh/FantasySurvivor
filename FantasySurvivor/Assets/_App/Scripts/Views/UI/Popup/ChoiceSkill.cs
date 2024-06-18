@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
@@ -8,24 +9,20 @@ using UnityEngine.UI;
 
 public class ChoiceSkill : View<GameApp>, IPopup
 {
-	public int skillNumber = 3;
-
-	// private const int maxUniqueSkills = 4;
-
 	[SerializeField] private GameObject _slotSkillContainer;
 
 	[SerializeField] private SkillUI _slotSKill;
 	public ToggleGroup group;
 
 	private SkillUI[] _listSkillUI;
-	private List<SkillData> selectedSkills = new List<SkillData>();
 	public GameController gameController => Singleton<GameController>.instance;
+	public SkillController skillController => Singleton<SkillController>.instance;
 
 
 	protected override void OnViewInit()
 	{
 		base.OnViewInit();
-		var skillData = gameController.map.GetRandomSkill();
+		var skillData = skillController.GetRandomSkill();
 		_listSkillUI = new SkillUI[skillData.Count];
 		for (int i = 0; i < skillData.Count; i++)
 		{

@@ -1,22 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ArbanFramework.Config;
 using UnityEngine;
 namespace FantasySurvivor
 {
     public class DataLevelSkillConfig : IConfigItem
     {
-        public string skillName { get; private set; }
+        public string Id { get; private set; }
         public Dictionary<int, LevelSkillData> data { get; private set; }
         public string GetId()
         {
-            return skillName;
+            return Id;
         }
 
         public void OnReadImpl(IConfigReader reader)
         {
             data = new Dictionary<int, LevelSkillData>();
 
-            skillName = reader.ReadString();
+            Id = reader.ReadString();
 
             var levelArr = reader.ReadIntArr();
             var valueArr = reader.ReadFloatArr();
@@ -37,7 +38,7 @@ namespace FantasySurvivor
     {
         public override string FileName => nameof(DataLevelSkillConfig);
 
-        public DataLevelSkillConfig GetConfig(SkillName skillName)
+        public DataLevelSkillConfig GetConfig(SkillId skillName)
         {
             return GetConfig(skillName.ToString());
         }

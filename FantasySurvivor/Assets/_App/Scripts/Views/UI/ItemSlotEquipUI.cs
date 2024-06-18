@@ -11,7 +11,7 @@ public class ItemSlotEquipUI : ItemSlotUI
     [SerializeField] private Sprite _baseRank;
     public bool isEquip;
     
-    public override void Init(ItemEquipData dataUI)
+    public override void Init(ItemInBag dataUI)
     {
         base.Init(dataUI);
         isEquip = true;
@@ -21,14 +21,25 @@ public class ItemSlotEquipUI : ItemSlotUI
     
     protected override void OnClickBtn()
     {
+        if(isShow) return;
+        isShow = true;
+        app.resourceManager.ShowPopup(PopupType.ItemEquipDetail).TryGetComponent(out PopupItemEquipDetail popup);
+        popup.Init(this, itemInBag, itemData, image, imageRank, isEquip);
+        
+    }
+
+    public override void Action(int value)
+    {
         if(!isEquip) return;
-        parent.UnEquipItem(data.dataUi.type, data);
+        isShow = false;
+        parent.UnEquipItem(itemData.dataConfig.type, itemInBag, value);
     }
 
     public void ResetData()
     {
         if(!isEquip) return;
-        data = null;
+        itemInBag = null;
+        itemData = null;
         _imgEquip.SetActive(false);
         _imgUnEquip.SetActive(true);
         imageRank.sprite = _baseRank;

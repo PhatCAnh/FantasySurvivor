@@ -5,8 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ArbanFramework;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -23,9 +23,13 @@ public class CharacterInformation : View<GameApp>, IPopup
 
 	[SerializeField] private Button _btnBack;
 
-	private Dictionary<ItemEquipType, ItemSlotEquipUI> _dicItemEquip;
+	private Dictionary<ItemType, ItemSlotEquipUI> _dicItemEquip;
 
 	private ItemController itemController => ArbanFramework.Singleton<ItemController>.instance;
+
+	private List<GameObject> _listItemSlot = new List<GameObject>();
+
+	private int _numberValue;
 
 	protected override void Start()
 	{
@@ -48,54 +52,81 @@ public class CharacterInformation : View<GameApp>, IPopup
 		_slotShoes.Init(null, this);
 		_slotGloves.Init(null, this);
 
-		_dicItemEquip = new Dictionary<ItemEquipType, ItemSlotEquipUI>
+		_dicItemEquip = new Dictionary<ItemType, ItemSlotEquipUI>
 		{
-			{ItemEquipType.Weapon, _slotWeapon},
-			{ItemEquipType.Armor, _slotArmor},
-			{ItemEquipType.Hat, _slotHat},
-			{ItemEquipType.Ring, _slotRing},
-			{ItemEquipType.Shoes, _slotShoes},
-			{ItemEquipType.Gloves, _slotGloves},
+			{ItemType.Weapon, _slotWeapon},
+			{ItemType.Armor, _slotArmor},
+			{ItemType.Hat, _slotHat},
+			{ItemType.Ring, _slotRing},
+			{ItemType.Shoes, _slotShoes},
+			{ItemType.Gloves, _slotGloves},
 		};
 		
 		_btnBack.onClick.AddListener(Close);
-		
-		//app.models.dataPlayerModel.AddItemEquipToBag(itemController.GetDataItemEquip(ItemEquipId.Item1).dataStat);
 
-		foreach(var item in app.models.dataPlayerModel.BagItemEquip)
+		//app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Axe, ItemRank.Legendary, 2);
+
+		foreach(var item in app.models.dataPlayerModel.BagItem)
 		{
-			if(item.isEquip)
-			{
-				var id = itemController.GetDataItemEquip((ItemEquipId) Enum.Parse(typeof(ItemEquipId), item.itemEquipStat.id));
-				var data = new ItemEquipData(id.dataUi,  item.itemEquipStat, id.spriteRank);
-				EquipItem(data.dataUi.type, id);
-			}
-			else
-			{
-				Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item1);
-				var id = itemController.GetDataItemEquip((ItemEquipId) Enum.Parse(typeof(ItemEquipId), item.itemEquipStat.id));
-				var data = new ItemEquipData(id.dataUi,  item.itemEquipStat, id.spriteRank);
-				item1.Init(data, this);
-			}
+			var go = Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer);
+			go.TryGetComponent(out ItemSlotUI item1);
+			item1.Init(item, this);
+			_listItemSlot.Add(go);
+		}
+
+		foreach(var item in app.models.dataPlayerModel.ListItemEquipped)
+		{
+			var dataItem = itemController.GetDataItem(item.id, item.rank, item.level);
+			var nameStat = Singleton<GameController>.instance.GetTypeStatItemEquip(dataItem.dataConfig.type);
+			var data = Singleton<GameController>.instance.GetDataStat(nameStat, item.rank);
+			_numberValue = dataItem.dataConfig.baseValue + data.Item2 * (item.level - 1);
+			itemController.EquipItem(item, _numberValue);
+			
+			// var data = itemController.GetDataItem(item.id, item.rank, item.level);
+			// var slot = _dicItemEquip[data.dataConfig.type];
+			// if(slot.isEquip) UnEquipItem(data.dataConfig.type, item);
+			// slot.Init(item);
 		}
 	}
 
-	public void EquipItem(ItemEquipType type, ItemEquipData data)
+	[ContextMenu("Test item piece")]
+	public void Test()
 	{
-		var slot = _dicItemEquip[type];
-		if(slot.isEquip) UnEquipItem(type, slot.data);
-		slot.Init(data);
-		itemController.EquipItem(data);
-		app.models.dataPlayerModel.EquipItemInToBag(data.dataStat, true);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.PieceFire, 2);
+	}
+	
+	[ContextMenu("Test item Equip")]
+	public void TestEquip()
+	{
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Axe, ItemRank.Normal, 1);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Armor, ItemRank.Rare, 2);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Shoes, ItemRank.Epic, 3); 
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Gloves, ItemRank.Unique, 4);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Hat, ItemRank.Legendary, 5);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Ring, ItemRank.Epic, 6);
+		
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Axe1, ItemRank.Normal, 1);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Armor1, ItemRank.Rare, 2);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Shoes1, ItemRank.Epic, 3);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Gloves1, ItemRank.Unique, 4);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Hat1, ItemRank.Legendary, 5);
+		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Ring1, ItemRank.Epic, 6);
 	}
 
-	public void UnEquipItem(ItemEquipType type, ItemEquipData data)
+	public void EquipItem(ItemType type, ItemInBag data, int value)
+	{
+		var slot = _dicItemEquip[type];
+		if(slot.isEquip) UnEquipItem(type, data, value);
+		slot.Init(data);
+		itemController.EquipItem(data, value);
+	}
+
+	public void UnEquipItem(ItemType type, ItemInBag data, int value)
 	{
 		_dicItemEquip[type].ResetData();
-		itemController.UnEquipItem(data);
+		itemController.UnEquipItem(data, value);
 		Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
 		item.Init(data, this);
-		app.models.dataPlayerModel.EquipItemInToBag(data.dataStat, false);
 	}
 
 	private void InitDispatcher()
@@ -120,19 +151,31 @@ public class CharacterInformation : View<GameApp>, IPopup
 
 		AddDataBinding("fieldCharacterModel-armorValue", _txtArmor, (control, e) =>
 		{
-			float armorPercent = (float) app.models.characterModel.armor / 100f;
+			float armorPercent = app.models.characterModel.armor / 100f;
 			control.text = $"{armorPercent * 100f}%";
 		}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.armor), app.models.characterModel));
 		
 		AddDataBinding("fieldDataPlayerModel-BagItemEquipValue", this, (control, e) =>
 			{
-                var dataStat = app.models.dataPlayerModel.GetFirstItemEquipAdded();
-				if (dataStat == null) return;
-                Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
-				var id =itemController.GetDataItemEquip((ItemEquipId) Enum.Parse(typeof(ItemEquipId), dataStat.itemEquipStat.id));
-				var data = new ItemEquipData(id.dataUi, dataStat.itemEquipStat, id.spriteRank);
-				item.Init(data, this);
-			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.BagItemEquip), app.models.dataPlayerModel)
+				foreach(var itemSlot in _listItemSlot.ToList())
+				{
+					Destroy(itemSlot);
+				}
+				_listItemSlot.Clear();
+				
+				foreach(var itemSlot in app.models.dataPlayerModel.BagItem)
+				{
+					var go = Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer);
+					go.TryGetComponent(out ItemSlotUI item1);
+					item1.Init(itemSlot, this);
+					_listItemSlot.Add(go);
+				}
+				
+    //             var dataStat = app.models.dataPlayerModel.GetFirstItemEquipAdded();
+				// if (dataStat == null) return;
+    //             Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
+    //             item.Init(dataStat, this);
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.BagItem), app.models.dataPlayerModel)
 		);
 	}
 	public void Open()

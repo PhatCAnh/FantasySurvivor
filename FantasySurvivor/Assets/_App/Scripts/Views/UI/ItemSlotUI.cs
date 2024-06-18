@@ -1,30 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using ArbanFramework;
 using ArbanFramework.MVC;
+using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ItemSlotUI : View<GameApp>
 {
-    public ItemEquipData data;
+    public ItemInBag itemInBag;
+    public ItemData itemData;
     [SerializeField] protected Image image;
     [SerializeField] protected Image imageRank;
     [SerializeField] protected Button btn;
+    [SerializeField] private TextMeshProUGUI txtNumber;
 
     protected CharacterInformation parent;
+
+    public bool isShow = false;
     
-    public void Init(ItemEquipData data, CharacterInformation ui)
+    public void Init(ItemInBag data, CharacterInformation ui)
     {
         parent = ui;
         if(data != null)
         {
             InitData(data);
+            
         }
         btn.onClick.AddListener(OnClickBtn);
     }
     
-    public virtual void Init(ItemEquipData data)
+    public virtual void Init(ItemInBag data)
     {
         InitData(data);
         btn.onClick.AddListener(OnClickBtn);
@@ -32,14 +40,46 @@ public class ItemSlotUI : View<GameApp>
 
     protected virtual void OnClickBtn()
     {
-        parent.EquipItem(data.dataUi.type, data);
+        if(isShow) return;
+        isShow = true;
+        var type = itemData.dataConfig.type;
+        if(type == 0)
+        {
+            app.resourceManager.ShowPopup(PopupType.ItemPieceDetail).TryGetComponent(out PopupItemPieceDetail popup);
+            popup.Init(this, itemInBag, itemData, image, imageRank);
+        }
+        else
+        {
+            app.resourceManager.ShowPopup(PopupType.ItemEquipDetail).TryGetComponent(out PopupItemEquipDetail popup);
+            popup.Init(this, itemInBag, itemData, image, imageRank);
+        }
+
+    }
+
+    public virtual void Action(int value)
+    {
+        parent.EquipItem(itemData.dataConfig.type, itemInBag, value);
         Destroy(gameObject);
     }
 
-    private void InitData(ItemEquipData data)
+    public void UpdateLevel(ItemInBag data)
     {
-        this.data = data;
-        image.sprite = this.data.dataUi.skin;
-        imageRank.sprite = data.spriteRank;
+        txtNumber.text = $"{data.level}/{app.configs.dataStatRankItemEquip.GetConfig(data.rank).levelLimit}";
+    }
+
+    private void InitData(ItemInBag data)
+    {
+        var itemController = Singleton<ItemController>.instance;
+        this.itemInBag = data;
+        this.itemData = itemController.GetDataItem(data.id, data.rank, data.level);
+        image.sprite = itemData.dataUi.skin;
+        imageRank.sprite = itemController.GetSpriteRank(data.rank);
+        if(data.quantity != 0)
+        {
+            txtNumber.text = $"{data.quantity}";
+        } else if(data.level != 0)
+        {
+            txtNumber.text = $"{data.level}/{app.configs.dataStatRankItemEquip.GetConfig(data.rank).levelLimit}";
+        }
     }
 }

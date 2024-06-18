@@ -48,7 +48,5 @@ namespace FantasySurvivor
 		{
 			_character = character;
 		}
-		
-		
 	}
 }

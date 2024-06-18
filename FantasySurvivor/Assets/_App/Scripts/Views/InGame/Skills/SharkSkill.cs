@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _App.Datas.DataScript;
 using _App.Scripts.Controllers;
 using ArbanFramework;
 using FantasySurvivor;
@@ -11,7 +12,7 @@ using Random = UnityEngine.Random;
 
 public class Skill
 {
-	public SkillName skillName;
+	public SkillId skillId;
 
 	public int level;
 
@@ -35,9 +36,11 @@ public class Skill
 
 	}
 
-	public virtual void Init(SkillData data)
+	public virtual void Init(SkillDataTotal dataTotal)
 	{
-		this.skillName = data.name;
+		var data = dataTotal.skillDataUI;
+		
+		this.skillId = data.id;
 
 		this.origin = gameController.character;
 
@@ -53,7 +56,7 @@ public class Skill
 
 		skillPrefab = normalSkillPrefab;
 
-		levelData = data.levelSkillData;
+		levelData = dataTotal.statSkillData.data;
 
     }
 
@@ -81,12 +84,6 @@ public class ProactiveSkill : Skill
 {
 	protected int numberProjectile = 1;
 	protected int timeDelaySkill = 1;
-
-	public override void Init(SkillData data)
-	{
-		base.Init(data);
-		AddCooldown();
-	}
 
 	public override async void Active()
 	{
@@ -117,11 +114,6 @@ public class ProactiveSkill : Skill
 			SpawnPos.Character => gameController.character.transform.position,
 			SpawnPos.Monster => mob.transform.position,
 		};
-	}
-
-	protected virtual void AddCooldown()
-	{
-		origin.listSkillCooldown.Add(this);
 	}
 
 	protected virtual void UpdatePrefab(SkillActive prefab)
