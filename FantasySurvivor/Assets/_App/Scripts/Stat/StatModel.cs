@@ -67,10 +67,11 @@ namespace FantasySurvivor
 		public StatFloat attackRange = new();
 		public StatFloat itemAttractionRange = new();
 		public StatInt armor = new();
-        public StatFloat shield = new();
+        public StatInt shield = new();
 
-        public CharacterStat(float health, float ms, float ad, float itemRange, float ar, int armor, float shield)
+        public CharacterStat(float health, float ms, float ad, float itemRange, float ar, int armor, int shield)
         {
+
 			this.moveSpeed.BaseValue = ms;
 			this.maxHealth.BaseValue = health;
 			this.attackRange.BaseValue = ar;

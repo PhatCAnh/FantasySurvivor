@@ -25,7 +25,7 @@ public class EarthShield : SkillBulletActive
 
     private void ShieldUp()
     {
-        app.models.characterModel.shield += (origin.model.maxHealthPoint/10f);
+        app.models.characterModel.shield += Mathf.RoundToInt(origin.model.maxHealthPoint/10f);
         Debug.Log(origin.model.shield);
     }
 }

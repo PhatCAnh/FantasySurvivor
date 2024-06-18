@@ -398,7 +398,7 @@ public class GameController : Controller<GameApp>
             model.attackRange,
             model.armor,
             model.shield
-            );
+        );
         characterPrefab.Init(stat, model);
 
         return characterPrefab;
@@ -439,8 +439,6 @@ public class GameController : Controller<GameApp>
 			_ => ""
 		};
 	}
-	
-	
 
 	private void LoadMap(int chapter, int level)
 	{

@@ -8,7 +8,7 @@ using UnityEngine.U2D;
 public class CharacterModel : Model<GameApp>
 {
 	public static EventTypeBase dataChangedEvent = new EventTypeBase(nameof(CharacterModel) + ".dataChanged");
-	public CharacterModel(float maxHp, float moveSpeed, float attackDamage, float itemAttractionRange, float attackRange, int armor, float regen, float shield) : base(dataChangedEvent)
+	public CharacterModel(float maxHp, float moveSpeed, float attackDamage, float itemAttractionRange, float attackRange, int armor, float regen, int shield) : base(dataChangedEvent)
 	{
 		this.currentHealthPoint = maxHp;
 		this.maxHealthPoint = maxHp;
@@ -42,8 +42,8 @@ public class CharacterModel : Model<GameApp>
 	
 	private float _regen;
 
-    private float _shield;
-    public float shield
+    private int _shield;
+    public int shield
     {
         get => _shield;
         set
@@ -55,13 +55,12 @@ public class CharacterModel : Model<GameApp>
     }
     public float moveSpeed
     {
-        get => _moveSpeed;
-        set
-        {
-            if (moveSpeed.Equals(value)) return;
-            _moveSpeed = value;
-            RaiseDataChanged(nameof(moveSpeed));
-        }
+	    get => _moveSpeed;
+	    set {
+		    if(moveSpeed.Equals(value)) return;
+		    _moveSpeed = value;
+		    RaiseDataChanged(nameof(moveSpeed));
+	    }
     }
 
     public float currentHealthPoint
