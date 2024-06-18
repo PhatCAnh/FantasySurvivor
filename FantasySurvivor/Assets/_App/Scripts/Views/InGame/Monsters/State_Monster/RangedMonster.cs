@@ -31,9 +31,9 @@ namespace FantasySurvivor
 
         public override void Attack()
 		{
-           
+            animator.SetBool("Attack", true);
             // Tạo một instance mới của viên đạn từ bulletPrefab
-           Singleton<PoolController>.instance.GetObject(typeBullet, firePoint.position).TryGetComponent(out BulletMonster bullet);
+            Singleton<PoolController>.instance.GetObject(typeBullet, firePoint.position).TryGetComponent(out BulletMonster bullet);
             bullet.transform.rotation = firePoint.rotation;
             // Khởi tạo viên đạn
             bullet.Init(this);

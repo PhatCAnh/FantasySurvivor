@@ -129,9 +129,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4098184249524812961}
-  - component: {fileID: 594830982208636487}
   - component: {fileID: 3894977788984732733}
   - component: {fileID: 2496867563197963964}
+  - component: {fileID: 4566264544168191557}
   m_Layer: 6
   m_Name: GoblinSwift
   m_TagString: Untagged
@@ -149,35 +149,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 412.1426, y: 902.5038, z: -1.3980849}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8274509701786795939}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &594830982208636487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756737215646588848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f999cc0f5ed74375b6f14d94d9638f2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 32
-  myRigid: {fileID: 3894977788984732733}
-  animator: {fileID: 1955296917695202191}
-  firePoint: {fileID: 952657077086114115}
-  justSpawnVertical: 0
-  isDead: 0
-  isNoMove: 0
-  size: 0.75
-  bulletPrefab: {fileID: 8094329372227174719, guid: f9b8f363c11665a49829e6ae66cec902, type: 3}
-  typeBullet: 31
-  _numberBack: 0
 --- !u!50 &3894977788984732733
 Rigidbody2D:
   serializedVersion: 4
@@ -237,9 +214,32 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08694458, y: 0.01739502}
-  m_Size: {x: 1.2303467, y: 1.75354}
+  m_Offset: {x: 0.06395467, y: 0.028462728}
+  m_Size: {x: 1.203064, y: 1.6851807}
   m_Direction: 0
+--- !u!114 &4566264544168191557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756737215646588848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7ca444e748a4e4f849f1b43aa6c04a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 32
+  myRigid: {fileID: 3894977788984732733}
+  animator: {fileID: 1955296917695202191}
+  firePoint: {fileID: 952657077086114115}
+  justSpawnVertical: 0
+  isDead: 0
+  isNoMove: 0
+  size: 1.2
+  bulletPrefab: {fileID: 8094329372227174719, guid: f9b8f363c11665a49829e6ae66cec902, type: 3}
+  typeBullet: 31
+  _numberBack: 0
 --- !u!1 &8847712063082246917
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,7 +265,7 @@ Transform:
   m_GameObject: {fileID: 8847712063082246917}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.57, y: 0.27, z: 0}
+  m_LocalPosition: {x: 0.62, y: 0.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

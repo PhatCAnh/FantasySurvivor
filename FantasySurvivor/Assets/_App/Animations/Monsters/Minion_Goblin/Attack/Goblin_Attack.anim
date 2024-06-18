@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GoblinSwift_Attack
+  m_Name: Goblin_Attack
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 53711451, guid: b82a49f079913a44188d5d8a67bef1b3, type: 3}
+      value: {fileID: 1257346096, guid: de6a02c2d9b703e4b8c1c201807b7cd3, type: 3}
     - time: 0.16666667
-      value: {fileID: 411720190, guid: b82a49f079913a44188d5d8a67bef1b3, type: 3}
-    - time: 0.5
-      value: {fileID: -2051937357, guid: b82a49f079913a44188d5d8a67bef1b3, type: 3}
+      value: {fileID: -1209266366, guid: de6a02c2d9b703e4b8c1c201807b7cd3, type: 3}
+    - time: 0.33333334
+      value: {fileID: -1375636770, guid: de6a02c2d9b703e4b8c1c201807b7cd3, type: 3}
     - time: 0.6666667
-      value: {fileID: 53711451, guid: b82a49f079913a44188d5d8a67bef1b3, type: 3}
+      value: {fileID: -774469273, guid: de6a02c2d9b703e4b8c1c201807b7cd3, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,10 +50,10 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 53711451, guid: b82a49f079913a44188d5d8a67bef1b3, type: 3}
-    - {fileID: 411720190, guid: b82a49f079913a44188d5d8a67bef1b3, type: 3}
-    - {fileID: -2051937357, guid: b82a49f079913a44188d5d8a67bef1b3, type: 3}
-    - {fileID: 53711451, guid: b82a49f079913a44188d5d8a67bef1b3, type: 3}
+    - {fileID: 1257346096, guid: de6a02c2d9b703e4b8c1c201807b7cd3, type: 3}
+    - {fileID: -1209266366, guid: de6a02c2d9b703e4b8c1c201807b7cd3, type: 3}
+    - {fileID: -1375636770, guid: de6a02c2d9b703e4b8c1c201807b7cd3, type: 3}
+    - {fileID: -774469273, guid: de6a02c2d9b703e4b8c1c201807b7cd3, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

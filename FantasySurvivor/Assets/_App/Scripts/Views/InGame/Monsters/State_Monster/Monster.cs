@@ -99,31 +99,31 @@ public class Monster : ObjectRPG
     public List<StatusEffect> listStatusEffect = new List<StatusEffect>();
 
     public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave, ItemPrefab monsType)
-	{
-		stat = monsterStat;
+    {
+	    stat = monsterStat;
 
-		var exp = 0;
+	    var exp = 0;
 
-		if(wave != null)
-		{
-			this.wave = wave;
-			exp = wave.expMonster;
-		}
+	    if(wave != null)
+	    {
+		    this.wave = wave;
+		    exp = wave.expMonster;
+	    }
 
-		model = new MonsterModel(
-			stat.moveSpeed.BaseValue,
-			stat.maxHealth.BaseValue,
-			stat.attackDamage.BaseValue,
-			stat.attackSpeed.BaseValue,
-			exp);
-		sizeAttack = stat.attackRange.BaseValue != 0 ? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
+	    model = new MonsterModel(
+		    stat.moveSpeed.BaseValue,
+		    stat.maxHealth.BaseValue,
+		    stat.attackDamage.BaseValue,
+		    stat.attackSpeed.BaseValue,
+		    exp);
+	    sizeAttack = stat.attackRange.BaseValue != 0 ? stat.attackRange.BaseValue : 0.1f + target.sizeBase + size;
 
-		InitializationStateMachine();
-		monsCollider = GetComponent<Collider2D>();
-		monsCollider.isTrigger = false;
-	}
+	    InitializationStateMachine();
+	    monsCollider = GetComponent<Collider2D>();
+	    monsCollider.isTrigger = false;
+    }
 
-	private void Update()
+    private void Update()
 	{
 		if(gameController.isStop) return;
 		var time = Time.deltaTime;
@@ -154,17 +154,15 @@ public class Monster : ObjectRPG
 
 		if(moveDirection.magnitude < sizeAttack)
 		{
-			if(cdAttack.isFinished)
+            if (cdAttack.isFinished)
 			{
-				animator.SetBool("Attack", true);
 				AttackState();
 				cdAttack.Restart(1 / model.attackSpeed);
-			}
+            }
 			else
 			{
-				IdleState();
-				animator.SetBool("Attack", false);
-			}
+                IdleState();
+            }
 		}
 		else if(moveDirection.magnitude > 25)
 		{
@@ -173,8 +171,8 @@ public class Monster : ObjectRPG
 		else
 		{
 			MoveState();
-			animator.SetBool("Attack", false);
-		}
+            animator.SetBool("Attack", false);
+        }
 		SetAnimation(idleDirection);
 	}
 
@@ -187,8 +185,9 @@ public class Monster : ObjectRPG
 	}
 	public virtual void Attack()
 	{
-		target.TakeDamage(model.attackDamage);
-	}
+        animator.SetBool("Attack", true);
+        target.TakeDamage(model.attackDamage);
+    }
 
 
 	public virtual void TakeDamage(float damage, TextPopupType type, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)

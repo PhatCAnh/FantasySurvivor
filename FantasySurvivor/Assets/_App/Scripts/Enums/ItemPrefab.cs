@@ -44,6 +44,7 @@ public enum ItemPrefab
     LightningWeb,
     ThunderChanneling,
     TimeBoom,
+	MinionGoblin,
 }
 
 public enum MapType

@@ -135,7 +135,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	[SerializeField] private GameObject _goblinSwift;
 
-	private Dictionary<string, GameObject> _typeMonsterDic;
+    [SerializeField] private GameObject _minionGoblin;
+
+    private Dictionary<string, GameObject> _typeMonsterDic;
 
 	[Header("Item reward prefabs")]
 	[SerializeField] private ItemReward _irCoin;
@@ -228,6 +230,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.LightningWeb, _skillLightningWeb},
 			{ItemPrefab.ThunderChanneling, _skillThunderChanneling},
 			{ItemPrefab.TimeBoom, _skillTimeBoom},
+			{ItemPrefab.MinionGoblin, _minionGoblin},
 		};
 
 		_mapDic = new Dictionary<MapType, Map>
@@ -249,7 +252,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 
             {"Skeleton", _minionSkeleton},
 			{"Wolf", _minionWolf},
-		};
+            {"Goblin", _minionGoblin},
+
+        };
 
 		_typeItemReward = new Dictionary<TypeItemReward, ItemReward>()
 		{

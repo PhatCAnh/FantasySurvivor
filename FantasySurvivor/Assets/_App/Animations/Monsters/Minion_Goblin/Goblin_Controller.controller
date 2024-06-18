@@ -128,7 +128,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0
+  m_ExitTime: 0.75
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -202,7 +202,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 378b4a9232c1035499416697bece284b, type: 2}
+  m_Motion: {fileID: 7400000, guid: c44f5229c2fb63f4e989bbeb3bbd5218, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -227,7 +227,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0
+  m_ExitTime: 0.75
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -256,7 +256,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 6942301b293cc88408ab63f1f77af9d2, type: 2}
+  m_Motion: {fileID: 7400000, guid: c12f12a35dd3f4445adaa1978c8de943, type: 2}
   m_Tag: 
   m_SpeedParameter: SpeedMul
   m_MirrorParameter: 
@@ -293,7 +293,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Goblinswift_Controller
+  m_Name: Goblin_Controller
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Speed
@@ -393,7 +393,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: f309003c0e81cf54db4f688b12c50e12, type: 2}
+  m_Motion: {fileID: 7400000, guid: 6b761b46431b49f47b0578ff499ad13f, type: 2}
   m_Tag: 
   m_SpeedParameter: SpeedMul
   m_MirrorParameter: 
@@ -422,7 +422,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e95c01893bdc34e4492f575c4c1bb727, type: 2}
+  m_Motion: {fileID: 7400000, guid: 77cf34bf6e696684f995a1a6a8f7ae02, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -526,7 +526,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
+  m_TransitionDuration: 0.269703
   m_TransitionOffset: 0
   m_ExitTime: 1
   m_HasExitTime: 1
