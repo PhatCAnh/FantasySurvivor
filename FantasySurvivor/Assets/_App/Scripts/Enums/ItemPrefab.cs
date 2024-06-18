@@ -106,6 +106,17 @@ public enum SkillName
     SmilingFace,
 	IceSpear,
 	Twin,
+
+
+    /* ThunderBird,*/
+   Swamp,
+   BlackDrum,
+
+    /*Twin,
+    ZoneOfJudgment,
+    BlackDrum,
+    Passive1,
+    */
 }
 
 public enum SkillType

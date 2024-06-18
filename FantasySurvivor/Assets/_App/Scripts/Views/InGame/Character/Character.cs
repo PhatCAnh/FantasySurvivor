@@ -200,9 +200,6 @@ public class Character : ObjectRPG
                         case SkillName.FireShield:
                             skillIns = new FireShieldControl();
                             break;
-                        case SkillName.Shark:
-                            skillIns = new SharkControl();
-                            break;
                         case SkillName.PoisonBullet:
                             skillIns = new PoisonballControl();
                             break;
@@ -223,6 +220,15 @@ public class Character : ObjectRPG
                             break;
                         case SkillName.Twin: 
                             skillIns = new TwinControl(); 
+                            break;
+                        case SkillName.Swamp:
+                            skillIns = new swamp();
+                            break;
+                        case SkillName.Shark:
+                            skillIns = new Shark();
+                            break;
+                        case SkillName.BlackDrum:
+                            skillIns = new BlackDrum();
                             break;
                         default:
                             skillIns = new ProactiveSkill();

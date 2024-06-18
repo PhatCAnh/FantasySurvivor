@@ -8,8 +8,10 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using FantasySurvivor;
 using JetBrains.Annotations;
+using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using UnityEngine.SceneManagement;
+using MonsterStat = FantasySurvivor.MonsterStat;
 
 public class GameController : Controller<GameApp>
 {
@@ -27,19 +29,15 @@ public class GameController : Controller<GameApp>
 
 	public Action<Monster> onMonsterDie;
 
-    public int numberLimitChoiceSkill = 4;// limit skill out game
-    private HealthBar _healthBar;
-    private int _limitSkill = 2;// limit skill in game
-    private int currentSkill = 0;// điếm số skill in game
-    public int currentNumberSkill = 0;// điếm số skill outr game
-    private Vector3 _camSize;
+	private HealthBar _healthBar;
+
+	private Vector3 _camSize;
 	private float _width;
 	private float _height;
 
 	private Vector3 charPos => character.transform.position;
-   public List<SkillData> _listSkill = new List<SkillData>();
 
-    private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
+	private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
 
 	private PoolController poolController => Singleton<PoolController>.instance;
 
@@ -75,12 +73,11 @@ public class GameController : Controller<GameApp>
 	public void ShowMainHome()
 	{
 		app.resourceManager.ShowPopup(PopupType.MainUI);
-		//app.resourceManager.ShowPopup(PopupType.ChoiceMap);
 	}
 
-	public void StartGame(int chapter, int level)
+	public void StartGame(int chapter)
 	{
-		ChangeScene(GameConst.nameScene_Game, () => LoadMap(chapter, level));
+		ChangeScene(GameConst.nameScene_Game, () => LoadMap(chapter));
 	}
 
 	public void WinGame()
@@ -91,6 +88,7 @@ public class GameController : Controller<GameApp>
 	public void LoseGame()
 	{
 		isEndGame = true;
+		Singleton<PoolController>.instance.RemoveAllObject(ItemPrefab.GemExp);
 		app.resourceManager.ShowPopup(PopupType.LoseGame);
 		//app.analytics.TrackPlay(LevelResult.Failure, map.model.levelInGame);
 	}
@@ -102,15 +100,6 @@ public class GameController : Controller<GameApp>
 		{
 			callback?.Invoke();
 		};
-	}
-	// check exit skill in game 
-	public void CheckExistSkill()
-	{
-		currentSkill++;
-		if(currentSkill == _limitSkill)
-		{
-			map.listSkill = character.listSkillDataCurrents;
-		}
 	}
 
 	public void ChangeSceneHome()
@@ -158,14 +147,16 @@ public class GameController : Controller<GameApp>
 		}
 	}
 
-
-	public void ResetPool()
+	[Button]
+	public void TestMethod()
 	{
-		Singleton<PoolController>.instance.RemoveAllPool();
+		character.AddHealth(0);
 	}
-    public Monster SpawnMonster(MapView.WaveData wave)
+
+
+	public Monster SpawnMonster(MapView.WaveData wave)
 	{
-        var statMonster = app.configs.dataStatMonster.GetConfig(wave.idMonster);
+		var statMonster = app.configs.dataStatMonster.GetConfig(wave.idMonster);
 
 		var monsterStat = new MonsterStat(statMonster.moveSpeed, wave.healthMonster, wave.adMonster, statMonster.attackSpeed, statMonster.attackRange, wave.expMonster);
 
@@ -173,34 +164,13 @@ public class GameController : Controller<GameApp>
 
 		Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
 
-        //var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
+		//var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
+		monster.Init(monsterStat, wave, type);
 
-        monster.Init(monsterStat, wave, type);
-		monster.ResetAttackCountdown();
-		monster.isDead = false;
-		monster.animator.SetBool("Dead", false);
-        listMonster.Add(monster);
+		listMonster.Add(monster);
 
-        return monster;
+		return monster;
 	}
-
-	public Monster SpawnMonster(string id, int health, int attackDamage)
-	{
-        var statMonster = app.configs.dataStatMonster.GetConfig(id);
-        var monsterStat = new MonsterStat(statMonster.moveSpeed, health, attackDamage, statMonster.attackSpeed, statMonster.attackRange);
-        var type = (ItemPrefab)Enum.Parse(typeof(ItemPrefab), statMonster.monsterType);
-        Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
-
-        monster.Init(monsterStat, null, type);
-
-		monster.ResetAttackCountdown();
-        monster.isDead = false;
-        monster.animator.SetBool("Dead", false);
-
-        listMonster.Add(monster);
-        return monster;
-	}	
-
 	public void MonsterDie(Monster mons, bool selfDie = false)
 	{
 		if(!selfDie)
@@ -211,25 +181,14 @@ public class GameController : Controller<GameApp>
 		}
 
 		listMonster.Remove(mons);
-		if(mons.wave != null)
-		{
-            mons.wave.monsterInWave.Remove(mons);
-        }
-
-        //Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
+		mons.wave.monsterInWave.Remove(mons);
+		Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
 		//Destroy(mons.gameObject);
 	}
-    public void MonsterDestroy(Monster mons)
+
+	public void KillAllMonster()
 	{
-        listMonster.Remove(mons);
-        //Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
-    }
-
-
-
-    public void KillAllMonster()
-	{
-		foreach(var mob in listMonster.ToList())
+		foreach(var mob in listMonster)
 		{
 			MonsterDie(mob, true);
 		}
@@ -251,37 +210,83 @@ public class GameController : Controller<GameApp>
 			// 	listMonsterInRect.Add(mons);
 			// }
 		}
-		return listMonsterInRect;
+		return listMonsterInRect.Count != 0 ? listMonsterInRect : null;
 	}
 
-
-	public Monster FindNearestMonster(Vector3 bulletPosition, float range, Monster origin = null)
+    public List<Monster> GetAllMonsterInSence()
+    {
+        var characterPos = character.transform.position;
+        Rect myRect = new Rect(characterPos.x - _width / 2, characterPos.y - _height / 2, _width, _height);
+        var listMonsterInRect = new List<Monster>();
+        foreach (var mons in listMonster)
+        {
+            //if (CheckTouchCharacter(mons.transform.position, character.model.attackRange))
+            //{
+            //    listMonsterInRect.Add(mons);
+            //}
+             if(myRect.Contains(mons.transform.position))
+             {
+             	listMonsterInRect.Add(mons);
+             }
+        }
+        return listMonsterInRect.Count != 0 ? listMonsterInRect : null;
+    }
+    public List<Monster> GetAllMonsterInRange(Vector2 trans, float range)
 	{
-		Monster nearestMonster = null;
-		float minDistance = float.MaxValue;
-
-		if(listMonster == null) return null;
-
-		foreach(Monster monster in listMonster)
+		var listMonsterInRange = new List<Monster>();
+		foreach(var mons in listMonster)
 		{
-			if(monster == origin) continue;
-
-			float distance = Vector3.Distance(bulletPosition, monster.transform.position);
-
-			if(distance <= range && distance < minDistance)
+			if(CheckTouch(mons.transform.position, trans, range))
 			{
-				nearestMonster = monster;
-				minDistance = distance;
+				listMonsterInRange.Add(mons);
 			}
+			// if(myRect.Contains(mons.transform.position))
+			// {
+			// 	listMonsterInRect.Add(mons);
+			// }
 		}
-		return nearestMonster;
+		return listMonsterInRange;
 	}
-
 
 	public void CharacterDie(Character characterView)
 	{
 		LoseGame();
 	}
+
+	public GameObject SpawnBullet(GameObject prefab)
+	{
+		var bullet = Instantiate(prefab);
+		return bullet;
+	}
+
+	// public (GameObject, Monster) UseSkill(SkillName name)
+	// {
+	// 	var mons = GetRandomMonster();
+	// 	if(mons != null)
+	// 	{
+	// 		var skill = Instantiate(
+	// 			app.resourceManager.GetSkill(name).skillPrefab,
+	// 			new Vector3(mons.transform.position.x, mons.transform.position.y),
+	// 			quaternion.identity
+	// 		);
+	// 		return (skill, mons);
+	// 	}
+	// 	return (null, null);
+	// }
+
+	// public void UseSkillHaveFlightRoute(SkillName name)
+	// {
+	// 	var mons = GetRandomMonster();
+	// 	if(mons != null)
+	// 	{
+	// 		var skill = Instantiate(
+	// 			app.resourceManager.GetSkill(name).skillPrefab,
+	// 			character.transform.position,
+	// 			quaternion.identity
+	// 		);
+	// 		skill.GetComponent<BulletView>().Init(mons, name);
+	// 	}
+	// }
 
 	// ReSharper disable Unity.PerformanceAnalysis
 	public void Collected(DropItem dropItem)
@@ -346,6 +351,7 @@ public class GameController : Controller<GameApp>
 		return DropItemType.Exp;
 	}
 
+
 	public Vector2 RandomPositionSpawnMonster(float radius, bool justVertical = false)
 	{
 		float angle = Random.Range(0, 2 * Mathf.PI);
@@ -369,7 +375,23 @@ public class GameController : Controller<GameApp>
 		// }
 		// return new Vector2(posX, posY);
 	}
-	
+
+	private Character SpawnCharacter()
+	{
+		var characterPrefab = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.Character))
+			.GetComponent<Character>();
+		characterPrefab.transform.position = Vector2.zero;
+
+		_healthBar = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.HealthBar), app.resourceManager.rootContainer)
+			.GetComponent<HealthBar>();
+		_healthBar.Init(characterPrefab);
+
+		var stat = new CharacterStat(2.5f, 100, 5, 20, 50);
+		characterPrefab.Init(stat);
+
+		return characterPrefab;
+	}
+
 	public bool CheckTouchCharacter(Vector3 trans, float number)
 	{
 		var x = trans.x - charPos.x;
@@ -382,25 +404,10 @@ public class GameController : Controller<GameApp>
 		var x = a.x - b.x;
 		var y = a.y - b.y;
 		return x * x + y * y <= number * number;
-	}
-	private Character SpawnCharacter()
-	{
-		var characterPrefab = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.Character))
-			.GetComponent<Character>();
-		characterPrefab.transform.position = Vector2.zero;
+    }
 
-		_healthBar = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.HealthBar), app.resourceManager.rootContainer)
-			.GetComponent<HealthBar>();
-		_healthBar.Init(characterPrefab);
-
-		var stat = new CharacterStat(100, 2.5f, 10, 1, 10, 50);
-		characterPrefab.Init(stat);
-
-		return characterPrefab;
-	}
-	
-
-	private void LoadMap(int chapter, int level)
+    
+    private void LoadMap(int chapter)
 	{
 		_camSize = Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0));
 		_width = 1 / (_camSize.x - 0.5f);
@@ -408,11 +415,12 @@ public class GameController : Controller<GameApp>
 		Instantiate(app.resourceManager.mapInfinity, Vector3.zero, quaternion.identity).Init(chapter);
 
 		map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
-		map.Init(chapter, level);
+		map.Init();
 		character = SpawnCharacter();
 		listMonster.Clear();
 		Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.SupportItem), Vector3.zero, quaternion.identity);
 		app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
 		//app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
 	}
+
 }

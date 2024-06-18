@@ -7,6 +7,7 @@ public class Effect : View<GameApp>
 {
     protected virtual void DoneEffect()
     {
+        
         Destroy(gameObject);
     }
 }
