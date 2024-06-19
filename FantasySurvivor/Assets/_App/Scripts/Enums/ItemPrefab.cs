@@ -168,6 +168,7 @@ public enum PopupType
 	ChoiceSkill,
 	ChoiceSkillOutGame,
 	CharacterInformation,
+	CharacterChoose,
 	ItemEquipDetail,
 	ItemPieceDetail,
 }
