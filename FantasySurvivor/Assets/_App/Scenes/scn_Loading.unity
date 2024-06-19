@@ -316,6 +316,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _gatlingCrab
+      value: 
+      objectReference: {fileID: 2142622185076917216, guid: 31761c973df113a4ea466589f23e155b, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _bulletBossGatlingCrab
+      value: 
+      objectReference: {fileID: 5619392962214509051, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
     - target: {fileID: 4925867890613326577, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: m_Name
       value: --GameRunner
