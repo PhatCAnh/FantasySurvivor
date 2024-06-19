@@ -8,6 +8,7 @@ public class ElectroBomber : Monster
     public override void Attack()
     {
         base.Attack();
+        model.currentHealthPoint = 0;
         Die(true);
     }
 

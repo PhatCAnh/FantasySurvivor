@@ -57,11 +57,9 @@ public class Monster : ObjectRPG
 
 	public bool isAttack => _stateMachine.currentState == _attackState;
 
-	public bool isAlive => model.currentHealthPoint > 0;
+	public bool isDead => model.currentHealthPoint <= 0;
 
-	public bool isDead;
-
-	public bool isNoMove = false;
+    public bool isNoMove = false;
 
 	private Collider2D monsCollider;
 	public bool isStandStill { get; private set; } = false;
@@ -222,7 +220,7 @@ public class Monster : ObjectRPG
 
 	public virtual void Die(bool selfDie = false)
 	{
-		isDead = true;
+		if (!isDead) return;
 		listStatusEffect.Clear();
 		monsCollider.isTrigger = true;
 		animator.SetBool("Dead", isDead);

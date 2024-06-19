@@ -12,6 +12,7 @@ using Unity.Mathematics;
 using UnityEngine.SceneManagement;
 
 using MonsterStat = FantasySurvivor.MonsterStat;
+using System.Threading;
 
 public class GameController : Controller<GameApp>
 {
@@ -171,6 +172,27 @@ public class GameController : Controller<GameApp>
     {
         Singleton<PoolController>.instance.RemoveAllPool();
     }
+
+    public Monster SpawnBoss(MapView.WaveData wave)
+    {
+        var statBoss = app.configs.dataStatMonster.GetConfig(wave.idMonster);
+
+        var monsterStat = new MonsterStat(statBoss.moveSpeed, wave.healthMonster, wave.adMonster, statBoss.attackSpeed, statBoss.attackRange, wave.expMonster);
+
+        var type = (ItemPrefab)Enum.Parse(typeof(ItemPrefab), statBoss.monsterType);
+
+        Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster boss);
+
+        //var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
+        boss.Init(monsterStat, wave, type);
+
+        boss.ResetAttackCountdown();
+        boss.animator.SetBool("Dead", false);
+        listMonster.Add(boss);
+
+        return boss;
+    }
+
     public Monster SpawnMonster(MapView.WaveData wave)
     {
         var statMonster = app.configs.dataStatMonster.GetConfig(wave.idMonster);
@@ -187,7 +209,6 @@ public class GameController : Controller<GameApp>
 
 
         monster.ResetAttackCountdown();
-        monster.isDead = false;
         monster.animator.SetBool("Dead", false);
         listMonster.Add(monster);
 
@@ -204,7 +225,6 @@ public class GameController : Controller<GameApp>
         monster.Init(monsterStat, null, type);
 
         monster.ResetAttackCountdown();
-        monster.isDead = false;
         monster.animator.SetBool("Dead", false);
 
         listMonster.Add(monster);
