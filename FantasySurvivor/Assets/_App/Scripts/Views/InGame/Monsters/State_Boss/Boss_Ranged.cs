@@ -12,11 +12,13 @@ namespace FantasySurvivor
     {
         public BulletBossGatlingCrab bulletPrefab;
         public BulletBossGatlingCrab bulletPrefab2;
+        public BulletBossGatlingCrab bulletPrefab3;
         public Transform firePoint2;
-        public GameObject telegraphEffectPrefab; // Prefab cho hiệu ứng báo hiệu
-
+        public Transform firePoint3;
+        public GameObject telegraphEffectPrefab;
+        private GameObject currentTelegraphEffect;
         private Vector3 spawnPos { get; set; }
-        private Vector3 markedPosition; // Vị trí đánh dấu để tấn công
+        private Vector3 markedPosition;
 
         [SerializeField] private ItemPrefab typeBullet;
         [SerializeField] private ItemPrefab typeBullet2;
@@ -29,8 +31,9 @@ namespace FantasySurvivor
         private bool isState1 = false;
         private bool isState2 = false;
         private bool isState3 = false;
-        private bool isStateAttack = false;
-        private bool isTelegraphing = false; // Trạng thái chuẩn bị tấn công
+        private bool isTelegraphing = false;
+        private float telegraphTimer = 0f;
+        private float telegraphDuration = 1.5f;
 
         protected override void OnViewInit()
         {
@@ -50,16 +53,56 @@ namespace FantasySurvivor
             moveTarget = gameController.character.transform.position;
             moveDirection = moveTarget - transform.position;
 
+            if (isTelegraphing)
+            {
+                isState3 = true;
+                IdleState();
+                telegraphTimer -= Time.deltaTime;
+
+                if (telegraphTimer <= 0f)
+                {
+                    IdleState();
+                    transform.position = markedPosition;
+
+
+                    if (currentTelegraphEffect != null)
+                    {
+                        Destroy(currentTelegraphEffect);
+                        currentTelegraphEffect = null;
+                    }
+
+                    TelegraphingAttack();
+                    cdAttack.Restart(2 / model.attackSpeed);
+                    isTelegraphing = false;
+                    isState3 = false;
+                }
+                return;
+            }
+
             if (moveDirection.magnitude > 20 && !isTelegraphing)
             {
-                IdleState();
                 markedPosition = gameController.character.transform.position;
-                StartCoroutine(TelegraphedChargeAttack()); 
+
+                Vector3 telegraphPosition = gameController.character.transform.position;
+                if (telegraphEffectPrefab != null)
+                {
+
+                    if (currentTelegraphEffect != null)
+                    {
+                        Destroy(currentTelegraphEffect);
+                    }
+
+                    currentTelegraphEffect = Instantiate(telegraphEffectPrefab, telegraphPosition, Quaternion.identity);
+
+                }
+
+                telegraphTimer = telegraphDuration;
+                isTelegraphing = true;
                 return;
             }
 
             //sizeAttack
-            if (moveDirection.magnitude < sizeAttack)
+            if (moveDirection.magnitude < sizeAttack && !isState3)
             {
                 if (cdAttack.isFinished)
                 {
@@ -110,22 +153,6 @@ namespace FantasySurvivor
             }
 
             SetAnimation(idleDirection);
-        }
-
-        private IEnumerator TelegraphedChargeAttack()
-        {
-            isTelegraphing = true;
-
-            Vector3 telegraphPosition = gameController.character.transform.position;
-            if (telegraphEffectPrefab != null)
-            {
-                Instantiate(telegraphEffectPrefab, telegraphPosition, Quaternion.identity);
-            }
-            yield return new WaitForSeconds(1.5f);
-            transform.position = markedPosition;
-            TelegraphingAttack();
-
-            isTelegraphing = false;
         }
 
         public override void Attack()
@@ -188,11 +215,24 @@ namespace FantasySurvivor
             }
         }
 
+
+
+
+        private void AroundAttack(float damageDistance)
+        {
+            float distanceToCharacter = Vector3.Distance(transform.position, gameController.character.transform.position);
+
+            if (distanceToCharacter <= damageDistance)
+            {
+                gameController.character.TakeDamage(model.attackDamage);
+            }
+        }
+
         private void TelegraphingAttack()
         {
             animator.SetBool("Attack", true);
-            int bulletCount = 8;
-            float radius = 1.5f;
+            int bulletCount = 20;
+            float radius = 1f;
             Vector2 directionToCharacter = (gameController.character.transform.position - transform.position).normalized;
             float baseAngle = Mathf.Atan2(directionToCharacter.y, directionToCharacter.x) * Mathf.Rad2Deg;
 
@@ -204,21 +244,22 @@ namespace FantasySurvivor
                 float bulDirX = Mathf.Cos(angle * Mathf.Deg2Rad);
                 float bulDirY = Mathf.Sin(angle * Mathf.Deg2Rad);
 
-                Vector3 bulletPosition = firePoint.position + new Vector3(bulDirX * radius, bulDirY * radius, 0f);
+                Vector3 bulletPosition = firePoint3.position + new Vector3(bulDirX * radius, bulDirY * radius, 0f);
 
-                var bulletObject = Singleton<PoolController>.instance.GetObject(typeBullet, firePoint.position);
+                var bulletObject = Singleton<PoolController>.instance.GetObject(typeBullet, firePoint3.position);
 
-                if (bulletObject.TryGetComponent(out BulletBossGatlingCrab bullet))
+                if (bulletObject.TryGetComponent(out BulletBossGatlingCrab bullet3))
                 {
-                    bullet.transform.position = bulletPosition;
-                    bullet.transform.rotation = Quaternion.Euler(0, 0, angle);
-                    bullet.Init(this);
+                    bullet3.transform.position = bulletPosition;
+                    bullet3.transform.rotation = Quaternion.Euler(0, 0, angle);
+                    bullet3.Init(this);
 
                     Vector2 bulMoveDirection = new Vector2(bulDirX, bulDirY).normalized;
-                    bullet.SetDirection(bulMoveDirection);
+                    bullet3.SetDirection(bulMoveDirection);
                 }
             }
 
+            AroundAttack(6);
 
             _coolDownBack++;
             if (_numberBack != 0)
@@ -263,36 +304,6 @@ namespace FantasySurvivor
                 bullet2.Init(this);
             }
 
-            //logic bullet new
-            /*animator.SetBool("Attack", true);
-            int bulletCount = 8;
-            float radius = 1.5f; 
-            Vector2 directionToCharacter = (gameController.character.transform.position - transform.position).normalized;
-            float baseAngle = Mathf.Atan2(directionToCharacter.y, directionToCharacter.x) * Mathf.Rad2Deg;
-
-           for (int i = 0; i < bulletCount; i++)
-            {
-
-                float angle = baseAngle + i * 360f / bulletCount;
-
-                float bulDirX = Mathf.Cos(angle * Mathf.Deg2Rad);
-                float bulDirY = Mathf.Sin(angle * Mathf.Deg2Rad);
-
-                Vector3 bulletPosition = firePoint.position + new Vector3(bulDirX * radius, bulDirY * radius, 0f);
-
-                var bulletObject = Singleton<PoolController>.instance.GetObject(typeBullet, firePoint.position);
-
-                if (bulletObject.TryGetComponent(out BulletBossGatlingCrab bullet))
-                {
-                    bullet.transform.position = bulletPosition;
-                    bullet.transform.rotation = Quaternion.Euler(0, 0, angle);
-                    bullet.Init(this);
-
-                    Vector2 bulMoveDirection = new Vector2(bulDirX, bulDirY).normalized;
-                    bullet.SetDirection(bulMoveDirection);
-                }
-            }
-            }*/
 
             _coolDownBack++;
             if (_numberBack != 0)

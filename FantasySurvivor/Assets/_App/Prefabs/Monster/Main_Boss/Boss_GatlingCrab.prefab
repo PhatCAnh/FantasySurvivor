@@ -84,7 +84,9 @@ MonoBehaviour:
   size: 3
   bulletPrefab: {fileID: -7805141340533506810, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
   bulletPrefab2: {fileID: -7805141340533506810, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
+  bulletPrefab3: {fileID: -7805141340533506810, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
   firePoint2: {fileID: 4790529623898961803}
+  firePoint3: {fileID: 5500678796437042815}
   telegraphEffectPrefab: {fileID: 2073436260658583224, guid: 7a32d8caca4bf514d8f52bfbe353df98, type: 3}
   typeBullet: 35
   typeBullet2: 35
@@ -220,6 +222,7 @@ Transform:
   m_Children:
   - {fileID: 2456488772675752657}
   - {fileID: 4790529623898961803}
+  - {fileID: 5500678796437042815}
   m_Father: {fileID: 4067744832134226557}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2998328604696572718
@@ -307,3 +310,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 164a3ae04c0b8e149b58a5d26bf775c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5536686733975524631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5500678796437042815}
+  m_Layer: 9
+  m_Name: FirePoint3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5500678796437042815
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5536686733975524631}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.14, y: -1.44, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4910354155545197857}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
