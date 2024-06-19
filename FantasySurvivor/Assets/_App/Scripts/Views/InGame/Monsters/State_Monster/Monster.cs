@@ -149,6 +149,7 @@ public class Monster : ObjectRPG
 	protected virtual void HandlePhysicUpdate()
 	{
 		if(isDead) return;
+
 		moveTarget = gameController.character.transform.position;
 		moveDirection = moveTarget - transform.position;
 
@@ -192,14 +193,14 @@ public class Monster : ObjectRPG
 
 	public virtual void TakeDamage(float damage, TextPopupType type, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
 	{
-		if(!isAlive) return;
+		if(isDead) return;
 		model.currentHealthPoint -= damage;
 		callBackDamaged?.Invoke();
 
 		var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
 		text.GetComponent<TextPopup>().Create(damage, type, isCritical);
 
-		if(isAlive) return;
+		if(!isDead) return;
 		Die();
 		callBackKilled?.Invoke();
 	}
@@ -347,6 +348,7 @@ public class Monster : ObjectRPG
 		flip();
 		if(isAttack) return;
 		_stateMachine.ChangeState(_attackState);
+		IdleState();
 	}
 
 	#endregion

@@ -45,6 +45,9 @@ public enum ItemPrefab
     ThunderChanneling,
     TimeBoom,
 	MinionGoblin,
+	GatlingCrab,
+    BulletBossGatlingCrab,
+
 }
 
 public enum MapType

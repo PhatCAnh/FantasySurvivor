@@ -59,6 +59,8 @@ public class ResourceManager : UIManagerBase<PopupType>
     [SerializeField] private GameObject _bulletGoblinswift;
 
 	[SerializeField] private GameObject _skillCyclone;
+	
+    [SerializeField] private GameObject _bulletBossGatlingCrab;
 
 	[SerializeField] private GameObject _skillWindfield;
 
@@ -133,6 +135,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _goblinSwift;
 
     [SerializeField] private GameObject _minionGoblin;
+
+    [SerializeField] private GameObject _gatlingCrab;
+
 
     private Dictionary<string, GameObject> _typeMonsterDic;
 
@@ -228,6 +233,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.ThunderChanneling, _skillThunderChanneling},
 			{ItemPrefab.TimeBoom, _skillTimeBoom},
 			{ItemPrefab.MinionGoblin, _minionGoblin},
+			{ItemPrefab.GatlingCrab, _gatlingCrab },
+			{ItemPrefab.BulletBossGatlingCrab, _bulletBossGatlingCrab},
 		};
 
 		_mapDic = new Dictionary<MapType, Map>
@@ -250,6 +257,8 @@ public class ResourceManager : UIManagerBase<PopupType>
             {"Skeleton", _minionSkeleton},
 			{"Wolf", _minionWolf},
             {"Goblin", _minionGoblin},
+
+			{"B1", _gatlingCrab},
 
         };
 
