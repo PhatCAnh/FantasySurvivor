@@ -22,6 +22,7 @@ namespace FantasySurvivor
 
 		protected override void OnViewInit()
 		{
+			base.OnViewInit();
 			var model = _character.model;
 			
 			AddDataBinding("sldHealthBar-maxValue", _sldHealthPoint, (control, e) =>

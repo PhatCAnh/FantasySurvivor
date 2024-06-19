@@ -474,7 +474,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3009715037168439679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb833a1ecf856624589a087f93b6c914, type: 3}
+  m_Script: {fileID: 11500000, guid: 38a4413e0cf44c0dad96950b3652dd49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _imgSkin: {fileID: 8672665790339452956}
@@ -482,14 +482,14 @@ MonoBehaviour:
   _imgIcon: {fileID: 2559210252935878403}
   _txtName: {fileID: 426085086414919515}
   _txtDescription: {fileID: 1275359134882077530}
-  _txtValue: {fileID: 3410292342139289858}
+  _txtValue: {fileID: 2288637200307871900}
   _txtBtnAction: {fileID: 4158750854270375454}
   _txtPriceUpdate: {fileID: 2288637200307871900}
   _btnAction: {fileID: 154959958108832864}
   _btnClose: {fileID: 4039690147263458914}
   _btnUpdate: {fileID: 5730654345514585357}
   _spriteWeapon: {fileID: 21300000, guid: 759ff3efa4b1d4283ac05a2b4c084b38, type: 3}
-  _spriteArmor: {fileID: 21300000, guid: 6fd0c242a45d6472cb3533e9f7dbf179, type: 3}
+  _spriteArmor: {fileID: 21300000, guid: f26474d143dc84587bc9514d14d0674f, type: 3}
   _spriteShoes: {fileID: 21300000, guid: c5e89d08241b54ec7bc004a7b9bcd16b, type: 3}
   _spriteGloves: {fileID: 21300000, guid: e67c8f8d226094ac5a1e523c5f7e3a69, type: 3}
   _spriteHat: {fileID: 21300000, guid: b91cf1dbd490c41aab12079d0311cdf5, type: 3}
@@ -2204,14 +2204,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2038618643615693124, guid: 0ab009e3f4a5c2d4f9a71a7e9c6abf5d, type: 3}
   m_PrefabInstance: {fileID: 1403702471983911321}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3410292342139289858 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4335058956482433179, guid: 0ab009e3f4a5c2d4f9a71a7e9c6abf5d, type: 3}
-  m_PrefabInstance: {fileID: 1403702471983911321}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -7,6 +7,7 @@ namespace FantasySurvivor
     public class DataLevelSkillConfig : IConfigItem
     {
         public string Id { get; private set; }
+        public string SkillName { get; private set; }
         public Dictionary<int, LevelSkillData> data { get; private set; }
         public string GetId()
         {
@@ -18,6 +19,8 @@ namespace FantasySurvivor
             data = new Dictionary<int, LevelSkillData>();
 
             Id = reader.ReadString();
+
+            SkillName = reader.ReadString();
 
             var levelArr = reader.ReadIntArr();
             var valueArr = reader.ReadFloatArr();

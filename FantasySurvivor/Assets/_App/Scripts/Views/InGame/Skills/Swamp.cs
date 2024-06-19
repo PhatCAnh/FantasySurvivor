@@ -14,10 +14,10 @@ namespace FantasySurvivor
 
         [SerializeField] private SpawnPos spawnPos;
         private static List<Vector3> usedPositions = new List<Vector3>();
-        public override void Init(float damage, Monster target, int level)
+        public override void Init(LevelSkillData dataLevel, Monster target, int level, ItemPrefab type)
         {
-        
-            base.Init(damage, target, level);
+
+            base.Init(dataLevel, target, level, type);
 
             if (target == null) return;
             //if (level == 1)
@@ -68,7 +68,7 @@ namespace FantasySurvivor
                 if (gameController.CheckTouch(transform.position, item.transform.position, size + item.size))
                 {
 
-                    item.TakeDamage(damage); 
+                    item.TakeDamage(damage, TextPopupType.Normal);
                 }
             }
         }

@@ -375,6 +375,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2756737215646588848, guid: 035e17780e2c67c43b03a14b05d8d8d6, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _minionGoblin
+      value: 
+      objectReference: {fileID: 3424273944471096184, guid: 27b57c58d3a7a6f468df34450bb113d3, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _skillCyclone
       value: 
       objectReference: {fileID: 2824138957750563773, guid: 7352b3dee434b354295f275870412f3c, type: 3}
@@ -414,6 +418,18 @@ PrefabInstance:
       propertyPath: _slimeWandering
       value: 
       objectReference: {fileID: 7424864141763079353, guid: 583fe81bb4245f041a6e7e0f7986836c, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _healthBarPrefab
+      value: 
+      objectReference: {fileID: 1867674957666603258, guid: 3cdb5f442e1887847a47081da1f84b1e, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _itemEquipDetail
+      value: 
+      objectReference: {fileID: 3009715037168439679, guid: 40fd35a6102ad6945bf934b6e881d60f, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _itemPieceDetail
+      value: 
+      objectReference: {fileID: 5275826770181054991, guid: cc2677a26dfa5bc4cb2e21dd94a50f6b, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _skillEarthPunch
       value: 
@@ -910,6 +926,10 @@ PrefabInstance:
       propertyPath: _poolSkill.Array.data[19].normalSkillType
       value: 33
       objectReference: {fileID: 0}
+    - target: {fileID: 4756559215553902207, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _itemDataUITable
+      value: 
+      objectReference: {fileID: 11400000, guid: 3fc29209e21996444a25fe9f4291eda1, type: 2}
     - target: {fileID: 4925867890613326577, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: m_Name
       value: --GameRunner

@@ -14,14 +14,14 @@ public class ItemSlotEquipUI : ItemSlotUI
     public override void Init(ItemInBag dataUI)
     {
         base.Init(dataUI);
-        isEquip = true;
+        isEquip = false;
         _imgEquip.SetActive(true);
         _imgUnEquip.SetActive(false);
     }
     
     protected override void OnClickBtn()
     {
-        if(isShow) return;
+        if(isShow || !isEquip) return;
         isShow = true;
         app.resourceManager.ShowPopup(PopupType.ItemEquipDetail).TryGetComponent(out PopupItemEquipDetail popup);
         popup.Init(this, itemInBag, itemData, image, imageRank, isEquip);
