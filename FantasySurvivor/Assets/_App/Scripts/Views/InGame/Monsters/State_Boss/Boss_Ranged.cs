@@ -259,7 +259,7 @@ namespace FantasySurvivor
                 }
             }
 
-            AroundAttack(6);
+            AroundAttack(5);
 
             _coolDownBack++;
             if (_numberBack != 0)
