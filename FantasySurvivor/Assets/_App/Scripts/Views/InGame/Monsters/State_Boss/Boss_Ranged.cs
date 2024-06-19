@@ -48,7 +48,7 @@ namespace FantasySurvivor
 
         protected override void HandlePhysicUpdate()
         {
-            if (isAlive) return;
+            if (isDead) return;
 
             moveTarget = gameController.character.transform.position;
             moveDirection = moveTarget - transform.position;
@@ -214,8 +214,6 @@ namespace FantasySurvivor
                 }
             }
         }
-
-
 
 
         private void AroundAttack(float damageDistance)
