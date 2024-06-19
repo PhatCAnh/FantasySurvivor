@@ -121,7 +121,7 @@ namespace FantasySurvivor
                     {
                         attackCounter = 0;
                         isState2 = true;
-                        cdAttack.Restart(3 / model.attackSpeed);
+                        cdAttack.Restart(2 / model.attackSpeed);
                         IdleState();
                     }
 
