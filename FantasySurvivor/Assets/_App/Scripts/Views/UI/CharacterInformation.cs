@@ -15,6 +15,10 @@ public class CharacterInformation : View<GameApp>, IPopup
     [SerializeField] private GameObject _slotItemEquipPrefab;
     [SerializeField] private ItemSlotEquipUI _slotWeapon, _slotArmor, _slotHat, _slotRing, _slotShoes, _slotGloves;
     [SerializeField] private Button _btnBack;
+    [SerializeField] private Button _btnOkPopup;
+    [SerializeField] private Button _btnBackPopup;
+    [SerializeField] private Button _btnChooseCharacter;
+    [SerializeField] private GameObject _chooseCharacterPrefab;
     [SerializeField] private Button _btnAll;
     [SerializeField] private GameObject _focusAll;
     [SerializeField] private Button _btnWeapon;
@@ -29,7 +33,8 @@ public class CharacterInformation : View<GameApp>, IPopup
     [SerializeField] private GameObject _focusHat;
     [SerializeField] private Button _btnGlove;
     [SerializeField] private GameObject _focusGlove;
-
+    [SerializeField] private GameObject _popupLimitItem;
+    private int MaxItem = 50;
     private Dictionary<ItemType, ItemSlotEquipUI> _dicItemEquip;
     private ItemController itemController => ArbanFramework.Singleton<ItemController>.instance;
     private List<GameObject> _listItemSlot = new List<GameObject>();
@@ -63,18 +68,16 @@ public class CharacterInformation : View<GameApp>, IPopup
         };
 
         _btnBack.onClick.AddListener(Close);
-        _btnAll.onClick.AddListener(()=>
+        _btnAll.onClick.AddListener(() =>
         {
             ShowAll();
             ToggleFocus(_focusAll);
-
         });
         _btnWeapon.onClick.AddListener(() =>
         {
             ShowItemsByType(ItemType.Weapon);
             ToggleFocus(_focusWeapon);
             _focusAll.SetActive(false);
-          
         });
         _btnArmor.onClick.AddListener(() =>
         {
@@ -92,7 +95,7 @@ public class CharacterInformation : View<GameApp>, IPopup
         {
             ShowItemsByType(ItemType.Ring);
             ToggleFocus(_focusRing);
-           _focusAll.SetActive(false);
+            _focusAll.SetActive(false);
         });
         _btnHat.onClick.AddListener(() =>
         {
@@ -100,11 +103,16 @@ public class CharacterInformation : View<GameApp>, IPopup
             ToggleFocus(_focusHat);
             _focusAll.SetActive(false);
         });
-       _btnGlove.onClick.AddListener(() =>
+        _btnGlove.onClick.AddListener(() =>
         {
             ShowItemsByType(ItemType.Gloves);
             ToggleFocus(_focusGlove);
             _focusAll.SetActive(false);
+        });
+
+        _btnChooseCharacter.onClick.AddListener(() =>
+        {
+            SwitchToChooseCharacter();
         });
 
         ShowAll();
@@ -167,9 +175,27 @@ public class CharacterInformation : View<GameApp>, IPopup
             slot.Init(item);
         }
     }
+
+    private void ShowPopup()
+    {
+        _popupLimitItem.SetActive(true);
+        _btnBackPopup.onClick.AddListener(ClosePopup);
+        _btnOkPopup.onClick.AddListener(ClosePopup);
+    }
+
+    private void ClosePopup()
+    {
+        _popupLimitItem.SetActive(false);
+    }
+
     private void ToggleFocus(GameObject focusObject)
     {
-       _focusAll.SetActive(focusObject == _focusAll);
+        if (_focusAll == null || _focusWeapon == null || _focusArmor == null || _focusShoes == null || _focusRing == null || _focusHat == null || _focusGlove == null)
+        {
+            return;
+        }
+
+        _focusAll.SetActive(focusObject == _focusAll);
         _focusWeapon.SetActive(focusObject == _focusWeapon);
         _focusArmor.SetActive(focusObject == _focusArmor);
         _focusShoes.SetActive(focusObject == _focusShoes);
@@ -178,6 +204,15 @@ public class CharacterInformation : View<GameApp>, IPopup
         _focusGlove.SetActive(focusObject == _focusGlove);
     }
 
+    private void SwitchToChooseCharacter()
+    {
+        // Hide current UI elements
+        gameObject.SetActive(false);
+
+        // Instantiate and show the choose character prefab
+        var chooseCharacterInstance = Instantiate(_chooseCharacterPrefab, transform.parent);
+        chooseCharacterInstance.SetActive(true);
+    }
 
     private int GetItemTypeOrder(ItemType itemType)
     {
@@ -217,25 +252,43 @@ public class CharacterInformation : View<GameApp>, IPopup
     [ContextMenu("Test item piece")]
     public void Test()
     {
-        app.models.dataPlayerModel.AddItemEquipToBag(ItemId.PieceFire, 2);
+        var sortedBagItems = app.models.dataPlayerModel.BagItem;
+        if (sortedBagItems.Count > MaxItem)
+        {
+            ShowPopup();
+            return;
+        }
+        else
+        {
+            app.models.dataPlayerModel.AddItemEquipToBag(ItemId.PieceFire, 2);
+        }
     }
 
     [ContextMenu("Test item Equip")]
     public void TestEquip()
     {
-        app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Axe, ItemRank.Normal, 1);
-        app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Armor, ItemRank.Rare, 2);
-        app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Shoes, ItemRank.Epic, 3);
-        app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Gloves, ItemRank.Unique, 4);
-        app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Hat, ItemRank.Legendary, 5);
-        app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Ring, ItemRank.Epic, 6);
+        var sortedBagItems = app.models.dataPlayerModel.BagItem;
+        if (sortedBagItems.Count > MaxItem)
+        {
+            ShowPopup();
+            return;
+        }
+        else
+        {
+            app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Axe, ItemRank.Normal, 1);
+            app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Armor, ItemRank.Rare, 2);
+            app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Shoes, ItemRank.Epic, 3);
+            app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Gloves, ItemRank.Unique, 4);
+            app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Hat, ItemRank.Legendary, 5);
+            app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Ring, ItemRank.Epic, 6);
 
-        app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Axe1, ItemRank.Normal, 1);
-        app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Armor1, ItemRank.Rare, 2);
-        app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Shoes1, ItemRank.Epic, 3);
-        app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Gloves1, ItemRank.Unique, 4);
-        app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Hat1, ItemRank.Legendary, 5);
-        app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Ring1, ItemRank.Epic, 6);
+            app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Axe1, ItemRank.Normal, 1);
+            app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Armor1, ItemRank.Rare, 2);
+            app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Shoes1, ItemRank.Epic, 3);
+            app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Gloves1, ItemRank.Unique, 4);
+            app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Hat1, ItemRank.Legendary, 5);
+            app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Ring1, ItemRank.Epic, 6);
+        }
     }
 
     private void InitDispatcher()
@@ -272,7 +325,6 @@ public class CharacterInformation : View<GameApp>, IPopup
             var sortedBagItems = app.models.dataPlayerModel.BagItem
                 .OrderBy(item => GetItemTypeOrder(itemController.GetDataItem(item.id, item.rank, item.level).dataConfig.type))
                 .ToList();
-
             foreach (var itemSlot in sortedBagItems)
             {
                 var go = Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer);
