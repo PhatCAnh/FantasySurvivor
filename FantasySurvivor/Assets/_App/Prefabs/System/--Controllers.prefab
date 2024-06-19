@@ -31,6 +31,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4008007943000763285}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1467138127176356657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2249510436670389200}
+  - component: {fileID: 5454919604169432421}
+  m_Layer: 0
+  m_Name: CharacterController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2249510436670389200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467138127176356657}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4008007943000763285}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5454919604169432421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467138127176356657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ce036a13ee43d58b04b1874e4a1f66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberLimitBagEquip: 0
+  numberLimitBagETC: 0
+  _charDataTable: {fileID: 11400000, guid: 9e00d1965133fb9468a916dd14a5d7a2, type: 2}
 --- !u!1 &2857875863129843907
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,6 +162,8 @@ Transform:
   - {fileID: 6821980598547356828}
   - {fileID: 9091336881132467036}
   - {fileID: 3933363360015676566}
+  - {fileID: 7023807762188672726}
+  - {fileID: 2249510436670389200}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5275234799807573989
@@ -128,7 +177,7 @@ GameObject:
   - component: {fileID: 3933363360015676566}
   - component: {fileID: 1043168713118033963}
   m_Layer: 0
-  m_Name: Pool Object (1)
+  m_Name: SkillController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,3 +210,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a0cb57c9ab48f2bf8d8f2f2357e1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5817687925726287618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7023807762188672726}
+  - component: {fileID: 4756007564157907166}
+  m_Layer: 0
+  m_Name: ItemController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7023807762188672726
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5817687925726287618}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4008007943000763285}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4756007564157907166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5817687925726287618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b6e178e955a4bb5a8cb659aa76fef71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemDataUITable: {fileID: 11400000, guid: 3fc29209e21996444a25fe9f4291eda1, type: 2}
+  _spriteNormal: {fileID: 21300000, guid: dd77367546bf4433dbbb2317a935df54, type: 3}
+  _spriteRare: {fileID: 21300000, guid: 35d7e6588f1f34db1b9a5e62f4efdf77, type: 3}
+  _spriteEpic: {fileID: 21300000, guid: 84063999b9e1741d099c1d8f7bbc0f7a, type: 3}
+  _spriteUnique: {fileID: 21300000, guid: c7ade68a31f1d4e12a57617409b6ee8a, type: 3}
+  _spriteLegendary: {fileID: 21300000, guid: e6eea4f7cbb9f46f79c0fe06180fa5b3, type: 3}
