@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c0247c33b884a41af91d0922c191c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 34
+  type: 41
   myRigid: {fileID: 105766822974865168}
   animator: {fileID: 447482296261929045}
   firePoint: {fileID: 2456488772675752657}
@@ -88,8 +88,8 @@ MonoBehaviour:
   firePoint2: {fileID: 4790529623898961803}
   firePoint3: {fileID: 5500678796437042815}
   telegraphEffectPrefab: {fileID: 2073436260658583224, guid: 7a32d8caca4bf514d8f52bfbe353df98, type: 3}
-  typeBullet: 35
-  typeBullet2: 35
+  typeBullet: 42
+  typeBullet2: 42
   _numberBack: 0
 --- !u!58 &4740617157485917428
 CircleCollider2D:
