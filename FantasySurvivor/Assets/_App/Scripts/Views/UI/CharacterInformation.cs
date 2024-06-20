@@ -13,7 +13,7 @@ using UnityEngine.UI;
 
 public class CharacterInformation : View<GameApp>, IPopup
 {
-	[SerializeField] private TextMeshProUGUI _txtHealth, _txtMoveSpeed, _txtAtkDamage, _txtArmor;
+	[SerializeField] private TextMeshProUGUI _txtHealth, _txtMoveSpeed, _txtAtkDamage, _txtArmor, _txtLimit;
 
 	[SerializeField] private Transform _slotItemEquipContainer;
 
@@ -68,6 +68,9 @@ public class CharacterInformation : View<GameApp>, IPopup
 		_tglAll.onValueChanged.AddListener(GetAllItem);
 		_tglItemEquip.onValueChanged.AddListener(GetAllItemEquip);
 		_tglItemPiece.onValueChanged.AddListener(GetAllItemPiece);
+		
+		var dataPlayerModel = app.models.dataPlayerModel;
+		_txtLimit.text = $"{dataPlayerModel.BagItem.Count} / {dataPlayerModel.LimitQuantityItemEquip}";
 
 		//app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Axe, ItemRank.Legendary, 2);
 
@@ -97,7 +100,7 @@ public class CharacterInformation : View<GameApp>, IPopup
 	[ContextMenu("Test item piece")]
 	public void Test()
 	{
-		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.PieceFire, 2);
+		app.models.dataPlayerModel.AddItemPieceToBag(ItemId.PieceFire, 2);
 	}
 	
 	[ContextMenu("Test item Equip")]
@@ -189,6 +192,12 @@ public class CharacterInformation : View<GameApp>, IPopup
 			float armorPercent = app.models.characterModel.armor / 100f;
 			control.text = $"{armorPercent * 100f}%";
 		}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.armor), app.models.characterModel));
+		
+		AddDataBinding("fieldDataPlayerModel-bagItem", _txtLimit, (control, e) =>
+		{
+			var data = app.models.dataPlayerModel;
+			control.text = $"{data.BagItem.Count} / {data.LimitQuantityItemEquip}";
+		}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.BagItem), app.models.dataPlayerModel));
 		
 		AddDataBinding("fieldDataPlayerModel-BagItemEquipValue", this, (control, e) =>
 			{
