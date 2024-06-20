@@ -37,6 +37,8 @@ public class Monster : ObjectRPG
 
     public bool weakness = false;
 
+    public bool isStun;
+
     public Vector2 moveDirection
     {
         get => _direction;
@@ -150,6 +152,7 @@ public class Monster : ObjectRPG
     protected virtual void HandlePhysicUpdate()
     {
         if (isDead) return;
+        if (isStun) return;
 
         moveTarget = gameController.character.transform.position;
         moveDirection = moveTarget - transform.position;
@@ -195,6 +198,7 @@ public class Monster : ObjectRPG
     public virtual void TakeDamage(float damage, TextPopupType type, bool isCritical = false, Action callBackDamaged = null, Action callBackKilled = null)
     {
         if (isDead) return;
+        if (isStun) return;
         foreach (StatusEffect status in listStatusEffect)
         {
             if (status.name == StatusEffectName.Vulerability)
@@ -232,6 +236,7 @@ public class Monster : ObjectRPG
     public virtual void Move(Vector2 dir, float deltaTime)
     {
         if (isDead) return;
+        if (isStun) return;
 
         var movement = model.moveSpeed * GameConst.MOVE_SPEED_ANIMATION_RATIO * deltaTime * speedMul * dir;
         var newPosition = myRigid.position + movement;
