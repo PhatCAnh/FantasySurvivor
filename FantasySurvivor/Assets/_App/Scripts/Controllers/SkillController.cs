@@ -57,6 +57,12 @@ namespace _App.Scripts.Controllers
 		{
 			return _listSkillSelected;
 		}
+
+		public void ResetDataSkillInGame()
+		{
+			_listSkillChoose.Clear();
+			listSkills.Clear();
+		}
 		
 		public List<SkillDataTotal> GetRandomSkill()
 		{
