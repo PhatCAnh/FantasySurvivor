@@ -9,7 +9,7 @@ public class Stun : StatusEffect
         type = EffectType.Debuff;
         this.value = value / 2;
     }
-    public Stun(Character target, float duration) : base(target, duration)
+    public Stun(Character character, float duration) : base(character, duration)
     {
         type = EffectType.Debuff;
         this.value = value / 2;

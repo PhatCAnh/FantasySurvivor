@@ -25,10 +25,10 @@ public class StatusEffect
 		cdTotal.Restart(duration);
 	}
 
-    public StatusEffect(Character target, float value, float duration)
+    public StatusEffect(Character character, float value, float duration)
     {
-        this.character = target;
-        this.target.listStatusEffect.Add(this);
+        this.character = character;
+        this.character.listStatusEffect.Add(this);
         this.value = value;
         cdTotal = new Cooldown();
         cdTotal.Restart(duration);
@@ -41,10 +41,10 @@ public class StatusEffect
 		cdTotal = new Cooldown();
 		cdTotal.Restart(duration);
 	}
-	public StatusEffect(Character target, float duration)
+	public StatusEffect(Character character, float duration)
 	{
-		this.character = target;
-		this.target.listStatusEffect.Add(this);
+		this.character = character;
+		this.character.listStatusEffect.Add(this);
 		cdTotal = new Cooldown();
 		cdTotal.Restart(duration);
 	}

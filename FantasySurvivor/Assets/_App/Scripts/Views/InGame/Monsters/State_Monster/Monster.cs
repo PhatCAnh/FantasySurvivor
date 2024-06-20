@@ -35,7 +35,9 @@ public class Monster : ObjectRPG
 
     public float speedMul { get; set; } = 1;
 
-    public bool weakness = false;
+    public float weakness = 0;
+
+    public float buffDame = 0;
 
     public bool isStun;
 
@@ -203,26 +205,26 @@ public class Monster : ObjectRPG
         {
             if (status.name == StatusEffectName.Vulerability)
             {
-                weakness = true;
+                weakness = (damage * status.value / 100);
                 break;
             }
         }
-        if (weakness)
+        foreach (StatusEffect status in gameController.character.listStatusEffect)
         {
-            model.currentHealthPoint -= (damage + damage*10/100); 
-            callBackDamaged?.Invoke();
-
-            var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-            text.GetComponent<TextPopup>().Create((damage + damage * 10 / 100), type, isCritical);
+            if (status.name == StatusEffectName.BuffDame)
+            {
+                buffDame = (damage * status.value / 100);
+                break;
+            }
         }
-        else
-        {
-            model.currentHealthPoint -= damage;
-            callBackDamaged?.Invoke();
 
-            var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
-            text.GetComponent<TextPopup>().Create(damage, type, isCritical);
-        }
+
+        model.currentHealthPoint -= ( damage + weakness + buffDame);
+        callBackDamaged?.Invoke();
+
+        var text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);
+        text.GetComponent<TextPopup>().Create(damage + weakness + buffDame, type, isCritical);
+
         if (!isDead) return;
         Die();
         callBackKilled?.Invoke();

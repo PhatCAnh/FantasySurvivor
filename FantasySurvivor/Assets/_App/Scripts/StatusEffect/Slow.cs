@@ -8,13 +8,13 @@ public class Slow : StatusEffect
     public Slow(Monster target, float value, float duration) : base(target, value, duration)
     {
         type = EffectType.Debuff;
-        this.value = value / 2;
+        this.value = value;
         isApplied = false;
     }
-    public Slow(Character target, float value, float duration) : base(target, value, duration)
+    public Slow(Character character, float value, float duration) : base(character, value, duration)
     {
         type = EffectType.Debuff;
-        this.value = value / 2;
+        this.value = value;
         isApplied = false;
     }
 
@@ -27,7 +27,6 @@ public class Slow : StatusEffect
             target.model.moveSpeed *= (value/100);
             isApplied = true;
         }
-        Debug.Log(target.model.moveSpeed);
     }
 
     public override bool Cooldown(float deltaTime)

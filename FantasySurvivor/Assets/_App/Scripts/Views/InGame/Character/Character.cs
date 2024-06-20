@@ -52,6 +52,8 @@ public class Character : ObjectRPG
 
 	public List<CharacterUpdateStat> listUpdateStat = new List<CharacterUpdateStat>();
 
+	public List<StatusEffect> listStatusEffect = new List<StatusEffect>();
+
 	public bool IsAlive => model.currentHealthPoint > 0;
 	public bool IsMove => _stateMachine.currentState == _moveSm;
 

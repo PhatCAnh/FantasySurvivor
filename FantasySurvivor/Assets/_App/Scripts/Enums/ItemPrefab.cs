@@ -222,5 +222,6 @@ public enum StatusEffectName
 	Poison,
 	Slow,
 	Vulerability,
-	Channeling
+	Channeling,
+	BuffDame
 }
