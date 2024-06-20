@@ -91,7 +91,17 @@ namespace FantasySurvivor
 		//fix it
 		public bool AddItemEquipToBag(ItemId id, ItemRank rank, int level)
 		{
-			if(_bagItem.Count >= LimitQuantityItemEquip) return false;
+			if(_bagItem.Count >= LimitQuantityItemEquip)
+			{
+				if(!app.resourceManager.CheckExistPopup(PopupType.Warning))
+				{
+					app.resourceManager.ShowPopup(PopupType.Warning).TryGetComponent(out PopupWarning warning);
+					warning.Init(
+						"Your bag is full, no more items can be added. Please increase your bag limit"
+					);
+				}
+				return false;
+			}
 			
 			ItemInBag itemInBag = new ItemInBag(id.ToString(), rank.ToString(), level);
 			_bagItem.Add(itemInBag);

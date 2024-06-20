@@ -171,6 +171,7 @@ public enum PopupType
 	CharacterChoose,
 	ItemEquipDetail,
 	ItemPieceDetail,
+	Warning,
 }
 
 public enum SkillDamagedType

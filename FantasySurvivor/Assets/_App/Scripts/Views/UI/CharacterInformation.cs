@@ -21,7 +21,7 @@ public class CharacterInformation : View<GameApp>, IPopup
 
 	[SerializeField] private ItemSlotEquipUI _slotWeapon, _slotArmor, _slotHat, _slotRing, _slotShoes, _slotGloves;
 
-	[SerializeField] private Button _btnBack;
+	[SerializeField] private Button _btnBack, _btnAddItemSlot;
 
 	[SerializeField] private Toggle _tglAll, _tglItemEquip, _tglItemPiece;
 
@@ -65,6 +65,7 @@ public class CharacterInformation : View<GameApp>, IPopup
 		};
 		
 		_btnBack.onClick.AddListener(Close);
+		_btnAddItemSlot.onClick.AddListener(AddItemSlot);
 		_tglAll.onValueChanged.AddListener(GetAllItem);
 		_tglItemEquip.onValueChanged.AddListener(GetAllItemEquip);
 		_tglItemPiece.onValueChanged.AddListener(GetAllItemPiece);
@@ -137,6 +138,14 @@ public class CharacterInformation : View<GameApp>, IPopup
 		item.Init(data, this);
 	}
 
+	private void AddItemSlot()
+	{
+		app.resourceManager.ShowPopup(PopupType.Warning).TryGetComponent(out PopupWarning popupWarning);
+		popupWarning.Init("Buy slot item", "Would you like to buy 50 item slots? with 10000 <sprite=4>", "10000 <sprite=4>",
+			() => { app.models.dataPlayerModel.LimitQuantityItemEquip += 50; popupWarning.Close(); }
+		);
+	}
+
 	private void GetAllItem(bool value)
 	{
 		if(!_tglAll.isOn) return;
@@ -198,6 +207,12 @@ public class CharacterInformation : View<GameApp>, IPopup
 			var data = app.models.dataPlayerModel;
 			control.text = $"{data.BagItem.Count} / {data.LimitQuantityItemEquip}";
 		}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.BagItem), app.models.dataPlayerModel));
+		
+		AddDataBinding("fieldDataPlayerModel-limitQuantityItemEquip", _txtLimit, (control, e) =>
+		{
+			var data = app.models.dataPlayerModel;
+			control.text = $"{data.BagItem.Count} / {data.LimitQuantityItemEquip}";
+		}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.LimitQuantityItemEquip), app.models.dataPlayerModel));
 		
 		AddDataBinding("fieldDataPlayerModel-BagItemEquipValue", this, (control, e) =>
 			{
