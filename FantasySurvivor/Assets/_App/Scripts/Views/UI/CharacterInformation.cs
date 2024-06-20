@@ -23,6 +23,8 @@ public class CharacterInformation : View<GameApp>, IPopup
 
 	[SerializeField] private Button _btnBack;
 
+	[SerializeField] private Toggle _tglAll, _tglItemEquip, _tglItemPiece;
+
 	private Dictionary<ItemType, ItemSlotEquipUI> _dicItemEquip;
 
 	private ItemController itemController => ArbanFramework.Singleton<ItemController>.instance;
@@ -63,6 +65,9 @@ public class CharacterInformation : View<GameApp>, IPopup
 		};
 		
 		_btnBack.onClick.AddListener(Close);
+		_tglAll.onValueChanged.AddListener(GetAllItem);
+		_tglItemEquip.onValueChanged.AddListener(GetAllItemEquip);
+		_tglItemPiece.onValueChanged.AddListener(GetAllItemPiece);
 
 		//app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Axe, ItemRank.Legendary, 2);
 
@@ -128,6 +133,36 @@ public class CharacterInformation : View<GameApp>, IPopup
 		Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer).TryGetComponent(out ItemSlotUI item);
 		item.Init(data, this);
 	}
+
+	private void GetAllItem(bool value)
+	{
+		if(!_tglAll.isOn) return;
+		foreach(var itemSlot in _listItemSlot.ToList())
+		{
+			itemSlot.SetActive(true);
+		}
+	}
+	
+	private void GetAllItemEquip(bool value)
+	{
+		if(!_tglItemEquip.isOn) return;
+		foreach(var itemSlot in _listItemSlot.ToList())
+		{
+			var type = itemSlot.GetComponent<ItemSlotUI>().itemData.dataConfig.type;
+			itemSlot.SetActive(type is ItemType.Armor or ItemType.Gloves or ItemType.Hat or ItemType.Ring or ItemType.Shoes or ItemType.Weapon);
+		}
+	}
+	
+	private void GetAllItemPiece(bool value)
+	{
+		if(!_tglItemPiece.isOn) return;
+		foreach(var itemSlot in _listItemSlot.ToList())
+		{
+			var type = itemSlot.GetComponent<ItemSlotUI>().itemData.dataConfig.type;
+			itemSlot.SetActive(type is not (ItemType.Armor or ItemType.Gloves or ItemType.Hat or ItemType.Ring or ItemType.Shoes or ItemType.Weapon));
+		}
+	}
+	
 
 	private void InitDispatcher()
 	{
