@@ -12,6 +12,7 @@ using FantasySurvivor;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.TextCore.Text;
 using StateMachine = ArbanFramework.StateMachine.StateMachine;
 
 public class Character : ObjectRPG
@@ -124,16 +125,25 @@ public class Character : ObjectRPG
 		HandleProactiveSkill(time);
 		HandleUpdateStat(time);
 		HandleUpdateHealing(time);
-	}
+		HandleStatusEffect(time);
+    }
 
-	private void FixedUpdate()
+    private void FixedUpdate()
 	{
 		if(gameController.isStop) return;
 
 		_stateMachine.currentState.PhysicUpdate(Time.fixedTime);
 	}
 
-	private void LateUpdate()
+    private void HandleStatusEffect(float deltaTime)
+    {
+        foreach (var item in listStatusEffect.ToList())
+        {
+            item.Cooldown(deltaTime);
+        }
+    }
+
+    private void LateUpdate()
 	{
 		var position = transform.position;
 		Camera.main.transform.position = new Vector3(position.x, position.y, -1);

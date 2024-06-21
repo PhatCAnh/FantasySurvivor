@@ -35,10 +35,6 @@ public class Monster : ObjectRPG
 
     public float speedMul { get; set; } = 1;
 
-    public float weakness = 0;
-
-    public float buffDame = 0;
-
     public bool isStun;
 
     public Vector2 moveDirection
@@ -201,6 +197,8 @@ public class Monster : ObjectRPG
     {
         if (isDead) return;
         if (isStun) return;
+        float buffDame = 0f;
+        float weakness = 0f;
         foreach (StatusEffect status in listStatusEffect)
         {
             if (status.name == StatusEffectName.Vulerability)

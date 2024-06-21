@@ -17,10 +17,10 @@ public class BuffDame : StatusEffect
 
     public override bool Cooldown(float deltaTime)
     {
-        Active();
         cdTotal.Update(deltaTime);
         if (cdTotal.isFinished)
         {
+            character.listStatusEffect.Remove(this);
             target.listStatusEffect.Remove(this);
             return true;
         }
