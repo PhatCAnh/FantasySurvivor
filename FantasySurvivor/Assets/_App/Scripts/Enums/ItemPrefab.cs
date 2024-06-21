@@ -47,6 +47,7 @@ public enum ItemPrefab
 	MinionGoblin,
 	GatlingCrab,
     BulletBossGatlingCrab,
+	GatlingCrab_HealthBar,
 
 }
 
@@ -171,6 +172,7 @@ public enum PopupType
 	CharacterChoose,
 	ItemEquipDetail,
 	ItemPieceDetail,
+    GatlingCrab_HealthBar,
 }
 
 public enum SkillDamagedType

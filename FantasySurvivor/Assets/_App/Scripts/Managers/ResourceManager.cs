@@ -139,6 +139,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     [SerializeField] private GameObject _gatlingCrab;
 
+    [SerializeField] private GameObject _healthBarController;
+
 
     private Dictionary<string, GameObject> _typeMonsterDic;
 
@@ -237,7 +239,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.MinionGoblin, _minionGoblin},
 			{ItemPrefab.GatlingCrab, _gatlingCrab },
 			{ItemPrefab.BulletBossGatlingCrab, _bulletBossGatlingCrab},
-		};
+            {ItemPrefab.GatlingCrab_HealthBar, _healthBarController},
+
+        };
 
 		_mapDic = new Dictionary<MapType, Map>
 		{

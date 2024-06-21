@@ -120,12 +120,10 @@ public class MapView : View<GameApp>
             gameController.AddReward(dictionaryReward, TypeItemReward.Coin, _coinOfLevel);
             model.WaveInGame++;
             UpdateLevel();
-            Debug.Log("Round bat dau" + GetCurrentWave());
 
             if (GetCurrentWave() == 3)
             {
                 _isBattleBossing = true;
-                Debug.Log("Round" + GetCurrentWave());
                 foreach (var wave in _listWaveData.ToList())
                 {
                     ClearCurrentMonsters();

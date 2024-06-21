@@ -31,7 +31,10 @@ public class GameController : Controller<GameApp>
     public Action<Monster> onMonsterDie;
 
     public int numberLimitChoiceSkill = 3;// limit skill out game
+    
     private HealthBar _healthBar;
+    private HealthBarController _healthBarController;
+
     public int currentNumberSkill = 0;// điếm số skill outr game
     private Vector3 _camSize;
     private float _width;
@@ -175,6 +178,7 @@ public class GameController : Controller<GameApp>
 
     public Monster SpawnBoss(MapView.WaveData wave)
     {
+
         var statBoss = app.configs.dataStatMonster.GetConfig(wave.idMonster);
 
         var bossStat = new MonsterStat(statBoss.moveSpeed, wave.healthMonster, wave.adMonster, statBoss.attackSpeed, statBoss.attackRange, wave.expMonster);
@@ -186,6 +190,9 @@ public class GameController : Controller<GameApp>
         //var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
         boss.Init(bossStat, wave, type);
 
+        _healthBarController = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.GatlingCrab_HealthBar), app.resourceManager.rootContainer)
+           .GetComponent<HealthBarController>();
+        _healthBarController.Init(boss);
 
         boss.ResetAttackCountdown();
         boss.animator.SetBool("Dead", false);
@@ -209,6 +216,9 @@ public class GameController : Controller<GameApp>
 		//var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
 		monster.Init(monsterStat, wave, type);
 
+        _healthBarController = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.GatlingCrab_HealthBar), app.resourceManager.rootContainer)
+            .GetComponent<HealthBarController>();
+        _healthBarController.Init(monster);
 
         monster.ResetAttackCountdown();
         monster.animator.SetBool("Dead", false);
