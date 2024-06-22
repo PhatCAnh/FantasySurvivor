@@ -148,4 +148,8 @@ public class CharacterModel : Model<GameApp>
         this.attackRange += attackRange;
         this._armor += armor;
     }
+    public void Revive()
+    {
+        currentHealthPoint = maxHealthPoint;
+    }
 }

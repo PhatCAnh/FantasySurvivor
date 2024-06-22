@@ -144,13 +144,13 @@ public class Character : ObjectRPG
 
 	public void TakeDamage(int damage)
 	{
-		if(!IsAlive) return;
+		/* if(!IsAlive) return;
 		damage -= Convert.ToInt32(damage * DamageReductionByArmor());
 		var currentShield = model.shield;
 		model.shield -= damage;
 		damage = Mathf.RoundToInt(damage - currentShield);
 		if(damage < 0) damage = 0;
-
+		*/
 		model.currentHealthPoint -= damage;
 
 		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);

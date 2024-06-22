@@ -516,4 +516,14 @@ public class GameController : Controller<GameApp>
         app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
         //app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
     }
+    public void ReviveCharacter()
+    {
+        if (character == null || character.model.currentHealthPoint > 0) return;
+
+        character.model.Revive();
+        character.transform.position = charPos; // vi tri char die
+        character.gameObject.SetActive(true);
+        isEndGame = false;
+    }
+
 }
