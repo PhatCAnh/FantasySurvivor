@@ -87,10 +87,35 @@ public class MapView : View<GameApp>
         _cdEndLevel.Restart(dataLevel.timeEnd);
     }
 
+    private void UpdateLevelBoss()
+    {
+        _isBattleBossing = true;
+        foreach (var wave in _listWaveData.ToList())
+        {
+            ClearCurrentMonsters();
+            wave.monsterInWave.Add(gameController.SpawnBoss(wave));
+            wave.coolDownTime.Restart(wave.stepTime);
+            wave.number++;
+        }
+    }
+
+    private void UpdateWaveMonster()
+    {
+        if (_isBattleBossing == true) return;
+        foreach (var wave in _listWaveData.ToList())
+        {
+            if (wave.coolDownTime.isFinished)
+            {
+                wave.monsterInWave.Add(gameController.SpawnMonster(wave));
+                wave.coolDownTime.Restart(wave.stepTime);
+                wave.number++;
+            }
+        }
+    }
+
     private void Update()
     {
         if (gameController.isStop) return;
-        if (_isBattleBossing) return;
 
         var deltaTime = Time.deltaTime;
 
@@ -98,39 +123,18 @@ public class MapView : View<GameApp>
 
         _cdEndLevel.Update(deltaTime);
 
-
-        /*if (GetCurrentWave() == 21)
-		{
-            foreach (var item in gameController.listMonster.ToList())
-            {
-                item.Die(true);
-            }
-            _isBattleBossing = true;
-			foreach (var item in gameController.listMonster.ToList())
-			{
-				item.Die(true);
-			}
-			gameController.SpawnMonster(wave);
-            return;
-        }*/
-
         if (_cdEndLevel.isFinished)
         {
-            _listWaveData.Clear();
-            gameController.AddReward(dictionaryReward, TypeItemReward.Coin, _coinOfLevel);
-            model.WaveInGame++;
-            UpdateLevel();
-
-            if (GetCurrentWave() == 3)
+            if (GetCurrentWave() == 3 && _isBattleBossing== false)
             {
-                _isBattleBossing = true;
-                foreach (var wave in _listWaveData.ToList())
-                {
-                    ClearCurrentMonsters();
-                    wave.monsterInWave.Add(gameController.SpawnBoss(wave));
-                    wave.coolDownTime.Restart(wave.stepTime);
-                    wave.number++;
-                }
+                UpdateLevelBoss();
+            }
+            else
+            {
+                _listWaveData.Clear();
+                gameController.AddReward(dictionaryReward, TypeItemReward.Coin, _coinOfLevel);
+                model.WaveInGame++;
+                UpdateLevel();
             }
             return;
         }
@@ -142,6 +146,7 @@ public class MapView : View<GameApp>
                 if (wave.monsterInWave.Count == 0)
                 {
                     _listWaveData.Remove(wave);
+
                     if (_listWaveData.Count == 0)
                     {
                         gameController.AddReward(dictionaryReward, TypeItemReward.Coin, _coinOfLevel);
@@ -152,13 +157,14 @@ public class MapView : View<GameApp>
                 continue;
             }
 
-            wave.coolDownTime.Update(deltaTime);
-            if (wave.coolDownTime.isFinished)
+            if (GetCurrentWave() == 3)
             {
-                if (_isBattleBossing) return;
-                wave.monsterInWave.Add(gameController.SpawnMonster(wave));
-                wave.coolDownTime.Restart(wave.stepTime);
-                wave.number++;
+                wave.coolDownTime.Update(deltaTime);
+                UpdateLevelBoss();
+            } else
+            {
+                wave.coolDownTime.Update(deltaTime);
+                UpdateWaveMonster();
             }
         }
     }
@@ -173,7 +179,7 @@ public class MapView : View<GameApp>
         }
 
         _listWaveData.Clear();
-    
+
     }
 
     public int GetCurrentWave()

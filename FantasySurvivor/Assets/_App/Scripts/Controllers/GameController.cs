@@ -31,7 +31,7 @@ public class GameController : Controller<GameApp>
     public Action<Monster> onMonsterDie;
 
     public int numberLimitChoiceSkill = 3;// limit skill out game
-    
+
     private HealthBar _healthBar;
     private HealthBarController _healthBarController;
 
@@ -44,7 +44,7 @@ public class GameController : Controller<GameApp>
     public List<SkillData> _listSkill = new List<SkillData>();
 
 
-	private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
+    private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
 
     private PoolController poolController => Singleton<PoolController>.instance;
 
@@ -53,18 +53,18 @@ public class GameController : Controller<GameApp>
         Singleton<GameController>.Set(this);
     }
 
-	private void Start()
-	{
-		listMonster = new List<Monster>();
-		
-		var data = app.resourceManager.GetDicDropItem();
-		float value = 0;
-		foreach(var item in data)
-		{
-			value += item.Value;
-			_percentDropItem.Add(item.Key, value);
-		}
-	}
+    private void Start()
+    {
+        listMonster = new List<Monster>();
+
+        var data = app.resourceManager.GetDicDropItem();
+        float value = 0;
+        foreach (var item in data)
+        {
+            value += item.Value;
+            _percentDropItem.Add(item.Key, value);
+        }
+    }
 
     protected override void OnDestroy()
     {
@@ -95,14 +95,14 @@ public class GameController : Controller<GameApp>
     }
 
 
-	public void ChangeScene(string nameScene, [CanBeNull] Action callback)
-	{
-		var load = SceneManager.LoadSceneAsync(nameScene, LoadSceneMode.Single);
-		load.completed += o =>
-		{
-			callback?.Invoke();
-		};
-	}
+    public void ChangeScene(string nameScene, [CanBeNull] Action callback)
+    {
+        var load = SceneManager.LoadSceneAsync(nameScene, LoadSceneMode.Single);
+        load.completed += o =>
+        {
+            callback?.Invoke();
+        };
+    }
     public void ChangeSceneHome()
     {
         var load = SceneManager.LoadSceneAsync(GameConst.nameScene_Main, LoadSceneMode.Single);
@@ -116,24 +116,24 @@ public class GameController : Controller<GameApp>
 
     public Monster FindNearestMonster(Vector3 bulletPosition, float range, Monster origin = null)
     {
-	    if(listMonster.Count == 0) return null;
-	
-	    Monster nearestMonster = null;
-	    float minDistance = float.MaxValue;
+        if (listMonster.Count == 0) return null;
 
-	    foreach(Monster monster in listMonster)
-	    {
-		    if(monster == origin) continue;
+        Monster nearestMonster = null;
+        float minDistance = float.MaxValue;
 
-		    float distance = Vector3.Distance(bulletPosition, monster.transform.position);
+        foreach (Monster monster in listMonster)
+        {
+            if (monster == origin) continue;
 
-		    if(distance <= range && distance < minDistance)
-		    {
-			    nearestMonster = monster;
-			    minDistance = distance;
-		    }
-	    }
-	    return nearestMonster;
+            float distance = Vector3.Distance(bulletPosition, monster.transform.position);
+
+            if (distance <= range && distance < minDistance)
+            {
+                nearestMonster = monster;
+                minDistance = distance;
+            }
+        }
+        return nearestMonster;
     }
 
     public void AddReward(Dictionary<TypeItemReward, int> listReward, TypeItemReward type, int value)
@@ -178,7 +178,6 @@ public class GameController : Controller<GameApp>
 
     public Monster SpawnBoss(MapView.WaveData wave)
     {
-
         var statBoss = app.configs.dataStatMonster.GetConfig(wave.idMonster);
 
         var bossStat = new MonsterStat(statBoss.moveSpeed, wave.healthMonster, wave.adMonster, statBoss.attackSpeed, statBoss.attackRange, wave.expMonster);
@@ -213,12 +212,12 @@ public class GameController : Controller<GameApp>
 
         Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
 
-		//var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
-		monster.Init(monsterStat, wave, type);
+        //var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
+        monster.Init(monsterStat, wave, type);
 
-        _healthBarController = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.GatlingCrab_HealthBar), app.resourceManager.rootContainer)
+        /*_healthBarController = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.GatlingCrab_HealthBar), app.resourceManager.rootContainer)
             .GetComponent<HealthBarController>();
-        _healthBarController.Init(monster);
+        _healthBarController.Init(monster);*/
 
         monster.ResetAttackCountdown();
         monster.animator.SetBool("Dead", false);
@@ -245,6 +244,7 @@ public class GameController : Controller<GameApp>
 
     public void MonsterDie(Monster mons, bool selfDie = false)
     {
+        if (_healthBarController != null && mons.isDead == true) _healthBarController.RemoveHealthBar();
         mons.animator.SetBool("Dead", true);
 
         if (!selfDie)
@@ -259,7 +259,9 @@ public class GameController : Controller<GameApp>
         {
             mons.wave.monsterInWave.Remove(mons);
         }
-        
+
+
+
         //Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
         //Destroy(mons.gameObject);
     }
@@ -310,10 +312,10 @@ public class GameController : Controller<GameApp>
             //{
             //    listMonsterInRect.Add(mons);
             //}
-             if(myRect.Contains(mons.transform.position))
-             {
-             	listMonsterInRect.Add(mons);
-             }
+            if (myRect.Contains(mons.transform.position))
+            {
+                listMonsterInRect.Add(mons);
+            }
         }
         return listMonsterInRect.Count != 0 ? listMonsterInRect : null;
     }
@@ -448,8 +450,8 @@ public class GameController : Controller<GameApp>
 
         foreach (var item in app.models.dataPlayerModel.ListItemEquipped)
         {
-	        var itemData = Singleton<ItemController>.instance.GetDataItem(item.id, item.rank, item.level).dataConfig;
-			//fix it
+            var itemData = Singleton<ItemController>.instance.GetDataItem(item.id, item.rank, item.level).dataConfig;
+            //fix it
         }
 
         var stat = new CharacterStat(
@@ -466,52 +468,52 @@ public class GameController : Controller<GameApp>
         return characterPrefab;
     }
 
-	public (string, int, StatId) GetDataStat(string text, ItemRank rank)
-	{
-		int number = 0;
-		string nameReturn = "";
-		var type = (StatId) Enum.Parse(typeof(StatId), text);
-		var statRank = app.configs.dataStatRankItemEquip.GetConfig(rank);
-		switch (type)
-		{
-			case StatId.Atk:
-				nameReturn = "AttackDamage";
-				number = statRank.atk;
-				break;
-			case StatId.Health:
-				nameReturn = "HealthPoint";
-				number = statRank.health;
-				break;
-		}
-		return (nameReturn, number, type);
-	}
+    public (string, int, StatId) GetDataStat(string text, ItemRank rank)
+    {
+        int number = 0;
+        string nameReturn = "";
+        var type = (StatId)Enum.Parse(typeof(StatId), text);
+        var statRank = app.configs.dataStatRankItemEquip.GetConfig(rank);
+        switch (type)
+        {
+            case StatId.Atk:
+                nameReturn = "AttackDamage";
+                number = statRank.atk;
+                break;
+            case StatId.Health:
+                nameReturn = "HealthPoint";
+                number = statRank.health;
+                break;
+        }
+        return (nameReturn, number, type);
+    }
 
-	public string GetTypeStatItemEquip(ItemType type)
-	{
-		return type switch
-		{
-			ItemType.Weapon => "Atk",
-			ItemType.Armor => "Health",
-			ItemType.Shoes => "Health",
-			ItemType.Gloves => "Atk",
-			ItemType.Hat => "Health",
-			ItemType.Ring => "Atk",
-			_ => ""
-		};
-	}
-	private void LoadMap(int chapter, int level)
-	{
-		_camSize = Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0));
-		_width = 1 / (_camSize.x - 0.5f);
-		_height = 1 / (_camSize.y - 0.5f);
-		Instantiate(app.resourceManager.mapInfinity, Vector3.zero, quaternion.identity).Init(chapter);
+    public string GetTypeStatItemEquip(ItemType type)
+    {
+        return type switch
+        {
+            ItemType.Weapon => "Atk",
+            ItemType.Armor => "Health",
+            ItemType.Shoes => "Health",
+            ItemType.Gloves => "Atk",
+            ItemType.Hat => "Health",
+            ItemType.Ring => "Atk",
+            _ => ""
+        };
+    }
+    private void LoadMap(int chapter, int level)
+    {
+        _camSize = Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0));
+        _width = 1 / (_camSize.x - 0.5f);
+        _height = 1 / (_camSize.y - 0.5f);
+        Instantiate(app.resourceManager.mapInfinity, Vector3.zero, quaternion.identity).Init(chapter);
 
-		map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
-		map.Init(chapter, level);
-		character = SpawnCharacter();
-		listMonster.Clear();
-		Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.SupportItem), Vector3.zero, quaternion.identity);
-		app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
-		//app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
-	}
+        map = app.resourceManager.ShowPopup(PopupType.MainInGame).GetComponent<MapView>();
+        map.Init(chapter, level);
+        character = SpawnCharacter();
+        listMonster.Clear();
+        Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.SupportItem), Vector3.zero, quaternion.identity);
+        app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
+        //app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
+    }
 }

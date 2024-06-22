@@ -45,7 +45,13 @@ public class HealthBarController : View<GameApp>
     private void LateUpdate()
     {
         if (gameController.isStop) return;
+       
         transform.position = Camera.main.WorldToScreenPoint(Vector3.up * 2f + _monster.transform.position);
+    }
+
+    public void RemoveHealthBar()
+    {
+        Destroy(gameObject);
     }
 
     public void Init(Monster monster)
