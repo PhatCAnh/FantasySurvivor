@@ -1,4 +1,4 @@
-using ArbanFramework;
+﻿using ArbanFramework;
 using ArbanFramework.MVC;
 using System.Collections;
 using FantasySurvivor;
@@ -18,6 +18,8 @@ public class HealthBarController : View<GameApp>
     public GameController gameController => Singleton<GameController>.instance;
 
     public Monster monster => Singleton<Monster>.instance;
+
+    private Vector2 fixedScreenPosition = new Vector2(0.50f, 0.80f);
 
     protected override void OnViewInit()
     {
@@ -40,13 +42,16 @@ public class HealthBarController : View<GameApp>
             new DataChangedValue(MonsterModel.dataChangedEvent, nameof(MonsterModel.currentHealthPoint), _monster.model)
         );
 
+        SetFixedPosition();
+
     }
 
-    private void LateUpdate()
+
+    private void SetFixedPosition()
     {
-        if (gameController.isStop) return;
-       
-        transform.position = Camera.main.WorldToScreenPoint(Vector3.up * 2f + _monster.transform.position);
+        // Chuyển đổi vị trí cố định từ tỷ lệ màn hình sang tọa độ pixel
+        Vector3 screenPosition = new Vector3(fixedScreenPosition.x * Screen.width, fixedScreenPosition.y * Screen.height, 0);
+        transform.position = screenPosition;
     }
 
     public void RemoveHealthBar()
@@ -57,5 +62,7 @@ public class HealthBarController : View<GameApp>
     public void Init(Monster monster)
     {
         _monster = monster;
+
+        SetFixedPosition();    
     }
 }
