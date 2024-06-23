@@ -48,6 +48,7 @@ public enum ItemPrefab
 	GatlingCrab,
     BulletBossGatlingCrab,
 	GatlingCrab_HealthBar,
+    PopupWarning_Boss,
 
 }
 

@@ -141,6 +141,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     [SerializeField] private GameObject _healthBarController;
 
+    [SerializeField] private GameObject _PopupWarning_Boss;
+
 
     private Dictionary<string, GameObject> _typeMonsterDic;
 
@@ -240,6 +242,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.GatlingCrab, _gatlingCrab },
 			{ItemPrefab.BulletBossGatlingCrab, _bulletBossGatlingCrab},
             {ItemPrefab.GatlingCrab_HealthBar, _healthBarController},
+            {ItemPrefab.PopupWarning_Boss, _PopupWarning_Boss},
+            
 
         };
 
