@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework;
 using ArbanFramework.MVC;
@@ -22,6 +22,7 @@ public class LoseGamePopup : View<GameApp>, IPopup
     
     [SerializeField] private Button _btnHome;
     [SerializeField] private Button _btnReward;
+    [SerializeField] private Button _btnRevive;  // Thêm nút hồi sinh
 
     private Sequence _sequence;
     private GameController gameController => Singleton<GameController>.instance;
@@ -38,6 +39,8 @@ public class LoseGamePopup : View<GameApp>, IPopup
         _btnHome.onClick.AddListener(OnClickBtnHome);
         
         _btnReward.onClick.AddListener(OnClickBtnReward);
+
+        _btnRevive.onClick.AddListener(OnClickBtnRevive);  // Liên kết sự kiện
 
         _txtWave.text = $"Best wave: {gameController.map.model.WaveInGame}";
 
@@ -82,6 +85,12 @@ public class LoseGamePopup : View<GameApp>, IPopup
         });
     }
 
+    private void OnClickBtnRevive()
+    {
+        gameController.ReviveCharacter();  // Gọi phương thức hồi sinh
+        Destroy(gameObject);  // Đóng popup sau khi hồi sinh
+    }
+
     private void SetAnimOpen()
     {
         _sequence = DOTween.Sequence();
@@ -101,6 +110,8 @@ public class LoseGamePopup : View<GameApp>, IPopup
         
         _btnHome.transform.localScale = Vector3.zero;
         _btnReward.transform.localScale = Vector3.zero;
+        _btnRevive.transform.localScale = Vector3.zero;  // Ẩn nút hồi sinh ban đầu
+
 
         _sequence
             .Append(_imageBackGround.DOFade(0.9f, duration * 2))
@@ -111,7 +122,9 @@ public class LoseGamePopup : View<GameApp>, IPopup
             .Join(_leftArrow.transform.DOLocalMove(new Vector3(-470, 0), duration))
             .Join(_rightArrow.transform.DOLocalMove(new Vector3(470, 0), duration))
             .Join(_btnHome.transform.DOScale(Vector3.one, duration))
-            .Join(_btnReward.transform.DOScale(Vector3.one, duration));
+            .Join(_btnReward.transform.DOScale(Vector3.one, duration))
+              .Join(_btnRevive.transform.DOScale(Vector3.one, duration));  // Hiển thị nút hồi sinh
+
         
         for(int i = 0; i < _containerReward.childCount; i++)
         {
