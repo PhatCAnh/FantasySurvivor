@@ -15,7 +15,7 @@ namespace FantasySurvivor
         public BulletBossGatlingCrab bulletPrefab3;
         public Transform firePoint2;
         public Transform firePoint3;
-        private GameObject telegraphEffectPrefab;
+        public GameObject telegraphEffectPrefab;
         private GameObject currentTelegraphEffect;
 
         private Vector3 spawnPos { get; set; }
@@ -36,10 +36,20 @@ namespace FantasySurvivor
         private float telegraphTimer = 0f;
         private float telegraphDuration = 1.5f;
 
+        private float sightRange = 10f;
+        private bool isInSightRange = false;
+
+
         protected override void OnViewInit()
         {
             base.OnViewInit();
             spawnPos = transform.position;
+            IdleState();
+        }
+
+        private bool IsSightRange()
+        {
+            return Vector3.Distance(transform.position, gameController.character.transform.position) <= sightRange;
         }
 
         private bool CheckBack()
@@ -53,6 +63,19 @@ namespace FantasySurvivor
 
             moveTarget = gameController.character.transform.position;
             moveDirection = moveTarget - transform.position;
+
+            if (!isInSightRange)
+            {
+                if (IsSightRange())
+                {
+                    isInSightRange = true;
+                }
+                else
+                {
+                    IdleState();
+                    return;
+                }
+            }
 
             if (isTelegraphing)
             {
@@ -76,6 +99,7 @@ namespace FantasySurvivor
                     cdAttack.Restart(2 / model.attackSpeed);
                     isTelegraphing = false;
                     isState3 = false;
+                    isState2 = false;
                 }
                 return;
             }
@@ -128,7 +152,6 @@ namespace FantasySurvivor
 
                     if (isState2 && cdAttack.isFinished)
                     {
-
                         if (attackCounter < 3)
                         {
                             isState2 = true;

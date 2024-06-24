@@ -91,6 +91,7 @@ MonoBehaviour:
   bulletPrefab3: {fileID: -7805141340533506810, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
   firePoint2: {fileID: 4790529623898961803}
   firePoint3: {fileID: 5500678796437042815}
+  telegraphEffectPrefab: {fileID: 2073436260658583224, guid: 7a32d8caca4bf514d8f52bfbe353df98, type: 3}
   typeBullet: 42
   typeBullet2: 42
   _numberBack: 0
@@ -603,10 +604,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 60
   orthographic: 1
-  orthographic size: 100
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
