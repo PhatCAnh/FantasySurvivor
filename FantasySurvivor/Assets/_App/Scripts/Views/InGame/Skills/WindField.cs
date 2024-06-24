@@ -43,7 +43,8 @@ public class WindField : SkillActive
         {
             if (gameController.CheckTouch(mons.transform.position, transform.position, size) && !attackedMonsters.Contains(mons))
             {
-                mons.UpdateStat(StatModifierType.Mul, 1, data.valueSpecial2, 1, 1, data.cooldown);
+                //mons.UpdateStat(StatModifierType.Mul, 1, data.valueSpecial2, 1, 1, data.cooldown);
+                var slow = new Slow(mons, data.valueSpecial2, 0.2f);
                 attackedMonsters.Add(mons);
             }
         }

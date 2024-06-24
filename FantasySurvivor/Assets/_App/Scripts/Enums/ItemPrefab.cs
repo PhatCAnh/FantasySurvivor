@@ -216,3 +216,13 @@ public enum TargetType
     Shot,
     None,
 }
+
+public enum StatusEffectName
+{
+	Ignite,
+	Poison,
+	Slow,
+	Vulerability,
+	Channeling,
+	BuffDame
+}
