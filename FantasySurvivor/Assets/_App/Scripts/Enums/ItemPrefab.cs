@@ -174,6 +174,7 @@ public enum PopupType
 	ItemEquipDetail,
 	ItemPieceDetail,
     GatlingCrab_HealthBar,
+	Warning,
 }
 
 public enum SkillDamagedType
@@ -217,4 +218,14 @@ public enum TargetType
     Target,
     Shot,
     None,
+}
+
+public enum StatusEffectName
+{
+	Ignite,
+	Poison,
+	Slow,
+	Vulerability,
+	Channeling,
+	BuffDame
 }

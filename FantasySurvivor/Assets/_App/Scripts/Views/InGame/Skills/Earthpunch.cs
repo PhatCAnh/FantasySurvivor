@@ -22,9 +22,12 @@ public class Earthpunch : SkillBulletActive
 
         if (!gameController.CheckTouch(monster.transform.position, transform.position, sizeTouch)) return false;
         TakeDamage(monster);
-        if (IsActionSuccessful(data.valueSpecial2))
+        if (IsActionSuccessful(/*data.valueSpecial2*/ 1))
         {
-            monster.UpdateStat(StatModifierType.Mul, 1, 0, 1, 1, data.valueSpecial1);
+            //monster.UpdateStat(StatModifierType.Mul, 1, 0, 1, 1, data.valueSpecial1);
+            //var slow = new Slow(monster, 0 , 5);
+            //var vul = new Vulnerability(monster,5);
+            var stun = new Stun(monster,10);
         }
         return true;
     }

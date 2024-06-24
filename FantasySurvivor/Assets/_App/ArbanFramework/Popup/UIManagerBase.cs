@@ -76,6 +76,11 @@ namespace ArbanFramework.MVC
         {
             return _popupDic.Count > 0;
         }
+        
+        public virtual bool CheckExistPopup(T type)
+        {
+            return _popupDic.ContainsKey(type);
+        }
 
         public void CloseAllPopup()
         {

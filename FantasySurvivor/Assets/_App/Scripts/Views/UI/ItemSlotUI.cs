@@ -27,7 +27,6 @@ public class ItemSlotUI : View<GameApp>
         if(data != null)
         {
             InitData(data);
-            
         }
         btn.onClick.AddListener(OnClickBtn);
     }

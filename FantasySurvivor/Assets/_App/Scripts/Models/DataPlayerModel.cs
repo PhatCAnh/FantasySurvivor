@@ -26,21 +26,24 @@ namespace FantasySurvivor
 		{
 			this.Coin = 99;
 			this.Gem = 10;
+			this.LimitQuantityItemEquip = 50;
 
 			app.models.WriteModel<DataPlayerModel>();
-			numberItemCreated = 0;
 		}
 
 		[JsonProperty] private int _coin;
+		
 		[JsonProperty] private int _gem;
+		
+		[JsonProperty] private int _limitQuantityItemEquip;
 
 		[JsonProperty] private List<ItemInBag> _bagItem = new List<ItemInBag>();
 
 		[JsonProperty] private List<ItemInBag> _listItemEquipped = new List<ItemInBag>();
 		
 		[JsonProperty] private List<SkillId> _skillSet = new List<SkillId>();
-
-		[JsonProperty] private int numberItemCreated;
+		
+		
 
 		public int Coin
 		{
@@ -63,12 +66,18 @@ namespace FantasySurvivor
 				RaiseDataChanged(nameof(Gem));
 			}
 		}
-
-		public string GetNumberItemEquipCreated()
+		
+		public int LimitQuantityItemEquip
 		{
-			return "Goty_" + numberItemCreated;
+			get => _limitQuantityItemEquip;
+			set {
+				if(LimitQuantityItemEquip == value) return;
+				_limitQuantityItemEquip = value;
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(LimitQuantityItemEquip));
+			}
 		}
-
+		
 		public List<ItemInBag> BagItem
 		{
 			get => _bagItem;
@@ -80,15 +89,28 @@ namespace FantasySurvivor
 		}
 
 		//fix it
-		public void AddItemEquipToBag(ItemId id, ItemRank rank, int level)
+		public bool AddItemEquipToBag(ItemId id, ItemRank rank, int level)
 		{
+			if(_bagItem.Count >= LimitQuantityItemEquip)
+			{
+				if(!app.resourceManager.CheckExistPopup(PopupType.Warning))
+				{
+					app.resourceManager.ShowPopup(PopupType.Warning).TryGetComponent(out PopupWarning warning);
+					warning.Init(
+						"Your bag is full, no more items can be added. Please increase your bag limit"
+					);
+				}
+				return false;
+			}
+			
 			ItemInBag itemInBag = new ItemInBag(id.ToString(), rank.ToString(), level);
 			_bagItem.Add(itemInBag);
 			app.models.WriteModel<DataPlayerModel>();
 			RaiseDataChanged(nameof(BagItem));
+			return true;
 		}
 		
-		public void AddItemEquipToBag(ItemId id, int quantity)
+		public void AddItemPieceToBag(ItemId id, int quantity)
 		{
 			var check = _bagItem.Find(item => item.id == id);
 			if(check == null)

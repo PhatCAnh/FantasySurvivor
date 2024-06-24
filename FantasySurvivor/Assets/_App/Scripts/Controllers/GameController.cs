@@ -172,9 +172,10 @@ public class GameController : Controller<GameApp>
     }
 
 
-    public void ResetPool()
+    public void ResetGame()
     {
         Singleton<PoolController>.instance.RemoveAllPool();
+        Singleton<SkillController>.instance.ResetDataSkillInGame();
     }
 
     public Monster SpawnBoss(MapView.WaveData wave)

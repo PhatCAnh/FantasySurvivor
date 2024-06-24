@@ -56,7 +56,7 @@ public class LoseGamePopup : View<GameApp>, IPopup
     }
     public void Close()
     {
-        //gameController.ResetPool();
+        gameController.ResetGame();
         gameController.ChangeSceneHome();
         gameController.isEndGame = false;
         Destroy(gameObject);

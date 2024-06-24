@@ -13,7 +13,7 @@ using UnityEngine.UI;
 
 public class CharacterInformation : View<GameApp>, IPopup
 {
-	[SerializeField] private TextMeshProUGUI _txtHealth, _txtMoveSpeed, _txtAtkDamage, _txtArmor;
+	[SerializeField] private TextMeshProUGUI _txtHealth, _txtMoveSpeed, _txtAtkDamage, _txtArmor, _txtLimit;
 
 	[SerializeField] private Transform _slotItemEquipContainer;
 
@@ -21,7 +21,9 @@ public class CharacterInformation : View<GameApp>, IPopup
 
 	[SerializeField] private ItemSlotEquipUI _slotWeapon, _slotArmor, _slotHat, _slotRing, _slotShoes, _slotGloves;
 
-	[SerializeField] private Button _btnBack;
+	[SerializeField] private Button _btnBack, _btnAddItemSlot;
+
+	[SerializeField] private Toggle _tglAll, _tglItemEquip, _tglItemPiece;
 
 	private Dictionary<ItemType, ItemSlotEquipUI> _dicItemEquip;
 
@@ -63,6 +65,13 @@ public class CharacterInformation : View<GameApp>, IPopup
 		};
 		
 		_btnBack.onClick.AddListener(Close);
+		_btnAddItemSlot.onClick.AddListener(AddItemSlot);
+		_tglAll.onValueChanged.AddListener(GetAllItem);
+		_tglItemEquip.onValueChanged.AddListener(GetAllItemEquip);
+		_tglItemPiece.onValueChanged.AddListener(GetAllItemPiece);
+		
+		var dataPlayerModel = app.models.dataPlayerModel;
+		_txtLimit.text = $"{dataPlayerModel.BagItem.Count} / {dataPlayerModel.LimitQuantityItemEquip}";
 
 		//app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Axe, ItemRank.Legendary, 2);
 
@@ -92,7 +101,7 @@ public class CharacterInformation : View<GameApp>, IPopup
 	[ContextMenu("Test item piece")]
 	public void Test()
 	{
-		app.models.dataPlayerModel.AddItemEquipToBag(ItemId.PieceFire, 2);
+		app.models.dataPlayerModel.AddItemPieceToBag(ItemId.PieceFire, 2);
 	}
 	
 	[ContextMenu("Test item Equip")]
@@ -129,6 +138,44 @@ public class CharacterInformation : View<GameApp>, IPopup
 		item.Init(data, this);
 	}
 
+	private void AddItemSlot()
+	{
+		app.resourceManager.ShowPopup(PopupType.Warning).TryGetComponent(out PopupWarning popupWarning);
+		popupWarning.Init("Buy slot item", "Would you like to buy 50 item slots? with 10000 <sprite=4>", "10000 <sprite=4>",
+			() => { app.models.dataPlayerModel.LimitQuantityItemEquip += 50; popupWarning.Close(); }
+		);
+	}
+
+	private void GetAllItem(bool value)
+	{
+		if(!_tglAll.isOn) return;
+		foreach(var itemSlot in _listItemSlot.ToList())
+		{
+			itemSlot.SetActive(true);
+		}
+	}
+	
+	private void GetAllItemEquip(bool value)
+	{
+		if(!_tglItemEquip.isOn) return;
+		foreach(var itemSlot in _listItemSlot.ToList())
+		{
+			var type = itemSlot.GetComponent<ItemSlotUI>().itemData.dataConfig.type;
+			itemSlot.SetActive(type is ItemType.Armor or ItemType.Gloves or ItemType.Hat or ItemType.Ring or ItemType.Shoes or ItemType.Weapon);
+		}
+	}
+	
+	private void GetAllItemPiece(bool value)
+	{
+		if(!_tglItemPiece.isOn) return;
+		foreach(var itemSlot in _listItemSlot.ToList())
+		{
+			var type = itemSlot.GetComponent<ItemSlotUI>().itemData.dataConfig.type;
+			itemSlot.SetActive(type is not (ItemType.Armor or ItemType.Gloves or ItemType.Hat or ItemType.Ring or ItemType.Shoes or ItemType.Weapon));
+		}
+	}
+	
+
 	private void InitDispatcher()
 	{
 		AddDataBinding("fieldCharacterModel-healthValue", _txtHealth, (control, e) =>
@@ -154,6 +201,18 @@ public class CharacterInformation : View<GameApp>, IPopup
 			float armorPercent = app.models.characterModel.armor / 100f;
 			control.text = $"{armorPercent * 100f}%";
 		}, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.armor), app.models.characterModel));
+		
+		AddDataBinding("fieldDataPlayerModel-bagItem", _txtLimit, (control, e) =>
+		{
+			var data = app.models.dataPlayerModel;
+			control.text = $"{data.BagItem.Count} / {data.LimitQuantityItemEquip}";
+		}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.BagItem), app.models.dataPlayerModel));
+		
+		AddDataBinding("fieldDataPlayerModel-limitQuantityItemEquip", _txtLimit, (control, e) =>
+		{
+			var data = app.models.dataPlayerModel;
+			control.text = $"{data.BagItem.Count} / {data.LimitQuantityItemEquip}";
+		}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.LimitQuantityItemEquip), app.models.dataPlayerModel));
 		
 		AddDataBinding("fieldDataPlayerModel-BagItemEquipValue", this, (control, e) =>
 			{

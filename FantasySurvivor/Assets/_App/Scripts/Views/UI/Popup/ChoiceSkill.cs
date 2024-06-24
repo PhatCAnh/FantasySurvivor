@@ -18,10 +18,12 @@ public class ChoiceSkill : View<GameApp>, IPopup
 	public GameController gameController => Singleton<GameController>.instance;
 	public SkillController skillController => Singleton<SkillController>.instance;
 
+	private bool isSelected;
 
 	protected override void OnViewInit()
 	{
 		base.OnViewInit();
+		isSelected = false;
 		var skillData = skillController.GetRandomSkill();
 		_listSkillUI = new SkillUI[skillData.Count];
 		for (int i = 0; i < skillData.Count; i++)
@@ -60,6 +62,9 @@ public class ChoiceSkill : View<GameApp>, IPopup
 
 	public void Selected(SkillUI skillUI)
 	{
+		if(isSelected) return;
+		isSelected = true;
+		
 		Sequence sequence = DOTween.Sequence();
 
 		sequence

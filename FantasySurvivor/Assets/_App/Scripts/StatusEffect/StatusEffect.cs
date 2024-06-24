@@ -9,8 +9,10 @@ public enum EffectType
 public class StatusEffect
 {
 	public EffectType type;
+	public StatusEffectName name;
 	public float value;
 	public Monster target;
+	public Character character;
 	public Cooldown cdTotal;
 	
 
@@ -22,11 +24,27 @@ public class StatusEffect
 		cdTotal = new Cooldown();
 		cdTotal.Restart(duration);
 	}
-	
-	public StatusEffect(Monster target, float duration)
+
+    public StatusEffect(Character character, float value, float duration)
+    {
+        this.character = character;
+        this.character.listStatusEffect.Add(this);
+        this.value = value;
+        cdTotal = new Cooldown();
+        cdTotal.Restart(duration);
+    }
+
+    public StatusEffect(Monster target, float duration)
 	{
 		this.target = target;
 		this.target.listStatusEffect.Add(this);
+		cdTotal = new Cooldown();
+		cdTotal.Restart(duration);
+	}
+	public StatusEffect(Character character, float duration)
+	{
+		this.character = character;
+		this.character.listStatusEffect.Add(this);
 		cdTotal = new Cooldown();
 		cdTotal.Restart(duration);
 	}

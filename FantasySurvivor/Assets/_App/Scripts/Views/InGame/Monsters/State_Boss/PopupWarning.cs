@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class PopupWarning : MonoBehaviour
+public class PopupWarningBossing : MonoBehaviour
 {
     public TMP_Text popupText;  // Text để hiển thị thông báo
 
