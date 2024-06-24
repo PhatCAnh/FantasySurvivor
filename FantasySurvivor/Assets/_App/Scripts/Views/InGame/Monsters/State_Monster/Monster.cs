@@ -81,7 +81,6 @@ public class Monster : ObjectRPG
     public float size;
     public Character target => gameController.character;
 
-
     public MapView.WaveData wave { get; private set; }
 
     protected float sizeAttack;
@@ -190,7 +189,16 @@ public class Monster : ObjectRPG
     public virtual void Attack()
     {
         animator.SetBool("Attack", true);
-        target.TakeDamage(model.attackDamage);
+        int buffDame = 0;
+        foreach (StatusEffect status in listStatusEffect)
+        {
+            if (status.name == StatusEffectName.BuffDame)
+            {
+                buffDame = (model.attackDamage * Convert.ToInt32(status.value) / 100);
+                break;
+            }
+        }
+        target.TakeDamage(model.attackDamage + buffDame);
     }
 
 
@@ -216,7 +224,8 @@ public class Monster : ObjectRPG
                 break;
             }
         }
-    
+
+
         model.currentHealthPoint -= ( damage + weakness + buffDame);
         callBackDamaged?.Invoke();
 
@@ -227,6 +236,7 @@ public class Monster : ObjectRPG
         Die();
         callBackKilled?.Invoke();
     }
+
 
     public void ResetAttackCountdown()
     {
