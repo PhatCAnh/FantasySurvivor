@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3402335936684319673}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -540, y: -960, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7740478561839289927}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3402335936684319679
 MonoBehaviour:
@@ -92,6 +92,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7740478561442437962}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -99,7 +100,6 @@ Transform:
   m_Children:
   - {fileID: 7740478561839289927}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7740478561442437960
 MonoBehaviour:
@@ -117,6 +117,33 @@ MonoBehaviour:
   _healthBarPrefab: {fileID: 5614261067818666273, guid: 35409695b36a9264d80899c5dd561465, type: 3}
   _characterPrefab: {fileID: 6980818757309096134, guid: e679a345c1e93424f921109a1aaf81ba, type: 3}
   _gemExpPrefab: {fileID: 8527315627761866939, guid: 8abfee58130042548a87a2d4844c6437, type: 3}
+  _textPopup: {fileID: 0}
+  _supportItem: {fileID: 0}
+  _bulletKillerBee: {fileID: 0}
+  _skillFireShield: {fileID: 0}
+  _skillFireBall: {fileID: 0}
+  _skillThunderStrike: {fileID: 0}
+  _skillThunderStrikeSmall: {fileID: 0}
+  _bulletGlobloomSentry: {fileID: 0}
+  _skillWaterBall: {fileID: 0}
+  _skillShark: {fileID: 0}
+  _skillPoisonBullet: {fileID: 0}
+  _skillEarthPunch: {fileID: 0}
+  _skillSkyBoom: {fileID: 0}
+  _skillBoomerang: {fileID: 0}
+  _skillSmilingface: {fileID: 0}
+  _skillIceSpear: {fileID: 0}
+  _skillTwin: {fileID: 0}
+  _bulletOwlStriker: {fileID: 0}
+  _bulletGoblinswift: {fileID: 0}
+  _skillCyclone: {fileID: 0}
+  _bulletBossGatlingCrab: {fileID: 0}
+  _skillWindfield: {fileID: 0}
+  _skillThunderPunch: {fileID: 0}
+  _skillEarthShield: {fileID: 0}
+  _skillLightningWeb: {fileID: 0}
+  _skillThunderChanneling: {fileID: 0}
+  _skillTimeBoom: {fileID: 0}
   _mainUIInGame: {fileID: 5689714708223612571, guid: 965e9b98cbf91be42860273d75b9e9b0, type: 3}
   _mainUI: {fileID: 4517874775808894528, guid: 05c26368afa94b545a807df678ec685d, type: 3}
   _pausePopup: {fileID: 2920936543736872574, guid: 54c842cbdc5037e4e9d70f478b0694e4, type: 3}
@@ -124,62 +151,216 @@ MonoBehaviour:
   _choiceMapPopup: {fileID: 596667037376128798, guid: 30f13f392a9b75b479117dbd33a1941e, type: 3}
   _loseGamePopup: {fileID: 1395811789396144461, guid: 08abf63e269daae449e5d2dea7cc9230, type: 3}
   _choiceSkill: {fileID: 8671060162732829558, guid: e18158855844cf846930ec9f3275f7a2, type: 3}
+  _choiceSkillOutGame: {fileID: 0}
+  _characterInformation: {fileID: 0}
+  _characterChoose: {fileID: 0}
+  _itemEquipDetail: {fileID: 0}
+  _itemPieceDetail: {fileID: 0}
+  _warning: {fileID: 0}
   _clickBulletTutorial: {fileID: 4578341570658841133, guid: 482474f6201afa444b6d80d03d536966, type: 3}
+  _meadowMap: {fileID: 0}
   _forestMap: {fileID: 5413659250902458259, guid: 4a657833fb5ae654e86158b4274f4159, type: 3}
   mapInfinity: {fileID: 1576476033222042154, guid: 5163479d93b45d24aadfde983865c1bb, type: 3}
-  _blueZombie: {fileID: 5281739451839745389, guid: 169d4e58824d47647a166e95477b2cc8, type: 3}
-  _purpleZombie: {fileID: 5281739451839745389, guid: fb3091dddb5f1e34a8f2642e9729034e, type: 3}
-  _blueGhost: {fileID: 5281739451839745389, guid: e0101715c270b80498ca0800fc4eda60, type: 3}
-  _yellowBomb: {fileID: 8916838031505534731, guid: 77edd8347697b5842a205261c02618a9, type: 3}
-  _purpleDevil: {fileID: 2251807672777610876, guid: cfec675ec25a68346897caaffd1f72f1, type: 3}
+  _swampOoze: {fileID: 0}
+  _killerBee: {fileID: 0}
+  _globloomSentry: {fileID: 0}
+  _lupineStag: {fileID: 0}
+  _electroBomber: {fileID: 0}
+  _slimeWandering: {fileID: 0}
+  _minionSkeleton: {fileID: 0}
+  _minionWolf: {fileID: 0}
+  _owlStriker: {fileID: 0}
+  _goblinSwift: {fileID: 0}
+  _minionGoblin: {fileID: 0}
+  _gatlingCrab: {fileID: 0}
+  _healthBarController: {fileID: 0}
+  _PopupWarning_Boss: {fileID: 0}
   _irCoin: {fileID: 4763499435868738885, guid: 4accdbbbca1969d46992dd9b3e66be7a, type: 3}
   _exp: 99.7
   _magnet: 0.1
   _food: 0.1
   _bomb: 0.1
   _poolSkill:
-  - name: 0
+  - id: 0
+    name: 0
     type: 0
+    spawnPos: 0
+    normalSkillType: 10
+    evolveSkillType: 10
     typeElemental: 0
     imgUI: {fileID: 21300000, guid: 65d81833a9705374299a503a6186aa2f, type: 3}
-    skillPrefab: {fileID: 8206914173546746077, guid: 24f582cf70ec6c444bd720fa6d3c911a, type: 3}
-    skillEvolvePrefab: {fileID: 0}
-  - name: 1
+    canAppear: 1
+  - id: 1
+    name: 5
     type: 0
-    typeElemental: 1
-    imgUI: {fileID: 704797902, guid: e4ffbed7851f5774ca9f8acb8fce1d5e, type: 3}
-    skillPrefab: {fileID: 9075703475211245482, guid: 7c860169edcee5747bf90d4ebca6da2e, type: 3}
-    skillEvolvePrefab: {fileID: 0}
-  - name: 2
-    type: 0
-    typeElemental: 2
-    imgUI: {fileID: 21300000, guid: 7d9f2344361daf645b44645c6bbcec2c, type: 3}
-    skillPrefab: {fileID: 5969974768321339375, guid: bccfbe3ac4d1a834387290001c1a7597, type: 3}
-    skillEvolvePrefab: {fileID: 0}
-  - name: 3
-    type: 0
-    typeElemental: 5
-    imgUI: {fileID: 21300000, guid: c2631b5db58c62e4193d892172de7ad7, type: 3}
-    skillPrefab: {fileID: 5246971698916849523, guid: 9248e3ef35126f346affde9b9d9fde8b, type: 3}
-    skillEvolvePrefab: {fileID: 0}
-  - name: 4
-    type: 0
-    typeElemental: 4
-    imgUI: {fileID: -1216228538, guid: 8712650e07ff46049a576ee656f0e945, type: 3}
-    skillPrefab: {fileID: 873336829918094235, guid: a6a831d5a3c80f44d8a599b2b220c529, type: 3}
-    skillEvolvePrefab: {fileID: 6105532977934052371, guid: 7755505eb2bb0b9448c97bde25b3c4cd, type: 3}
-  - name: 5
-    type: 0
-    typeElemental: 3
-    imgUI: {fileID: 21300000, guid: 4f6d07691f47aae4783a915494071d2c, type: 3}
-    skillPrefab: {fileID: 4717237100564316986, guid: 4b32837a25835084b81f6041d56db7b7, type: 3}
-    skillEvolvePrefab: {fileID: 0}
-  - name: 6
-    type: 1
+    spawnPos: 0
+    normalSkillType: 14
+    evolveSkillType: 14
     typeElemental: 0
+    imgUI: {fileID: 704797902, guid: e4ffbed7851f5774ca9f8acb8fce1d5e, type: 3}
+    canAppear: 1
+  - id: 2
+    name: 10
+    type: 0
+    spawnPos: 1
+    normalSkillType: 18
+    evolveSkillType: 18
+    typeElemental: 0
+    imgUI: {fileID: 21300000, guid: 7d9f2344361daf645b44645c6bbcec2c, type: 3}
+    canAppear: 1
+  - id: 3
+    name: 20
+    type: 0
+    spawnPos: 0
+    normalSkillType: 39
+    evolveSkillType: 39
+    typeElemental: 0
+    imgUI: {fileID: 21300000, guid: c2631b5db58c62e4193d892172de7ad7, type: 3}
+    canAppear: 1
+  - id: 20
+    name: 1
+    type: 0
+    spawnPos: 1
+    normalSkillType: 11
+    evolveSkillType: 12
+    typeElemental: 2
+    imgUI: {fileID: -1216228538, guid: 8712650e07ff46049a576ee656f0e945, type: 3}
+    canAppear: 1
+  - id: 21
+    name: 4
+    type: 0
+    spawnPos: 0
+    normalSkillType: 38
+    evolveSkillType: 38
+    typeElemental: 2
+    imgUI: {fileID: 21300000, guid: 4f6d07691f47aae4783a915494071d2c, type: 3}
+    canAppear: 1
+  - id: 22
+    name: 12
+    type: 0
+    spawnPos: 0
+    normalSkillType: 20
+    evolveSkillType: 20
+    typeElemental: 2
     imgUI: {fileID: -2132478216, guid: e88eaf7389d53004a963e0a054888286, type: 3}
-    skillPrefab: {fileID: 0}
-    skillEvolvePrefab: {fileID: 0}
+    canAppear: 1
+  - id: 23
+    name: 17
+    type: 0
+    spawnPos: 0
+    normalSkillType: 35
+    evolveSkillType: 35
+    typeElemental: 2
+    imgUI: {fileID: -2132478216, guid: e88eaf7389d53004a963e0a054888286, type: 3}
+    canAppear: 1
+  - id: 24
+    name: 19
+    type: 0
+    spawnPos: 0
+    normalSkillType: 37
+    evolveSkillType: 37
+    typeElemental: 2
+    imgUI: {fileID: -2132478216, guid: e88eaf7389d53004a963e0a054888286, type: 3}
+    canAppear: 1
+  - id: 5
+    name: 2
+    type: 0
+    spawnPos: 0
+    normalSkillType: 13
+    evolveSkillType: 13
+    typeElemental: 1
+    imgUI: {fileID: -2132478216, guid: e88eaf7389d53004a963e0a054888286, type: 3}
+    canAppear: 1
+  - id: 6
+    name: 6
+    type: 0
+    spawnPos: 1
+    normalSkillType: 15
+    evolveSkillType: 15
+    typeElemental: 1
+    imgUI: {fileID: -2132478216, guid: e88eaf7389d53004a963e0a054888286, type: 3}
+    canAppear: 1
+  - id: 7
+    name: 13
+    type: 0
+    spawnPos: 0
+    normalSkillType: 21
+    evolveSkillType: 21
+    typeElemental: 1
+    imgUI: {fileID: -2132478216, guid: e88eaf7389d53004a963e0a054888286, type: 3}
+    canAppear: 1
+  - id: 17
+    name: 13
+    type: 0
+    spawnPos: 0
+    normalSkillType: 21
+    evolveSkillType: 21
+    typeElemental: 1
+    imgUI: {fileID: -2132478216, guid: e88eaf7389d53004a963e0a054888286, type: 3}
+    canAppear: 1
+  - id: 10
+    name: 8
+    type: 0
+    spawnPos: 0
+    normalSkillType: 16
+    evolveSkillType: 16
+    typeElemental: 4
+    imgUI: {fileID: -2132478216, guid: e88eaf7389d53004a963e0a054888286, type: 3}
+    canAppear: 1
+  - id: 11
+    name: 9
+    type: 0
+    spawnPos: 0
+    normalSkillType: 17
+    evolveSkillType: 17
+    typeElemental: 4
+    imgUI: {fileID: -2132478216, guid: e88eaf7389d53004a963e0a054888286, type: 3}
+    canAppear: 1
+  - id: 12
+    name: 18
+    type: 0
+    spawnPos: 0
+    normalSkillType: 36
+    evolveSkillType: 36
+    typeElemental: 4
+    imgUI: {fileID: -2132478216, guid: e88eaf7389d53004a963e0a054888286, type: 3}
+    canAppear: 1
+  - id: 15
+    name: 11
+    type: 0
+    spawnPos: 0
+    normalSkillType: 19
+    evolveSkillType: 19
+    typeElemental: 3
+    imgUI: {fileID: -2132478216, guid: e88eaf7389d53004a963e0a054888286, type: 3}
+    canAppear: 1
+  - id: 16
+    name: 14
+    type: 0
+    spawnPos: 0
+    normalSkillType: 22
+    evolveSkillType: 22
+    typeElemental: 3
+    imgUI: {fileID: -2132478216, guid: e88eaf7389d53004a963e0a054888286, type: 3}
+    canAppear: 1
+  - id: 17
+    name: 15
+    type: 0
+    spawnPos: 0
+    normalSkillType: 33
+    evolveSkillType: 33
+    typeElemental: 3
+    imgUI: {fileID: -2132478216, guid: e88eaf7389d53004a963e0a054888286, type: 3}
+    canAppear: 1
+  - id: 18
+    name: 16
+    type: 0
+    spawnPos: 0
+    normalSkillType: 34
+    evolveSkillType: 34
+    typeElemental: 3
+    imgUI: {fileID: -2132478216, guid: e88eaf7389d53004a963e0a054888286, type: 3}
+    canAppear: 1
 --- !u!1 &7740478561839289926
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +395,6 @@ RectTransform:
   - {fileID: 7740478562728095186}
   - {fileID: 3402335936684319678}
   m_Father: {fileID: 7740478561442437963}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -238,7 +418,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -314,7 +496,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7740478561839289927}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
