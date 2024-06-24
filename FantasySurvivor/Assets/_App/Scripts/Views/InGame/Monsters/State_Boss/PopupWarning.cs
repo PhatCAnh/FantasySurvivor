@@ -20,28 +20,24 @@ public class PopupWarningBossing : MonoBehaviour
     }
 
     // Phương thức để hiển thị popup với một thông báo
-    public void ShowPopup(string text, float timeshow)
+    public void ShowPopup(string text)
     {
-        isActive = true;
         window.SetActive(true);  // Hiển thị cửa sổ popup
         popupText.text = text;  // Cập nhật văn bản thông báo
         popupAnimator.Play("PopupWarningBoss");  // Chạy hoạt ảnh hiển thị popup
-        StartCoroutine(HideAfterDelay(5f));  // Tự động ẩn popup sau 5 giây
+    }
+
+
+    // Phương thức để ẩn popup
+    public void HidePopup()
+    {
+        // Hủy đối tượng PopupWarning sau khi ẩn
+        Destroy(gameObject);
     }
 
     // Phương thức để bắt đầu quá trình hiển thị popup khi được tạo ra
-    public void ShowPopupOnSpawn(string text, float timeshow)
+    public void ShowPopupOnSpawn(string text)
     {
-        ShowPopup(text, timeshow);
+        ShowPopup(text);
     }
-
-    // Coroutine để ẩn popup sau một khoảng thời gian trì hoãn
-    private IEnumerator HideAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);  // Chờ trong thời gian đã định
-        window.SetActive(false);  // Ẩn cửa sổ popup
-        isActive = false;  // Cập nhật trạng thái của popup
-    }
-
-
 }

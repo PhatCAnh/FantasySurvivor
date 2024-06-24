@@ -34,7 +34,6 @@ public class GameController : Controller<GameApp>
 
     private HealthBar _healthBar;
     private HealthBarController _healthBarController;
-    private PopupWarning _popupWarningBoss;
 
     public int currentNumberSkill = 0;// điếm số skill outr game
     private Vector3 _camSize;
@@ -194,9 +193,7 @@ public class GameController : Controller<GameApp>
         _healthBarController = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.GatlingCrab_HealthBar), app.resourceManager.rootContainer)
            .GetComponent<HealthBarController>();
         _healthBarController.Init(boss);
-  
-        _popupWarningBoss = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.PopupWarning_Boss), app.resourceManager.rootContainer).GetComponent<PopupWarning>();
-  
+
         boss.ResetAttackCountdown();
         boss.animator.SetBool("Dead", false);
         listMonster.Add(boss);

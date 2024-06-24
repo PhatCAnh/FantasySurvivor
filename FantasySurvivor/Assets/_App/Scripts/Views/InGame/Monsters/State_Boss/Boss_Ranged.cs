@@ -15,8 +15,9 @@ namespace FantasySurvivor
         public BulletBossGatlingCrab bulletPrefab3;
         public Transform firePoint2;
         public Transform firePoint3;
-        public GameObject telegraphEffectPrefab;
+        private GameObject telegraphEffectPrefab;
         private GameObject currentTelegraphEffect;
+
         private Vector3 spawnPos { get; set; }
         private Vector3 markedPosition;
 
