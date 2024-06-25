@@ -36,7 +36,6 @@ public class GameController : Controller<GameApp>
     private HealthBarController _healthBarController;
     private PopupWarning _popupWarningBoss;
 
-    public int currentNumberSkill = 0;// điếm số skill outr game
     private Vector3 _camSize;
     private float _width;
     private float _height;

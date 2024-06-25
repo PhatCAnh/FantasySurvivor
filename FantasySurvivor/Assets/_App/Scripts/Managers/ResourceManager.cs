@@ -162,9 +162,6 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	private Dictionary<DropItemType, float> _dropItemDic;
 
-	[SerializeField] private List<SkillData> _poolSkill;
-
-	public Dictionary<SkillName, Skill> dictionarySkill = new Dictionary<SkillName, Skill>();
 	private void Awake()
 	{
 		Singleton<ResourceManager>.Set(this);
@@ -308,16 +305,6 @@ public class ResourceManager : UIManagerBase<PopupType>
 	public ItemReward GetItemReward(TypeItemReward type)
 	{
 		return _typeItemReward[type];
-	}
-
-	public List<SkillData> GetListSkill()
-	{
-		return _poolSkill.Where(skill => skill.name != SkillName.Food).ToList();
-	}
-
-	public SkillData GetSkill(SkillName name)
-	{
-		return _poolSkill.FirstOrDefault(skill => skill.name == name);
 	}
 
 	public Dictionary<DropItemType, float> GetDicDropItem()

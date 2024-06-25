@@ -12,6 +12,8 @@ namespace _App.Scripts.Controllers
 {
 	public class SkillController : Controller<GameApp>
 	{
+		[SerializeField] private SkillDataTable _skillDataTable;
+		
 		private List<SkillDataTotal> _listSkillTotal;
 
 		private List<SkillId> _listSkillSelected;
@@ -29,10 +31,10 @@ namespace _App.Scripts.Controllers
 		private void Start()
 		{
 			_listSkillTotal = new List<SkillDataTotal>();
-			_listSkillSelected = new List<SkillId>();
+			_listSkillSelected = app.models.dataPlayerModel.GetSkillSet();
 			_listSkillChoose = new List<SkillId>();
 
-			var listSkillUI = app.resourceManager.GetListSkill();
+			var listSkillUI = _skillDataTable.listSkillData;
 
 			foreach(var item in listSkillUI)
 			{
@@ -41,6 +43,16 @@ namespace _App.Scripts.Controllers
 				var skill = new SkillDataTotal(id, item, dataStat);
 				_listSkillTotal.Add(skill);
 			}
+		}
+		
+		public List<SkillData> GetListSkillDataTable()
+		{
+			return _skillDataTable.listSkillData.Where(skill => skill.name != SkillName.Food).ToList();
+		}
+
+		public SkillData GetSkillDataTable(SkillName name)
+		{
+			return _skillDataTable.listSkillData.FirstOrDefault(skill => skill.name == name);
 		}
 
 		public List<SkillDataTotal> GetListSkillTotal()
