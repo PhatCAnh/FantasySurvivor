@@ -40,11 +40,26 @@ namespace FantasySurvivor
         private bool isInSightRange = false;
 
 
+        public GameObject zonePrefab; 
+        private GameObject currentZone; 
+        public float initialZoneRadius = 20f; 
+        public float shrinkingSpeed = 0.1f; 
+        public float damagePerSecondOutsideZone = 10f; 
+        private float currentZoneRadius;
+
+
         protected override void OnViewInit()
         {
             base.OnViewInit();
             spawnPos = transform.position;
             IdleState();
+
+
+           
+            currentZone = Instantiate(zonePrefab, transform.position, Quaternion.identity);
+            currentZone.transform.localScale = Vector3.one * initialZoneRadius * 2; 
+            currentZoneRadius = initialZoneRadius;
+
         }
 
         private bool IsSightRange()
@@ -63,6 +78,8 @@ namespace FantasySurvivor
 
             moveTarget = gameController.character.transform.position;
             moveDirection = moveTarget - transform.position;
+
+            UpdateZone();
 
             if (!isInSightRange)
             {
@@ -152,6 +169,7 @@ namespace FantasySurvivor
 
                     if (isState2 && cdAttack.isFinished)
                     {
+
                         if (attackCounter < 3)
                         {
                             isState2 = true;
@@ -178,6 +196,24 @@ namespace FantasySurvivor
 
             SetAnimation(idleDirection);
         }
+
+        private void UpdateZone()
+        {
+            if (currentZoneRadius > 0)
+            {
+                currentZoneRadius -= shrinkingSpeed * Time.deltaTime;
+                currentZone.transform.localScale = Vector3.one * currentZoneRadius * 2;
+            }
+
+
+            int damage = (int)(damagePerSecondOutsideZone * Time.deltaTime);
+            float distanceToPlayer = Vector3.Distance(transform.position, gameController.character.transform.position);
+            if (distanceToPlayer > currentZoneRadius)
+            {
+                gameController.character.TakeDamage(damage);
+            }
+        }
+
 
         public override void Attack()
         {
