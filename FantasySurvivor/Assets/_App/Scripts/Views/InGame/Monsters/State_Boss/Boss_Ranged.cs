@@ -43,9 +43,9 @@ namespace FantasySurvivor
         public GameObject zonePrefab; 
         private GameObject currentZone; 
         public float initialZoneRadius = 20f; 
-        public float shrinkingSpeed = 0.1f; 
-        public float damagePerSecondOutsideZone = 10f; 
+        public float shrinkingSpeed = 0.1f;
         private float currentZoneRadius;
+        private float damageTimer = 0f;
 
 
         protected override void OnViewInit()
@@ -205,12 +205,16 @@ namespace FantasySurvivor
                 currentZone.transform.localScale = Vector3.one * currentZoneRadius * 2;
             }
 
+            damageTimer += Time.deltaTime;
 
-            int damage = (int)(damagePerSecondOutsideZone * Time.deltaTime);
-            float distanceToPlayer = Vector3.Distance(transform.position, gameController.character.transform.position);
-            if (distanceToPlayer > currentZoneRadius)
+            if (damageTimer >= 0.5f) // Kiểm tra xem có một giây đã trôi qua
             {
-                gameController.character.TakeDamage(damage);
+                float distanceToPlayer = Vector3.Distance(transform.position, gameController.character.transform.position);
+                if (distanceToPlayer > currentZoneRadius)
+                {
+                    gameController.character.TakeDamage(10);
+                }
+                damageTimer = 0f; // Reset bộ đếm thời gian
             }
         }
 
