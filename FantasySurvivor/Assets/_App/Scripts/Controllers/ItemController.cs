@@ -81,4 +81,57 @@ public class ItemController : Controller<GameApp>
 				break;
 		}
 	}
+
+	public void ClaimItem(ItemId id, ItemType type, ItemRank rank, int level, int quantity)
+	{
+		app.resourceManager.ShowPopup(PopupType.RewardPopup).TryGetComponent(out PopupReward popupReward);
+
+		var listItem = new List<ItemInBag>
+		{
+			new ItemInBag(id.ToString(), rank.ToString(), 0, quantity),
+		};
+		
+		popupReward.Init(listItem);
+
+		LogicClaimItem(type, id, rank, level, quantity);
+	}
+
+	private void LogicClaimItem(ItemType type, ItemId id, ItemRank rank, int level, int quantity)
+	{
+		switch (type)
+		{
+
+			case ItemType.Piece:
+				app.models.dataPlayerModel.AddItemPieceToBag(id, quantity);
+				break;
+			case ItemType.ETC:
+				switch (id)
+				{
+					case ItemId.Gold:
+						app.models.dataPlayerModel.Gold += quantity;
+						break;
+					case ItemId.Gem:
+						app.models.dataPlayerModel.Gem += quantity;
+						break;
+				}
+				break;
+			case ItemType.Weapon:
+			case ItemType.Armor:
+			case ItemType.Shoes:
+			case ItemType.Gloves:
+			case ItemType.Hat:
+			case ItemType.Ring:
+				app.models.dataPlayerModel.AddItemEquipToBag(id, rank, level);
+				break;
+			default:
+				break;
+		}
+	}
+
+	// [ContextMenu("Test item piece")]
+	// public void Test()
+	// {
+	// 	app.resourceManager.ShowPopup(PopupType.RewardPopup).TryGetComponent(out PopupReward popupReward);
+	// 	popupReward.Init();
+	// }
 }

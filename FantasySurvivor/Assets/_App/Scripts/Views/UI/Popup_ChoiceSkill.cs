@@ -101,24 +101,4 @@ public class PopupChoiceSkill : View<GameApp>, IPopup
 	{
 		return app.models.dataPlayerModel.GetSkillSet().Contains(id);
 	}
-
-
-	// private void OnClickBtnCoin()
-	// {
-	//     app.models.dataPlayerModel.Coin += 1000;
-	// }
-	//
-	// private void OnClickBtnGem()
-	// {
-	//     GameConst.gemStartGame += 1000;
-	// }
-	//
-	// private void OnClickBtnDeleteData()
-	// {
-	//     GameConst.gemStartGame = 100;
-	//     PlayerPrefs.DeleteAll();
-	//     app.models.dataPlayerModel.InitBaseData();
-	//     app.resourceManager.CloseAllPopup();
-	//     Singleton<GameController>.instance.ChangeSceneHome();
-	// }
 }

@@ -175,6 +175,8 @@ public enum PopupType
 	ItemPieceDetail,
     GatlingCrab_HealthBar,
 	Warning,
+	DailyGift,
+	RewardPopup,
 }
 
 public enum SkillDamagedType
