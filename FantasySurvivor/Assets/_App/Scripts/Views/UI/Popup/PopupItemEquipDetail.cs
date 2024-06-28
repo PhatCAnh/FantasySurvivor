@@ -55,7 +55,7 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
 		_txtValue.text = $"+ {itemData.dataConfig.baseValue}";
 
 		_costUpdate = (1000 + (int) dataInBag.rank * 250) * dataInBag.level;
-		_currentCoin = app.models.dataPlayerModel.Coin;
+		_currentCoin = app.models.dataPlayerModel.Gold;
 		var textCurrentCoin = _currentCoin < _costUpdate ? $"<color=red>{_currentCoin}</color>" : $"{_currentCoin}";
 
 		_txtPriceUpdate.text = textCurrentCoin + $"/{_costUpdate}";

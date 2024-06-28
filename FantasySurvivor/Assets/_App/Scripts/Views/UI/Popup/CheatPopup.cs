@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
@@ -18,7 +19,7 @@ public class CheatPopup : View<GameApp>, IPopup
 	protected override void OnViewInit()
 	{
 		base.OnViewInit();
-		_listSkill = app.resourceManager.GetListSkill();
+		_listSkill = Singleton<SkillController>.instance.GetListSkillDataTable();
 
 		foreach(var skill in _listSkill)
 		{

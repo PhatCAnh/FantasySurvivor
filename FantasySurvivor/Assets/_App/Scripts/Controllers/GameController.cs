@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using _App.Scripts.Controllers;
-using ArbanFramework;
 using ArbanFramework.MVC;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -13,6 +12,7 @@ using UnityEngine.SceneManagement;
 
 using MonsterStat = FantasySurvivor.MonsterStat;
 using System.Threading;
+using Unity.VisualScripting;
 
 public class GameController : Controller<GameApp>
 {
@@ -36,7 +36,6 @@ public class GameController : Controller<GameApp>
     private HealthBarController _healthBarController;
     private PopupWarning _popupWarningBoss;
 
-    public int currentNumberSkill = 0;// điếm số skill outr game
     private Vector3 _camSize;
     private float _width;
     private float _height;
@@ -47,11 +46,11 @@ public class GameController : Controller<GameApp>
 
     private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
 
-    private PoolController poolController => Singleton<PoolController>.instance;
+    private PoolController poolController => ArbanFramework.Singleton<PoolController>.instance;
 
     private void Awake()
     {
-        Singleton<GameController>.Set(this);
+        ArbanFramework.Singleton<GameController>.Set(this);
     }
 
     private void Start()
@@ -70,7 +69,7 @@ public class GameController : Controller<GameApp>
     protected override void OnDestroy()
     {
         base.OnDestroy();
-        Singleton<GameController>.Unset(this);
+        ArbanFramework.Singleton<GameController>.Unset(this);
     }
 
     public void ShowMainHome()
@@ -166,7 +165,7 @@ public class GameController : Controller<GameApp>
         switch (type)
         {
             case TypeItemReward.Coin:
-                app.models.dataPlayerModel.Coin += value;
+                app.models.dataPlayerModel.Gold += value;
                 break;
         }
     }
@@ -174,8 +173,8 @@ public class GameController : Controller<GameApp>
 
     public void ResetGame()
     {
-        Singleton<PoolController>.instance.RemoveAllPool();
-        Singleton<SkillController>.instance.ResetDataSkillInGame();
+        ArbanFramework.Singleton<PoolController>.instance.RemoveAllPool();
+        ArbanFramework.Singleton<SkillController>.instance.ResetDataSkillInGame();
     }
 
     public Monster SpawnBoss(MapView.WaveData wave)
@@ -186,7 +185,7 @@ public class GameController : Controller<GameApp>
 
         var type = (ItemPrefab)Enum.Parse(typeof(ItemPrefab), statBoss.monsterType);
 
-        Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster boss);
+        ArbanFramework.Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster boss);
 
         //var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
         boss.Init(bossStat, wave, type);
@@ -214,7 +213,7 @@ public class GameController : Controller<GameApp>
 
         var type = (ItemPrefab)Enum.Parse(typeof(ItemPrefab), statMonster.monsterType);
 
-        Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
+        ArbanFramework.Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
 
         //var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
         monster.Init(monsterStat, wave, type);
@@ -235,7 +234,7 @@ public class GameController : Controller<GameApp>
         var statMonster = app.configs.dataStatMonster.GetConfig(id);
         var monsterStat = new MonsterStat(statMonster.moveSpeed, health, attackDamage, statMonster.attackSpeed, statMonster.attackRange);
         var type = (ItemPrefab)Enum.Parse(typeof(ItemPrefab), statMonster.monsterType);
-        Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
+        ArbanFramework.Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
 
         monster.Init(monsterStat, null, type);
 
@@ -454,7 +453,7 @@ public class GameController : Controller<GameApp>
 
         foreach (var item in app.models.dataPlayerModel.ListItemEquipped)
         {
-            var itemData = Singleton<ItemController>.instance.GetDataItem(item.id, item.rank, item.level).dataConfig;
+            var itemData = ArbanFramework.Singleton<ItemController>.instance.GetDataItem(item.id, item.rank, item.level).dataConfig;
             //fix it
         }
 
@@ -530,4 +529,40 @@ public class GameController : Controller<GameApp>
         isEndGame = false;
     }
 
+    public (int, int, int) GetDateTimeNow()
+    {
+        var currentUtcDateTime = DateTime.UtcNow;
+        var day = currentUtcDateTime.Day;
+        var month = currentUtcDateTime.Month;
+        var year = currentUtcDateTime.Year;
+
+        return (day, month, year);
+    }
+
+
+    public int CalculateTimeDailyGift()
+    {
+        var dataDateStartDaily = app.models.dataPlayerModel.DateStartDailyGift.Split("/");
+        var day = Convert.ToInt32(dataDateStartDaily[0]);
+        var month = Convert.ToInt32(dataDateStartDaily[1]);
+        var year = Convert.ToInt32(dataDateStartDaily[2]);
+        var startDate = new DateTime(year, month, day);
+        var currentDay = DateTime.Now;
+        
+        var dateDifference = currentDay - startDate;
+
+        return dateDifference.Days;
+    }
+
+    [ContextMenu("Test item piece")]
+    public void CheatDay()
+    {
+        var dataDateStartDaily = app.models.dataPlayerModel.DateStartDailyGift.Split("/");
+        var day = Convert.ToInt32(dataDateStartDaily[0]);
+        var month = Convert.ToInt32(dataDateStartDaily[1]);
+        var year = Convert.ToInt32(dataDateStartDaily[2]);
+        day -= 1;
+        app.models.dataPlayerModel.DateStartDailyGift = $"{day}/{month}/{year}";
+        
+    }
 }

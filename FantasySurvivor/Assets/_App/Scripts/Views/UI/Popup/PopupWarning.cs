@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework.MVC;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,6 +15,8 @@ public class PopupWarning : View<GameApp>, IPopup
     
     public void Open()
     {
+        transform.localScale = Vector3.zero;
+        transform.DOScale(Vector3.one, 0.35f);
     }
     public void Close()
     {

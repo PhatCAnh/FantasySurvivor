@@ -25,7 +25,7 @@ public class ItemData
 	public readonly ItemDataUI dataUi;
 	public readonly DataItemConfig dataConfig;
 
-	public ItemData(ItemDataUI dataUI, DataItemConfig dataConfig, ItemRank rank = ItemRank.Normal)
+	public ItemData(ItemDataUI dataUI, DataItemConfig dataConfig, ItemRank rank = ItemRank.Rare)
 	{
 		this.id = dataUI.id;
 		this.dataUi = dataUI;
@@ -42,7 +42,7 @@ public class ItemInBag
 	public int level;
 	public int quantity;
 	
-	public ItemInBag(string id, string rank, int level = 1, int quantity = 0)
+	public ItemInBag(string id, string rank, int level = 0, int quantity = 0)
 	{
 		this.id = (ItemId)Enum.Parse(typeof(ItemId), id);
 		this.rank = (ItemRank)Enum.Parse(typeof(ItemRank), rank);

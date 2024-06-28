@@ -18,6 +18,7 @@ public enum ItemId
 	PieceFire, PieceWater, PieceWind, PieceEarth, PieceElectric,
 	Axe, Armor, Shoes, Gloves, Hat, Ring,
 	Axe1, Armor1, Shoes1, Gloves1, Hat1, Ring1,
+	Gold, Gem, SilverKey, GoldKey,
 }
 
 public enum StatId

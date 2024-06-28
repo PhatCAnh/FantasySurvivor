@@ -22,7 +22,7 @@ public class MainUI : View<GameApp>, IPopup
 	[SerializeField] private ItemToggle _itemHome, _itemElemental, _itemShop, _itemUpdate, _itemLock;
 	[SerializeField] private GameObject _goLock, _goUpdateStat, _goHome;
 	[SerializeField] private Image _imgLineFocus;
-	[SerializeField] private Button _btnBattle, _btnCheat, _btnTest;
+	[SerializeField] private Button _btnBattle, _btnCheat, _btnTest, _btnDailyGift;
 	[SerializeField] private TextMeshProUGUI _txtGoldCoin;
 
 	private float _durationAnim = 0.3f;
@@ -40,6 +40,11 @@ public class MainUI : View<GameApp>, IPopup
 		_itemLock.toggle.onValueChanged.AddListener(OnClickTglLock);
 		_btnBattle.onClick.AddListener(OnClickBtnBattle);
 		_btnTest.onClick.AddListener(Test);
+		
+		_btnDailyGift.onClick.AddListener(() =>
+		{
+			app.resourceManager.ShowPopup(PopupType.DailyGift);
+		});
 
 		_btnCheat.onClick.AddListener(() =>
 		{
@@ -123,10 +128,10 @@ public class MainUI : View<GameApp>, IPopup
 
 	private void AddEventChangeStat()
 	{
-		AddDataBinding("fieldPlayerTower-goldCoinValue", _txtGoldCoin, (control, e) =>
+		AddDataBinding("fieldDataPlayerModel-goldValue", _txtGoldCoin, (control, e) =>
 			{
-				control.text = $"{app.models.dataPlayerModel.Coin}";
-			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.Coin), app.models.dataPlayerModel)
+				control.text = $"{app.models.dataPlayerModel.Gold}";
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.Gold), app.models.dataPlayerModel)
 		);
 	}
 }

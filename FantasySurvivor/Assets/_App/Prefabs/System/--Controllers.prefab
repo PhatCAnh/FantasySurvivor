@@ -141,7 +141,6 @@ MonoBehaviour:
   map: {fileID: 0}
   listMonster: []
   numberLimitChoiceSkill: 3
-  currentNumberSkill: 0
   _listSkill: []
 --- !u!1 &4008007943000763282
 GameObject:
@@ -223,6 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a0cb57c9ab48f2bf8d8f2f2357e1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _skillDataTable: {fileID: 11400000, guid: dbd9fede64579ad4dba80c0e017884df, type: 2}
 --- !u!1 &5817687925726287618
 GameObject:
   m_ObjectHideFlags: 0

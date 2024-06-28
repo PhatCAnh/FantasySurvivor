@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
+using ArbanFramework;
 using ArbanFramework.MVC;
 using Newtonsoft.Json;
 using Unity.Collections.LowLevel.Unsafe;
@@ -24,14 +25,17 @@ namespace FantasySurvivor
 
 		public override void InitBaseData()
 		{
-			this.Coin = 99;
+			this.Gold = 99;
 			this.Gem = 10;
 			this.LimitQuantityItemEquip = 50;
-
+			var dateNow = Singleton<GameController>.instance.GetDateTimeNow();
+			DateLoginGame = $"{dateNow.Item1}/{dateNow.Item2}/{dateNow.Item3}";
+			DateStartDailyGift = $"{dateNow.Item1}/{dateNow.Item2}/{dateNow.Item3}";
+			DataSaveClaimDailyGift = "Waiting-Waiting-Waiting-Waiting-Waiting-Waiting-Waiting";
 			app.models.WriteModel<DataPlayerModel>();
 		}
 
-		[JsonProperty] private int _coin;
+		[JsonProperty] private int _gold;
 		
 		[JsonProperty] private int _gem;
 		
@@ -42,17 +46,48 @@ namespace FantasySurvivor
 		[JsonProperty] private List<ItemInBag> _listItemEquipped = new List<ItemInBag>();
 		
 		[JsonProperty] private List<SkillId> _skillSet = new List<SkillId>();
-		
-		
 
-		public int Coin
+		[JsonProperty] private string _dateLoginGame;
+		
+		[JsonProperty] private string _dateStartDailyGift;
+		
+		[JsonProperty] private string _dataSaveClaimDailyGift;
+		
+		public string DataSaveClaimDailyGift
 		{
-			get => _coin;
+			get => _dataSaveClaimDailyGift;
 			set {
-				if(Coin == value) return;
-				_coin = value;
+				_dataSaveClaimDailyGift = value;
 				app.models.WriteModel<DataPlayerModel>();
-				RaiseDataChanged(nameof(Coin));
+			}
+		}
+		
+		public string DateStartDailyGift
+		{
+			get => _dateStartDailyGift;
+			set {
+				_dateStartDailyGift = value;
+				app.models.WriteModel<DataPlayerModel>();
+			}
+		}
+		
+		public string DateLoginGame
+		{
+			get => _dateLoginGame;
+			set {
+				_dateLoginGame = value;
+				app.models.WriteModel<DataPlayerModel>();
+			}
+		}
+
+		public int Gold
+		{
+			get => _gold;
+			set {
+				if(Gold == value) return;
+				_gold = value;
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(Gold));
 			}
 		}
 
