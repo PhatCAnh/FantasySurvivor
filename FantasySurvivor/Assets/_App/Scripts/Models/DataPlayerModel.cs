@@ -53,6 +53,8 @@ namespace FantasySurvivor
 		
 		[JsonProperty] private string _dataSaveClaimDailyGift;
 		
+		private ItemInBag item;
+		
 		public string DataSaveClaimDailyGift
 		{
 			get => _dataSaveClaimDailyGift;
@@ -186,8 +188,36 @@ namespace FantasySurvivor
 			_skillSet.Add(id);
 			app.models.WriteModel<DataPlayerModel>();
 		}
+        public void AddCoins(int amount)
+		{
+			Gold += amount;
+			app.models.WriteModel<DataPlayerModel>();
+
+        }
+        public void RemoveItem(ItemInBag item)
+        {
+            _bagItem.Remove(item);
+            _bagItem = _bagItem.OrderBy(i => i.id).ToList();
+            app.models.WriteModel<DataPlayerModel>();
+            RaiseDataChanged(nameof(BagItem));
 		
-		public void RemoveSkillSet(SkillId id)
+        }
+		public void RemovePiece(ItemId id, int quantityToRemove)
+		{
+			var itemInBag = _bagItem.Find(item => item.id == id);
+			if (itemInBag != null)
+			{
+				itemInBag.quantity -= quantityToRemove;
+				if (itemInBag.quantity <= 0)
+				{
+					_bagItem.Remove(itemInBag);
+				}
+				_bagItem = _bagItem.OrderBy(i => i.id).ToList();
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(BagItem));
+			}
+		}
+            public void RemoveSkillSet(SkillId id)
 		{
 			_skillSet.Remove(id);
 			app.models.WriteModel<DataPlayerModel>();

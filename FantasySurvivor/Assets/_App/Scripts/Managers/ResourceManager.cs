@@ -109,7 +109,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _rewardPopup;
 
 
-	[Header("UI Tutorial prefabs")]
+    [Header("UI Tutorial prefabs")]
 	[SerializeField] private GameObject _clickBulletTutorial;
 
 	[Header("Map prefabs")]
@@ -198,7 +198,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 		RegisterPopup(PopupType.RewardPopup, _rewardPopup);
 	}
 
-	private void InitDic()
+    private void InitDic()
 	{
 		_itemPrefabDic = new Dictionary<ItemPrefab, GameObject>()
 		{

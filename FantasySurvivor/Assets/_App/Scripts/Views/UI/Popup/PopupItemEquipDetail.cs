@@ -15,7 +15,7 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
 
 	[SerializeField] private TextMeshProUGUI _txtName, _txtDescription, _txtValue, _txtBtnAction, _txtPriceUpdate;
 
-	[SerializeField] private Button _btnAction, _btnClose, _btnUpdate;
+	[SerializeField] private Button _btnAction, _btnClose, _btnUpdate,_btnSale;
 
 	[SerializeField] private Sprite _spriteWeapon, _spriteArmor, _spriteShoes, _spriteGloves, _spriteHat, _spriteRing;
 
@@ -63,6 +63,7 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
 		_btnClose.onClick.AddListener(Close);
 		_btnAction.onClick.AddListener(Action);
 		_btnUpdate.onClick.AddListener(UpdateLevel);
+		_btnSale.onClick.AddListener(SaleItem);
 		var nameStat = "";
 		switch (itemData.dataConfig.type)
 		{
@@ -131,8 +132,16 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
 				Destroy(gameObject);
 			});
 	}
+    private void SaleItem()
+    {
+        
+       app.models.dataPlayerModel.AddCoins(99);
+        app.models.dataPlayerModel.RemovePiece(_dataInBag.id, _dataInBag.quantity);
+        Debug.Log(_currentCoin);
+        Close();
+    }
 
-	private void UpdateLevel()
+    private void UpdateLevel()
 	{
 		if(_currentCoin < _costUpdate)
 		{
