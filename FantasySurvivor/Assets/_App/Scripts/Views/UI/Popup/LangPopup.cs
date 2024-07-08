@@ -19,7 +19,7 @@ public class LangPopup : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void OpenLanguagePopup() // Thay ??i tên thành OpenLanguagePopup
+    public void OpenLanguagePopup()
     {
         // Destroy the current popup if it exists
         if (currentPopup != null)
@@ -31,7 +31,7 @@ public class LangPopup : MonoBehaviour
         currentPopup = Instantiate(languagePopupPrefab, transform);
     }
 
-    private void OnLanguageButtonClick() // Thay ??i tên thành OnLanguageButtonClick
+    private void OnLanguageButtonClick() 
     {
         OpenLanguagePopup();
         Debug.Log("Language button clicked");
