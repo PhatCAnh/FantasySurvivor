@@ -453,7 +453,7 @@ public class GameController : Controller<GameApp>
 
         foreach (var item in app.models.dataPlayerModel.ListItemEquipped)
         {
-            var itemData = ArbanFramework.Singleton<ItemController>.instance.GetDataItem(item.id, item.rank, item.level).dataConfig;
+            var itemData = ArbanFramework.Singleton<ItemController>.instance.GetDataItem(item.id, item.rank).dataConfig;
             //fix it
         }
 

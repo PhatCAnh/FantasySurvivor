@@ -72,7 +72,7 @@ public class ItemSlotUI : View<GameApp>
     {
         var itemController = Singleton<ItemController>.instance;
         this.itemInBag = data;
-        this.itemData = itemController.GetDataItem(data.id, data.rank, data.level);
+        this.itemData = itemController.GetDataItem(data.id, data.rank);
         image.sprite = itemData.dataUi.skin;
         imageRank.sprite = itemController.GetSpriteRank(data.rank);
         if(data.quantity != 0)

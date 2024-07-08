@@ -38,7 +38,7 @@ public class ItemController : Controller<GameApp>
 		return _dicRankItemEquip[rank];
 	}
 
-	public ItemData GetDataItem(ItemId id, ItemRank rank, int level)
+	public ItemData GetDataItem(ItemId id, ItemRank rank)
 	{
 		var dataUI = _itemDataUITable.listItemEquipData.FirstOrDefault(item => item.id == id);
 		var data = app.configs.dataItem.GetConfig(id);
@@ -48,7 +48,7 @@ public class ItemController : Controller<GameApp>
 	public void EquipItem(ItemInBag data, int value)
 	{
 		app.models.dataPlayerModel.EquipItem(data);
-		var itemData = GetDataItem(data.id, data.rank, data.level);
+		var itemData = GetDataItem(data.id, data.rank);
 		var model = app.models.characterModel;
 		switch (itemData.dataConfig.type)
 		{
@@ -67,7 +67,7 @@ public class ItemController : Controller<GameApp>
 	public void UnEquipItem(ItemInBag data, int value)
 	{
 		app.models.dataPlayerModel.UnEquipItem(data);
-		var itemData = GetDataItem(data.id, data.rank, data.level);
+		var itemData = GetDataItem(data.id, data.rank);
 		var model = app.models.characterModel;
 		switch (itemData.dataConfig.type)
 		{

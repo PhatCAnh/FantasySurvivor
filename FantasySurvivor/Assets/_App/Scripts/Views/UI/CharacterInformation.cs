@@ -96,7 +96,7 @@ public class CharacterInformation : View<GameApp>, IPopup
 
         foreach (var item in app.models.dataPlayerModel.ListItemEquipped)
         {
-            var dataItem = itemController.GetDataItem(item.id, item.rank, item.level);
+            var dataItem = itemController.GetDataItem(item.id, item.rank);
             var nameStat = Singleton<GameController>.instance.GetTypeStatItemEquip(dataItem.dataConfig.type);
             var data = Singleton<GameController>.instance.GetDataStat(nameStat, item.rank);
             _numberValue = dataItem.dataConfig.baseValue + data.Item2 * (item.level - 1);
