@@ -21,7 +21,7 @@ public class CharacterInformation : View<GameApp>, IPopup
 
     [SerializeField] private ItemSlotEquipUI _slotWeapon, _slotArmor, _slotHat, _slotRing, _slotShoes, _slotGloves;
 
-    [SerializeField] private Button _btnBack, _btnAddItemSlot;
+    [SerializeField] private Button _btnBack, _btnAddItemSlot, _btnChooseCharacter;
 
     [SerializeField] private Toggle _tglAll, _tglItemEquip, _tglItemPiece;
 
@@ -64,8 +64,10 @@ public class CharacterInformation : View<GameApp>, IPopup
             {ItemType.Gloves, _slotGloves},
         };
 
-        _btnBack.onClick.AddListener(Close);
+        //_btnBack.onClick.AddListener(Close);
         _btnAddItemSlot.onClick.AddListener(AddItemSlot);
+        _btnChooseCharacter.onClick.AddListener(ChooseCharacter);
+
         _tglAll.onValueChanged.AddListener(GetAllItem);
         _tglItemEquip.onValueChanged.AddListener(GetAllItemEquip);
         _tglItemPiece.onValueChanged.AddListener(GetAllItemPiece);
@@ -155,6 +157,11 @@ public class CharacterInformation : View<GameApp>, IPopup
         popupWarning.Init("Buy slot item", "Would you like to buy 50 item slots? with 10000 <sprite=4>", "10000 <sprite=4>",
             () => { app.models.dataPlayerModel.LimitQuantityItemEquip += 50; popupWarning.Close(); }
         );
+    }
+
+    private void ChooseCharacter()
+    {
+        app.resourceManager.ShowPopup(PopupType.CharacterChoose);
     }
 
     //private void ShowSaleItem()

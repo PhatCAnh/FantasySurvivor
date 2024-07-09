@@ -18,7 +18,7 @@ public class CharacterChoose : View<GameApp>
 
     protected override void OnViewInit()
     {
-        //base.OnViewInit();
+        base.OnViewInit();
         _btnBack.onClick.AddListener(Close);
     }
         public void Close()

@@ -381,7 +381,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4999012140195384931
 RectTransform:
   m_ObjectHideFlags: 0
@@ -505,8 +505,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 96274b6f4982041558dfdc5471747076, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 2437969a2b17b41b0a10bef95252a284, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3594,7 +3594,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8135926211466111966
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4851,7 +4851,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1990377745, guid: 92c8905e91946fb488462ae745c6b9ef, type: 3}
+  m_Sprite: {fileID: -244766095, guid: ae3ce6c94150b0249bb729cf9a71f012, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6319,6 +6319,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4052364480650660409}
   m_SourcePrefab: {fileID: 100100000, guid: 42665abf3ed876248af13a52768338c5, type: 3}
+--- !u!114 &1140951146406887821 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8463475107542584844, guid: 42665abf3ed876248af13a52768338c5, type: 3}
+  m_PrefabInstance: {fileID: 8836401947910573953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2338222281184400241 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6544359212072426736, guid: 42665abf3ed876248af13a52768338c5, type: 3}
@@ -6336,9 +6347,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34889578f104d4fb82b4a62312aef72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemInBag:
+    id: 0
+    rank: 0
+    level: 0
+    quantity: 0
   image: {fileID: 6561916844856333744}
-  imageRank: {fileID: 0}
+  imageRank: {fileID: 1140951146406887821}
   btn: {fileID: 8884400608908241402}
+  txtNumber: {fileID: 0}
+  isShow: 0
   _imgEquip: {fileID: 0}
   _imgUnEquip: {fileID: 0}
   _baseRank: {fileID: 0}
