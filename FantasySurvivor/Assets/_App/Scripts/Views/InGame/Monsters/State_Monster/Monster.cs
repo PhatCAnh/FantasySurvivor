@@ -97,7 +97,6 @@ public class Monster : ObjectRPG
 
     protected Cooldown moveSpeedCooldown = new Cooldown();
     public List<StatusEffect> listStatusEffect = new List<StatusEffect>();
-	public HealthBarController healthBarController;
 
     public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave, ItemPrefab monsType)
     {
