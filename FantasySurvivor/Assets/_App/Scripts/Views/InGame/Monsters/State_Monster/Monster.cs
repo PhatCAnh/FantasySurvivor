@@ -255,10 +255,10 @@ public class Monster : ObjectRPG
 
     public virtual void Die(bool selfDie = false)
     {
-        if (!isDead) return;
+        model.currentHealthPoint = 0;
         listStatusEffect.Clear();
         monsCollider.isTrigger = true;
-        animator.SetBool("Dead", isDead);
+        animator.SetBool("Dead", true);
         gameController.MonsterDie(this, selfDie);
 
     }
