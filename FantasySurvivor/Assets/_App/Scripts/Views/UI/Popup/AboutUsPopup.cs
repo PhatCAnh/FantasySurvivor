@@ -19,7 +19,7 @@ public class AboutUsPopup : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void OpenSoundsPopup()
+    public void OpenAboutusPopup()
     {
         // Destroy the current popup if it exists
         if (currentPopup != null)
@@ -31,9 +31,5 @@ public class AboutUsPopup : MonoBehaviour
         currentPopup = Instantiate(aboutusPopupPrefab, transform);
     }
 
-    private void OnSoundsButtonClick()
-    {
-        OpenSoundsPopup();
-        Debug.Log("Sounds button clicked");
-    }
+    
 }
