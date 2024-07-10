@@ -328,7 +328,7 @@ public class GameController : Controller<GameApp>
     // ReSharper disable Unity.PerformanceAnalysis
     public void Collected(DropItem dropItem)
     {
-        if (dropItem.type == DropItemType.Exp)
+        if (dropItem.typeItem == DropItemType.Exp)
         {
             map.model.ExpCurrent += dropItem.value;
             if (map.model.ExpCurrent > map.model.ExpMax)
@@ -341,7 +341,7 @@ public class GameController : Controller<GameApp>
         }
         else
         {
-            CollectedItemSpecial(dropItem.type);
+            CollectedItemSpecial(dropItem.typeItem);
         }
     }
 
@@ -352,7 +352,7 @@ public class GameController : Controller<GameApp>
             case DropItemType.Magnet:
                 foreach (var item in poolController.GetPool(ItemPrefab.GemExp).usedList)
                 {
-                    if (item.TryGetComponent(out DropItem dropItemType) && dropItemType.type == DropItemType.Exp)
+                    if (item.TryGetComponent(out DropItem dropItemType) && dropItemType.typeItem == DropItemType.Exp)
                     {
                         dropItemType.Collect();
                     }
