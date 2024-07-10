@@ -4,63 +4,76 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
+using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GoogleIntegration : MonoBehaviour
 {
-    public string googlePlayToken;
-    public string googlePlayError;
+    public TextMeshProUGUI txtNoti, txtName, txtId;
 
-    private async void Start()
+    public string Token;
+    public string Error;
+
+    void Start()
     {
-        await Authenticate();
+        //Initialize PlayGamesPlatform
+        UnityServices.InitializeAsync();
+        PlayGamesPlatform.Activate();
+        LoginGooglePlayGames();
     }
 
-    public async Task Authenticate()
+    public async void LoginGooglePlayGames()
     {
-        PlayGamesPlatform.Activate();
-        await UnityServices.InitializeAsync();
-        
-        PlayGamesPlatform.Instance.Authenticate((success)
-            =>
+        PlayGamesPlatform.Instance.Authenticate((success) =>
         {
             if (success == SignInStatus.Success)
             {
-                Debug.Log("Login with google was successful.");
-                PlayGamesPlatform.Instance.RequestServerSideAccess(true,
-                    code =>
-                    {
-                        Debug.Log($"Auth code is {code}");
-                        googlePlayToken = code;
-                    });
+                txtNoti.text = ("Login with Google Play games successful.");
+
+                PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
+                {
+                    txtNoti.text =("Authorization code: " + code);
+                    Token = code;
+// This token serves as an example to be used for SignInWithGooglePlayGames
+                });
             }
-            else
+            else if (success == SignInStatus.Canceled)
             {
-                googlePlayError = "Failed to retrieve GPG auth code";
-                Debug.LogError("Login Failed");
+                Error = "Failed to retrieve Google play games authorization code";
+                txtNoti.text =("Login Unsuccessful");
+            }else if (success == SignInStatus.InternalError)
+            {
+                Error = "Failed to retrieve Google play games authorization code";
+                txtNoti.text =("Login InternalError");
             }
         });
 
-        await AuthenticateWithUnity();
+        await SignInWithGooglePlayGamesAsync(Token);
     }
-
-    private async Task AuthenticateWithUnity()
+    
+    async Task SignInWithGooglePlayGamesAsync(string authCode)
     {
         try
         {
-            await AuthenticationService.Instance.SignInWithGoogleAsync(googlePlayToken);
+            await AuthenticationService.Instance.SignInWithGooglePlayGamesAsync(authCode);
+            txtNoti.text =("SignIn is successful.");
+            txtId.text = AuthenticationService.Instance.PlayerId;
+            txtName.text = AuthenticationService.Instance.PlayerName;
         }
-        catch (AuthenticationException e)
+        catch (AuthenticationException ex)
         {
-            Debug.LogException(e);
-            throw;
+            // Compare error code to AuthenticationErrorCodes
+            // Notify the player with the proper error message
+            txtNoti.text = ex.ToString();
         }
-        catch (RequestFailedException e)
+        catch (RequestFailedException ex)
         {
-            Debug.LogException(e);
-            throw;
+            // Compare error code to CommonErrorCodes
+            // Notify the player with the proper error message
+            txtNoti.text = ex.ToString();
         }
     }
 }

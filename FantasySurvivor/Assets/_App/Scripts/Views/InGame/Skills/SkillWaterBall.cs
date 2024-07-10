@@ -13,7 +13,7 @@ namespace FantasySurvivor
         {
             base.Init(data, target, level, type);
         }
-        private void FixedUpdate()
+        protected override void FixedUpdate()
         {
             if (gameController.isStop) return;
 
