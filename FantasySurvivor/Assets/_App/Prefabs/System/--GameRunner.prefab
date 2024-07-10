@@ -184,8 +184,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4925867891092163753}
   - component: {fileID: 4925867891092163752}
-  - component: {fileID: 6972810038960651663}
-  - component: {fileID: 2009129696925615508}
   m_Layer: 0
   m_Name: SoundBackground
   m_TagString: Untagged
@@ -304,32 +302,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6972810038960651663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4925867891092163734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94df2dcb157e1db4dbbdbb237ed2262e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  backgroundClip: {fileID: 8300000, guid: e37bdf1510ee1654cb0bd7545844c754, type: 3}
---- !u!114 &2009129696925615508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4925867891092163734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94df2dcb157e1db4dbbdbb237ed2262e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  backgroundClip: {fileID: 8300000, guid: e37bdf1510ee1654cb0bd7545844c754, type: 3}
 --- !u!1 &4925867891668576827
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/*
 public class AudioManager : AudioManagerBase<AudioType>
 {
     private AudioType _currentMusicKey;
@@ -55,3 +55,4 @@ public class AudioManager : AudioManagerBase<AudioType>
             StopMusic();
     }
 }
+*/

@@ -2,6 +2,7 @@
 public enum CharacterId
 {
 	Char1,
+	Char2,
 }
 
 public enum SkillId

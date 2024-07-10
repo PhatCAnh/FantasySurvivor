@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ClickSound : MonoBehaviour
 {
-    public AudioSource audioSource; // Tham chi?u ??n AudioSource
-    public AudioClip clickSound; // Tham chi?u ??n AudioClip
+    public AudioSource audioSource; 
+    public AudioClip clickSound; 
 
     void Start()
     {
@@ -15,7 +15,6 @@ public class ClickSound : MonoBehaviour
         }
     }
 
-    // Ph??ng th?c này s? ???c g?i khi game object b? nh?n
     public void OnClick()
     {
         if (clickSound != null)
