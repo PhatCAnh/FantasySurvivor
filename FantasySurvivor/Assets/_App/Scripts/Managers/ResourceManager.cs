@@ -74,6 +74,10 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	[SerializeField] private GameObject _skillTimeBoom;
 
+    [SerializeField] private GameObject _bulletBossHydustShrimp;
+
+
+
     private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
 
@@ -149,6 +153,9 @@ public class ResourceManager : UIManagerBase<PopupType>
     [SerializeField] private GameObject _healthBarController;
 
     [SerializeField] private GameObject _PopupWarning_Boss;
+
+    [SerializeField] private GameObject _hydustShrimp;
+
 
 
     private Dictionary<string, GameObject> _typeMonsterDic;
@@ -250,7 +257,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.BulletBossGatlingCrab, _bulletBossGatlingCrab},
             {ItemPrefab.GatlingCrab_HealthBar, _healthBarController},
             {ItemPrefab.PopupWarning_Boss, _PopupWarning_Boss},
-            
+            {ItemPrefab.HydustShrimp, _hydustShrimp},
+            {ItemPrefab.BulletBossHydustShrimp, _bulletBossHydustShrimp},
 
         };
 
@@ -276,6 +284,8 @@ public class ResourceManager : UIManagerBase<PopupType>
             {"Goblin", _minionGoblin},
 
 			{"B1", _gatlingCrab},
+            {"B2", _hydustShrimp},
+
 
         };
 

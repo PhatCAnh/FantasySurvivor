@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6032325749048589663}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 378930778354163577}
   - component: {fileID: 8289075399977994587}
   - component: {fileID: 4041119894638598542}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 8396428060978782794}
   - component: {fileID: 772411927052525347}
   - component: {fileID: 5909719044027387325}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Minion_Wolf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ MonoBehaviour:
   animator: {fileID: 8289075399977994587}
   firePoint: {fileID: 6032325749048589663}
   justSpawnVertical: 0
-  isDead: 0
+  isStun: 0
   isNoMove: 0
   size: 0.6
 --- !u!70 &5909719044027387325

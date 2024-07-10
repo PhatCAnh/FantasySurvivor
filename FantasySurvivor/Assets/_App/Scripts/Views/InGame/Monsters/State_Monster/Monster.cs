@@ -97,7 +97,6 @@ public class Monster : ObjectRPG
 
     protected Cooldown moveSpeedCooldown = new Cooldown();
     public List<StatusEffect> listStatusEffect = new List<StatusEffect>();
-	public HealthBarController healthBarController;
 
     public virtual void Init(MonsterStat monsterStat, MapView.WaveData wave, ItemPrefab monsType)
     {
@@ -256,10 +255,10 @@ public class Monster : ObjectRPG
 
     public virtual void Die(bool selfDie = false)
     {
-        if (!isDead) return;
+        model.currentHealthPoint = 0;
         listStatusEffect.Clear();
         monsCollider.isTrigger = true;
-        animator.SetBool("Dead", isDead);
+        animator.SetBool("Dead", true);
         gameController.MonsterDie(this, selfDie);
 
     }

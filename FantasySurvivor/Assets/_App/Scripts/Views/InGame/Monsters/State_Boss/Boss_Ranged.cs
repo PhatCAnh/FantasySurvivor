@@ -17,6 +17,7 @@ namespace FantasySurvivor
         public Transform firePoint3;
         public GameObject telegraphEffectPrefab;
         private GameObject currentTelegraphEffect;
+
         private Vector3 spawnPos { get; set; }
         private Vector3 markedPosition;
 
@@ -35,10 +36,34 @@ namespace FantasySurvivor
         private float telegraphTimer = 0f;
         private float telegraphDuration = 1.5f;
 
+        private float sightRange = 10f;
+        private bool isInSightRange = false;
+
+
+        public GameObject zonePrefab; 
+        private GameObject currentZone;
+        public float initialZoneRadius; //size zone
+        public float minimumZoneRadius;
+        public float shrinkingSpeed; //time thu nho
+        private float currentZoneRadius;
+        private float damageTimer = 0f; //count time dame zone
+
+
         protected override void OnViewInit()
         {
             base.OnViewInit();
             spawnPos = transform.position;
+            IdleState();
+
+            currentZone = Instantiate(zonePrefab, transform.position, Quaternion.identity);
+            currentZone.transform.localScale = Vector3.one * initialZoneRadius * 2; 
+            currentZoneRadius = initialZoneRadius;
+
+        }
+
+        private bool IsSightRange()
+        {
+            return Vector3.Distance(transform.position, gameController.character.transform.position) <= sightRange;
         }
 
         private bool CheckBack()
@@ -52,6 +77,21 @@ namespace FantasySurvivor
 
             moveTarget = gameController.character.transform.position;
             moveDirection = moveTarget - transform.position;
+
+            UpdateZone();
+
+            if (!isInSightRange)
+            {
+                if (IsSightRange())
+                {
+                    isInSightRange = true;
+                }
+                else
+                {
+                    IdleState();
+                    return;
+                }
+            }
 
             if (isTelegraphing)
             {
@@ -75,15 +115,18 @@ namespace FantasySurvivor
                     cdAttack.Restart(2 / model.attackSpeed);
                     isTelegraphing = false;
                     isState3 = false;
+                    isState2 = false;
                 }
                 return;
             }
 
             if (moveDirection.magnitude > 20 && !isTelegraphing)
             {
+                isState1 = false;
+                isState2 = false;
                 markedPosition = gameController.character.transform.position;
-
                 Vector3 telegraphPosition = gameController.character.transform.position;
+
                 if (telegraphEffectPrefab != null)
                 {
 
@@ -154,6 +197,33 @@ namespace FantasySurvivor
 
             SetAnimation(idleDirection);
         }
+
+        private void UpdateZone()
+        {
+            if (currentZoneRadius > 0)
+            {
+                currentZoneRadius -= shrinkingSpeed * Time.deltaTime;
+                currentZoneRadius = Mathf.Max(currentZoneRadius, minimumZoneRadius);
+
+                currentZone.transform.position = spawnPos;
+                currentZone.transform.localScale = Vector3.one * currentZoneRadius * 2;
+
+
+            }
+
+            damageTimer += Time.deltaTime;
+
+            if (damageTimer >= 0.5f)
+            {
+                float distanceToPlayer = Vector3.Distance(spawnPos, gameController.character.transform.position);
+                if (distanceToPlayer > currentZoneRadius)
+                {
+                    gameController.character.TakeDamage(10);
+                }
+                damageTimer = 0f;
+            }
+        }
+
 
         public override void Attack()
         {
