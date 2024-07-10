@@ -44,6 +44,8 @@ namespace FantasySurvivor
 		[JsonProperty] private List<ItemInBag> _bagItem = new List<ItemInBag>();
 
 		[JsonProperty] private List<ItemInBag> _listItemEquipped = new List<ItemInBag>();
+
+		[JsonProperty] private List<ItemInBag> _listItemChosen = new List<ItemInBag>();
 		
 		[JsonProperty] private List<SkillId> _skillSet = new List<SkillId>();
 
@@ -177,7 +179,6 @@ namespace FantasySurvivor
 			_listItemEquipped.Remove(item);
 			app.models.WriteModel<DataPlayerModel>();
 		}
-
 		public ItemInBag GetFirstItemEquipAdded()
 		{
 			return _bagItem.LastOrDefault();

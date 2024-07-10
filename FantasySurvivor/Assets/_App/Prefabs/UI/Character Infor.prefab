@@ -410,7 +410,6 @@ MonoBehaviour:
   _txtLimit: {fileID: 3075862407896086549}
   _slotItemEquipContainer: {fileID: 2108241682945069409}
   _slotItemEquipPrefab: {fileID: 6544359212072426736, guid: 42665abf3ed876248af13a52768338c5, type: 3}
-  _saleItem: {fileID: 7383486681192210166}
   _slotWeapon: {fileID: 8782206523070850046}
   _slotArmor: {fileID: 937486360281076727}
   _slotHat: {fileID: 4907117196539781768}
@@ -419,14 +418,10 @@ MonoBehaviour:
   _slotGloves: {fileID: 384528815904491606}
   _btnBack: {fileID: 8996183592380812205}
   _btnAddItemSlot: {fileID: 5124755832339742238}
-  _btnSaleItem: {fileID: 5864038867390172640}
-  _btnbackSale: {fileID: 6890788957249756939}
+  _btnConvertItem: {fileID: 5864038867390172640}
   _tglAll: {fileID: 3906991510728062945}
   _tglItemEquip: {fileID: 2060773504720761804}
   _tglItemPiece: {fileID: 4130414980926599544}
-  _tglSaleAll: {fileID: 9083428318641850847}
-  _tglSaleItemEquip: {fileID: 2141060883618967378}
-  _tglSaleItemPiece: {fileID: 8385065106422174321}
 --- !u!1 &605505936909092493
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,7 +585,7 @@ GameObject:
   - component: {fileID: 8961458185550185832}
   - component: {fileID: 5864038867390172640}
   m_Layer: 5
-  m_Name: Button_Sale
+  m_Name: Button_Convert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22663,7 +22658,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sale Item
+  m_text: Convert
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c2f49fe8c22d94f9a9e6cd06ad490155, type: 2}
   m_sharedMaterial: {fileID: 3074828514974314926, guid: c2f49fe8c22d94f9a9e6cd06ad490155, type: 2}
@@ -22690,7 +22685,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 52
+  m_fontSize: 45.6
   m_fontSizeBase: 52
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -21,7 +21,7 @@ public class CharacterInformation : View<GameApp>, IPopup
 
     [SerializeField] private ItemSlotEquipUI _slotWeapon, _slotArmor, _slotHat, _slotRing, _slotShoes, _slotGloves;
 
-    [SerializeField] private Button _btnBack, _btnAddItemSlot;
+    [SerializeField] private Button _btnBack, _btnAddItemSlot, _btnConvertItem;
 
     [SerializeField] private Toggle _tglAll, _tglItemEquip, _tglItemPiece;
 
@@ -67,9 +67,9 @@ public class CharacterInformation : View<GameApp>, IPopup
         _btnBack.onClick.AddListener(Close);
         _btnAddItemSlot.onClick.AddListener(AddItemSlot);
         _tglAll.onValueChanged.AddListener(GetAllItem);
+        _btnConvertItem.onClick.AddListener(ConvertItem);
         _tglItemEquip.onValueChanged.AddListener(GetAllItemEquip);
         _tglItemPiece.onValueChanged.AddListener(GetAllItemPiece);
-    
        
 
         var dataPlayerModel = app.models.dataPlayerModel;
@@ -307,4 +307,10 @@ public class CharacterInformation : View<GameApp>, IPopup
     {
         Destroy(gameObject);
     }
+
+    public void ConvertItem()
+    {
+        app.resourceManager.ShowPopup(PopupType.ConvertItem).TryGetComponent(out ConvertItemPopup convertItem );
+    }
+
 }

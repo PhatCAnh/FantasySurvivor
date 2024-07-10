@@ -177,6 +177,7 @@ public enum PopupType
 	Warning,
 	DailyGift,
 	RewardPopup,
+	ConvertItem,
 }
 
 public enum SkillDamagedType

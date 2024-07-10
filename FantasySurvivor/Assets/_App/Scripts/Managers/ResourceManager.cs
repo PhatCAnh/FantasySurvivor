@@ -108,6 +108,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 	
 	[SerializeField] private GameObject _rewardPopup;
 
+	[SerializeField] private GameObject _convertItem;
+
 
     [Header("UI Tutorial prefabs")]
 	[SerializeField] private GameObject _clickBulletTutorial;
@@ -196,6 +198,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 		RegisterPopup(PopupType.Warning, _warning);
 		RegisterPopup(PopupType.DailyGift, _dailyGift);
 		RegisterPopup(PopupType.RewardPopup, _rewardPopup);
+		RegisterPopup(PopupType.ConvertItem, _convertItem);
 	}
 
     private void InitDic()

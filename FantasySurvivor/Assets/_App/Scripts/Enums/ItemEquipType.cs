@@ -14,6 +14,7 @@ public enum ItemType
 	Gloves,
 	Hat,
 	Ring,
+	None,
 }
 
 public enum ItemRank : byte
