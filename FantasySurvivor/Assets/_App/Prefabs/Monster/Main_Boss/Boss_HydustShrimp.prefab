@@ -152,6 +152,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &977136662648129716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3173103922902231955}
+  m_Layer: 9
+  m_Name: FirePoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3173103922902231955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977136662648129716}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.26, y: -1.05, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4866070643108103150}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1459843854226497923
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +345,7 @@ GameObject:
   - component: {fileID: 161506361360329444}
   - component: {fileID: 8317233838734252731}
   - component: {fileID: 3902938657587038907}
-  - component: {fileID: 745907628278799792}
+  - component: {fileID: 5571585587052262646}
   m_Layer: 9
   m_Name: Boss_HydustShrimp
   m_TagString: Untagged
@@ -421,7 +452,7 @@ MonoBehaviour:
   _targetPosition: {fileID: 4866070643108103150}
   _pointerRectTransform: {fileID: 5464204293344934053}
   pointerImage: {fileID: 2956999848126341669}
---- !u!114 &745907628278799792
+--- !u!114 &5571585587052262646
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -430,7 +461,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2004849026101922825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4c0247c33b884a41af91d0922c191c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 01a657155d0c38b4a8e5f6e7821b94be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 45
@@ -440,16 +471,22 @@ MonoBehaviour:
   justSpawnVertical: 0
   isStun: 0
   isNoMove: 0
-  size: 2.5
-  bulletPrefab: {fileID: -7805141340533506810, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
-  bulletPrefab2: {fileID: -7805141340533506810, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
-  bulletPrefab3: {fileID: -7805141340533506810, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
-  firePoint2: {fileID: 1421857555634100162}
-  firePoint3: {fileID: 1421857555634100162}
-  telegraphEffectPrefab: {fileID: 2073436260658583224, guid: 7a32d8caca4bf514d8f52bfbe353df98, type: 3}
-  typeBullet: 42
-  typeBullet2: 42
+  size: 0
+  bulletPrefab: {fileID: 277380798738218016, guid: 0c7bb9fc62cf10d43a6eeefdf9f04233, type: 3}
+  bulletPrefab2: {fileID: 277380798738218016, guid: 0c7bb9fc62cf10d43a6eeefdf9f04233, type: 3}
+  bulletPrefab3: {fileID: 277380798738218016, guid: 0c7bb9fc62cf10d43a6eeefdf9f04233, type: 3}
+  firePoint2: {fileID: 3173103922902231955}
+  firePoint3: {fileID: 0}
+  telegraphEffectPrefab: {fileID: 0}
+  typeBullet: 46
+  typeBullet2: 46
   _numberBack: 0
+  attackCounter: 0
+  isState1: 0
+  isState2: 0
+  isState3: 0
+  sightRange: 15
+  isInSightRange: 0
   zonePrefab: {fileID: 901334509334556526, guid: 91d837e8feaa3ee4d96e1118d6a0408d, type: 3}
   initialZoneRadius: 50
   minimumZoneRadius: 20
@@ -562,6 +599,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1421857555634100162}
+  - {fileID: 3173103922902231955}
   m_Father: {fileID: 48518682382240027}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7395563818789393216
@@ -1034,7 +1072,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1421857555634100162}
   m_Layer: 9
-  m_Name: FirePoint
+  m_Name: FirePoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1049,7 +1087,7 @@ Transform:
   m_GameObject: {fileID: 6047649634019076379}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.39, y: -1.3, z: 0}
+  m_LocalPosition: {x: -2.26, y: -1.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
