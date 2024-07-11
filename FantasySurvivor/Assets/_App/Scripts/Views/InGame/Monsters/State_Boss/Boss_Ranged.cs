@@ -27,16 +27,16 @@ namespace FantasySurvivor
         private GameController gameController => Singleton<GameController>.instance;
 
         private int _coolDownBack = 0;
-        private int attackCounter = 0; // count so lan attack
-        private bool isState1 = false;
-        private bool isState2 = false;
-        private bool isState3 = false;
+        public int attackCounter = 0; // count so lan attack
+        public bool isState1 = false;
+        public bool isState2 = false;
+        public bool isState3 = false;
         private bool isTelegraphing = false;
         private float telegraphTimer = 0f;
         private float telegraphDuration = 1.5f;
 
-        private float sightRange = 10f;
-        private bool isInSightRange = false;
+        public float sightRange = 10f;
+        public bool isInSightRange = false;
 
 
         public GameObject zonePrefab; 
@@ -60,7 +60,7 @@ namespace FantasySurvivor
 
         }
 
-        private bool IsSightRange()
+        public virtual bool IsSightRange()
         {
             return Vector3.Distance(transform.position, gameController.character.transform.position) <= sightRange;
         }
@@ -197,7 +197,7 @@ namespace FantasySurvivor
             SetAnimation(idleDirection);
         }
 
-        private void UpdateZone()
+        public virtual void UpdateZone()
         {
             if (currentZoneRadius > 0)
             {
@@ -339,7 +339,7 @@ namespace FantasySurvivor
         }
 
 
-        private void SecondAttack()
+        public virtual void SecondAttack()
         {
             animator.SetBool("Attack", true);
             int bulletCount = 10;
