@@ -10,6 +10,6 @@ public class LoadScene : MonoBehaviour
 {
     private void Start()
     {
-        Singleton<GameController>.instance.ChangeSceneHome();
+	    Singleton<GameController>.instance.StartGame();
     }
 }

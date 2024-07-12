@@ -91,6 +91,50 @@ MonoBehaviour:
   numberLimitBagEquip: 0
   numberLimitBagETC: 0
   _charDataTable: {fileID: 11400000, guid: 9e00d1965133fb9468a916dd14a5d7a2, type: 2}
+--- !u!1 &2798323186694841254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1021480227365955801}
+  - component: {fileID: 5930657867944045646}
+  m_Layer: 0
+  m_Name: PlayFabController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1021480227365955801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2798323186694841254}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4008007943000763285}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5930657867944045646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2798323186694841254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c032581da0ccb90468a535034da6aabe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2857875863129843907
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,6 +220,7 @@ Transform:
   - {fileID: 3933363360015676566}
   - {fileID: 7023807762188672726}
   - {fileID: 2249510436670389200}
+  - {fileID: 1021480227365955801}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5275234799807573989
