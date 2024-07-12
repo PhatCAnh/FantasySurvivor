@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 417893795010923971}
   - component: {fileID: 1265810781918317441}
   - component: {fileID: 8787760594629568027}
-  - component: {fileID: 7148853119256476525}
+  - component: {fileID: 7247969257256635134}
   m_Layer: 0
   m_Name: CrabBomber
   m_TagString: Untagged
@@ -97,7 +97,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7148853119256476525
+--- !u!114 &7247969257256635134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 669821632634323273}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3baee317a03089b46a2f32138d3de842, type: 3}
+  m_Script: {fileID: 11500000, guid: 379b58e43b49cbd4aa2a559f9528c276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 47
@@ -115,8 +115,9 @@ MonoBehaviour:
   firePoint: {fileID: 7909847587556015615}
   justSpawnVertical: 0
   isStun: 0
-  isNoMove: 1
+  isNoMove: 0
   size: 0.25
+  dieCountdown: 3
 --- !u!1 &1335905100983425064
 GameObject:
   m_ObjectHideFlags: 0
