@@ -4,7 +4,7 @@ using UnityEngine;
 namespace FantasySurvivor
 {
 	
-	public class InteractBulletBoss : BulletBossGatlingCrab
+	public class InteractBulletGatlingCrabBoss : BulletBossGatlingCrab
 	{
 		private void OnMouseDown()
 		{

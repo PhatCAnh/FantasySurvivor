@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5987853829186999760}
-  - component: {fileID: 277380798738218016}
+  - component: {fileID: 3127870901867446525}
   m_Layer: 0
   m_Name: BossHydustShrimp_Bullet
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 2873441232847508595}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &277380798738218016
+--- !u!114 &3127870901867446525
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3900767114551469106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9f32b74782984ebe4f16a5aa1cde4, type: 3}
+  m_Script: {fileID: 11500000, guid: 168d8f1739c54e542932af5d0ff4eda6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skin: {fileID: 8178968271256265086}
