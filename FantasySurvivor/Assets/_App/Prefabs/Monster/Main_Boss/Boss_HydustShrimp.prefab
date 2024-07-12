@@ -177,7 +177,7 @@ Transform:
   m_GameObject: {fileID: 977136662648129716}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.26, y: -1.05, z: 0}
+  m_LocalPosition: {x: 2.53, y: -0.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -481,16 +481,15 @@ MonoBehaviour:
   typeBullet: 46
   typeBullet2: 46
   _numberBack: 0
-  attackCounter: 0
-  isState1: 0
-  isState2: 0
-  isState3: 0
   sightRange: 15
   isInSightRange: 0
   zonePrefab: {fileID: 901334509334556526, guid: 91d837e8feaa3ee4d96e1118d6a0408d, type: 3}
   initialZoneRadius: 50
   minimumZoneRadius: 20
   shrinkingSpeed: 2
+  typeBullet: 46
+  typeBullet2: 46
+  _numberBack: 0
 --- !u!1 &2053120397473760720
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,7 +644,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_Sprite: {fileID: -1484058322, guid: e259b015b5318cf4caa204274947c6da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 4, y: 4}
@@ -1087,7 +1086,7 @@ Transform:
   m_GameObject: {fileID: 6047649634019076379}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.26, y: -1.05, z: 0}
+  m_LocalPosition: {x: -0.37, y: -1.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

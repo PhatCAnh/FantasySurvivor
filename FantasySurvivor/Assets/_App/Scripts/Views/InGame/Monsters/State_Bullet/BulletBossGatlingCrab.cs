@@ -31,7 +31,7 @@ namespace FantasySurvivor
 
 
 
-        public void SetDirection(Vector2 direction)
+        public virtual void SetDirection(Vector2 direction)
         {
             _directionToTarget = direction.normalized;
         }

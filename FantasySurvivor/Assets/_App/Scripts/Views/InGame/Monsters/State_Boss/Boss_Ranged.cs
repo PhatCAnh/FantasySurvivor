@@ -27,10 +27,10 @@ namespace FantasySurvivor
         private GameController gameController => Singleton<GameController>.instance;
 
         private int _coolDownBack = 0;
-        public int attackCounter = 0; // count so lan attack
-        public bool isState1 = false;
-        public bool isState2 = false;
-        public bool isState3 = false;
+        private int attackCounter = 0; // count so lan attack
+        private bool isState1 = false;
+        private bool isState2 = false;
+        private bool isState3 = false;
         private bool isTelegraphing = false;
         private float telegraphTimer = 0f;
         private float telegraphDuration = 1.5f;
@@ -65,7 +65,7 @@ namespace FantasySurvivor
             return Vector3.Distance(transform.position, gameController.character.transform.position) <= sightRange;
         }
 
-        private bool CheckBack()
+        public virtual bool CheckBack()
         {
             return _coolDownBack >= _numberBack;
         }
@@ -263,7 +263,7 @@ namespace FantasySurvivor
 
                 Vector2 bulMoveDirection = new Vector2(bulDirX, bulDirY).normalized;
 
-                var bulletObject = Singleton<PoolController>.instance.GetObject(typeBullet, firePoint.position);
+                var bulletObject = Singleton<PoolController>.instance.GetObject(typeBullet2, firePoint.position);
 
                 if (bulletObject.TryGetComponent(out BulletBossGatlingCrab bullet2))
                 {
