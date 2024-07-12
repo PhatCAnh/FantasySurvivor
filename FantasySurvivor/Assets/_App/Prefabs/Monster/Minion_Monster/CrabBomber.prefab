@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 417893795010923971}
   - component: {fileID: 1265810781918317441}
   - component: {fileID: 8787760594629568027}
-  - component: {fileID: 2241576976693935043}
+  - component: {fileID: 7148853119256476525}
   m_Layer: 0
   m_Name: CrabBomber
   m_TagString: Untagged
@@ -97,7 +97,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2241576976693935043
+--- !u!114 &7148853119256476525
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,17 +106,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 669821632634323273}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6e85ede2ae711547b05a0890f5f521b, type: 3}
+  m_Script: {fileID: 11500000, guid: 3baee317a03089b46a2f32138d3de842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  myRigid: {fileID: 0}
-  animator: {fileID: 0}
-  firePoint: {fileID: 0}
+  type: 47
+  myRigid: {fileID: 8787760594629568027}
+  animator: {fileID: 3778247638694950536}
+  firePoint: {fileID: 7909847587556015615}
   justSpawnVertical: 0
   isStun: 0
-  isNoMove: 0
-  size: 0
+  isNoMove: 1
+  size: 0.25
 --- !u!1 &1335905100983425064
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +262,7 @@ Transform:
   m_GameObject: {fileID: 1746867099401709272}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

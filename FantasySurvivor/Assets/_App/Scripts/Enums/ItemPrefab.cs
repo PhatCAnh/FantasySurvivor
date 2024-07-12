@@ -51,6 +51,7 @@ public enum ItemPrefab
     PopupWarning_Boss,
 	HydustShrimp,
     BulletBossHydustShrimp,
+	MinionCrabBomber,
 
 }
 
