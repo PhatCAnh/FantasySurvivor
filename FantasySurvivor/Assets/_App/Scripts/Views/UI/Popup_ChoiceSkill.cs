@@ -12,12 +12,11 @@ using UnityEngine.UI;
 public class PopupChoiceSkill : View<GameApp>, IPopup
 {
 	[SerializeField] private TextMeshProUGUI NumberTaget;
-	[SerializeField] private Transform container;
+	[SerializeField] private Transform container, containerchoose;
 	[SerializeField] private GameObject iconSkillPrefab;
-	[SerializeField] private Button closeBtn;
-	[SerializeField] private Button GoBtn;
+	[SerializeField] private Button GoBtn, Backbtn;
 
-	public int currentNumberSkill = 0; // điếm số skill outr game
+	private int currentNumberSkill = 0; // điếm số skill outr game
 	private GameController gameController => Singleton<GameController>.instance;
 	private SkillController skillController => Singleton<SkillController>.instance;
 
@@ -36,15 +35,26 @@ public class PopupChoiceSkill : View<GameApp>, IPopup
 
 			icon.Init(skill.id, this, result);
 		}
+        foreach (var skill in gameController._listSkill)
+        {
+            var id = skill.id;
 
-		closeBtn.onClick.AddListener(Close);
-		Open();
+            if (CheckSkillSet(id) == true)
+            {
+                Instantiate(iconSkillPrefab, containerchoose).TryGetComponent(out Icon_ChoiceSkill icon);
+                icon.ShowList(skill.id, this);
+            }
+
+        }
+		Backbtn.onClick.AddListener(Close);
+        Open();
 		NumberTaget.text = $"{currentNumberSkill}/{gameController.numberLimitChoiceSkill}"; //fix text numberskill khi mới vào
 		if(currentNumberSkill < gameController.numberLimitChoiceSkill) //ẩn nút go
 		{
 			GoBtn.interactable = false;
 		}
 		GoBtn.onClick.AddListener(Close_Go);
+		return;
 	}
 	public void Open()
 	{
@@ -72,30 +82,29 @@ public class PopupChoiceSkill : View<GameApp>, IPopup
 
 	}
 
-	public bool UpdateTextNumberChoiceSkill(SkillId id)
-	{
-		if(CheckSkillSet(id))
-		{
-			currentNumberSkill -= 1;
-			skillController.RemoveSkillSet(id);
-			NumberTaget.text = $"{currentNumberSkill}/{gameController.numberLimitChoiceSkill}";
-			GoBtn.interactable = false;
-			return false;
-		}
+	//public bool UpdateTextNumberChoiceSkill(SkillId id)
+	//{
+		//if(CheckSkillSet(id))
+		//{
+		//	currentNumberSkill -= 1;
+		//	NumberTaget.text = $"{currentNumberSkill}/{gameController.numberLimitChoiceSkill}";
+		//	GoBtn.interactable = false;
+           
+  //          return false;
+  //      }
 
-		if(currentNumberSkill < gameController.numberLimitChoiceSkill)
-		{
-			currentNumberSkill += 1;
-			skillController.AddSkillSet(id);
-			NumberTaget.text = $"{currentNumberSkill}/{gameController.numberLimitChoiceSkill}";
+		//if(currentNumberSkill < gameController.numberLimitChoiceSkill)
+		//{
+		//	currentNumberSkill += 1;
+  //          NumberTaget.text = $"{currentNumberSkill}/{gameController.numberLimitChoiceSkill}";
 
-			GoBtn.interactable = currentNumberSkill == gameController.numberLimitChoiceSkill;
-
-			return true;
-		}
-		
-		return false;
-	}
+		//	GoBtn.interactable = currentNumberSkill == gameController.numberLimitChoiceSkill;
+           
+  //          return true;
+		//}
+       
+ //       return false;
+	//}
 
 	private bool CheckSkillSet(SkillId id)
 	{

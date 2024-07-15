@@ -50,7 +50,8 @@ namespace _App.Scripts.Controllers
 			return _skillDataTable.listSkillData.Where(skill => skill.name != SkillName.Food).ToList();
 		}
 
-		public SkillData GetSkillDataTable(SkillName name)
+      
+        public SkillData GetSkillDataTable(SkillName name)
 		{
 			return _skillDataTable.listSkillData.FirstOrDefault(skill => skill.name == name);
 		}

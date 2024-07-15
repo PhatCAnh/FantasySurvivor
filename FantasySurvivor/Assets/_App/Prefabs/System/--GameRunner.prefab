@@ -404,6 +404,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4925867890613326579}
     m_Modifications:
+    - target: {fileID: 3406260845707158370, guid: d8bffafac3ebbbb4c982947129728679, type: 3}
+      propertyPath: numberLimitChoiceSkill
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4008007943000763282, guid: d8bffafac3ebbbb4c982947129728679, type: 3}
       propertyPath: m_Name
       value: --Controllers
@@ -475,6 +479,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6955668542304683199, guid: 801bc8899527a48e3b4fbd9d6cc56935, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _dailyGift
+      value: 
+      objectReference: {fileID: 3146637427274540913, guid: 293cf80370e1c7147ab6504b905cf658, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _killerBee
       value: 
       objectReference: {fileID: 48425990686245726, guid: 6f9b6ff3c81c3a34b8fa73ef81bcee39, type: 3}
@@ -518,6 +526,10 @@ PrefabInstance:
       propertyPath: _goblinSwift
       value: 
       objectReference: {fileID: 2756737215646588848, guid: 035e17780e2c67c43b03a14b05d8d8d6, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _rewardPopup
+      value: 
+      objectReference: {fileID: 642018596976232263, guid: 26458c20af3a03c4bb4dd061a6d3c153, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _supportItem
       value: 
@@ -574,6 +586,10 @@ PrefabInstance:
       propertyPath: _slimeWandering
       value: 
       objectReference: {fileID: 7424864141763079353, guid: 583fe81bb4245f041a6e7e0f7986836c, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _Choicelistskill
+      value: 
+      objectReference: {fileID: 5092614275285453532, guid: ad9a6ee6a67844c57aa5d5924ec01de7, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _bulletKillerBee
       value: 

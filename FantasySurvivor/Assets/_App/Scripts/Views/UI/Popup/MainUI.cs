@@ -17,14 +17,14 @@ public class MainUI : View<GameApp>, IPopup
 		public Toggle toggle;
 		public Image image;
 		public bool isLock;
+		
 	}
 
 	[SerializeField] private ItemToggle _itemHome, _itemElemental, _itemShop, _itemUpdate, _itemLock;
-	[SerializeField] private GameObject _goLock, _goUpdateStat, _goHome;
+	[SerializeField] private GameObject _goLock, _goUpdateStat, _goHome,_goListSkill;
 	[SerializeField] private Image _imgLineFocus;
 	[SerializeField] private Button _btnBattle, _btnCheat, _btnTest, _btnDailyGift;
 	[SerializeField] private TextMeshProUGUI _txtGoldCoin;
-
 	private float _durationAnim = 0.3f;
 
 	private GameController gameController => Singleton<GameController>.instance;
@@ -41,10 +41,10 @@ public class MainUI : View<GameApp>, IPopup
 		_btnBattle.onClick.AddListener(OnClickBtnBattle);
 		_btnTest.onClick.AddListener(Test);
 		
-		_btnDailyGift.onClick.AddListener(() =>
-		{
-			app.resourceManager.ShowPopup(PopupType.DailyGift);
-		});
+		//_btnDailyGift.onClick.AddListener(() =>
+		//{
+		//	app.resourceManager.ShowPopup(PopupType.DailyGift);
+		//});
 
 		_btnCheat.onClick.AddListener(() =>
 		{
@@ -93,12 +93,17 @@ public class MainUI : View<GameApp>, IPopup
 	{
 		ChangeAnimToggle(_itemHome);
 		_goHome.SetActive(value);
+		
 	}
 
-	private void OnClickTglElemental(bool value)
+	public void OnClickTglElemental(bool value)
 	{
-		ChangeAnimToggle(_itemElemental);
-		_goLock.SetActive(_itemElemental.isLock && value);
+       // app.resourceManager.ShowPopup(PopupType.Choicelistskill);
+        ChangeAnimToggle(_itemElemental);
+		_goListSkill.SetActive(_itemElemental.isLock && value);
+		//_itemElemental.isLock=value;
+		//_goLock.SetActive(_itemElemental.isLock && value);
+		//app.resourceManager.ShowPopup(PopupType.Choicelistskill);
 	}
 
 	private void OnClickTglShop(bool value)
