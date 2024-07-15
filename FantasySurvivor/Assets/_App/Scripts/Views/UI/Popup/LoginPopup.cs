@@ -20,6 +20,10 @@ public class LoginPopup : View<GameApp>, IPopup
 	[SerializeField] private Button _btnRegisterAccount, _btnBack;
 	[SerializeField] private TextMeshProUGUI _txtErrorRegister;
 
+	private string _email;
+
+	private string _password;
+
 	private PlayfabController playfab => Singleton<PlayfabController>.instance;
 
 	protected override void OnViewInit()
@@ -68,11 +72,16 @@ public class LoginPopup : View<GameApp>, IPopup
 	{
 		_goLogin.SetActive(true);
 		_goRegister.SetActive(false);
+
+		_inputEmail.text = _email;
+		
 		_txtError.text = "Register successful";
 	}
 
 	private void OnClickBtnLogin()
 	{
+		_email = _inputEmail.text;
+		_password = _inputPassword.text;
 		playfab.Login(_inputEmail.text, _inputPassword.text, OnLoginSuccess, ErrorLogin);
 	}
 
@@ -97,6 +106,8 @@ public class LoginPopup : View<GameApp>, IPopup
 	{
 		var data = app.models.dataPlayerModel;
 		data.NameDisplay = result.PlayFabId;
+		data.Email = _email;
+		data.Password = _password;
 		Singleton<GameController>.instance.ChangeSceneHome();
 	}
 

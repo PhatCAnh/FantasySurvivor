@@ -9,7 +9,6 @@ using FantasySurvivor;
 using JetBrains.Annotations;
 using Unity.Mathematics;
 using UnityEngine.SceneManagement;
-
 using MonsterStat = FantasySurvivor.MonsterStat;
 using System.Threading;
 using Unity.VisualScripting;
@@ -30,7 +29,7 @@ public class GameController : Controller<GameApp>
 
     public Action<Monster> onMonsterDie;
 
-    public int numberLimitChoiceSkill = 3;// limit skill out game
+    public int numberLimitChoiceSkill = 3; // limit skill out game
 
     private HealthBar _healthBar;
     private HealthBarController _healthBarController;
@@ -98,11 +97,9 @@ public class GameController : Controller<GameApp>
     public void ChangeScene(string nameScene, [CanBeNull] Action callback)
     {
         var load = SceneManager.LoadSceneAsync(nameScene, LoadSceneMode.Single);
-        load.completed += o =>
-        {
-            callback?.Invoke();
-        };
+        load.completed += o => { callback?.Invoke(); };
     }
+
     public void ChangeSceneHome()
     {
         var load = SceneManager.LoadSceneAsync(GameConst.nameScene_Main, LoadSceneMode.Single);
@@ -116,7 +113,23 @@ public class GameController : Controller<GameApp>
 
     public void StartGame()
     {
-        app.resourceManager.ShowPopup(PopupType.AccountPopup);
+        var model = app.models.dataPlayerModel;
+        if (app.models.dataPlayerModel.Email != "")
+        {
+            ArbanFramework.Singleton<PlayfabController>.instance.Login(model.Email,
+                model.Password,
+                (result) =>
+                {
+                    model.NameDisplay = result.PlayFabId;
+                    ChangeSceneHome();
+                }, 
+                (error) => {});
+            
+        }
+        else
+        {
+            app.resourceManager.ShowPopup(PopupType.AccountPopup);
+        }
     }
 
     public Monster FindNearestMonster(Vector3 bulletPosition, float range, Monster origin = null)
@@ -138,6 +151,7 @@ public class GameController : Controller<GameApp>
                 minDistance = distance;
             }
         }
+
         return nearestMonster;
     }
 
@@ -186,21 +200,26 @@ public class GameController : Controller<GameApp>
     {
         var statBoss = app.configs.dataStatMonster.GetConfig(wave.idMonster);
 
-        var bossStat = new MonsterStat(statBoss.moveSpeed, wave.healthMonster, wave.adMonster, statBoss.attackSpeed, statBoss.attackRange, wave.expMonster);
+        var bossStat = new MonsterStat(statBoss.moveSpeed, wave.healthMonster, wave.adMonster, statBoss.attackSpeed,
+            statBoss.attackRange, wave.expMonster);
 
         var type = (ItemPrefab)Enum.Parse(typeof(ItemPrefab), statBoss.monsterType);
 
-        ArbanFramework.Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster boss);
+        ArbanFramework.Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20))
+            .TryGetComponent(out Monster boss);
 
         //var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
         boss.Init(bossStat, wave, type);
 
-        _healthBarController = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.GatlingCrab_HealthBar), app.resourceManager.rootContainer)
-           .GetComponent<HealthBarController>();
+        _healthBarController = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.GatlingCrab_HealthBar),
+                app.resourceManager.rootContainer)
+            .GetComponent<HealthBarController>();
         _healthBarController.Init(boss);
-  
-        _popupWarningBoss = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.PopupWarning_Boss), app.resourceManager.rootContainer).GetComponent<PopupWarning>();
-  
+
+        _popupWarningBoss =
+            Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.PopupWarning_Boss),
+                app.resourceManager.rootContainer).GetComponent<PopupWarning>();
+
         boss.ResetAttackCountdown();
         boss.animator.SetBool("Dead", false);
         listMonster.Add(boss);
@@ -214,11 +233,13 @@ public class GameController : Controller<GameApp>
         var statMonster = app.configs.dataStatMonster.GetConfig(wave.idMonster);
 
 
-        var monsterStat = new MonsterStat(statMonster.moveSpeed, wave.healthMonster, wave.adMonster, statMonster.attackSpeed, statMonster.attackRange, wave.expMonster);
+        var monsterStat = new MonsterStat(statMonster.moveSpeed, wave.healthMonster, wave.adMonster,
+            statMonster.attackSpeed, statMonster.attackRange, wave.expMonster);
 
         var type = (ItemPrefab)Enum.Parse(typeof(ItemPrefab), statMonster.monsterType);
 
-        ArbanFramework.Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
+        ArbanFramework.Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20))
+            .TryGetComponent(out Monster monster);
 
         //var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
         monster.Init(monsterStat, wave, type);
@@ -237,9 +258,11 @@ public class GameController : Controller<GameApp>
     public Monster SpawnMonster(string id, int health, int attackDamage)
     {
         var statMonster = app.configs.dataStatMonster.GetConfig(id);
-        var monsterStat = new MonsterStat(statMonster.moveSpeed, health, attackDamage, statMonster.attackSpeed, statMonster.attackRange);
+        var monsterStat = new MonsterStat(statMonster.moveSpeed, health, attackDamage, statMonster.attackSpeed,
+            statMonster.attackRange);
         var type = (ItemPrefab)Enum.Parse(typeof(ItemPrefab), statMonster.monsterType);
-        ArbanFramework.Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20)).TryGetComponent(out Monster monster);
+        ArbanFramework.Singleton<PoolController>.instance.GetObject(type, RandomPositionSpawnMonster(20))
+            .TryGetComponent(out Monster monster);
 
         monster.Init(monsterStat, null, type);
 
@@ -269,16 +292,15 @@ public class GameController : Controller<GameApp>
         }
 
 
-
         //Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
         //Destroy(mons.gameObject);
     }
+
     public void MonsterDestroy(Monster mons)
     {
         listMonster.Remove(mons);
         //Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
     }
-
 
 
     public void KillAllMonster()
@@ -305,6 +327,7 @@ public class GameController : Controller<GameApp>
             // 	listMonsterInRect.Add(mons);
             // }
         }
+
         return listMonsterInRect;
     }
 
@@ -325,6 +348,7 @@ public class GameController : Controller<GameApp>
                 listMonsterInRect.Add(mons);
             }
         }
+
         return listMonsterInRect.Count != 0 ? listMonsterInRect : null;
     }
 
@@ -365,6 +389,7 @@ public class GameController : Controller<GameApp>
                         dropItemType.Collect();
                     }
                 }
+
                 break;
             case DropItemType.Food:
                 character.AddHealth(character.model.maxHealthPoint * 20 / 100);
@@ -379,6 +404,7 @@ public class GameController : Controller<GameApp>
                         MonsterDie(mons);
                     }
                 }
+
                 break;
         }
     }
@@ -393,6 +419,7 @@ public class GameController : Controller<GameApp>
                 return item.Key;
             }
         }
+
         return DropItemType.Exp;
     }
 
@@ -433,13 +460,15 @@ public class GameController : Controller<GameApp>
         var y = a.y - b.y;
         return x * x + y * y <= number * number;
     }
+
     private Character SpawnCharacter()
     {
         var characterPrefab = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.Character))
             .GetComponent<Character>();
         characterPrefab.transform.position = Vector2.zero;
 
-        _healthBar = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.HealthBar), app.resourceManager.rootContainer)
+        _healthBar = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.HealthBar),
+                app.resourceManager.rootContainer)
             .GetComponent<HealthBar>();
         _healthBar.Init(characterPrefab);
 
@@ -454,11 +483,12 @@ public class GameController : Controller<GameApp>
             dataChar.armor,
             dataChar.regen,
             dataChar.shield
-            );
+        );
 
         foreach (var item in app.models.dataPlayerModel.ListItemEquipped)
         {
-            var itemData = ArbanFramework.Singleton<ItemController>.instance.GetDataItem(item.id, item.rank, item.level).dataConfig;
+            var itemData = ArbanFramework.Singleton<ItemController>.instance.GetDataItem(item.id, item.rank, item.level)
+                .dataConfig;
             //fix it
         }
 
@@ -493,6 +523,7 @@ public class GameController : Controller<GameApp>
                 number = statRank.health;
                 break;
         }
+
         return (nameReturn, number, type);
     }
 
@@ -509,6 +540,7 @@ public class GameController : Controller<GameApp>
             _ => ""
         };
     }
+
     private void LoadMap(int chapter, int level)
     {
         _camSize = Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0));
@@ -524,6 +556,7 @@ public class GameController : Controller<GameApp>
         app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
         //app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
     }
+
     public void ReviveCharacter()
     {
         if (character == null || character.model.currentHealthPoint > 0) return;
@@ -553,7 +586,7 @@ public class GameController : Controller<GameApp>
         var year = Convert.ToInt32(dataDateStartDaily[2]);
         var startDate = new DateTime(year, month, day);
         var currentDay = DateTime.Now;
-        
+
         var dateDifference = currentDay - startDate;
 
         return dateDifference.Days;
@@ -568,6 +601,5 @@ public class GameController : Controller<GameApp>
         var year = Convert.ToInt32(dataDateStartDaily[2]);
         day -= 1;
         app.models.dataPlayerModel.DateStartDailyGift = $"{day}/{month}/{year}";
-        
     }
 }

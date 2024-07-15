@@ -286,7 +286,7 @@ namespace FantasySurvivor
 		{
 			Email = "";
 			Password = "";
-			NameDisplay = "";
+			NameDisplay = "Guest";
 		}
 	}
 }
