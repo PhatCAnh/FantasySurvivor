@@ -7,29 +7,49 @@ using Unity.VisualScripting;
 using UnityEditor.Timeline;
 using UnityEngine;
 
-public class HydustShrimp_Boss : Boss_Ranged
+public class HydustShrimp_Boss : Monster
 {
+    //bullet
+    public BulletBossHydustShrimp bulletPrefab1;
+    public Transform firePoint2;
+    public Transform spawnFirePoint;
 
     [SerializeField] private ItemPrefab typeBullet;
-    [SerializeField] private ItemPrefab typeBullet2;
     [SerializeField] private int _numberBack = 0;
 
+
+    //zone
+    public GameObject zonePrefab;
+    private GameObject currentZone;
+    public float initialZoneRadius; //size zone
+    public float minimumZoneRadius;
+    public float shrinkingSpeed; //time thu nho
+    private float currentZoneRadius;
+    private float damageTimer = 0f; //count time dame zone
+
+    //sight
+    public float sightRange = 10f;
+    private bool isInSightRange = false;
 
     private Vector3 spawnPos { get; set; }
 
     private int _coolDownBack = 0;
     private int attackCounter = 0; // count so lan attack
-    private bool isState1 = false;
-    private bool isState2 = false;
-    private bool isState3 = false;
-
-
+    private bool isState1;
+    private bool isState2;
+    private bool isState3;
 
     private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
     protected override void OnViewInit()
     {
         base.OnViewInit();
+        spawnPos = transform.position;
+        IdleState();
+
+        currentZone = Instantiate(zonePrefab, transform.position, Quaternion.identity);
+        currentZone.transform.localScale = Vector3.one * initialZoneRadius * 2;
+        currentZoneRadius = initialZoneRadius;
     }
 
     protected override void HandlePhysicUpdate()
@@ -64,7 +84,7 @@ public class HydustShrimp_Boss : Boss_Ranged
                     if (!isState2)
                     {
                         isState1 = true;
-                        SecondAttack();
+                        AttackState();
                         MoveState();
                         attackCounter++;
                         cdAttack.Restart(1 / model.attackSpeed);
@@ -72,9 +92,10 @@ public class HydustShrimp_Boss : Boss_Ranged
                 }
                 else
                 {
+                    animator.SetBool("Attack", false);
                     attackCounter = 0;
                     isState2 = true;
-                    cdAttack.Restart(2 / model.attackSpeed);
+                    cdAttack.Restart(1 / model.attackSpeed);
                     IdleState();
                 }
 
@@ -92,7 +113,7 @@ public class HydustShrimp_Boss : Boss_Ranged
                     {
                         isState2 = false;
                         attackCounter = 0;
-                        cdAttack.Restart(1 / model.attackSpeed);
+                        cdAttack.Restart(2 / model.attackSpeed);
                         return;
                     }
                 }
@@ -102,11 +123,41 @@ public class HydustShrimp_Boss : Boss_Ranged
         {
             MoveState();
             animator.SetBool("Attack", false);
+            animator.SetBool("SummonAttack", false);
             attackCounter = 0;
         }
 
         SetAnimation(idleDirection);
 
+    }
+
+    public virtual bool IsSightRange()
+    {
+        return Vector3.Distance(transform.position, gameController.character.transform.position) <= sightRange;
+    }
+
+    private void UpdateZone()
+    {
+        if (currentZoneRadius > 0)
+        {
+            currentZoneRadius -= shrinkingSpeed * Time.deltaTime;
+            currentZoneRadius = Mathf.Max(currentZoneRadius, minimumZoneRadius);
+
+            currentZone.transform.position = spawnPos;
+            currentZone.transform.localScale = Vector3.one * currentZoneRadius * 2;
+        }
+
+        damageTimer += Time.deltaTime;
+
+        if (damageTimer >= 0.5f)
+        {
+            float distanceToPlayer = Vector3.Distance(spawnPos, gameController.character.transform.position);
+            if (distanceToPlayer > currentZoneRadius)
+            {
+                gameController.character.TakeDamage(10);
+            }
+            damageTimer = 0f;
+        }
     }
 
     public override void Attack()
@@ -169,9 +220,26 @@ public class HydustShrimp_Boss : Boss_Ranged
         }
     }
 
-    public override void SecondAttack()
+    private void SecondAttack()
     {
-       
+        animator.SetBool("SummonAttack", true);
+        SpawnBomb();
+    }
+
+    private void SpawnBomb()
+    {
+        int numMonster = 3;
+        float range = 2f;
+
+        for (int i = 0; i < numMonster; i++)
+        {
+            var mob = gameController.SpawnMonster("CrabBomber", 5, stat.attackDamage.BaseValue);
+
+            Vector2 randomPosition = new Vector2(spawnFirePoint.transform.position.x + Random.Range(-range, range),
+                                                 spawnFirePoint.transform.position.y + Random.Range(-range, range));
+
+            mob.transform.position = randomPosition;
+        }
     }
 
     public virtual void ThirdAttack()
@@ -179,5 +247,9 @@ public class HydustShrimp_Boss : Boss_Ranged
 
     }
 
+    private bool CheckBack()
+    {
+        return _coolDownBack >= _numberBack;
+    }
 
 }

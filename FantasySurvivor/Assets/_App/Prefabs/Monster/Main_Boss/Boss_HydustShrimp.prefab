@@ -183,6 +183,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4866070643108103150}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1361888343053810600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1166418747676267844}
+  m_Layer: 9
+  m_Name: SpawnFirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1166418747676267844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361888343053810600}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.22, y: -1.23, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4866070643108103150}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1459843854226497923
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,24 +503,16 @@ MonoBehaviour:
   isStun: 0
   isNoMove: 0
   size: 0
-  bulletPrefab: {fileID: 277380798738218016, guid: 0c7bb9fc62cf10d43a6eeefdf9f04233, type: 3}
-  bulletPrefab2: {fileID: 277380798738218016, guid: 0c7bb9fc62cf10d43a6eeefdf9f04233, type: 3}
-  bulletPrefab3: {fileID: 277380798738218016, guid: 0c7bb9fc62cf10d43a6eeefdf9f04233, type: 3}
+  bulletPrefab1: {fileID: 3127870901867446525, guid: 0c7bb9fc62cf10d43a6eeefdf9f04233, type: 3}
   firePoint2: {fileID: 3173103922902231955}
-  firePoint3: {fileID: 0}
-  telegraphEffectPrefab: {fileID: 0}
+  spawnFirePoint: {fileID: 1166418747676267844}
   typeBullet: 46
-  typeBullet2: 46
   _numberBack: 0
-  sightRange: 15
-  isInSightRange: 0
   zonePrefab: {fileID: 901334509334556526, guid: 91d837e8feaa3ee4d96e1118d6a0408d, type: 3}
   initialZoneRadius: 50
   minimumZoneRadius: 20
   shrinkingSpeed: 2
-  typeBullet: 46
-  typeBullet2: 46
-  _numberBack: 0
+  sightRange: 15
 --- !u!1 &2053120397473760720
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,6 +622,7 @@ Transform:
   m_Children:
   - {fileID: 1421857555634100162}
   - {fileID: 3173103922902231955}
+  - {fileID: 1166418747676267844}
   m_Father: {fileID: 48518682382240027}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7395563818789393216

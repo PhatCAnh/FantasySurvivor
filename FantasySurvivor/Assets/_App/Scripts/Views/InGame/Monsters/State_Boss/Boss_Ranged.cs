@@ -197,7 +197,7 @@ namespace FantasySurvivor
             SetAnimation(idleDirection);
         }
 
-        public virtual void UpdateZone()
+        private void UpdateZone()
         {
             if (currentZoneRadius > 0)
             {
