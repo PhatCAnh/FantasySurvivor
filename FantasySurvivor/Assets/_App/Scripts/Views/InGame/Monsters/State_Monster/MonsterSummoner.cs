@@ -50,7 +50,28 @@ public class MonsterSummoner : Monster
     public override void Attack()
     {
         animator.SetBool("Attack", true);
-        for (int i = 0; i < numMonster; i++)
+
+        for (int i = 0; i < 1; i++)
+        {
+            var mob = gameController.SpawnMonster("Wolf", 5, stat.attackDamage.BaseValue);
+
+            Vector2 randomPosition = new Vector2(firePoint.position.x + Random.Range(-range, range),
+                                                 firePoint.position.y + Random.Range(-range, range));
+
+            mob.transform.position = randomPosition;
+        }
+
+        for (int i = 0; i < 1; i++)
+        {
+            var mob = gameController.SpawnMonster("Wolf", 5, stat.attackDamage.BaseValue);
+
+            Vector2 randomPosition = new Vector2(firePoint.position.x + Random.Range(-range, range),
+                                                 firePoint.position.y + Random.Range(-range, range));
+
+            mob.transform.position = randomPosition;
+        }
+
+        for (int i = 0; i < 1; i++)
         {
             var mob = gameController.SpawnMonster("Wolf", 5, stat.attackDamage.BaseValue);
 

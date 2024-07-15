@@ -113,25 +113,24 @@ public class HydustShrimp_Boss : Monster
             if (chargeElapsedTime >= chargeDuration)
             {
                 isCharging = false;
-
             }
 
             return;
         }
 
-        if (moveDirection.magnitude > 10)
+        if (moveDirection.magnitude > 15)
         {
-            isState3 = true;
             isState1 = false;
             isState2 = false;
 
             IdleState();
             ThirdAttack();
+            cdAttack.Restart(1 / model.attackSpeed);
             return;
         }
 
         //sizeAttack
-        if (moveDirection.magnitude < sizeAttack && !isState3)
+        if (moveDirection.magnitude < sizeAttack)
         {
             if (cdAttack.isFinished)
             {
