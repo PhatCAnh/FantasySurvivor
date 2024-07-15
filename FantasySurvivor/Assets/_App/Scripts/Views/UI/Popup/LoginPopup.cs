@@ -28,6 +28,7 @@ public class LoginPopup : View<GameApp>, IPopup
 		_btnLogin.onClick.AddListener(OnClickBtnLogin);
 		_btnRegister.onClick.AddListener(OnClickBtnSignIn);
 		_btnRegisterAccount.onClick.AddListener(OnClickBtnRegister);
+		_btnBack.onClick.AddListener(OnClickBtnBack);
 		Open();
 	}
 
@@ -55,7 +56,6 @@ public class LoginPopup : View<GameApp>, IPopup
 		}
 
 		playfab.Register(_inputFieldEmailRegister.text, _inputFieldPasswordRegister.text, OnRegisterSuccess, ErrorRegister);
-		Close();
 	}
 
 	private void ErrorRegister(PlayFabError error)
@@ -65,7 +65,9 @@ public class LoginPopup : View<GameApp>, IPopup
 
 	private void OnRegisterSuccess(RegisterPlayFabUserResult result)
 	{
-		playfab.Login(_inputFieldEmailRegister.text, _inputFieldEmailRegister.text, OnLoginSuccess, ErrorLogin);
+		_goLogin.SetActive(true);
+		_goRegister.SetActive(false);
+		_txtError.text = "Register successful";
 	}
 
 	private void OnClickBtnLogin()
@@ -77,7 +79,12 @@ public class LoginPopup : View<GameApp>, IPopup
 	{
 		_goLogin.SetActive(false);
 		_goRegister.SetActive(true);
-		Close();
+	}
+
+	private void OnClickBtnBack()
+	{
+		_goLogin.SetActive(true);
+		_goRegister.SetActive(false);
 	}
 
 	private void ErrorLogin(PlayFabError error)
@@ -87,6 +94,8 @@ public class LoginPopup : View<GameApp>, IPopup
 
 	private void OnLoginSuccess(LoginResult result)
 	{
+		var data = app.models.dataPlayerModel;
+		data.NameDisplay = result.PlayFabId;
 		Singleton<GameController>.instance.ChangeSceneHome();
 	}
 }

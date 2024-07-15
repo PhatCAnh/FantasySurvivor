@@ -116,7 +116,7 @@ public class GameController : Controller<GameApp>
 
     public void StartGame()
     {
-        app.resourceManager.ShowPopup(PopupType.LoginPopup);
+        app.resourceManager.ShowPopup(PopupType.AccountPopup);
     }
 
     public Monster FindNearestMonster(Vector3 bulletPosition, float range, Monster origin = null)

@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using ArbanFramework.MVC;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingPopup : MonoBehaviour
+public class SettingPopup : View<GameApp>, IPopup
 {
     [SerializeField] private Button closeButton;
     public GameObject userIdPopupPrefab;
@@ -11,7 +12,6 @@ public class SettingPopup : MonoBehaviour
     public GameObject soundsPopupPrefab;
     public GameObject ratePopupPrefab;
     public GameObject aboutUsPopupPrefab;
-    public GameObject logoutPopupPrefab;
     public GameObject exitGamePopupPrefab;
 
     public Button userIdButton;
@@ -26,28 +26,21 @@ public class SettingPopup : MonoBehaviour
 
     void Start()
     {
-        if (userIdButton != null)
-            userIdButton.onClick.AddListener(OpenUserIdPopup);
-        if (languageButton != null)
-            languageButton.onClick.AddListener(OpenLanguagePopup);
-        if (soundsButton != null)
-            soundsButton.onClick.AddListener(OpenSoundsPopup);
-        if (rateButton != null)
-            rateButton.onClick.AddListener(OpenRatePopup);
-        if (aboutUsButton != null)
-            aboutUsButton.onClick.AddListener(OpenAboutUsPopup);
-        if (logoutButton != null)
-            logoutButton.onClick.AddListener(OpenLogoutPopup);
-        if (exitGameButton != null)
-            exitGameButton.onClick.AddListener(OpenExitGamePopup);
-        if (closeButton != null)
-            closeButton.onClick.AddListener(OnCloseButtonClick);
-
+        userIdButton.onClick.AddListener(OpenUserIdPopup);
+        languageButton.onClick.AddListener(OpenLanguagePopup);
+        soundsButton.onClick.AddListener(OpenSoundsPopup);
+        rateButton.onClick.AddListener(OpenRatePopup);
+        aboutUsButton.onClick.AddListener(OpenAboutUsPopup);
+        logoutButton.onClick.AddListener(OnClickBtnLogout);
+        exitGameButton.onClick.AddListener(OpenExitGamePopup);
+        closeButton.onClick.AddListener(OnCloseButtonClick);
     }
+
     private void OnCloseButtonClick()
     {
         Destroy(gameObject);
     }
+
     void OpenUserIdPopup()
     {
         OpenPopup(userIdPopupPrefab);
@@ -73,9 +66,12 @@ public class SettingPopup : MonoBehaviour
         OpenPopup(aboutUsPopupPrefab);
     }
 
-    void OpenLogoutPopup()
+    void OnClickBtnLogout()
     {
-        OpenPopup(logoutPopupPrefab);
+        app.models.dataPlayerModel.Logout();
+        app.resourceManager.CloseAllPopup();
+        Destroy(gameObject);
+        app.resourceManager.ShowPopup(PopupType.AccountPopup);
     }
 
     void OpenExitGamePopup()
@@ -93,6 +89,11 @@ public class SettingPopup : MonoBehaviour
         currentPopup = Instantiate(popupPrefab, transform);
     }
 
-   
+    public void Open()
+    {
+    }
 
+    public void Close()
+    {
+    }
 }

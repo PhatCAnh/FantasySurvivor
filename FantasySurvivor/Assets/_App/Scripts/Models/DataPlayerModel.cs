@@ -32,8 +32,21 @@ namespace FantasySurvivor
 			DateLoginGame = $"{dateNow.Item1}/{dateNow.Item2}/{dateNow.Item3}";
 			DateStartDailyGift = $"{dateNow.Item1}/{dateNow.Item2}/{dateNow.Item3}";
 			DataSaveClaimDailyGift = "Waiting-Waiting-Waiting-Waiting-Waiting-Waiting-Waiting";
+
+			_email = "Guest";
+			
+			_password = "123";
+
+			_nameDisplay = "Guest";
+			
 			app.models.WriteModel<DataPlayerModel>();
 		}
+		
+		[JsonProperty] private string _email;
+		
+		[JsonProperty] private string _password;
+		
+		[JsonProperty] private string _nameDisplay;
 
 		[JsonProperty] private int _gold;
 		
@@ -54,6 +67,33 @@ namespace FantasySurvivor
 		[JsonProperty] private string _dataSaveClaimDailyGift;
 		
 		private ItemInBag item;
+		
+		public string Email
+		{
+			get => _email;
+			set {
+				_email = value;
+				app.models.WriteModel<DataPlayerModel>();
+			}
+		}
+		
+		public string Password
+		{
+			get => _password;
+			set {
+				_password = value;
+				app.models.WriteModel<DataPlayerModel>();
+			}
+		}
+		
+		public string NameDisplay
+		{
+			get => _nameDisplay;
+			set {
+				_nameDisplay = value;
+				app.models.WriteModel<DataPlayerModel>();
+			}
+		}
 		
 		public string DataSaveClaimDailyGift
 		{
@@ -233,6 +273,20 @@ namespace FantasySurvivor
 		public List<SkillId> GetSkillSet()
 		{
 			return _skillSet;
+		}
+
+		public void Login(string email, string password)
+		{
+			Email = email;
+			Password = password;
+			NameDisplay = email;
+		}
+		
+		public void Logout()
+		{
+			Email = "";
+			Password = "";
+			NameDisplay = "";
 		}
 	}
 }

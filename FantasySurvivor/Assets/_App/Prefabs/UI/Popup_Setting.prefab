@@ -1154,10 +1154,10 @@ RectTransform:
   - {fileID: 4812586800068121853}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1100}
-  m_SizeDelta: {x: 1000, y: 1250}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -80, y: -670}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1453640290401046935
 MonoBehaviour:
@@ -1177,14 +1177,13 @@ MonoBehaviour:
   soundsPopupPrefab: {fileID: 4812586798846200643, guid: 0fa4c4fb01ed92248a60386d245da634, type: 3}
   ratePopupPrefab: {fileID: 4812586798846200643, guid: 5dab680a7daef4040987a1e5623f226a, type: 3}
   aboutUsPopupPrefab: {fileID: 4812586798846200643, guid: 29caebf535901e84dbde9cea863706c9, type: 3}
-  logoutPopupPrefab: {fileID: 4812586798846200643, guid: 0fa4c4fb01ed92248a60386d245da634, type: 3}
   exitGamePopupPrefab: {fileID: 4812586798846200643, guid: 3dc836de9f1efd14aa2c9b5daca01d33, type: 3}
   userIdButton: {fileID: 3807222877149512073}
   languageButton: {fileID: 6030196767342220267}
   soundsButton: {fileID: 1554781574646609839}
   rateButton: {fileID: 927237143606377466}
   aboutUsButton: {fileID: 5427087202354525322}
-  logoutButton: {fileID: 0}
+  logoutButton: {fileID: 1017853596340004910}
   exitGameButton: {fileID: 5927854526847757262}
 --- !u!1 &4812586799249858961
 GameObject:

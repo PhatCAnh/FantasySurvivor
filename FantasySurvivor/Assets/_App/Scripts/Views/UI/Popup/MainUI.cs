@@ -22,8 +22,8 @@ public class MainUI : View<GameApp>, IPopup
 	[SerializeField] private ItemToggle _itemHome, _itemElemental, _itemShop, _itemUpdate, _itemLock;
 	[SerializeField] private GameObject _goLock, _goUpdateStat, _goHome;
 	[SerializeField] private Image _imgLineFocus;
-	[SerializeField] private Button _btnBattle, _btnCheat, _btnTest, _btnDailyGift;
-	[SerializeField] private TextMeshProUGUI _txtGoldCoin;
+	[SerializeField] private Button _btnBattle, _btnCheat, _btnTest, _btnDailyGift, _btnSetting;
+	[SerializeField] private TextMeshProUGUI _txtGoldCoin, _txtUsername;
 
 	private float _durationAnim = 0.3f;
 
@@ -40,6 +40,7 @@ public class MainUI : View<GameApp>, IPopup
 		_itemLock.toggle.onValueChanged.AddListener(OnClickTglLock);
 		_btnBattle.onClick.AddListener(OnClickBtnBattle);
 		_btnTest.onClick.AddListener(Test);
+		_btnSetting.onClick.AddListener(OnClickBtnSetting);
 		
 		_btnDailyGift.onClick.AddListener(() =>
 		{
@@ -50,6 +51,8 @@ public class MainUI : View<GameApp>, IPopup
 		{
 			app.resourceManager.ShowPopup(PopupType.Cheat);
 		});
+
+		_txtUsername.text = app.models.dataPlayerModel.NameDisplay;
 
 		AddEventChangeStat();
 
@@ -66,6 +69,11 @@ public class MainUI : View<GameApp>, IPopup
 	public void Test()
 	{
 		app.resourceManager.ShowPopup(PopupType.CharacterInformation);
+	}
+	
+	public void OnClickBtnSetting()
+	{
+		app.resourceManager.ShowPopup(PopupType.SettingPopup);
 	}
 
 	private void MoveLineFocus(Vector3 pos)
