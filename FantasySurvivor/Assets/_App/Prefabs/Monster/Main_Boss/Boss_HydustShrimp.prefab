@@ -502,7 +502,7 @@ MonoBehaviour:
   justSpawnVertical: 0
   isStun: 0
   isNoMove: 0
-  size: 0
+  size: 2.8
   bulletPrefab1: {fileID: 3127870901867446525, guid: 0c7bb9fc62cf10d43a6eeefdf9f04233, type: 3}
   firePoint2: {fileID: 3173103922902231955}
   spawnFirePoint: {fileID: 1166418747676267844}
@@ -513,6 +513,7 @@ MonoBehaviour:
   minimumZoneRadius: 20
   shrinkingSpeed: 2
   sightRange: 15
+  warningPrefab: {fileID: 7321742405972234692, guid: c1d80fd0637011043b0f2f649f0013de, type: 3}
 --- !u!1 &2053120397473760720
 GameObject:
   m_ObjectHideFlags: 0

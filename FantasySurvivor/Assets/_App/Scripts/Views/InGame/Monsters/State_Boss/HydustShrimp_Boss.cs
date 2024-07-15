@@ -33,11 +33,25 @@ public class HydustShrimp_Boss : Monster
 
     private Vector3 spawnPos { get; set; }
 
+    //state atack
     private int _coolDownBack = 0;
     private int attackCounter = 0; // count so lan attack
     private bool isState1;
     private bool isState2;
     private bool isState3;
+
+    private bool isCharging = false;
+    private Vector3 chargeDirection;
+    private float chargeSpeed = 15f;
+    private float chargeDuration = 1f;
+    private float chargeElapsedTime = 0f;
+
+    //warning attack
+    public GameObject warningPrefab;
+    private GameObject warningInstance;
+    private float warningDuration = 1.5f;
+    private float warningElapsedTime = 0f;
+    private bool isWarning = false;
 
     private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
@@ -72,6 +86,48 @@ public class HydustShrimp_Boss : Monster
                 IdleState();
                 return;
             }
+        }
+
+        if (isWarning)
+        {
+            warningElapsedTime += Time.deltaTime;
+
+            if (warningElapsedTime >= warningDuration)
+            {
+                Destroy(warningInstance);
+                isWarning = false;
+                IdleState();
+                StartCharging();
+            }
+
+            return;
+        }
+
+        if (isCharging)
+        {
+            transform.position += chargeDirection * chargeSpeed * Time.deltaTime;
+            chargeElapsedTime += Time.deltaTime;
+
+            CheckTouchThirdAttack();
+
+            if (chargeElapsedTime >= chargeDuration)
+            {
+                isCharging = false;
+
+            }
+
+            return;
+        }
+
+        if (moveDirection.magnitude > 10)
+        {
+            isState3 = true;
+            isState1 = false;
+            isState2 = false;
+
+            IdleState();
+            ThirdAttack();
+            return;
         }
 
         //sizeAttack
@@ -242,10 +298,44 @@ public class HydustShrimp_Boss : Monster
         }
     }
 
-    public virtual void ThirdAttack()
+    private void ThirdAttack()
     {
+        isWarning = true;
+        warningElapsedTime = 0f;
 
+        chargeDirection = (gameController.character.transform.position - transform.position).normalized;
+
+        float warningOffsetDistance = 8f;
+        Vector3 warningPosition = transform.position + chargeDirection * warningOffsetDistance;
+        warningInstance = Instantiate(warningPrefab, warningPosition, Quaternion.identity);
+
+        float angle = Mathf.Atan2(chargeDirection.y, chargeDirection.x) * Mathf.Rad2Deg;
+        warningInstance.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
+
+    private void StartCharging()
+    {
+        isCharging = true;
+        chargeElapsedTime = 0f;
+    }
+
+    private void CheckTouchThirdAttack()
+    {
+        var characterPosition = gameController.character.transform.position;
+        var x = transform.position.x - characterPosition.x;
+        var y = transform.position.y - characterPosition.y;
+        float distance = x * x + y * y;
+        var sizeTotal = size + gameController.character.sizeBase;
+
+        if (distance <= sizeTotal * sizeTotal)
+        {
+            gameController.character.TakeDamage(20);
+
+            isCharging = false;
+            IdleState();
+        }
+    }
+
 
     private bool CheckBack()
     {
