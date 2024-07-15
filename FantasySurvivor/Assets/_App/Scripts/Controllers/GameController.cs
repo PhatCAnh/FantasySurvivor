@@ -267,7 +267,14 @@ public class GameController : Controller<GameApp>
     }
     public void MonsterDestroy(Monster mons)
     {
+        if (_healthBarController != null && mons.isDead == true) _healthBarController.RemoveHealthBar();
+        mons.animator.SetBool("Dead", true);
+
         listMonster.Remove(mons);
+        if (mons.wave != null)
+        {
+            mons.wave.monsterInWave.Remove(mons);
+        }
         //Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
     }
 
