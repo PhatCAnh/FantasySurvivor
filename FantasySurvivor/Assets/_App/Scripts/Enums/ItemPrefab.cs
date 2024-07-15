@@ -180,6 +180,7 @@ public enum PopupType
 	AccountPopup,
 	RegisterPopup,
 	SettingPopup,
+	ConfirmPopup,
 }
 
 public enum SkillDamagedType

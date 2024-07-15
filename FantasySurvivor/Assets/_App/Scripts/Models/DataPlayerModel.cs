@@ -33,9 +33,9 @@ namespace FantasySurvivor
 			DateStartDailyGift = $"{dateNow.Item1}/{dateNow.Item2}/{dateNow.Item3}";
 			DataSaveClaimDailyGift = "Waiting-Waiting-Waiting-Waiting-Waiting-Waiting-Waiting";
 
-			_email = "Guest";
+			_email = "0";
 			
-			_password = "123";
+			_password = "0";
 
 			_nameDisplay = "Guest";
 			

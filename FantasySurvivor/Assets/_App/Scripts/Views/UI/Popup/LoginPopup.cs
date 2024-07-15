@@ -13,7 +13,7 @@ public class LoginPopup : View<GameApp>, IPopup
 	[SerializeField] private GameObject _goLogin, _goRegister;
 
 	[SerializeField] private TMP_InputField _inputEmail, _inputPassword;
-	[SerializeField] private Button _btnLogin, _btnRegister;
+	[SerializeField] private Button _btnLogin, _btnRegister, _btnGuest;
 	[SerializeField] private TextMeshProUGUI _txtError;
 
 	[SerializeField] private TMP_InputField _inputFieldEmailRegister, _inputFieldPasswordRegister, _inputFieldConfirm;
@@ -29,6 +29,7 @@ public class LoginPopup : View<GameApp>, IPopup
 		_btnRegister.onClick.AddListener(OnClickBtnSignIn);
 		_btnRegisterAccount.onClick.AddListener(OnClickBtnRegister);
 		_btnBack.onClick.AddListener(OnClickBtnBack);
+		_btnGuest.onClick.AddListener(OnClickBtnGuest);
 		Open();
 	}
 
@@ -96,6 +97,13 @@ public class LoginPopup : View<GameApp>, IPopup
 	{
 		var data = app.models.dataPlayerModel;
 		data.NameDisplay = result.PlayFabId;
+		Singleton<GameController>.instance.ChangeSceneHome();
+	}
+
+	private void OnClickBtnGuest()
+	{
+		var data = app.models.dataPlayerModel;
+		data.NameDisplay = "Guest";
 		Singleton<GameController>.instance.ChangeSceneHome();
 	}
 }

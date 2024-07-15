@@ -68,10 +68,14 @@ public class SettingPopup : View<GameApp>, IPopup
 
     void OnClickBtnLogout()
     {
-        app.models.dataPlayerModel.Logout();
-        app.resourceManager.CloseAllPopup();
-        Destroy(gameObject);
-        app.resourceManager.ShowPopup(PopupType.AccountPopup);
+        var go = app.resourceManager.ShowPopup(PopupType.ConfirmPopup).GetComponent<ConfirmPopup>();
+        go.Init("You want to logout?", () =>
+        {
+            app.models.dataPlayerModel.Logout();
+            app.resourceManager.CloseAllPopup();
+            Destroy(gameObject);
+            app.resourceManager.ShowPopup(PopupType.AccountPopup);
+        });
     }
 
     void OpenExitGamePopup()
