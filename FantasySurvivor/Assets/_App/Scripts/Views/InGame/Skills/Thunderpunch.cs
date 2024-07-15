@@ -12,6 +12,7 @@ public class Thunderpunch : SkillBulletActive
     public override void Init(LevelSkillData data, Monster target, int level, ItemPrefab type)
     {
         base.Init(data, target, level, type);
+        AudioManager.Instance.PlaySFX("Thunder punch");
     }
     protected override bool CheckTouchMonsters(Monster monster)
     {

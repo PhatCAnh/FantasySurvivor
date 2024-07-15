@@ -18,6 +18,7 @@ public class WindField : SkillActive
     protected override void OnViewInit()
     {
         base.OnViewInit();
+        AudioManager.Instance.PlaySFX("wind field");
         cdTime = new Cooldown(data.cooldown);
         this.transform.localScale = Vector3.one * data.valueSpecial1;
         this.size = data.valueSpecial1;

@@ -14,6 +14,7 @@ namespace FantasySurvivor
 
         public void InitTwin(Vector2 direction, float moveSpeed, float damage, Monster oldTarget, int level)
         {
+            AudioManager.Instance.PlaySFX("Twin");
             this.level = level;
             this.origin = gameController.character;
             this.direction = direction;

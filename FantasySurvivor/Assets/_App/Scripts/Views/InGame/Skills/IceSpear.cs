@@ -10,6 +10,7 @@ public class IceSpear : SkillBulletActive
     {
         base.Init(data, target, level, type);
         attackedMonsters.Clear();
+        AudioManager.Instance.PlaySFX("Ice Spear");
     }
     private static Random random = new Random();
 
@@ -26,6 +27,7 @@ public class IceSpear : SkillBulletActive
             {
                 TouchUnit(mons);
                 attackedMonsters.Add(mons);
+     
             }
         }
         if (!gameController.CheckTouch(origin.transform.position, transform.position, 30))
@@ -38,9 +40,11 @@ public class IceSpear : SkillBulletActive
     protected override void TouchUnit(Monster mons)
     {
         mons.TakeDamage(damage, TextPopupType.Normal, isCritical);
+       
         if (IsActionSuccessful(data.valueSpecial2))
         {
             mons.UpdateStat(StatModifierType.Mul, 1, 0, 1, 1, data.valueSpecial1);
+            
         }
     }
 }
