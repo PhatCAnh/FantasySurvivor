@@ -197,16 +197,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03939474b6bb4aa438a5246a6c50b3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  myRigid: {fileID: 0}
-  animator: {fileID: 0}
-  firePoint: {fileID: 0}
+  type: 49
+  myRigid: {fileID: 1703447564154983746}
+  animator: {fileID: 4691929900999556812}
+  firePoint: {fileID: 6908689433260029578}
   justSpawnVertical: 0
   isStun: 0
   isNoMove: 0
-  size: 0
-  bulletPrefab: {fileID: 0}
-  typeBullet: 0
+  size: 0.5
+  bulletPrefab: {fileID: 2288371303130910626, guid: e3d7f9208ef5ec541bbbc4899ffcacf2, type: 3}
+  typeBullet: 52
   _numberBack: 0
 --- !u!50 &1703447564154983746
 Rigidbody2D:

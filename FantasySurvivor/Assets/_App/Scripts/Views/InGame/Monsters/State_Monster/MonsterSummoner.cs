@@ -53,7 +53,7 @@ public class MonsterSummoner : Monster
 
         for (int i = 0; i < 1; i++)
         {
-            var mob = gameController.SpawnMonster("Wolf", 5, stat.attackDamage.BaseValue);
+            var mob = gameController.SpawnMonster("LasirdBlue", 5, stat.attackDamage.BaseValue);
 
             Vector2 randomPosition = new Vector2(firePoint.position.x + Random.Range(-range, range),
                                                  firePoint.position.y + Random.Range(-range, range));
@@ -63,7 +63,7 @@ public class MonsterSummoner : Monster
 
         for (int i = 0; i < 1; i++)
         {
-            var mob = gameController.SpawnMonster("Wolf", 5, stat.attackDamage.BaseValue);
+            var mob = gameController.SpawnMonster("LasirdGreen", 5, stat.attackDamage.BaseValue);
 
             Vector2 randomPosition = new Vector2(firePoint.position.x + Random.Range(-range, range),
                                                  firePoint.position.y + Random.Range(-range, range));
@@ -73,7 +73,7 @@ public class MonsterSummoner : Monster
 
         for (int i = 0; i < 1; i++)
         {
-            var mob = gameController.SpawnMonster("Wolf", 5, stat.attackDamage.BaseValue);
+            var mob = gameController.SpawnMonster("LasirdOrange", 5, stat.attackDamage.BaseValue);
 
             Vector2 randomPosition = new Vector2(firePoint.position.x + Random.Range(-range, range),
                                                  firePoint.position.y + Random.Range(-range, range));

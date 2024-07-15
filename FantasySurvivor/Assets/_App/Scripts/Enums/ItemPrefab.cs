@@ -52,6 +52,12 @@ public enum ItemPrefab
 	HydustShrimp,
     BulletBossHydustShrimp,
 	MinionCrabBomber,
+	MinionLasirdBlue,
+    MinionLasirdGreen,
+    MinionLasirdOrange,
+    BulletMinionLasirdBlue,
+    BulletMinionLasirdGreen,
+    BulletMinionLasirdOrange,
 
 }
 

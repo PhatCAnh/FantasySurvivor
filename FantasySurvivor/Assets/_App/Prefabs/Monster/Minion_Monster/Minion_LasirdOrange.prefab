@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4556243894477354981}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.139043, y: -6.092779, z: -0.23477842}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -73,16 +73,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03939474b6bb4aa438a5246a6c50b3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  myRigid: {fileID: 0}
-  animator: {fileID: 0}
-  firePoint: {fileID: 0}
+  type: 50
+  myRigid: {fileID: 7516544277179109762}
+  animator: {fileID: 3668681542959741199}
+  firePoint: {fileID: 5591553295792145765}
   justSpawnVertical: 0
   isStun: 0
   isNoMove: 0
-  size: 0
-  bulletPrefab: {fileID: 0}
-  typeBullet: 0
+  size: 0.5
+  bulletPrefab: {fileID: 2812739349405320356, guid: a3d4b8d61b17db94dab17987dbde5c0a, type: 3}
+  typeBullet: 53
   _numberBack: 0
 --- !u!1 &7805686304687628255
 GameObject:
@@ -112,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 7805686304687628255}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.31, y: -0.07, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
