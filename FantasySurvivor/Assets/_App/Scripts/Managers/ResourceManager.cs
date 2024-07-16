@@ -276,8 +276,8 @@ public class ResourceManager : UIManagerBase<PopupType>
             {ItemPrefab.MinionLasirdGreen, _minionLasirdGreen},
 			{ItemPrefab.MinionLasirdOrange, _minionLasirdOrange},
 			{ItemPrefab.BulletMinionLasirdBlue, _bulletMinionLasirdBlue},
-            {ItemPrefab.BulletMinionLasirdBlue, _bulletMinionLasirdGreen},
-            {ItemPrefab.BulletMinionLasirdBlue, _bulletMinionLasirdOrange},
+            {ItemPrefab.BulletMinionLasirdGreen, _bulletMinionLasirdGreen},
+            {ItemPrefab.BulletMinionLasirdOrange, _bulletMinionLasirdOrange},
 
         };
 
