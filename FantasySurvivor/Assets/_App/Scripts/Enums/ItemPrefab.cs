@@ -179,6 +179,8 @@ public enum PopupType
 	RewardPopup,
 	ConvertItem,
 	ConvertItemPopup,
+	TransferItem,
+	TransferItemPopup,
     SuccessfulCombinePopupDetail,
 }
 

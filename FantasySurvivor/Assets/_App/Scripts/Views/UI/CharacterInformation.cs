@@ -21,7 +21,7 @@ public class CharacterInformation : View<GameApp>, IPopup
 
     [SerializeField] private ItemSlotEquipUI _slotWeapon, _slotArmor, _slotHat, _slotRing, _slotShoes, _slotGloves;
 
-    [SerializeField] private Button _btnBack, _btnAddItemSlot, _btnConvertItem;
+    [SerializeField] private Button _btnBack, _btnAddItemSlot, _btnConvertItem, _btnTransferItem;
 
     [SerializeField] private Toggle _tglAll, _tglItemEquip, _tglItemPiece;
 
@@ -71,6 +71,7 @@ public class CharacterInformation : View<GameApp>, IPopup
         _tglAll.onValueChanged.AddListener(GetAllItem);
         _btnConvertItem.onClick.AddListener(ConvertItem);
         _tglItemEquip.onValueChanged.AddListener(GetAllItemEquip);
+        _btnTransferItem.onClick.AddListener(TransferItem);
         _tglItemPiece.onValueChanged.AddListener(GetAllItemPiece);
        
 
@@ -323,4 +324,8 @@ public class CharacterInformation : View<GameApp>, IPopup
         app.resourceManager.ShowPopup(PopupType.ConvertItem).TryGetComponent(out ConvertItemPopup convertItem );
     }
 
+    public void TransferItem()
+    {
+        app.resourceManager.ShowPopup(PopupType.TransferItem).TryGetComponent(out TransferItemPopup transferItem);
+    }
 }
