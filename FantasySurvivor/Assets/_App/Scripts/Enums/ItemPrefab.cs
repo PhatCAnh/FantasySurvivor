@@ -178,6 +178,8 @@ public enum PopupType
 	DailyGift,
 	RewardPopup,
 	ConvertItem,
+	ConvertItemPopup,
+    SuccessfulCombinePopupDetail,
 }
 
 public enum SkillDamagedType

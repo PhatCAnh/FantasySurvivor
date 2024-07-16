@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class ConvertItemPopup : View<GameApp>, IPopup
 {
     [SerializeField] private Button _btnConvert, _btnBack;
@@ -13,6 +12,7 @@ public class ConvertItemPopup : View<GameApp>, IPopup
 
     [SerializeField] private GameObject _slotItemEquipPrefab;
     [SerializeField] private ItemSlotChosenCVUI _slotNone1, _slotNone2, _slotNone3;
+
 
 
     private Dictionary<ItemType, ItemSlotChosenCVUI> _dicItemEquip1;
@@ -47,7 +47,7 @@ public class ConvertItemPopup : View<GameApp>, IPopup
             {ItemType.Ring, _slotNone2},
             {ItemType.Gloves, _slotNone2},
             {ItemType.Hat, _slotNone2},
-            {ItemType.Shoes, _slotNone2},   
+            {ItemType.Shoes, _slotNone2},
             {ItemType.Armor, _slotNone2},
         };
         _dicItemEquip3 = new Dictionary<ItemType, ItemSlotChosenCVUI>
@@ -87,15 +87,17 @@ public class ConvertItemPopup : View<GameApp>, IPopup
             _slotNone1.ItemType = type;
             var slot = _dicItemEquip1[type];
             if (slot.isChosen) UnChosenItem(type, data);
-            slot.Init(data);    
-        }else
+            slot.Init(data);
+        }
+        else
         if (_slotNone1.itemData != null && _slotNone2.itemData == null)
         {
             _slotNone2.ItemType = type;
             var slot = _dicItemEquip2[type];
             if (slot.isChosen) UnChosenItem(type, data);
             slot.Init(data);
-        }else
+        }
+        else
         if (_slotNone1.itemData != null
             && _slotNone2.itemData != null
             && _slotNone3.itemData == null)
@@ -112,23 +114,23 @@ public class ConvertItemPopup : View<GameApp>, IPopup
         if (data == _slotNone1.itemInBag)
         {
             _dicItemEquip1[type].ResetData();
-        Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer)
-            .TryGetComponent(out ItemSlotCVUI item);
-        item.Init(data, this);
+            Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer)
+                .TryGetComponent(out ItemSlotCVUI item);
+            item.Init(data, this);
         }
         if (data == _slotNone2.itemInBag)
         {
             _dicItemEquip2[type].ResetData();
-        Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer)
-            .TryGetComponent(out ItemSlotCVUI item);
-        item.Init(data, this);
+            Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer)
+                .TryGetComponent(out ItemSlotCVUI item);
+            item.Init(data, this);
         }
         if (data == _slotNone3.itemInBag)
         {
             _dicItemEquip3[type].ResetData();
-        Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer)
-            .TryGetComponent(out ItemSlotCVUI item);
-        item.Init(data, this);
+            Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer)
+                .TryGetComponent(out ItemSlotCVUI item);
+            item.Init(data, this);
         }
     }
     public void Open()
@@ -149,13 +151,34 @@ public class ConvertItemPopup : View<GameApp>, IPopup
             case ItemType.Gloves: return 3;
             case ItemType.Hat: return 4;
             case ItemType.Ring: return 5;
-            case ItemType.Piece: return 6;
             default: return int.MaxValue;
         }
 
     }
     public void ConvertItem()
     {
-
+        if (_slotNone1.ItemType == _slotNone2.ItemType
+            && _slotNone1.ItemType == _slotNone3.ItemType
+            && _slotNone1.itemInBag.rank == _slotNone2.itemInBag.rank
+            && _slotNone1.itemInBag.rank == _slotNone3.itemInBag.rank)
+        {
+            if (Earthpunch.IsActionSuccessful(1))
+            {
+                app.models.dataPlayerModel.AddItemEquipToBag(_slotNone1.itemInBag.id, _slotNone1.itemInBag.rank + 1, 1);
+                app.resourceManager.ShowPopup(PopupType.SuccessfulCombinePopupDetail).TryGetComponent(out SuccessfulCombinePopupDetail successfulCombine);
+                Debug.Log("Upgrade Successful");
+            }
+            else
+            {
+                Debug.Log("Upgrade Failed"); 
+                app.resourceManager.ShowPopup(PopupType.ConvertItemPopup).TryGetComponent(out Popup_Noty convertItemPopUp);
+            }
+           /* app.models.dataPlayerModel.RemovePiece(_slotNone1.itemInBag.id, _slotNone2.itemInBag.quantity);
+            app.models.dataPlayerModel.RemovePiece(_slotNone2.itemInBag.id, _slotNone2.itemInBag.quantity);
+            app.models.dataPlayerModel.RemovePiece(_slotNone3.itemInBag.id, _slotNone2.itemInBag.quantity);*/
+            app.models.dataPlayerModel.RemoveItem(_slotNone1.itemInBag);
+            app.models.dataPlayerModel.RemoveItem(_slotNone2.itemInBag);
+            app.models.dataPlayerModel.RemoveItem(_slotNone3.itemInBag);
+        }
     }
 }

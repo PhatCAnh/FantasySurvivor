@@ -27,6 +27,8 @@ public class CharacterInformation : View<GameApp>, IPopup
 
     private Dictionary<ItemType, ItemSlotEquipUI> _dicItemEquip;
 
+    private static System.Random random = new System.Random();
+
     private ItemController itemController => ArbanFramework.Singleton<ItemController>.instance;
 
     protected List<GameObject> _listItemSlot = new List<GameObject>();
@@ -113,6 +115,10 @@ public class CharacterInformation : View<GameApp>, IPopup
     public void Test()
     {
         app.models.dataPlayerModel.AddItemPieceToBag(ItemId.PieceFire, 2);
+    }[ContextMenu("Test Money")]
+    public void TestMoney()
+    {
+        app.models.dataPlayerModel.Gold += 1000000;
     }
 
     [ContextMenu("Test item Equip")]
@@ -131,6 +137,10 @@ public class CharacterInformation : View<GameApp>, IPopup
         app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Gloves1, ItemRank.Unique, 4);
         app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Hat1, ItemRank.Legendary, 5);
         app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Ring1, ItemRank.Epic, 6);
+    }
+    public static bool IsActionSuccessful(double probability)
+    {
+        return random.NextDouble() < probability;
     }
 
     public void EquipItem(ItemType type, ItemInBag data, int value)

@@ -23,7 +23,6 @@ public class ItemSlotChosenCVUI : ItemSlotCVUI
 
     protected override void OnClickBtn()
     {
-        isChosen = true;
         parent.UnChosenItem(itemData.dataConfig.type, itemInBag);
     }
 

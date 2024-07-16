@@ -45,8 +45,6 @@ namespace FantasySurvivor
 
 		[JsonProperty] private List<ItemInBag> _listItemEquipped = new List<ItemInBag>();
 
-		[JsonProperty] private List<ItemInBag> _listItemChosen = new List<ItemInBag>();
-		
 		[JsonProperty] private List<SkillId> _skillSet = new List<SkillId>();
 
 		[JsonProperty] private string _dateLoginGame;
@@ -230,6 +228,12 @@ namespace FantasySurvivor
 			item.level += 1;
 			app.models.WriteModel<DataPlayerModel>();
 		}
+		public void UpdateFailedItem(ItemInBag item)
+		{
+			if (item.level == 1) return;
+            item.level -= 1;
+            app.models.WriteModel<DataPlayerModel>();
+        }
 
 		public List<SkillId> GetSkillSet()
 		{

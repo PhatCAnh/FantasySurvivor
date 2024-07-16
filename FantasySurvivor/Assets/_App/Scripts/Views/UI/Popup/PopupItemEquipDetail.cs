@@ -7,6 +7,7 @@ using DG.Tweening;
 using FantasySurvivor;
 using TMPro;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class PopupItemEquipDetail : View<GameApp>, IPopup
@@ -142,19 +143,35 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
     }
 
     private void UpdateLevel()
-	{
-		if(_currentCoin < _costUpdate)
-		{
-			if(_punchCostPrice != null && _punchCostPrice.IsPlaying()) return;
-			_punchCostPrice = _goCostUpdate
-				.DOPunchScale(Vector3.one, 1, 1, 3)
-				.OnComplete(() => _punchCostPrice = null);
-			return;
-		}
+    {
+        if (_currentCoin < _costUpdate || _dataInBag.level == _dataStatRank.levelLimit)
+        {
+            if (_punchCostPrice != null && _punchCostPrice.IsPlaying()) return;
+            _punchCostPrice = _goCostUpdate
+                .DOPunchScale(Vector3.one, 1, 1, 3)
+                .OnComplete(() => _punchCostPrice = null);
+            return;
+        }
+        CheckUpgradeLevel(_dataInBag);
+        _itemSlotUI.UpdateLevel(_dataInBag);
+    }
 
-		app.models.dataPlayerModel.UpdateItem(_dataInBag);
-		_itemSlotUI.UpdateLevel(_dataInBag);
-		_txtName.text = $"{_itemData.dataConfig.name} - Level: {_dataInBag.level} / {_dataStatRank.levelLimit}";
-		_txtPriceUpdate.text = $"{(1000 + (int) _dataInBag.rank * 250) * _dataInBag.level}";
-	}
+    private void CheckUpgradeLevel(ItemInBag dataInBag)
+    {
+        if (Earthpunch.IsActionSuccessful(1 - ( dataInBag.level - 1) * (1f / 30f)))
+        {
+            app.models.dataPlayerModel.UpdateItem(_dataInBag);
+        }
+        else
+        {
+            app.models.dataPlayerModel.UpdateFailedItem(_dataInBag);
+        }
+        _currentCoin -= _costUpdate;
+        _costUpdate = (1000 + (int)dataInBag.rank * 250) * dataInBag.level;
+        app.models.dataPlayerModel.Gold = Convert.ToInt32(_currentCoin);
+        var textCurrentCoin = _currentCoin < _costUpdate ? $"<color=red>{_currentCoin}</color>" : $"{_currentCoin}";
+        _txtPriceUpdate.text = textCurrentCoin + $"/{_costUpdate}";
+        _txtName.text = $"{_itemData.dataConfig.name} - Level: {_dataInBag.level} / {_dataStatRank.levelLimit}";
+    }
+
 }
