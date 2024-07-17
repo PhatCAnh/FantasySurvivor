@@ -604,7 +604,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: About
+  m_text: About Us
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c2f49fe8c22d94f9a9e6cd06ad490155, type: 2}
   m_sharedMaterial: {fileID: 3074828514974314926, guid: c2f49fe8c22d94f9a9e6cd06ad490155, type: 2}
@@ -1213,7 +1213,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: User information
+  m_text: User Information
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c2f49fe8c22d94f9a9e6cd06ad490155, type: 2}
   m_sharedMaterial: {fileID: 3074828514974314926, guid: c2f49fe8c22d94f9a9e6cd06ad490155, type: 2}
@@ -1471,6 +1471,10 @@ MonoBehaviour:
   _btnExit: {fileID: 3653079561483028880}
   _btnClose: {fileID: 5263457521990182707}
   _btnDimer: {fileID: 7996317658368528899}
+  _btnSound: {fileID: 4565389277719692365}
+  _btnAbout: {fileID: 3179047541065497552}
+  _btnRate: {fileID: 6583061652793888868}
+  _btnLanguage: {fileID: 3060385252116217687}
   _goMainContent: {fileID: 4791950698125302306}
 --- !u!1 &5095236525109349087
 GameObject:
@@ -2132,7 +2136,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Support
+  m_text: Sound
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c2f49fe8c22d94f9a9e6cd06ad490155, type: 2}
   m_sharedMaterial: {fileID: 3074828514974314926, guid: c2f49fe8c22d94f9a9e6cd06ad490155, type: 2}
@@ -2214,7 +2218,7 @@ GameObject:
   - component: {fileID: 4024686241933411863}
   - component: {fileID: 4565389277719692365}
   m_Layer: 5
-  m_Name: Button_Support
+  m_Name: Button_Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
