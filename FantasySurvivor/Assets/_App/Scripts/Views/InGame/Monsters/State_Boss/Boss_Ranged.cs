@@ -1,10 +1,5 @@
 ﻿using _App.Scripts.Controllers;
 using ArbanFramework;
-using ArbanFramework.StateMachine;
-using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.IO.LowLevel.Unsafe;
-using UnityEditor.Timeline;
 using UnityEngine;
 namespace FantasySurvivor
 {

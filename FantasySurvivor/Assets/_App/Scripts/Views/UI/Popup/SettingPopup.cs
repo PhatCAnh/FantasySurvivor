@@ -1,52 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework.MVC;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class SettingPopup : View<GameApp>, IPopup
 {
-    [SerializeField] private Button closeButton;
-    public GameObject userIdPopupPrefab;
-    public GameObject languagePopupPrefab;
+    [SerializeField] private Button _btnUserInfo,_btnLogout,_btnExit, _btnClose, _btnDimer;
+
+    [SerializeField] private Transform _goMainContent;
+
+    /*public Button languageButton;
+    public Button soundsButton;
+    public Button rateButton;
+    public Button aboutUsButton;*/
+    
+    /*public GameObject languagePopupPrefab;
     public GameObject soundsPopupPrefab;
     public GameObject ratePopupPrefab;
     public GameObject aboutUsPopupPrefab;
-    public GameObject exitGamePopupPrefab;
+    public GameObject exitGamePopupPrefab;*/
 
-    public Button userIdButton;
-    public Button languageButton;
-    public Button soundsButton;
-    public Button rateButton;
-    public Button aboutUsButton;
-    public Button logoutButton;
-    public Button exitGameButton;
-
-    private GameObject currentPopup;
-
-    void Start()
+    protected override void OnViewInit()
     {
-        userIdButton.onClick.AddListener(OpenUserIdPopup);
-        languageButton.onClick.AddListener(OpenLanguagePopup);
+        _btnUserInfo.onClick.AddListener(OnClickBtnUserInfo);
+        _btnLogout.onClick.AddListener(OnClickBtnLogout);
+        _btnExit.onClick.AddListener(OnClickBtnExit);
+        _btnClose.onClick.AddListener(Close);
+        _btnDimer.onClick.AddListener(Close);
+        
+        Open();
+
+
+        /*languageButton.onClick.AddListener(OpenLanguagePopup);
         soundsButton.onClick.AddListener(OpenSoundsPopup);
         rateButton.onClick.AddListener(OpenRatePopup);
         aboutUsButton.onClick.AddListener(OpenAboutUsPopup);
-        logoutButton.onClick.AddListener(OnClickBtnLogout);
-        exitGameButton.onClick.AddListener(OpenExitGamePopup);
-        closeButton.onClick.AddListener(OnCloseButtonClick);
+        closeButton.onClick.AddListener(OnCloseButtonClick);*/
     }
 
-    private void OnCloseButtonClick()
+    void OnClickBtnUserInfo()
     {
+        app.resourceManager.ShowPopup(PopupType.UserInfo);
         Destroy(gameObject);
     }
 
-    void OpenUserIdPopup()
-    {
-        OpenPopup(userIdPopupPrefab);
-    }
-
-    void OpenLanguagePopup()
+    /*void OpenLanguagePopup()
     {
         OpenPopup(languagePopupPrefab);
     }
@@ -64,7 +65,7 @@ public class SettingPopup : View<GameApp>, IPopup
     void OpenAboutUsPopup()
     {
         OpenPopup(aboutUsPopupPrefab);
-    }
+    }*/
 
     void OnClickBtnLogout()
     {
@@ -78,26 +79,29 @@ public class SettingPopup : View<GameApp>, IPopup
         });
     }
 
-    void OpenExitGamePopup()
+    void OnClickBtnExit()
     {
-        OpenPopup(exitGamePopupPrefab);
-    }
-
-    void OpenPopup(GameObject popupPrefab)
-    {
-        if (currentPopup != null)
+        var go = app.resourceManager.ShowPopup(PopupType.ConfirmPopup).GetComponent<ConfirmPopup>();
+        go.Init("Do you want to Exit game?", () =>
         {
-            Destroy(currentPopup);
-        }
-
-        currentPopup = Instantiate(popupPrefab, transform);
+            Application.Quit();
+#if UNITY_EDITOR
+            // Chỉ dùng cho Unity Editor để thoát play mode
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        });
     }
 
     public void Open()
     {
+        _goMainContent.localScale = Vector3.zero;
+
+        _goMainContent.DOScale(Vector3.one, 0.15f);
     }
 
     public void Close()
     {
+        _goMainContent.DOScale(Vector3.zero, 0.15f)
+            .OnComplete(() => { Destroy(gameObject); });
     }
 }

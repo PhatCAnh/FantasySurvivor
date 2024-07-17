@@ -141,5 +141,11 @@ public class MainUI : View<GameApp>, IPopup
 				control.text = $"{app.models.dataPlayerModel.Gold}";
 			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.Gold), app.models.dataPlayerModel)
 		);
+		
+		AddDataBinding("fieldDataPlayerModel-nameDisplayValue", _txtUsername, (control, e) =>
+			{
+				control.text = app.models.dataPlayerModel.NameDisplay;
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.NameDisplay), app.models.dataPlayerModel)
+		);
 	}
 }

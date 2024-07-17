@@ -113,22 +113,29 @@ public class GameController : Controller<GameApp>
 
     public void StartGame()
     {
+        var popupLoading = app.resourceManager.ShowPopup(PopupType.LoadingPopup);
         var model = app.models.dataPlayerModel;
+        var controller = ArbanFramework.Singleton<PlayfabController>.instance;
         if (app.models.dataPlayerModel.Email != "")
         {
-            ArbanFramework.Singleton<PlayfabController>.instance.Login(model.Email,
+            controller.Login(model.Email,
                 model.Password,
                 (result) =>
                 {
-                    model.NameDisplay = result.PlayFabId;
-                    ChangeSceneHome();
-                }, 
-                (error) => {});
-            
+                    //controller.SaveData();
+                    //controller.GetData();
+                    ChangeScene(GameConst.nameScene_Main, () =>
+                    {
+                        ShowMainHome();
+                        Destroy(popupLoading);
+                    });
+                },
+                (error) => { });
         }
         else
         {
             app.resourceManager.ShowPopup(PopupType.AccountPopup);
+            Destroy(popupLoading);
         }
     }
 

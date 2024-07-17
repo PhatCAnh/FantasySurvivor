@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework.MVC;
 using DG.Tweening;
-using UnityEditor.U2D.Sprites;
 using UnityEngine;
 using UnityEngine.UI;
 

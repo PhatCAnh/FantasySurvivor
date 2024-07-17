@@ -442,6 +442,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3146637427274540913, guid: 293cf80370e1c7147ab6504b905cf658, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _cloudPopup
+      value: 
+      objectReference: {fileID: 6650948830781230916, guid: 4224d97afa9635e4290e75b280051e3e, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _loginPopup
       value: 
       objectReference: {fileID: 6797610742914013406, guid: 3f96199bd2c4f19499297bb5bd7ba358, type: 3}
@@ -462,6 +466,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8755949161037868469, guid: a5958610679c10947b65355e0635388c, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _loadingPopup
+      value: 
+      objectReference: {fileID: 2967475238651948427, guid: 83095541a65c65f4c98a4e84c3621098, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _settingPopup
       value: 
       objectReference: {fileID: 4812586798846200643, guid: 134db43e1ddabd7479f1e343d1df5243, type: 3}
@@ -469,6 +477,10 @@ PrefabInstance:
       propertyPath: _registerPopup
       value: 
       objectReference: {fileID: 6797610742914013406, guid: 3f96199bd2c4f19499297bb5bd7ba358, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _userInfoPopup
+      value: 
+      objectReference: {fileID: 1179088871299746931, guid: b85685317934ca2438a74255e4d92b0d, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _PopupWarning_Boss
       value: 
@@ -481,6 +493,10 @@ PrefabInstance:
       propertyPath: _bulletBossGatlingCrab
       value: 
       objectReference: {fileID: 5619392962214509051, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _changeDisplayNamePopup
+      value: 
+      objectReference: {fileID: 411174014737494296, guid: 6b13b1f333053de43a8d5ff3471fd83c, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[1].id
       value: 1

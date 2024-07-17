@@ -180,6 +180,10 @@ public enum PopupType
 	AccountPopup,
 	RegisterPopup,
 	SettingPopup,
+	LoadingPopup,
+	Cloud,
+	UserInfo,
+	ChangeDisplayName,
 	ConfirmPopup,
 }
 

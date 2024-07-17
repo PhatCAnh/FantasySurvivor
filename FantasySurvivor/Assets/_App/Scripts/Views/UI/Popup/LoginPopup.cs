@@ -106,6 +106,7 @@ public class LoginPopup : View<GameApp>, IPopup
 	{
 		var data = app.models.dataPlayerModel;
 		data.NameDisplay = result.PlayFabId;
+		data.Id = result.PlayFabId;
 		data.Email = _email;
 		data.Password = _password;
 		Singleton<GameController>.instance.ChangeSceneHome();
