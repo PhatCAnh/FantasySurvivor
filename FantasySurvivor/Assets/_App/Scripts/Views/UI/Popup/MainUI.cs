@@ -19,8 +19,8 @@ public class MainUI : View<GameApp>, IPopup
 		public bool isLock;
 	}
 
-	[SerializeField] private ItemToggle _itemHome, _itemElemental, _itemShop, _itemUpdate, _itemLock;
-	[SerializeField] private GameObject _goLock, _goUpdateStat, _goHome;
+	[SerializeField] private ItemToggle _itemHome, _itemElemental, _itemShop, _itemUpdate, _itemCharacter, _itemLock;
+	[SerializeField] private GameObject _goLock, _goUpdateStat, _goHome, _goCharacter;
 	[SerializeField] private Image _imgLineFocus;
 	[SerializeField] private Button _btnBattle, _btnCheat, _btnTest, _btnDailyGift, _btnSetting;
 	[SerializeField] private TextMeshProUGUI _txtGoldCoin, _txtUsername;
@@ -37,8 +37,10 @@ public class MainUI : View<GameApp>, IPopup
 		_itemElemental.toggle.onValueChanged.AddListener(OnClickTglElemental);
 		_itemShop.toggle.onValueChanged.AddListener(OnClickTglShop);
 		_itemUpdate.toggle.onValueChanged.AddListener(OnClickTglUpdate);
-		_itemLock.toggle.onValueChanged.AddListener(OnClickTglLock);
-		_btnBattle.onClick.AddListener(OnClickBtnBattle);
+        _itemCharacter.toggle.onValueChanged.AddListener(OnClickTglCharacter);
+
+        _btnBattle.onClick.AddListener(OnClickBtnBattle);
+
 		_btnTest.onClick.AddListener(Test);
 		_btnSetting.onClick.AddListener(OnClickBtnSetting);
 		
@@ -68,7 +70,7 @@ public class MainUI : View<GameApp>, IPopup
 
 	public void Test()
 	{
-		app.resourceManager.ShowPopup(PopupType.CharacterInformation);
+		app.resourceManager.ShowPopup(PopupType.CharacterChoose);
 	}
 	
 	public void OnClickBtnSetting()
@@ -121,13 +123,14 @@ public class MainUI : View<GameApp>, IPopup
 		_goUpdateStat.SetActive(value);
 	}
 
-	private void OnClickTglLock(bool value)
+	private void OnClickTglCharacter(bool value)
 	{
-		ChangeAnimToggle(_itemLock);
-		_goLock.SetActive(_itemLock.isLock && value);
+		ChangeAnimToggle(_itemCharacter);
+		_goCharacter.SetActive(value);
 	}
 
-	private void OnClickBtnBattle()
+
+    private void OnClickBtnBattle()
 	{
 		app.resourceManager.ShowPopup(PopupType.ChoiceSkillOutGame);
 

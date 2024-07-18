@@ -118,7 +118,6 @@ public class Character : ObjectRPG
 	private void Update()
 	{
 		if(gameController.isStop) return;
-		Controlled(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
 		var time = Time.deltaTime;
 		_stateMachine.currentState.LogicUpdate(time);
 		HandlePhysicUpdate();

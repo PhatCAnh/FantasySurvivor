@@ -14,7 +14,7 @@ namespace FantasySurvivor
             base.Init(data, target, level, type);
             AudioManager.Instance.PlaySFX("Water Ball");
         }
-        private void FixedUpdate()
+        protected override void FixedUpdate()
         {
             if (gameController.isStop) return;
 

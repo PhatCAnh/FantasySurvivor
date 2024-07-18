@@ -49,6 +49,15 @@ public enum ItemPrefab
     BulletBossGatlingCrab,
 	GatlingCrab_HealthBar,
     PopupWarning_Boss,
+	HydustShrimp,
+    BulletBossHydustShrimp,
+	MinionCrabBomber,
+	MinionLasirdBlue,
+    MinionLasirdGreen,
+    MinionLasirdOrange,
+    BulletMinionLasirdBlue,
+    BulletMinionLasirdGreen,
+    BulletMinionLasirdOrange,
 
 }
 

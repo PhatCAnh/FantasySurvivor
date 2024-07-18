@@ -34,7 +34,6 @@ public class GameController : Controller<GameApp>
 
     private HealthBar _healthBar;
     private HealthBarController _healthBarController;
-    private PopupWarning _popupWarningBoss;
 
     private Vector3 _camSize;
     private float _width;
@@ -244,10 +243,6 @@ public class GameController : Controller<GameApp>
             .GetComponent<HealthBarController>();
         _healthBarController.Init(boss);
 
-        _popupWarningBoss =
-            Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.PopupWarning_Boss),
-                app.resourceManager.rootContainer).GetComponent<PopupWarning>();
-
         boss.ResetAttackCountdown();
         boss.animator.SetBool("Dead", false);
         listMonster.Add(boss);
@@ -326,7 +321,14 @@ public class GameController : Controller<GameApp>
 
     public void MonsterDestroy(Monster mons)
     {
+        if (_healthBarController != null && mons.isDead == true) _healthBarController.RemoveHealthBar();
+        mons.animator.SetBool("Dead", true);
+
         listMonster.Remove(mons);
+        if (mons.wave != null)
+        {
+            mons.wave.monsterInWave.Remove(mons);
+        }
         //Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
     }
 
@@ -388,7 +390,7 @@ public class GameController : Controller<GameApp>
     // ReSharper disable Unity.PerformanceAnalysis
     public void Collected(DropItem dropItem)
     {
-        if (dropItem.type == DropItemType.Exp)
+        if (dropItem.typeItem == DropItemType.Exp)
         {
             map.model.ExpCurrent += dropItem.value;
             if (map.model.ExpCurrent > map.model.ExpMax)
@@ -401,7 +403,7 @@ public class GameController : Controller<GameApp>
         }
         else
         {
-            CollectedItemSpecial(dropItem.type);
+            CollectedItemSpecial(dropItem.typeItem);
         }
     }
 
@@ -412,7 +414,7 @@ public class GameController : Controller<GameApp>
             case DropItemType.Magnet:
                 foreach (var item in poolController.GetPool(ItemPrefab.GemExp).usedList)
                 {
-                    if (item.TryGetComponent(out DropItem dropItemType) && dropItemType.type == DropItemType.Exp)
+                    if (item.TryGetComponent(out DropItem dropItemType) && dropItemType.typeItem == DropItemType.Exp)
                     {
                         dropItemType.Collect();
                     }
@@ -515,8 +517,8 @@ public class GameController : Controller<GameApp>
 
         foreach (var item in app.models.dataPlayerModel.ListItemEquipped)
         {
-            var itemData = ArbanFramework.Singleton<ItemController>.instance.GetDataItem(item.id, item.rank, item.level)
-                .dataConfig;
+
+            var itemData = ArbanFramework.Singleton<ItemController>.instance.GetDataItem(item.id, item.rank).dataConfig;
             //fix it
         }
 

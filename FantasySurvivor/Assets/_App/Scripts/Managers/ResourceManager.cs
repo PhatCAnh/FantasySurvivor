@@ -74,6 +74,15 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	[SerializeField] private GameObject _skillTimeBoom;
 
+    [SerializeField] private GameObject _bulletBossHydustShrimp;
+
+	[SerializeField] private GameObject _bulletMinionLasirdBlue;
+
+	[SerializeField] private GameObject _bulletMinionLasirdGreen;
+
+    [SerializeField] private GameObject _bulletMinionLasirdOrange;
+
+
     private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
 
@@ -172,6 +181,16 @@ public class ResourceManager : UIManagerBase<PopupType>
     [SerializeField] private GameObject _healthBarController;
 
     [SerializeField] private GameObject _PopupWarning_Boss;
+
+    [SerializeField] private GameObject _hydustShrimp;
+
+    [SerializeField] private GameObject _minionCrabBomber;
+
+	[SerializeField] private GameObject _minionLasirdBlue;
+
+    [SerializeField] private GameObject _minionLasirdGreen;
+
+    [SerializeField] private GameObject _minionLasirdOrange;
 
 
     private Dictionary<string, GameObject> _typeMonsterDic;
@@ -285,7 +304,15 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.BulletBossGatlingCrab, _bulletBossGatlingCrab},
             {ItemPrefab.GatlingCrab_HealthBar, _healthBarController},
             {ItemPrefab.PopupWarning_Boss, _PopupWarning_Boss},
-            
+            {ItemPrefab.HydustShrimp, _hydustShrimp},
+            {ItemPrefab.BulletBossHydustShrimp, _bulletBossHydustShrimp},
+            {ItemPrefab.MinionCrabBomber, _minionCrabBomber },
+			{ItemPrefab.MinionLasirdBlue, _minionLasirdBlue},
+            {ItemPrefab.MinionLasirdGreen, _minionLasirdGreen},
+			{ItemPrefab.MinionLasirdOrange, _minionLasirdOrange},
+			{ItemPrefab.BulletMinionLasirdBlue, _bulletMinionLasirdBlue},
+            {ItemPrefab.BulletMinionLasirdGreen, _bulletMinionLasirdGreen},
+            {ItemPrefab.BulletMinionLasirdOrange, _bulletMinionLasirdOrange},
 
         };
 
@@ -309,8 +336,14 @@ public class ResourceManager : UIManagerBase<PopupType>
             {"Skeleton", _minionSkeleton},
 			{"Wolf", _minionWolf},
             {"Goblin", _minionGoblin},
+            {"CrabBomber", _minionCrabBomber},
+            {"LasirdBlue", _minionLasirdBlue},
+            {"LasirdGreen", _minionLasirdGreen},
+            {"LasirdOrange", _minionLasirdOrange},
 
-			{"B1", _gatlingCrab},
+            {"B1", _gatlingCrab},
+            {"B2", _hydustShrimp},
+
 
         };
 

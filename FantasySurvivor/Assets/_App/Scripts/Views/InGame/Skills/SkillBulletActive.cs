@@ -2,10 +2,7 @@
 using System.Linq;
 using _App.Scripts.Controllers;
 using ArbanFramework;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 namespace FantasySurvivor
 {
@@ -13,8 +10,6 @@ namespace FantasySurvivor
     {
         [SerializeField] protected Transform skin;
         
-		public TargetType targetType;
-
 		protected HashSet<Monster> attackedMonsters = new HashSet<Monster>();
 
         public bool canBlock;

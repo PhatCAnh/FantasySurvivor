@@ -18,19 +18,13 @@ namespace FantasySurvivor
 		[SerializeField] private Button _btnSetting;
 
 		[SerializeField] private Slider _sldExpCharacter;
-
-		[SerializeField] private RectTransform _interactContainer;
-
-		[SerializeField] private Image _imgArrow, _imgStat, _imgElemental;
-
-		[SerializeField] private Toggle _toggleStat, _toggleDef, _toggleChangeStateInteract;
-
-		[SerializeField] private GameObject _containerStatAtk, _containerStatDef;
+		
+		[SerializeField] private FloatingJoystick _floatingJoystick;
 
 		[SerializeField] private TextMeshProUGUI _txtLevelCharacter, _txtLevel, _txtTimeMinutes, _txtTimeSeconds, _txtMonsterKilled;
 		public GameController gameController => Singleton<GameController>.instance;
 		private MapModel mapModel => gameController.map.model;
-		private CharacterModel towerModel => gameController.character.model;
+		private Character character => gameController.character;
 
 		public void Open()
 		{
@@ -40,13 +34,16 @@ namespace FantasySurvivor
 			Destroy(gameObject);
 		}
 
+		private void Update()
+		{
+			if (gameController.isStop) return;
+			character.Controlled(new Vector2(_floatingJoystick.Horizontal, _floatingJoystick.Vertical));
+		}
+
 		protected override void OnViewInit()
 		{
 			base.OnViewInit();
 			_btnSetting.onClick.AddListener(OnClickBtnSetting);
-			_toggleChangeStateInteract.onValueChanged.AddListener(OnClickToggleChangeStateInteract);
-			_toggleStat.onValueChanged.AddListener(OnClickToggleStat);
-			_toggleDef.onValueChanged.AddListener(OnClickToggleDEF);
 
 			AddDataBinding("fieldMap-expCurrentValue", _sldExpCharacter, (control, e) =>
 				{
@@ -88,45 +85,12 @@ namespace FantasySurvivor
 			);
 		}
 
-		private void OnClickToggleChangeStateInteract(bool value)
-		{
-			var endValue = Camera.main.orthographicSize;
-			if(value)
-			{
-				Camera.main.transform.DOLocalMove(Vector3.back, 1f);
-				DOTween.To(() => Camera.main.orthographicSize, value => Camera.main.orthographicSize = value, endValue - 5, 1f);
-				_interactContainer.DOLocalMove(new Vector3(0, -1050), 1f);
-				_imgArrow.sprite = _spriteArrowUp;
-			}
-			else
-			{
-				Camera.main.transform.DOLocalMove(new Vector3(0, -10, -1), 1f);
-				DOTween.To(() => Camera.main.orthographicSize, value => Camera.main.orthographicSize = value, endValue + 5, 1f);
-				_interactContainer.DOLocalMove(new Vector3(0, 0), 1f);
-				_imgArrow.sprite = _spriteArrowDown;
-			}
-		}
-
 
 		private void OnClickBtnSetting()
 		{
 			if(gameController.isStop) return;
 			//gameController.ChangeScene(GameConst.nameScene_Game, null);
 			app.resourceManager.ShowPopup(PopupType.Pause);
-		}
-
-		private void OnClickToggleStat(bool value)
-		{
-			_toggleChangeStateInteract.isOn = false;
-			_imgStat.color = value ? new Color(1, 0.8313726f, 0.4196079f) : Color.white;
-			_containerStatAtk.SetActive(value);
-		}
-
-		private void OnClickToggleDEF(bool value)
-		{
-			_toggleChangeStateInteract.isOn = false;
-			_imgElemental.color = value ? new Color(1, 0.8313726f, 0.4196079f) : Color.white;
-			_containerStatDef.SetActive(value);
 		}
 	}
 }
