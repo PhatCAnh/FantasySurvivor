@@ -140,6 +140,16 @@ public class ResourceManager : UIManagerBase<PopupType>
 	
 	[SerializeField] private GameObject _notificationPopup;
 
+	[SerializeField] private GameObject _convertItem;
+
+	[SerializeField] private GameObject _convertItemPopUp;
+
+    [SerializeField] private GameObject _transferItem;
+
+    [SerializeField] private GameObject _transferItemPopUp;
+
+    [SerializeField] private GameObject _successfulCombinePopupDetail;
+
 
     [Header("UI Tutorial prefabs")]
 	[SerializeField] private GameObject _clickBulletTutorial;
@@ -243,13 +253,17 @@ public class ResourceManager : UIManagerBase<PopupType>
 		RegisterPopup(PopupType.SoundPopup, _soundPopup);
         RegisterPopup(PopupType.AboutUsPopup, _aboutPopup);
 		RegisterPopup(PopupType.LanguagePopup, _languagePopup);
-
         RegisterPopup(PopupType.LoadingPopup, _loadingPopup);
 		RegisterPopup(PopupType.UserInfo, _userInfoPopup);
 		RegisterPopup(PopupType.Cloud, _cloudPopup);
 		RegisterPopup(PopupType.ChangeDisplayName, _changeDisplayNamePopup);
 		RegisterPopup(PopupType.ConfirmPopup, _confirmPopup);
 		RegisterPopup(PopupType.NotificationPopup, _notificationPopup);
+		RegisterPopup(PopupType.ConvertItem, _convertItem);
+		RegisterPopup(PopupType.ConvertItemPopup, _convertItemPopUp);
+        RegisterPopup(PopupType.TransferItem, _transferItem);
+        RegisterPopup(PopupType.TransferItemPopup, _transferItemPopUp);
+        RegisterPopup(PopupType.SuccessfulCombinePopupDetail, _successfulCombinePopupDetail);
 	}
 
     private void InitDic()

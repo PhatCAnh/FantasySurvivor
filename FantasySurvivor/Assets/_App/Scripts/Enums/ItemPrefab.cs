@@ -196,7 +196,12 @@ public enum PopupType
 	UserInfo,
 	ChangeDisplayName,
 	ConfirmPopup,
-	NotificationPopup
+	NotificationPopup,
+	ConvertItem,
+	ConvertItemPopup,
+	TransferItem,
+	TransferItemPopup,
+    SuccessfulCombinePopupDetail,
 }
 
 public enum SkillDamagedType

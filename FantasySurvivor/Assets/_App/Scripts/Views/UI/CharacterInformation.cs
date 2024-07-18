@@ -21,11 +21,12 @@ public class CharacterInformation : View<GameApp>, IPopup
 
     [SerializeField] private ItemSlotEquipUI _slotWeapon, _slotArmor, _slotHat, _slotRing, _slotShoes, _slotGloves;
 
-    [SerializeField] private Button _btnBack, _btnAddItemSlot, _btnChooseCharacter;
-
+    [SerializeField] private Button _btnBack, _btnAddItemSlot, _btnChooseCharacter, _btnConvertItem, _btnTransferItem;
     [SerializeField] private Toggle _tglAll, _tglItemEquip, _tglItemPiece;
 
     private Dictionary<ItemType, ItemSlotEquipUI> _dicItemEquip;
+
+    private static System.Random random = new System.Random();
 
     private ItemController itemController => ArbanFramework.Singleton<ItemController>.instance;
 
@@ -69,9 +70,10 @@ public class CharacterInformation : View<GameApp>, IPopup
         _btnChooseCharacter.onClick.AddListener(ChooseCharacter);
 
         _tglAll.onValueChanged.AddListener(GetAllItem);
+        _btnConvertItem.onClick.AddListener(ConvertItem);
         _tglItemEquip.onValueChanged.AddListener(GetAllItemEquip);
+        _btnTransferItem.onClick.AddListener(TransferItem);
         _tglItemPiece.onValueChanged.AddListener(GetAllItemPiece);
-    
        
 
         var dataPlayerModel = app.models.dataPlayerModel;
@@ -115,6 +117,10 @@ public class CharacterInformation : View<GameApp>, IPopup
     public void Test()
     {
         app.models.dataPlayerModel.AddItemPieceToBag(ItemId.PieceFire, 2);
+    }[ContextMenu("Test Money")]
+    public void TestMoney()
+    {
+        app.models.dataPlayerModel.Gold += 1000000;
     }
 
     [ContextMenu("Test item Equip")]
@@ -133,6 +139,10 @@ public class CharacterInformation : View<GameApp>, IPopup
         app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Gloves1, ItemRank.Unique, 4);
         app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Hat1, ItemRank.Legendary, 5);
         app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Ring1, ItemRank.Epic, 6);
+    }
+    public static bool IsActionSuccessful(double probability)
+    {
+        return random.NextDouble() < probability;
     }
 
     public void EquipItem(ItemType type, ItemInBag data, int value)
@@ -313,5 +323,15 @@ public class CharacterInformation : View<GameApp>, IPopup
     public void Close()
     {
         Destroy(gameObject);
+    }
+
+    public void ConvertItem()
+    {
+        app.resourceManager.ShowPopup(PopupType.ConvertItem).TryGetComponent(out ConvertItemPopup convertItem );
+    }
+
+    public void TransferItem()
+    {
+        app.resourceManager.ShowPopup(PopupType.TransferItem).TryGetComponent(out TransferItemPopup transferItem);
     }
 }

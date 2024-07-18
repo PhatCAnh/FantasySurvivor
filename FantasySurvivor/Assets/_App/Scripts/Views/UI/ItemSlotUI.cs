@@ -58,7 +58,6 @@ public class ItemSlotUI : View<GameApp>
     public virtual void Action(int value)
     {
         parent.EquipItem(itemData.dataConfig.type, itemInBag, value);
-
         Destroy(gameObject);
     }
 

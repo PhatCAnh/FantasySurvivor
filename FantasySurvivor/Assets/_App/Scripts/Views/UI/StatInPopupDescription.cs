@@ -16,4 +16,5 @@ public class StatInPopupDescription : View<GameApp>
 		_txtNumber.text = $"+ {number}";
 		_img.sprite = sprite;
 	}
+    
 }
