@@ -177,6 +177,7 @@ public enum PopupType
 	Cheat,
 	ChoiceSkill,
 	ChoiceSkillOutGame,
+	Choicelistskill,
 	CharacterInformation,
 	CharacterChoose,
 	ItemEquipDetail,

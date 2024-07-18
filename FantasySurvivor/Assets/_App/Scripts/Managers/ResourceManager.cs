@@ -102,8 +102,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _choiceSkill;
 
 	[SerializeField] private GameObject _choiceSkillOutGame;
-	
-	[SerializeField] private GameObject _characterInformation;
+	[SerializeField] private GameObject _Choicelistskill;
+
+    [SerializeField] private GameObject _characterInformation;
 
     [SerializeField] private GameObject _characterChoose;
     

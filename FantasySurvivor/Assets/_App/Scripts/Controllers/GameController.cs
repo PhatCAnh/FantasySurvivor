@@ -30,7 +30,7 @@ public class GameController : Controller<GameApp>
 
     public Action<Monster> onMonsterDie;
 
-    public int numberLimitChoiceSkill = 3; // limit skill out game
+    public int numberLimitChoiceSkill;// limit skill out game
 
     private HealthBar _healthBar;
     private HealthBarController _healthBarController;
