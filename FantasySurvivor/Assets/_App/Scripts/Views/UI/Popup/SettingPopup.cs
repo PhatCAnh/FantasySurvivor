@@ -8,20 +8,11 @@ using UnityEngine.UI;
 
 public class SettingPopup : View<GameApp>, IPopup
 {
-    [SerializeField] private Button _btnUserInfo,_btnLogout,_btnExit, _btnClose, _btnDimer;
+    [SerializeField] private Button _btnUserInfo,_btnLogout,_btnExit, _btnClose, _btnDimer, _btnSound, _btnAbout, _btnRate, _btnLanguage;
 
     [SerializeField] private Transform _goMainContent;
 
-    /*public Button languageButton;
-    public Button soundsButton;
-    public Button rateButton;
-    public Button aboutUsButton;*/
-    
-    /*public GameObject languagePopupPrefab;
-    public GameObject soundsPopupPrefab;
-    public GameObject ratePopupPrefab;
-    public GameObject aboutUsPopupPrefab;
-    public GameObject exitGamePopupPrefab;*/
+ 
 
     protected override void OnViewInit()
     {
@@ -30,15 +21,14 @@ public class SettingPopup : View<GameApp>, IPopup
         _btnExit.onClick.AddListener(OnClickBtnExit);
         _btnClose.onClick.AddListener(Close);
         _btnDimer.onClick.AddListener(Close);
-        
+        _btnSound.onClick.AddListener(OnClickBtnSound); 
+        _btnAbout.onClick.AddListener(OnClickBtnAbout); 
+        _btnRate.onClick.AddListener(OnClickBtnRate);
+        _btnLanguage.onClick.AddListener(OnClickBtnlanguage);
         Open();
 
 
-        /*languageButton.onClick.AddListener(OpenLanguagePopup);
-        soundsButton.onClick.AddListener(OpenSoundsPopup);
-        rateButton.onClick.AddListener(OpenRatePopup);
-        aboutUsButton.onClick.AddListener(OpenAboutUsPopup);
-        closeButton.onClick.AddListener(OnCloseButtonClick);*/
+       
     }
 
     void OnClickBtnUserInfo()
@@ -47,26 +37,28 @@ public class SettingPopup : View<GameApp>, IPopup
         Destroy(gameObject);
     }
 
-    /*void OpenLanguagePopup()
+    void OnClickBtnSound()
     {
-        OpenPopup(languagePopupPrefab);
+        app.resourceManager.ShowPopup(PopupType.SoundPopup);
+        Destroy(gameObject);
     }
 
-    void OpenSoundsPopup()
+    void OnClickBtnAbout()
     {
-        OpenPopup(soundsPopupPrefab);
+        app.resourceManager.ShowPopup(PopupType.AboutUsPopup);
+        Destroy(gameObject);
     }
 
-    void OpenRatePopup()
+    void OnClickBtnRate()
     {
-        OpenPopup(ratePopupPrefab);
+        app.resourceManager.ShowPopup(PopupType.RatePopup);
+        Destroy(gameObject);
     }
-
-    void OpenAboutUsPopup()
+    void OnClickBtnlanguage()
     {
-        OpenPopup(aboutUsPopupPrefab);
-    }*/
-
+        app.resourceManager.ShowPopup(PopupType.LanguagePopup);
+        Destroy(gameObject);
+    }
     void OnClickBtnLogout()
     {
         var go = app.resourceManager.ShowPopup(PopupType.ConfirmPopup).GetComponent<ConfirmPopup>();

@@ -111,8 +111,15 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _accountPopup;
 	
 	[SerializeField] private GameObject _settingPopup;
-	
-	[SerializeField] private GameObject _confirmPopup;
+
+    [SerializeField] private GameObject _soundPopup;
+
+    [SerializeField] private GameObject _aboutPopup;
+
+    [SerializeField] private GameObject _languagePopup;
+
+
+    [SerializeField] private GameObject _confirmPopup;
 	
 	[SerializeField] private GameObject _loadingPopup;
 	
@@ -214,7 +221,11 @@ public class ResourceManager : UIManagerBase<PopupType>
 		RegisterPopup(PopupType.RewardPopup, _rewardPopup);
 		RegisterPopup(PopupType.AccountPopup, _accountPopup);
 		RegisterPopup(PopupType.SettingPopup, _settingPopup);
-		RegisterPopup(PopupType.LoadingPopup, _loadingPopup);
+		RegisterPopup(PopupType.SoundPopup, _soundPopup);
+        RegisterPopup(PopupType.AboutUsPopup, _aboutPopup);
+		RegisterPopup(PopupType.LanguagePopup, _languagePopup);
+
+        RegisterPopup(PopupType.LoadingPopup, _loadingPopup);
 		RegisterPopup(PopupType.UserInfo, _userInfoPopup);
 		RegisterPopup(PopupType.Cloud, _cloudPopup);
 		RegisterPopup(PopupType.ChangeDisplayName, _changeDisplayNamePopup);
