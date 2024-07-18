@@ -239,6 +239,7 @@ MonoBehaviour:
   musicSounds:
   - name: Theme
     clip: {fileID: 8300000, guid: a64b304c3a1c51b4c80978875637eba2, type: 3}
+    loop: 0
   sfxSounds: []
   musicSource: {fileID: 1654598987}
   sfxSource: {fileID: 952197852}
@@ -307,7 +308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &702149535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,6 +475,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4812586798846200643, guid: 0fa4c4fb01ed92248a60386d245da634, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _convertItem
+      value: 
+      objectReference: {fileID: 1229709468813714765, guid: 850f18f62dd0fe941bc4b153ce951384, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _gatlingCrab
       value: 
       objectReference: {fileID: 2142622185076917216, guid: 31761c973df113a4ea466589f23e155b, type: 3}
@@ -489,6 +494,10 @@ PrefabInstance:
       propertyPath: _confirmPopup
       value: 
       objectReference: {fileID: 8755949161037868469, guid: a5958610679c10947b65355e0635388c, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _hydustShrimp
+      value: 
+      objectReference: {fileID: 2004849026101922825, guid: a9b20f4bd0b58054ab7fcca75e63c87f, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _loadingPopup
       value: 
@@ -510,13 +519,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1179088871299746931, guid: b85685317934ca2438a74255e4d92b0d, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _convertItemPopUp
+      value: 
+      objectReference: {fileID: 8518666800957524247, guid: fc7d3a3daef562d4894c2ca01acabc40, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _minionCrabBomber
+      value: 
+      objectReference: {fileID: 669821632634323273, guid: d740b19951aa6ae4e9daafd783045ac0, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _minionLasirdBlue
+      value: 
+      objectReference: {fileID: 8038190239252735685, guid: 775dca733061ec14d8f4f7dc2ceac799, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _PopupWarning_Boss
       value: 
       objectReference: {fileID: 1183470633731463772, guid: 33dee2ec159247c43940aee79fadfa37, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _minionLasirdGreen
+      value: 
+      objectReference: {fileID: 7798369911501613735, guid: 071c1d2c627f8f04291f9557fdcb0e56, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _notificationPopup
       value: 
       objectReference: {fileID: 3641610877795761460, guid: 4aafc2f8bcb9ab14e93ba08527066061, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _minionLasirdOrange
+      value: 
+      objectReference: {fileID: 4556243894477354981, guid: e9ff7d218ed2f154b8122a975775aa09, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _healthBarController
       value: 
@@ -526,9 +555,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5619392962214509051, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _bulletBossHydustShrimp
+      value: 
+      objectReference: {fileID: 3900767114551469106, guid: 0c7bb9fc62cf10d43a6eeefdf9f04233, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _bulletMinionLasirdBlue
+      value: 
+      objectReference: {fileID: 6151225764835809331, guid: 6f28ebbe74b82924e87ce4673afb4c38, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _changeDisplayNamePopup
       value: 
       objectReference: {fileID: 411174014737494296, guid: 6b13b1f333053de43a8d5ff3471fd83c, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _bulletMinionLasirdGreen
+      value: 
+      objectReference: {fileID: 1251826561529863831, guid: e3d7f9208ef5ec541bbbc4899ffcacf2, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _bulletMinionLasirdOrange
+      value: 
+      objectReference: {fileID: 7615247192328761934, guid: a3d4b8d61b17db94dab17987dbde5c0a, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[1].id
       value: 1
@@ -621,6 +666,10 @@ PrefabInstance:
       propertyPath: _poolSkill.Array.data[9].name
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _successfulCombinePopupDetail
+      value: 
+      objectReference: {fileID: 3666474366691452483, guid: 5cec1b361da7b7441a2de452c5dd7d92, type: 3}
     - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _poolSkill.Array.data[10].name
       value: 15
