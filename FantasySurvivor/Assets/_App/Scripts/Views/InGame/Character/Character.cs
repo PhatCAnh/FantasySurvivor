@@ -156,6 +156,7 @@ public class Character : ObjectRPG
 
 	public void TakeDamage(int damage)
 	{
+		if (model.isInvincible) return;
 		/* if(!IsAlive) return;
 		damage -= Convert.ToInt32(damage * DamageReductionByArmor());
 		var currentShield = model.shield;

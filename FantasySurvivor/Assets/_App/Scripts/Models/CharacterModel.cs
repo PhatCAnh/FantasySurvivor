@@ -28,6 +28,8 @@ public class CharacterModel : Model<GameApp>
 
     private float _currentHealthPoint;
 
+    public bool isInvincible { get; private set; }
+
     private float _maxHealthPoint;
 
     private float _moveSpeed;
@@ -147,6 +149,11 @@ public class CharacterModel : Model<GameApp>
         this._itemAttractionRange += itemAttractionRange;
         this.attackRange += attackRange;
         this._armor += armor;
+    }
+
+    public void SetInvincible(bool value)
+    {
+        isInvincible = value;
     }
     public void Revive()
     {
