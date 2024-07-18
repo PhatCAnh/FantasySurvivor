@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
 using FantasySurvivor;
@@ -18,7 +19,14 @@ public class UserInfoPopup : View<GameApp>, IPopup
 
     private void OnClickBtnCloudSave()
     {
-        app.resourceManager.ShowPopup(PopupType.Cloud);
+        if (app.models.dataPlayerModel.Email == "Guest")
+        {
+            Singleton<GameController>.instance.CallNotificationPopup("Please LOGIN to use CLOUD SAVE");
+        }
+        else
+        {
+            app.resourceManager.ShowPopup(PopupType.Cloud);
+        }
     }
 
     protected override void OnViewInit()

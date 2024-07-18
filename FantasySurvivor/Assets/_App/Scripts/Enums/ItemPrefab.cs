@@ -158,7 +158,6 @@ public enum SkillElementalType
 public enum PopupType
 {
 	MainUI,
-	Notification,
 	Pause,
 	WinGame,
 	LoseGame,
@@ -178,13 +177,13 @@ public enum PopupType
 	DailyGift,
 	RewardPopup,
 	AccountPopup,
-	RegisterPopup,
 	SettingPopup,
 	LoadingPopup,
 	Cloud,
 	UserInfo,
 	ChangeDisplayName,
 	ConfirmPopup,
+	NotificationPopup
 }
 
 public enum SkillDamagedType

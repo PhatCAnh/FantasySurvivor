@@ -24,7 +24,7 @@ public class PlayfabController : Controller<GameApp>
         ArbanFramework.Singleton<PlayfabController>.Unset(this);
     }
 
-    public void Register(string email, string password, Action<RegisterPlayFabUserResult> result,
+    public void Register(string email, string password, Action<RegisterPlayFabUserResult> action,
         Action<PlayFabError> error)
     {
         if (password.Length < 6)
@@ -38,17 +38,17 @@ public class PlayfabController : Controller<GameApp>
             Password = password,
             RequireBothUsernameAndEmail = false
         };
-        PlayFabClientAPI.RegisterPlayFabUser(request, result, error);
+        PlayFabClientAPI.RegisterPlayFabUser(request, action, error);
     }
 
-    public void Login(string email, string password, Action<LoginResult> result, Action<PlayFabError> error)
+    public void Login(string email, string password, Action<LoginResult> action, Action<PlayFabError> error)
     {
         var request = new LoginWithEmailAddressRequest()
         {
             Email = email,
             Password = password,
         };
-        PlayFabClientAPI.LoginWithEmailAddress(request, result, error);
+        PlayFabClientAPI.LoginWithEmailAddress(request, action, error);
     }
 
     public void SaveData(Action<UpdateUserDataResult> result)

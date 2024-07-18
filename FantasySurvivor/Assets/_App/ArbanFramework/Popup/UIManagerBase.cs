@@ -113,11 +113,16 @@ namespace ArbanFramework.MVC
                 onEmptyPopup?.Invoke();
         }
 
-        private bool HasPopup(T type)
+        public bool HasPopup(T type)
         {
             if (_resourcePathDic.ContainsKey(type))
                 return true;
             return false;
+        }
+        
+        public GameObject GetPopup(T type)
+        {
+            return _resourcePathDic.GetValueOrDefault(type);
         }
     }
 }

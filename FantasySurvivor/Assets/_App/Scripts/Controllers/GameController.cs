@@ -43,6 +43,9 @@ public class GameController : Controller<GameApp>
     public List<SkillData> _listSkill = new List<SkillData>();
 
 
+    private NotificationPopup _popupNotification;
+
+
     private readonly Dictionary<DropItemType, float> _percentDropItem = new Dictionary<DropItemType, float>();
 
     private PoolController poolController => ArbanFramework.Singleton<PoolController>.instance;
@@ -116,7 +119,12 @@ public class GameController : Controller<GameApp>
         var popupLoading = app.resourceManager.ShowPopup(PopupType.LoadingPopup);
         var model = app.models.dataPlayerModel;
         var controller = ArbanFramework.Singleton<PlayfabController>.instance;
-        if (app.models.dataPlayerModel.Email != "")
+        if (app.models.dataPlayerModel.Email == "Guest")
+        {
+            ChangeSceneHome();
+            Destroy(popupLoading);
+        }
+        else if (app.models.dataPlayerModel.Email != "")
         {
             controller.Login(model.Email,
                 model.Password,
@@ -137,6 +145,18 @@ public class GameController : Controller<GameApp>
             app.resourceManager.ShowPopup(PopupType.AccountPopup);
             Destroy(popupLoading);
         }
+    }
+
+    public void CallNotificationPopup(string content)
+    {
+        if (app.resourceManager.CheckExistPopup(PopupType.NotificationPopup))
+        {
+            return;
+        }
+        
+        var popup = app.resourceManager.ShowPopup(PopupType.NotificationPopup).GetComponent<NotificationPopup>();
+        popup.Init(content);
+        _popupNotification = popup;
     }
 
     public Monster FindNearestMonster(Vector3 bulletPosition, float range, Monster origin = null)

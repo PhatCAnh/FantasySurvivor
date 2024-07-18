@@ -80,9 +80,11 @@ public class LoginPopup : View<GameApp>, IPopup
 
 	private void OnClickBtnLogin()
 	{
+		var popupLoading = app.resourceManager.ShowPopup(PopupType.LoadingPopup);
 		_email = _inputEmail.text;
 		_password = _inputPassword.text;
 		playfab.Login(_inputEmail.text, _inputPassword.text, OnLoginSuccess, ErrorLogin);
+		Destroy(popupLoading);
 	}
 
 	private void OnClickBtnSignIn()
@@ -116,6 +118,8 @@ public class LoginPopup : View<GameApp>, IPopup
 	{
 		var data = app.models.dataPlayerModel;
 		data.NameDisplay = "Guest";
+		data.Email = "Guest";
+		data.Password = "Guest";
 		Singleton<GameController>.instance.ChangeSceneHome();
 	}
 }
