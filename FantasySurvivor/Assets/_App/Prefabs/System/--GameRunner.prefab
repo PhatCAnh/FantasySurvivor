@@ -311,6 +311,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4925867891668576826}
+  - component: {fileID: 2249388490980005729}
+  - component: {fileID: 5259628436735651265}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -335,6 +337,121 @@ Transform:
   - {fileID: 4925867891092163753}
   m_Father: {fileID: 4925867892422093208}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &2249388490980005729
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925867891668576827}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5259628436735651265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925867891668576827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718a91c3809beee47bd7cd9a6ec0cb1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSounds:
+  - name: Theme
+    clip: {fileID: 8300000, guid: a64b304c3a1c51b4c80978875637eba2, type: 3}
+    loop: 0
+  sfxSounds: []
+  musicSource: {fileID: 4925867891092163752}
+  sfxSource: {fileID: 4925867890600014226}
 --- !u!1 &4925867892422093209
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,6 +592,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8019563876969885780, guid: e455c20de49a1234b8832933daa6dd58, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _aboutPopup
+      value: 
+      objectReference: {fileID: 4812586798846200643, guid: 29caebf535901e84dbde9cea863706c9, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _cloudPopup
+      value: 
+      objectReference: {fileID: 6650948830781230916, guid: 4224d97afa9635e4290e75b280051e3e, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _lupineStag
       value: 
       objectReference: {fileID: 2251807672777610876, guid: 670dd8759cd83704eb62ec88344c4da0, type: 3}
@@ -490,6 +615,10 @@ PrefabInstance:
       propertyPath: _skillShark
       value: 
       objectReference: {fileID: 8206914173546746077, guid: 5092a53af760915459def15d68544006, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _soundPopup
+      value: 
+      objectReference: {fileID: 4812586798846200643, guid: 0fa4c4fb01ed92248a60386d245da634, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _gatlingCrab
       value: 
@@ -507,9 +636,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6809299494165481089, guid: 9e9e8f20962b9714890808476b0b5c89, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _accountPopup
+      value: 
+      objectReference: {fileID: 2140766759663707240, guid: 227ca276b11add24fa57964fd832ed67, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _confirmPopup
+      value: 
+      objectReference: {fileID: 8755949161037868469, guid: a5958610679c10947b65355e0635388c, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _loadingPopup
+      value: 
+      objectReference: {fileID: 2967475238651948427, guid: 83095541a65c65f4c98a4e84c3621098, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _minionGoblin
       value: 
       objectReference: {fileID: 3424273944471096184, guid: 27b57c58d3a7a6f468df34450bb113d3, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _settingPopup
+      value: 
+      objectReference: {fileID: 4812586798846200643, guid: 134db43e1ddabd7479f1e343d1df5243, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _skillCyclone
       value: 
@@ -523,6 +668,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3192426052812612716, guid: 2ade275be3b886440aeed52a0ed216ca, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _languagePopup
+      value: 
+      objectReference: {fileID: 4812586798846200643, guid: 5dab680a7daef4040987a1e5623f226a, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _skillFireBall
       value: 
       objectReference: {fileID: 9075703475211245482, guid: 7c860169edcee5747bf90d4ebca6da2e, type: 3}
@@ -534,6 +683,10 @@ PrefabInstance:
       propertyPath: _skillTimeBoom
       value: 
       objectReference: {fileID: 4717237100564316986, guid: 4b32837a25835084b81f6041d56db7b7, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _userInfoPopup
+      value: 
+      objectReference: {fileID: 1179088871299746931, guid: b85685317934ca2438a74255e4d92b0d, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _globloomSentry
       value: 
@@ -611,6 +764,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8113089588768341060, guid: f9b8f363c11665a49829e6ae66cec902, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _notificationPopup
+      value: 
+      objectReference: {fileID: 3641610877795761460, guid: 4aafc2f8bcb9ab14e93ba08527066061, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _skillLightningWeb
       value: 
       objectReference: {fileID: 1828904477151934876, guid: fb73d7b5be531c445b9ad57137a825e1, type: 3}
@@ -650,6 +807,10 @@ PrefabInstance:
       propertyPath: _bulletBossGatlingCrab
       value: 
       objectReference: {fileID: 5619392962214509051, guid: 7b01254030773054083ea7b6e3c4675a, type: 3}
+    - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
+      propertyPath: _changeDisplayNamePopup
+      value: 
+      objectReference: {fileID: 411174014737494296, guid: 6b13b1f333053de43a8d5ff3471fd83c, type: 3}
     - target: {fileID: 7740478561442437960, guid: af9ed0242ddcc4846a2083a968bf2af0, type: 3}
       propertyPath: _skillThunderChanneling
       value: 

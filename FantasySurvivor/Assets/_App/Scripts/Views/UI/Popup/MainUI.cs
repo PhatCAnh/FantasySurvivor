@@ -46,11 +46,7 @@ public class MainUI : View<GameApp>, IPopup
 		_btnTest.onClick.AddListener(Test);
 		_btnSetting.onClick.AddListener(OnClickBtnSetting);
 		
-		//_btnDailyGift.onClick.AddListener(() =>
-		//{
-		//	app.resourceManager.ShowPopup(PopupType.DailyGift);
-		//});
-
+		
 		_btnCheat.onClick.AddListener(() =>
 		{
 			app.resourceManager.ShowPopup(PopupType.Cheat);
