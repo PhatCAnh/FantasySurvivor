@@ -9,6 +9,7 @@ public class EarthShield : SkillBulletActive
     public override void Init(LevelSkillData data, Monster target, int level, ItemPrefab type)
     {
         base.Init(data, target, level, type);
+        AudioManager.Instance.PlaySFX("EarthShield");
     }
 
     protected override bool CheckTouchMonsters(Monster monster)

@@ -9,6 +9,7 @@ namespace FantasySurvivor
         protected override void OnViewInit()
         {
             base.OnViewInit();
+          
             _skillActive = GetComponentInParent<SkillActive>();
         }
         protected override void Attack()

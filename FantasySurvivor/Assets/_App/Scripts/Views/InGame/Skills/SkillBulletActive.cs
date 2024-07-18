@@ -30,9 +30,14 @@ namespace FantasySurvivor
 		{
 			base.Init(data, target, level, type);
 
+            if (type == ItemPrefab.SkillFireBall)
+            {
+                AudioManager.Instance.PlaySFX("FireBall");
+            }
             this.direction = target.transform.position - transform.position;
 
             skin.up = direction;
+        
         }
 
         protected virtual void FixedUpdate()

@@ -18,6 +18,7 @@ namespace FantasySurvivor
         {
 
             base.Init(dataLevel, target, level, type);
+            AudioManager.Instance.PlaySFX("Water swamp");
 
             if (target == null) return;
             //if (level == 1)

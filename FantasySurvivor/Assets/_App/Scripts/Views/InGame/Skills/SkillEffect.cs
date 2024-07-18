@@ -22,6 +22,23 @@ namespace FantasySurvivor
         {
             Singleton<PoolController>.instance.ReturnObject(_skillActive.type, _skillActive.gameObject);
         }
+
+        protected virtual void ThunderStrike()
+        {
+            AudioManager.Instance.PlaySFX("Lightning strikes");
+        }
+        protected virtual void Shark()
+        {
+            AudioManager.Instance.PlaySFX("Hydro Shark");
+        }
+        protected virtual void Earthpunch() 
+        {
+            AudioManager.Instance.PlaySFX("Earthpunch");
+        }
+        protected virtual void FireBall()
+        {
+            AudioManager.Instance.PlaySFX("FireBall");
+        }
     }
     
 }

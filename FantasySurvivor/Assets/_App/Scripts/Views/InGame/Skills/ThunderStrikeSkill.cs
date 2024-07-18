@@ -6,7 +6,16 @@ using UnityEngine;
 
 public class ThunderStrikeSkill : SkillFallActive
 {
-	protected override void TouchUnit(Monster mons)
+    public override void Init(LevelSkillData data, Monster target, int level, ItemPrefab type)
+    {
+        base.Init(data, target, level, type);
+        Debug.Log("ban");
+
+        if (target == null) return;
+
+        transform.position = target.transform.position;
+    }
+    protected override void TouchUnit(Monster mons)
 	{
 		mons.TakeDamage(mons == target ? damage : damage * data.valueSpecial1 / 100,TextPopupType.Normal, isCritical);
 	}

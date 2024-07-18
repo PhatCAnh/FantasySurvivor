@@ -12,6 +12,7 @@ using UnityEngine.SceneManagement;
 using MonsterStat = FantasySurvivor.MonsterStat;
 using System.Threading;
 using Unity.VisualScripting;
+using System.Collections;
 
 public class GameController : Controller<GameApp>
 {
@@ -589,11 +590,17 @@ public class GameController : Controller<GameApp>
         if (character == null || character.model.currentHealthPoint > 0) return;
 
         character.model.Revive();
-        character.transform.position = charPos; // vi tri char die
+        character.transform.position = charPos; 
         character.gameObject.SetActive(true);
         isEndGame = false;
+        StartCoroutine(MakeCharacterInvincible(5f));
     }
-
+    private IEnumerator MakeCharacterInvincible(float duration)
+    {
+        character.model.SetInvincible(true); 
+        yield return new WaitForSeconds(duration); 
+        character.model.SetInvincible(false); 
+    }
     public (int, int, int) GetDateTimeNow()
     {
         var currentUtcDateTime = DateTime.UtcNow;
