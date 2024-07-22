@@ -316,6 +316,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _hydustShrimp
+      value: 
+      objectReference: {fileID: 2004849026101922825, guid: a9b20f4bd0b58054ab7fcca75e63c87f, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _winGamePopup
+      value: 
+      objectReference: {fileID: 3589114155113187675, guid: 2bc038e5494af6a4fb567d03e71cc5d5, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _minionCrabBomber
+      value: 
+      objectReference: {fileID: 669821632634323273, guid: d740b19951aa6ae4e9daafd783045ac0, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _minionLasirdBlue
+      value: 
+      objectReference: {fileID: 8038190239252735685, guid: 775dca733061ec14d8f4f7dc2ceac799, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _minionLasirdGreen
+      value: 
+      objectReference: {fileID: 7798369911501613735, guid: 071c1d2c627f8f04291f9557fdcb0e56, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _minionLasirdOrange
+      value: 
+      objectReference: {fileID: 4556243894477354981, guid: e9ff7d218ed2f154b8122a975775aa09, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _bulletBossHydustShrimp
+      value: 
+      objectReference: {fileID: 3900767114551469106, guid: 0c7bb9fc62cf10d43a6eeefdf9f04233, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _bulletMinionLasirdBlue
+      value: 
+      objectReference: {fileID: 6151225764835809331, guid: 6f28ebbe74b82924e87ce4673afb4c38, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _bulletMinionLasirdGreen
+      value: 
+      objectReference: {fileID: 1251826561529863831, guid: e3d7f9208ef5ec541bbbc4899ffcacf2, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _bulletMinionLasirdOrange
+      value: 
+      objectReference: {fileID: 7615247192328761934, guid: a3d4b8d61b17db94dab17987dbde5c0a, type: 3}
     - target: {fileID: 4925867890613326577, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: m_Name
       value: --GameRunner

@@ -128,7 +128,6 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     [SerializeField] private GameObject _languagePopup;
 
-
     [SerializeField] private GameObject _confirmPopup;
 	
 	[SerializeField] private GameObject _loadingPopup;
@@ -150,6 +149,8 @@ public class ResourceManager : UIManagerBase<PopupType>
     [SerializeField] private GameObject _transferItemPopUp;
 
     [SerializeField] private GameObject _successfulCombinePopupDetail;
+
+    [SerializeField] private GameObject _winGamePopup;
 
 
     [Header("UI Tutorial prefabs")]
@@ -265,7 +266,8 @@ public class ResourceManager : UIManagerBase<PopupType>
         RegisterPopup(PopupType.TransferItem, _transferItem);
         RegisterPopup(PopupType.TransferItemPopup, _transferItemPopUp);
         RegisterPopup(PopupType.SuccessfulCombinePopupDetail, _successfulCombinePopupDetail);
-	}
+        RegisterPopup(PopupType.WinGame, _winGamePopup);
+    }
 
     private void InitDic()
 	{

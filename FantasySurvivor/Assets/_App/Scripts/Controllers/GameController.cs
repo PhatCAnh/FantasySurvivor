@@ -86,13 +86,14 @@ public class GameController : Controller<GameApp>
 
     public void WinGame()
     {
-        Debug.Log("Wingame r ne");
+        isEndGame = true;
+        app.resourceManager.ShowPopup(PopupType.WinGame);
     }
 
     public void LoseGame()
     {
         isEndGame = true;
-        app.resourceManager.ShowPopup(PopupType.LoseGame);
+        app.resourceManager.ShowPopup(PopupType.WinGame);
         //app.analytics.TrackPlay(LevelResult.Failure, map.model.levelInGame);
     }
 
