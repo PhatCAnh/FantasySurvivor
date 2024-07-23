@@ -105,8 +105,7 @@ public class PlayfabController : Controller<GameApp>
         Debug.Log("Received data");
         if (result.Data != null)
         {
-            app.models.dataPlayerModel =
-                JsonConvert.DeserializeObject<DataPlayerModel>(result.Data[GetKey(app.models.dataPlayerModel)].Value);
+            app.models.dataPlayerModel.ChangeData(JsonConvert.DeserializeObject<DataPlayerModel>(result.Data[GetKey(app.models.dataPlayerModel)].Value));
         }
     }
 

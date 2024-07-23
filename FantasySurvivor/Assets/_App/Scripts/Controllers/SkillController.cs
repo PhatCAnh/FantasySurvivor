@@ -30,7 +30,7 @@ namespace _App.Scripts.Controllers
 		private void Start()
 		{
 			_listSkillTotal = new List<SkillDataTotal>();
-			_listSkillSelected = app.models.dataPlayerModel.GetSkillSet();
+			_listSkillSelected = app.models.dataPlayerModel.SkillSet;
 			_listSkillChoose = new List<SkillId>();
 
 			var listSkillUI = _skillDataTable.listSkillData;

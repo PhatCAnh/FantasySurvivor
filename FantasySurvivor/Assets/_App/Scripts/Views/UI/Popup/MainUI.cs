@@ -23,7 +23,7 @@ public class MainUI : View<GameApp>, IPopup
 
 
 	[SerializeField] private ItemToggle _itemHome, _itemElemental, _itemShop, _itemUpdate, _itemLock, _itemCharacter;
-	[SerializeField] private GameObject _goLock, _goUpdateStat, _goHome, _goListSkill;
+	[SerializeField] private GameObject _goLock, _goUpdateStat, _goHome,_goListSkill, _goCharacter;
 	[SerializeField] private Image _imgLineFocus;
 	[SerializeField] private Button _btnBattle, _btnCheat, _btnTest, _btnDailyGift, _btnSetting;
 	[SerializeField] private TextMeshProUGUI _txtGoldCoin, _txtUsername;
@@ -43,8 +43,8 @@ public class MainUI : View<GameApp>, IPopup
         _btnBattle.onClick.AddListener(OnClickBtnBattle);
 
 		_btnTest.onClick.AddListener(Test);
-		_btnSetting.onClick.AddListener(OnClickBtnSetting);
 		
+		_btnSetting.onClick.AddListener(OnClickBtnSetting);
 		
 		_btnCheat.onClick.AddListener(() =>
 		{
@@ -54,7 +54,6 @@ public class MainUI : View<GameApp>, IPopup
 		_txtUsername.text = app.models.dataPlayerModel.NameDisplay;
 
 		AddEventChangeStat();
-
 	}
 
 	public void Open()
@@ -135,7 +134,6 @@ public class MainUI : View<GameApp>, IPopup
 	{
 		app.resourceManager.ShowPopup(PopupType.ChoiceSkillOutGame);
 	}
-
 
 	private void AddEventChangeStat()
 	{

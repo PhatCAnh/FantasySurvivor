@@ -134,6 +134,6 @@ public class Showlistskill : View<GameApp>, IPopup
 
     private bool CheckSkillSet(SkillId id)
     {
-        return app.models.dataPlayerModel.GetSkillSet().Contains(id);
+        return app.models.dataPlayerModel.SkillSet.Contains(id);
     }
 }
