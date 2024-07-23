@@ -203,6 +203,7 @@ public enum PopupType
 	TransferItem,
 	TransferItemPopup,
     SuccessfulCombinePopupDetail,
+    RewardGetPopup,
 }
 
 public enum SkillDamagedType

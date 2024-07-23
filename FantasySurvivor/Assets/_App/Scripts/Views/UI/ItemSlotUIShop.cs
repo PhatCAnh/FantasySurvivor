@@ -17,6 +17,8 @@ public class ItemSlotUIShop : View<GameApp>
 
     private ShopUI _parent;
 
+    private int _count;
+
     private ItemController itemController => Singleton<ItemController>.instance;
 
     public void Init(ItemData data, int price, ShopUI parent, ItemId typePrice = ItemId.Gold, int count = 0)
@@ -30,6 +32,8 @@ public class ItemSlotUIShop : View<GameApp>
         _imgRank.sprite = itemController.GetSpriteRank(data.rank);
         _imgItem.sprite = data.dataUi.skin;
 
+        _count = count;
+
         _imgTypePrice.sprite = typePrice is ItemId.Gem ? _spriteGem : _spriteGold;
         
         _btnBuy.onClick.AddListener(OnClickBtnBuy);
@@ -37,6 +41,7 @@ public class ItemSlotUIShop : View<GameApp>
 
     private void OnClickBtnBuy()
     {
-        Debug.Log("Clicked Btn Buy");
+        app.resourceManager.ShowPopup(PopupType.RewardGetPopup).TryGetComponent(out RewardGetPopup rewardGetPopup);
+        rewardGetPopup.Init(new List<ItemInBag> { new (_data.id.ToString(), _data.rank.ToString(),0, _count)});
     }
 }
