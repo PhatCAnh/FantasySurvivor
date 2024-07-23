@@ -549,8 +549,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: -150, y: -200}
+  m_AnchoredPosition: {x: 0, y: 250}
+  m_SizeDelta: {x: -150, y: -800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2306344268037549222
 MonoBehaviour:
@@ -85537,6 +85537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3589114155113187674}
   - component: {fileID: 3589114155113187669}
+  - component: {fileID: -2176267795195372520}
   m_Layer: 5
   m_Name: WinGamePopup
   m_TagString: Untagged
@@ -85571,13 +85572,35 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3589114155113187675}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a00128818eda43dfaa959b83527b255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   otherPanels:
   - {fileID: 0}
+--- !u!114 &-2176267795195372520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3589114155113187675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 643efe88a44cc9a4586166ea5539b09e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _imageBackGround: {fileID: 3589114153642941823}
+  _title: {fileID: 428163251291707250}
+  _txtEnemyKilled: {fileID: 4673369931322230507}
+  _txtWave: {fileID: 1170430596630707366}
+  _leftArrow: {fileID: 7593382490497798649}
+  _rightArrow: {fileID: 3446606516505048997}
+  _txtReward: {fileID: 4814940886677358835}
+  _containerReward: {fileID: 5671790748802347852}
+  _btnClaim: {fileID: 6939148864814018025}
+  _btnReward: {fileID: 270300135426146504}
 --- !u!1 &3589114155152926117
 GameObject:
   m_ObjectHideFlags: 0
@@ -111070,7 +111093,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Home
+  m_text: 'Claim
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d70f485aa27dc43f79a8fd168f58435c, type: 2}
   m_sharedMaterial: {fileID: 5416806443266638455, guid: d70f485aa27dc43f79a8fd168f58435c, type: 2}
@@ -111173,7 +111198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -730}
+  m_AnchoredPosition: {x: 0, y: -660}
   m_SizeDelta: {x: 0, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6465614654312136438
@@ -116086,7 +116111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7310323022105782886
