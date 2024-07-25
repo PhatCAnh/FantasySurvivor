@@ -598,7 +598,7 @@ public class GameController : Controller<GameApp>
         map.Init(chapter, level);
         character = SpawnCharacter();
         listMonster.Clear();
-        Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.SupportItem), Vector3.zero, quaternion.identity);
+        //Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.SupportItem), Vector3.zero, quaternion.identity);
         app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
         //app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
     }
