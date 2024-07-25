@@ -115,8 +115,12 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _warning;
 	
 	[SerializeField] private GameObject _dailyGift;
-	
-	[SerializeField] private GameObject _rewardPopup;
+
+    [SerializeField] private GameObject _ShopInGame;
+
+    [SerializeField] private GameObject _dailyMission;
+
+    [SerializeField] private GameObject _rewardPopup;
 	
 	[SerializeField] private GameObject _accountPopup;
 	
@@ -248,6 +252,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 		RegisterPopup(PopupType.CharacterChoose, _characterChoose);
 		RegisterPopup(PopupType.Warning, _warning);
 		RegisterPopup(PopupType.DailyGift, _dailyGift);
+		RegisterPopup(PopupType.ShopInGame, _ShopInGame);
+		RegisterPopup(PopupType.DailyMission, _dailyMission);
 		RegisterPopup(PopupType.RewardPopup, _rewardPopup);
 		RegisterPopup(PopupType.AccountPopup, _accountPopup);
 		RegisterPopup(PopupType.SettingPopup, _settingPopup);

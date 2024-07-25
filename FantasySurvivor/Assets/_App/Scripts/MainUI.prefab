@@ -1688,6 +1688,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1941366635}
+  - component: {fileID: 4429969639874017789}
   m_Layer: 5
   m_Name: btn_Achivement
   m_TagString: Untagged
@@ -1719,6 +1720,50 @@ RectTransform:
   m_AnchoredPosition: {x: -550, y: -650}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4429969639874017789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941366634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1956402484
 GameObject:
   m_ObjectHideFlags: 0
@@ -22791,16 +22836,17 @@ MonoBehaviour:
     toggle: {fileID: 0}
     image: {fileID: 0}
     isLock: 0
-  _goLock: {fileID: 4875301780911519397}
+  _goLock: {fileID: 0}
   _goUpdateStat: {fileID: 1197727486673799968}
   _goHome: {fileID: 4715287793069283638}
   _goListSkill: {fileID: 7083707253193788833}
   _imgLineFocus: {fileID: 3982987167419258250}
   _btnBattle: {fileID: 86872664}
   _btnCheat: {fileID: 8840631335821913033}
-  _btnTest: {fileID: 1856873232}
+  _btnTest: {fileID: 4429969639874017789}
   _btnDailyGift: {fileID: 2233467842716431365}
   _btnSetting: {fileID: 6952020795599022162}
+  _btnMission: {fileID: 2911962039290582944}
   _txtGoldCoin: {fileID: 8114161817288681542}
   _txtUsername: {fileID: 2136258253058824058}
 --- !u!1 &4544456657365309012
@@ -29071,7 +29117,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1472374356713796743}
-  - component: {fileID: 1655417574194120503}
   m_Layer: 0
   m_Name: Gift
   m_TagString: Untagged
@@ -29103,20 +29148,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 400}
   m_SizeDelta: {x: 0, y: 400}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1655417574194120503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6494596720498750912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af7bf06d9cc86044ab0dcf99c5afc58c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settingsPopupPrefab: {fileID: 4812586798846200643, guid: bd651e852bb107a4e8933fd2135daaf3, type: 3}
-  openSettingsButton: {fileID: 2911962039290582944}
 --- !u!1 &6580780629246212317
 GameObject:
   m_ObjectHideFlags: 0

@@ -69,10 +69,16 @@ namespace FantasySurvivor
 		[JsonProperty] private string _dateStartDailyGift;
 		
 		[JsonProperty] private string _dataSaveClaimDailyGift;
-		
-		private ItemInBag item;
-		
-		public string Id
+
+        [JsonProperty] private string _dataSaveClaimMissionGift;
+
+
+
+        private ItemInBag item;
+
+ 
+
+        public string Id
 		{
 			get => _id;
 			set {
@@ -117,8 +123,17 @@ namespace FantasySurvivor
 				app.models.WriteModel<DataPlayerModel>();
 			}
 		}
-		
-		public string DateStartDailyGift
+        public string DataSaveClaimMissionGift
+        {
+            get => _dataSaveClaimMissionGift;
+            set
+            {
+                _dataSaveClaimDailyGift = value;
+                app.models.WriteModel<DataPlayerModel>();
+            }
+        }
+
+        public string DateStartDailyGift
 		{
 			get => _dateStartDailyGift;
 			set {
