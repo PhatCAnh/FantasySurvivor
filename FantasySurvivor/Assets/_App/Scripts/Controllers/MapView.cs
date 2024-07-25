@@ -51,7 +51,7 @@ public class MapView : View<GameApp>
     private bool _isBattleBossing = false;
 
     private int _countWavesSpawn = 3;
-    public GameObject _spawnedSupportItem = null;
+    public HelpItemDrop _spawnedSupportItem = null;
     private int _countWavesRemove;
 
 
@@ -180,11 +180,12 @@ public class MapView : View<GameApp>
 
                         _countWavesSpawn--;
 
-                        if (_countWavesSpawn == 0 && _spawnedSupportItem == null)
+                        if (_countWavesSpawn == 0/* && _spawnedSupportItem == null*/)
                         {
                             if (_isBattleBossing) return;
-                            _spawnedSupportItem = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.SupportItem), Vector3.zero, quaternion.identity);
+                            _spawnedSupportItem = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.SupportItem), Vector3.zero, quaternion.identity, app.resourceManager.rootContainer).GetComponent<HelpItemDrop>();
                             _countWavesRemove = 4;
+                            _countWavesSpawn = 3;
                         }
 
                         if (_spawnedSupportItem != null)
