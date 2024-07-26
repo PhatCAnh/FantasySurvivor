@@ -2,17 +2,21 @@
 using ArbanFramework.MVC;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class ConvertItemPopup : View<GameApp>, IPopup
 {
-    [SerializeField] private Button _btnConvert, _btnBack;
+    [SerializeField] private Button _btnConvert, _btnBack, _btnTalismanConvert;
 
-    [SerializeField] private Transform _slotItemEquipContainer;
+    [SerializeField] private Transform _slotItemEquipContainer, _goCostUpdate;
 
     [SerializeField] private GameObject _slotItemEquipPrefab;
+
+    [SerializeField] private TextMeshProUGUI _txtPriceUpdate;
+
     [SerializeField] private ItemSlotChosenCVUI _slotNone1, _slotNone2, _slotNone3;
-    
+
     private Dictionary<ItemType, ItemSlotChosenCVUI> _dicItemEquip1;
     private Dictionary<ItemType, ItemSlotChosenCVUI> _dicItemEquip2;
     private Dictionary<ItemType, ItemSlotChosenCVUI> _dicItemEquip3;
@@ -22,6 +26,9 @@ public class ConvertItemPopup : View<GameApp>, IPopup
     private List<GameObject> _listItemSlot = new List<GameObject>();
 
     private int _numberValue;
+
+
+    private float _costUpdate, _currentCoin;
 
     protected override void OnViewInit()
     {
@@ -57,8 +64,14 @@ public class ConvertItemPopup : View<GameApp>, IPopup
             {ItemType.Shoes, _slotNone3},
             {ItemType.Armor, _slotNone3},
         };
-        _btnConvert.onClick.AddListener(ConvertItem);
+        _costUpdate = 0;
+        _currentCoin = app.models.dataPlayerModel.Talisman;
+        var textCurrentCoin = _currentCoin < _costUpdate ? $"<color=red>{_currentCoin}</color>" : $"{_currentCoin}";
+
+        _txtPriceUpdate.text = textCurrentCoin + $"/{_costUpdate}";
         _btnBack.onClick.AddListener(Close);
+        _btnConvert.onClick.AddListener(ConvertItem);
+        _btnTalismanConvert.onClick.AddListener(ConvertItemWithTalisman);
         var dataPlayerModel = app.models.dataPlayerModel;
 
         foreach (var item in app.models.dataPlayerModel.BagItem)
@@ -80,7 +93,7 @@ public class ConvertItemPopup : View<GameApp>, IPopup
     }
     public void ChosenItem(ItemType type, ItemInBag data)
     {
-if (_slotNone1.itemData == null)
+        if (_slotNone1.itemData == null)
         {
             _slotNone1.ItemType = type;
             var slot = _dicItemEquip1[type];
@@ -88,7 +101,7 @@ if (_slotNone1.itemData == null)
             slot.Init(data);
         }
         else
-        if (_slotNone1.itemData != null && _slotNone2.itemData == null)
+                if (_slotNone1.itemData != null && _slotNone2.itemData == null)
         {
             _slotNone2.ItemType = type;
             var slot = _dicItemEquip2[type];
@@ -96,15 +109,16 @@ if (_slotNone1.itemData == null)
             slot.Init(data);
         }
         else
-        if (_slotNone1.itemData != null
-            && _slotNone2.itemData != null
-            && _slotNone3.itemData == null)
+                if (_slotNone1.itemData != null
+                    && _slotNone2.itemData != null
+                    && _slotNone3.itemData == null)
         {
             _slotNone3.ItemType = type;
             var slot = _dicItemEquip3[type];
             if (slot.isChosen) UnChosenItem(type, data);
             slot.Init(data);
         }
+        CheckUpdate();
     }
     public bool UnableChosen()
     {
@@ -164,6 +178,7 @@ if (_slotNone1.itemData == null)
     }
     public void ConvertItem()
     {
+        if (UnableChosen()) return;
         if (_slotNone1.ItemType == _slotNone2.ItemType
             && _slotNone1.ItemType == _slotNone3.ItemType
             && _slotNone1.itemInBag.rank == _slotNone2.itemInBag.rank
@@ -177,15 +192,77 @@ if (_slotNone1.itemData == null)
             }
             else
             {
-Debug.Log("Upgrade Failed"); 
+                Debug.Log("Upgrade Failed");
                 app.resourceManager.ShowPopup(PopupType.ConvertItemPopup).TryGetComponent(out Popup_Noty convertItemPopUp);
             }
-           /* app.models.dataPlayerModel.RemovePiece(_slotNone1.itemInBag.id, _slotNone2.itemInBag.quantity);
-            app.models.dataPlayerModel.RemovePiece(_slotNone2.itemInBag.id, _slotNone2.itemInBag.quantity);
-            app.models.dataPlayerModel.RemovePiece(_slotNone3.itemInBag.id, _slotNone2.itemInBag.quantity);*/
             app.models.dataPlayerModel.RemoveItem(_slotNone1.itemInBag);
             app.models.dataPlayerModel.RemoveItem(_slotNone2.itemInBag);
             app.models.dataPlayerModel.RemoveItem(_slotNone3.itemInBag);
+            _slotNone1.ResetData();
+            _slotNone2.ResetData();
+            _slotNone3.ResetData(); 
+            ReloadItem();
+        }
+    }
+    public void ConvertItemWithTalisman()
+    {
+        if (UnableChosen()) return;
+        if (_slotNone1.ItemType == _slotNone2.ItemType
+            && _slotNone1.ItemType == _slotNone3.ItemType
+            && _slotNone1.itemInBag.rank == _slotNone2.itemInBag.rank
+            && _slotNone1.itemInBag.rank == _slotNone3.itemInBag.rank)
+        {
+            if (Earthpunch.IsActionSuccessful(1))
+            {
+                app.models.dataPlayerModel.AddItemEquipToBag(_slotNone1.itemInBag.id, _slotNone1.itemInBag.rank + 1, 1);
+                app.resourceManager.ShowPopup(PopupType.SuccessfulCombinePopupDetail).TryGetComponent(out SuccessfulCombinePopupDetail successfulCombine);
+                Debug.Log("Upgrade Successful");
+            }
+            else
+            {
+                Debug.Log("Upgrade Failed");
+                app.resourceManager.ShowPopup(PopupType.ConvertItemPopup).TryGetComponent(out Popup_Noty convertItemPopUp);
+            }
+            _slotNone1.ResetData();
+            _slotNone2.ResetData();
+            _slotNone3.ResetData();
+            ReloadItem();
+            app.models.dataPlayerModel.Talisman -= ((int)_slotNone1.itemData.rank + 1 * 1);
+        }
+    }
+    public void CheckUpdate()
+    {
+        if (_slotNone1 != null && _slotNone2 != null && _slotNone3 != null)
+        {
+            _costUpdate = ((int)_slotNone1.itemData.rank+1 * 1);
+            _currentCoin = app.models.dataPlayerModel.Talisman;
+            var textCurrentCoin = _currentCoin < _costUpdate ? $"<color=red>{_currentCoin}</color>" : $"{_currentCoin}";
+            _txtPriceUpdate.text = textCurrentCoin + $"/{_costUpdate}";
+        }
+        else
+        {
+            _costUpdate = 0;
+            _currentCoin = app.models.dataPlayerModel.Talisman;
+            var textCurrentCoin = _currentCoin < _costUpdate ? $"<color=red>{_currentCoin}</color>" : $"{_currentCoin}";
+            _txtPriceUpdate.text = textCurrentCoin + $"/{_costUpdate}";
+        }
+    }
+
+    public void ReloadItem()
+    {
+        foreach (var itemSlot in _listItemSlot)
+        {
+            Destroy(itemSlot);
+        }
+        _listItemSlot.Clear();
+
+        // Reinstantiate items
+        foreach (var item in app.models.dataPlayerModel.BagItem)
+        {
+            var go = Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer);
+            go.TryGetComponent(out ItemSlotCVUI item1);
+            item1.Init(item, this);
+            _listItemSlot.Add(go);
         }
     }
 }

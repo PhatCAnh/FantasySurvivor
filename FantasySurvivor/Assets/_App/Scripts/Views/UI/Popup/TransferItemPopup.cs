@@ -24,7 +24,6 @@ namespace FantasySurvivor
         private List<GameObject> _listItemSlot = new List<GameObject>();
 
         private int _numberValue;
-
         protected override void OnViewInit()
         {
             base.OnViewInit();
@@ -141,6 +140,7 @@ namespace FantasySurvivor
         }
         public void ConvertItem()
         {
+            if (UnableChosen()) return;
             if (_slotNone1.ItemType == _slotNone2.ItemType
                 && _slotNone1.itemInBag.level > _slotNone2.itemInBag.level)
             {
@@ -155,6 +155,24 @@ namespace FantasySurvivor
                 }
                 _slotNone1.ResetData();
                 _slotNone2.ResetData();
+                ReloadItem();
+            }
+        }
+        public void ReloadItem()
+        {
+            foreach (var itemSlot in _listItemSlot)
+            {
+                Destroy(itemSlot);
+            }
+            _listItemSlot.Clear();
+
+            // Reinstantiate items
+            foreach (var item in app.models.dataPlayerModel.BagItem)
+            {
+                var go = Instantiate(_slotItemEquipPrefab, _slotItemEquipContainer);
+                go.TryGetComponent(out ItemSlotTranfUI item1);
+                item1.Init(item, this);
+                _listItemSlot.Add(go);
             }
         }
     }

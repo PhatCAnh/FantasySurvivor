@@ -121,6 +121,7 @@ public class CharacterInformation : View<GameApp>, IPopup
     public void TestMoney()
     {
         app.models.dataPlayerModel.Gold += 1000000;
+        app.models.dataPlayerModel.Talisman += 1000;
     }
 
     [ContextMenu("Test item Equip")]

@@ -23,7 +23,9 @@ public class ItemSlotChosenCVUI : ItemSlotCVUI
 
     protected override void OnClickBtn()
     {
+        if (itemInBag == null) return;
         parent.UnChosenItem(itemData.dataConfig.type, itemInBag);
+        ResetData();
     }
 
     /*public override void Action(int value)
@@ -34,7 +36,6 @@ public class ItemSlotChosenCVUI : ItemSlotCVUI
 */
     public void ResetData()
     {
-        if (!isChosen) return;
         itemInBag = null;
         itemData = null;
         _imgEquip.SetActive(false);
