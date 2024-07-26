@@ -65,7 +65,7 @@ public class CharacterInformation : View<GameApp>, IPopup
             {ItemType.Gloves, _slotGloves},
         };
 
-        //_btnBack.onClick.AddListener(Close);
+        _btnBack.onClick.AddListener(Close);
         _btnAddItemSlot.onClick.AddListener(AddItemSlot);
         _btnChooseCharacter.onClick.AddListener(ChooseCharacter);
 

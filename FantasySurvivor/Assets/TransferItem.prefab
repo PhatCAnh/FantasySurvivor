@@ -508,7 +508,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6950673933900356480}
-  - component: {fileID: 1816494933586524253}
+  - component: {fileID: 3657221209810725493}
   m_Layer: 5
   m_Name: TransferItem
   m_TagString: Untagged
@@ -539,7 +539,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1816494933586524253
+--- !u!114 &3657221209810725493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -548,16 +548,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1229709468813714765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a8dc0dfb90230d4f9ba112af108fc34, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dd4588be6e036242bf756d91c0f1a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _btnTransfer: {fileID: 5121988113127950652}
+  _btnTranf: {fileID: 5121988113127950652}
   _btnBack: {fileID: 3708975243933609208}
-  _slotItemEquipContainer: {fileID: 0}
-  _slotItemEquipPrefab: {fileID: 0}
-  _slotNone1: {fileID: 0}
-  _slotNone2: {fileID: 0}
-  _slotNone3: {fileID: 0}
+  _slotItemEquipContainer: {fileID: 6977768124532356925}
+  _slotItemEquipPrefab: {fileID: 6329213528002979845, guid: 24a8ccabd60f2d549817cf254ac948b6, type: 3}
+  _slotNone1: {fileID: 220289421541693348}
+  _slotNone2: {fileID: 8414407058413596428}
 --- !u!1 &1268674168575253060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,8 +1098,8 @@ GameObject:
   - component: {fileID: 2654283456002519737}
   - component: {fileID: 8632746050379851732}
   - component: {fileID: 7104351756363243673}
-  - component: {fileID: 4018752418350090659}
   - component: {fileID: 6946083269127042451}
+  - component: {fileID: 8414407058413596428}
   m_Layer: 5
   m_Name: Equip_Slot (3)
   m_TagString: Untagged
@@ -1167,32 +1166,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4018752418350090659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2552007411775486652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89048d07858ca314ba1b0efa9442b739, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemInBag:
-    id: 0
-    rank: 0
-    level: 0
-    quantity: 0
-  image: {fileID: 5396905759084093158}
-  imageRank: {fileID: 7104351756363243673}
-  btn: {fileID: 6946083269127042451}
-  txtNumber: {fileID: 7525810868601587035}
-  isShow: 0
-  _imgEquip: {fileID: 2545204607818238887}
-  _imgUnEquip: {fileID: 8111219541627091538}
-  _baseRank: {fileID: 21300000, guid: ccca3a10c39d04c6c9a0e6a35e048bbb, type: 3}
-  isChosen: 0
 --- !u!114 &6946083269127042451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1237,6 +1210,32 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8414407058413596428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2552007411775486652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2854daae99907e248a74c0db85237546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemInBag:
+    id: 0
+    rank: 0
+    level: 0
+    quantity: 0
+  image: {fileID: 5396905759084093158}
+  imageRank: {fileID: 7104351756363243673}
+  btn: {fileID: 6946083269127042451}
+  txtNumber: {fileID: 7525810868601587035}
+  isShow: 1
+  _imgEquip: {fileID: 2545204607818238887}
+  _imgUnEquip: {fileID: 8754614614799292442}
+  _baseRank: {fileID: 21300000, guid: ccca3a10c39d04c6c9a0e6a35e048bbb, type: 3}
+  isChosen: 0
 --- !u!1 &3947983302245937147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2032,8 +2031,8 @@ GameObject:
   - component: {fileID: 9176564821760307592}
   - component: {fileID: 5620111860906979676}
   - component: {fileID: 5265273380764444837}
-  - component: {fileID: 8728323953242601741}
   - component: {fileID: 6076492177408482975}
+  - component: {fileID: 220289421541693348}
   m_Layer: 5
   m_Name: Equip_Slot (2)
   m_TagString: Untagged
@@ -2100,32 +2099,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8728323953242601741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6249876205932102850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89048d07858ca314ba1b0efa9442b739, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemInBag:
-    id: 0
-    rank: 0
-    level: 0
-    quantity: 0
-  image: {fileID: 2377865295054966725}
-  imageRank: {fileID: 5265273380764444837}
-  btn: {fileID: 6076492177408482975}
-  txtNumber: {fileID: 5775694884166449109}
-  isShow: 0
-  _imgEquip: {fileID: 6876903449384662024}
-  _imgUnEquip: {fileID: 2480809105624750445}
-  _baseRank: {fileID: 21300000, guid: ccca3a10c39d04c6c9a0e6a35e048bbb, type: 3}
-  isChosen: 0
 --- !u!114 &6076492177408482975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2170,6 +2143,32 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &220289421541693348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6249876205932102850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2854daae99907e248a74c0db85237546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemInBag:
+    id: 0
+    rank: 0
+    level: 0
+    quantity: 0
+  image: {fileID: 2377865295054966725}
+  imageRank: {fileID: 5265273380764444837}
+  btn: {fileID: 6076492177408482975}
+  txtNumber: {fileID: 5775694884166449109}
+  isShow: 1
+  _imgEquip: {fileID: 6876903449384662024}
+  _imgUnEquip: {fileID: 4987032150880633792}
+  _baseRank: {fileID: 21300000, guid: ccca3a10c39d04c6c9a0e6a35e048bbb, type: 3}
+  isChosen: 0
 --- !u!1 &6285588131925605761
 GameObject:
   m_ObjectHideFlags: 0

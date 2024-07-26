@@ -106,7 +106,16 @@ if (_slotNone1.itemData == null)
             slot.Init(data);
         }
     }
-
+    public bool UnableChosen()
+    {
+        if (_slotNone1.itemData != null
+         && _slotNone2.itemData != null
+         && _slotNone3.itemData != null)
+        {
+            return false;
+        }
+        return true;
+    }
     public void UnChosenItem(ItemType type, ItemInBag data)
     {
         if (data == _slotNone1.itemInBag)

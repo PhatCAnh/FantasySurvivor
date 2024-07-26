@@ -316,6 +316,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _convertItem
+      value: 
+      objectReference: {fileID: 1229709468813714765, guid: 850f18f62dd0fe941bc4b153ce951384, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _transferItem
+      value: 
+      objectReference: {fileID: 1229709468813714765, guid: 51f7afcab3e61284e955d6dd641c7786, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _convertItemPopUp
+      value: 
+      objectReference: {fileID: 8518666800957524247, guid: fc7d3a3daef562d4894c2ca01acabc40, type: 3}
+    - target: {fileID: 3757817642436620280, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: _successfulCombinePopupDetail
+      value: 
+      objectReference: {fileID: 3666474366691452483, guid: 5cec1b361da7b7441a2de452c5dd7d92, type: 3}
     - target: {fileID: 4925867890613326577, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: m_Name
       value: --GameRunner
