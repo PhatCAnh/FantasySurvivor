@@ -182,17 +182,15 @@ public class ConvertItemPopup : View<GameApp>, IPopup
         if (_slotNone1.ItemType == _slotNone2.ItemType
             && _slotNone1.ItemType == _slotNone3.ItemType
             && _slotNone1.itemInBag.rank == _slotNone2.itemInBag.rank
-            && _slotNone1.itemInBag.rank == _slotNone3.itemInBag.rank)
+            && _slotNone1.itemInBag.rank == _slotNone3.itemInBag.rank
+            && maxRank())
         {
-            if (Earthpunch.IsActionSuccessful(1))
+            if (Earthpunch.IsActionSuccessful(1 - ((float)_slotNone1.itemInBag.rank - 1) * (1f / 7f)))
             {
                 app.models.dataPlayerModel.AddItemEquipToBag(_slotNone1.itemInBag.id, _slotNone1.itemInBag.rank + 1, 1);
-                app.resourceManager.ShowPopup(PopupType.SuccessfulCombinePopupDetail).TryGetComponent(out SuccessfulCombinePopupDetail successfulCombine);
-                Debug.Log("Upgrade Successful");
             }
             else
             {
-                Debug.Log("Upgrade Failed");
                 app.resourceManager.ShowPopup(PopupType.ConvertItemPopup).TryGetComponent(out Popup_Noty convertItemPopUp);
             }
             app.models.dataPlayerModel.RemoveItem(_slotNone1.itemInBag);
@@ -210,24 +208,27 @@ public class ConvertItemPopup : View<GameApp>, IPopup
         if (_slotNone1.ItemType == _slotNone2.ItemType
             && _slotNone1.ItemType == _slotNone3.ItemType
             && _slotNone1.itemInBag.rank == _slotNone2.itemInBag.rank
-            && _slotNone1.itemInBag.rank == _slotNone3.itemInBag.rank)
+            && _slotNone1.itemInBag.rank == _slotNone3.itemInBag.rank && maxRank())
         {
-            if (Earthpunch.IsActionSuccessful(1))
+            if (Earthpunch.IsActionSuccessful(1 - ((float)_slotNone1.itemInBag.rank - 1) * (1f / 30f)))
             {
                 app.models.dataPlayerModel.AddItemEquipToBag(_slotNone1.itemInBag.id, _slotNone1.itemInBag.rank + 1, 1);
-                app.resourceManager.ShowPopup(PopupType.SuccessfulCombinePopupDetail).TryGetComponent(out SuccessfulCombinePopupDetail successfulCombine);
-                Debug.Log("Upgrade Successful");
+                app.models.dataPlayerModel.Talisman -= ((int)_slotNone1.itemData.rank + 1 * 1); app.models.dataPlayerModel.RemoveItem(_slotNone1.itemInBag);
+                app.models.dataPlayerModel.RemoveItem(_slotNone2.itemInBag);
+                app.models.dataPlayerModel.RemoveItem(_slotNone3.itemInBag);
+                _slotNone1.ResetData();
+                _slotNone2.ResetData();
+                _slotNone3.ResetData();
             }
             else
             {
-                Debug.Log("Upgrade Failed");
                 app.resourceManager.ShowPopup(PopupType.ConvertItemPopup).TryGetComponent(out Popup_Noty convertItemPopUp);
+                app.models.dataPlayerModel.Talisman -= ((int)_slotNone1.itemData.rank + 1 * 1);
+                _slotNone1.ResetData();
+                _slotNone2.ResetData();
+                _slotNone3.ResetData();
             }
-            _slotNone1.ResetData();
-            _slotNone2.ResetData();
-            _slotNone3.ResetData();
             ReloadItem();
-            app.models.dataPlayerModel.Talisman -= ((int)_slotNone1.itemData.rank + 1 * 1);
         }
     }
     public void CheckUpdate()
@@ -264,5 +265,17 @@ public class ConvertItemPopup : View<GameApp>, IPopup
             item1.Init(item, this);
             _listItemSlot.Add(go);
         }
+    }
+
+    public bool maxRank()
+    {
+
+        if ((int)_slotNone1.itemInBag.rank == 4 ||
+        (int)_slotNone2.itemInBag.rank == 4 ||
+        (int)_slotNone3.itemInBag.rank == 4 )
+        {
+            return false;
+        }
+        return true;
     }
 }

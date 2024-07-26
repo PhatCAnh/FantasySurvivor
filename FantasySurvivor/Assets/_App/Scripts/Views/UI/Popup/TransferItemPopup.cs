@@ -24,6 +24,8 @@ namespace FantasySurvivor
         private List<GameObject> _listItemSlot = new List<GameObject>();
 
         private int _numberValue;
+
+        private int oldLevel;
         protected override void OnViewInit()
         {
             base.OnViewInit();
@@ -144,14 +146,23 @@ namespace FantasySurvivor
             if (_slotNone1.ItemType == _slotNone2.ItemType
                 && _slotNone1.itemInBag.level > _slotNone2.itemInBag.level)
             {
-                if (Earthpunch.IsActionSuccessful(1))
+                if (Earthpunch.IsActionSuccessful(1 - (_slotNone1.itemInBag.level - 1) * (1f / 30f)))
                 {
+                    oldLevel = _slotNone2.itemInBag.level;
                     _slotNone2.itemInBag.level = _slotNone1.itemInBag.level-1;
-                    _slotNone1.itemInBag.level = 1;
+                    if (oldLevel > 1)
+                    {
+                        _slotNone1.itemInBag.level = oldLevel - 1;
+                    }
+                    else
+                    {
+                        _slotNone1.itemInBag.level = 1;
+                    }
+
                 }
                 else
                 {
-                    app.resourceManager.ShowPopup(PopupType.ConvertItemPopup).TryGetComponent(out Popup_Noty convertItemPopUp);
+                    _slotNone1.itemInBag.level = 1;
                 }
                 _slotNone1.ResetData();
                 _slotNone2.ResetData();
