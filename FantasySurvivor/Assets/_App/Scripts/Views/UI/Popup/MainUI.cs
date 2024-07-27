@@ -79,31 +79,6 @@ public class MainUI : View<GameApp>, IPopup
 	public void OnClickBtnSetting()
 	{
         _settingButtonClickCount++;
-
-        if (_settingButtonClickCount == 2)
-        {
-
-            DailyMissionPopup newDailyMissionPopup = FindObjectOfType<DailyMissionPopup>();
-
-            if (newDailyMissionPopup == null)
-            {
-                GameObject popupPrefab = Resources.Load<GameObject>("Prefabs/DailyMissionPopup");
-                if (popupPrefab != null)
-                {
-                    GameObject popupInstance = Instantiate(popupPrefab);
-                    newDailyMissionPopup = popupInstance.GetComponent<DailyMissionPopup>();
-                }
-            }
-
-            if (newDailyMissionPopup != null)
-            {
-                newDailyMissionPopup.UpdateTaskStatus(0, TaskStatus.Complete);
-            }
-
-            _settingButtonClickCount = 0; 
-        }
-
-
         app.resourceManager.ShowPopup(PopupType.SettingPopup);
     }
     public void OnClickBtnDailyGift()

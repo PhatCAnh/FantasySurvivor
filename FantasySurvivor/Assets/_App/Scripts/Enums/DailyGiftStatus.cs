@@ -9,10 +9,4 @@ namespace _App.Scripts.Enums
 		Waiting,
 		NotReady
 	}
-    public enum TaskStatus
-    {
-        Incomplete,
-        Complete,
-        Claimed
-    }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
+using _App.Scripts.Enums;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using Newtonsoft.Json;
@@ -73,7 +74,7 @@ namespace FantasySurvivor
         [JsonProperty] private string _dataSaveClaimMissionGift;
 
 
-
+        private const string MissionStatusKeyPrefix = "MissionStatus_";
         private ItemInBag item;
 
  
@@ -324,5 +325,27 @@ namespace FantasySurvivor
 			NameDisplay = "Guest";
 			app.models.WriteModel<DataPlayerModel>();
 		}
-	}
+        // Lưu trạng thái nhiệm vụ
+        public void SaveMissionStatus(string missionTitle, MissionStatus status)
+        {
+            string key = MissionStatusKeyPrefix + missionTitle;
+            PlayerPrefs.SetString(key, status.ToString());
+            PlayerPrefs.Save(); // Đảm bảo dữ liệu được lưu ngay lập tức
+        }
+
+        // Lấy trạng thái nhiệm vụ
+        public MissionStatus GetMissionStatus(string missionTitle)
+        {
+            string key = MissionStatusKeyPrefix + missionTitle;
+            if (PlayerPrefs.HasKey(key))
+            {
+                string statusString = PlayerPrefs.GetString(key);
+                if (Enum.TryParse(statusString, out MissionStatus status))
+                {
+                    return status;
+                }
+            }
+            return MissionStatus.Incomplete; // Giá trị mặc định nếu không tìm thấy
+        }
+    }
 }

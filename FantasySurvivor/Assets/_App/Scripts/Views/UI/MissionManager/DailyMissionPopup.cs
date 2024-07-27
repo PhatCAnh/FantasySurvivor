@@ -8,63 +8,108 @@ using DG.Tweening;
 using FantasySurvivor;
 using UnityEngine;
 using UnityEngine.UI;
-using _App.Scripts.Enums;
 
 public class DailyMissionPopup : View<GameApp>, IPopup
 {
+    private class DailyMissionItemDetail
+    {
+        public string title;
+        public ItemId id;
+        public int quantity;
+        public ItemType type;
 
+        public DailyMissionItemDetail(string title, ItemId id, ItemType type, int quantity)
+        {
+            this.title = title;
+            this.id = id;
+            this.type = type;
+            this.quantity = quantity;
+        }
+    }
+
+    [SerializeField] private DailyMissionItem[] _arrDailyMissionItems;
     [SerializeField] private Button _btnClose;
     [SerializeField] private Transform _goMainContent;
-    [SerializeField] public DailyTaskItem[] _dailyTaskItems;
 
-    private DataPlayerModel dataPlayerModel => Singleton<DataPlayerModel>.instance;
+    private GameController gameController => Singleton<GameController>.instance;
 
     protected override void OnViewInit()
     {
         base.OnViewInit();
+        Debug.Log("DailyMissionPopup: OnViewInit");
         Init();
+        UpdateMissionStatuses();
         Open();
     }
 
     private void Init()
     {
+        Debug.Log("DailyMissionPopup: Init");
         _btnClose.onClick.AddListener(Close);
 
-        // Initialize the two tasks with descriptions and button click requirements
-        _dailyTaskItems[0].Init("Nhấn 2 lần nút Setting", TaskStatus.Incomplete, this);
-
-        // Update task statuses
-        foreach (var taskItem in _dailyTaskItems)
+        var arrDailyMissionItemDetail = new[]
         {
-            taskItem.CheckTaskStatus();
+            new DailyMissionItemDetail("Enter the game", ItemId.Gold, ItemType.ETC, 100),
+        };
+
+        for (int i = 0; i < arrDailyMissionItemDetail.Length; i++)
+        {
+            _arrDailyMissionItems[i].Init(arrDailyMissionItemDetail[i].title, arrDailyMissionItemDetail[i].id, arrDailyMissionItemDetail[i].type, arrDailyMissionItemDetail[i].quantity, MissionStatus.Incomplete, this);
         }
     }
 
+    private void UpdateMissionStatuses()
+    {
+        for (int i = 0; i < _arrDailyMissionItems.Length; i++)
+        {
+            var currentItem = _arrDailyMissionItems[i];
+            // Tải trạng thái nhiệm vụ từ mô hình dữ liệu
+            MissionStatus savedStatus = app.models.dataPlayerModel.GetMissionStatus(currentItem.GetTitle());
+            currentItem.status = savedStatus;
+            currentItem.SetData(); // Cập nhật UI
+        }
+    }
+    private void SaveMissionStatuses()
+    {
+        string saveData = "";
+        for (int i = 0; i < _arrDailyMissionItems.Length; i++)
+        {
+            saveData += _arrDailyMissionItems[i].status;
+            if (i != _arrDailyMissionItems.Length - 1)
+            {
+                saveData += "-";
+            }
+        }
+        app.models.dataPlayerModel.DataSaveClaimMissionGift = saveData;
+    }
+    private bool CheckCondition(int index)
+    {
+        // Logic để kiểm tra điều kiện hoàn thành nhiệm vụ
+        // Ví dụ: kiểm tra số lần nhấn nút hoặc các điều kiện khác
+        // Trả về true nếu nhiệm vụ đã hoàn thành
+        return true; // Thay thế bằng điều kiện thực tế
+    }
     public void Open()
     {
+        Debug.Log("DailyMissionPopup: Open");
         _goMainContent.localScale = Vector3.zero;
-        _goMainContent.DOScale(Vector3.one, 0.25f);
+        _goMainContent.DOScale(Vector3.one, 0.15f);
     }
 
     public void Close()
     {
-        _goMainContent.DOScale(Vector3.zero, 0.25f)
+        Debug.Log("DailyMissionPopup: Close");
+        _goMainContent.DOScale(Vector3.zero, 0.15f)
             .OnComplete(() =>
             {
                 Destroy(gameObject);
             });
     }
 
-    public void UpdateTaskStatus(int taskIndex, TaskStatus newStatus)
+    public void OnClickClaim()
     {
-        if (taskIndex >= 0 && taskIndex < _dailyTaskItems.Length)
-        {
-            _dailyTaskItems[taskIndex].UpdateTaskStatus(newStatus);
-        }
+        Debug.Log("DailyMissionPopup: OnClickClaim - Save mission status");
+        SaveMissionStatuses(); // Lưu trạng thái của các nhiệm vụ
     }
 
-    public void SaveTaskStatus()
-    {
-        // Status already saved in DailyTaskItem.cs using PlayerPrefs
-    }
 }
