@@ -22792,9 +22792,9 @@ MonoBehaviour:
     isLock: 0
   _goLock: {fileID: 4875301780911519397}
   _goUpdateStat: {fileID: 1197727486673799968}
-  _goHome: {fileID: 2853501269126946631}
-  _goListSkill: {fileID: 1776460465850150677}
-  _goCharacter: {fileID: 9053785282362729189}
+  _goHome: {fileID: 4715287793069283638}
+  _goListSkill: {fileID: 7083707253193788833}
+  _goCharacter: {fileID: 1197727486673799968}
   _imgLineFocus: {fileID: 3982987167419258250}
   _btnBattle: {fileID: 86872664}
   _btnCheat: {fileID: 8840631335821913033}
@@ -35289,6 +35289,11 @@ PrefabInstance:
 --- !u!224 &6055765126197963939 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8135926211466111966, guid: ad9a6ee6a67844c57aa5d5924ec01de7, type: 3}
+  m_PrefabInstance: {fileID: 2657963277392299901}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7083707253193788833 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5092614275285453532, guid: ad9a6ee6a67844c57aa5d5924ec01de7, type: 3}
   m_PrefabInstance: {fileID: 2657963277392299901}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5392095447404579902

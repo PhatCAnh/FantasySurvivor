@@ -152,6 +152,8 @@ public class ResourceManager : UIManagerBase<PopupType>
     [SerializeField] private GameObject _successfulCombinePopupDetail;
     
     [SerializeField] private GameObject _rewardGetPopup;
+    
+    [SerializeField] private GameObject _purchaseItem;
 
 
     [Header("UI Tutorial prefabs")]
@@ -266,6 +268,7 @@ public class ResourceManager : UIManagerBase<PopupType>
         RegisterPopup(PopupType.TransferItem, _transferItem);
         RegisterPopup(PopupType.TransferItemPopup, _transferItemPopUp);
         RegisterPopup(PopupType.SuccessfulCombinePopupDetail, _successfulCombinePopupDetail);
+        RegisterPopup(PopupType.PurchaseItemPopup, _purchaseItem);
         RegisterPopup(PopupType.RewardGetPopup, _rewardGetPopup);
         RegisterPopup(PopupType.NotificationPopup, _notificationPopup);
 	}

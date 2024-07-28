@@ -30,7 +30,6 @@ public class PopupItemPieceDetail : View<GameApp>, IPopup
     }
     private void SaleItem()
     {
-
         app.models.dataPlayerModel.AddCoins(99);
         app.models.dataPlayerModel.RemovePiece(ItemId.PieceFire, 2);
 

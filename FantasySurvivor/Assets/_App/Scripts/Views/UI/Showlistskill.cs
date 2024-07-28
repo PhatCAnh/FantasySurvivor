@@ -1,17 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using _App.Datas.DataScript;
 using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
-using FantasySurvivor;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
-//using UnityEngine.UIElements;
-using static System.Net.Mime.MediaTypeNames;
 
 public class Showlistskill : View<GameApp>, IPopup
 {
