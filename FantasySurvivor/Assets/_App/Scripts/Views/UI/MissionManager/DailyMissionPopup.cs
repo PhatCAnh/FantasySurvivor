@@ -38,6 +38,7 @@ public class DailyMissionPopup : View<GameApp>, IPopup
         base.OnViewInit();
         Debug.Log("DailyMissionPopup: OnViewInit");
         Init();
+        CheckAndResetDailyMissions();
         UpdateMissionStatuses();
         Open();
     }
@@ -49,7 +50,7 @@ public class DailyMissionPopup : View<GameApp>, IPopup
 
         var arrDailyMissionItemDetail = new[]
         {
-            new DailyMissionItemDetail("Enter the game", ItemId.Gold, ItemType.ETC, 100),
+            new DailyMissionItemDetail("Enter the game", ItemId.Gold, ItemType.ETC, 300),
         };
 
         for (int i = 0; i < arrDailyMissionItemDetail.Length; i++)
@@ -63,10 +64,13 @@ public class DailyMissionPopup : View<GameApp>, IPopup
         for (int i = 0; i < _arrDailyMissionItems.Length; i++)
         {
             var currentItem = _arrDailyMissionItems[i];
-            // Tải trạng thái nhiệm vụ từ mô hình dữ liệu
             MissionStatus savedStatus = app.models.dataPlayerModel.GetMissionStatus(currentItem.GetTitle());
             currentItem.status = savedStatus;
-            currentItem.SetData(); // Cập nhật UI
+            if (currentItem.status == MissionStatus.Incomplete && currentItem.CheckCondition())
+            {
+                currentItem.status = MissionStatus.Complete;
+            }
+            currentItem.SetData(); 
         }
     }
     private void SaveMissionStatuses()
@@ -84,10 +88,7 @@ public class DailyMissionPopup : View<GameApp>, IPopup
     }
     private bool CheckCondition(int index)
     {
-        // Logic để kiểm tra điều kiện hoàn thành nhiệm vụ
-        // Ví dụ: kiểm tra số lần nhấn nút hoặc các điều kiện khác
-        // Trả về true nếu nhiệm vụ đã hoàn thành
-        return true; // Thay thế bằng điều kiện thực tế
+        return true;
     }
     public void Open()
     {
@@ -109,7 +110,28 @@ public class DailyMissionPopup : View<GameApp>, IPopup
     public void OnClickClaim()
     {
         Debug.Log("DailyMissionPopup: OnClickClaim - Save mission status");
-        SaveMissionStatuses(); // Lưu trạng thái của các nhiệm vụ
+        SaveMissionStatuses();
+    }
+    private void CheckAndResetDailyMissions()
+    {
+        DateTime currentDate = DateTime.Now.Date;
+        if (currentDate > app.models.dataPlayerModel.LastResetDate)
+        {
+            ResetDailyMissions();
+            app.models.dataPlayerModel.LastResetDate = currentDate;
+            app.models.dataPlayerModel.Save();
+        }
     }
 
+    private void ResetDailyMissions()
+    {
+        foreach (var missionItem in _arrDailyMissionItems)
+        {
+            if (missionItem.status == MissionStatus.Claimed)
+            {
+                Debug.Log($"Mission '{missionItem.GetTitle()}' was claimed and is now resetting.");
+            }
+            missionItem.ResetMission();
+        }
+    }
 }

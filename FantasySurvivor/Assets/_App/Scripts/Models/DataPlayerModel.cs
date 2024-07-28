@@ -33,8 +33,9 @@ namespace FantasySurvivor
 			DateLoginGame = $"{dateNow.Item1}/{dateNow.Item2}/{dateNow.Item3}";
 			DateStartDailyGift = $"{dateNow.Item1}/{dateNow.Item2}/{dateNow.Item3}";
 			DataSaveClaimDailyGift = "Waiting-Waiting-Waiting-Waiting-Waiting-Waiting-Waiting";
+            LastResetDate = DateTime.Now.Date;
 
-			_id = "";
+            _id = "";
 			
 			_email = "";
 			
@@ -77,7 +78,17 @@ namespace FantasySurvivor
         private const string MissionStatusKeyPrefix = "MissionStatus_";
         private ItemInBag item;
 
- 
+        [JsonProperty] private string _lastResetDate;
+
+        public DateTime LastResetDate
+        {
+            get => DateTime.TryParse(_lastResetDate, out var date) ? date : DateTime.MinValue;
+            set
+            {
+                _lastResetDate = value.ToString("yyyy-MM-dd");
+                app.models.WriteModel<DataPlayerModel>();
+            }
+        }
 
         public string Id
 		{
@@ -346,6 +357,10 @@ namespace FantasySurvivor
                 }
             }
             return MissionStatus.Incomplete; // Giá trị mặc định nếu không tìm thấy
+        }
+        public void Save()
+        {
+            app.models.WriteModel<DataPlayerModel>();
         }
     }
 }

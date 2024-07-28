@@ -35,10 +35,12 @@ public class DailyMissionItem : View<GameApp>
         this._parent = parent;
         _txtTitle.text = title;
         _txtValue.text = $"{_quantity}";
-        if (CheckCondition())
+
+        if (this.status == MissionStatus.Incomplete && CheckCondition())
         {
-            status = MissionStatus.Complete;
+            this.status = MissionStatus.Complete;
         }
+
         SetData();
     }
 
@@ -95,31 +97,41 @@ public class DailyMissionItem : View<GameApp>
 
         app.models.dataPlayerModel.AddCoins(_quantity);
         status = MissionStatus.Claimed;
-
-        // Lưu trạng thái nhiệm vụ vào mô hình dữ liệu
         app.models.dataPlayerModel.SaveMissionStatus(GetTitle(), status);
-
-        // Cập nhật giao diện người dùng
         SetData();
     }
     public string GetTitle()
     {
-        return _title; // Hoặc cách bạn lưu tiêu đề nhiệm vụ
+        return _title;
     }
     private void OnClickBtnClaim()
     {
-        Debug.Log("DailyMissionItem: OnClickBtnClaim - Reward already claimed");
-
+        if (status == MissionStatus.Claimed)
+        {
+            Debug.Log("DailyMissionItem: OnClickBtnClaim - Reward already claimed. Please wait until after 12 AM for the next reset.");
+            ShowWaitMessage();
+        }
+        else
+        {
+            Debug.Log("DailyMissionItem: OnClickBtnClaim - Claiming reward");
+            status = MissionStatus.Claimed;
+            app.models.dataPlayerModel.AddCoins(_quantity);
+            SetData();
+        }
     }
-
-    private bool CheckCondition()
+    private void ShowWaitMessage()
+    {
+        Debug.Log("Please wait until after 12 AM for the next reset.");
+    }
+    public bool CheckCondition()
     {
         Debug.Log("DailyMissionItem: CheckCondition - Verifying mission completion");
-        // Kiểm tra điều kiện hoàn thành nhiệm vụ
-        // Điều kiện mẫu: 
-        // nv1: Vào game
-
-        return true;
+        return true; 
+    }
+    public void ResetMission()
+    {
+        status = MissionStatus.Incomplete;
+        SetData();
     }
 }
 
