@@ -33,13 +33,18 @@ namespace FantasySurvivor
 			Destroy(gameObject);
 		}
 
-		private void OnClickExit()
-		{
-			gameController.LoseGame();
-			Close();
-		}
+        private void OnClickExit()
+        {
+            foreach (var reward in gameController.map.dictionaryReward)
+            {
+                gameController.ClaimReward(reward.Key, reward.Value);
+            }
+            gameController.ResetGame();
+            gameController.ChangeSceneHome();
+            gameController.isEndGame = false;
+        }
 
-		private void OnClickResume()
+        private void OnClickResume()
 		{
 			Close();
 		}

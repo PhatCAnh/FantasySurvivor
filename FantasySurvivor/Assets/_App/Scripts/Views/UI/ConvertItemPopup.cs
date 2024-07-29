@@ -192,10 +192,6 @@ public class ConvertItemPopup : View<GameApp>, IPopup
             {
                 app.models.dataPlayerModel.AddItemEquipToBag(_slotNone1.itemInBag.id, _slotNone1.itemInBag.rank + 1, 1);
             }
-            else
-            {
-                app.resourceManager.ShowPopup(PopupType.ConvertItemPopup).TryGetComponent(out Popup_Noty convertItemPopUp);
-            }
             app.models.dataPlayerModel.RemoveItem(_slotNone1.itemInBag);
             app.models.dataPlayerModel.RemoveItem(_slotNone2.itemInBag);
             app.models.dataPlayerModel.RemoveItem(_slotNone3.itemInBag);
@@ -225,7 +221,6 @@ public class ConvertItemPopup : View<GameApp>, IPopup
             }
             else
             {
-                app.resourceManager.ShowPopup(PopupType.ConvertItemPopup).TryGetComponent(out Popup_Noty convertItemPopUp);
                 app.models.dataPlayerModel.Talisman -= ((int)_slotNone1.itemData.rank + 1 * 1);
                 _slotNone1.ResetData();
                 _slotNone2.ResetData();

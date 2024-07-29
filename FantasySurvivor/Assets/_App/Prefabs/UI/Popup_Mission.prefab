@@ -610,7 +610,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4812586798846200642}
-  - component: {fileID: 5946030263781139034}
+  - component: {fileID: 6804515118665777339}
   m_Layer: 5
   m_Name: Popup_Mission
   m_TagString: Untagged
@@ -639,7 +639,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1300, y: 2072.3896}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5946030263781139034
+--- !u!114 &6804515118665777339
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -648,11 +648,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4812586798846200643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ea4ad132cb2e5342aacd8763c74c706, type: 3}
+  m_Script: {fileID: 11500000, guid: 823ab9cfe52d44149280127496bca749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _arrDailyMissionItems:
-  - {fileID: 8209007324238886602}
+  - {fileID: 5078674806941357512}
   _btnClose: {fileID: 4812586799568446412}
   _goMainContent: {fileID: 4812586800068121853}
 --- !u!1 &4812586799249858961
@@ -2442,7 +2442,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1769776588762972643, guid: dba6edf93480449ffaf9a1503f4e0f76, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8209007324238886602}
+      addedObject: {fileID: 5078674806941357512}
   m_SourcePrefab: {fileID: 100100000, guid: dba6edf93480449ffaf9a1503f4e0f76, type: 3}
 --- !u!114 &389722638771894050 stripped
 MonoBehaviour:
@@ -2476,7 +2476,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1769776588762972643, guid: dba6edf93480449ffaf9a1503f4e0f76, type: 3}
   m_PrefabInstance: {fileID: 3553928693087922224}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8209007324238886602
+--- !u!114 &5078674806941357512
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2485,12 +2485,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3016731424659597779}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bed0f031d08c93444af56fb095404f66, type: 3}
+  m_Script: {fileID: 11500000, guid: b53a9cb4b1dd4c518c121b4d2af0e903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _txtTitle: {fileID: 657740815648399302}
   _txtValue: {fileID: 5157201567847790505}
-  _goIncomplete: {fileID: 3514080729119682380}
+  _goIncomplete: {fileID: 7661269448031163785}
   _goComplete: {fileID: 7661269448031163785}
   _goClaimed: {fileID: 2279494120011961374}
   _btnIncomplete: {fileID: 3968578433923348493}

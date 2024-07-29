@@ -146,13 +146,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	[SerializeField] private GameObject _convertItem;
 
-	[SerializeField] private GameObject _convertItemPopUp;
-
     [SerializeField] private GameObject _transferItem;
-
-    [SerializeField] private GameObject _transferItemPopUp;
-
-    [SerializeField] private GameObject _successfulCombinePopupDetail;
     
     [SerializeField] private GameObject _rewardGetPopup;
     
@@ -185,8 +179,6 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _electroBomber;
 
 	[SerializeField] private GameObject _slimeWandering;
-
-	[SerializeField] private GameObject _minionSkeleton;
 
 	[SerializeField] private GameObject _minionWolf;
 
@@ -271,10 +263,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 		RegisterPopup(PopupType.ChangeDisplayName, _changeDisplayNamePopup);
 		RegisterPopup(PopupType.ConfirmPopup, _confirmPopup);
 		RegisterPopup(PopupType.ConvertItem, _convertItem);
-		RegisterPopup(PopupType.ConvertItemPopup, _convertItemPopUp);
         RegisterPopup(PopupType.TransferItem, _transferItem);
-        RegisterPopup(PopupType.TransferItemPopup, _transferItemPopUp);
-        RegisterPopup(PopupType.SuccessfulCombinePopupDetail, _successfulCombinePopupDetail);
         RegisterPopup(PopupType.PurchaseItemPopup, _purchaseItem);
         RegisterPopup(PopupType.RewardGetPopup, _rewardGetPopup);
         RegisterPopup(PopupType.NotificationPopup, _notificationPopup);
@@ -296,7 +285,6 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.LupineStag, _lupineStag},
 			{ItemPrefab.ElectroBomber, _electroBomber},
 			{ItemPrefab.SlimeWandering, _slimeWandering},
-			{ItemPrefab.MinionSkeleton, _minionSkeleton},
 
 			{ItemPrefab.BulletKillerBee, _bulletKillerBee},
 			{ItemPrefab.BulletGlobloomSentry, _bulletGlobloomSentry},
@@ -362,7 +350,6 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{"M7", _owlStriker},
             {"M8", _goblinSwift},
 
-            {"Skeleton", _minionSkeleton},
 			{"Wolf", _minionWolf},
             {"Goblin", _minionGoblin},
             {"CrabBomber", _minionCrabBomber},

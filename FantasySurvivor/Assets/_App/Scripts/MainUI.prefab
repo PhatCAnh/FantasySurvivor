@@ -22998,7 +22998,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6610930414186903792
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35326,8 +35326,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2170969660515833522, guid: ad9a6ee6a67844c57aa5d5924ec01de7, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -35715,6 +35714,10 @@ PrefabInstance:
     - target: {fileID: 244530338927875015, guid: 1e4be98bb24611f469c0df79cca8f5a7, type: 3}
       propertyPath: m_Name
       value: ShopUI (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 244530338927875015, guid: 1e4be98bb24611f469c0df79cca8f5a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3224017046249692516, guid: 1e4be98bb24611f469c0df79cca8f5a7, type: 3}
       propertyPath: m_AnchorMax.y
