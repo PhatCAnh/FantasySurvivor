@@ -185,6 +185,8 @@ public enum PopupType
     GatlingCrab_HealthBar,
 	Warning,
 	DailyGift,
+	ShopInGame,
+	DailyMission,
 	RewardPopup,
 	AccountPopup,
 	SettingPopup,

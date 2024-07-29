@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using ArbanFramework;
@@ -8,6 +8,7 @@ using FantasySurvivor;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using _App.Scripts.Enums;
 
 public class MainUI : View<GameApp>, IPopup
 {
@@ -25,14 +26,17 @@ public class MainUI : View<GameApp>, IPopup
 	[SerializeField] private ItemToggle _itemHome, _itemElemental, _itemShop, _itemUpdate, _itemLock, _itemCharacter;
 	[SerializeField] private GameObject _goLock, _goUpdateStat, _goHome,_goListSkill, _goCharacter;
 	[SerializeField] private Image _imgLineFocus;
-	[SerializeField] private Button _btnBattle, _btnCheat, _btnTest, _btnDailyGift, _btnSetting;
+	[SerializeField] private Button _btnBattle, _btnCheat, _btnTest, _btnDailyGift, _btnSetting, _btnMission;
 	[SerializeField] private TextMeshProUGUI _txtGoldCoin, _txtUsername;
 	private float _durationAnim = 0.3f;
 
 	private GameController gameController => Singleton<GameController>.instance;
 	private PopupChoiceSkill popupChoiceSkill => Singleton<PopupChoiceSkill>.instance;
+    private DailyMissionPopup dailyMissionPopup => Singleton<DailyMissionPopup>.instance;
 
-	protected override void OnViewInit()
+    private int _settingButtonClickCount = 0;
+
+    protected override void OnViewInit()
 	{
 		base.OnViewInit();
 		_itemHome.toggle.onValueChanged.AddListener(OnClickTglHome);
@@ -41,8 +45,12 @@ public class MainUI : View<GameApp>, IPopup
 		_itemUpdate.toggle.onValueChanged.AddListener(OnClickTglUpdate);
 
         _btnBattle.onClick.AddListener(OnClickBtnBattle);
-
+		_btnDailyGift.onClick.AddListener(OnClickBtnDailyGift);
 		_btnTest.onClick.AddListener(Test);
+
+		_btnMission.onClick.AddListener(OnClickBtnDailyMission);
+
+        _btnSetting.onClick.AddListener(OnClickBtnSetting);
 		
 		_btnSetting.onClick.AddListener(OnClickBtnSetting);
 		
@@ -71,10 +79,18 @@ public class MainUI : View<GameApp>, IPopup
 	
 	public void OnClickBtnSetting()
 	{
-		app.resourceManager.ShowPopup(PopupType.SettingPopup);
+        _settingButtonClickCount++;
+        app.resourceManager.ShowPopup(PopupType.SettingPopup);
+    }
+    public void OnClickBtnDailyGift()
+    {
+        app.resourceManager.ShowPopup(PopupType.DailyGift);
+    }
+	public void OnClickBtnDailyMission()
+	{
+		app.resourceManager.ShowPopup(PopupType.DailyMission);
 	}
-
-	private void MoveLineFocus(Vector3 pos)
+    private void MoveLineFocus(Vector3 pos)
 	{
 		var trans = _imgLineFocus.transform;
 		trans.DOLocalMove(new Vector3(pos.x, trans.localPosition.y), _durationAnim);

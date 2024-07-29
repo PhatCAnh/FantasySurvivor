@@ -201,7 +201,7 @@ public class GameController : Controller<GameApp>
             listReward.Add(type, value);
         }
     }
-
+  
     public ItemReward SpawnItemReward(TypeItemReward type, int value, Transform parent)
     {
         var rewardPrefab = app.resourceManager.GetItemReward(type);

@@ -153,6 +153,9 @@ if (_slotNone1.itemData == null)
         }
 
     }
+    
+    
+    
     public void ConvertItem()
     {
         if (_slotNone1.ItemType == _slotNone2.ItemType
