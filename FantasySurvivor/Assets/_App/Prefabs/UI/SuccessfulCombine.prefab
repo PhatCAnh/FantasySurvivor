@@ -492,7 +492,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4936644266561350842}
-  - component: {fileID: 8762830849221283738}
+  - component: {fileID: 866255061672019620}
   m_Layer: 5
   m_Name: SuccessfulCombine
   m_TagString: Untagged
@@ -521,7 +521,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8762830849221283738
+--- !u!114 &866255061672019620
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -530,26 +530,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3666474366691452483}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef8cdce6d1a29fd4eb46dabf42660d0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c37eb18f48e4225b2926765343d7dcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _imgSkin: {fileID: 7073567534871910921}
-  _imgRank: {fileID: 2466771258977731846}
-  _imgIcon: {fileID: 447646481678764503}
+  _imgSkin: {fileID: 0}
+  _imgRank: {fileID: 0}
+  _imgIcon: {fileID: 0}
   _txtName: {fileID: 7393617433183465267}
   _txtDescription: {fileID: 316306666919545131}
   _btnClose: {fileID: 5879539302818034923}
-  _spriteWeapon: {fileID: 21300000, guid: 759ff3efa4b1d4283ac05a2b4c084b38, type: 3}
-  _spriteArmor: {fileID: 21300000, guid: f26474d143dc84587bc9514d14d0674f, type: 3}
-  _spriteShoes: {fileID: 21300000, guid: c5e89d08241b54ec7bc004a7b9bcd16b, type: 3}
-  _spriteGloves: {fileID: 21300000, guid: e67c8f8d226094ac5a1e523c5f7e3a69, type: 3}
-  _spriteHat: {fileID: 21300000, guid: b91cf1dbd490c41aab12079d0311cdf5, type: 3}
-  _spriteRing: {fileID: 21300000, guid: 550354964fdb749a790b090cf8bd8118, type: 3}
-  _spriteAtk: {fileID: 21300000, guid: 169d45648e00348038299fc345aa6b4f, type: 3}
-  _spriteHealth: {fileID: 21300000, guid: 6dd98809192e24bb185001de5a7f7b38, type: 3}
-  _goMainContent: {fileID: 2959867165504459986}
-  _prefabStat: {fileID: 6455812676382420884, guid: 0ab009e3f4a5c2d4f9a71a7e9c6abf5d, type: 3}
-  _statContainer: {fileID: 2325959907456412085}
+  _spriteWeapon: {fileID: 0}
+  _spriteArmor: {fileID: 0}
+  _spriteShoes: {fileID: 0}
+  _spriteGloves: {fileID: 0}
+  _spriteHat: {fileID: 0}
+  _spriteRing: {fileID: 0}
+  _spriteAtk: {fileID: 0}
+  _spriteHealth: {fileID: 0}
+  _goMainContent: {fileID: 8280743150691420642}
+  _prefabStat: {fileID: 0}
+  _statContainer: {fileID: 0}
 --- !u!1 &4260076930045861822
 GameObject:
   m_ObjectHideFlags: 0

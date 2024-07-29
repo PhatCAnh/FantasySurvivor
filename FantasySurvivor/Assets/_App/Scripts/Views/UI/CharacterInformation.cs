@@ -65,7 +65,7 @@ public class CharacterInformation : View<GameApp>, IPopup
             {ItemType.Gloves, _slotGloves},
         };
 
-        //_btnBack.onClick.AddListener(Close);
+        _btnBack.onClick.AddListener(Close);
         _btnAddItemSlot.onClick.AddListener(AddItemSlot);
         _btnChooseCharacter.onClick.AddListener(ChooseCharacter);
 
@@ -121,6 +121,7 @@ public class CharacterInformation : View<GameApp>, IPopup
     public void TestMoney()
     {
         app.models.dataPlayerModel.Gold += 1000000;
+        app.models.dataPlayerModel.Talisman += 1000;
     }
 
     [ContextMenu("Test item Equip")]

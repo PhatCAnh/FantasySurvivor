@@ -1,8 +1,9 @@
-﻿using ArbanFramework;
-using UnityEditor;
+using ArbanFramework;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemSlotChosenCVUI : ItemSlotCVUI
+public class ItemSlotChosenTranfUI : ItemSlotTranfUI
 {
     [SerializeField] private GameObject _imgEquip, _imgUnEquip;
     [SerializeField] private Sprite _baseRank;
@@ -51,6 +52,6 @@ public class ItemSlotChosenCVUI : ItemSlotCVUI
         this.itemData = itemController.GetDataItem(data.id, data.rank, data.level);
         image.sprite = itemData.dataUi.skin;
         imageRank.sprite = itemController.GetSpriteRank(data.rank);
-        
+
     }
 }

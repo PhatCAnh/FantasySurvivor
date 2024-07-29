@@ -32,12 +32,12 @@ public class ThunderChanneling : SkillBulletActive
     private void SpawnChanneling()
     {
         if (check) return;
-        Monster nearestMonster = gameController.FindNearestMonster(target.transform.position, maxRange);
+        Monster nearestMonster = gameController.FindNearestMonster(target.transform.position, maxRange, target);
         if (nearestMonster != null)
         {
             var Channeling = new Channeling(nearestMonster, damage/2, 0.1f,level, channelingTime - 1);
         }
-        else 
+        else if ( level == 6)
         {
             var Channeling = new Channeling(target,damage/2, 0.1f, level, channelingTime - 1);
         }

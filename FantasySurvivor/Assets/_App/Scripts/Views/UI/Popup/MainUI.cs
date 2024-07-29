@@ -74,7 +74,7 @@ public class MainUI : View<GameApp>, IPopup
 
 	public void Test()
 	{
-		app.resourceManager.ShowPopup(PopupType.CharacterChoose);
+		app.resourceManager.ShowPopup(PopupType.CharacterInformation);
 	}
 	
 	public void OnClickBtnSetting()

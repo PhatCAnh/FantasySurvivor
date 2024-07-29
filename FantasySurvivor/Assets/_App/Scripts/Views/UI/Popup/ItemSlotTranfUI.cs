@@ -1,22 +1,23 @@
-﻿using ArbanFramework;
+using ArbanFramework;
 using ArbanFramework.MVC;
 using FantasySurvivor;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class ItemSlotCVUI : View<GameApp>
+
+public class ItemSlotTranfUI : View<GameApp>
 {
+    protected TransferItemPopup parent;
     public ItemInBag itemInBag;
     public ItemData itemData;
     [SerializeField] protected Image image;
     [SerializeField] protected Image imageRank;
     [SerializeField] protected Button btn;
     [SerializeField] private TextMeshProUGUI txtNumber;
-    protected ConvertItemPopup parent;
     private int _numberValue;
     public bool isShow = true;
 
-    public void Init(ItemInBag data, ConvertItemPopup ui)
+    public void Init(ItemInBag data, TransferItemPopup ui)
     {
         parent = ui;
         if (data != null)

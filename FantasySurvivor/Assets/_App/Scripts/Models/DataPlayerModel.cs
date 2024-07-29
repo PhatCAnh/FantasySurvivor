@@ -52,6 +52,8 @@ namespace FantasySurvivor
 		[JsonProperty] private string _id;
 
 		[JsonProperty] private int _gold;
+
+		[JsonProperty] private int _talisman;
 		
 		[JsonProperty] private int _gem;
 		
@@ -166,6 +168,16 @@ namespace FantasySurvivor
 			set {
 				if(Gold == value) return;
 				_gold = value;
+				app.models.WriteModel<DataPlayerModel>();
+				RaiseDataChanged(nameof(Gold));
+			}
+		}
+		public int Talisman
+        {
+			get => _talisman;
+			set {
+				if(Talisman == value) return;
+                _talisman = value;
 				app.models.WriteModel<DataPlayerModel>();
 				RaiseDataChanged(nameof(Gold));
 			}
