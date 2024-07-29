@@ -926,15 +926,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 180
     m_Right: 20
     m_Top: 40
     m_Bottom: 200
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 400, y: 250}
-  m_Spacing: {x: 50, y: 90}
+  m_CellSize: {x: 200, y: 200}
+  m_Spacing: {x: 200, y: 200}
   m_Constraint: 1
   m_ConstraintCount: 3
 --- !u!114 &4288382435453609783
@@ -2480,7 +2480,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: add list skill bro??
+  m_text: You have selected enough skills, let's start the game!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c1482dbce654844b9ba1c753cbea5d80, type: 2}
   m_sharedMaterial: {fileID: 7374927986402738804, guid: c1482dbce654844b9ba1c753cbea5d80, type: 2}
@@ -2643,8 +2643,8 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 350, y: 250}
-  m_Spacing: {x: 75, y: 75}
+  m_CellSize: {x: 200, y: 200}
+  m_Spacing: {x: 200, y: 200}
   m_Constraint: 2
   m_ConstraintCount: 2
 --- !u!1 &8803531696463006310

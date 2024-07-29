@@ -12,29 +12,18 @@ using UnityEngine.UI;
 public class PopupChoiceSkill : View<GameApp>, IPopup
 {
 	[SerializeField] private TextMeshProUGUI NumberTaget;
-	[SerializeField] private Transform container, containerchoose;
+	[SerializeField] private Transform containerchoose;
 	[SerializeField] private GameObject iconSkillPrefab;
 	[SerializeField] private Button GoBtn, Backbtn;
 
-	private int currentNumberSkill = 0; // điếm số skill outr game
-	private GameController gameController => Singleton<GameController>.instance;
-	private SkillController skillController => Singleton<SkillController>.instance;
-
-	protected override void OnViewInit()
+	private int NumberSkill =0;
+    private GameController gameController => Singleton<GameController>.instance;
+    private SkillController skillController => Singleton<SkillController>.instance;
+    protected override void OnViewInit()
 	{
-		base.OnViewInit();
-		gameController._listSkill = skillController.GetListSkillDataTable();
-		foreach(var skill in gameController._listSkill) // lấy list skill
-		{
-			Instantiate(iconSkillPrefab, container).TryGetComponent(out Icon_ChoiceSkill icon);
-
-			var id = skill.id;
-			var result = CheckSkillSet(id);
-
-			if(result) currentNumberSkill += 1;
-
-			icon.Init(skill.id, this, result);
-		}
+        gameController._listSkill = skillController.GetListSkillDataTable();
+       // skillController.currentNumberSkill=skillController.GetListSkillDataTable().Count;
+        base.OnViewInit();
         foreach (var skill in gameController._listSkill)
         {
             var id = skill.id;
@@ -43,13 +32,15 @@ public class PopupChoiceSkill : View<GameApp>, IPopup
             {
                 Instantiate(iconSkillPrefab, containerchoose).TryGetComponent(out Icon_ChoiceSkill icon);
                 icon.ShowList(skill.id, this);
+				NumberSkill++;
             }
 
         }
 		Backbtn.onClick.AddListener(Close);
         Open();
-		NumberTaget.text = $"{currentNumberSkill}/{gameController.numberLimitChoiceSkill}"; //fix text numberskill khi mới vào
-		if(currentNumberSkill < gameController.numberLimitChoiceSkill) //ẩn nút go
+		NumberTaget.text = $"{NumberSkill}/{gameController.numberLimitChoiceSkill}"; //fix text numberskill khi mới vào
+        GoBtn.interactable = NumberSkill == gameController.numberLimitChoiceSkill;
+        if (NumberSkill < gameController.numberLimitChoiceSkill) //ẩn nút go
 		{
 			GoBtn.interactable = false;
 		}

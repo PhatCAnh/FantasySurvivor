@@ -14,8 +14,6 @@ public class Showlistskill : View<GameApp>, IPopup
     [SerializeField] private GameObject waringAddListSkill, skillDetail;
     [SerializeField] private Button closeBtn, saveBtn, okbtn;
     [SerializeField] private TextMeshProUGUI _txtName, _txtDescription, _txtValue, NumberTaget;
-    
-    private int currentNumberSkill = 0; // điếm số skill outr game
     private GameController gameController => Singleton<GameController>.instance;
     private SkillController skillController => Singleton<SkillController>.instance;
   
@@ -28,10 +26,10 @@ public class Showlistskill : View<GameApp>, IPopup
             Instantiate(iconSkillPrefab, container).TryGetComponent(out Icon_ListSkill icon);
             var id = skill.id;
             var result = CheckSkillSet(id);
-            if (result) currentNumberSkill += 1;
+            if (result) skillController.currentNumberSkill += 1;
             icon.Init(skill.id, this, result);
         }
-        NumberTaget.text = $"{currentNumberSkill}/{gameController.numberLimitChoiceSkill}";
+        NumberTaget.text = $"{skillController.currentNumberSkill}/{gameController.numberLimitChoiceSkill}";
         foreach (var skill in gameController._listSkill)
         {
             var id = skill.id;
@@ -61,9 +59,9 @@ public class Showlistskill : View<GameApp>, IPopup
     {
         if (CheckSkillSet(id))
         {
-           
-            currentNumberSkill -= 1;
-            NumberTaget.text = $"{currentNumberSkill}/{gameController.numberLimitChoiceSkill}";
+
+            skillController.currentNumberSkill -= 1;
+            NumberTaget.text = $"{skillController.currentNumberSkill}/{gameController.numberLimitChoiceSkill}";
             skillController.RemoveSkillSet(id);
             foreach (Transform child in containerchoose)
             {
@@ -76,17 +74,17 @@ public class Showlistskill : View<GameApp>, IPopup
             return false;
         }
 
-        if (currentNumberSkill < gameController.numberLimitChoiceSkill)
+        if (skillController.currentNumberSkill < gameController.numberLimitChoiceSkill)
         {
-            currentNumberSkill += 1;
-            NumberTaget.text = $"{currentNumberSkill}/{gameController.numberLimitChoiceSkill}";
+            skillController.currentNumberSkill += 1;
+            NumberTaget.text = $"{skillController.currentNumberSkill}/{gameController.numberLimitChoiceSkill}";
             skillController.AddSkillSet(id);
             Skilldetail(id);
             Instantiate(iconSkillPrefab, containerchoose).TryGetComponent(out Icon_ListSkill icon);
             icon.ShowList(id, this);
             return true;
         }
-        if (currentNumberSkill == gameController.numberLimitChoiceSkill)
+        if (skillController.currentNumberSkill == gameController.numberLimitChoiceSkill)
         {
             waringAddListSkill.SetActive(true);
             closeBtn.onClick.AddListener(Close);

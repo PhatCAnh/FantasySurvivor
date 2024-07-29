@@ -14,20 +14,20 @@ public class Icon_ChoiceSkill : View<GameApp>
     private SkillData _skillData;
     private SkillController skillController => Singleton<SkillController>.instance;
 
-    public void Init(SkillId id, PopupChoiceSkill parent, bool checkSKillSet)
-    {
-        this.id = id;
-        this.parent = parent;
-        _skillData = skillController.GetDataSkill(id).skillDataUI;
-         toggle.isOn= checkSKillSet ;
-        _txtName.text = skillController.GetDataSkill(id).skillDataUI.name.ToString();
-        toggle.interactable = false;
-        // if(checkSKillSet)
-        // {
-        //     skillController.GetListSkillInGame().Add(id);
-        //     parent.UpdateTextNumberChoiceSkill(true);
-        // }
-    }
+    //public void Init(SkillId id, PopupChoiceSkill parent, bool checkSKillSet)
+    //{
+    //    this.id = id;
+    //    this.parent = parent;
+    //    _skillData = skillController.GetDataSkill(id).skillDataUI;
+    //     toggle.isOn= checkSKillSet ;
+    //    _txtName.text = skillController.GetDataSkill(id).skillDataUI.name.ToString();
+    //    toggle.interactable = false;
+    //    // if(checkSKillSet)
+    //    // {
+    //    //     skillController.GetListSkillInGame().Add(id);
+    //    //     parent.UpdateTextNumberChoiceSkill(true);
+    //    // }
+    //}
     public void ShowList(SkillId id, PopupChoiceSkill parent)
     {
         this.id = id;
