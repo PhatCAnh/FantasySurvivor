@@ -239,6 +239,7 @@ MonoBehaviour:
   musicSounds:
   - name: Theme
     clip: {fileID: 8300000, guid: a64b304c3a1c51b4c80978875637eba2, type: 3}
+    loop: 0
   sfxSounds: []
   musicSource: {fileID: 1654598987}
   sfxSource: {fileID: 952197852}
@@ -307,7 +308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &702149535
 MonoBehaviour:
   m_ObjectHideFlags: 0

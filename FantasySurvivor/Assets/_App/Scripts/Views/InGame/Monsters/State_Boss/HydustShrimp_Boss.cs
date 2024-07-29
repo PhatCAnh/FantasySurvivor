@@ -1,10 +1,5 @@
 ﻿using _App.Scripts.Controllers;
-using ArbanFramework;
 using FantasySurvivor;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Timeline;
 using UnityEngine;
 
 public class HydustShrimp_Boss : Monster
