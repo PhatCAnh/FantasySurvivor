@@ -29,7 +29,7 @@ public class Channeling : StatusEffect
 		target.TakeDamage(value, TextPopupType.Lightning);
 		if (ChannelingTime > 0)
 		{
-			Monster nearestMonster = gameController.FindNearestMonster(target.transform.position, 3f);
+			Monster nearestMonster = gameController.FindNearestMonster(target.transform.position, 3f, target);
 			if (nearestMonster != null)
 			{
 				var channeling = new Channeling(nearestMonster,value , duration, level, ChannelingTime - 1);
