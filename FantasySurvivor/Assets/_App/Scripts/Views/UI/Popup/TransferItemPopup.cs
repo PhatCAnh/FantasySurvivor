@@ -148,17 +148,8 @@ namespace FantasySurvivor
             {
                 if (Earthpunch.IsActionSuccessful(1 - (_slotNone1.itemInBag.level - 1) * (1f / 30f)))
                 {
-                    oldLevel = _slotNone2.itemInBag.level;
                     _slotNone2.itemInBag.level = _slotNone1.itemInBag.level-1;
-                    if (oldLevel > 1)
-                    {
-                        _slotNone1.itemInBag.level = oldLevel - 1;
-                    }
-                    else
-                    {
-                        _slotNone1.itemInBag.level = 1;
-                    }
-
+                    _slotNone1.itemInBag.level = 1;
                 }
                 else
                 {
