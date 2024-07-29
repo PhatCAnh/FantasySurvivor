@@ -17,6 +17,7 @@ public class Boomeerang : SkillBulletActive
     public override void Init(LevelSkillData data, Monster target, int level, ItemPrefab type)
     {
         base.Init(data, target, level, type);
+        AudioManager.Instance.PlaySFXLoop("Boomerang");
         initialPosition = transform.position;
         Vector3 direction = (target.transform.position - initialPosition).normalized;
         targetPosition = initialPosition + direction * origin.model.attackRange;

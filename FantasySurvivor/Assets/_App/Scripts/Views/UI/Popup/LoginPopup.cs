@@ -13,12 +13,16 @@ public class LoginPopup : View<GameApp>, IPopup
 	[SerializeField] private GameObject _goLogin, _goRegister;
 
 	[SerializeField] private TMP_InputField _inputEmail, _inputPassword;
-	[SerializeField] private Button _btnLogin, _btnRegister;
+	[SerializeField] private Button _btnLogin, _btnRegister, _btnGuest;
 	[SerializeField] private TextMeshProUGUI _txtError;
 
 	[SerializeField] private TMP_InputField _inputFieldEmailRegister, _inputFieldPasswordRegister, _inputFieldConfirm;
 	[SerializeField] private Button _btnRegisterAccount, _btnBack;
 	[SerializeField] private TextMeshProUGUI _txtErrorRegister;
+
+	private string _email;
+
+	private string _password;
 
 	private PlayfabController playfab => Singleton<PlayfabController>.instance;
 
@@ -29,6 +33,7 @@ public class LoginPopup : View<GameApp>, IPopup
 		_btnRegister.onClick.AddListener(OnClickBtnSignIn);
 		_btnRegisterAccount.onClick.AddListener(OnClickBtnRegister);
 		_btnBack.onClick.AddListener(OnClickBtnBack);
+		_btnGuest.onClick.AddListener(OnClickBtnGuest);
 		Open();
 	}
 
@@ -67,12 +72,19 @@ public class LoginPopup : View<GameApp>, IPopup
 	{
 		_goLogin.SetActive(true);
 		_goRegister.SetActive(false);
+
+		_inputEmail.text = _email;
+		
 		_txtError.text = "Register successful";
 	}
 
 	private void OnClickBtnLogin()
 	{
+		var popupLoading = app.resourceManager.ShowPopup(PopupType.LoadingPopup);
+		_email = _inputEmail.text;
+		_password = _inputPassword.text;
 		playfab.Login(_inputEmail.text, _inputPassword.text, OnLoginSuccess, ErrorLogin);
+		Destroy(popupLoading);
 	}
 
 	private void OnClickBtnSignIn()
@@ -96,6 +108,18 @@ public class LoginPopup : View<GameApp>, IPopup
 	{
 		var data = app.models.dataPlayerModel;
 		data.NameDisplay = result.PlayFabId;
+		data.Id = result.PlayFabId;
+		data.Email = _email;
+		data.Password = _password;
+		Singleton<GameController>.instance.ChangeSceneHome();
+	}
+
+	private void OnClickBtnGuest()
+	{
+		var data = app.models.dataPlayerModel;
+		data.NameDisplay = "Guest";
+		data.Email = "Guest";
+		data.Password = "Guest";
 		Singleton<GameController>.instance.ChangeSceneHome();
 	}
 }

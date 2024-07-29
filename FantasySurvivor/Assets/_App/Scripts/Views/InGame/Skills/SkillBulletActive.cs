@@ -2,10 +2,7 @@
 using System.Linq;
 using _App.Scripts.Controllers;
 using ArbanFramework;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 namespace FantasySurvivor
 {
@@ -13,8 +10,6 @@ namespace FantasySurvivor
     {
         [SerializeField] protected Transform skin;
         
-		public TargetType targetType;
-
 		protected HashSet<Monster> attackedMonsters = new HashSet<Monster>();
 
         public bool canBlock;
@@ -30,9 +25,14 @@ namespace FantasySurvivor
 		{
 			base.Init(data, target, level, type);
 
+            if (type == ItemPrefab.SkillFireBall)
+            {
+                AudioManager.Instance.PlaySFX("FireBall");
+            }
             this.direction = target.transform.position - transform.position;
 
             skin.up = direction;
+        
         }
 
         protected virtual void FixedUpdate()

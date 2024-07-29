@@ -14,6 +14,7 @@ public class FireBurnArea : SkillActive
     public float reAct;
     public void InitFireArea(float dame, int level, float size, float duration, float reAct)
     {
+        AudioManager.Instance.PlaySFXLoop("Sky boom2");
         this.damage = dame;
         this.level = level;
         this.size = size;

@@ -19,6 +19,8 @@ public class SmilingFace : SkillBulletActive
         this.direction = target.transform.position - transform.position;
 
         skin.up = direction;
+        AudioManager.Instance.PlaySFXLoop("Smiling face loop");
+        
     }
 
     protected override void FixedUpdate()
@@ -40,6 +42,8 @@ public class SmilingFace : SkillBulletActive
                 }
             }
             var explosion = Instantiate(_explosionEffect, transform.position, quaternion.identity);
+            AudioManager.Instance.StopLoopingSFX();
+            AudioManager.Instance.PlaySFX("Smiling face boom");
             explosion.transform.localScale = data.valueSpecial1 * Vector3.one;
             Destroy(gameObject);
         }

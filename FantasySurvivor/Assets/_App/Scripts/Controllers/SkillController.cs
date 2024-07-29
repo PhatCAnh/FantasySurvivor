@@ -30,7 +30,7 @@ namespace _App.Scripts.Controllers
 		private void Start()
 		{
 			_listSkillTotal = new List<SkillDataTotal>();
-			_listSkillSelected = app.models.dataPlayerModel.GetSkillSet();
+			_listSkillSelected = app.models.dataPlayerModel.SkillSet;
 			_listSkillChoose = new List<SkillId>();
 
 			var listSkillUI = _skillDataTable.listSkillData;
@@ -49,7 +49,8 @@ namespace _App.Scripts.Controllers
 			return _skillDataTable.listSkillData.Where(skill => skill.name != SkillName.Food).ToList();
 		}
 
-		public SkillData GetSkillDataTable(SkillName name)
+      
+        public SkillData GetSkillDataTable(SkillName name)
 		{
 			return _skillDataTable.listSkillData.FirstOrDefault(skill => skill.name == name);
 		}

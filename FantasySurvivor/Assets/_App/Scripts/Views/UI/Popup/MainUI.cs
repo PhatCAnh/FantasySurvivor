@@ -17,14 +17,16 @@ public class MainUI : View<GameApp>, IPopup
 		public Toggle toggle;
 		public Image image;
 		public bool isLock;
+		
 	}
 
-	[SerializeField] private ItemToggle _itemHome, _itemElemental, _itemShop, _itemUpdate, _itemLock;
-	[SerializeField] private GameObject _goLock, _goUpdateStat, _goHome;
+
+
+	[SerializeField] private ItemToggle _itemHome, _itemElemental, _itemShop, _itemUpdate, _itemLock, _itemCharacter;
+	[SerializeField] private GameObject _goLock, _goUpdateStat, _goHome,_goListSkill, _goCharacter;
 	[SerializeField] private Image _imgLineFocus;
 	[SerializeField] private Button _btnBattle, _btnCheat, _btnTest, _btnDailyGift, _btnSetting;
 	[SerializeField] private TextMeshProUGUI _txtGoldCoin, _txtUsername;
-
 	private float _durationAnim = 0.3f;
 
 	private GameController gameController => Singleton<GameController>.instance;
@@ -37,16 +39,13 @@ public class MainUI : View<GameApp>, IPopup
 		_itemElemental.toggle.onValueChanged.AddListener(OnClickTglElemental);
 		_itemShop.toggle.onValueChanged.AddListener(OnClickTglShop);
 		_itemUpdate.toggle.onValueChanged.AddListener(OnClickTglUpdate);
-		_itemLock.toggle.onValueChanged.AddListener(OnClickTglLock);
-		_btnBattle.onClick.AddListener(OnClickBtnBattle);
+
+        _btnBattle.onClick.AddListener(OnClickBtnBattle);
+
 		_btnTest.onClick.AddListener(Test);
+		
 		_btnSetting.onClick.AddListener(OnClickBtnSetting);
 		
-		_btnDailyGift.onClick.AddListener(() =>
-		{
-			app.resourceManager.ShowPopup(PopupType.DailyGift);
-		});
-
 		_btnCheat.onClick.AddListener(() =>
 		{
 			app.resourceManager.ShowPopup(PopupType.Cheat);
@@ -55,7 +54,6 @@ public class MainUI : View<GameApp>, IPopup
 		_txtUsername.text = app.models.dataPlayerModel.NameDisplay;
 
 		AddEventChangeStat();
-
 	}
 
 	public void Open()
@@ -68,7 +66,7 @@ public class MainUI : View<GameApp>, IPopup
 
 	public void Test()
 	{
-		app.resourceManager.ShowPopup(PopupType.CharacterInformation);
+		app.resourceManager.ShowPopup(PopupType.CharacterChoose);
 	}
 	
 	public void OnClickBtnSetting()
@@ -101,12 +99,17 @@ public class MainUI : View<GameApp>, IPopup
 	{
 		ChangeAnimToggle(_itemHome);
 		_goHome.SetActive(value);
+		
 	}
 
-	private void OnClickTglElemental(bool value)
+	public void OnClickTglElemental(bool value)
 	{
-		ChangeAnimToggle(_itemElemental);
-		_goLock.SetActive(_itemElemental.isLock && value);
+       // app.resourceManager.ShowPopup(PopupType.Choicelistskill);
+        ChangeAnimToggle(_itemElemental);
+		_goListSkill.SetActive(_itemElemental.isLock && value);
+		//_itemElemental.isLock=value;
+		//_goLock.SetActive(_itemElemental.isLock && value);
+		//app.resourceManager.ShowPopup(PopupType.Choicelistskill);
 	}
 
 	private void OnClickTglShop(bool value)
@@ -121,18 +124,16 @@ public class MainUI : View<GameApp>, IPopup
 		_goUpdateStat.SetActive(value);
 	}
 
-	private void OnClickTglLock(bool value)
+	private void OnClickTglCharacter(bool value)
 	{
-		ChangeAnimToggle(_itemLock);
-		_goLock.SetActive(_itemLock.isLock && value);
+		ChangeAnimToggle(_itemCharacter);
 	}
 
-	private void OnClickBtnBattle()
+
+    private void OnClickBtnBattle()
 	{
 		app.resourceManager.ShowPopup(PopupType.ChoiceSkillOutGame);
-
 	}
-
 
 	private void AddEventChangeStat()
 	{
@@ -140,6 +141,12 @@ public class MainUI : View<GameApp>, IPopup
 			{
 				control.text = $"{app.models.dataPlayerModel.Gold}";
 			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.Gold), app.models.dataPlayerModel)
+		);
+		
+		AddDataBinding("fieldDataPlayerModel-nameDisplayValue", _txtUsername, (control, e) =>
+			{
+				control.text = app.models.dataPlayerModel.NameDisplay;
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.NameDisplay), app.models.dataPlayerModel)
 		);
 	}
 }

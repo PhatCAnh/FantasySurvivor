@@ -23,8 +23,10 @@ public class Poison : StatusEffect
 	public override void Active()
 	{
 		base.Active();
-		//value = 5;
-		value = target.model.maxHealthPoint / 10;
+        AudioManager.Instance.StopLoopingSFX();
+        AudioManager.Instance.PlaySFX("PoisonBulletsboom");
+        //value = 5;
+        value = target.model.maxHealthPoint / 10;
 		target.TakeDamage(value, TextPopupType.Poison);
 		if(target.isDead)
 		{

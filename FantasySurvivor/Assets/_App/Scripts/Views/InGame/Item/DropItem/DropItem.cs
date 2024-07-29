@@ -7,6 +7,7 @@ using ArbanFramework.StateMachine;
 using DG.Tweening;
 using FantasySurvivor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 namespace FantasySurvivor
@@ -20,7 +21,7 @@ namespace FantasySurvivor
         
         public SpriteRenderer skin;
 
-        public DropItemType type;
+        public DropItemType typeItem;
 
         public int value;
         //item type
@@ -60,7 +61,7 @@ namespace FantasySurvivor
         }
         public void Init(int valueInit, DropItemType itemType)
         {
-            type = itemType;
+            typeItem = itemType;
             switch (itemType)
             {
                 case DropItemType.Exp:

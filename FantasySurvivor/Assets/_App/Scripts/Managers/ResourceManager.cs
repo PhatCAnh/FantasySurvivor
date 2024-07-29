@@ -74,6 +74,15 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	[SerializeField] private GameObject _skillTimeBoom;
 
+    [SerializeField] private GameObject _bulletBossHydustShrimp;
+
+	[SerializeField] private GameObject _bulletMinionLasirdBlue;
+
+	[SerializeField] private GameObject _bulletMinionLasirdGreen;
+
+    [SerializeField] private GameObject _bulletMinionLasirdOrange;
+
+
     private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
 
 
@@ -93,8 +102,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _choiceSkill;
 
 	[SerializeField] private GameObject _choiceSkillOutGame;
-	
-	[SerializeField] private GameObject _characterInformation;
+	[SerializeField] private GameObject _Choicelistskill;
+
+    [SerializeField] private GameObject _characterInformation;
 
     [SerializeField] private GameObject _characterChoose;
     
@@ -111,6 +121,39 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _accountPopup;
 	
 	[SerializeField] private GameObject _settingPopup;
+
+    [SerializeField] private GameObject _soundPopup;
+
+    [SerializeField] private GameObject _aboutPopup;
+
+    [SerializeField] private GameObject _languagePopup;
+
+
+    [SerializeField] private GameObject _confirmPopup;
+	
+	[SerializeField] private GameObject _loadingPopup;
+	
+	[SerializeField] private GameObject _cloudPopup;
+	
+	[SerializeField] private GameObject _userInfoPopup;
+	
+	[SerializeField] private GameObject _changeDisplayNamePopup;
+	
+	[SerializeField] private GameObject _notificationPopup;
+
+	[SerializeField] private GameObject _convertItem;
+
+	[SerializeField] private GameObject _convertItemPopUp;
+
+    [SerializeField] private GameObject _transferItem;
+
+    [SerializeField] private GameObject _transferItemPopUp;
+
+    [SerializeField] private GameObject _successfulCombinePopupDetail;
+    
+    [SerializeField] private GameObject _rewardGetPopup;
+    
+    [SerializeField] private GameObject _purchaseItem;
 
 
     [Header("UI Tutorial prefabs")]
@@ -153,6 +196,16 @@ public class ResourceManager : UIManagerBase<PopupType>
     [SerializeField] private GameObject _healthBarController;
 
     [SerializeField] private GameObject _PopupWarning_Boss;
+
+    [SerializeField] private GameObject _hydustShrimp;
+
+    [SerializeField] private GameObject _minionCrabBomber;
+
+	[SerializeField] private GameObject _minionLasirdBlue;
+
+    [SerializeField] private GameObject _minionLasirdGreen;
+
+    [SerializeField] private GameObject _minionLasirdOrange;
 
 
     private Dictionary<string, GameObject> _typeMonsterDic;
@@ -202,6 +255,22 @@ public class ResourceManager : UIManagerBase<PopupType>
 		RegisterPopup(PopupType.RewardPopup, _rewardPopup);
 		RegisterPopup(PopupType.AccountPopup, _accountPopup);
 		RegisterPopup(PopupType.SettingPopup, _settingPopup);
+		RegisterPopup(PopupType.SoundPopup, _soundPopup);
+        RegisterPopup(PopupType.AboutUsPopup, _aboutPopup);
+		RegisterPopup(PopupType.LanguagePopup, _languagePopup);
+        RegisterPopup(PopupType.LoadingPopup, _loadingPopup);
+		RegisterPopup(PopupType.UserInfo, _userInfoPopup);
+		RegisterPopup(PopupType.Cloud, _cloudPopup);
+		RegisterPopup(PopupType.ChangeDisplayName, _changeDisplayNamePopup);
+		RegisterPopup(PopupType.ConfirmPopup, _confirmPopup);
+		RegisterPopup(PopupType.ConvertItem, _convertItem);
+		RegisterPopup(PopupType.ConvertItemPopup, _convertItemPopUp);
+        RegisterPopup(PopupType.TransferItem, _transferItem);
+        RegisterPopup(PopupType.TransferItemPopup, _transferItemPopUp);
+        RegisterPopup(PopupType.SuccessfulCombinePopupDetail, _successfulCombinePopupDetail);
+        RegisterPopup(PopupType.PurchaseItemPopup, _purchaseItem);
+        RegisterPopup(PopupType.RewardGetPopup, _rewardGetPopup);
+        RegisterPopup(PopupType.NotificationPopup, _notificationPopup);
 	}
 
     private void InitDic()
@@ -256,7 +325,15 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.BulletBossGatlingCrab, _bulletBossGatlingCrab},
             {ItemPrefab.GatlingCrab_HealthBar, _healthBarController},
             {ItemPrefab.PopupWarning_Boss, _PopupWarning_Boss},
-            
+            {ItemPrefab.HydustShrimp, _hydustShrimp},
+            {ItemPrefab.BulletBossHydustShrimp, _bulletBossHydustShrimp},
+            {ItemPrefab.MinionCrabBomber, _minionCrabBomber },
+			{ItemPrefab.MinionLasirdBlue, _minionLasirdBlue},
+            {ItemPrefab.MinionLasirdGreen, _minionLasirdGreen},
+			{ItemPrefab.MinionLasirdOrange, _minionLasirdOrange},
+			{ItemPrefab.BulletMinionLasirdBlue, _bulletMinionLasirdBlue},
+            {ItemPrefab.BulletMinionLasirdGreen, _bulletMinionLasirdGreen},
+            {ItemPrefab.BulletMinionLasirdOrange, _bulletMinionLasirdOrange},
 
         };
 
@@ -280,8 +357,14 @@ public class ResourceManager : UIManagerBase<PopupType>
             {"Skeleton", _minionSkeleton},
 			{"Wolf", _minionWolf},
             {"Goblin", _minionGoblin},
+            {"CrabBomber", _minionCrabBomber},
+            {"LasirdBlue", _minionLasirdBlue},
+            {"LasirdGreen", _minionLasirdGreen},
+            {"LasirdOrange", _minionLasirdOrange},
 
-			{"B1", _gatlingCrab},
+            {"B1", _gatlingCrab},
+            {"B2", _hydustShrimp},
+
 
         };
 

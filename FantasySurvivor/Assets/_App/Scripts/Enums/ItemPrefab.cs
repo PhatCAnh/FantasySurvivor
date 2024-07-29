@@ -49,6 +49,15 @@ public enum ItemPrefab
     BulletBossGatlingCrab,
 	GatlingCrab_HealthBar,
     PopupWarning_Boss,
+	HydustShrimp,
+    BulletBossHydustShrimp,
+	MinionCrabBomber,
+	MinionLasirdBlue,
+    MinionLasirdGreen,
+    MinionLasirdOrange,
+    BulletMinionLasirdBlue,
+    BulletMinionLasirdGreen,
+    BulletMinionLasirdOrange,
 
 }
 
@@ -158,7 +167,6 @@ public enum SkillElementalType
 public enum PopupType
 {
 	MainUI,
-	Notification,
 	Pause,
 	WinGame,
 	LoseGame,
@@ -169,6 +177,7 @@ public enum PopupType
 	Cheat,
 	ChoiceSkill,
 	ChoiceSkillOutGame,
+	Choicelistskill,
 	CharacterInformation,
 	CharacterChoose,
 	ItemEquipDetail,
@@ -178,8 +187,24 @@ public enum PopupType
 	DailyGift,
 	RewardPopup,
 	AccountPopup,
-	RegisterPopup,
 	SettingPopup,
+	SoundPopup,
+	AboutUsPopup,
+	LanguagePopup,
+	RatePopup,
+	LoadingPopup,
+	Cloud,
+	UserInfo,
+	ChangeDisplayName,
+	ConfirmPopup,
+	NotificationPopup,
+	ConvertItem,
+	ConvertItemPopup,
+	TransferItem,
+	TransferItemPopup,
+    SuccessfulCombinePopupDetail,
+    RewardGetPopup,
+    PurchaseItemPopup
 }
 
 public enum SkillDamagedType
