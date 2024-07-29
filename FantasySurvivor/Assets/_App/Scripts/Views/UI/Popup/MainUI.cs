@@ -23,7 +23,7 @@ public class MainUI : View<GameApp>, IPopup
 
 
 
-	[SerializeField] private ItemToggle _itemHome, _itemElemental, _itemShop, _itemUpdate, _itemLock, _itemCharacter;
+	[SerializeField] private ItemToggle _itemHome, _itemElemental, _itemShop, _itemUpdate, _itemLock;
 	[SerializeField] private GameObject _goLock, _goUpdateStat, _goHome,_goListSkill, _goCharacter;
 	[SerializeField] private Image _imgLineFocus;
 	[SerializeField] private Button _btnBattle, _btnCheat, _btnTest, _btnDailyGift, _btnSetting, _btnMission;
@@ -43,6 +43,7 @@ public class MainUI : View<GameApp>, IPopup
 		_itemElemental.toggle.onValueChanged.AddListener(OnClickTglElemental);
 		_itemShop.toggle.onValueChanged.AddListener(OnClickTglShop);
 		_itemUpdate.toggle.onValueChanged.AddListener(OnClickTglUpdate);
+        _itemLock.toggle.onValueChanged.AddListener(OnClickTglLock);
 
         _btnBattle.onClick.AddListener(OnClickBtnBattle);
 		_btnDailyGift.onClick.AddListener(OnClickBtnDailyGift);
@@ -140,11 +141,11 @@ public class MainUI : View<GameApp>, IPopup
 		_goUpdateStat.SetActive(value);
 	}
 
-	private void OnClickTglCharacter(bool value)
+	private void OnClickTglLock(bool value)
 	{
-		ChangeAnimToggle(_itemCharacter);
-	}
-
+        ChangeAnimToggle(_itemLock);
+        _goLock.SetActive(_itemLock.isLock && value);
+    }
 
     private void OnClickBtnBattle()
 	{
