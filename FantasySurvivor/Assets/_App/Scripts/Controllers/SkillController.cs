@@ -6,7 +6,6 @@ using _App.Scripts.Views.InGame.Skills.SkillMono;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using FantasySurvivor;
-using UnityEditor.U2D.Sprites;
 using UnityEngine;
 namespace _App.Scripts.Controllers
 {
