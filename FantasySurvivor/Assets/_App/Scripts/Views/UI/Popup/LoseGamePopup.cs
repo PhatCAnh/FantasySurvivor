@@ -64,7 +64,8 @@ public class LoseGamePopup : View<GameApp>, IPopup
 
     private void OnClickBtnHome()
     {
-        foreach(var reward in gameController.map.dictionaryReward)
+        gameController.ClearHealthBar();
+        foreach (var reward in gameController.map.dictionaryReward)
         {
             gameController.ClaimReward(reward.Key, reward.Value);
         }

@@ -86,17 +86,22 @@ public class GameController : Controller<GameApp>
 
     public void WinGame()
     {
-        if (_healthBarController != null) _healthBarController.RemoveHealthBar();
+        ClearHealthBar();
         isEndGame = true;
         app.resourceManager.ShowPopup(PopupType.WinGame);
     }
 
     public void LoseGame()
     {
-        if (_healthBarController != null) _healthBarController.RemoveHealthBar();
+        //if (_healthBarController != null) _healthBarController.RemoveHealthBar();
         isEndGame = true;
         app.resourceManager.ShowPopup(PopupType.LoseGame);
         //app.analytics.TrackPlay(LevelResult.Failure, map.model.levelInGame);
+    }
+
+    public void ClearHealthBar()
+    {
+        if (_healthBarController != null) _healthBarController.RemoveHealthBar();
     }
 
 
