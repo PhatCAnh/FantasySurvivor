@@ -86,14 +86,22 @@ public class GameController : Controller<GameApp>
 
     public void WinGame()
     {
-        Debug.Log("Wingame r ne");
+        ClearHealthBar();
+        isEndGame = true;
+        app.resourceManager.ShowPopup(PopupType.WinGame);
     }
 
     public void LoseGame()
     {
+        //if (_healthBarController != null) _healthBarController.RemoveHealthBar();
         isEndGame = true;
         app.resourceManager.ShowPopup(PopupType.LoseGame);
         //app.analytics.TrackPlay(LevelResult.Failure, map.model.levelInGame);
+    }
+
+    public void ClearHealthBar()
+    {
+        if (_healthBarController != null) _healthBarController.RemoveHealthBar();
     }
 
 
@@ -153,7 +161,7 @@ public class GameController : Controller<GameApp>
         {
             return;
         }
-        
+
         var popup = app.resourceManager.ShowPopup(PopupType.NotificationPopup).GetComponent<NotificationPopup>();
         popup.Init(content);
         _popupNotification = popup;
@@ -237,10 +245,10 @@ public class GameController : Controller<GameApp>
 
         //var monsterIns = Instantiate(app.resourceManager.GetMonster(wave.idMonster)).GetComponent<Monster>();
         boss.Init(bossStat, wave, type);
-
+ 
         _healthBarController = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.GatlingCrab_HealthBar),
-                app.resourceManager.rootContainer)
-            .GetComponent<HealthBarController>();
+            app.resourceManager.rootContainer)
+        .GetComponent<HealthBarController>();
         _healthBarController.Init(boss);
 
         boss.ResetAttackCountdown();
@@ -321,7 +329,6 @@ public class GameController : Controller<GameApp>
 
     public void MonsterDestroy(Monster mons)
     {
-        if (_healthBarController != null && mons.isDead == true) _healthBarController.RemoveHealthBar();
         mons.animator.SetBool("Dead", true);
 
         listMonster.Remove(mons);
@@ -330,6 +337,20 @@ public class GameController : Controller<GameApp>
             mons.wave.monsterInWave.Remove(mons);
         }
         //Singleton<PoolController>.instance.ReturnObject(mons.type, mons.gameObject);
+    }
+
+    public void BossDie(Monster mons)
+    {
+        if (_healthBarController != null && mons.isDead == true) _healthBarController.RemoveHealthBar();
+        mons.animator.SetBool("Dead", true);
+
+        map.model.monsterKilled++;
+
+        listMonster.Remove(mons);
+
+        mons.wave.monsterInWave.Remove(mons);
+
+        WinGame();
     }
 
 
@@ -582,7 +603,7 @@ public class GameController : Controller<GameApp>
         map.Init(chapter, level);
         character = SpawnCharacter();
         listMonster.Clear();
-        Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.SupportItem), Vector3.zero, quaternion.identity);
+        //Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.SupportItem), Vector3.zero, quaternion.identity);
         app.resourceManager.ShowPopup(PopupType.ChoiceSkill);
         //app.analytics.TrackPlay(LevelResult.Start, map.model.levelInGame);
     }
@@ -592,16 +613,16 @@ public class GameController : Controller<GameApp>
         if (character == null || character.model.currentHealthPoint > 0) return;
 
         character.model.Revive();
-        character.transform.position = charPos; 
+        character.transform.position = charPos;
         character.gameObject.SetActive(true);
         isEndGame = false;
         StartCoroutine(MakeCharacterInvincible(5f));
     }
     private IEnumerator MakeCharacterInvincible(float duration)
     {
-        character.model.SetInvincible(true); 
-        yield return new WaitForSeconds(duration); 
-        character.model.SetInvincible(false); 
+        character.model.SetInvincible(true);
+        yield return new WaitForSeconds(duration);
+        character.model.SetInvincible(false);
     }
     public (int, int, int) GetDateTimeNow()
     {

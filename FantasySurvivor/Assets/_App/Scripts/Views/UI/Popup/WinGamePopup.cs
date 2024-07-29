@@ -7,22 +7,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoseGamePopup : View<GameApp>, IPopup
+public class WinGame : View<GameApp>, IPopup
 {
     [SerializeField] private Image _imageBackGround;
-    
     [SerializeField] private GameObject _title;
-    
     [SerializeField] private TextMeshProUGUI _txtEnemyKilled, _txtWave;
-    
+
     [SerializeField] private GameObject _leftArrow;
     [SerializeField] private GameObject _rightArrow;
     [SerializeField] private TextMeshProUGUI _txtReward;
     [SerializeField] private Transform _containerReward;
-    
-    [SerializeField] private Button _btnHome;
+
+    [SerializeField] private Button _btnClaim;
     [SerializeField] private Button _btnReward;
-    [SerializeField] private Button _btnRevive;  // Thêm nút hồi sinh
 
     private Sequence _sequence;
     private GameController gameController => Singleton<GameController>.instance;
@@ -31,16 +28,13 @@ public class LoseGamePopup : View<GameApp>, IPopup
     {
         base.OnViewInit();
 
-        foreach(var reward in gameController.map.dictionaryReward)
+        foreach (var reward in gameController.map.dictionaryReward)
         {
             gameController.SpawnItemReward(reward.Key, reward.Value, _containerReward);
         }
 
-        _btnHome.onClick.AddListener(OnClickBtnHome);
-        
+        _btnClaim.onClick.AddListener(OnClickBtnClaim);
         _btnReward.onClick.AddListener(OnClickBtnReward);
-
-        _btnRevive.onClick.AddListener(OnClickBtnRevive);  // Liên kết sự kiện
 
         _txtWave.text = $"Best wave: {gameController.map.model.WaveInGame}";
 
@@ -49,11 +43,11 @@ public class LoseGamePopup : View<GameApp>, IPopup
         Open();
     }
 
-
     public void Open()
     {
         SetAnimOpen();
     }
+
     public void Close()
     {
         gameController.ResetGame();
@@ -62,34 +56,27 @@ public class LoseGamePopup : View<GameApp>, IPopup
         Destroy(gameObject);
     }
 
-    private void OnClickBtnHome()
+    private void OnClickBtnClaim()
     {
-        gameController.ClearHealthBar();
         foreach (var reward in gameController.map.dictionaryReward)
         {
             gameController.ClaimReward(reward.Key, reward.Value);
         }
-        
+
         Close();
     }
 
     private void OnClickBtnReward()
-    {   
+    {
         app.adsController.ShowReward(() =>
         {
-            foreach(var reward in gameController.map.dictionaryReward)
+            foreach (var reward in gameController.map.dictionaryReward)
             {
                 gameController.ClaimReward(reward.Key, reward.Value * 2);
             }
-        
+
             Close();
         });
-    }
-
-    private void OnClickBtnRevive()
-    {
-        gameController.ReviveCharacter();  // Gọi phương thức hồi sinh
-        Destroy(gameObject);  // Đóng popup sau khi hồi sinh
     }
 
     private void SetAnimOpen()
@@ -104,14 +91,13 @@ public class LoseGamePopup : View<GameApp>, IPopup
         _leftArrow.transform.localPosition = new Vector3(-1000, 0);
         _rightArrow.transform.localPosition = new Vector3(1000, 0);
 
-        for(int i = 0; i < _containerReward.childCount; i++)
+        for (int i = 0; i < _containerReward.childCount; i++)
         {
             _containerReward.GetChild(i).localScale = Vector3.zero;
         }
-        
-        _btnHome.transform.localScale = Vector3.zero;
+
+        _btnClaim.transform.localScale = Vector3.zero;
         _btnReward.transform.localScale = Vector3.zero;
-        _btnRevive.transform.localScale = Vector3.zero;  // Ẩn nút hồi sinh ban đầu
 
 
         _sequence
@@ -122,16 +108,16 @@ public class LoseGamePopup : View<GameApp>, IPopup
             .Append(_txtReward.transform.DOScale(Vector3.one, duration))
             .Join(_leftArrow.transform.DOLocalMove(new Vector3(-470, 0), duration))
             .Join(_rightArrow.transform.DOLocalMove(new Vector3(470, 0), duration))
-            .Join(_btnHome.transform.DOScale(Vector3.one, duration))
-            .Join(_btnReward.transform.DOScale(Vector3.one, duration))
-              .Join(_btnRevive.transform.DOScale(Vector3.one, duration));  // Hiển thị nút hồi sinh
+            .Join(_btnClaim.transform.DOScale(Vector3.one, duration))
+            .Join(_btnReward.transform.DOScale(Vector3.one, duration));
 
-        
-        for(int i = 0; i < _containerReward.childCount; i++)
+
+        for (int i = 0; i < _containerReward.childCount; i++)
         {
             _sequence.Append(_containerReward.GetChild(i).DOScale(Vector3.one, duration / 2));
         }
     }
+
 
     protected override void OnDestroy()
     {

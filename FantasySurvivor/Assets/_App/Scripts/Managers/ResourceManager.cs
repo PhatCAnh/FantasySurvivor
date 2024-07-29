@@ -128,7 +128,6 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     [SerializeField] private GameObject _languagePopup;
 
-
     [SerializeField] private GameObject _confirmPopup;
 	
 	[SerializeField] private GameObject _loadingPopup;
@@ -154,6 +153,8 @@ public class ResourceManager : UIManagerBase<PopupType>
     [SerializeField] private GameObject _rewardGetPopup;
     
     [SerializeField] private GameObject _purchaseItem;
+
+    [SerializeField] private GameObject _winGamePopup;
 
 
     [Header("UI Tutorial prefabs")]
@@ -271,7 +272,8 @@ public class ResourceManager : UIManagerBase<PopupType>
         RegisterPopup(PopupType.PurchaseItemPopup, _purchaseItem);
         RegisterPopup(PopupType.RewardGetPopup, _rewardGetPopup);
         RegisterPopup(PopupType.NotificationPopup, _notificationPopup);
-	}
+        RegisterPopup(PopupType.WinGame, _winGamePopup);
+    }
 
     private void InitDic()
 	{
