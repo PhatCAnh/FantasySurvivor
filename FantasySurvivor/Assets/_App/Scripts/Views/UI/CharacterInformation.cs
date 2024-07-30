@@ -103,11 +103,11 @@ public class CharacterInformation : View<GameApp>, IPopup
             var dataItem = itemController.GetDataItem(item.id, item.rank, item.level);
             var nameStat = Singleton<GameController>.instance.GetTypeStatItemEquip(dataItem.dataConfig.type);
             var data = Singleton<GameController>.instance.GetDataStat(nameStat, item.rank);
-            //_numberValue = dataItem.dataConfig.baseValue + data.Item2 * (item.level - 1);
-            itemController.EquipItem(item, 1);
-             var slot = _dicItemEquip[dataItem.dataConfig.type];
-             //if(slot.isEquip) UnEquipItem(dataItem.dataConfig.type, item, _numberValue);
-             slot.Init(item);
+            _numberValue = dataItem.dataConfig.baseValue + data.Item2 * (item.level - 1);
+            itemController.EquipItem(item,_numberValue);
+            var slot = _dicItemEquip[dataItem.dataConfig.type];
+            //if(slot.isEquip) UnEquipItem(dataItem.dataConfig.type, item, _numberValue);
+            slot.Init(item);
             slot.isEquip = true;
         }
     }
@@ -151,8 +151,8 @@ public class CharacterInformation : View<GameApp>, IPopup
         //if (slot.isEquip) UnEquipItem(type, data, value);
         if (slot.isEquip)
         {
-            var oldItem = GetEquippedItem(type); // Giả sử phương thức này lấy vật phẩm hiện đang được trang bị
-            UnEquipItem(type, oldItem, oldItem.quantity); // Gỡ bỏ vật phẩm cũ
+            var oldItem = GetEquippedItem(type);
+            UnEquipItem(type, oldItem, oldItem.quantity);
         }
         slot.Init(data);
         slot.isEquip = true;

@@ -17,7 +17,16 @@ public class ItemSlotEquipUI : ItemSlotUI
         isEquip = false;
         _imgEquip.SetActive(true);
         _imgUnEquip.SetActive(false);
+        if (parent == null)
+        {
+            parent = GetComponentInParent<CharacterInformation>();
+            if (parent == null)
+            {
+                Debug.LogError("CharacterInformation component not found in parent.");
+            }
+        }
     }
+
     
     protected override void OnClickBtn()
     {
@@ -25,7 +34,6 @@ public class ItemSlotEquipUI : ItemSlotUI
         isShow = true;
         app.resourceManager.ShowPopup(PopupType.ItemEquipDetail).TryGetComponent(out PopupItemEquipDetail popup);
         popup.Init(this, itemInBag, itemData, image, imageRank, isEquip);
-        
     }
 
     public override void Action(int value)
