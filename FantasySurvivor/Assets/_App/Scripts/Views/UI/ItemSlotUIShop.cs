@@ -18,7 +18,7 @@ public class ItemSlotUIShop : View<GameApp>
     private int _count, _price;
 
     private Sprite _rank, _skin, _typePrice;
-    
+
     private ShopUI _parent;
 
     private ItemController itemController => Singleton<ItemController>.instance;
@@ -26,24 +26,36 @@ public class ItemSlotUIShop : View<GameApp>
     public void Init(ItemData data, int price, ShopUI parent, TypeItemSell typePrice, int count = 0)
     {
         _parent = parent;
-        
+
         _txtName.text = data.dataConfig.name;
-        
+
         _data = data;
-        
+
         _count = count;
 
         _price = price;
-        
-        _rank = itemController.GetSpriteRank(data.rank);
-        
-        _skin = data.dataUi.skin;
-        
 
-        _typePrice = typePrice is TypeItemSell.Gem ? _spriteGem : _spriteGold;
+        _rank = itemController.GetSpriteRank(data.rank);
+
+        _skin = data.dataUi.skin;
+
+        _txtCount.text = _count.ToString();
+        
+        if (typePrice is TypeItemSell.Gold)
+        {
+            _typePrice = _spriteGold;
+        }
+        else if (typePrice is TypeItemSell.Gem)
+        {
+            _typePrice = _spriteGem;
+        }
+        else if (typePrice is TypeItemSell.Ads)
+        {
+            _txtCount.text = "Watch Ads";
+        }
 
         _txtPrice.text = _price.ToString();
-        _txtCount.text = _count.ToString();
+        
         _txtCount.gameObject.SetActive(_count != 0);
         _imgRank.sprite = _rank;
         _imgItem.sprite = _skin;
@@ -57,17 +69,22 @@ public class ItemSlotUIShop : View<GameApp>
         {
             _btnBuy.onClick.AddListener(OnClickBtnBuy);
         }
-        
     }
 
     private void OnClickBtnBuy()
     {
-        app.resourceManager.ShowPopup(PopupType.PurchaseItemPopup).TryGetComponent(out PurchaseItemPopup purchaseItemPopup);
+        app.resourceManager.ShowPopup(PopupType.PurchaseItemPopup)
+            .TryGetComponent(out PurchaseItemPopup purchaseItemPopup);
         purchaseItemPopup.Init(_data, _price, _count, _rank, _skin, _typePrice);
     }
 
     private void OnClickWatchAds()
     {
-        Singleton<AdsController>.instance.ShowReward();
+        Singleton<AdsController>.instance.ShowReward(() =>
+        {
+            app.resourceManager.ShowPopup(PopupType.PurchaseItemPopup)
+                .TryGetComponent(out PurchaseItemPopup purchaseItemPopup);
+            purchaseItemPopup.Init(_data, _price, _count, _rank, _skin, _typePrice);
+        });
     }
 }

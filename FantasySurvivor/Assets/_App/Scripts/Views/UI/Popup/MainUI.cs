@@ -24,7 +24,7 @@ public class MainUI : View<GameApp>, IPopup
 
 
 	[SerializeField] private ItemToggle _itemHome, _itemElemental, _itemShop, _itemUpdate, _itemLock;
-	[SerializeField] private GameObject _goLock, _goUpdateStat, _goHome,_goListSkill, _goCharacter;
+	[SerializeField] private GameObject _goLock, _goUpdateStat, _goHome,_goListSkill, _goCharacter, _goShop;
 	[SerializeField] private Image _imgLineFocus;
 	[SerializeField] private Button _btnBattle, _btnCheat, _btnTest, _btnDailyGift, _btnSetting, _btnMission;
 	[SerializeField] private TextMeshProUGUI _txtGoldCoin, _txtUsername;
@@ -132,7 +132,7 @@ public class MainUI : View<GameApp>, IPopup
 	private void OnClickTglShop(bool value)
 	{
 		ChangeAnimToggle(_itemShop);
-		_goLock.SetActive(_itemShop.isLock && value);
+		_goShop.SetActive(value);
 	}
 
 	private void OnClickTglUpdate(bool value)
