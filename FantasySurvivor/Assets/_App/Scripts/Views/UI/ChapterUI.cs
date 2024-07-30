@@ -14,6 +14,8 @@ public class ChapterUI : View<GameApp>
 
 	private int chapter, level;
 
+	private GameObject _parent;
+
 	protected override void OnViewInit()
 	{
 		base.OnViewInit();
@@ -28,16 +30,17 @@ public class ChapterUI : View<GameApp>
 		}
 	}
 
-	public void Init(int chapter, int level)
+	public void Init(int chapter, int level, GameObject parent)
 	{
 		this.chapter = chapter;
 		this.level = level;
+		_parent = parent;
 	}
 
 	private void OnClickBtn()
 	{
 		Singleton<GameController>.instance.StartGame(chapter, level);
-		app.resourceManager.ForceClosePopup(PopupType.ChoiceMap);
+		Destroy(_parent);
 		app.resourceManager.ForceClosePopup(PopupType.MainUI);
 	}
 }

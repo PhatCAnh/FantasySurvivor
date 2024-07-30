@@ -22995,7 +22995,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6610930414186903792
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35533,6 +35533,10 @@ PrefabInstance:
     - target: {fileID: 244530338927875015, guid: 1e4be98bb24611f469c0df79cca8f5a7, type: 3}
       propertyPath: m_Name
       value: ShopUI (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 244530338927875015, guid: 1e4be98bb24611f469c0df79cca8f5a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 315868484889127847, guid: 1e4be98bb24611f469c0df79cca8f5a7, type: 3}
       propertyPath: m_SizeDelta.x
