@@ -139,24 +139,26 @@ public class MapView : View<GameApp>
                 gameController.AddReward(dictionaryReward, TypeItemReward.Coin, _coinOfLevel);
                 model.WaveInGame++;
 
-                /*_countWavesSpawn++;
-                _countWavesRemove++;
+                _countWavesSpawn--;
 
-                if (_countWavesSpawn % 2 == 0 && _spawnedSupportItem == null)
+                if (_countWavesSpawn == 0 && _spawnedSupportItem == null)
                 {
+                    if (_isBattleBossing) return;
                     _spawnedSupportItem = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.SupportItem), Vector3.zero, quaternion.identity);
-                    _countWavesRemove = 0;
+                    _countWavesRemove = 4;
+                    _countWavesSpawn = 3;
                 }
 
                 if (_spawnedSupportItem != null)
                 {
-                    _countWavesRemove++;
-                    if (_countWavesRemove >= 2)
+                    _countWavesRemove--;
+                    if (_countWavesRemove == 0)
                     {
                         Destroy(_spawnedSupportItem);
                         _spawnedSupportItem = null;
+                        _countWavesSpawn = 3;
                     }
-                }*/
+                }
 
                 UpdateLevel();
             }
