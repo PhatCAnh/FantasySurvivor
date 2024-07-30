@@ -91,56 +91,14 @@ namespace FantasySurvivor
 
 		private void OnClickBtnPlay()
 		{
-			/*var load = SceneManager.LoadSceneAsync(GameConst.nameScene_Game, LoadSceneMode.Single);
-			load.completed += o => gameController.StartGame(_currentChapter);
-			Close();*/
-		}
-
-		private void SetAnimOpen()
-		{
-			_sequence = DOTween.Sequence();
-			var duration = 0.25f;
-			
-			_title.transform.localScale = Vector3.zero;
-			_btnClose.transform.localScale = Vector3.zero;
-			_icon.transform.localScale = Vector3.zero;
-			
-			_leftArrow.transform.localScale = Vector3.zero;
-			_rightArrow.transform.localScale = Vector3.zero;
-			_leftArrow.transform.localPosition = Vector3.zero;
-			_rightArrow.transform.localPosition = Vector3.zero;
-			_txtChapterName.transform.localScale = Vector3.zero;
-			_sldLevel.transform.localScale = Vector3.zero;
-			_sldLevel.value = 0;
-			
-			_textContent.transform.localScale = Vector3.zero;
-			_btnClaimGift.transform.localScale = Vector3.zero;
-			_btnPlay.transform.localScale = Vector3.zero;
-			
-			
-			
-			_sequence
-				.Append(_title.transform.DOScale(Vector3.one, duration))
-				.Append(_btnClose.transform.DOScale(Vector3.one, duration))
-				.Append(_icon.transform.DOScale(Vector3.one, duration))
-				.Append(_leftArrow.transform.DOLocalMove(new Vector3(-500, 0), duration))
-				.Join(_rightArrow.transform.DOLocalMove(new Vector3(500, 0), duration))
-				.Join(_leftArrow.transform.DOScale(Vector3.one, duration))
-				.Join(_rightArrow.transform.DOScale(Vector3.one, duration))
-				.Join(_txtChapterName.transform.DOScale(Vector3.one, duration))
-				.Append(_sldLevel.transform.DOScale(Vector3.one, duration).OnComplete(() =>
-				{
-					DOTween.To(() => _sldLevel.value, value => _sldLevel.value = value, 30, duration * 3);
-				}))
-				.Append(_textContent.transform.DOScale(Vector3.one, duration))
-				.Append(_btnClaimGift.transform.DOScale(Vector3.one, duration))
-				.Join(_btnPlay.transform.DOScale(Vector3.one, duration));
+			var load = SceneManager.LoadSceneAsync(GameConst.nameScene_Game, LoadSceneMode.Single);
+			load.completed += o => gameController.StartGame(_currentChapter, 1);
+			Close();
 		}
 
 		protected override void OnDestroy()
 		{
 			base.OnDestroy();
-			_sequence.Kill();
 		}
 	}
 }

@@ -56,8 +56,10 @@ public class PopupChoiceSkill : View<GameApp>, IPopup
 	{
 		transform.DOScale(Vector3.zero, 0.35f).OnComplete(() =>
 		{
-			app.resourceManager.ForceClosePopup(PopupType.MainUI);
-			gameController.StartGame(1, 1);
+			//app.resourceManager.ForceClosePopup(PopupType.MainUI);
+			//gameController.StartGame(1, 1);
+
+			app.resourceManager.ShowPopup(PopupType.ChoiceMap);
 
 			Destroy(gameObject);
 		});

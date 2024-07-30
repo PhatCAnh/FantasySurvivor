@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class ControlChapterUI : View<GameApp>
+public class ControlChapterUI : View<GameApp>, IPopup
 {
 	[SerializeField] private TextMeshProUGUI _titleLvl1, _titleLvl2, _titleLvl3;
 
@@ -24,7 +24,16 @@ public class ControlChapterUI : View<GameApp>
 		title.text = "chua set title ne";
 		for(int i = 0; i < parent.childCount; i++)
 		{
-			parent.GetChild(i).GetComponent<ChapterUI>().Init(chapter, i + 1);
+			parent.GetChild(i).GetComponent<ChapterUI>().Init(chapter, i + 1, gameObject);
 		}
+	}
+
+	public void Open()
+	{
+		
+	}
+
+	public void Close()
+	{
 	}
 }
