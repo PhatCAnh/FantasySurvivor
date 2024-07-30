@@ -47,13 +47,13 @@ public class CharacterInformation : View<GameApp>, IPopup
     protected override void OnViewInit()
     {
         base.OnViewInit();
-
+/*
         _slotWeapon.Init(null, this);
         _slotArmor.Init(null, this);
         _slotHat.Init(null, this);
         _slotRing.Init(null, this);
         _slotShoes.Init(null, this);
-        _slotGloves.Init(null, this);
+        _slotGloves.Init(null, this);*/
 
         _dicItemEquip = new Dictionary<ItemType, ItemSlotEquipUI>
         {
@@ -100,16 +100,15 @@ public class CharacterInformation : View<GameApp>, IPopup
 
         foreach (var item in app.models.dataPlayerModel.ListItemEquipped)
         {
-            var dataItem = itemController.GetDataItem(item.id, item.rank);
+            var dataItem = itemController.GetDataItem(item.id, item.rank, item.level);
             var nameStat = Singleton<GameController>.instance.GetTypeStatItemEquip(dataItem.dataConfig.type);
             var data = Singleton<GameController>.instance.GetDataStat(nameStat, item.rank);
-            _numberValue = dataItem.dataConfig.baseValue + data.Item2 * (item.level - 1);
-            itemController.EquipItem(item, _numberValue);
-
-            // var data = itemController.GetDataItem(item.id, item.rank, item.level);
-            // var slot = _dicItemEquip[data.dataConfig.type];
-            // if(slot.isEquip) UnEquipItem(data.dataConfig.type, item);
-            // slot.Init(item);
+            //_numberValue = dataItem.dataConfig.baseValue + data.Item2 * (item.level - 1);
+            itemController.EquipItem(item, 1);
+             var slot = _dicItemEquip[dataItem.dataConfig.type];
+             //if(slot.isEquip) UnEquipItem(dataItem.dataConfig.type, item, _numberValue);
+             slot.Init(item);
+            slot.isEquip = true;
         }
     }
 
@@ -149,9 +148,30 @@ public class CharacterInformation : View<GameApp>, IPopup
     public void EquipItem(ItemType type, ItemInBag data, int value)
     {
         var slot = _dicItemEquip[type];
-        if (slot.isEquip) UnEquipItem(type, data, value);
+        //if (slot.isEquip) UnEquipItem(type, data, value);
+        if (slot.isEquip)
+        {
+            var oldItem = GetEquippedItem(type); // Giả sử phương thức này lấy vật phẩm hiện đang được trang bị
+            UnEquipItem(type, oldItem, oldItem.quantity); // Gỡ bỏ vật phẩm cũ
+        }
         slot.Init(data);
+        slot.isEquip = true;
         itemController.EquipItem(data, value);
+    }
+
+    public ItemInBag GetEquippedItem(ItemType type)
+    {
+        foreach (var item in app.models.dataPlayerModel.ListItemEquipped)
+        {
+            var dataItem = itemController.GetDataItem(item.id, item.rank);
+            var nameStat = Singleton<GameController>.instance.GetTypeStatItemEquip(dataItem.dataConfig.type);
+            if (type == dataItem.dataConfig.type)
+            {
+                return item;
+            }
+        }
+        Debug.Log("null");
+        return null;
     }
 
     public void UnEquipItem(ItemType type, ItemInBag data, int value)
@@ -328,11 +348,13 @@ public class CharacterInformation : View<GameApp>, IPopup
 
     public void ConvertItem()
     {
+        Close();
         app.resourceManager.ShowPopup(PopupType.ConvertItem).TryGetComponent(out ConvertItemPopup convertItem );
     }
 
     public void TransferItem()
     {
+        Close();
         app.resourceManager.ShowPopup(PopupType.TransferItem).TryGetComponent(out TransferItemPopup transferItem);
     }
 }
