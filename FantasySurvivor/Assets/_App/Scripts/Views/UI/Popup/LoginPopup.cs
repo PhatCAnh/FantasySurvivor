@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using PlayFab;
@@ -23,6 +24,9 @@ public class LoginPopup : View<GameApp>, IPopup
 	private string _email;
 
 	private string _password;
+	
+	private static readonly string EmailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+	private static readonly Regex EmailRegex = new Regex(EmailPattern, RegexOptions.IgnoreCase);
 
 	private PlayfabController playfab => Singleton<PlayfabController>.instance;
 
@@ -51,12 +55,17 @@ public class LoginPopup : View<GameApp>, IPopup
 	{
 		if(_inputFieldPasswordRegister.text.Length < 6)
 		{
-			_txtErrorRegister.text = "Lam on nhap mat khau dai hon 6 ky tu";
+			_txtErrorRegister.text = "Please enter a password longer than 5 characters";
 			return;
 		}
-		else if(!_inputFieldPasswordRegister.text.Equals(_inputFieldConfirm.text))
+		if(!_inputFieldPasswordRegister.text.Equals(_inputFieldConfirm.text))
 		{
 			_txtErrorRegister.text = "Password and Confirm password are not same";
+			return;
+		}
+		if (!IsValidEmail(_inputFieldPasswordRegister.text))
+		{
+			_txtErrorRegister.text = "Please enter Email format";
 			return;
 		}
 
@@ -65,7 +74,12 @@ public class LoginPopup : View<GameApp>, IPopup
 
 	private void ErrorRegister(PlayFabError error)
 	{
-		_txtErrorRegister.text = "Input wrong email or password!";
+		_txtErrorRegister.text = "Email address is exist!!!";
+	}
+	
+	public static bool IsValidEmail(string email)
+	{
+		return EmailRegex.IsMatch(email);
 	}
 
 	private void OnRegisterSuccess(RegisterPlayFabUserResult result)
