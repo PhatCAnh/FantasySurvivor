@@ -129,7 +129,7 @@ public class MapView : View<GameApp>
 
         if (_cdEndLevel.isFinished)
         {
-            if (GetCurrentWave() == 16 && _isBattleBossing == false)
+            if (GetCurrentWave() == 15 && _isBattleBossing == false)
             {
                 UpdateLevelBoss();
             }
@@ -207,7 +207,7 @@ public class MapView : View<GameApp>
                 continue;
             }
 
-            if (GetCurrentWave() == 16)
+            if (GetCurrentWave() == 15)
             {
                 wave.coolDownTime.Update(deltaTime);
                 UpdateLevelBoss();
