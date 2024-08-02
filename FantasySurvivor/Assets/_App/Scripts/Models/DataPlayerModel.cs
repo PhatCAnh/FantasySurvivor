@@ -24,6 +24,7 @@ namespace FantasySurvivor
 		public override void InitBaseData()
 		{
 			this.Gold = 99;
+			this.Talisman = 10;
 			this.Gem = 10;
 			this.LimitQuantityItemEquip = 50;
 			var dateNow = Singleton<GameController>.instance.GetDateTimeNow();
@@ -179,7 +180,7 @@ namespace FantasySurvivor
 				if(Talisman == value) return;
                 _talisman = value;
 				app.models.WriteModel<DataPlayerModel>();
-				RaiseDataChanged(nameof(Gold));
+				RaiseDataChanged(nameof(Talisman));
 			}
 		}
 
@@ -296,7 +297,9 @@ namespace FantasySurvivor
 
             Id = dataPlayerModel.Id;
 
-            Gold = dataPlayerModel.Gold;
+            Gold = dataPlayerModel.Gold; 
+
+            Talisman = dataPlayerModel.Talisman;
 
             Gem = dataPlayerModel.Gem;
 
