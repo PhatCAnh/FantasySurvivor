@@ -78,6 +78,7 @@ namespace FantasySurvivor
             {
                 _slotNone1.ItemType = type;
                 var slot = _dicItemEquip1[type];
+                slot.isChosen = true;
                 if (slot.isChosen) UnChosenItem(type, data);
                 slot.Init(data);
             }
@@ -86,6 +87,7 @@ namespace FantasySurvivor
             {
                 _slotNone2.ItemType = type;
                 var slot = _dicItemEquip2[type];
+                slot.isChosen = true;
                 if (slot.isChosen) UnChosenItem(type, data);
                 slot.Init(data);
             }
