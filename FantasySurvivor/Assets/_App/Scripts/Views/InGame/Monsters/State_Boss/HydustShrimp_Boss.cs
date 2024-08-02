@@ -21,6 +21,7 @@ public class HydustShrimp_Boss : Monster
     public float shrinkingSpeed; //time thu nho
     private float currentZoneRadius;
     private float damageTimer = 0f; //count time dame zone
+    private Vector3 initialZonePosition;
 
     //sight
     public float sightRange = 10f;
@@ -48,6 +49,7 @@ public class HydustShrimp_Boss : Monster
     private float warningElapsedTime = 0f;
     private bool isWarning = false;
 
+
     private GameController gameController => ArbanFramework.Singleton<GameController>.instance;
 
     protected override void OnViewInit()
@@ -56,15 +58,13 @@ public class HydustShrimp_Boss : Monster
         spawnPos = transform.position;
         IdleState();
 
-        currentZone = Instantiate(zonePrefab, transform.position, Quaternion.identity);
-        currentZone.transform.localScale = Vector3.one * initialZoneRadius * 2;
-        currentZoneRadius = initialZoneRadius;
     }
 
     protected override void HandlePhysicUpdate()
     {
         if (isDead) return;
 
+        spawnPos = transform.position;
         moveTarget = gameController.character.transform.position;
         moveDirection = moveTarget - transform.position;
 
@@ -186,27 +186,53 @@ public class HydustShrimp_Boss : Monster
         return Vector3.Distance(transform.position, gameController.character.transform.position) <= sightRange;
     }
 
-    private void UpdateZone()
+    private void InitializeZone()
     {
-        if (currentZoneRadius > 0)
+        if (currentZone != null)
         {
-            currentZoneRadius -= shrinkingSpeed * Time.deltaTime;
-            currentZoneRadius = Mathf.Max(currentZoneRadius, minimumZoneRadius);
-
-            currentZone.transform.position = spawnPos;
-            currentZone.transform.localScale = Vector3.one * currentZoneRadius * 2;
+            Destroy(currentZone);
         }
 
-        damageTimer += Time.deltaTime;
-
-        if (damageTimer >= 0.5f)
+        if (zonePrefab != null)
         {
-            float distanceToPlayer = Vector3.Distance(spawnPos, gameController.character.transform.position);
-            if (distanceToPlayer > currentZoneRadius)
+            currentZone = Instantiate(zonePrefab, transform.position, Quaternion.identity);
+            initialZonePosition = transform.position;
+            currentZone.transform.localScale = Vector3.one * initialZoneRadius * 2;
+            currentZoneRadius = initialZoneRadius;
+        }
+    }
+
+    private void UpdateZone()
+    {
+        if (isDead) return;
+
+        if (currentZone == null)
+        {
+            InitializeZone();
+        }
+        else
+        {
+
+            if (currentZoneRadius > 0)
             {
-                gameController.character.TakeDamage(10);
+                currentZoneRadius -= shrinkingSpeed * Time.deltaTime;
+                currentZoneRadius = Mathf.Max(currentZoneRadius, minimumZoneRadius);
+
+                currentZone.transform.position = initialZonePosition;
+                currentZone.transform.localScale = Vector3.one * currentZoneRadius * 2;
             }
-            damageTimer = 0f;
+
+            damageTimer += Time.deltaTime;
+
+            if (damageTimer >= 0.5f)
+            {
+                float distanceToPlayer = Vector3.Distance(initialZonePosition, gameController.character.transform.position);
+                if (distanceToPlayer > currentZoneRadius)
+                {
+                    gameController.character.TakeDamage(10);
+                }
+                damageTimer = 0f;
+            }
         }
     }
 
@@ -330,6 +356,21 @@ public class HydustShrimp_Boss : Monster
         }
     }
 
+    public override void Die(bool selfDie = true)
+    {
+        if (currentZone != null)
+        {
+            Destroy(currentZone);
+            currentZone = null;
+        }
+
+        model.currentHealthPoint = 0;
+        listStatusEffect.Clear();
+        animator.SetBool("Dead", true);
+        gameController.BossDie(this);
+
+        isInSightRange = false;
+    }
 
     private bool CheckBack()
     {

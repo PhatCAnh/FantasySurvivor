@@ -306,7 +306,6 @@ public class GameController : Controller<GameApp>
 
     public void MonsterDie(Monster mons, bool selfDie = false)
     {
-        if (_healthBarController != null && mons.isDead == true) _healthBarController.RemoveHealthBar();
         mons.animator.SetBool("Dead", true);
 
         if (!selfDie)
@@ -329,6 +328,7 @@ public class GameController : Controller<GameApp>
 
     public void MonsterDestroy(Monster mons)
     {
+        if (_healthBarController != null && mons.isDead == true) _healthBarController.RemoveHealthBar();
         mons.animator.SetBool("Dead", true);
 
         listMonster.Remove(mons);
