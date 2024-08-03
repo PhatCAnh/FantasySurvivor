@@ -74,22 +74,25 @@ public class MainUI : View<GameApp>, IPopup
 	}
 
 	public void Test()
-	{
-		app.resourceManager.ShowPopup(PopupType.CharacterInformation);
+    {
+        AudioManager.Instance.PlaySFX("Click");
+        app.resourceManager.ShowPopup(PopupType.CharacterInformation);
 	}
 	
 	public void OnClickBtnSetting()
 	{
-       
+        AudioManager.Instance.PlaySFX("Click");
         app.resourceManager.ShowPopup(PopupType.SettingPopup);
     }
     public void OnClickBtnDailyGift()
     {
+        AudioManager.Instance.PlaySFX("Click");
         app.resourceManager.ShowPopup(PopupType.DailyGift);
     }
 	public void OnClickBtnDailyMission()
 	{
-		app.resourceManager.ShowPopup(PopupType.DailyMission);
+        AudioManager.Instance.PlaySFX("Click");
+        app.resourceManager.ShowPopup(PopupType.DailyMission);
 	}
     private void MoveLineFocus(Vector3 pos)
 	{
@@ -98,7 +101,7 @@ public class MainUI : View<GameApp>, IPopup
 	}
 
 	private void ChangeAnimToggle(ItemToggle itemToggle)
-	{
+	{  AudioManager.Instance.PlaySFX("Click");
 		if(itemToggle.toggle.isOn)
 		{
 			MoveLineFocus(itemToggle.toggle.transform.localPosition);
@@ -113,15 +116,17 @@ public class MainUI : View<GameApp>, IPopup
 	}
 
 	private void OnClickTglHome(bool value)
-	{
-		ChangeAnimToggle(_itemHome);
+    {
+        AudioManager.Instance.PlaySFX("Click");
+        ChangeAnimToggle(_itemHome);
 		_goHome.SetActive(value);
 		
 	}
 
 	public void OnClickTglElemental(bool value)
-	{
-       // app.resourceManager.ShowPopup(PopupType.Choicelistskill);
+    {
+        AudioManager.Instance.PlaySFX("Click");
+        // app.resourceManager.ShowPopup(PopupType.Choicelistskill);
         ChangeAnimToggle(_itemElemental);
 		_goListSkill.SetActive(_itemElemental.isLock && value);
 		//_itemElemental.isLock=value;
@@ -130,26 +135,31 @@ public class MainUI : View<GameApp>, IPopup
 	}
 
 	private void OnClickTglShop(bool value)
-	{
-		ChangeAnimToggle(_itemShop);
+    {
+        AudioManager.Instance.PlaySFX("Click");
+        ChangeAnimToggle(_itemShop);
 		_goShop.SetActive(value);
 	}
 
 	private void OnClickTglUpdate(bool value)
-	{
-		ChangeAnimToggle(_itemUpdate);
+    {
+        AudioManager.Instance.PlaySFX("Click");
+        ChangeAnimToggle(_itemUpdate);
 		_goUpdateStat.SetActive(value);
 	}
 
 	private void OnClickTglLock(bool value)
-	{
+    {
+        AudioManager.Instance.PlaySFX("Click");
         ChangeAnimToggle(_itemLock);
         _goLock.SetActive(_itemLock.isLock && value);
     }
 
     private void OnClickBtnBattle()
 	{
-		app.resourceManager.ShowPopup(PopupType.ChoiceSkillOutGame);
+
+        AudioManager.Instance.PlaySFX("Click");
+        app.resourceManager.ShowPopup(PopupType.ChoiceSkillOutGame);
 	}
 
 	private void AddEventChangeStat()

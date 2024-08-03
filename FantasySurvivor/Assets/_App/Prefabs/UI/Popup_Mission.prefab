@@ -2710,8 +2710,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 534.8816, y: -21.000025}
-  m_SizeDelta: {x: 530.9315, y: 70.8787}
+  m_AnchoredPosition: {x: 572.53906, y: -35.439}
+  m_SizeDelta: {x: 606.2496, y: 70.8787}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9149720778693252301
 CanvasRenderer:
@@ -2741,7 +2741,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Play 3 game '
+  m_text: play 3 games at a time log in to the game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c1482dbce654844b9ba1c753cbea5d80, type: 2}
   m_sharedMaterial: {fileID: 7374927986402738804, guid: c1482dbce654844b9ba1c753cbea5d80, type: 2}
@@ -3622,11 +3622,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5122502018176155496, guid: dba6edf93480449ffaf9a1503f4e0f76, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 534.8816
+      value: 534.88
       objectReference: {fileID: 0}
     - target: {fileID: 5122502018176155496, guid: dba6edf93480449ffaf9a1503f4e0f76, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -21.000025
+      value: -35.439
       objectReference: {fileID: 0}
     - target: {fileID: 5434295264124879252, guid: dba6edf93480449ffaf9a1503f4e0f76, type: 3}
       propertyPath: m_Name
