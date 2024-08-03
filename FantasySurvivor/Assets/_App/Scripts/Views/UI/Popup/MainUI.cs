@@ -34,7 +34,7 @@ public class MainUI : View<GameApp>, IPopup
 	private PopupChoiceSkill popupChoiceSkill => Singleton<PopupChoiceSkill>.instance;
     private DailyMissionPopup dailyMissionPopup => Singleton<DailyMissionPopup>.instance;
 
-    private int _settingButtonClickCount = 0;
+
 
     protected override void OnViewInit()
 	{
@@ -80,7 +80,7 @@ public class MainUI : View<GameApp>, IPopup
 	
 	public void OnClickBtnSetting()
 	{
-        _settingButtonClickCount++;
+       
         app.resourceManager.ShowPopup(PopupType.SettingPopup);
     }
     public void OnClickBtnDailyGift()

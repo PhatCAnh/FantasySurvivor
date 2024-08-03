@@ -51,6 +51,7 @@ public class DailyMissionPopup : View<GameApp>, IPopup
         var arrDailyMissionItemDetail = new[]
         {
             new DailyMissionItemDetail("Enter the game", ItemId.Gold, ItemType.ETC, 300),
+            new DailyMissionItemDetail("Play 3 games", ItemId.Gold, ItemType.ETC, 1000),
         };
 
         for (int i = 0; i < arrDailyMissionItemDetail.Length; i++)
@@ -133,5 +134,8 @@ public class DailyMissionPopup : View<GameApp>, IPopup
             }
             missionItem.ResetMission();
         }
+
+        app.models.dataPlayerModel.DailyGamePlays = 0; 
+        app.models.dataPlayerModel.Save();
     }
 }

@@ -127,7 +127,14 @@ public class DailyMissionItem : View<GameApp>
     public bool CheckCondition()
     {
         Debug.Log("DailyMissionItem: CheckCondition - Verifying mission completion");
-        return true; 
+
+        if (_title == "Play 3 games")
+        {
+            return app.models.dataPlayerModel.DailyGamePlays >= 3;
+        }
+
+       
+        return true;
     }
     public void ResetMission()
     {

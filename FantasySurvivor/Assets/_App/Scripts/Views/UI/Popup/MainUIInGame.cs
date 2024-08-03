@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
@@ -43,7 +43,9 @@ namespace FantasySurvivor
 		protected override void OnViewInit()
 		{
 			base.OnViewInit();
-			_btnSetting.onClick.AddListener(OnClickBtnSetting);
+            Singleton<GameApp>.instance.models.dataPlayerModel.IncrementDailyGamePlays();
+
+            _btnSetting.onClick.AddListener(OnClickBtnSetting);
 
 			AddDataBinding("fieldMap-expCurrentValue", _sldExpCharacter, (control, e) =>
 				{
