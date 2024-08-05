@@ -432,6 +432,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5259628436735651265, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: sfxSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259628436735651265, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: sfxSounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: efd6975bf7b9a504a836b1ec6065f4be, type: 3}
+    - target: {fileID: 5259628436735651265, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
+      propertyPath: sfxSounds.Array.data[0].name
+      value: Click
+      objectReference: {fileID: 0}
     - target: {fileID: 7533546456404699279, guid: a58398efbbc97cc4eb189419670638b1, type: 3}
       propertyPath: _spriteEpic
       value: 

@@ -13,10 +13,6 @@ using TMPro;
 public class UISoundController : View<GameApp>, IPopup
 {
     public Slider _musicslider, _sfxSlider;
-    [SerializeField] Image OnIconMusic;
-    [SerializeField] Image OffIconMusic;
-    [SerializeField] Image OnIconSfx;
-    [SerializeField] Image OffIconSfx;
     [SerializeField] private Button _btnClose;
     [SerializeField] private Transform _goMainContent;
 
@@ -40,10 +36,6 @@ public class UISoundController : View<GameApp>, IPopup
         // Initialize sliders and icons
         _musicslider.value = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
         _sfxSlider.value = PlayerPrefs.GetFloat("SfxVolume", 0.5f);
-
-        UpdateMusicIcon();
-        UpdateSfxIcon();
-
         // Initialize button listeners
         _btnClose.onClick.AddListener(OnClickBtnClose);
 
@@ -62,13 +54,12 @@ public class UISoundController : View<GameApp>, IPopup
     public void ToggleMusic()
     {
         AudioManager.Instance.ToggleMusic();
-        UpdateMusicIcon();
+
     }
 
     public void ToggleSfx()
     {
         AudioManager.Instance.ToggleSfx();
-        UpdateSfxIcon();
     }
 
     public void MusicVolume()
@@ -81,17 +72,5 @@ public class UISoundController : View<GameApp>, IPopup
         AudioManager.Instance.SfxVolume(_sfxSlider.value);
     }
 
-    private void UpdateMusicIcon()
-    {
-        bool isMusicOn = AudioManager.Instance.IsMusicOn();
-        OnIconMusic.gameObject.SetActive(isMusicOn);
-        OffIconMusic.gameObject.SetActive(!isMusicOn);
-    }
 
-    private void UpdateSfxIcon()
-    {
-        bool isSfxOn = AudioManager.Instance.IsSfxOn();
-        OnIconSfx.gameObject.SetActive(isSfxOn);
-        OffIconSfx.gameObject.SetActive(!isSfxOn);
-    }
 }
