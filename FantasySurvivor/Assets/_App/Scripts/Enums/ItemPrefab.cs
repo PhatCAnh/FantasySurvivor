@@ -58,6 +58,7 @@ public enum ItemPrefab
     BulletMinionLasirdBlue,
     BulletMinionLasirdGreen,
     BulletMinionLasirdOrange,
+	GoblinS,
 
 }
 

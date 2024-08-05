@@ -204,6 +204,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 
     [SerializeField] private GameObject _minionLasirdOrange;
 
+    [SerializeField] private GameObject _goblinS;
 
     private Dictionary<string, GameObject> _typeMonsterDic;
 
@@ -330,6 +331,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.BulletMinionLasirdBlue, _bulletMinionLasirdBlue},
             {ItemPrefab.BulletMinionLasirdGreen, _bulletMinionLasirdGreen},
             {ItemPrefab.BulletMinionLasirdOrange, _bulletMinionLasirdOrange},
+            {ItemPrefab.GoblinS, _goblinS},
 
         };
 
@@ -349,8 +351,9 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{"M6", _slimeWandering},
 			{"M7", _owlStriker},
             {"M8", _goblinSwift},
+            {"M9", _goblinS},
 
-			{"Wolf", _minionWolf},
+            {"Wolf", _minionWolf},
             {"Goblin", _minionGoblin},
             {"CrabBomber", _minionCrabBomber},
             {"LasirdBlue", _minionLasirdBlue},
