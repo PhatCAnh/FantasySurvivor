@@ -59,6 +59,7 @@ public enum ItemPrefab
     BulletMinionLasirdGreen,
     BulletMinionLasirdOrange,
 	GoblinS,
+	KillerShark,
 
 }
 
