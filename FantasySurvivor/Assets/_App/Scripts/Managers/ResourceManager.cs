@@ -160,6 +160,10 @@ public class ResourceManager : UIManagerBase<PopupType>
     
     [SerializeField] private GameObject _mailBoxPopup;
 
+	[SerializeField] private GameObject _convertItemNotyfail;
+
+	[SerializeField] private GameObject _convertItemNotysuccess;
+
 
     [Header("UI Tutorial prefabs")]
 	[SerializeField] private GameObject _clickBulletTutorial;
@@ -280,6 +284,8 @@ public class ResourceManager : UIManagerBase<PopupType>
         RegisterPopup(PopupType.MailBox, _mailBoxPopup);
         RegisterPopup(PopupType.ReadMail, _readMailPopup);
         RegisterPopup(PopupType.RewardGetPopup, _rewardGetPopup);
+        RegisterPopup(PopupType.ConvertItemPopup, _convertItemNotysuccess);
+        RegisterPopup(PopupType.TransferItemPopup, _convertItemNotyfail);
     }
 
     private void InitDic()
