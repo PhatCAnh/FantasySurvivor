@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class ConfirmPopup : View<GameApp>, IPopup
 {
-    [SerializeField] private Button _btnDimmer, _btnYes, _btnNo;
+    [SerializeField] private Button _btnDimmer, _btnYes, _btnNo, _btnClose;
 
     [SerializeField] private TextMeshProUGUI _txtDescription;
     
@@ -18,6 +18,7 @@ public class ConfirmPopup : View<GameApp>, IPopup
         _txtDescription.text = description;
         _btnYes.onClick.AddListener(() => callBackYes());
         _btnNo.onClick.AddListener(Close);
+        _btnClose.onClick.AddListener(Close);
         _btnDimmer.onClick.AddListener(Close);
         Open();
     }

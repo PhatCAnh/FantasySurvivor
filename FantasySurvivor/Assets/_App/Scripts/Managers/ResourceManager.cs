@@ -16,7 +16,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[Header("Object prefabs")]
 	[SerializeField] private GameObject _healthBarPrefab;
 
-	[SerializeField] private GameObject _characterPrefab;
+	[SerializeField] private GameObject _character1;
 
 	[SerializeField] private GameObject _gemExpPrefab;
 
@@ -81,6 +81,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 	[SerializeField] private GameObject _bulletMinionLasirdGreen;
 
     [SerializeField] private GameObject _bulletMinionLasirdOrange;
+    
+    [SerializeField] private GameObject _character2;
 
 
     private Dictionary<ItemPrefab, GameObject> _itemPrefabDic;
@@ -153,6 +155,10 @@ public class ResourceManager : UIManagerBase<PopupType>
     [SerializeField] private GameObject _purchaseItem;
 
     [SerializeField] private GameObject _winGamePopup;
+    
+    [SerializeField] private GameObject _readMailPopup;
+    
+    [SerializeField] private GameObject _mailBoxPopup;
 
 
     [Header("UI Tutorial prefabs")]
@@ -265,9 +271,11 @@ public class ResourceManager : UIManagerBase<PopupType>
 		RegisterPopup(PopupType.ConvertItem, _convertItem);
         RegisterPopup(PopupType.TransferItem, _transferItem);
         RegisterPopup(PopupType.PurchaseItemPopup, _purchaseItem);
-        RegisterPopup(PopupType.RewardGetPopup, _rewardGetPopup);
         RegisterPopup(PopupType.NotificationPopup, _notificationPopup);
         RegisterPopup(PopupType.WinGame, _winGamePopup);
+        RegisterPopup(PopupType.MailBox, _mailBoxPopup);
+        RegisterPopup(PopupType.ReadMail, _readMailPopup);
+        RegisterPopup(PopupType.RewardGetPopup, _rewardGetPopup);
     }
 
     private void InitDic()
@@ -275,7 +283,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 		_itemPrefabDic = new Dictionary<ItemPrefab, GameObject>()
 		{
 			{ItemPrefab.HealthBar, _healthBarPrefab},
-			{ItemPrefab.Character, _characterPrefab},
+			{ItemPrefab.Character1, _character1},
 			{ItemPrefab.TextPopup, _textPopup},
 			{ItemPrefab.GemExp, _gemExpPrefab},
 
@@ -330,6 +338,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{ItemPrefab.BulletMinionLasirdBlue, _bulletMinionLasirdBlue},
             {ItemPrefab.BulletMinionLasirdGreen, _bulletMinionLasirdGreen},
             {ItemPrefab.BulletMinionLasirdOrange, _bulletMinionLasirdOrange},
+            {ItemPrefab.Character2, _character2},
 
         };
 
@@ -375,6 +384,8 @@ public class ResourceManager : UIManagerBase<PopupType>
 			{DropItemType.Bomb, _bomb},
 			{DropItemType.Food, _food},
 		};
+
+		InitMail();
 	}
 
 	public GameObject GetItemPrefab(ItemPrefab itemPrefab)
@@ -410,4 +421,22 @@ public class ResourceManager : UIManagerBase<PopupType>
 		popupGo.GetOrAddComponent<GraphicRaycaster>();
 		return popupGo;
 	}
+
+	public Dictionary<string, ItemMail> _DictionaryMailBox;
+
+	public void InitMail()
+	{
+		var mail1 = new ItemMail("mail1", "Chua co title", "chua co noi dung",
+			new List<ItemInBag> { new ItemInBag(ItemId.Gold.ToString(), ItemRank.Normal.ToString(), 0, 10000) });
+		
+		_DictionaryMailBox = new Dictionary<string, ItemMail>
+		{
+			{mail1.id, mail1}
+		};
+	}
+
+	public Dictionary<string, ItemMail> GetMail()
+	{
+		return _DictionaryMailBox;
+}
 }

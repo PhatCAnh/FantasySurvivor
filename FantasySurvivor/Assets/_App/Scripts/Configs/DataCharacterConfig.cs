@@ -4,6 +4,8 @@ namespace FantasySurvivor
 	public class DataCharacterConfig : IConfigItem
 	{
 		public string id { get; private set; }
+		public string name { get; private set; }
+		public string description { get; private set; }
 		public int hp { get; private set; }
 		public int moveSpeed { get; private set; }
 		public int damage { get; private set; }
@@ -17,6 +19,8 @@ namespace FantasySurvivor
         public void OnReadImpl(IConfigReader reader)
 		{
 			id = reader.ReadString();
+			name = reader.ReadString();
+			description = reader.ReadString();
 			hp = reader.ReadInt();
 			moveSpeed = reader.ReadInt();
 			damage = reader.ReadInt();

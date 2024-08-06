@@ -7,26 +7,32 @@ using UnityEngine.UI;
 
 public class ControlChapterUI : View<GameApp>, IPopup
 {
-	[SerializeField] private TextMeshProUGUI _titleLvl1, _titleLvl2, _titleLvl3;
+	[SerializeField] private TextMeshProUGUI _titleLvl1, _titleLvl2;
 
-	[SerializeField] private Transform _containerLevelUI1, _containerLevelUI2, _containerLevelUI3;
+	[SerializeField] private Transform _containerLevelUI1, _containerLevelUI2;
+
+	[SerializeField] private Button _btnBack;
 	protected override void OnViewInit()
 	{
 		base.OnViewInit();
 
 		InitChapterUI(_containerLevelUI1, 1, _titleLvl1);
 		InitChapterUI(_containerLevelUI2, 2, _titleLvl2);
-		InitChapterUI(_containerLevelUI3, 3, _titleLvl3);
+		
+	_btnBack.onClick.AddListener(Close);
 	}
 
 	private void InitChapterUI(Transform parent, int chapter, TextMeshProUGUI title)
 	{
-		title.text = "chua set title ne";
+		title.text = "CHAPTER " + chapter;
 		for(int i = 0; i < parent.childCount; i++)
 		{
-			parent.GetChild(i).GetComponent<ChapterUI>().Init(chapter, i + 1, gameObject);
+			int level = i + 1;
+			parent.GetChild(i).GetComponent<ChapterUI>().Init(chapter, level, gameObject, (chapter - 1) * 3 + level - 1 <= app.models.dataPlayerModel.DataLevelPlayed);
 		}
 	}
+	
+	//(chapter - 1) * 3 + level
 
 	public void Open()
 	{
@@ -35,5 +41,6 @@ public class ControlChapterUI : View<GameApp>, IPopup
 
 	public void Close()
 	{
+		Destroy(gameObject);
 	}
 }

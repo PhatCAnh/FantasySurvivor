@@ -39,6 +39,8 @@ public class GameController : Controller<GameApp>
     private float _width;
     private float _height;
 
+    private int _numberChapter, _numberLevel;
+
     private Vector3 charPos => character.transform.position;
     public List<SkillData> _listSkill = new List<SkillData>();
 
@@ -81,13 +83,24 @@ public class GameController : Controller<GameApp>
 
     public void StartGame(int chapter, int level)
     {
-        ChangeScene(GameConst.nameScene_Game, () => LoadMap(chapter, level));
+        ChangeScene(GameConst.nameScene_Game, () =>
+        {
+            _numberLevel = level;
+            _numberChapter = chapter;
+            LoadMap(chapter, level);
+        });
     }
 
+    [ContextMenu("Test win game")]
     public void WinGame()
     {
-        ClearHealthBar();
         isEndGame = true;
+        var number = (_numberChapter - 1) * 3 + _numberLevel;
+        if (number > app.models.dataPlayerModel.DataLevelPlayed)
+        {
+            app.models.dataPlayerModel.DataLevelPlayed = number;
+        }
+        ClearHealthBar();
         app.resourceManager.ShowPopup(PopupType.WinGame);
     }
 
@@ -514,7 +527,14 @@ public class GameController : Controller<GameApp>
 
     private Character SpawnCharacter()
     {
-        var characterPrefab = Instantiate(app.resourceManager.GetItemPrefab(ItemPrefab.Character))
+        var charId = app.models.dataPlayerModel.mainChar;
+        var charIdPrefab = charId == CharacterId.Char1
+            ? ItemPrefab.Character1
+            : ItemPrefab.Character2;
+        
+        
+        
+        var characterPrefab = Instantiate(app.resourceManager.GetItemPrefab(charIdPrefab))
             .GetComponent<Character>();
         characterPrefab.transform.position = Vector2.zero;
 
@@ -523,7 +543,7 @@ public class GameController : Controller<GameApp>
             .GetComponent<HealthBar>();
         _healthBar.Init(characterPrefab);
 
-        var dataChar = app.configs.dataCharacter.GetConfig(CharacterId.Char1);
+        var dataChar = app.configs.dataCharacter.GetConfig(charId);
 
         var model = new CharacterModel(
             dataChar.hp,
@@ -649,7 +669,7 @@ public class GameController : Controller<GameApp>
         return dateDifference.Days;
     }
 
-    [ContextMenu("Test item piece")]
+    
     public void CheatDay()
     {
         var dataDateStartDaily = app.models.dataPlayerModel.DateStartDailyGift.Split("/");

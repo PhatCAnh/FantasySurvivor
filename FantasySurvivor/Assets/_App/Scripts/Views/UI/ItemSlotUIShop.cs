@@ -21,6 +21,8 @@ public class ItemSlotUIShop : View<GameApp>
 
     private ShopUI _parent;
 
+    private bool canBuy;
+
     private ItemController itemController => Singleton<ItemController>.instance;
 
     public void Init(ItemData data, int price, ShopUI parent, TypeItemSell typePrice, int count = 0)
@@ -44,10 +46,12 @@ public class ItemSlotUIShop : View<GameApp>
         if (typePrice is TypeItemSell.Gold)
         {
             _typePrice = _spriteGold;
+            canBuy = app.models.dataPlayerModel.Gold >= price;
         }
         else if (typePrice is TypeItemSell.Gem)
         {
             _typePrice = _spriteGem;
+            canBuy = app.models.dataPlayerModel.Gem >= price;
         }
         else if (typePrice is TypeItemSell.Ads)
         {
@@ -75,16 +79,16 @@ public class ItemSlotUIShop : View<GameApp>
     {
         app.resourceManager.ShowPopup(PopupType.PurchaseItemPopup)
             .TryGetComponent(out PurchaseItemPopup purchaseItemPopup);
-        purchaseItemPopup.Init(_data, _price, _count, _rank, _skin, _typePrice);
+        purchaseItemPopup.Init(_data, _price, _count, _rank, _skin, _typePrice, canBuy);
     }
 
     private void OnClickWatchAds()
     {
         Singleton<AdsController>.instance.ShowReward(() =>
         {
-            app.resourceManager.ShowPopup(PopupType.PurchaseItemPopup)
-                .TryGetComponent(out PurchaseItemPopup purchaseItemPopup);
-            purchaseItemPopup.Init(_data, _price, _count, _rank, _skin, _typePrice);
+            app.models.dataPlayerModel.AddItemEquipToBag(_data.id, _data.rank, 0);
+            app.resourceManager.ShowPopup(PopupType.RewardGetPopup).TryGetComponent(out PopupReward rewardGetPopup);
+            rewardGetPopup.Init(new List<ItemInBag> { new (_data.id.ToString(), _data.rank.ToString(),0, _count)});
         });
     }
 }

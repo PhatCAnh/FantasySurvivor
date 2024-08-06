@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WinGame : View<GameApp>, IPopup
+public class WinGamePopup : View<GameApp>, IPopup
 {
     [SerializeField] private Image _imageBackGround;
     [SerializeField] private GameObject _title;

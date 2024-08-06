@@ -32,6 +32,18 @@ namespace FantasySurvivor
 			DataSaveClaimDailyGift = "Waiting-Waiting-Waiting-Waiting-Waiting-Waiting-Waiting";
             LastResetDate = DateTime.Now.Date;
 
+            _mainChar = CharacterId.Char1;
+
+            _listMailRead = new();
+
+            _listCharCollected = new List<CharacterId>
+            {
+	            CharacterId.Char1,
+	            CharacterId.Char2
+            };
+
+            DataLevelPlayed = 0;
+
             _id = "";
 			
 			_email = "";
@@ -57,7 +69,15 @@ namespace FantasySurvivor
 		
 		[JsonProperty] private int _gem;
 		
+		[JsonProperty] private int _dataLevelPlayed;
+		
 		[JsonProperty] private int _limitQuantityItemEquip;
+		
+		[JsonProperty] private CharacterId _mainChar;
+
+		[JsonProperty] private List<CharacterId> _listCharCollected;
+		
+		[JsonProperty] private List<string> _listMailRead;
 
 		[JsonProperty] private List<ItemInBag> _bagItem = new List<ItemInBag>();
 
@@ -88,6 +108,23 @@ namespace FantasySurvivor
                 app.models.WriteModel<DataPlayerModel>();
             }
         }
+
+        public CharacterId mainChar
+        {
+	        get => _mainChar;
+	        set => _mainChar = value;
+        }
+
+        public List<CharacterId> GetListCharCollected()
+        {
+	        return _listCharCollected;
+        }
+
+        public void CollectedChar(CharacterId id)
+        {
+	        _listCharCollected.Add(id);
+        }
+        
 
         public string Id
 		{
@@ -193,6 +230,22 @@ namespace FantasySurvivor
 				RaiseDataChanged(nameof(Gem));
 			}
 		}
+
+		public List<string> listMailRead
+		{
+			get => _listMailRead;
+			set => _listMailRead = value;
+		}
+		
+		public int DataLevelPlayed
+		{
+			get => _dataLevelPlayed;
+			set {
+				if(DataLevelPlayed > value) return;
+				_dataLevelPlayed = value;
+				app.models.WriteModel<DataPlayerModel>();
+			}
+		}
 		
 		public int LimitQuantityItemEquip
 		{
@@ -215,6 +268,12 @@ namespace FantasySurvivor
 		{
 			set => _listItemEquipped = value;
 			get => _listItemEquipped;
+		}
+
+		public void ReadMail(string id)
+		{
+			_listMailRead.Add(id);
+			app.models.WriteModel<DataPlayerModel>();
 		}
 
 		//fix it
@@ -308,11 +367,17 @@ namespace FantasySurvivor
 
             SkillSet = dataPlayerModel.SkillSet;
 
-            _dateLoginGame = dataPlayerModel.DateLoginGame;
+            DataLevelPlayed = dataPlayerModel.DataLevelPlayed;
 
-            _dateStartDailyGift = dataPlayerModel.DateStartDailyGift;
+            DateLoginGame = dataPlayerModel.DateLoginGame;
 
-            _dataSaveClaimDailyGift = dataPlayerModel.DataSaveClaimDailyGift;
+            DateStartDailyGift = dataPlayerModel.DateStartDailyGift;
+
+            DataSaveClaimDailyGift = dataPlayerModel.DataSaveClaimDailyGift;
+
+            mainChar = dataPlayerModel.mainChar;
+
+            listMailRead = dataPlayerModel.listMailRead;
         }
 
         

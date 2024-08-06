@@ -28,7 +28,7 @@ public enum ItemPrefab
 	IceSpear,
 	Twin,
 	HealthBar,
-	Character,
+	Character1,
 	TextPopup,
 	GemExp,
 	SupportItem,
@@ -58,6 +58,7 @@ public enum ItemPrefab
     BulletMinionLasirdBlue,
     BulletMinionLasirdGreen,
     BulletMinionLasirdOrange,
+    Character2,
 
 }
 
@@ -206,7 +207,10 @@ public enum PopupType
 	TransferItemPopup,
     SuccessfulCombinePopupDetail,
     RewardGetPopup,
-    PurchaseItemPopup
+    PurchaseItemPopup,
+    ReadMail,
+    MailBox,
+    
 }
 
 public enum SkillDamagedType

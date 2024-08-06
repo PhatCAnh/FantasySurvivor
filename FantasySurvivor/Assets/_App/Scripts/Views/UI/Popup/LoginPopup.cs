@@ -25,7 +25,7 @@ public class LoginPopup : View<GameApp>, IPopup
 
 	private string _password;
 	
-	private static readonly string EmailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+	private static readonly string EmailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
 	private static readonly Regex EmailRegex = new Regex(EmailPattern, RegexOptions.IgnoreCase);
 
 	private PlayfabController playfab => Singleton<PlayfabController>.instance;
@@ -53,6 +53,11 @@ public class LoginPopup : View<GameApp>, IPopup
 
 	private void OnClickBtnRegister()
 	{
+		if (!IsValidEmail(_inputFieldEmailRegister.text))
+		{
+			_txtErrorRegister.text = "Please enter Email format";
+			return;
+		}
 		if(_inputFieldPasswordRegister.text.Length < 6)
 		{
 			_txtErrorRegister.text = "Please enter a password longer than 5 characters";
@@ -61,11 +66,6 @@ public class LoginPopup : View<GameApp>, IPopup
 		if(!_inputFieldPasswordRegister.text.Equals(_inputFieldConfirm.text))
 		{
 			_txtErrorRegister.text = "Password and Confirm password are not same";
-			return;
-		}
-		if (!IsValidEmail(_inputFieldPasswordRegister.text))
-		{
-			_txtErrorRegister.text = "Please enter Email format";
 			return;
 		}
 
@@ -97,6 +97,18 @@ public class LoginPopup : View<GameApp>, IPopup
 		var popupLoading = app.resourceManager.ShowPopup(PopupType.LoadingPopup);
 		_email = _inputEmail.text;
 		_password = _inputPassword.text;
+		
+		if (!IsValidEmail(_email))
+		{
+			_txtError.text = "Please enter Email format";
+			return;
+		}
+		if(_password.Length < 6)
+		{
+			_txtError.text = "Please enter a password longer than 5 characters";
+			return;
+		}
+		
 		playfab.Login(_inputEmail.text, _inputPassword.text, OnLoginSuccess, ErrorLogin);
 		Destroy(popupLoading);
 	}
@@ -115,6 +127,7 @@ public class LoginPopup : View<GameApp>, IPopup
 
 	private void ErrorLogin(PlayFabError error)
 	{
+		
 		_txtError.text = "Input wrong email or password!";
 	}
 

@@ -19,7 +19,7 @@ public class PurchaseItemPopup : View<GameApp>, IPopup
 
     private int _count, _price;
 
-    public void Init(ItemData data, int price, int count, Sprite rank, Sprite skin, Sprite typePrice)
+    public void Init(ItemData data, int price, int count, Sprite rank, Sprite skin, Sprite typePrice, bool canBuy)
     {
         _data = data;
         
@@ -42,6 +42,9 @@ public class PurchaseItemPopup : View<GameApp>, IPopup
         _btnDimer.onClick.AddListener(Close);
         _btnClose.onClick.AddListener(Close);
         _btnPurchase.onClick.AddListener(OnClickBtnPurchase);
+
+        _btnPurchase.interactable = canBuy;
+        
         Open();
     }
     
@@ -63,9 +66,10 @@ public class PurchaseItemPopup : View<GameApp>, IPopup
 
     private void OnClickBtnPurchase()
     {
-        Close();
-        app.resourceManager.ShowPopup(PopupType.RewardGetPopup).TryGetComponent(out RewardGetPopup rewardGetPopup);
-        rewardGetPopup.Init(new List<ItemInBag> { new (_data.id.ToString(), _data.rank.ToString(),0, _count)});
+        app.models.dataPlayerModel.AddItemEquipToBag(_data.id, _data.rank, 0);
         app.models.dataPlayerModel.Gold -= _price;
+        app.resourceManager.ShowPopup(PopupType.RewardGetPopup).TryGetComponent(out PopupReward rewardGetPopup);
+        rewardGetPopup.Init(new List<ItemInBag> { new (_data.id.ToString(), _data.rank.ToString(),0, _count)});
+        Close();
     }
 }
