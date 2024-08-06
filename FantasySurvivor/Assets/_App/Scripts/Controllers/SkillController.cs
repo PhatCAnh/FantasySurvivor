@@ -20,7 +20,6 @@ namespace _App.Scripts.Controllers
 		private List<SkillId> _listSkillChoose;
 
 		public List<Skill> listSkills = new List<Skill>();
-        public int currentNumberSkill = 0;
         private int _limitSkill = 2;
 		private void Awake()
 		{
