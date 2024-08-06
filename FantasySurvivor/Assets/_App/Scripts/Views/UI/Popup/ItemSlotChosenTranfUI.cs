@@ -8,7 +8,7 @@ public class ItemSlotChosenTranfUI : ItemSlotTranfUI
     [SerializeField] private GameObject _imgEquip, _imgUnEquip;
     [SerializeField] private Sprite _baseRank;
     public ItemType ItemType { get; set; }
-    public bool isChosen;
+    public bool isChosen = false;
     public override void Init(ItemInBag dataUI)
     {
         base.Init(dataUI);
@@ -17,14 +17,13 @@ public class ItemSlotChosenTranfUI : ItemSlotTranfUI
             InitData(dataUI);
         }
         ItemType = ItemType.None;
-        isChosen = false;
         _imgEquip.SetActive(true);
         _imgUnEquip.SetActive(false);
     }
 
     protected override void OnClickBtn()
     {
-        if (itemInBag == null) return;
+        if (!isChosen) return;
         parent.UnChosenItem(itemData.dataConfig.type, itemInBag);
         ResetData();
     }

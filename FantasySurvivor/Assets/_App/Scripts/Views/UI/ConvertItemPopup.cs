@@ -97,6 +97,7 @@ public class ConvertItemPopup : View<GameApp>, IPopup
         {
             _slotNone1.ItemType = type;
             var slot = _dicItemEquip1[type];
+            slot.isChosen = true;
             if (slot.isChosen) UnChosenItem(type, data);
             slot.Init(data);
         }
@@ -105,6 +106,7 @@ public class ConvertItemPopup : View<GameApp>, IPopup
         {
             _slotNone2.ItemType = type;
             var slot = _dicItemEquip2[type];
+            slot.isChosen = true;
             if (slot.isChosen) UnChosenItem(type, data);
             slot.Init(data);
         }
@@ -115,6 +117,7 @@ public class ConvertItemPopup : View<GameApp>, IPopup
         {
             _slotNone3.ItemType = type;
             var slot = _dicItemEquip3[type];
+            slot.isChosen = true;
             if (slot.isChosen) UnChosenItem(type, data);
             slot.Init(data);
         }
@@ -160,6 +163,7 @@ public class ConvertItemPopup : View<GameApp>, IPopup
     }
     public void Close()
     {
+        app.resourceManager.ShowPopup(PopupType.CharacterInformation);
         Destroy(gameObject);
     }
     protected int GetItemTypeOrder(ItemType itemType)
