@@ -10,7 +10,6 @@ public class LoadScene : MonoBehaviour
 {
     private void Start()
     {
-        PlayerPrefs.DeleteAll();
 	    Singleton<GameController>.instance.StartGame();
     }
 }

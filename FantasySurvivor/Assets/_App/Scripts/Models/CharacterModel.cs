@@ -13,8 +13,8 @@ public class CharacterModel : Model<GameApp>
 		this.currentHealthPoint = maxHp;
 		this.maxHealthPoint = maxHp;
 		this.moveSpeed = moveSpeed;
-		this._attackDamage = attackDamage;
-		this._itemAttractionRange = itemAttractionRange;
+		this.attackDamage = attackDamage;
+		this.itemAttractionRange = itemAttractionRange;
 		this.attackRange = attackRange;
 		this.armor = armor;
 		this.regen = regen;
@@ -139,6 +139,19 @@ public class CharacterModel : Model<GameApp>
 			_regen = value;
 			RaiseDataChanged(nameof(regen));
 		}
+	}
+	
+	public void ChangeCharacterStat(float maxHp, float moveSpeed, float attackDamage, float itemAttractionRange, float attackRange, int armor, float regen, int shield)
+	{
+		this.currentHealthPoint += maxHp;
+		this.maxHealthPoint += maxHp;
+		this.moveSpeed += moveSpeed;
+		this.attackDamage += attackDamage;
+		this.itemAttractionRange += itemAttractionRange;
+		this.attackRange += attackRange;
+		this.armor += armor;
+		this.regen += regen;
+		this.shield += shield;
 	}
 
 	public void AddStatFormItemEquip(float maxHp, float moveSpeed, float attackDamage, float itemAttractionRange, float attackRange, int armor)

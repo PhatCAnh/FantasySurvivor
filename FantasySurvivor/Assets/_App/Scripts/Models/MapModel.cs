@@ -30,6 +30,7 @@ namespace FantasySurvivor
 		private int _monsterKilled;
 
 		private int _goldCoinCollected;
+		
 		public float timeInGame
 		{
 			get => _timeInGame;
@@ -96,6 +97,7 @@ namespace FantasySurvivor
 			set {
 				if(goldCoinCollected == value) return;
 				_goldCoinCollected = value;
+				RaiseDataChanged(nameof(goldCoinCollected));
 			}
 		}
 	}

@@ -11,9 +11,9 @@ public class ItemSlotEquipUI : ItemSlotUI
     [SerializeField] private Sprite _baseRank;
     public bool isEquip;
     
-    public override void Init(ItemInBag dataUI)
+    public override void Init(ItemInBag dataUI, bool isCanSeeDetail = true)
     {
-        base.Init(dataUI);
+        base.Init(dataUI, isCanSeeDetail);
         isEquip = false;
         _imgEquip.SetActive(true);
         _imgUnEquip.SetActive(false);

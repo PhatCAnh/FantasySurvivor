@@ -13,6 +13,9 @@ public class ItemController : Controller<GameApp>
 
     private Dictionary<ItemRank, Sprite> _dicRankItemEquip;
 
+    public List<ItemInBag> listItemEquip = new List<ItemInBag>();
+
+    private ItemController itemController => Singleton<ItemController>.instance;
 
     private void Awake()
     {
@@ -55,6 +58,7 @@ public class ItemController : Controller<GameApp>
 
     public void EquipItem(ItemInBag data, int value)
     {
+        itemController.listItemEquip.Add(data);
         app.models.dataPlayerModel.EquipItem(data);
         var itemData = GetDataItem(data.id, data.rank, data.level);
         var model = app.models.characterModel;
@@ -74,16 +78,19 @@ public class ItemController : Controller<GameApp>
     }
     public void UnEquipItem(ItemInBag data, int value)
     {
+        itemController.listItemEquip.Remove(data);
         app.models.dataPlayerModel.UnEquipItem(data);
         var itemData = GetDataItem(data.id, data.rank, data.level);
         var model = app.models.characterModel;
         switch (itemData.dataConfig.type)
         {
             case ItemType.Weapon:
+            case ItemType.Ring:
             case ItemType.Gloves:
                 model.attackDamage -= value; //cong them chi so cua level nua
                 break;
             case ItemType.Armor:
+            case ItemType.Hat:
             case ItemType.Shoes:
                 model.maxHealthPoint -= value;
                 break;

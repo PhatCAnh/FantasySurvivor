@@ -32,6 +32,8 @@ public class GameController : Controller<GameApp>
 
     public int numberLimitChoiceSkill;// limit skill out game
 
+    public bool isRevive = false;
+
     private HealthBar _healthBar;
     private HealthBarController _healthBarController;
 
@@ -531,8 +533,10 @@ public class GameController : Controller<GameApp>
         var charIdPrefab = charId == CharacterId.Char1
             ? ItemPrefab.Character1
             : ItemPrefab.Character2;
-        
-        
+
+        var model = app.models.characterModel;
+
+        model.currentHealthPoint = model.maxHealthPoint;
         
         var characterPrefab = Instantiate(app.resourceManager.GetItemPrefab(charIdPrefab))
             .GetComponent<Character>();
@@ -542,37 +546,8 @@ public class GameController : Controller<GameApp>
                 app.resourceManager.rootContainer)
             .GetComponent<HealthBar>();
         _healthBar.Init(characterPrefab);
-
-        var dataChar = app.configs.dataCharacter.GetConfig(charId);
-
-        var model = new CharacterModel(
-            dataChar.hp,
-            dataChar.moveSpeed,
-            dataChar.damage,
-            dataChar.itemAttractionRange,
-            dataChar.attackRange,
-            dataChar.armor,
-            dataChar.regen,
-            dataChar.shield
-        );
-
-        foreach (var item in app.models.dataPlayerModel.ListItemEquipped)
-        {
-
-            var itemData = ArbanFramework.Singleton<ItemController>.instance.GetDataItem(item.id, item.rank).dataConfig;
-            //fix it
-        }
-
-        var stat = new CharacterStat(
-            model.maxHealthPoint,
-            model.moveSpeed,
-            model.attackDamage,
-            model.itemAttractionRange,
-            model.attackRange,
-            model.armor,
-            model.shield
-        );
-        characterPrefab.Init(stat, model);
+        
+        characterPrefab.Init();
 
         return characterPrefab;
     }
@@ -633,7 +608,6 @@ public class GameController : Controller<GameApp>
         if (character == null || character.model.currentHealthPoint > 0) return;
 
         character.model.Revive();
-        character.transform.position = charPos;
         character.gameObject.SetActive(true);
         isEndGame = false;
         StartCoroutine(MakeCharacterInvincible(5f));

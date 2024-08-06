@@ -32,7 +32,7 @@ public class ReadMailPopup : View<GameApp>, IPopup
         foreach (var item in itemMail.listReward)
         {
             Instantiate(_item, _goContainer).TryGetComponent(out ItemSlotUI itemSlotUI);
-            itemSlotUI.Init(item);
+            itemSlotUI.Init(item, false);
         }
         
         _btnClaim.onClick.AddListener(() =>
@@ -40,6 +40,12 @@ public class ReadMailPopup : View<GameApp>, IPopup
             app.models.dataPlayerModel.ReadMail(itemMail.id);
             app.resourceManager.ShowPopup(PopupType.RewardGetPopup).TryGetComponent(out PopupReward rewardGetPopup);
             rewardGetPopup.Init(itemMail.listReward);
+
+            foreach (var item in itemMail.listReward)
+            {
+                app.models.dataPlayerModel.AddItemPieceToBag(item.id, item.quantity);
+            }
+            
             _btnClaim.interactable = false;
         });
 

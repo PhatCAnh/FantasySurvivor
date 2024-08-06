@@ -120,7 +120,12 @@ namespace FantasySurvivor
         public CharacterId mainChar
         {
 	        get => _mainChar;
-	        set => _mainChar = value;
+	        set
+	        {
+		        _mainChar = value;
+		        RaiseDataChanged(nameof(mainChar));
+		        app.models.WriteModel<DataPlayerModel>();
+	        }
         }
 
         public List<CharacterId> GetListCharCollected()

@@ -13,7 +13,7 @@ using UnityEngine.UI;
 
 public class CharacterInformation : View<GameApp>, IPopup
 {
-    [SerializeField] private TextMeshProUGUI _txtHealth, _txtMoveSpeed, _txtAtkDamage, _txtArmor, _txtLimit;
+    [SerializeField] private TextMeshProUGUI _txtHealth, _txtAtkDamage, _txtLimit;
 
     [SerializeField] private Transform _slotItemEquipContainer;
 
@@ -21,8 +21,12 @@ public class CharacterInformation : View<GameApp>, IPopup
 
     [SerializeField] private ItemSlotEquipUI _slotWeapon, _slotArmor, _slotHat, _slotRing, _slotShoes, _slotGloves;
 
-    [SerializeField] private Button _btnBack, _btnAddItemSlot, _btnChooseCharacter, _btnConvertItem, _btnTransferItem;
+    [SerializeField] private Button _btnAddItemSlot, _btnChooseCharacter, _btnConvertItem, _btnTransferItem;
     [SerializeField] private Toggle _tglAll, _tglItemEquip, _tglItemPiece;
+
+    [SerializeField] private Sprite _spriteChar1, _spriteChar2;
+
+    [SerializeField] private Image _imgMainChar;
 
     private Dictionary<ItemType, ItemSlotEquipUI> _dicItemEquip;
 
@@ -38,13 +42,14 @@ public class CharacterInformation : View<GameApp>, IPopup
     {
         base.Start();
 
-        //fix cho nay
-        Task.Delay(500);
-
         InitDispatcher();
+        
+        _txtHealth.text = $"{app.models.characterModel.maxHealthPoint}";
+        
+        _txtAtkDamage.text = $"{app.models.characterModel.attackDamage}";
     }
 
-    protected override void OnViewInit()
+    protected void Awake()
     {
         base.OnViewInit();
 /*
@@ -65,7 +70,6 @@ public class CharacterInformation : View<GameApp>, IPopup
             {ItemType.Gloves, _slotGloves},
         };
 
-        _btnBack.onClick.AddListener(Close);
         _btnAddItemSlot.onClick.AddListener(AddItemSlot);
         _btnChooseCharacter.onClick.AddListener(ChooseCharacter);
 
@@ -78,6 +82,8 @@ public class CharacterInformation : View<GameApp>, IPopup
 
         var dataPlayerModel = app.models.dataPlayerModel;
         _txtLimit.text = $"{dataPlayerModel.BagItem.Count} / {dataPlayerModel.LimitQuantityItemEquip}";
+        
+        _imgMainChar.sprite = app.models.dataPlayerModel.mainChar == CharacterId.Char1 ? _spriteChar1 : _spriteChar2;
 
         //app.models.dataPlayerModel.AddItemEquipToBag(ItemId.Axe, ItemRank.Legendary, 2);
 
@@ -100,11 +106,16 @@ public class CharacterInformation : View<GameApp>, IPopup
 
         foreach (var item in app.models.dataPlayerModel.ListItemEquipped)
         {
+            
+            
             var dataItem = itemController.GetDataItem(item.id, item.rank, item.level);
             var nameStat = Singleton<GameController>.instance.GetTypeStatItemEquip(dataItem.dataConfig.type);
             var data = Singleton<GameController>.instance.GetDataStat(nameStat, item.rank);
             _numberValue = dataItem.dataConfig.baseValue + data.Item2 * (item.level - 1);
-            itemController.EquipItem(item,_numberValue);
+            if (!itemController.listItemEquip.Contains(item))
+            {
+                itemController.EquipItem(item,_numberValue);
+            }
             var slot = _dicItemEquip[dataItem.dataConfig.type];
             //if(slot.isEquip) UnEquipItem(dataItem.dataConfig.type, item, _numberValue);
             slot.Init(item);
@@ -281,10 +292,10 @@ public class CharacterInformation : View<GameApp>, IPopup
             }, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.maxHealthPoint), app.models.characterModel)
         );
 
-        AddDataBinding("fieldCharacterModel-moveSpeedValue", _txtMoveSpeed, (control, e) =>
+        AddDataBinding("fieldCharacterModel-moveSpeedValue", _imgMainChar, (control, e) =>
             {
-                control.text = $"{app.models.characterModel.moveSpeed}";
-            }, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.moveSpeed), app.models.characterModel)
+                control.sprite = app.models.dataPlayerModel.mainChar == CharacterId.Char1 ? _spriteChar1 : _spriteChar2;
+            }, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.mainChar), app.models.dataPlayerModel)
         );
 
         AddDataBinding("fieldCharacterModel-atkDamageValue", _txtAtkDamage, (control, e) =>
@@ -293,11 +304,11 @@ public class CharacterInformation : View<GameApp>, IPopup
             }, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.attackDamage), app.models.characterModel)
         );
 
-        AddDataBinding("fieldCharacterModel-armorValue", _txtArmor, (control, e) =>
+        /*AddDataBinding("fieldCharacterModel-armorValue", _txtArmor, (control, e) =>
         {
             float armorPercent = app.models.characterModel.armor / 100f;
             control.text = $"{armorPercent * 100f}%";
-        }, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.armor), app.models.characterModel));
+        }, new DataChangedValue(CharacterModel.dataChangedEvent, nameof(CharacterModel.armor), app.models.characterModel));*/
 
         AddDataBinding("fieldDataPlayerModel-bagItem", _txtLimit, (control, e) =>
         {

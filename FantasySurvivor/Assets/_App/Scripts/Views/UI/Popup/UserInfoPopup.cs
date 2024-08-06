@@ -61,8 +61,15 @@ public class UserInfoPopup : View<GameApp>, IPopup
 
     private void OnClickBtnChangeNameDisplay()
     {
-        app.resourceManager.ShowPopup(PopupType.ChangeDisplayName);
-        Destroy(gameObject);
+        if (app.models.dataPlayerModel.Email == "Guest")
+        {
+            Singleton<GameController>.instance.CallNotificationPopup("Please LOGIN to use CLOUD SAVE");
+        }
+        else
+        {
+            app.resourceManager.ShowPopup(PopupType.ChangeDisplayName);
+            Destroy(gameObject);
+        }
     }
     
     public void Close()

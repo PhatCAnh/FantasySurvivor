@@ -21,7 +21,7 @@ namespace FantasySurvivor
 		
 		[SerializeField] private FloatingJoystick _floatingJoystick;
 
-		[SerializeField] private TextMeshProUGUI _txtLevelCharacter, _txtLevel, _txtTimeMinutes, _txtTimeSeconds, _txtMonsterKilled;
+		[SerializeField] private TextMeshProUGUI _txtLevelCharacter, _txtLevel, _txtTimeMinutes, _txtTimeSeconds, _txtMonsterKilled, _txtGoldCollected;
 		public GameController gameController => Singleton<GameController>.instance;
 		private MapModel mapModel => gameController.map.model;
 		private Character character => gameController.character;
@@ -70,6 +70,12 @@ namespace FantasySurvivor
 				{
 					control.text = $"{mapModel.monsterKilled}";
 				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.monsterKilled), mapModel)
+			);
+			
+			AddDataBinding("fieldMapModel-goldCoinCollectedValue", _txtGoldCollected, (control, e) =>
+				{
+					control.text = $"{mapModel.goldCoinCollected}";
+				}, new DataChangedValue(MapModel.dataChangedEvent, nameof(MapModel.goldCoinCollected), mapModel)
 			);
 
 			AddDataBinding("fieldMap-timeInMapValue", _txtTimeMinutes, (control, e) =>

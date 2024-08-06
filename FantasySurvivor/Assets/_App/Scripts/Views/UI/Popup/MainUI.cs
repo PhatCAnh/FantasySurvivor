@@ -21,13 +21,11 @@ public class MainUI : View<GameApp>, IPopup
 		
 	}
 
-
-
 	[SerializeField] private ItemToggle _itemHome, _itemElemental, _itemShop, _itemUpdate, _itemLock;
 	[SerializeField] private GameObject _goLock, _goUpdateStat, _goHome,_goListSkill, _goCharacter, _goShop;
 	[SerializeField] private Image _imgLineFocus;
 	[SerializeField] private Button _btnBattle, _btnCheat, _btnTest, _btnDailyGift, _btnSetting, _btnMission, _btnMail;
-	[SerializeField] private TextMeshProUGUI _txtGoldCoin, _txtUsername;
+	[SerializeField] private TextMeshProUGUI _txtGoldCoin, _txtGemCoin, _txtUsername;
 	private float _durationAnim = 0.3f;
 
 	private GameController gameController => Singleton<GameController>.instance;
@@ -172,6 +170,12 @@ public class MainUI : View<GameApp>, IPopup
 			{
 				control.text = $"{app.models.dataPlayerModel.Gold}";
 			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.Gold), app.models.dataPlayerModel)
+		);
+		
+		AddDataBinding("fieldDataPlayerModel-gemValue", _txtGemCoin, (control, e) =>
+			{
+				control.text = $"{app.models.dataPlayerModel.Gem}";
+			}, new DataChangedValue(DataPlayerModel.dataChangedEvent, nameof(DataPlayerModel.Gem), app.models.dataPlayerModel)
 		);
 		
 		AddDataBinding("fieldDataPlayerModel-nameDisplayValue", _txtUsername, (control, e) =>

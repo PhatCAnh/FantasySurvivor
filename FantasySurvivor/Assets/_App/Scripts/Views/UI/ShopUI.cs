@@ -10,7 +10,8 @@ public enum TypeItemSell
     Gold,
     Gem,
     Free,
-    Ads
+    Ads,
+    IAP,
 }
 
 public class ShopUI : View<GameApp>

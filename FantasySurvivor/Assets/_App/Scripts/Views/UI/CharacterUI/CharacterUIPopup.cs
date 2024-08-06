@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
 using TMPro;
@@ -115,8 +116,8 @@ public class CharacterUIPopup : View<GameApp>, IPopup
 
     private void OnClickBtnSelect()
     {
+        Singleton<CharacterController>.instance.ChangeCharacterData(characterId);
         app.models.dataPlayerModel.mainChar = characterId;
-
         if (characterId == CharacterId.Char1)
         {
             _goSelectChar1.SetActive(true);

@@ -16,30 +16,35 @@ public class ItemSlotUI : View<GameApp>
     protected CharacterInformation parent;
 
     public bool isShow = false;
-    
+
     public void Init(ItemInBag data, CharacterInformation ui)
     {
         parent = ui;
-        if(data != null)
+        if (data != null)
         {
             InitData(data);
+            txtNumber.gameObject.SetActive(data.quantity != 0);
         }
         btn.onClick.AddListener(OnClickBtn);
     }
 
-    
-    public virtual void Init(ItemInBag data)
+
+    public virtual void Init(ItemInBag data, bool isCanSeeDetail = true)
     {
         InitData(data);
-        btn.onClick.AddListener(OnClickBtn);
+        txtNumber.gameObject.SetActive(data.quantity != 0);
+        if (isCanSeeDetail)
+        {
+            btn.onClick.AddListener(OnClickBtn);
+        }
     }
 
     protected virtual void OnClickBtn()
     {
-        if(isShow) return;
+        if (isShow) return;
         isShow = true;
         var type = itemData.dataConfig.type;
-        if(type == 0)
+        if (type == 0)
         {
             app.resourceManager.ShowPopup(PopupType.ItemPieceDetail).TryGetComponent(out PopupItemPieceDetail popup);
             popup.Init(this, itemInBag, itemData, image, imageRank);
@@ -49,7 +54,6 @@ public class ItemSlotUI : View<GameApp>
             app.resourceManager.ShowPopup(PopupType.ItemEquipDetail).TryGetComponent(out PopupItemEquipDetail popup);
             popup.Init(this, itemInBag, itemData, image, imageRank);
         }
-
     }
 
     public virtual void Action(int value)
@@ -70,10 +74,11 @@ public class ItemSlotUI : View<GameApp>
         this.itemData = itemController.GetDataItem(data.id, data.rank);
         image.sprite = itemData.dataUi.skin;
         imageRank.sprite = itemController.GetSpriteRank(data.rank);
-        if(data.quantity != 0)
+        if (data.quantity != 0)
         {
             txtNumber.text = $"{data.quantity}";
-        } else if(data.level != 0)
+        }
+        else if (data.level != 0)
         {
             txtNumber.text = $"{data.level}/{app.configs.dataStatRankItemEquip.GetConfig(data.rank).levelLimit}";
         }

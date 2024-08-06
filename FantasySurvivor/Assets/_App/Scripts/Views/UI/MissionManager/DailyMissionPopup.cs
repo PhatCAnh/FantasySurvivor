@@ -93,14 +93,12 @@ public class DailyMissionPopup : View<GameApp>, IPopup
     }
     public void Open()
     {
-        Debug.Log("DailyMissionPopup: Open");
         _goMainContent.localScale = Vector3.zero;
         _goMainContent.DOScale(Vector3.one, 0.15f);
     }
 
     public void Close()
     {
-        Debug.Log("DailyMissionPopup: Close");
         _goMainContent.DOScale(Vector3.zero, 0.15f)
             .OnComplete(() =>
             {
@@ -110,7 +108,6 @@ public class DailyMissionPopup : View<GameApp>, IPopup
 
     public void OnClickClaim()
     {
-        Debug.Log("DailyMissionPopup: OnClickClaim - Save mission status");
         SaveMissionStatuses();
     }
     private void CheckAndResetDailyMissions()

@@ -107,10 +107,36 @@ public class Character : ObjectRPG
 
 	}
 
-	public void Init(CharacterStat statInit, CharacterModel model)
+	public void Init()
 	{
-		stat = statInit;
-		app.models.characterModel = model;
+		/*foreach (var item in app.models.dataPlayerModel.ListItemEquipped)
+		{
+			var itemData = ArbanFramework.Singleton<ItemController>.instance.GetDataItem(item.id, item.rank).dataConfig;
+			switch (GetTypeStatItemEquip(itemData.type))
+			{
+				case "Atk":
+					var dataAtk = GetDataStat("Atk", item.rank);
+					var valueAtk = itemData.baseValue + dataAtk.Item2 * (item.level - 1);
+					model.attackDamage += valueAtk;
+					break;
+				case "Health":
+					var dataHealth = GetDataStat("Health", item.rank);
+					var valueHealth = itemData.baseValue + dataHealth.Item2 * (item.level - 1);
+					model.maxHealthPoint += valueHealth;
+					break;
+			}
+		}*/
+
+		stat = new CharacterStat(
+			model.maxHealthPoint,
+			model.moveSpeed,
+			model.attackDamage,
+			model.itemAttractionRange,
+			model.attackRange,
+			model.armor,
+			model.shield
+		);
+		
 		_cdRegen = new Cooldown();
 		_cdRegen.Restart(1);
 	}
@@ -156,13 +182,16 @@ public class Character : ObjectRPG
 	public void TakeDamage(int damage)
 	{
 		if (model.isInvincible) return;
-		/* if(!IsAlive) return;
-		damage -= Convert.ToInt32(damage * DamageReductionByArmor());
-		var currentShield = model.shield;
-		model.shield -= damage;
-		damage = Mathf.RoundToInt(damage - currentShield);
-		if(damage < 0) damage = 0;
-		*/
+		 if(!IsAlive) return;
+		 if (model.armor != 0)
+		 {
+			 damage -= Convert.ToInt32(damage * DamageReductionByArmor());
+		 }
+		 var currentShield = model.shield;
+		 model.shield -= damage;
+		 damage = Mathf.RoundToInt(damage - currentShield);
+		 if(damage < 0) damage = 0;
+		
 		model.currentHealthPoint -= damage;
 
 		GameObject text = Singleton<PoolController>.instance.GetObject(ItemPrefab.TextPopup, transform.position);

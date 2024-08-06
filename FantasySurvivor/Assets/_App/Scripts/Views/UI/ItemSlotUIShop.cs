@@ -43,6 +43,8 @@ public class ItemSlotUIShop : View<GameApp>
 
         _txtCount.text = _count.ToString();
         
+        _txtPrice.text = _price.ToString();
+        
         if (typePrice is TypeItemSell.Gold)
         {
             _typePrice = _spriteGold;
@@ -55,10 +57,8 @@ public class ItemSlotUIShop : View<GameApp>
         }
         else if (typePrice is TypeItemSell.Ads)
         {
-            _txtCount.text = "Watch Ads";
+            _txtPrice.text = "Watch Ads";
         }
-
-        _txtPrice.text = _price.ToString();
         
         _txtCount.gameObject.SetActive(_count != 0);
         _imgRank.sprite = _rank;
@@ -69,7 +69,7 @@ public class ItemSlotUIShop : View<GameApp>
         {
             _btnBuy.onClick.AddListener(OnClickWatchAds);
         }
-        else
+        else if (typePrice != TypeItemSell.IAP)
         {
             _btnBuy.onClick.AddListener(OnClickBtnBuy);
         }

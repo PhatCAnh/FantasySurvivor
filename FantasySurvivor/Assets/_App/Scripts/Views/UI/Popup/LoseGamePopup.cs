@@ -42,6 +42,11 @@ public class LoseGamePopup : View<GameApp>, IPopup
 
         _btnRevive.onClick.AddListener(OnClickBtnRevive);  // Liên kết sự kiện
 
+        if (gameController.isRevive)
+        {
+            _btnRevive.gameObject.SetActive(false);
+        }
+
         _txtWave.text = $"Best wave: {gameController.map.model.WaveInGame}";
 
         _txtEnemyKilled.text = $"Monster killed: {gameController.map.model.monsterKilled}";
@@ -69,7 +74,8 @@ public class LoseGamePopup : View<GameApp>, IPopup
         {
             gameController.ClaimReward(reward.Key, reward.Value);
         }
-        
+
+        gameController.isRevive = false;
         Close();
     }
 
@@ -81,15 +87,19 @@ public class LoseGamePopup : View<GameApp>, IPopup
             {
                 gameController.ClaimReward(reward.Key, reward.Value * 2);
             }
-        
+            gameController.isRevive = false;
             Close();
         });
     }
 
     private void OnClickBtnRevive()
     {
-        gameController.ReviveCharacter();  // Gọi phương thức hồi sinh
-        Destroy(gameObject);  // Đóng popup sau khi hồi sinh
+        app.adsController.ShowReward(() =>
+        {
+            gameController.ReviveCharacter();
+            gameController.isRevive = true;
+            Destroy(gameObject);
+        });
     }
 
     private void SetAnimOpen()

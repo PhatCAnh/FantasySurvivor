@@ -37,8 +37,6 @@ public class MapView : View<GameApp>
 
     [SerializeField] private Vector2 _size;
 
-    private int _coinOfLevel = 0;
-
     private ControlWaveeConfig[] _dataLevelArr;
 
     private Cooldown _cdEndLevel = new Cooldown();
@@ -87,7 +85,7 @@ public class MapView : View<GameApp>
             waveData.coolDownTime.Restart(0);
             _listWaveData.Add(waveData);
         }
-        _coinOfLevel = dataLevel.coin;
+        model.goldCoinCollected = dataLevel.coin;
         _cdEndLevel.Restart(dataLevel.timeEnd);
     }
 
@@ -136,7 +134,7 @@ public class MapView : View<GameApp>
             else
             {
                 _listWaveData.Clear();
-                gameController.AddReward(dictionaryReward, TypeItemReward.Coin, _coinOfLevel);
+                gameController.AddReward(dictionaryReward, TypeItemReward.Coin, model.goldCoinCollected);
                 model.WaveInGame++;
 
                 _countWavesSpawn--;
@@ -177,7 +175,7 @@ public class MapView : View<GameApp>
 
                     if (_listWaveData.Count == 0)
                     {
-                        gameController.AddReward(dictionaryReward, TypeItemReward.Coin, _coinOfLevel);
+                        gameController.AddReward(dictionaryReward, TypeItemReward.Coin, model.goldCoinCollected);
                         model.WaveInGame++;
 
                         _countWavesSpawn--;
