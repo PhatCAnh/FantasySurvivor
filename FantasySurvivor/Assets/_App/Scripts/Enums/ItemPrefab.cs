@@ -59,7 +59,8 @@ public enum ItemPrefab
     BulletMinionLasirdGreen,
     BulletMinionLasirdOrange,
     Character2,
-
+	GoblinS,
+	KillerShark,
 }
 
 public enum MapType

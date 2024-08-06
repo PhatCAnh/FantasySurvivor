@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7466287608060297857}
   - component: {fileID: 2974901807789051120}
   - component: {fileID: -1481224856444279697}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Minion_Goblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ MonoBehaviour:
   animator: {fileID: 8777179603153276254}
   firePoint: {fileID: 6328269996565495591}
   justSpawnVertical: 0
-  isDead: 0
+  isStun: 0
   isNoMove: 0
   size: 0.66
 --- !u!1 &4251253781480172918
@@ -126,7 +126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6328269996565495591}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 9195483270318025321}
   - component: {fileID: 8777179603153276254}
   - component: {fileID: 8043409820634372133}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
