@@ -9,13 +9,15 @@ public class Poison : StatusEffect
 	public Cooldown cd;
 	public bool burnDie = false;
 	public float duration;
+	public float damage;
 	public float level;
 	private GameController gameController => Singleton<GameController>.instance;
 
-	public Poison(Monster target, float duration, float level) : base(target, duration)
+	public Poison(Monster target,float damage ,float duration, float level) : base(target, duration)
 	{
 		type = EffectType.Debuff;
 		cd = new Cooldown();
+		this.damage = damage;
 		this.duration = duration;
 		this.level = level;
 	}
@@ -25,8 +27,7 @@ public class Poison : StatusEffect
 		base.Active();
         AudioManager.Instance.StopLoopingSFX();
         AudioManager.Instance.PlaySFX("PoisonBulletsboom");
-        //value = 5;
-        value = target.model.maxHealthPoint / 10;
+        value = damage / 2;
 		target.TakeDamage(value, TextPopupType.Poison);
 		if(target.isDead)
 		{
@@ -44,7 +45,7 @@ public class Poison : StatusEffect
 	}
 	public void PoisonTranf(Monster monster)
 	{
-		var poison = new Poison(monster, duration, level);
+		var poison = new Poison(monster,damage ,duration, level);
 	}
 
 	public override bool Cooldown(float deltaTime)
