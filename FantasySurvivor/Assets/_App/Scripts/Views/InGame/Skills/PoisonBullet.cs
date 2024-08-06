@@ -22,7 +22,7 @@ public class PoisonBullet : SkillBulletActive
         TakeDamage(monster);
         if (!monster.isDead)
         {
-            var poison = new Poison(monster, data.valueSpecial1, level);
+            var poison = new Poison(monster, damage,data.valueSpecial1, level);
         }
         return true;
     }
