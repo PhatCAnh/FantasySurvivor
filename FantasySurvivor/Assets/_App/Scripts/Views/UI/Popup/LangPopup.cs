@@ -1,39 +1,38 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using ArbanFramework;
+using ArbanFramework.MVC;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LangPopup : MonoBehaviour
+public class LangPopup : View<GameApp>, IPopup
 {
-    [SerializeField] private Button closeButton;
-    [SerializeField] private GameObject languagePopupPrefab; 
-    private GameObject currentPopup;
+    [SerializeField] private Button _btnClose;
+    [SerializeField] private Transform _goMainContent; 
 
-    void Start()
+    private void OnClickBtnClose()
     {
-        closeButton.onClick.AddListener(OnCloseButtonClick);
+        Close();
     }
 
-    private void OnCloseButtonClick()
+    protected override void OnViewInit()
     {
-        Destroy(gameObject);
+        base.OnViewInit();
+        Open();
     }
 
-    public void OpenLanguagePopup()
+    public void Open()
     {
-        // Destroy the current popup if it exists
-        if (currentPopup != null)
-        {
-            Destroy(currentPopup);
-        }
-
-        // Instantiate and store the language popup
-        currentPopup = Instantiate(languagePopupPrefab, transform);
+        _btnClose.onClick.AddListener(Close);
+        _goMainContent.localScale = Vector3.zero;
+        _goMainContent.DOScale(Vector3.one, 0.15f);
     }
 
-    private void OnLanguageButtonClick() 
+    public void Close()
     {
-        OpenLanguagePopup();
-        Debug.Log("Language button clicked");
+        _goMainContent.DOScale(Vector3.zero, 0.15f)
+            .OnComplete(() => { Destroy(gameObject); });
     }
+
 }

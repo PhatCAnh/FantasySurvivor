@@ -95,11 +95,18 @@ namespace FantasySurvivor
         [JsonProperty] private string _dataSaveClaimMissionGift;
 
 
+
         private const string MissionStatusKeyPrefix = "MissionStatus_";
         private ItemInBag item;
 
         [JsonProperty] private string _lastResetDate;
-
+		
+        public int DailyGamePlays { get; set; }
+        public void IncrementDailyGamePlays()
+        {
+            DailyGamePlays++;
+            Save();
+        }
         public DateTime LastResetDate
         {
             get => DateTime.TryParse(_lastResetDate, out var date) ? date : DateTime.MinValue;
@@ -452,15 +459,15 @@ namespace FantasySurvivor
 			NameDisplay = "Guest";
 			app.models.WriteModel<DataPlayerModel>();
 		}
-        // Lưu trạng thái nhiệm vụ
+      
         public void SaveMissionStatus(string missionTitle, MissionStatus status)
         {
             string key = MissionStatusKeyPrefix + missionTitle;
             PlayerPrefs.SetString(key, status.ToString());
-            PlayerPrefs.Save(); // Đảm bảo dữ liệu được lưu ngay lập tức
+            PlayerPrefs.Save(); 
         }
 
-        // Lấy trạng thái nhiệm vụ
+       
         public MissionStatus GetMissionStatus(string missionTitle)
         {
             string key = MissionStatusKeyPrefix + missionTitle;
@@ -472,7 +479,7 @@ namespace FantasySurvivor
                     return status;
                 }
             }
-            return MissionStatus.Incomplete; // Giá trị mặc định nếu không tìm thấy
+            return MissionStatus.Incomplete; 
         }
         public void Save()
         {

@@ -1,35 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
+using ArbanFramework;
+using ArbanFramework.MVC;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AboutUsPopup : MonoBehaviour
+public class AboutUsPopup : View<GameApp>, IPopup
 {
-    [SerializeField] private Button closeButton;
-    [SerializeField] private GameObject aboutusPopupPrefab;
-    private GameObject currentPopup;
+    [SerializeField] private Button _btnClose;
+    [SerializeField] private Transform _goMainContent;
 
-    void Start()
+    private void OnClickBtnClose()
     {
-        closeButton.onClick.AddListener(OnCloseButtonClick);
+        Close();
     }
 
-    private void OnCloseButtonClick()
+    protected override void OnViewInit()
     {
-        Destroy(gameObject);
+        base.OnViewInit();
+        Open();
     }
 
-    public void OpenAboutusPopup()
+    public void Open()
     {
-        // Destroy the current popup if it exists
-        if (currentPopup != null)
-        {
-            Destroy(currentPopup);
-        }
 
-        // Instantiate and store the sounds popup
-        currentPopup = Instantiate(aboutusPopupPrefab, transform);
+        _btnClose.onClick.AddListener(OnClickBtnClose);
+        _goMainContent.localScale = Vector3.zero;
+        _goMainContent.DOScale(Vector3.one, 0.15f);
     }
 
-    
+    public void Close()
+    {
+        _goMainContent.DOScale(Vector3.zero, 0.15f)
+            .OnComplete(() => { Destroy(gameObject); });
+    }
+
 }

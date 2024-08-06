@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class SettingPopup : View<GameApp>, IPopup
 {
-    [SerializeField] private Button _btnUserInfo,_btnLogout,_btnExit, _btnClose, _btnDimer, _btnSound, _btnAbout, _btnRate, _btnLanguage;
+    [SerializeField] private Button _btnUserInfo,_btnLogout,_btnExit, _btnClose, _btnDimer, _btnSound, _btnAbout, _btnLanguage;
 
     [SerializeField] private Transform _goMainContent;
 
@@ -23,7 +23,6 @@ public class SettingPopup : View<GameApp>, IPopup
         _btnDimer.onClick.AddListener(Close);
         _btnSound.onClick.AddListener(OnClickBtnSound); 
         _btnAbout.onClick.AddListener(OnClickBtnAbout); 
-        _btnRate.onClick.AddListener(OnClickBtnRate);
         _btnLanguage.onClick.AddListener(OnClickBtnlanguage);
         Open();
 
@@ -34,30 +33,25 @@ public class SettingPopup : View<GameApp>, IPopup
     void OnClickBtnUserInfo()
     {
         app.resourceManager.ShowPopup(PopupType.UserInfo);
-        Destroy(gameObject);
+ 
     }
 
     void OnClickBtnSound()
     {
         app.resourceManager.ShowPopup(PopupType.SoundPopup);
-        Destroy(gameObject);
+     
     }
 
     void OnClickBtnAbout()
     {
         app.resourceManager.ShowPopup(PopupType.AboutUsPopup);
-        Destroy(gameObject);
+       
     }
 
-    void OnClickBtnRate()
-    {
-        app.resourceManager.ShowPopup(PopupType.RatePopup);
-        Destroy(gameObject);
-    }
     void OnClickBtnlanguage()
     {
         app.resourceManager.ShowPopup(PopupType.LanguagePopup);
-        Destroy(gameObject);
+       
     }
     void OnClickBtnLogout()
     {
