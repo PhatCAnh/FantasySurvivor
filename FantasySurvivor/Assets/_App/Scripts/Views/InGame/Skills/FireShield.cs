@@ -19,7 +19,7 @@ public class FireShield : SkillActive
 	protected override void OnViewInit()
 	{
 		base.OnViewInit();
-        AudioManager.Instance.PlaySFXLoop("FireShield");
+        AudioManager.Instance.PlaySFX("FireShield");
         MoveInCircle();
 		centerPoint = gameController.character.transform;
 	}

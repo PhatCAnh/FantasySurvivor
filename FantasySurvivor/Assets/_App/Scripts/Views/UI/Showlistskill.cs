@@ -83,7 +83,7 @@ public class Showlistskill : View<GameApp>, IPopup
         _txtName.text = skillController.GetDataSkill(id).skillDataUI.name.ToString();
        
         _txtDescription.text = skillController.GetDataSkill(id).statSkillData.data[1].description;
-     _txtValue.text= skillController.GetDataSkill(id).statSkillData.data[1].value.ToString("F0");
+     _txtValue.text= "Damage : " + skillController.GetDataSkill(id).statSkillData.data[1].value.ToString("F0") + " %";
         Instantiate(iconSkillPrefab, containerPopup).TryGetComponent(out Icon_ListSkill icon);
         icon.SkillDetail(id, this);
         okbtn.onClick.AddListener(() =>
