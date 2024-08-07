@@ -195,6 +195,12 @@ public class ConvertItemPopup : View<GameApp>, IPopup
             if (Earthpunch.IsActionSuccessful(1 - ((float)_slotNone1.itemInBag.rank - 1) * (1f / 7f)))
             {
                 app.models.dataPlayerModel.AddItemEquipToBag(_slotNone1.itemInBag.id, _slotNone1.itemInBag.rank + 1, 1);
+                app.resourceManager.ShowPopup(PopupType.ConvertItemPopup);
+
+            }
+            else
+            {
+                app.resourceManager.ShowPopup(PopupType.TransferItemPopup);
             }
             app.models.dataPlayerModel.RemoveItem(_slotNone1.itemInBag);
             app.models.dataPlayerModel.RemoveItem(_slotNone2.itemInBag);
@@ -219,6 +225,7 @@ public class ConvertItemPopup : View<GameApp>, IPopup
                 app.models.dataPlayerModel.Talisman -= ((int)_slotNone1.itemData.rank + 1 * 1); app.models.dataPlayerModel.RemoveItem(_slotNone1.itemInBag);
                 app.models.dataPlayerModel.RemoveItem(_slotNone2.itemInBag);
                 app.models.dataPlayerModel.RemoveItem(_slotNone3.itemInBag);
+                app.resourceManager.ShowPopup(PopupType.ConvertItemPopup);
                 _slotNone1.ResetData();
                 _slotNone2.ResetData();
                 _slotNone3.ResetData();
@@ -226,6 +233,7 @@ public class ConvertItemPopup : View<GameApp>, IPopup
             else
             {
                 app.models.dataPlayerModel.Talisman -= ((int)_slotNone1.itemData.rank + 1 * 1);
+                app.resourceManager.ShowPopup(PopupType.TransferItemPopup);
                 _slotNone1.ResetData();
                 _slotNone2.ResetData();
                 _slotNone3.ResetData();

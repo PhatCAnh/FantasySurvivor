@@ -153,10 +153,12 @@ namespace FantasySurvivor
                 {
                     _slotNone2.itemInBag.level = _slotNone1.itemInBag.level-1;
                     _slotNone1.itemInBag.level = 1;
+                    app.resourceManager.ShowPopup(PopupType.ConvertItemPopup);
                 }
                 else
                 {
                     _slotNone1.itemInBag.level = 1;
+                    app.resourceManager.ShowPopup(PopupType.TransferItemPopup);
                 }
                 _slotNone1.ResetData();
                 _slotNone2.ResetData();

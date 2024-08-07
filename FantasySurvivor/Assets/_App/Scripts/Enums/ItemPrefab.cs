@@ -206,7 +206,6 @@ public enum PopupType
 	ConvertItemPopup,
 	TransferItem,
 	TransferItemPopup,
-    SuccessfulCombinePopupDetail,
     RewardGetPopup,
     PurchaseItemPopup,
     ReadMail,
