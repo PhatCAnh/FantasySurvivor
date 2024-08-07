@@ -6,6 +6,7 @@ using _App.Scripts.Controllers;
 using ArbanFramework;
 using ArbanFramework.MVC;
 using DG.Tweening;
+using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -103,6 +104,7 @@ public class SkillUI : View<GameApp>
 
 	private void SelectedSkill()
 	{
+		if (_parent.isSelected) return;
 		gameController.character.AddProactiveSkill(skillData.id);
 		_parent.Selected(this);
 	}

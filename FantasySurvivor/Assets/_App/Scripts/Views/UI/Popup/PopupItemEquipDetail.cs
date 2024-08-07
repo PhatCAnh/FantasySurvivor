@@ -55,7 +55,7 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
 		_txtName.text = $"{itemData.dataConfig.name} - Level: {dataInBag.level} / {_dataStatRank.levelLimit}";
 		_txtValue.text = $"+ {itemData.dataConfig.baseValue}";
 
-		_costUpdate = (1000 + (int) dataInBag.rank * 250) * dataInBag.level;
+		_costUpdate = (1000 + (int) dataInBag.rank * 250) * Mathf.Clamp(dataInBag.level, 1 ,_dataStatRank.levelLimit);
 		_currentCoin = app.models.dataPlayerModel.Gold;
 		var textCurrentCoin = _currentCoin < _costUpdate ? $"<color=red>{_currentCoin}</color>" : $"{_currentCoin}";
 
@@ -135,7 +135,6 @@ public class PopupItemEquipDetail : View<GameApp>, IPopup
 	}
     private void SaleItem()
     {
-        
        app.models.dataPlayerModel.AddCoins(99);
         app.models.dataPlayerModel.RemovePiece(_dataInBag.id, _dataInBag.quantity);
         Debug.Log(_currentCoin);

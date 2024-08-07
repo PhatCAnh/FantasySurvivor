@@ -163,7 +163,6 @@ public class ConvertItemPopup : View<GameApp>, IPopup
     }
     public void Close()
     {
-        app.resourceManager.ShowPopup(PopupType.CharacterInformation);
         Destroy(gameObject);
     }
     protected int GetItemTypeOrder(ItemType itemType)

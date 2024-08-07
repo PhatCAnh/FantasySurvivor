@@ -13,6 +13,7 @@ using MonsterStat = FantasySurvivor.MonsterStat;
 using System.Threading;
 using Unity.VisualScripting;
 using System.Collections;
+using UnityEngine.Purchasing;
 
 public class GameController : Controller<GameApp>
 {

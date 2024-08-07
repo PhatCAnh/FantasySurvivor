@@ -43,7 +43,18 @@ public class ReadMailPopup : View<GameApp>, IPopup
 
             foreach (var item in itemMail.listReward)
             {
-                app.models.dataPlayerModel.AddItemPieceToBag(item.id, item.quantity);
+                if (item.id == ItemId.Gold)
+                {
+                    app.models.dataPlayerModel.Gold += item.quantity;
+                }
+                else if (item.id == ItemId.Gem)
+                {
+                    app.models.dataPlayerModel.Gem += item.quantity;
+                }
+                else
+                {
+                    app.models.dataPlayerModel.AddItemPieceToBag(item.id, item.quantity);
+                }
             }
             
             _btnClaim.interactable = false;

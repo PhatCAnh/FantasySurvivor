@@ -197,7 +197,12 @@ public class CharacterInformation : View<GameApp>, IPopup
     {
         app.resourceManager.ShowPopup(PopupType.Warning).TryGetComponent(out PopupWarning popupWarning);
         popupWarning.Init("Buy slot item", "Would you like to buy 50 item slots? with 10000 <sprite=4>", "10000 <sprite=4>",
-            () => { app.models.dataPlayerModel.LimitQuantityItemEquip += 50; popupWarning.Close(); }
+            () =>
+            {
+                app.models.dataPlayerModel.LimitQuantityItemEquip += 50; app.models.dataPlayerModel.Gold -= 10000;
+                popupWarning.Close();
+            }
+            , app.models.dataPlayerModel.Gold >= 10000
         );
     }
 
@@ -357,15 +362,13 @@ public class CharacterInformation : View<GameApp>, IPopup
         Destroy(gameObject);
     }
 
-    public void ConvertItem()
+    private void ConvertItem()
     {
-        Close();
-        app.resourceManager.ShowPopup(PopupType.ConvertItem).TryGetComponent(out ConvertItemPopup convertItem );
+        app.resourceManager.ShowPopup(PopupType.ConvertItem);
     }
 
-    public void TransferItem()
+    private void TransferItem()
     {
-        Close();
-        app.resourceManager.ShowPopup(PopupType.TransferItem).TryGetComponent(out TransferItemPopup transferItem);
+        app.resourceManager.ShowPopup(PopupType.TransferItem);
     }
 }

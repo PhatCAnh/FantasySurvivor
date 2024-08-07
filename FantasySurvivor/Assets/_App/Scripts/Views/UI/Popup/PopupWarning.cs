@@ -44,7 +44,7 @@ public class PopupWarning : View<GameApp>, IPopup
         }
     }
     
-    public void Init(string namePopup, string description, string txtValue, UnityAction callBack = null, bool isOk = true)
+    public void Init(string namePopup, string description, string txtValue, UnityAction callBack = null, bool interactable = true, bool isOk = true)
     {
         _txtValue.text = txtValue;
         _txtName.text = namePopup;
@@ -55,6 +55,7 @@ public class PopupWarning : View<GameApp>, IPopup
         if(callBack != null)
         {
             _btnAction.gameObject.SetActive(true);
+            _btnAction.interactable = interactable;
             _btnAction.onClick.AddListener(callBack);
         }
     }

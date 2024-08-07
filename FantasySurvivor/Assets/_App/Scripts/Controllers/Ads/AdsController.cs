@@ -65,14 +65,12 @@ public class AdsController : IUnityAdsInitializationListener
 	public void ShowReward(Action callBack = null)
 	{
 		_reward.ShowAd(callBack);
-		return;
 		_analyticsController.TrackAds(TypeAds.Reward);
 	}
 
 	public void ShowInterstitial(Action callBack = null)
 	{
 		_interstitial.LoadAd(callBack);
-		return;
 		_analyticsController.TrackAds(TypeAds.Interstitial);
 	}
 

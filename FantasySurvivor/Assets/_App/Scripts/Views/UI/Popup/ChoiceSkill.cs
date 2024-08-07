@@ -18,7 +18,7 @@ public class ChoiceSkill : View<GameApp>, IPopup
 	public GameController gameController => Singleton<GameController>.instance;
 	public SkillController skillController => Singleton<SkillController>.instance;
 
-	private bool isSelected;
+	public bool isSelected;
 
 	protected override void OnViewInit()
 	{

@@ -439,7 +439,7 @@ public class ResourceManager : UIManagerBase<PopupType>
 
 	public void InitMail()
 	{
-		var mail1 = new ItemMail("mail1", "Chua co title", "chua co noi dung",
+		var mail1 = new ItemMail("mail1", "Welcome to Hunter Survival", "Welcome to Hunter Survival!\n\nDear Player,\n\nWe are thrilled to have you join our community. Get ready for exciting adventures and intense battles.\n\nHappy gaming!\n\nGoty Team!",
 			new List<ItemInBag> { new ItemInBag(ItemId.Gold.ToString(), ItemRank.Normal.ToString(), 0, 10000) });
 		
 		_DictionaryMailBox = new Dictionary<string, ItemMail>
