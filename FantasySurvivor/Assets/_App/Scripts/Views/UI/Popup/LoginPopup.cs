@@ -94,10 +94,8 @@ public class LoginPopup : View<GameApp>, IPopup
 
 	private void OnClickBtnLogin()
 	{
-		var popupLoading = app.resourceManager.ShowPopup(PopupType.LoadingPopup);
 		_email = _inputEmail.text;
 		_password = _inputPassword.text;
-		
 		if (!IsValidEmail(_email))
 		{
 			_txtError.text = "Please enter Email format";
@@ -108,7 +106,7 @@ public class LoginPopup : View<GameApp>, IPopup
 			_txtError.text = "Please enter a password longer than 5 characters";
 			return;
 		}
-		
+		var popupLoading = app.resourceManager.ShowPopup(PopupType.LoadingPopup);
 		playfab.Login(_inputEmail.text, _inputPassword.text, OnLoginSuccess, ErrorLogin);
 		Destroy(popupLoading);
 	}
