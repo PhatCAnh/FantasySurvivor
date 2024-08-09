@@ -21,7 +21,7 @@ public class Showlistskill : View<GameApp>, IPopup
     {
         base.OnViewInit();
         gameController._listSkill = skillController.GetListSkillDataTable();
-        foreach (var skill in gameController._listSkill) // lấy list skill
+        foreach (var skill in skillController.GetListSkill()) // lấy list skill
         {
             Instantiate(iconSkillPrefab, container).TryGetComponent(out Icon_ListSkill icon);
             var id = skill.id;
